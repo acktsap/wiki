@@ -22,4 +22,5 @@ A playground as a poor software developer
 
 - Commit message: "play". Please KEEP IT SIMPLE.
 - Do not summarize. Just extract keyword and link url.
+- Do not make directory more than 2 depth (except for directory convention like `src/main/java`)
 
