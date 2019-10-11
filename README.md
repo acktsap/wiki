@@ -13,5 +13,6 @@ A playground as a poor software developer
 
 ## Rule
 
-Commit message: "play". Please KEEP IT SIMPLE.
+- Commit message: "play". Please KEEP IT SIMPLE.
+- Do not summarize. Just extract keyword and link url.
 
