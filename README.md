@@ -2,7 +2,7 @@
 
 A playground as a poor software developer
 
-## Possible Categories
+## Possible Code Categories
 
 - Api
   - Comment
