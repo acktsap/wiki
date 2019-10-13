@@ -13,25 +13,32 @@ readonly SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 
 function get_next() {
   local message=${1:-"Enter next"}
-  echo -n "$message > "
+  echo -ne "$message\n> "
   read -r NEXT
 }
 
-function main() {
-  get_next "Enter arg1"
-  if [ ${NEXT} = "arg1" ]; then
-    echo "You typed arg1 correctely"
-  else
-    echo "You have to type 'arg1'"
-    get_next "Enter arg1 (last chance)"
-
-    if [ ${NEXT} != "arg1" ]; then
-      echo "I warned you"
-      exit -1
+function assert_next() {
+  local args=$@
+  local found=false
+  for arg in ${args[@]}; do
+    if [ ${NEXT} = ${arg} ] ; then
+      found=true
+      break
     fi
+  done
 
-    echo "Good boy"
+  if [ false = ${found} ]; then
+    echo "Next should be one of $args"
+    exit -1
   fi
+}
+
+function main() {
+  get_next "Enter arg1 or arg2"
+  assert_next "arg1" "arg2"
+
+  get_next "Enter n1 or n2"
+  assert_next "n1" "n2"
 }
 
 main $@
