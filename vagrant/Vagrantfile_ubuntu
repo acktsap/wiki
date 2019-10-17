@@ -1,0 +1,57 @@
+VAGRANTFILE_API_VERSION = 2
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # xenial64: 16.04
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.box_check_update = false
+
+  config.vm.network :public_network, bridge: "en0: Wi-Fi (AirPort)", use_dbcp_assigned_default_route: true
+
+  # config cpu, memory
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--cpus", "1"]
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+    vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+  end
+
+  USER_NAME = "tilim"
+  USER_MAIL = "#{USER_NAME}@blocko.io"
+
+  config.ssh.insert_key = false
+  config.ssh.private_key_path = [ "#{ENV['HOME']}/.vagrant.d/insecure_private_key" ]
+
+  config.vm.provision "shell", inline: "sudo ln -sf /usr/share/zoneinfo/$1 /etc/localtime; echo $1 | sudo tee /etc/timezone"
+
+  config.vm.provision "shell", inline: "echo \"$(netstat -rn | grep \"^0.0.0.0 \" | cut -d \" \" -f10)  #{USER_NAME}\" >> /etc/hosts"
+
+  # add user
+  config.vm.provision "shell", inline: "useradd -m -s /bin/bash -U #{USER_NAME}"
+  config.vm.provision "shell", inline: "echo '%#{USER_NAME} ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/#{USER_NAME}"
+
+  # config rsa key
+  config.vm.provision "shell", inline: "mkdir -p /home/#{USER_NAME}/.ssh"
+  config.vm.provision "file", source: "~/.ssh/#{USER_MAIL}.pub", destination: "authorized_keys"
+  config.vm.provision "file", source: "~/.ssh/#{USER_MAIL}", destination: "#{USER_MAIL}"
+  config.vm.provision "file", source: "~/.ssh/config", destination: "config"
+  config.vm.provision "shell", inline: "mv authorized_keys /home/#{USER_NAME}/.ssh"
+  config.vm.provision "shell", inline: "mv #{USER_MAIL} /home/#{USER_NAME}/.ssh"
+  config.vm.provision "shell", inline: "mv config /home/#{USER_NAME}/.ssh"
+  config.vm.provision "shell", inline: "chmod 700 /home/#{USER_NAME}/.ssh"
+  config.vm.provision "shell", inline: "chmod 600 /home/#{USER_NAME}/.ssh/*"
+  config.vm.provision "shell", inline: "chown -R #{USER_NAME}:#{USER_NAME} /home/#{USER_NAME}/.ssh"
+
+  # print ip address
+  config.vm.provision "shell", inline: "echo \"set -o vi\" >> /home/${USER_NAME}/.bash_profile"
+  config.vm.provision "shell", inline: "echo \"export PATH=.:$PATH\" >> /home/${USER_NAME}/.bash_profile"
+
+  config.vm.provision "shell", inline: "echo IP Address : $(ifconfig enp0s8 | grep inet | head -n 1 | awk '{print $2}' | cut -d ':' -f2)"
+
+  # sync folder
+  config.vm.synced_folder ".", "/vagrant"
+
+  # config port forwarding
+  config.vm.network "forwarded_port", guest: 7845, host: 7845
+
+  # run custom scripts
+  config.vm.provision "shell", inline: "sudo --user #{USER_NAME} /vagrant/install-all.sh"
+end

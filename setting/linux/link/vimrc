@@ -1,0 +1,62 @@
+set nocompatible        " Disable vi-compatibility, required for Vundle
+set encoding=utf-8
+
+set ts=2 shiftwidth=2 expandtab autoindent
+
+set number relativenumber numberwidth=3
+
+color deus
+set hlsearch
+set noswapfile
+syntax on
+
+" Remap code completion to Ctrl+Space {{{2
+" inoremap <C-Space> <C-n>
+
+
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" VundleVim Setting
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" see :h vundle for more details or wiki for FAQ
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" my plugins
+Plugin 'scrooloose/nerdtree' " file view tree
+Plugin 'vim-airline/vim-airline' " status bar
+Plugin 'tpope/vim-fugitive' " use git in vim within vim-airline
+Plugin 'airblade/vim-gitgutter' " show git diff
+Plugin 'scrooloose/syntastic' " syntax check
+Plugin 'valloric/youcompleteme' " auto complete
+Plugin 'majutsushi/tagbar'
+Plugin 'fatih/vim-go' " golang
+
+" runtime .cppvimrc
+" runtime .scalarc
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" runtime ~/.vim/.govimrc
+
+nmap ne :NERDTreeToggle<CR>
+
+map <F3> :GoDef<CR>
+map <F4> :TagbarToggle<CR>
+map <F10> :GoBuild<CR>
+map <F11> :GoRun<CR>
+
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1

@@ -1,0 +1,9 @@
+[alias]
+  st = status .
+  di = diff .
+  ca = diff --cached .
+  lo = log --graph --abbrev-commit --decorate --format=format:'%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
+
+[user]
+  email = sibera21@gmail.com
+  name = Taeik Lim

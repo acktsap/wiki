@@ -1,0 +1,27 @@
+# set default editor
+export EDITOR=vim
+
+# aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias grep='grep --color=auto'
+
+# PS1 setting sub function : get current branch in git repo
+function parse_git_branch() {
+	BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	[ ! -z "${BRANCH}" ] && echo "[${BRANCH}]"
+}
+
+# PS1 setting
+PS1="\[\e[0;36m\]\u\[\e[m\]@\h:\w\[\e[0;32m\]\`parse_git_branch\`\[\e[m\]\[\e[0;31m\]\[\e[m\] " && export PS1
+
+# LS_COLORS setting (see also https://geoff.greer.fm/lscolors/)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  LSCOLORS="exgxbxdxcxegedabagacad" && export LSCOLORS
+  export CLICOLOR=1
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+  LS_COLORS="di=34:ln=36:so=31:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43" && export LS_COLORS
+fi

@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+# Resolve script home
+SOURCE="${BASH_SOURCE[0]}"
+# resolve $SOURCE until the file is no longer a symlink
+while [ -h "$SOURCE" ]; do
+  SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT_HOME/$SOURCE"
+done
+SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+
+# define install command
+OS="$(grep . /etc/*-release | head -n 1)"
+if [[ "$OS" =~ "CentOS" ]]; then
+  INSTALL_CMD="yum"
+elif [[ "$OS" =~ "Ubuntu" ]]; then
+  INSTALL_CMD="apt-get"
+fi
+
+export OS
+export INSTALL_CMD
+
+
+## useful functions
+
+# check install (exit code 0 -> stop entire script)
+function check_install() {
+  local -r COMMAND="$1"
+  ${COMMAND} > /dev/null 2>&1
+}

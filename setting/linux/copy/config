@@ -1,0 +1,16 @@
+# make sure IdentityFile is in 400 mode
+
+Host bitbucket.org
+  Hostname bitbucket.org
+  IdentityFile ~/.ssh/sibera21@gmail.com
+  StrictHostKeyChecking no
+
+Host github.com
+  Hostname github.com
+  IdentityFile ~/.ssh/sibera21@gmail.com
+  StrictHostKeyChecking no
+
+Host *
+  User tilim
+  IdentityFile ~/.ssh/sibera21@gmail.com
+  StrictHostKeyChecking no
