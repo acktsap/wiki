@@ -17,6 +17,8 @@ A playground as a poor software developer
   - Concurrency
   - ...
 - Modeling
+- Some rules for coding
+- Separation of Concerns Subject
 
 ## Rule
 
