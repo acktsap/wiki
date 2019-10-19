@@ -1,5 +1,5 @@
 <!--
-  ~ @copyright defined in LICENSE.txt
+  ~ @copyright defined in LICENSE
   -->
 
 <configuration>
@@ -12,5 +12,5 @@
   <root level="INFO">
     <appender-ref ref="STDOUT" />
   </root>
-  <logger name="io.lim" level="info"/>
+  <logger name="acktsap.sample" level="info"/>
 </configuration>

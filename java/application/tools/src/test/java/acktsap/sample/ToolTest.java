@@ -1,14 +1,15 @@
-package io.lim.sample;
+package acktsap.sample;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import acktsap.sample.Tool;
 
-public class AppTest {
+public class ToolTest {
 
   @Test
   public void test() {
-    final App classUnderTest = new App();
+    final Tool classUnderTest = new Tool();
     assertNotNull("app should have a greeting", classUnderTest.getGreeting());
   }
 

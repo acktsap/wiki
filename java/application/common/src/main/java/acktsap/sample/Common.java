@@ -1,4 +1,4 @@
-package io.lim.sample;
+package acktsap.sample;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
