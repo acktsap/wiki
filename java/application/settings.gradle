@@ -1,0 +1,6 @@
+rootProject.name = 'java-application'
+
+include ':assembly'
+include ':common'
+include ':app'
+include ':tools'
