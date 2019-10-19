@@ -5,16 +5,18 @@
 - Prerequisite
   - jdk8
   - gradle
-- Test : `./gradlew test`
-- Build : `./gradlew clean build`
-- Make distribution : `./gradlew clean build installDist`
+- Test: `./gradlew test`
+- Build: `./gradlew clean build`
+- Make distribution: `./gradlew clean build installDist`
   - Distribution on `$PROJECT_HOME/assembly/build/distribution/`
   - Installed on `$PROJECT_HOME/assembly/install/xxx`
 
 ## Product
 
-- Install : `tar -xvf java-application-x.x.tar` or `unzip java-application-x.x.zip` 
-- Run : `./bin/app`, `./bin/tools`
+- Install: `tar -xvf java-application-x.x.tar` or `unzip java-application-x.x.zip`
+- Run
+  - App: `./bin/app`
+  - App: `./bin/tools`
 
 ## Update gradle wrapper
 
