@@ -8,3 +8,6 @@ bin/
 .classpath
 .project
 .settings/
+
+# assembly
+!/assembly/src/assembly/bin/
