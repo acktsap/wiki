@@ -3,6 +3,7 @@
 - README.md
   - Latest version
   - Compatibility
+  - Architecture
   - Build from source
     - Prerequisites
     - Install dependencies
