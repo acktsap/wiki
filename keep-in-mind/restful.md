@@ -11,7 +11,7 @@ p. 3
 The API’s job is to make the developer as successful as possible. The orientation for APIs is
 to think about design choices from the application developer’s point of view
 
-**Nouns are good; verbs are bad**
+### Nouns are good; verbs are bad
 
 p. 5
 
@@ -23,14 +23,14 @@ Use HTTP verbs to operate on the collections and elements (POST, GET, PUT, and D
 We think of them as mapping to the acronym, CRUD (Create-Read-Update-Delete)\
 (`/dogs`, `/dogs/:id`) * (POST, GET, PUT, DELETE) => 8 combinations
 
-**Plural nouns and concrete names**
+### Plural nouns and concrete names
 
 p. 8
 
 Use plural nouns (`/dog`: x, `/dogs`: o)\
 Use concrete (`/items`: x, `/users`: o)
 
-**Simplify associations - sweep complexity under the ‘?’**
+### Simplify associations - sweep complexity under the ‘?’
 
 p. 9
 
@@ -40,7 +40,7 @@ need too many cases where a URL is deeper than what we have above /resource/iden
 
 GET `/dogs?color=red&state=running&location=park`
 
-**Handling errors**
+### Handling errors
 
 p. 11
 
@@ -55,7 +55,7 @@ Handle following errors
 - The application did something wrong – client error (code: 40x)
 - The API did something wrong – server error (code: 50x)
 
-**Tips for versioning**
+### Tips for versioning
 
 p. 13
 
@@ -63,7 +63,7 @@ Never release an API without a version and make the version mandatory
 
 `/v1/dogs`: o, `/v1.2/dogs`: x
 
-**Pagination and partial response**
+### Pagination and partial response
 
 p. 16
 
@@ -82,7 +82,7 @@ Use default data size (eg. limit=10 with offset=0)
 
 `/dogs` == `/dogs?limit=10&offset=0`
 
-**What about responses that don’t involve resources**
+### What about responses that don’t involve resources
 
 p. 19.
 
@@ -92,21 +92,21 @@ Use verbs not nouns
 
 -> Should be no such request
 
-**Supporting multiple formats**
+### Supporting multiple formats
 
 -> Use just json. No multiple formats
 
-**What about attribute names?**
+### What about attribute names
 
 -> Use just json (camelcase, eg. "createdAt": 1320296464)
 
-**Tips for search**
+### Tips for search
 
 p. 22
 
 `/search?q=fluffy+fur` q: query
 
-**Consolidate API requests in one subdomain**
+### Consolidate API requests in one subdomain
 
 api.twitter.com\
 stream.twitter.com\
@@ -114,15 +114,15 @@ search.twitter.com
 
 -> In a small field, place domain in an endpoint like `localhost:xxx/api/v1/` or `localhost:xxx/stream/v1/`
 
-**Tips for handling exceptional behavior**
+### Tips for handling exceptional behavior
 
 -> Just throw a pass
 
-**Authentication**
+### Authentication
 
 -> Beyond the api design scope
 
-**Making requests on your API**
+### Making requests on your API
 
 p.27 - 29
 
@@ -222,15 +222,15 @@ Response
 200 OK
 ```
 
-**Chatty APIs**
+### Chatty APIs
 
 -> what?
 
-**Complement with an SDK**
+### Complement with an SDK
 
 -> what?
 
-**The API Facade Pattern**
+### The API Facade Pattern
 
 p. 34
 
@@ -247,4 +247,3 @@ Subsystems often get more complex as they evolve."
 ## Design guide
 
 Keep it simple stupid
-
