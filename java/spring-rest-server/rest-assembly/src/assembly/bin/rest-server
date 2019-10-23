@@ -19,8 +19,8 @@ readonly APP_DOC="$APP_HOME/doc"
 
 # jar files
 readonly JARS=$(find "$APP_LIB" -name '*.jar' | tr '\n' ':')
-readonly MAIN_CLASS="acktsap.sample.App"
-readonly LOG_FILE="app-logger.xml"
+readonly MAIN_CLASS="acktsap.sample.RestApplication"
+readonly LOG_FILE="rest-logger.xml"
 
 # run
 readonly COMMAND="java -cp $APP_CONF:$JARS \

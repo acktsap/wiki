@@ -23,7 +23,7 @@ readonly MAIN_CLASS="acktsap.sample.App"
 readonly LOG_FILE="tool-logger.xml"
 
 # run
-readonly COMMAND="java -cp $JARS \
+readonly COMMAND="java -cp $APP_CONF:$JARS \
 	-Dlogback.verbose=true \
 	-Dlogging.config=$APP_CONF/$LOG_FILE \
 	-Dlogback.configurationFile=$APP_CONF/$LOG_FILE \

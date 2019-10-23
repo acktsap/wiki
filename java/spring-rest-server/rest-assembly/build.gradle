@@ -1,8 +1,7 @@
 apply plugin: 'distribution'
 
 dependencies {
-  implementation project(':app-main')
-  implementation project(':app-tools')
+  implementation project(':rest-main')
 }
 
 distributions {
