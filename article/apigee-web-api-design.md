@@ -4,9 +4,6 @@
 
 ## Summarize & thoughts
 
-### Apigee web api design
-
-
 I deliberately missed some statements against my thought
 
 p. 3
