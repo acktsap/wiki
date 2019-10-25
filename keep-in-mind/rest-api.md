@@ -8,6 +8,8 @@ Define resources with URI(Uniform Resource Identifier) & use POST, GET, PUT, DEL
 
 Keep it simple stupid
 
+Write it extendablly
+
 Use base domain with integer version (no v1.2)
 
 - /api/v1/dogs/

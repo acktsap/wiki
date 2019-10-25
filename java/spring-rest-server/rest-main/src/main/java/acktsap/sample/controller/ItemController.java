@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/items")
 public class ItemController {
 
   protected final Logger logger = getLogger(getClass());
@@ -31,7 +33,7 @@ public class ItemController {
    *
    * @return item list
    */
-  @GetMapping("/items")
+  @GetMapping
   public List<Item> allItems() {
     logger.debug("GET /items");
     return this.itemService.findAll();
@@ -43,7 +45,7 @@ public class ItemController {
    * @param item an item
    * @return a created item
    */
-  @PostMapping("/items")
+  @PostMapping
   public Item newItem(@RequestBody Item item) {
     logger.debug("POST /items (item={}", item);
     return this.itemService.save(item);
@@ -58,7 +60,7 @@ public class ItemController {
    * @param id an item id
    * @return an item
    */
-  @GetMapping("/items/{id}")
+  @GetMapping("/{id}")
   public Item oneItem(@PathVariable Long id) {
     logger.debug("GET /items/{}", id);
     return this.itemService.findById(id)
@@ -72,7 +74,7 @@ public class ItemController {
    * @param newItem an new item
    * @return a replaced item
    */
-  @PutMapping("/items/{id}")
+  @PutMapping("/{id}")
   public Item replaceItem(@PathVariable Long id, @RequestBody Item newItem) {
     logger.debug("PUT /items/{} (newItem: {})", id, newItem);
     return this.itemService.replaceById(id, newItem)
@@ -84,7 +86,7 @@ public class ItemController {
    *
    * @param id an item id
    */
-  @DeleteMapping("/items/{id}")
+  @DeleteMapping("/{id}")
   public void deleteItem(@PathVariable Long id) {
     logger.debug("DELETE /items/{}", id);
     this.itemService.deleteById(id)

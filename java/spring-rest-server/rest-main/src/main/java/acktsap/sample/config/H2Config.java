@@ -26,7 +26,7 @@ public class H2Config {
   @Bean
   public CommandLineRunner initDatabase(final ItemRepository itemRepository) {
     return args -> {
-      IntStream.range(0, new Random().nextInt(500)).forEach(i -> {
+      IntStream.range(0, new Random().nextInt(300)).forEach(i -> {
         final String name = randomUUID().toString();
         final int value = new Random().nextInt(10);
         logger.info("Preloading {}", itemRepository.save(new Item(name, value)));

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: rest-server
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: user
+    password: password
+
+server:
+  port: 9000

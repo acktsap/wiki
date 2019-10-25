@@ -10,3 +10,4 @@ Type on each classes which contains main method
 
 - Mac: `Command + F11`
 - Windows: `Ctrl + F11`
+
