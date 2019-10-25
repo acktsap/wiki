@@ -33,6 +33,7 @@ subprojects {
   // lint
   checkstyle {
     toolVersion checkstyleVersion
+    sourceSets = [ project.sourceSets.main ] // exclude test codes
     configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
   }
 
