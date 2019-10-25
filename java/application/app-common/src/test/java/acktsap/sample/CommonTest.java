@@ -3,8 +3,8 @@ package acktsap.sample;
 import static java.util.UUID.randomUUID;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.Test;
 import acktsap.sample.Common;
+import org.junit.Test;
 
 public class CommonTest {
 

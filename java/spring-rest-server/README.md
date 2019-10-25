@@ -5,8 +5,9 @@
 - Prerequisite
   - jdk8
   - gradle
+- Lint: `./gradlew check`
 - Test: `./gradlew test`
-- Build: `./gradlew clean build`
+- Build (also lint, test): `./gradlew clean build`
 - Make distribution: `./gradlew clean build installDist`
   - Distribution on `$PROJECT_HOME/assembly/build/distribution/`
   - Installed on `$PROJECT_HOME/assembly/install/xxx`

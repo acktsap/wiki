@@ -7,10 +7,11 @@
   - Build from source
     - Prerequisites
     - Install dependencies
+    - Lint
+    - Unit test, Integration test (also coverage)
     - Build
-    - Unit test
-    - Integration test
     - Install dev mode
+    - Docs
   - Product
     - Install
     - Run
@@ -25,8 +26,8 @@
 - Compatibility
 - Dependencies version
 - Logging
-- Coverage
 - Lint
 - Testing
+- Coverage
 - Docs
 

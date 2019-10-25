@@ -5,8 +5,9 @@
 - Prerequisite
   - jdk8
   - gradle
+- Lint: `./gradlew check`
 - Test: `./gradlew test`
-- Build: `./gradlew clean build`
+- Build (also lint, test): `./gradlew clean build`
 - Make distribution: `./gradlew clean build installDist`
   - Distribution on `$PROJECT_HOME/assembly/build/distribution/`
   - Installed on `$PROJECT_HOME/assembly/install/xxx`
@@ -26,4 +27,6 @@
 
 ## See also
 
-[gradle plugin](https://docs.gradle.org/current/userguide/distribution_plugin.html)
+- [gradle distribution plugin](https://docs.gradle.org/current/userguide/distribution_plugin.html)
+- [gradle checkstyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
+- [google checkstyle](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)

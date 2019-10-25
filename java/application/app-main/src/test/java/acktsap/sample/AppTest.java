@@ -2,8 +2,8 @@ package acktsap.sample;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.Test;
 import acktsap.sample.App;
+import org.junit.Test;
 
 public class AppTest {
 

@@ -8,6 +8,7 @@ buildscript {
 
 subprojects {
   apply plugin: 'java'
+  apply plugin: 'checkstyle'
 
   sourceCompatibility = sourceJavaVersion
   targetCompatibility = targetJavaVersion
@@ -28,4 +29,11 @@ subprojects {
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "junit:junit:${junitVersion}"
   }
+
+  // lint
+  checkstyle {
+    toolVersion checkstyleVersion
+    configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
+  }
+
 }

@@ -1,8 +1,8 @@
 package acktsap.sample.service;
 
+import acktsap.sample.model.Item;
 import java.util.List;
 import java.util.Optional;
-import acktsap.sample.model.Item;
 
 public interface ItemService {
 
