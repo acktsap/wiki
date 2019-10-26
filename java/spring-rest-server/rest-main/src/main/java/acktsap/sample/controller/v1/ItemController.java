@@ -1,4 +1,4 @@
-package acktsap.sample.controller;
+package acktsap.sample.controller.v1;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("/items")
+@RestController
+@RequestMapping("/api/v1/items")
 public class ItemController {
 
   protected final Logger logger = getLogger(getClass());
