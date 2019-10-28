@@ -10,6 +10,14 @@ Keep it simple stupid
 
 Write it extendablly
 
+Use HTTP status codes for handling error\
+[wiki HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+- Everything worked - success (code: 20x)
+- Go away - redirection (code: 30x)
+- The application did something wrong – client error (code: 40x)
+- The API did something wrong – server error (code: 50x)
+
 Use base domain with integer version (no v1.2)
 
 - /api/v1/dogs/
@@ -22,7 +30,7 @@ If you wanna split api, use like
 - /stream/v1/dogs/
 - /stream/v1/dogs/:id
 
-### POST
+### POST (Create)
 
 ```text
 POST /api/v1/dogs
@@ -39,7 +47,7 @@ Response
 }
 ```
 
-### GET
+### GET (Read)
 
 Basic
 
@@ -203,7 +211,7 @@ Response
 }
 ```
 
-### PUT
+### PUT (Update)
 
 ```text
 PUT /dogs/1234
@@ -220,7 +228,7 @@ Response
 }
 ```
 
-### DELETE
+### DELETE (Delete)
 
 ```text
 DELETE /dogs/1234
