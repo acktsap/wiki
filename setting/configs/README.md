@@ -6,8 +6,9 @@
 
 ### Eclipse
 
-- Import: `eclipse preference -> java -> code style -> formatter`
+- Import: `Eclipse preference -> Java -> Code style -> Formatter`
 - Usage: command + shift + f (osx) or alt + shift + f (windows)
+- Copyright comment on new one: `Eclipse preference -> Code Templates -> Comments -> Files -> Import` & check Automatically add ~~
 
 Plugins
 
