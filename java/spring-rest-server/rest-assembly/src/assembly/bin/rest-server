@@ -21,11 +21,13 @@ readonly APP_DOC="$APP_HOME/doc"
 readonly JARS=$(find "$APP_LIB" -name '*.jar' | tr '\n' ':')
 readonly MAIN_CLASS="acktsap.sample.RestServerLauncher"
 readonly LOG_FILE="rest-logger.xml"
+readonly CONFIG_FILE="rest-server.yml"
 
 # run
 readonly COMMAND="java -cp $APP_CONF:$JARS \
-	-Dlogback.verbose=true \
-	-Dlogging.config=$APP_CONF/$LOG_FILE \
-	-Dlogback.configurationFile=$APP_CONF/$LOG_FILE \
+  -Dlogback.verbose=true \
+  -Dlogging.config=$APP_CONF/$LOG_FILE \
+  -Dlogback.configurationFile=$APP_CONF/$LOG_FILE \
+  -Dspring.config.location=classpath:$CONFIG_FILE \
   $MAIN_CLASS $*"
 ${COMMAND}

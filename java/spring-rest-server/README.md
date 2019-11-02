@@ -37,4 +37,5 @@
 - [Building a REST service with spring](https://spring.io/guides/tutorials/rest/)
 - [Spring Boot h2 database](https://www.baeldung.com/spring-boot-h2-database)
 - [Custom versioning with annotation](https://stackoverflow.com/questions/51897285/extend-class-level-requestmapping-with-custom-annotation)
+- [Spring Boot Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config-application-property-files)
 
