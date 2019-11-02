@@ -8,4 +8,4 @@ spring:
     password: password
 
 server:
-  port: 9000
+  port: 9201

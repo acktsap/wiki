@@ -1,0 +1,9 @@
+dependencies {
+  implementation ("org.springframework.boot:spring-boot-starter-batch:${springBootVersion}") {
+    // To disable spring-boot-starter-jdbc url autoconfigure
+    exclude group: "org.springframework.boot", module: "spring-boot-starter-jdbc"
+  }
+  implementation "org.springframework.boot:spring-boot-starter-quartz:${springBootVersion}"
+
+  testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}

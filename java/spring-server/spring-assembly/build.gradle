@@ -1,7 +1,8 @@
 apply plugin: 'distribution'
 
 dependencies {
-  implementation project(':rest-main')
+  implementation project(':spring-rest-server')
+  implementation project(':spring-scheduler')
 }
 
 distributions {

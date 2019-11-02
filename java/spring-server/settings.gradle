@@ -1,0 +1,5 @@
+rootProject.name = 'spring-server'
+
+include ':spring-assembly'
+include ':spring-rest-server'
+include ':spring-scheduler'

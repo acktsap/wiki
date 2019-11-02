@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+SOURCE="${BASH_SOURCE[0]}"
+# resolve $SOURCE until the file is no longer a symlink
+while [ -h "$SOURCE" ]; do
+  SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT_HOME/$SOURCE"
+done
+readonly SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+
+# Directory definitions
+readonly APP_HOME="$SCRIPT_HOME/.."
+readonly APP_BIN="$APP_HOME/bin"
+readonly APP_LIB="$APP_HOME/lib"
+readonly APP_CONF="$APP_HOME/conf"
+readonly APP_DOC="$APP_HOME/doc"
+
+# jar files
+readonly JARS=$(find "$APP_LIB" -name '*.jar' | tr '\n' ':')
+readonly MAIN_CLASS="acktsap.sample.SchedulerServerLauncher"
+readonly LOG_FILE="scheduler-logger.xml"
+readonly CONFIG_FILE="scheduler.yml"
+
+# run
+readonly COMMAND="java -cp $APP_CONF:$JARS \
+  -Dlogback.verbose=true \
+  -Dlogging.config=$APP_CONF/$LOG_FILE \
+  -Dlogback.configurationFile=$APP_CONF/$LOG_FILE \
+  -Dspring.config.location=classpath:$CONFIG_FILE \
+  $MAIN_CLASS $*"
+${COMMAND}

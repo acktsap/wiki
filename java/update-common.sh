@@ -13,7 +13,7 @@ readonly SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 
 readonly SOURCE_PROJECT=application
 readonly TARGET_PROJECTS=(
-  spring-rest-server
+  spring-server
 )
 readonly TARGET_FILES=(
   build.gradle

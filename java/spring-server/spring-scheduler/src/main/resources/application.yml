@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: scheduler
+
+remote:
+  endpoint: localhost
+  port: 8080

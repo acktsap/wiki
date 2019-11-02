@@ -1,4 +1,0 @@
-rootProject.name = 'spring-rest-server'
-
-include ':rest-assembly'
-include ':rest-main'
