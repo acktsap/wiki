@@ -19,11 +19,10 @@
   - App: `./bin/app`
   - App: `./bin/tools`
 
-## Update gradle wrapper
+## Useful gradle commands
 
-```sh
-> gradle wrapper --gradle-version x.xx
-```
+- Upgrade gradle wrapper: `gradle wrapper --gradle-version x.xx`
+- List available tasks: `./gradlew tasks --all`
 
 ## See also
 
