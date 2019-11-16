@@ -66,8 +66,8 @@ function search_match_filter() {
         "filter": {
           "range": {
             "balance": {
-              "gte": 20000,
-              "lte": 30000
+              "gte": 40000,
+              "lte": 50000
             }
           }
         }
@@ -78,7 +78,7 @@ function search_match_filter() {
 }
 
 case $1 in
-  match_all | batch_all_size | match | match_phrase | match_exclude | match_filter)
+  match_all | match_all_size | match | match_phrase | match_exclude | match_filter)
     search_$1
     ;;
   *)
