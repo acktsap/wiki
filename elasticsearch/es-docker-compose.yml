@@ -15,7 +15,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data01:/usr/share/elasticsearch/data
+      - ./data01:/usr/share/elasticsearch/data
     ports:
       - ${ES1_PORT}:${ES1_PORT}
     networks:
@@ -36,7 +36,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - data02:/usr/share/elasticsearch/data
+      - ./data02:/usr/share/elasticsearch/data
     ports:
       - ${ES2_PORT}:${ES2_PORT}
     networks:
