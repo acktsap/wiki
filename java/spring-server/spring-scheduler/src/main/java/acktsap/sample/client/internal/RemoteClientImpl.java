@@ -18,7 +18,7 @@ public class RemoteClientImpl implements RemoteClient {
   @Override
   public List<RawItem> request() {
     final Supplier<Integer> randomIntSupplier = () -> new Random().nextInt(Integer.MAX_VALUE);
-    return IntStream.of(new Random().nextInt(100)).mapToObj(Integer::new)
+    return IntStream.range(1, new Random().nextInt(100) + 1).mapToObj(Integer::new)
         .map(i -> RawItem.newBuilder().value(randomIntSupplier.get()).build())
         .collect(toList());
   }

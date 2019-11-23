@@ -2,7 +2,7 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.configuration;
+package acktsap.sample.config;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RemoteConfiguration {
+public class RemoteConfig {
 
   protected final Logger logger = getLogger(getClass());
 
@@ -24,11 +24,16 @@ public class RemoteConfiguration {
   @Value("${remote.port}")
   protected int remotePort;
 
+  /**
+   * RemoteClient bean.
+   *
+   * @return a remote client
+   */
   @Bean
   public RemoteClient remoteClient() {
-    RemoteClient fuck = new RemoteClientFactory().create(remoteEndpoint, remotePort);
+    final RemoteClient client = new RemoteClientFactory().create(remoteEndpoint, remotePort);
     logger.debug("Connect to {}:{}", remoteEndpoint, remotePort);
-    return fuck;
+    return client;
   }
 
 }

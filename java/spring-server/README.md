@@ -4,7 +4,7 @@
 
 - Batch (Read, Process, Write for a large number of records **effectively**)
   - ItemReader, ItemProcessor, ItemWriter (atomic task)
-  - Step (uses ItemReader, ItemProcessor, ItemWriter)
+  - Step (uses ItemReader, ItemProcessor, ItemWriter), Chunk
   - Job (one or more steps), JobInstance, JobParameters, JobExecution
   - JobLauncher (launch job), JobRepository (store job)
 - Quartz (like cron, do a job **periodically**)
@@ -55,4 +55,4 @@
 - [Spring boot batch docs](https://docs.spring.io/spring-batch/docs/current/reference/html/index.html)
 - [Spring boot quartz feature](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-quartz)
 - [Spring boot quartz scheduling](https://www.baeldung.com/spring-quartz-schedule)
-
+- [Spring batch & quartz](https://blog.kingbbode.com/posts/spring-batch-quartz)

@@ -1,3 +1,7 @@
+/*
+ * @copyright defined in LICENSE.txt
+ */
+
 package api.io;
 
 import java.io.IOException;

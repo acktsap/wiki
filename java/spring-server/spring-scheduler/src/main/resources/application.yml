@@ -1,6 +1,9 @@
 spring:
   application:
     name: scheduler
+  batch:
+    job:
+      enabled: true
 
 remote:
   endpoint: localhost
