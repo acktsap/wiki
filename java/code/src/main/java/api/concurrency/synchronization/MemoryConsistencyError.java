@@ -34,6 +34,7 @@ public class MemoryConsistencyError {
           flag.set(true);
         }
       });
+
       operator.start();
       reader.start();
 
@@ -46,7 +47,7 @@ public class MemoryConsistencyError {
       }
     }
 
-    System.out.format("Finished with try count(%s)%n", tryCount);
+    System.out.format("Finished with try count %s %n", tryCount);
   }
 
 }

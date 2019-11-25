@@ -28,11 +28,15 @@ public class SynchronizedStatement {
     }
 
     public int get1() {
-      return c1;
+      synchronized (lock1) {
+        return c1;
+      }
     }
 
     public int get2() {
-      return c2;
+      synchronized (lock2) {
+        return c2;
+      }
     }
 
   }
