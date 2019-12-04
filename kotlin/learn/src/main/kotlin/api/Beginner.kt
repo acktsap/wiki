@@ -2,11 +2,14 @@
  * Test.
  */
 
+package api
+
 object Obj {
     // public static final
     const val who = "world" // not assignment, just a declaration
 }
 
+// shift + shift general find
 fun main(args: Array<String>) {
     // final, variable, can't be reassigned
     val who = "world" // not assignment, just a declaration
