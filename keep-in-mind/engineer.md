@@ -4,7 +4,13 @@ Performance vs Pride
 
 ## Programming
 
-The process of creating a set of instructions that tell a computer how to perform a task
+The process of creating a set of instructions that tell a computer how to perform a task.
+
+It require **abstraction**. Which removes unnecessary things from our concerns.
+
+Abstraction is modeling some processing to solve some problem as a language of computational world.
+
+Then programming is creating a set of instruction for solving some problem based on model.
 
 ## Seperation of Concerns
 
@@ -21,9 +27,11 @@ It represents as **SOLID** in OOP
 
 ## Everything is for human
 
-Every tech is for solving some problem.
+**Technology** is for human. It should solve some problem human is struggle with.
 
 Human can handle a little information at the same time. Apply KISS (Keep It Simple Stupid) on code.
+
+Simple is best. Don't make a dependency if possible.
 
 ## Engineering Mind
 
@@ -33,8 +41,8 @@ Engineering is understanding performance, structure, limits of what you build, d
 
 ## Questions
 
-- What kind of stuffs need to be changed on spec changes?
 - What kind of problem does it solve? No alternatives for this one?
 - Is it simple enough? fancy? beautiful?
 - Is is effective enough?
+- What kind of stuffs need to be changed when spec changes?
 
