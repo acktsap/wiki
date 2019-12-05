@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7614ea1c-6904-4b3b-a089-822e160fbe73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../core/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/Advanced.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/Func.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/assignmentKey" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/META-INF/Mastermind-Task.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/mastermind/EvaluateGuessKt$evaluateGuess$consume$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/mastermind/EvaluateGuessKt$evaluateGuess$indexOf$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/mastermind/EvaluateGuessKt$evaluateGuess$store$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/mastermind/EvaluateGuessKt.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/mastermind/Evaluation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/out/production/classes/mastermind/PlayMastermindKt.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/partId" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/src/mastermind/evaluateGuess.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/src/mastermind/playMastermind.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/task-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/task.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/test/mastermind/MastermindTestUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/test/mastermind/TestMastermindDifferentLetters.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/Task/test/mastermind/TestMastermindRepeatedLetters.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mastermind/lesson-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/course-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/Task/assignmentKey" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/Task/partId" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/Task/src/nicestring/NiceString.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/Task/task-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/Task/task.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/Task/test/nicestring/TestNiceString.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Nice String/lesson-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/assignmentKey" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/partId" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/src/taxipark/TaxiPark.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/src/taxipark/TaxiParkTask.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/task-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/task.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TaxiParkTestUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TestTask1FakeDrivers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TestTask2FaithfulPassengers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TestTask3FrequentPassengers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TestTask4SmartPassengers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TestTask5TheMostFrequentTripDurationPeriod.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/Task/test/taxipark/TestTask6ParetoPrinciple.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/Taxi Park/lesson-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/course-info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Kotlin for Java Developers. Week 3/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/outagain.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/outagain.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/highlevel/ConcurrentSomething.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/highlevel/ConcurrentSomething.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/highlevel/ExecutorApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/highlevel/ExecutorApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/highlevel/ForkJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/highlevel/ForkJoin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/highlevel/LockObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/highlevel/LockObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/immutable/ImmutableObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/immutable/ImmutableObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/immutable/SynchronizedObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/immutable/SynchronizedObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/liveness/Deadlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/liveness/Deadlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/liveness/LiveLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/liveness/LiveLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/liveness/Starvation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/liveness/Starvation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/reference" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/reference" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/GuardedBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/GuardedBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/Interference.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/Interference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/MemoryConsistencyError.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/MemoryConsistencyError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/Reentrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/Reentrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/StaticLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/StaticLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/SynchronizedMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/SynchronizedMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/synchronization/SynchronizedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/synchronization/SynchronizedStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/threadobject/InterruptHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/threadobject/InterruptHandling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/threadobject/MakingThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/threadobject/MakingThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/concurrency/threadobject/SimpleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/concurrency/threadobject/SimpleThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/ResourcesIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/ResourcesIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/formatter/Format.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/formatter/Format.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/formatter/Print.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/formatter/Print.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/reference" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/reference" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/scanner/NumberScan.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/scanner/NumberScan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/scanner/TokenScan.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/scanner/TokenScan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/stream/BufferedByteStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/stream/BufferedByteStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/stream/BufferedCharStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/stream/BufferedCharStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/stream/ByteStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/stream/ByteStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/stream/CharStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/stream/CharStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/api/io/stream/LineOrientedIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/api/io/stream/LineOrientedIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/modeling/cluster/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/modeling/cluster/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/modeling/cluster/ClusterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/modeling/cluster/ClusterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/modeling/cluster/ClusteredFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/modeling/cluster/ClusteredFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/modeling/cluster/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/modeling/cluster/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/modeling/cluster/FailoverRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/modeling/cluster/FailoverRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/java/modeling/cluster/Invocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/java/modeling/cluster/Invocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/resources/resources.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/resources/resources.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/resources/usnumbers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/resources/usnumbers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java/code/src/main/resources/xanadu.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java/core/src/main/resources/xanadu.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/Advanced.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/Beginner.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/Beginner.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/Client.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/Condition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/Condition.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/Func.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/JavaFunc.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/JavaFunc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/src/main/kotlin/api/Loop.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../core/src/main/kotlin/api/Loop.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../learn/summary.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1UV0dIfQDaSdcD13MsdeMMkc7tF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="foldersAlwaysOnTop" value="false" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Kotlin" />
+    <property name="show.inlinked.gradle.project.popup" value="false" />
+  </component>
+  <component name="RunManager" selected="Gradle.TestMastermindRepeatedLetters">
+    <configuration name="TestMastermindDifferentLetters" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;mastermind.TestMastermindDifferentLetters&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Mastermind-Task:cleanTest" />
+            <option value=":Mastermind-Task:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestMastermindRepeatedLetters" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;mastermind.TestMastermindRepeatedLetters&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":Mastermind-Task:cleanTest" />
+            <option value=":Mastermind-Task:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="mastermind.EvaluateGuessKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="Mastermind-Task_main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="mastermind.EvaluateGuessKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mastermind.PlayMastermindKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="Mastermind-Task_main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="mastermind.PlayMastermindKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TestMastermindRepeatedLetters" />
+        <item itemvalue="Gradle.TestMastermindDifferentLetters" />
+        <item itemvalue="Kotlin.mastermind.EvaluateGuessKt" />
+        <item itemvalue="Kotlin.mastermind.PlayMastermindKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7614ea1c-6904-4b3b-a089-822e160fbe73" name="Default Changelist" comment="" />
+      <created>1575426540216</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575426540216</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1680" y="27" width="800" height="765" key="#Intentions" timestamp="1575515138890">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state x="1680" y="27" width="800" height="765" key="#Intentions/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575515138890" />
+    <state width="1558" height="283" key="GridCell.Tab.0.bottom" timestamp="1575528721352">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.0.bottom/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721352" />
+    <state width="1558" height="283" key="GridCell.Tab.0.center" timestamp="1575528721352">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.0.center/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721352" />
+    <state width="1558" height="283" key="GridCell.Tab.0.left" timestamp="1575528721351">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.0.left/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721351" />
+    <state width="1558" height="283" key="GridCell.Tab.0.right" timestamp="1575528721352">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.0.right/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721352" />
+    <state width="1558" height="283" key="GridCell.Tab.1.bottom" timestamp="1575528721353">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.1.bottom/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721353" />
+    <state width="1558" height="283" key="GridCell.Tab.1.center" timestamp="1575528721353">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.1.center/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721353" />
+    <state width="1558" height="283" key="GridCell.Tab.1.left" timestamp="1575528721352">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.1.left/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721352" />
+    <state width="1558" height="283" key="GridCell.Tab.1.right" timestamp="1575528721353">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state width="1558" height="283" key="GridCell.Tab.1.right/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575528721353" />
+    <state x="1466" y="-77" key="SettingsEditor" timestamp="1575522790666">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state x="1466" y="-77" key="SettingsEditor/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575522790666" />
+    <state x="1759" y="194" key="com.intellij.ide.util.TipDialog" timestamp="1575513993621">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state x="1759" y="194" key="com.intellij.ide.util.TipDialog/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575513993621" />
+    <state x="1650" y="104" width="860" height="590" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1575427769777">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state x="1650" y="104" width="860" height="590" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575427769777" />
+    <state x="1745" y="113" width="670" height="676" key="search.everywhere.popup" timestamp="1575517978043">
+      <screen x="1280" y="-77" width="1600" height="877" />
+    </state>
+    <state x="1745" y="113" width="670" height="676" key="search.everywhere.popup/0.23.1280.777/1280.-77.1600.877@1280.-77.1600.877" timestamp="1575517978043" />
+  </component>
+</project>
