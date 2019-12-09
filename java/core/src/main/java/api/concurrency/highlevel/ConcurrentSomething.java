@@ -23,7 +23,7 @@ public class ConcurrentSomething {
     final ConcurrentNavigableMap<Object, Object> navigableMap = new ConcurrentSkipListMap<>();
     System.out.format("Queue: %s, HashMap: %s, TreeMap: %s%n", queue, hashMap, navigableMap);
 
-    // Math.randomo use AtomicLong in a seed in a static 'Random' class instance
+    // Math.random use AtomicLong in a seed in a static 'Random' class instance
     // ThreadLocalRandom is faster than Math.random (if Math.random is shared)
     final double slowRandom = (int) Math.random();
     final double fastRandom = ThreadLocalRandom.current().nextDouble();
@@ -32,7 +32,7 @@ public class ConcurrentSomething {
     // All classes have get and set methods that work like reads and writes on volatile variables.
     // That is, a set has a happens-before relationship with any subsequent get on the same
     // variable. This is faster than synchronized keyword (monitoring lock). Atomic operations use
-    // CAS(compare-and-swap). But it may be slower than synchronized on too many thread (too many
+    // CAS (compare-and-swap). But it may be slower than synchronized on too many thread (too many
     // CAS operation).
     final AtomicInteger atomicInteger = new AtomicInteger();
     final AtomicLong atomicLong = new AtomicLong();

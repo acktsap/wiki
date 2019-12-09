@@ -3,14 +3,14 @@ files:
 - name: src/nicestring/NiceString.kt
   visible: true
   placeholders:
-  - offset: 55
-    length: 6
+  - offset: 94
+    length: 1246
     placeholder_text: TODO()
     initial_state:
       length: 6
       offset: 55
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Unchecked
   text: |-
     package nicestring
