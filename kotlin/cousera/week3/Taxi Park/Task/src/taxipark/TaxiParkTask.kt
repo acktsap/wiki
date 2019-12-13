@@ -5,7 +5,7 @@ package taxipark
  */
 fun TaxiPark.findFakeDrivers(): Set<Driver> {
   val busyDrivers = this.trips.map { it.driver }.distinct().toSet()
-  return this.allDrivers.minus(busyDrivers);
+  return this.allDrivers - busyDrivers;
 }
 
 /*

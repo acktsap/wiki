@@ -1,14 +1,14 @@
 package api
 
 // sealed: 이 안에 있는거는 대수적으로 셜계했다 안바뀜~!~!
-abstract sealed class List {
-  abstract fun add(e: String): List
+abstract sealed class List<T> {
+  abstract fun add(e: String): List<Any?>
   abstract fun get(i: Int): String?
-  abstract fun remove(i: Int): List
+  abstract fun remove(i: Int): List<Any?>
 }
 
-object EmptyList : List() {
-  override fun add(e: String): List {
+object EmptyList : List<Any?>() {
+  override fun add(e: String): List<Any?> {
     return Conc(e, EmptyList)
   }
 
@@ -16,7 +16,7 @@ object EmptyList : List() {
     return null
   }
 
-  override fun remove(i: Int): List {
+  override fun remove(i: Int): List<Any?> {
     return this
   }
 
@@ -36,8 +36,8 @@ sealed class C {
 // better for computer
 // ram is better than sqllite
 // 기계친화적인 코드임
-class Conc(val v: String, val tail: List) : List() {
-  override fun add(e: String): List {
+class Conc(val v: String, val tail: List<Any?>) : List<Any?>() {
+  override fun add(e: String): List<Any?> {
     return Conc(v, tail.add(e))
   }
 
@@ -49,7 +49,7 @@ class Conc(val v: String, val tail: List) : List() {
     }
   }
 
-  override fun remove(i: Int): List {
+  override fun remove(i: Int): List<Any?> {
     return if (0 == i) {
       tail
     } else {

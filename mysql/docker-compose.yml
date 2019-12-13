@@ -13,19 +13,6 @@ services:
     volumes:
       - ./data01:/var/lib/mysql
 
-  mysql-slave:
-    image: mysql:${MYSQL_VERSION}
-    container_name: mysql-slave
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    ports:
-      - ${DB2_PORT}:3306
-    networks:
-      - mysql
-    volumes:
-      - ./data02:/var/lib/mysql
-
 volumes:
   data01:
     driver: local

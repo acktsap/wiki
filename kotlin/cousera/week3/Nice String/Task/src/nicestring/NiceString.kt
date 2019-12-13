@@ -6,7 +6,7 @@ const val threshold = match * 2
 val notAfterB = setOf('u', 'a', 'e')
 val vowels = setOf('a', 'e', 'i', 'o', 'u')
 
-fun String.isNice(): Boolean {
+fun String.isNiceLim(): Boolean {
   if (this.isEmpty()) {
     return false
   } else {
@@ -48,4 +48,11 @@ fun String.isNice(): Boolean {
     return test(null, 0, match, unMatch, unMatch)
   }
 
+}
+
+fun String.isNice(): Boolean {
+  val c1 = listOf("bu", "ba", "be").none { it in this }
+  val c2 = 3 <= "aeiou".sumBy { a -> this.count { a == it } }
+  val c3 = (0 until length - 1).map { this[it] to this[it + 1] }.any { it.first == it.second }
+  return listOf(c1, c2, c3).count { it } >= 2
 }
