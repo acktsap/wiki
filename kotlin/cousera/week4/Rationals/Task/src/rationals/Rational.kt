@@ -70,7 +70,7 @@ operator fun Rational.div(other: Rational): Rational {
   return n divBy d
 }
 
-operator fun Rational.unaryMinus(): Rational = this.numerator.multiply(BigInteger.valueOf(-1)) divBy this.denominator
+operator fun Rational.unaryMinus(): Rational = this.numerator.negate() divBy this.denominator
 
 operator fun Rational.compareTo(other: Rational): Int =
   (this.numerator * other.denominator).compareTo(other.numerator * this.denominator)
