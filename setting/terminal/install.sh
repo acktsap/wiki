@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# identify source directory
+SOURCE="${BASH_SOURCE[0]}"
+# resolve $SOURCE until the file is no longer a symlink
+while [ -h "$SOURCE" ]; do
+  SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  [[ $SOURCE != /* ]] && SOURCE="$SCRIPT_HOME/$SOURCE"
+done
+SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
+cd "$SCRIPT_HOME"
+
+function main() {
+  echo "Current OS: $OSTYPE"
+  if [[ "$OSTYPE" = darwin* ]]; then
+    COMMAND="brew install"
+  elif [[ "$OSTYPE" = linux* ]]; then
+    local OS="$(grep . /etc/*-release | head -n 1)"
+    if [[ "$OS" = "CentOS" ]]; then
+      COMMAND="yum install"
+    elif [[ "$OS" = "Ubuntu" ]]; then
+      COMMAND="apt-get install"
+    fi
+  else
+    echo "Unsupported os type"
+    exit -1
+  fi
+
+  # z shell
+  ${COMMAND} zsh
+  local zshell_location=$(which zsh)
+  [ -z $(sudo grep ${zshell_location} /etc/shells) ] && sudo bash -c "echo ${zshell_location} >> /etc/shells"
+  chsh -s ${zshell_location}
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+}
+
+main "$@"
