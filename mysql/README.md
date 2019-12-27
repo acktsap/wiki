@@ -6,8 +6,9 @@
 - Create & Run: `docker-compose -f ./docker-compose.yml up`
 - Start/Stop/Rm: `docker-compose -f ./docker-compose.yml start/stop/rm`
 - Access:
-  - `docker exec -it ${containerName} bash`
-  - `mysql -u root -p${MYSQL_PASSWORD}"
+  - `docker exec -it ${CONTAINER_NAME} bash`
+  - `mysql -uroot -p${MYSQL_PASSWORD}"`
+- Apply dump: `docker exec -i ${CONTAINER_NAME} mysql -uroot -p{MYSQL_PASSWORD} < dbdump.db`
 
 ## Management
 
