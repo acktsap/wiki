@@ -28,12 +28,21 @@ function main() {
     exit -1
   fi
 
+  # vim
+  local vundle="$HOME/.vim/bundle/Vundle.vim"
+  if [[ ! -d "$vundle" ]]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git "$vundle"
+  fi
+
   # z shell
-  ${COMMAND} zsh
   local zshell_location=$(which zsh)
-  [ -z $(sudo grep ${zshell_location} /etc/shells) ] && sudo bash -c "echo ${zshell_location} >> /etc/shells"
-  chsh -s ${zshell_location}
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  if [[ -z ${zshell_location} ]]; then
+    zshell_location=$(which zsh)
+    ${COMMAND} zsh
+    [ -z $(sudo grep ${zshell_location} /etc/shells) ] && sudo bash -c "echo ${zshell_location} >> /etc/shells"
+    chsh -s ${zshell_location}
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
 }
 
 main "$@"

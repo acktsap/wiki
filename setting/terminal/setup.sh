@@ -12,15 +12,11 @@ done
 SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 cd "$SCRIPT_HOME"
 
+# link copy
+${SCRIPT_HOME}/link/link.sh
+${SCRIPT_HOME}/copy/copy.sh
 
-VUNDLE="$HOME/.vim/bundle/Vundle.vim"
-if [[ ! -d "$VUNDLE" ]]; then
-  git clone https://github.com/VundleVim/Vundle.vim.git "$VUNDLE"
-fi
-
-"$SCRIPT_HOME/link/link.sh"
-"$SCRIPT_HOME/copy/copy.sh"
-
+# additioal bashrc
 BASHRC_ADD_FILE="bashrc_add"
 HOME_BASHRC="$HOME/.bashrc"
 if [[ -z $(cat $HOME_BASHRC | grep $BASHRC_ADD_FILE) ]]; then

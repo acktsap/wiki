@@ -1,18 +1,60 @@
-set nocompatible        " Disable vi-compatibility, required for Vundle
+"""""""""""""""""""""""""""""""""""""""""""""
+"" Base config
+"" for more information, :help option-summary
+"""""""""""""""""""""""""""""""""""""""""""""
+
+" rendering
 set encoding=utf-8
 
-set ts=2 shiftwidth=2 expandtab autoindent
-
-set number relativenumber numberwidth=3
-
-color deus
-set hlsearch
-set noswapfile
+" syntax
+set sm                   " showmatch, show matching parenthesis
+set cursorline           " highlight cursor line
 syntax on
+" color desert
+
+" line number
+set nu                   " number
+set rnu                  " relativenumber
+set numberwidth=3        " number width
+
+" status bar, replaced with 'vim-airline' plugin
+" set ru                   " ruler, show cursor position on a status bar
+" set ls=2                 " laststatus, show status bar, 0 (none), 1 (not display on single window), 2 (always)
+
+" search
+set hls                  " hlsearch, highlight matches, :noh to remove highlight
+set ic                   " ignorecase, can search uppercase with lowercase
+set smartcase            " when search is uppercase, ignore lowercase
+set incsearch            " increment search, search as characters are entered
+
+" space
+set ts=2                 " tabstop
+set et                   " expandtab, tab are spaces
+set ai                   " autoindent
+set smartindent          " add smartly based on language
+set shiftwidth=2         " width on operations like >>, <<
+set wrap                 " wrap lines longer than the width of the window
+
+" file
+set autoread             " automatically apply file changes outside of vim
+set nobackup             " no backup file
+set noswapfile           " no swap file
+
+" env
+set nocompatible         " Disable vi-compatibility, required for Vundle
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+set confirm              " raise a confirm dislogue on unsaved changes
+set history=1000         " vim command history count, saved in ~/.viminfo
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""
+"" Plugin Configs
+"""""""""""""""""""""""""""""""""""""""""""""
 
 " Remap code completion to Ctrl+Space {{{2
 " inoremap <C-Space> <C-n>
-
 
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " VundleVim Setting
@@ -31,18 +73,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" my plugins
-Plugin 'scrooloose/nerdtree' " file view tree
-Plugin 'vim-airline/vim-airline' " status bar
-Plugin 'tpope/vim-fugitive' " use git in vim within vim-airline
-Plugin 'airblade/vim-gitgutter' " show git diff
-Plugin 'scrooloose/syntastic' " syntax check
-Plugin 'valloric/youcompleteme' " auto complete
-Plugin 'majutsushi/tagbar'
-Plugin 'fatih/vim-go' " golang
+" common
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}   " syntax
+Plugin 'scrooloose/nerdtree'              " file view tree
+Plugin 'vim-airline/vim-airline'          " status bar
+Plugin 'tpope/vim-fugitive'               " use git in vim within vim-airline
+Plugin 'airblade/vim-gitgutter'           " show git diff
+Plugin 'scrooloose/syntastic'             " syntax check
+Plugin 'majutsushi/tagbar'                " show tagbar
+Plugin 'valloric/youcompleteme'           " auto complete
 
-" runtime .cppvimrc
-" runtime .scalarc
+" languages
+Plugin 'fatih/vim-go'                     " golang
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -51,12 +93,23 @@ filetype plugin indent on    " required
 
 " runtime ~/.vim/.govimrc
 
+
+" onehalf
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
+
+" nerdtree
 nmap ne :NERDTreeToggle<CR>
 
-map <F3> :GoDef<CR>
-map <F4> :TagbarToggle<CR>
-map <F10> :GoBuild<CR>
-map <F11> :GoRun<CR>
+" tagbar
+nmap <F4> :TagbarToggle<CR>
 
+" youcompleteme
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" vim-go
+" TODO: separate to other file
+nmap <F3> :GoDef<CR>
+nmap <F10> :GoBuild<CR>
+nmap <F11> :GoRun<CR>
