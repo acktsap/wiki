@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # identify source directory
 SOURCE="${BASH_SOURCE[0]}"
@@ -13,20 +13,21 @@ SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 cd "$SCRIPT_HOME"
 
 function main() {
-  echo "Current OS: $OSTYPE"
+  echo "$OSTYPE detected.."
   if [[ "$OSTYPE" = darwin* ]]; then
     COMMAND="brew install"
   elif [[ "$OSTYPE" = linux* ]]; then
-    local OS="$(grep . /etc/*-release | head -n 1)"
+    local OS="$(grep . /etc/*-release | head -n 1 | cut -d"=" -f2)"
     if [[ "$OS" = "CentOS" ]]; then
-      COMMAND="yum install"
+      COMMAND="sudo yum install -y"
     elif [[ "$OS" = "Ubuntu" ]]; then
-      COMMAND="apt-get install"
+      COMMAND="sudo apt-get install -y"
     fi
   else
     echo "Unsupported os type"
     exit -1
   fi
+  echo "install with '$COMMAND..'"
 
   # vim
   local vundle="$HOME/.vim/bundle/Vundle.vim"
@@ -37,8 +38,8 @@ function main() {
   # z shell
   local zshell_location=$(which zsh)
   if [[ -z ${zshell_location} ]]; then
-    zshell_location=$(which zsh)
     ${COMMAND} zsh
+    zshell_location=$(which zsh)
     [ -z $(sudo grep ${zshell_location} /etc/shells) ] && sudo bash -c "echo ${zshell_location} >> /etc/shells"
     chsh -s ${zshell_location}
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
