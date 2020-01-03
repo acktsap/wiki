@@ -21,3 +21,7 @@ Plugins
 ## Iterm
 
 - Import: `Iterm preference -> profiles -> colors -> color presets -> import
+
+## Windwos terminal
+
+- Backgroun: (34, 34, 34)
