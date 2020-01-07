@@ -123,3 +123,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ll='ls -alF'
+
+# Additional
+if [ ! -z $(which direnv) ]; then
+  eval "$(direnv hook zsh)"
+fi

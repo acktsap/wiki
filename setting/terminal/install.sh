@@ -44,6 +44,11 @@ function main() {
     chsh -s ${zshell_location}
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
+
+  # direnv
+  if [[ -z $(which direnv) ]]; then
+    ${COMMAND} direnv
+  fi
 }
 
 main "$@"
