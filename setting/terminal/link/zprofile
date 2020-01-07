@@ -18,25 +18,21 @@ export ZSH=$HOME/.oh-my-zsh
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
+# function
 function parse_git_branch() {
   BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
   [ ! -z "${BRANCH}" ] && echo "[${BRANCH}]"
 }
 
-PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%~%{$fg_bold[blue]%}$(parse_git_branch)%{$reset_color%} $FG[105]%(!.#.»)%{$reset_color%} '
+# primary prompt
+# FG[xxx] is an 8 bit colors, see also https://jonasjacek.github.io/colors/
+PROMPT='$FG[237]${(l.COLUMNS..-.)}%{$reset_color%}
+$FG[032]%~%{$reset_color%}\
+$FG[076]$(parse_git_branch)%{$reset_color%} \
+$FG[105]%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
 
-# color vars
-eval my_gray='$FG[237]'
-
-# right prompt
-# if type "virtualenv_prompt_info" > /dev/null
-# then
-#  RPROMPT='$FG[078]$(virtualenv_prompt_info)%{$reset_color%} $my_gray%n@%m%{$reset_color%}%'
-# else
-#  RPROMPT='$my_gray%n@%m%{$reset_color%}%'
-# fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -125,6 +121,6 @@ source $ZSH/oh-my-zsh.sh
 alias ll='ls -alF'
 
 # Additional
-if [ ! -z $(which direnv) ]; then
+if [ ! -z $(which direnv | grep bin) ]; then
   eval "$(direnv hook zsh)"
 fi

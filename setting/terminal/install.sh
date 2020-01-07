@@ -27,7 +27,7 @@ function main() {
     echo "Unsupported os type"
     exit -1
   fi
-  echo "install with '$COMMAND..'"
+  echo "install with '$COMMAND'"
 
   # vim
   local vundle="$HOME/.vim/bundle/Vundle.vim"
