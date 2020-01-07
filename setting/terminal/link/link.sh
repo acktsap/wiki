@@ -19,6 +19,9 @@ for FILE in ${FILES[@]}; do
   CANONICAL_FILE_PATH="$SCRIPT_HOME/$FILE"
   DEST=""
   case $FILE in
+    *vim)
+      DEST="$HOME/.vim/$FILE"
+      ;;
     *)
       DEST="$HOME/.$FILE"
       ;;

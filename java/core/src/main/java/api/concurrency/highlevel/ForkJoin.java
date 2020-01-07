@@ -4,8 +4,11 @@
 
 package api.concurrency.highlevel;
 
+import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
+import java.util.function.Supplier;
+import java8.util.stream.IntStreams;
 
 public class ForkJoin {
 
@@ -15,7 +18,7 @@ public class ForkJoin {
 
     private static final long serialVersionUID = 1L;
 
-    protected static final int sThreshold = 100000;
+    protected static final int sThreshold = 10_000;
 
     private int[] mSource;
     private int mStart;
@@ -30,6 +33,26 @@ public class ForkJoin {
       mStart = start;
       mLength = length;
       mDestination = dst;
+    }
+
+    protected void compute() {
+      if (mLength < sThreshold) {
+        computeDirectly();
+        return;
+      }
+
+      int split = mLength / 2;
+      System.out.format("[Thread: %s] Divide compute (current length: %d, next: %d)%n",
+          Thread.currentThread(), mLength, split);
+      ForkJoinAction left = new ForkJoinAction(mSource, mStart, split, mDestination);
+      ForkJoinAction right =
+          new ForkJoinAction(mSource, mStart + split, mLength - split, mDestination);
+
+      invokeAll(left, right);
+      // left.fork();
+      // right.fork();
+      // left.join();
+      // right.join();
     }
 
     protected void computeDirectly() {
@@ -59,18 +82,14 @@ public class ForkJoin {
       System.out.format("[Thread: %s] Compute terminated %n", Thread.currentThread());
     }
 
-    protected void compute() {
-      if (mLength < sThreshold) {
-        computeDirectly();
-        return;
-      }
+  }
 
-      int split = mLength / 2;
-
-      invokeAll(new ForkJoinAction(mSource, mStart, split, mDestination),
-          new ForkJoinAction(mSource, mStart + split, mLength - split,
-              mDestination));
-    }
+  protected static int[] randomSrc() {
+    int size = 1_000_000 + new Random().nextInt(1_000_000);
+    Supplier<Integer> randomColor = () -> new Random().nextInt(256);
+    return IntStreams.range(0, size)
+        .map(i -> randomColor.get())
+        .toArray();
   }
 
   // One such implementation, introduced in Java SE 8, is used by the java.util.Arrays class for its
@@ -79,9 +98,11 @@ public class ForkJoin {
   // Another implementation of the fork/join framework is used by methods in the java.util.streams
   // package, which is part of Project Lambda scheduled for the Java SE 8 release
   public static void main(String[] args) {
-    final ForkJoinPool forkJoinPool = new ForkJoinPool();
-    final int[] src = new int[0];
-    final int[] destination = new int[0];
+    final ForkJoinPool forkJoinPool =
+        new ForkJoinPool(2 * Runtime.getRuntime().availableProcessors());
+    System.out.println("Parallelism level size: " + forkJoinPool.getParallelism());
+    final int[] src = randomSrc();
+    final int[] destination = new int[src.length];
     forkJoinPool.invoke(new ForkJoinAction(src, 0, src.length, destination));
   }
 

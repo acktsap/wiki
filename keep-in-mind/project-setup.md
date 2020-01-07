@@ -10,7 +10,7 @@
     - Lint
     - Unit test, Integration test (also coverage)
     - Build
-    - Install dev mode
+    - Run as dev mode
     - Docs
   - Product
     - Install
@@ -18,10 +18,8 @@
 - LICENSE.txt
 - CONTRIBUTING.md
 - BRANCH-AND-RELEASE.md
-- Continuous Integration (on ./scripts for generality)
-  - Consider multiple environment (eg. test on node 8, node 10 both)
 
-## Config Subject
+## Common Configs
 
 - Compatibility
 - Dependencies version
@@ -30,4 +28,6 @@
 - Testing
 - Coverage
 - Docs
+- Packaging
+- CI (on test dir, write as a script, consider multiple env)
 

@@ -23,28 +23,20 @@ function parse_git_branch() {
   [ ! -z "${BRANCH}" ] && echo "[${BRANCH}]"
 }
 
-# primary prompt (customized)
-PROMPT='$FG[237]${(l.COLUMNS..-.)}%{$reset_color%}
-$FG[032]%~\
-$FG[075]\
-$FG[078]$(parse_git_branch)\
-$FG[075]%{$reset_color%} \
-$FG[105]%(!.#.»)%{$reset_color%} '
+PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%~%{$fg_bold[blue]%}$(parse_git_branch)%{$reset_color%} $FG[105]%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
 
-
 # color vars
 eval my_gray='$FG[237]'
-eval my_orange='$FG[214]'
 
 # right prompt
-if type "virtualenv_prompt_info" > /dev/null
-then
-  RPROMPT='$FG[078]$(virtualenv_prompt_info)%{$reset_color%} $my_gray%n@%m%{$reset_color%}%'
-else
-  RPROMPT='$my_gray%n@%m%{$reset_color%}%'
-fi
+# if type "virtualenv_prompt_info" > /dev/null
+# then
+#  RPROMPT='$FG[078]$(virtualenv_prompt_info)%{$reset_color%} $my_gray%n@%m%{$reset_color%}%'
+# else
+#  RPROMPT='$my_gray%n@%m%{$reset_color%}%'
+# fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

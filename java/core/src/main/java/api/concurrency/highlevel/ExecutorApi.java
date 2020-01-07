@@ -22,9 +22,9 @@ public class ExecutorApi {
   // ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic
   // execution of tasks.
   public static void main(String[] args) throws InterruptedException {
-    final int count = 5;
-    final long scheduledWait = 1500L;
-    final Object[][] parameters = {
+    int count = 5;
+    long scheduledWait = 1500L;
+    Object[][] parameters = {
         // single thread
         {Executors.newSingleThreadExecutor(), "newSingleThreadExecutor()"},
 
@@ -41,29 +41,28 @@ public class ExecutorApi {
         {Executors.newScheduledThreadPool(2), "newScheduledThreadPool(2)"},
     };
 
-    for (final Object[] parameter : parameters) {
-      final ExecutorService executorService = (ExecutorService) parameter[0];
-      final String serviceName = (String) parameter[1];
+    for (Object[] parameter : parameters) {
+      ExecutorService executorService = (ExecutorService) parameter[0];
+      String serviceName = (String) parameter[1];
 
       System.out.format("--- Running with %s ---%n", serviceName);
-      final CountDownLatch latch = new CountDownLatch(count);
-      final Runnable task = () -> {
+      CountDownLatch latch = new CountDownLatch(count);
+      Runnable task = () -> {
         try {
           Thread.sleep(500L);
         } catch (InterruptedException e) {
-          e.printStackTrace();
         }
         System.out.format("[Thread: %s] Countdown (current count: %d)%n", Thread.currentThread().getName(),
             latch.getCount());
         latch.countDown();
       };
-
-      final Stream<Runnable> taskStream = IntStream.range(0, count).mapToObj(i -> task);
+      
+      Stream<Runnable> taskStream = IntStream.range(0, count).mapToObj(i -> task);
       if (executorService instanceof ScheduledExecutorService) {
         System.out.format(
             "ExecutorService is ScheduledExecutorService (each starts with delay (%dms)%n",
             scheduledWait);
-        final ScheduledExecutorService scheduledExecutorService =
+        ScheduledExecutorService scheduledExecutorService =
             (ScheduledExecutorService) executorService;
         taskStream.forEach(
             t -> scheduledExecutorService.schedule(t, scheduledWait, TimeUnit.MILLISECONDS));

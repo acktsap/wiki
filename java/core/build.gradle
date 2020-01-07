@@ -24,8 +24,12 @@ dependencies {
   // Use JUnit test framework
   testImplementation 'junit:junit:4.12'
 
+  // blockchain
   implementation 'org.web3j:core:4.2.0-android'
   implementation 'io.aergo:heraj-transport:1.3.0'
+
+  // spring
+  implementation 'org.springframework.boot:spring-boot-starter-web:2.2.2.RELEASE'
 }
 
 // In this section you declare where to find the dependencies of your project

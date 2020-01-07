@@ -18,15 +18,15 @@ public class ConcurrentSomething {
 
   public static void main(String[] args) {
     // concurrent data structures
-    final BlockingQueue<Object> queue = new ArrayBlockingQueue<Object>(10);
-    final ConcurrentMap<Object, Object> hashMap = new ConcurrentHashMap<>();
-    final ConcurrentNavigableMap<Object, Object> navigableMap = new ConcurrentSkipListMap<>();
+    BlockingQueue<Object> queue = new ArrayBlockingQueue<Object>(10);
+    ConcurrentMap<Object, Object> hashMap = new ConcurrentHashMap<>();
+    ConcurrentNavigableMap<Object, Object> navigableMap = new ConcurrentSkipListMap<>();
     System.out.format("Queue: %s, HashMap: %s, TreeMap: %s%n", queue, hashMap, navigableMap);
 
     // Math.random use AtomicLong in a seed in a static 'Random' class instance
     // ThreadLocalRandom is faster than Math.random (if Math.random is shared)
-    final double slowRandom = (int) Math.random();
-    final double fastRandom = ThreadLocalRandom.current().nextDouble();
+    double slowRandom = (int) Math.random();
+    double fastRandom = ThreadLocalRandom.current().nextDouble();
     System.out.format("SlowRandom: %s, FastRandom: %s%n", slowRandom, fastRandom);
 
     // All classes have get and set methods that work like reads and writes on volatile variables.
@@ -34,8 +34,8 @@ public class ConcurrentSomething {
     // variable. This is faster than synchronized keyword (monitoring lock). Atomic operations use
     // CAS (compare-and-swap). But it may be slower than synchronized on too many thread (too many
     // CAS operation).
-    final AtomicInteger atomicInteger = new AtomicInteger();
-    final AtomicLong atomicLong = new AtomicLong();
+    AtomicInteger atomicInteger = new AtomicInteger();
+    AtomicLong atomicLong = new AtomicLong();
     System.out.format("AtomicInteger: %s, AtomicLong: %s%n", atomicInteger, atomicLong);
   }
 

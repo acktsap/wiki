@@ -5,7 +5,7 @@
 package api.reflection;
 
 import java.io.FileInputStream;
-import java.lang.reflect.Method;
+import java.io.FileNotFoundException;
 import java.security.SecureClassLoader;
 
 public class Test {
@@ -36,16 +36,19 @@ public class Test {
        * 
        * child-first class loader vs parent-first class loader
        * 
-       * class loader leak : 이거땜에 만들기 어려
-       * Class -> ClassLoader -> RootSet
+       * class loader leak : 이거땜에 만들기 어려 Class -> ClassLoader -> RootSet
        * 
        * Strong, Soft, Weak, Phantom reference 생각해
        */
       @Override
       protected Class<?> findClass(String name) throws ClassNotFoundException {
-        FileInputStream in = new FileInputStream(name.replace('.', '/') + ".class");
-        // return defineClass(name, in);
-        return super.findClass(name);
+        try {
+          FileInputStream in = new FileInputStream(name.replace('.', '/') + ".class");
+          // return defineClass(name, in);
+          return super.findClass(name);
+        } catch (FileNotFoundException e) {
+          throw new IllegalStateException(e);
+        }
       }
 
     };

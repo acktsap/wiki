@@ -1,7 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""
-"" Base config
-"" for more information, :help option-summary
-"""""""""""""""""""""""""""""""""""""""""""""
+"" Base, For more information ':help option-summary'
 
 " rendering
 set encoding=utf-8
@@ -10,7 +8,7 @@ set encoding=utf-8
 set sm                   " showmatch, show matching parenthesis
 set cursorline           " highlight cursor line
 syntax on
-" color desert
+" color desert            " default theme
 
 " line number
 set nu                   " number
@@ -51,7 +49,6 @@ set history=1000         " vim command history count, saved in ~/.viminfo
 
 """""""""""""""""""""""""""""""""""""""""""""
 "" Plugin Configs
-"""""""""""""""""""""""""""""""""""""""""""""
 
 " Remap code completion to Ctrl+Space {{{2
 " inoremap <C-Space> <C-n>
@@ -73,17 +70,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" common
+" syntax, statusbar
 Plugin 'sonph/onehalf', {'rtp': 'vim/'}   " syntax
-Plugin 'scrooloose/nerdtree'              " file view tree
+Plugin 'scrooloose/syntastic'             " syntax check
 Plugin 'vim-airline/vim-airline'          " status bar
+
+" navigating
+Plugin 'scrooloose/nerdtree'              " file view tree
+Plugin 'ctrlpvim/ctrlp.vim'               " file finder
+Plugin 'majutsushi/tagbar'                " show tagbar
+
+" git
 Plugin 'tpope/vim-fugitive'               " use git in vim within vim-airline
 Plugin 'airblade/vim-gitgutter'           " show git diff
-Plugin 'scrooloose/syntastic'             " syntax check
-Plugin 'majutsushi/tagbar'                " show tagbar
-Plugin 'valloric/youcompleteme'           " auto complete
 
-" languages
+" language
 Plugin 'fatih/vim-go'                     " golang
 
 call vundle#end()            " required
@@ -91,25 +92,51 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-" runtime ~/.vim/.govimrc
 
 
-" onehalf
+""""""""""""""""""""""""""""""""""""""""""
+"" syntax, statusbar
+
+""" onehalfdark
 colorscheme onehalfdark
+
+""" airline
 let g:airline_theme='onehalfdark'
 
+
+""""""""""""""""""""""""""""""""""""""""""
+"" navigating
+
 " nerdtree
+" ne -> run nerd tree
 nmap ne :NERDTreeToggle<CR>
+" arrow synbols
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" ctrlpvim
+" Shortcuts
+" - Press <F5> to purge the cache
+" - Press <c-d> to switch to filename only search instead of full path.
+" - Press <c-r> to switch to regexp mode.
+" - Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+" <c-p>  -> run nerd tree
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " tagbar
+" Shortcuts
+"  - ctrl
+" f4 -> view tag bar
 nmap <F4> :TagbarToggle<CR>
 
 " youcompleteme
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" vim-go
-" TODO: separate to other file
-nmap <F3> :GoDef<CR>
-nmap <F10> :GoBuild<CR>
-nmap <F11> :GoRun<CR>
+
+""""""""""""""""""""""""""""""""""""""""""
+""" load file per extentions
+
+au BufNewFile,BufRead *.java :source ~/.vim/java.vim
+au BufNewFile,BufRead *.go :source ~/.vim/go.vim
