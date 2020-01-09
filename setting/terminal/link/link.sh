@@ -12,20 +12,31 @@ done
 SCRIPT_HOME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 cd "$SCRIPT_HOME"
 
+# add parent directories
+DIRS=(
+  $HOME/.config/nvim
+)
+for DIR in ${DIRS[@]}; do
+  if [[ ! -d ${DIR} ]]; then
+    mkdir -p ${DIR}
+  fi
+done
 
+# link
 CURRENT_FILE=$(basename $0)
 FILES=$(find * ! -name "$CURRENT_FILE")
+
 for FILE in ${FILES[@]}; do
   CANONICAL_FILE_PATH="$SCRIPT_HOME/$FILE"
   DEST=""
   case $FILE in
     *vim)
-      DEST="$HOME/.vim/$FILE"
+      DEST="$HOME/.config/nvim/$FILE"
       ;;
     *)
       DEST="$HOME/.$FILE"
       ;;
   esac
-  echo "Linking $CANONICAL_FILE_PATH to $DEST"
+  echo "Link to '$DEST'"
   ln -sf "$CANONICAL_FILE_PATH" "$DEST"
 done

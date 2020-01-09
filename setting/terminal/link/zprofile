@@ -27,8 +27,8 @@ function parse_git_branch() {
 # primary prompt
 # FG[xxx] is an 8 bit colors, see also https://jonasjacek.github.io/colors/
 PROMPT='$FG[237]${(l.COLUMNS..-.)}%{$reset_color%}
-$FG[032]%~%{$reset_color%}\
-$FG[076]$(parse_git_branch)%{$reset_color%} \
+$FG[039]%~%{$reset_color%}\
+$FG[040]$(parse_git_branch)%{$reset_color%} \
 $FG[105]%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
@@ -95,6 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export EDITOR=nvim
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -117,8 +118,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 alias ll='ls -alF'
+alias vi='nvim'
+alias vim='nvim'
 
 # Additional
 if [ ! -z $(which direnv | grep bin) ]; then

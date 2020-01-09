@@ -138,5 +138,5 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 """"""""""""""""""""""""""""""""""""""""""
 """ load file per extentions
 
-au BufNewFile,BufRead *.java :source ~/.vim/java.vim
-au BufNewFile,BufRead *.go :source ~/.vim/go.vim
+au BufNewFile,BufRead *.java :source ~/.config/nvim/java.vim
+au BufNewFile,BufRead *.go :source ~/.config/nvim/go.vim

@@ -30,6 +30,16 @@ function main() {
   echo "install with '$COMMAND'"
 
   # vim
+  if [[ -z $(which vim | grep bin) ]]; then
+    ${COMMAND} vim
+  fi
+
+  # spacevim
+  if [[ -z $(which spacevim) ]]; then
+    curl -sLf https://spacevim.org/install.sh | bash
+  fi
+
+  # vim vundle plugin
   local vundle="$HOME/.vim/bundle/Vundle.vim"
   if [[ ! -d "$vundle" ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git "$vundle"
@@ -46,7 +56,7 @@ function main() {
   fi
 
   # direnv
-  if [[ -z $(which direnv) ]]; then
+  if [[ -z $(which direnv | grep bin) ]]; then
     ${COMMAND} direnv
   fi
 }

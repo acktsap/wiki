@@ -28,9 +28,9 @@ for FILE in ${FILES[@]}; do
   esac
   mkdir -p "$DEST"
   if [[ ! -f "$DEST/$FILE" ]]; then
-    echo "Copying $CANONICAL_FILE_PATH to $DEST"
+    echo "Copy to $DEST"
     cp "$CANONICAL_FILE_PATH" "$DEST/$FILE"
   else
-    echo "Not copying $CANONICAL_FILE_PATH. It already exists"
+    echo "Not copy to '$DEST/$FILE'. It already exists"
   fi
 done
