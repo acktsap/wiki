@@ -1,0 +1,11 @@
+# generated files
+yarn.lock
+node_modules
+coverage
+
+# .x files
+.*
+
+# exclusion
+!.gitignore
+!.*rc

@@ -1,20 +1,25 @@
 # Eclipse setting
 
-## Dummy
+## Instruction
 
-Welcome: help -> welcome
-- Workbench basics
-- Java development
+- Formatter
+  - Preference -> Java -> Code style -> Formatter [google style guide github](https://github.com/google/styleguide)
+  - Usage : command + shift + f (osx) or alt + shift + f (windows)
+- Code template
+  - Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files
+    ```java
+    /*
+     * @copyright defined in LICENSE.txt
+     */
 
-- Import: `Eclipse preference -> Java -> Code style -> Formatter`
-- Usage: command + shift + f (osx) or alt + shift + f (windows)
-- Copyright comment on new one: `Eclipse preference -> Code Templates -> Comments -> Files -> Import` & check Automatically add ~~
+    ```
+- Static import
+  - Java -> Editor -> Content Assist -> Favorites
+    ```java
+    java.util.UUID.*        // randomUUID()
+    java.util.Objects.*     // requireNonNull
 
-[google style guide github](https://github.com/google/styleguide)
-
-## Step-by-Step
-
-TODO
+- Highlight Current Variable : Java -> Editor -> Mark occurrences
 
 ## Plugins
 
@@ -26,39 +31,51 @@ TODO
 
 ## View
 
+- Maximize / unmaximize
+  - Ctrl + M
+- Closing
+  - Close : Ctrl + W
+  - Close All : Ctrl + Shift + W
 - Navigating
-- Maximize / umaximize
+  - View : Ctrl + F7
+  - Method list of current file : Command + O
+  - Show document : F2
+  - Go to definition : F3
+  - Show hierarchy of class : F4
 
 ## File
 
-- New (including boilplate code)
+- New : Ctrl + N (in project explorer)
 - Move
-- Remove
+- Remove : Delete
 
 ## Edit
 
-- Insert, copy and paste, delete of
-  - Char
-  - Word
-  - Line
-  - Block
-- Rename
-- Extract variable
-- Extract method
+- Vim
+  - Insert, copy and paste, delete of
+    - Char
+    - Word
+    - Line
+    - Block
+- Refactor
+  - Rename : Command + Shift + R
+  - Extract variable : Command + Shift + L
+  - Extract method : Command + Shift + M
 
 ## Search
 
-- File
+- Resources : Command + Shift + R
+- Classes : Command + Shift + T
 - Class, function
-- Go to definition
-- Referer
-- Hierarchy
+- Go to definition : F3
+- Referer : ?
+- Call Hierarchy : Command + Alt + H
 
 ## Run, Debug
 
-- Run current file
+- Run current file : Command + F11
 - Debug current file
-- Mark break point
+- Mark break point : Command + Shift + B
 - Step into
 - Step over
 - Resume

@@ -1,0 +1,8 @@
+# core
+https://docs.oracle.com/javase/8/docs/
+https://docs.oracle.com/javase/tutorial/
+
+# concurrency
+https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
+https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html#MemoryVisibility
+https://stackoverflow.com/questions/32422441/atomicinteger-is-slower-than-synchronized

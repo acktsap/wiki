@@ -26,7 +26,7 @@ Practice basic api usage like
 
 - Dynamic-Array (ArrayList in java, vector in c++)
 - Stack
-- queue
+- Queue
 - Deque
 - Map
 - Priority-Queue

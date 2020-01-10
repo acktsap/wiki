@@ -1,0 +1,10 @@
+{
+  "name": "code-patterns",
+  "version": "0.0.1",
+  "description": "An collection of code patterns for javascript/typescript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "acktsap",
+}

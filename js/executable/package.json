@@ -1,0 +1,57 @@
+{
+  "name": "ts-executable-project",
+  "version": "0.0.1",
+  "description": "Sample typescript executable project for packages built with rollup.",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn run type-check -- --watch",
+    "lint": "eslint --fix \"./src/**/*.ts\"",
+    "test": "yarn run lint && nyc mocha --exit --require babel-register-ts --recursive \"./test/**/*.ts\"",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "rollup -c ./scripts/rollup.config.js ",
+    "build:watch": "rollup -c ./scripts/rollup.config.js -w",
+    "build": "rm -rf .dist/ && yarn run test && yarn run build:types && yarn run build:js",
+    "dev": "rm -rf .dist/ && yarn run test && yarn run build:types && yarn run build:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acktsap/ts-executable-template.git"
+  },
+  "keywords": [
+    "typescript",
+    "executable"
+  ],
+  "author": "acktsap",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acktsap/ts-executable-template/issues"
+  },
+  "homepage": "https://github.com/acktsap/ts-executable-template#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.4.0",
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/mocha": "^5.2.6",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "babel-register-ts": "^7.0.0",
+    "chai": "^4.1.7",
+    "chai-as-promised": "^7.1.0",
+    "eslint": "^5.15.3",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "rollup": "^1.7.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-terser": "^5.0.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.4000"
+  },
+  "dependencies": {}
+}
