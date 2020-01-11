@@ -12,26 +12,38 @@ Write those well-known algorithms into patterns.
 
 ## Language
 
-Use c-based language like c++, java. Use primitive type and array only if possible.
+Use java only. Use primitive type and array only if possible.
 
 ## Practice
 
-### Pattern
+Write and **develop your own patterns**
 
-Write and develop your own patterns
+### Data structures
 
-### Api
-
-Practice basic api usage like
-
-- Dynamic-Array (ArrayList in java, vector in c++)
-- Stack
+- Dynamic Array (ArrayList in java, vector in c++)
+- Linked List
 - Queue
+- Stack
 - Deque
-- Map
+- String
 - Priority-Queue
+- HashTable
+- Set
+- Tree
+  - Binary Tree
+  - Red-Black Tree
+  - Priority Queue
+  - Disjoint Set
+  - Segment Tree
+  - Trie
+  - B+ Tree
+- Etc
+  - Bitmask
+  - SubSum
 
 ### Well-known algorithm
+
+String handling
 
 Sorting algorithm
 
@@ -44,29 +56,6 @@ Sorting algorithm
 Searching algorithm
 
 - Binary Search
-
-Using basic data structure
-
-- Bitmask
-- SubSum
-- Dynamic Array
-- Linked List
-- Queue
-- Stack
-- Deque
-- String
-
-Using tree structures
-
-- Binary Tree
-- Red-Black Tree
-- Priority Queue
-- Disjoint Set
-- Segment Tree
-- Trie
-
-Graph
-
 - Depth first search
 - Breath first search
 - Dijkstra's short path algorithm

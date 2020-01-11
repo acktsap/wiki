@@ -1,10 +1,13 @@
-" 컴파일과 실행
-map <F6> :!java %:r<SPACE>
-map <F7> :w<ENTER>:make<ENTER>
-
-" 컴파일 설정
-" set makeprg=javac %
+" Compile
+" %:p:h -> directory containing file ('head')
+set makeprg=javac
 set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+" nmap <F7> :w<ENTER>:make -cp %:p:h -d %:p:h %<ENTER>
+nmap <F7> :w<ENTER>:!javac -Dfile.encoding=UTF-8 -cp %:p:h -d %:p:h %<ENTER>
+
+" Run
+" %:t:r -> tail:name of file less one extension 
+nmap <F11> :w<ENTER>:!javac -Dfile.encoding=UTF-8 -cp %:p:h -d %:p:h % && java -cp %:p:h %:t:r<ENTER>
 
 " 컴파일 에러 찾아가기
 map ,n :cn<ENTER>
@@ -30,3 +33,6 @@ set complete=.,w,b,u,t,i
 ab sysout System.out.println();<ESC>hi
 ab syserr System.out.println();<ESC>hi
 ab debug if (log.isDebugEnabled()) {<CR>log.debug();<CR>}<CR><ESC>kkf(a
+
+" references
+" see also https://vim.fandom.com/wiki/Get_the_name_of_the_current_file

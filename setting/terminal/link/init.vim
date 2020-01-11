@@ -80,6 +80,13 @@ Plugin 'scrooloose/nerdtree'              " file view tree
 Plugin 'ctrlpvim/ctrlp.vim'               " file finder
 Plugin 'majutsushi/tagbar'                " show tagbar
 
+" intellisence
+" youcompleteme
+"   cd ~/.vim/bundle/YouCompleteMe
+"   python3 install.py --all
+"   python3 -m pip install --user --upgrade pynvim
+Plugin 'valloric/youcompleteme'           " autocomplete
+
 " git
 Plugin 'tpope/vim-fugitive'               " use git in vim within vim-airline
 Plugin 'airblade/vim-gitgutter'           " show git diff

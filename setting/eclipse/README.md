@@ -20,6 +20,7 @@
     java.util.Objects.*     // requireNonNull
 
 - Highlight Current Variable : Java -> Editor -> Mark occurrences
+- Font size : General -> Appearance -> Colors and Fonts -> Java 
 
 ## Plugins
 

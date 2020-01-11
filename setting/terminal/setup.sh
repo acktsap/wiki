@@ -20,9 +20,20 @@ ${SCRIPT_HOME}/copy/copy.sh
 BASHRC_ADD_FILE="bashrc_add"
 HOME_BASHRC="$HOME/.bashrc"
 if [[ -z $(cat $HOME_BASHRC | grep $BASHRC_ADD_FILE) ]]; then
-cat << EOF >> ~/.bashrc
+cat << EOF >> $HOME_BASHRC
 
 # load additional bashrc setting
 source $PWD/$BASHRC_ADD_FILE
+EOF
+fi
+
+# additioal zshrc
+ZSHRC_ADD_FILE="zshrc_add"
+HOME_ZSHRC="$HOME/.zshrc"
+if [[ -z $(cat $HOME_ZSHRC | grep $ZSHRC_ADD_FILE) ]]; then
+cat << EOF >> $HOME_ZSHRC
+
+# load additional zshrc setting
+source $PWD/$ZSHRC_ADD_FILE
 EOF
 fi

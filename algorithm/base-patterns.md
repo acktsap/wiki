@@ -18,7 +18,7 @@ eg. 2/4, 3/6 -> 1/2
 
 ### Separate data with an algorithm
 
-```cpp
+```java
 // from
 string getMonthName(int month) {
   if (mount == 1) return "January";
@@ -28,8 +28,8 @@ string getMonthName(int month) {
 }
 
 // to
-string monthName[] = { "January", "February", "March", "December" };
-string getMonthName(int month) {
+String[] monthName = { "January", "February", "March", "December" };
+String getMonthName(int month) {
   return monthName[month - 1];
 }
 
@@ -57,19 +57,19 @@ void move(int direction) {
 
 ### Always init on declaration
 
-```cpp
+```java
 // from
-int arr[];
+int[] arr;
 
 // to
-int arr[] = { 1, 2, 3 };
+int[] arr = { 1, 2, 3 };
 ```
 
 ### No floating point operation if possible
 
 Floating point operation is slow, inaccurate
 
-```cpp
+```java
 // from
 sqrt((a - b) * (a - b)) == r
 
@@ -81,20 +81,18 @@ sqrt((a - b) * (a - b)) == r
 
 ### Logging middle result
 
-```cpp
+```java
 int sum = 0;
 for (int i = 0; i < 3; ++i) {
   sum += i;
-  printf("i: %d, sum: %d\n", i, sum);
+  System.out.format("i: %d, sum: %d\n", i, sum);
 }
 ```
 
 ### Use assert on precondition
 
 ```cpp
-#include <assert.h>
-
-void f (int next, int sum) {
-  assert (next < 3)
+void f(int next, int sum) {
+  assert next < 3
 }
 ```
