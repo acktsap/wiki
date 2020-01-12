@@ -20,42 +20,38 @@ Write and **develop your own patterns**
 
 ### Data structures
 
-- Dynamic Array (ArrayList in java, vector in c++)
-- Linked List
-- Queue
-- Stack
-- Deque
-- String
-- Priority-Queue
-- HashTable
-- Set
-- Tree
-  - Binary Tree
-  - Red-Black Tree
-  - Priority Queue
-  - Disjoint Set
-  - Segment Tree
-  - Trie
-  - B+ Tree
+- [ ] Dynamic Array (ArrayList in java, vector in c++)
+- [ ] Linked List
+- [ ] Queue
+- [ ] Stack
+- [ ] Deque
+- [ ] String
+- [ ] Priority-Queue
+- [ ] HashTable
+- [ ] Set
+- [ ] Tree
+  - [ ] Binary Tree
+  - [ ] Red-Black Tree
+  - [ ] Priority Queue
+  - [ ] Disjoint Set
+  - [ ] Segment Tree
+  - [ ] Trie
+  - [ ] B+ Tree
 - Etc
-  - Bitmask
-  - SubSum
+  - [ ] Bitmask
+  - [ ] SubSum
 
 ### Well-known algorithm
 
-String handling
-
-Sorting algorithm
-
-- Insertion Sort
-- Quick Sort
-- Merge Sort
-- Heap Sort
-- Shell Sort
-
-Searching algorithm
-
-- Binary Search
-- Depth first search
-- Breath first search
-- Dijkstra's short path algorithm
+- [ ] String handling
+- [ ] Sorting algorithm
+  - [ ] Insertion Sort
+  - [ ] Quick Sort
+  - [ ] Merge Sort
+  - [ ] Heap Sort
+  - [ ] Shell Sort
+- [ ] Searching algorithm
+  - [ ] Binary Search
+  - [ ] Depth first search
+  - [ ] Breath first search
+  - [ ] Dijkstra's short path algorithm

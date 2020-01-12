@@ -3,11 +3,11 @@
 set makeprg=javac
 set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 " nmap <F7> :w<ENTER>:make -cp %:p:h -d %:p:h %<ENTER>
-nmap <F7> :w<ENTER>:!javac -Dfile.encoding=UTF-8 -cp %:p:h -d %:p:h %<ENTER>
+nmap <F7> :w<ENTER>:!javac -encoding utf-8 -cp %:p:h -d %:p:h %<ENTER>
 
 " Run
 " %:t:r -> tail:name of file less one extension 
-nmap <F11> :w<ENTER>:!javac -Dfile.encoding=UTF-8 -cp %:p:h -d %:p:h % && java -cp %:p:h %:t:r<ENTER>
+nmap <F11> :w<ENTER>:!javac -encoding utf-8 -cp %:p:h -d %:p:h % && java -ea -cp %:p:h %:t:r<ENTER>
 
 " 컴파일 에러 찾아가기
 map ,n :cn<ENTER>
