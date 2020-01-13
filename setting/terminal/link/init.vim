@@ -5,7 +5,7 @@
 set encoding=utf-8
 
 " syntax
-set sm                   " showmatch, show matching parenthesis
+set showmatch            " showmatch, show matching parenthesis
 set cursorline           " highlight cursor line
 syntax on
 " color desert            " default theme
