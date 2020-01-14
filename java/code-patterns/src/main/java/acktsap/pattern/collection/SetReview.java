@@ -13,10 +13,9 @@ import java.util.TreeSet;
 
 public class SetReview {
 
-  public static void main(String[] args) {
-    // dummy data
-    List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+  static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
 
+  public static void main(String[] args) {
     /**
      * Hash Table implementation.
      *
@@ -29,8 +28,7 @@ public class SetReview {
      * Collections.synchronizedSet}.
      */
     Set<Integer> hashSet = new HashSet<>(data);
-    // do not keep order
-    System.out.println(hashSet.toString());
+    System.out.println("HashSet: " + hashSet); // do not keep order
 
     /**
      * Balanced Tree implementation.
@@ -44,8 +42,7 @@ public class SetReview {
      * Collections.synchronizedSortedSet}.
      */
     Set<Integer> treeSet = new TreeSet<>(data);
-    // order by value
-    System.out.println(treeSet.toString());
+    System.out.println("TreeSet: " + treeSet); // order by value
 
     /**
      * HashTable + Linked List implementation.
@@ -60,8 +57,7 @@ public class SetReview {
      * Collections.synchronizedSet}.
      * 
      */
-    Set<Integer> LinkedHashSet = new LinkedHashSet<>(data);
-    // keep insertion order
-    System.out.println(LinkedHashSet.toString());
+    Set<Integer> linkedHashSet = new LinkedHashSet<>(data);
+    System.out.println("LinkedHashSet: " + linkedHashSet); // keep insertion order
   }
 }

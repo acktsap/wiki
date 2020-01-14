@@ -11,15 +11,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DequeReview {
-  
-  public static void main(String[] args) {
-    // dummy data
-    List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
 
+  static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+
+  public static void main(String[] args) {
     /**
+     * Resizable-array implementation of the {@link Deque} interface.
+     * 
+     * Array deques have no capacity restrictions; they grow as necessary to support usage.
+     * 
+     * They are not thread-safe.
+     * 
+     * This class is likely to be faster than {@link Stack} when used as a stack, and faster than
+     * {@link LinkedList} when used as a queue.
      */
-    Deque<Integer> arrayList = new ArrayDeque<>(data);
-    System.out.println(arrayList);
+    Deque<Integer> arrayDeque = new ArrayDeque<>(data);
+    System.out.println("ArrayDeque: " + arrayDeque);
 
     /**
      * Doubly-linked list implementation.
@@ -35,7 +42,7 @@ public class DequeReview {
      * Collections.synchronizedList}.
      */
     List<Integer> linkedList = new LinkedList<>(data);
-    System.out.println(linkedList);
+    System.out.println("LinkedList: " + linkedList);
   }
 
 }

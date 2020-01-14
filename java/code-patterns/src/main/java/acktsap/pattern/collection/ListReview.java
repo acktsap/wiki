@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 public class ListReview {
+
+  static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
 
   /**
    * ArrayList vs LinkedList.
@@ -22,8 +25,15 @@ public class ListReview {
    * size.
    */
   public static void main(String[] args) {
-    // dummy data
-    List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+    /**
+     * Synchronized version of ArrayList.
+     * 
+     * Can define capacity increment ratio.
+     * 
+     * See {@link Vector#add}, {@link Vector#remove}.
+     */
+    List<Integer> vector = new Vector<Integer>(data);
+    System.out.println("Vector: " + vector);
 
     /**
      * Resizable-array implementation
@@ -41,9 +51,11 @@ public class ListReview {
      * 
      * Not synchronized. Wrapper is {@link Collections#synchronizedList
      * Collections.synchronizedList}.
+     *
+     * See {@link ArrayList#add}, {@link ArrayList#remove}.
      */
     List<Integer> arrayList = new ArrayList<>(data);
-    System.out.println(arrayList);
+    System.out.println("ArrayList: " + arrayList);
 
     /**
      * Doubly-linked list implementation.
@@ -57,9 +69,11 @@ public class ListReview {
      * 
      * Not synchronized. Wrapper is {@link Collections#synchronizedList
      * Collections.synchronizedList}.
+     *
+     * See {@link LinkedList#add}, {@link LinkedList#remove}.
      */
     List<Integer> linkedList = new LinkedList<>(data);
-    System.out.println(linkedList);
+    System.out.println("LinkedList: " + linkedList);
   }
 
 }

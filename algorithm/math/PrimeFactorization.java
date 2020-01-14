@@ -7,19 +7,18 @@ public class PrimeFactorization {
 
   List<Integer> factor(final int n) {
     final List<Integer> ret = new ArrayList<>();
+    ret.add(1);
 
-    // exceptional case
     if (n == 1) {
-      ret.add(1);
       return ret;
     }
 
+    int curr = n;
     int div = 2;
-    int left = n;
-    while (left != 1 && div <= n) {
-      while (left % div == 0) {
+    while (curr != 1) {
+      while (curr % div == 0) {
         ret.add(div);
-        left /= div;
+        curr /= div;
       }
       div++;
     }
@@ -30,10 +29,10 @@ public class PrimeFactorization {
   public static void main(String[] args) {
     final Object[][] parameters = {
       { 1, new Integer[] { 1 } },
-      { 2, new Integer[] { 2 } },
-      { 6, new Integer[] { 2, 3 } },
-      { 17, new Integer[] { 17 } },
-      { 24, new Integer[] { 2, 2, 2, 3 } }
+      { 2, new Integer[] { 1, 2 } },
+      { 6, new Integer[] { 1, 2, 3 } },
+      { 17, new Integer[] { 1, 17 } },
+      { 24, new Integer[] { 1, 2, 2, 2, 3 } }
     };
     for (Object[] parameter : parameters) {
       final Integer n = (Integer) parameter[0];
