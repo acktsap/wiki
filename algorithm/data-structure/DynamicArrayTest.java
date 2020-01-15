@@ -46,20 +46,21 @@ public class DynamicArrayTest {
 
     @Override
     public boolean remove(T element) {
-      int found = -1;
+      int foundIndex = -1;
       for (int i = 0; i < size; ++i) {
         if (this.datas[i] == element) {
-          found = i;
+          foundIndex = i;
           break;
         }
       }
 
-      if (-1 != found) {
-        System.arraycopy(this.datas, found + 1, this.datas, found, (this.size - (found + 1)));
+      if (-1 != foundIndex) {
+        int countBeforefoundIndex = foundIndex + 1;
+        System.arraycopy(this.datas, foundIndex + 1, this.datas, foundIndex, (this.size - countBeforefoundIndex));
         --size;
       }
 
-      return found != -1;
+      return foundIndex != -1;
     }
 
     @Override

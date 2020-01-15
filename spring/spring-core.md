@@ -87,23 +87,6 @@ https://docs.spring.io/spring/docs/current/spring-framework-reference/overview.h
 
 ### ● 높은 수준의 코드를 지향한다. (자랑)
 
-
-## 2. 강사 소개
-
-### 백기선
-
-### ● 현재 마이크로소프트에서 개발자로 재직 중
-
-### ● 아마존과 네이버에서 개발자로 일한적 있음
-
-```
-● Youtube/백기선 채널​ 운영 중
-● 온라인 강좌 운영 중
-○ 스프링 프레임워크 입문
-○ 스프링 부트 개념과 활용
-○ 스프링 데이터 JPA
-```
-
 ## 3. IoC 컨테이너 1 부: 스프링 IoC 컨테이너와 빈
 
 Inversion of Control: 의존 관계 주입(Dependency Injection)이라고도 하며, 어떤 객체가
