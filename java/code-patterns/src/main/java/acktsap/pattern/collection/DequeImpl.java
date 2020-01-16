@@ -10,7 +10,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DequeReview {
+public class DequeImpl {
 
   static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
 

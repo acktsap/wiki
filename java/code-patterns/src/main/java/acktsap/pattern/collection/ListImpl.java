@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-public class ListReview {
+public class ListImpl {
 
   static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
 

@@ -34,10 +34,6 @@
   * Locality
   * Caching line
 
-[뒤로](https://github.com/JaeYeopHan/for_beginner)
-
-</br>
-
 ---
 
 ## 프로세스와 스레드의 차이

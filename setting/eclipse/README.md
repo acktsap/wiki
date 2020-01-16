@@ -5,6 +5,8 @@
 - Formatter
   - Preference -> Java -> Code style -> Formatter [google style guide github](https://github.com/google/styleguide)
   - Usage : command + shift + f (osx) or alt + shift + f (windows)
+  - Customizing
+    - Line Wrapping -> Never join already wrapped lines
 - Code template
   - Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files
     ```java

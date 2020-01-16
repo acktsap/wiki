@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MapReview {
+public class MapImpl {
 
   static List<Integer> keys = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
   static String value = "v";
@@ -43,8 +43,8 @@ public class MapReview {
      * This implementation provides constant-time performance for the basic operations ({@code get}
      * and {@code put}).
      *
-     * Uses chaining of list for hash collision. On specific threshold, it changes to TreeNode.
-     * {@link HashMap#putVal}.
+     * Uses separate chaining of list for hash collision. On specific threshold, it changes to
+     * TreeNode.
      *
      * Not synchronized. Wrapped one is {@link Collections#synchronizedMap
      * Collections.synchronizedMap}.

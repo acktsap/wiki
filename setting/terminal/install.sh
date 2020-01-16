@@ -34,9 +34,9 @@ function main() {
     ${COMMAND} vim
   fi
 
-  # spacevim
-  if [[ -z $(which spacevim) ]]; then
-    curl -sLf https://spacevim.org/install.sh | bash
+  # nvim
+  if [[ -z $(which nvim) ]]; then
+    ${COMMAND} neovim
   fi
 
   # vim vundle plugin

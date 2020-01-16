@@ -11,10 +11,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class SetReview {
+public class SetImpl {
 
   static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
 
+  /**
+   * A Set is a Collection that cannot contain duplicate elements.
+   * 
+   * Set also adds a stronger contract on the behavior of the {@code equals} and {@code hashCode}
+   * operations, allowing Set instances to be compared meaningfully even if their implementation
+   * types differ
+   */
   public static void main(String[] args) {
     /**
      * Hash Table implementation.
