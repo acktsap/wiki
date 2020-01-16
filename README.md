@@ -49,3 +49,4 @@ Code pattern is an idioms. First, core api, then library.
 
 Modeling should be other temp private repository
 
+

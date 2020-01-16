@@ -105,7 +105,7 @@ filetype plugin indent on    " required
 "" syntax, statusbar
 
 """ onehalfdark
-colorscheme onehalfdark
+color onehalfdark
 
 """ airline
 let g:airline_theme='onehalfdark'
