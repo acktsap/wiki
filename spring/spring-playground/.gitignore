@@ -1,0 +1,13 @@
+# gradle
+.gradle
+build/
+!gradle-wrapper.jar
+
+# eclipse
+bin/
+.classpath
+.project
+.settings/
+
+# assembly
+!/*assembly/src/assembly/bin/

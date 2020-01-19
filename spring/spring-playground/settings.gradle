@@ -1,0 +1,3 @@
+rootProject.name = 'spring-playground'
+
+include ':spring-core'

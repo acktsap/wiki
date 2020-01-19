@@ -115,6 +115,8 @@ Bean
   - Lifecycle Interface : Bean이 추가 됬을 때 뭔가 하고 싶다! 이럴 때 사용할 수 있음
     - `@PostConstruct` : 생성 되고 난 후 called
 
+![spring-bean-lifecycle](./img/spring-bean-lifecycle.png)
+
 ApplicationContext : 실질적으로 사용하게 될 bean factory, 이것 저것 가지고 있음
 
 - BeanFactory
@@ -736,7 +738,7 @@ public void run() {
 
 ### Resource
 
-org.springframework.core.io.Resource
+`org.springframework.core.io.Resource`
 
 특징
 
@@ -746,17 +748,15 @@ org.springframework.core.io.Resource
 추상화 한 이유
 
 - 클래스패스 기준으로 리소스 읽어오는 기능 부재
-
 - ServletContext를 기준으로 상대 경로로 읽어오는 기능 부재
-- 새로운 핸들러를 등록하여 특별한 URL 접미사를 만들어 사용할 수는 있지만 구현이
-복잡하고 편의성 메소드가 부족하다.
+- 새로운 핸들러를 등록하여 특별한 URL 접미사를 만들어 사용할 수는 있지만 구현이 복잡하고 편의성 메소드가 부족하다.
 
 인터페이스 둘러보기
 
 - 상속 받은 인터페이스
 - 주요 메소드
   - getInputStream()
-  - exitst()
+  - exists()
   - isOpen()
   - getDescription() : 전체 경로 포함한 파일 이름 또는 실제 URL
 
@@ -770,14 +770,27 @@ org.springframework.core.io.Resource
 
 리소스 읽어오기
 
-- Resource의 타입은 locaion 문자열과 ​ ApplicationContext 의의 타입​타입​에 따라 결정 된다.
-- ClassPathXmlApplicationContext -> ClassPathResource
-- FileSystemXmlApplicationContext -> FileSystemResource
-- WebApplicationContext -> ServletContextResource
-- ApplicationContext 의의 타입에타입에 상관없이상관없이 리소스리소스 타입을타입을 강제하려면강제하려면 java.net.URL
-접두어접두어 (+ classpath:) 중중 하나를하나를 사용할사용할 수수 있다있다.
-- classpath: ​​me/whiteship/config.xml -> ClassPathResource
-- file:// ​​/some/resource/path/config.xml -> FileSystemResource
+- Resource의 타입은 locaion 문자열과 ​ **ApplicationContext 의의 타입​에 따라 결정** 된다.
+  - ClassPathXmlApplicationContext -> ClassPathResource
+  - FileSystemXmlApplicationContext -> FileSystemResource
+  - WebApplicationContext -> ServletContextResource
+
+  ```java
+  ApplicationContext classPathCtx = new ClassPathXmlApplicationContext("classpath.xml");
+  ApplicationContext fileSystemCtx = new FileSystemXmlApplicationContext("file.xml");
+  ```
+
+- ApplicationContext 의의 타입에 상관없이 리소스 타입을 강제하려면 java.net.URL
+  접두어 (+ classpath:) 중중 하나를 사용할 수 있다. (추천)
+  - classpath: ​​me/whiteship/config.xml -> ClassPathResource
+  - file:// ​​/some/resource/path/config.xml -> FileSystemResource
+
+  ```java
+  ApplicationContext context = new ClassPathXmlApplicationContext("classpath.xml");
+  ApplicationContext fileSystemCtx = new FileSystemXmlApplicationContext("file.xml");
+  ```
+
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/io/Resource.html
 
 ### Validation
 
