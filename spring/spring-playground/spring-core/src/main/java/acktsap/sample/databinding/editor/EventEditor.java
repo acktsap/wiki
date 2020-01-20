@@ -2,10 +2,11 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.databinding;
+package acktsap.sample.databinding.editor;
 
 import java.beans.PropertyEditorSupport;
 import org.springframework.validation.DataBinder;
+import acktsap.sample.databinding.Event;
 
 /**
  * Used with {@link DataBinder}.

@@ -17,10 +17,10 @@ public class EventValidator implements Validator {
 
   @Override
   public void validate(Object target, Errors errors) {
-    // utils
+    // using utils
     ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "notempty", "Empty title is not allowed");
     
-    // custom
+    // manual
     Event event =  (Event) target;
     if (null == event.getId()) {
       errors.reject("id", "notempty");

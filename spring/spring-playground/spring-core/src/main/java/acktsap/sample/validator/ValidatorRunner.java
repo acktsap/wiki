@@ -27,7 +27,7 @@ public class ValidatorRunner implements ApplicationRunner {
     Event event = new Event();
     event.limit = -1;
 
-    // custom
+    // custom validator
     EventValidator eventValidator = new EventValidator();
     Errors errors = new BeanPropertyBindingResult(event, "event");
 
@@ -40,7 +40,7 @@ public class ValidatorRunner implements ApplicationRunner {
       System.out.println(e.getDefaultMessage());
     });
 
-    // spring boot autowired
+    // spring boot autowired (LocalValidatorFactoryBean)
     System.out.println("Default validator: " + validator.getClass());
     Errors errors2 = new BeanPropertyBindingResult(event, "event");
 

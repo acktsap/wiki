@@ -29,6 +29,7 @@ public class ResourceRunner implements ApplicationRunner {
     System.out.println("ApplicationContext class: " + resourceLoader.getClass());
     System.out.println("------------------------");
 
+    // load appliation context config from resource
     ApplicationContext classPathContext = new ClassPathXmlApplicationContext();
     ApplicationContext fileSystemContext = new FileSystemXmlApplicationContext();
     ApplicationContext webXmlContext = new GenericApplicationContext();
@@ -40,18 +41,21 @@ public class ResourceRunner implements ApplicationRunner {
     System.out.println("ServletContextResource: " + r3);
     System.out.println("------------------------");
 
+    // class path resource
     Resource classResource = resourceLoader.getResource("classpath:test.txt");
     System.out.println("ClassPathResource: " + classResource.getClass());
     System.out.println(classResource.exists());
     System.out.println(classResource.getDescription());
     System.out.println("------------------------");
 
+    // url resource
     Resource urlResource = resourceLoader.getResource("http://test.txt");
     System.out.println("UrlResource: " + urlResource.getClass());
     System.out.println(urlResource.exists());
     System.out.println(urlResource.getDescription());
     System.out.println("------------------------");
 
+    // File resource
     Resource fileResource = resourceLoader.getResource("file:///test.txt");
     System.out.println("FileResource: " + fileResource.getClass());
     System.out.println(fileResource.exists());

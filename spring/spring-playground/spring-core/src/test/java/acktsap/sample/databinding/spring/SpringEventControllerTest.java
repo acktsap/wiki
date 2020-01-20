@@ -2,7 +2,7 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.databinding;
+package acktsap.sample.databinding.spring;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -16,16 +16,17 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class EventControllerTest {
+public class SpringEventControllerTest {
 
   @Autowired
   MockMvc mockMvc;
 
   @Test
-  public void getTest() throws Exception {
+  public void testGet() throws Exception {
     mockMvc.perform(get("/event/1"))
         .andExpect(status().isOk())
         .andExpect(content().string("1"));
   }
+
 
 }

@@ -2,7 +2,7 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.databinding;
+package acktsap.sample.databinding.formatter;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -11,6 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.format.Formatter;
 import org.springframework.format.support.DefaultFormattingConversionService;
+import acktsap.sample.databinding.Event;
 
 /**
  * Used with {@link ConversionService}. See also {@link DefaultFormattingConversionService}.

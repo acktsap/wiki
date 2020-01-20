@@ -4,6 +4,7 @@
 
 package acktsap.sample.nullsafety;
 
+import java.util.Objects;
 import org.assertj.core.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class EventService {
 
   public String createEvent(@NonNull String name) {
+    // recommaned (by acktsap)
+    Objects.requireNonNull(name);
     return "Hello " + name;
   }
 

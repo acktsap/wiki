@@ -2,11 +2,13 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.databinding;
+package acktsap.sample.databinding.spring;
 
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.stereotype.Component;
+import acktsap.sample.databinding.Event;
 
 /**
  * Used with {@link ConversionService}. See also {@link DefaultFormattingConversionService}.
@@ -17,6 +19,7 @@ import org.springframework.format.support.DefaultFormattingConversionService;
  */
 public class EventConverter {
 
+  @Component
   public static class StringToEventConverter implements Converter<String, Event> {
 
     @Override
@@ -29,6 +32,7 @@ public class EventConverter {
 
   }
 
+  @Component
   public static class EventToStringConverter implements Converter<Event, String> {
 
     @Override
