@@ -8,6 +8,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.security.SecureClassLoader;
 
+/**
+ * Reflection : Class에 대한 정보를 추출할 수 있는 Java에서 제공해 주는 API
+ */
 public class Test {
 
   protected static class MyBaseClass {

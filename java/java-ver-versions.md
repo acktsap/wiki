@@ -15,6 +15,7 @@ https://www.oracle.com/technetwork/java/javase/jdk7-relnotes-429209.html
 
 - Try-with-resources : Ensures that each resource is closed at the end of the statement.
 - Garbare-First (G1) garbage collectors
+- Fork-Join Pool : 분할 정복과 비슷, 나눠서 일하고 합친다
 
 ## Java 1.8
 
