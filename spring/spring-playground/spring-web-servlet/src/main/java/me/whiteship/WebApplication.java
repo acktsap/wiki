@@ -10,15 +10,15 @@ import javax.servlet.ServletRegistration;
 
 public class WebApplication implements WebApplicationInitializer {
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setServletContext(servletContext);
-        context.register(WebConfig.class);
-        context.refresh();
+  @Override
+  public void onStartup(ServletContext servletContext) throws ServletException {
+    AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+    context.setServletContext(servletContext);
+    context.register(WebConfig.class);
+    context.refresh();
 
-        DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
-        ServletRegistration.Dynamic app = servletContext.addServlet("app", dispatcherServlet);
-        app.addMapping("/app/*");
-    }
+    DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
+    ServletRegistration.Dynamic app = servletContext.addServlet("app", dispatcherServlet);
+    app.addMapping("/app/*");
+  }
 }

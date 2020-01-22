@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/WEB-INF/", ".jsp");
-    }
+  @Override
+  public void configureViewResolvers(ViewResolverRegistry registry) {
+    registry.jsp("/WEB-INF/", ".jsp");
+  }
 
 }

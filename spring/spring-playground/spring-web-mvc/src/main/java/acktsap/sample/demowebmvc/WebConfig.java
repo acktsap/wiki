@@ -1,4 +1,4 @@
-package me.whiteship.demowebmvc;
+package acktsap.sample.demowebmvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -11,16 +11,16 @@ import org.springframework.web.util.UrlPathHelper;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        UrlPathHelper urlPathHelper = new UrlPathHelper();
-        urlPathHelper.setRemoveSemicolonContent(false);
-        configurer.setUrlPathHelper(urlPathHelper);
-    }
+  @Override
+  public void configurePathMatch(PathMatchConfigurer configurer) {
+    UrlPathHelper urlPathHelper = new UrlPathHelper();
+    urlPathHelper.setRemoveSemicolonContent(false);
+    configurer.setUrlPathHelper(urlPathHelper);
+  }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new VisitTimeInterceptor());
-    }
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new VisitTimeInterceptor());
+  }
 
 }

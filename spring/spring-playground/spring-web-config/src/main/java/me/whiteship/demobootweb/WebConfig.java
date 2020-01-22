@@ -16,26 +16,26 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Bean
-    public Jaxb2Marshaller jaxb2Marshaller() {
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan(Person.class.getPackageName());
-        return jaxb2Marshaller;
-    }
+  @Bean
+  public Jaxb2Marshaller jaxb2Marshaller() {
+    Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+    jaxb2Marshaller.setPackagesToScan(Person.class.getPackageName());
+    return jaxb2Marshaller;
+  }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new GreetingInterceptor()).order(0);
-        registry.addInterceptor(new AnotherInterceptor())
-                .addPathPatterns("/hi")
-                .order(-1);
-    }
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new GreetingInterceptor()).order(0);
+    registry.addInterceptor(new AnotherInterceptor())
+        .addPathPatterns("/hi")
+        .order(-1);
+  }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/mobile/**")
-                .addResourceLocations("classpath:/mobile/")
-                .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
-    }
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/mobile/**")
+        .addResourceLocations("classpath:/mobile/")
+        .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
+  }
 
 }

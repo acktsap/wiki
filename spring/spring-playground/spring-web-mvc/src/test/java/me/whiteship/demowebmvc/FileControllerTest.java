@@ -18,20 +18,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class FileControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Test
-    public void fileUploadTest() throws Exception {
-        MockMultipartFile file = new MockMultipartFile(
-                "file",
-                "test.txt",
-                "text/plain",
-                "hello file".getBytes());
+  @Test
+  public void fileUploadTest() throws Exception {
+    MockMultipartFile file = new MockMultipartFile(
+        "file",
+        "test.txt",
+        "text/plain",
+        "hello file".getBytes());
 
-        this.mockMvc.perform(multipart("/file").file(file))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection());
-    }
+    this.mockMvc.perform(multipart("/file").file(file))
+        .andDo(print())
+        .andExpect(status().is3xxRedirection());
+  }
 
 }

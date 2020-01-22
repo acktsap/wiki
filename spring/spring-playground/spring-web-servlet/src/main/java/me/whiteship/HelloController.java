@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
-    @Autowired
-    HelloService helloService;
+  @Autowired
+  HelloService helloService;
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "Hello, " + helloService.getName();
-    }
+  @GetMapping("/hello")
+  @ResponseBody
+  public String hello() {
+    return "Hello, " + helloService.getName();
+  }
 
-    @GetMapping("/sample")
-    public void sample() {}
+  @GetMapping("/sample")
+  public void sample() {}
 
 }
