@@ -1,0 +1,90 @@
+<!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<!--
+
+이 정보에 기반해서 servlet container가
+listener, filter, servlet을 탐지 from war file
+
+Request processing
+  filter1 -> filter2 -> filter3 -> ... -> servlet
+
+ -->
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!-- spring!!! -->
+  <!-- spring context params -->
+  <context-param>
+     <param-name>contextClass</param-name>
+     <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
+  <context-param>
+     <param-name>contextConfigutation</param-name>
+     <param-value>acktsap.sample.webservlet.AppConfig</param-value>
+  </context-param>
+
+
+  <!-- filter 등록 -->
+  <filter>
+     <filter-name>myFilter</filter-name>
+     <filter-class>acktsap.sample.webservlet.MyFilter</filter-class>
+  </filter>
+
+
+  <!-- filter mapping -->
+  <filter-mapping>
+     <filter-name>myFilter</filter-name>
+     <servlet-name>hello</servlet-name>
+  </filter-mapping>
+
+
+  <!-- servlet listener 등록 -->
+  <listener>
+    <listener-class>acktsap.sample.webservlet.MyListener</listener-class>
+  </listener>
+
+
+  <!-- spring!!! -->
+  <!-- servlet lister에 spring context 등록 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+  <!-- servlet 등록 -->
+  <servlet>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>acktsap.sample.webservlet</servlet-class>
+  </servlet>
+
+
+  <!-- spring!!! -->
+  <!-- spring servlet 등록 -->
+  <servlet>
+    <servlet-name>app</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextClass</param-name>
+      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param>
+    <!-- Controller를 Scan하는 Config -->
+    <init-param>
+      <param-name>contextConfigutation</param-name>
+      <param-value>acktsap.sample.webservlet.WebConfig</param-value>
+    </init-param>
+  </servlet>
+
+
+  <!-- servlet mapping -->
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>app</servlet-name>
+    <url-pattern>/app</url-pattern>
+  </servlet-mapping>
+</web-app>

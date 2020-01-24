@@ -1,14 +1,20 @@
-package me.whiteship;
+package acktsap.sample.webservlet;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * ServletContextListener
+ * 
+ * Interface for receiving notification events about ServletContext lifecycle changes.
+ */
 public class MyListener implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
     System.out.println("Context Initialized");
-    sce.getServletContext().setAttribute("name", "keesun");
+    // attribute 구현
+    sce.getServletContext().setAttribute("name", "acktsap");
   }
 
   @Override
