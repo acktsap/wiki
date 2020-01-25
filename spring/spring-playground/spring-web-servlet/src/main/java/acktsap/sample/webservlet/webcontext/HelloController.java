@@ -17,7 +17,6 @@ public class HelloController {
 
   /**
    * /app/hello (web.xml에서 DispatcherServlet이 app에 mapping되어 있음)
-   * @return
    */
   @GetMapping("/hello")
   @ResponseBody

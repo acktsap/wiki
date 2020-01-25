@@ -23,9 +23,11 @@ public class WebApplication implements WebApplicationInitializer {
     context.register(WebConfig.class);
     context.refresh();
 
-    // servlet 등록
-    DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
-    ServletRegistration.Dynamic app = servletContext.addServlet("app", dispatcherServlet);
+    // servlet 추가 (spring에서 제공하는 DispatcherServlet) 이용
+    DispatcherServlet servlet = new DispatcherServlet(context);
+    ServletRegistration.Dynamic app = servletContext.addServlet("app", servlet);
+    // servlet mapping
     app.addMapping("/app/*");
   }
+
 }

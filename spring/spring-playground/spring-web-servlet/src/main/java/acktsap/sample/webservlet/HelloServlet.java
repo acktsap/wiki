@@ -9,6 +9,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 import acktsap.sample.webservlet.webcontext.HelloService;
 
+/**
+ * Servlet 예제. web.xml에 등록해둠
+ */
 public class HelloServlet extends HttpServlet {
 
   private static final long serialVersionUID = 3992246698687793854L;
@@ -26,6 +29,7 @@ public class HelloServlet extends HttpServlet {
     System.out.println("doGet");
 
     // Get servlet attribute from servelt context
+    // MyListener에서 등록된 이벤트를 가지고 옴
     String name = (String) getServletContext().getAttribute("name");
     System.out.println("ServeltContract attribute name: " + name);
 

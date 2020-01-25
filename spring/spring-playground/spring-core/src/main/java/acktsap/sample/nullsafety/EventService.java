@@ -20,8 +20,8 @@ public class EventService {
 
   public String createEvent(@NonNull String name) {
     // recommaned (by acktsap)
-    Objects.requireNonNull(name);
-    return "Hello " + name;
+    String eventName = Objects.requireNonNull(name);
+    return "Hello " + eventName;
   }
 
 }

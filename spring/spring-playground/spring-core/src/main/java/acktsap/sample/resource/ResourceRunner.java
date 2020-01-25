@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class ResourceRunner implements ApplicationRunner {
 
   @Autowired
-  ApplicationContext resourceLoader; // also ResourceLoader
+  ResourceLoader resourceLoader; // ApplicationContext is binded
 
   @SuppressWarnings("resource")
   @Override
@@ -42,21 +43,21 @@ public class ResourceRunner implements ApplicationRunner {
     System.out.println("------------------------");
 
     // class path resource
-    Resource classResource = resourceLoader.getResource("classpath:test.txt");
+    Resource classResource = resourceLoader.getResource("classpath:text.txt");
     System.out.println("ClassPathResource: " + classResource.getClass());
     System.out.println(classResource.exists());
     System.out.println(classResource.getDescription());
     System.out.println("------------------------");
 
     // url resource
-    Resource urlResource = resourceLoader.getResource("http://test.txt");
+    Resource urlResource = resourceLoader.getResource("http://text.txt");
     System.out.println("UrlResource: " + urlResource.getClass());
     System.out.println(urlResource.exists());
     System.out.println(urlResource.getDescription());
     System.out.println("------------------------");
 
     // File resource
-    Resource fileResource = resourceLoader.getResource("file:///test.txt");
+    Resource fileResource = resourceLoader.getResource("file://text.txt");
     System.out.println("FileResource: " + fileResource.getClass());
     System.out.println(fileResource.exists());
     System.out.println(fileResource.getDescription());

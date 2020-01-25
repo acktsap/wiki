@@ -13,7 +13,7 @@ public class MyListener implements ServletContextListener {
   @Override
   public void contextInitialized(ServletContextEvent sce) {
     System.out.println("Context Initialized");
-    // attribute 구현
+    // attribute 설정
     sce.getServletContext().setAttribute("name", "acktsap");
   }
 

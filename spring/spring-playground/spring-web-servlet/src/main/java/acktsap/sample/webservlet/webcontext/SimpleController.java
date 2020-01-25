@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
  * @org.springframework.stereotype.Controller("/simple")
  * 
  * -> HandlerMapping : {@link BeanNameUrlHandlerMapping}.
+ * 
+ * /app/simple (web.xml에서 DispatcherServlet이 app에 mapping되어 있음)
  */
 @org.springframework.stereotype.Controller("/simple")
 public class SimpleController implements Controller {
@@ -24,7 +26,7 @@ public class SimpleController implements Controller {
      */
     // return new ModelAndView("/WEB-INF/simple.jsp");
 
-    // we have custom view resolver
+    // custom view resolver에서 prefix, postfix를 붙여줌
     return new ModelAndView("simple");
   }
 }

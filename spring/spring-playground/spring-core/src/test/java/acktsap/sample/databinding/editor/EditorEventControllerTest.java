@@ -28,5 +28,4 @@ public class EditorEventControllerTest {
         .andExpect(content().string("1"));
   }
 
-
 }

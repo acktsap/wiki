@@ -15,6 +15,8 @@ import acktsap.sample.databinding.Event;
  * New one.
  *
  * Stateless, Thread-safe
+ *
+ * Run {@link ConverterEventControllerTest}.
  */
 public class EventConverter {
 

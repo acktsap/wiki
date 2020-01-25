@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class EventController {
-  
+
   @Autowired
   EventService eventService;
-  
+
   // @GetMapping : MetaAnnotation for
-  // @RequestMapping(value="/events", method = HttpMethod.GET)
+  // @RequestMapping(value="/events", method = RequestMethod.GET)
   @GetMapping("/events")
   public String events(Model model) {
     System.out.println("GET - /events");

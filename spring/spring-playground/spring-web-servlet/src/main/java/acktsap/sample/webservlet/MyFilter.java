@@ -1,7 +1,12 @@
 package acktsap.sample.webservlet;
 
-import javax.servlet.*;
 import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 /**
  * Filter
@@ -10,6 +15,7 @@ import java.io.IOException;
  * servlet or static content), or on the response from a resource, or both.
  */
 public class MyFilter implements Filter {
+
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     System.out.println("Filter Init");
@@ -18,7 +24,7 @@ public class MyFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
-    System.out.println("Filter");
+    System.out.println("Filter: " + getClass());
 
     // necessary, for filter chain
     // last filter connect this to servelt

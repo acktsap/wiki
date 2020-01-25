@@ -216,7 +216,7 @@ https://docs.oracle.com/cd/B14099_19/web.1012/b14017/filters.htm#i1000654
 
 ### 7. 스프링 IoC 컨테이너 연동
 
-![dispatcher-servlet](./img/dispatcher-servlet.png)
+![dispatcher-servlet-context](./img/dispatcher-servlet-context.png)
 
 (출처: https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc)
 
@@ -227,7 +227,7 @@ https://docs.oracle.com/cd/B14099_19/web.1012/b14017/filters.htm#i1000654
 
 ContextLoaderListener
 
-- 서블릿 리스너 구현체
+- Spring에서 제공하는 서블릿 리스너 구현체
 - ApplicationContext를 만들어 준다.
 - ApplicationContext를 서블릿 컨텍스트 라이프사이클에 따라 등록하고 소멸시켜준다.
 - 서블릿에서 IoC 컨테이너를 ServletContext를 통해 꺼내 사용할 수 있다.
@@ -457,8 +457,8 @@ public class WebConfig implements WebMvcConfigurer {
 
 스프링 MVC 커스터마이징
 
-- application.properties
-- @Configuration + Implements WebMvcConfigurer: 스프링 부트의 스프링 MVC 자동설정 + 추가 설정
+- application.properties : 가능하면 이거 쓰셈
+- **@Configuration + Implements WebMvcConfigurer: 스프링 부트의 스프링 MVC 자동설정 + 추가 설정**
 - @Configuration + @EnableWebMvc + implements WebMvcConfigurer: 스프링 부트의 스프링 MVC 자동설정 사용하지 않음.
 
 ### 18. 스프링 부트에서 JSP 사용하기
@@ -594,7 +594,7 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 HandlerInterceptor
 
 - 핸들러 맵핑에 설정할 수 있는 인터셉터
-- 핸들러를 실행하기 전, 후(아직 랜더링 전) 그리고 완료(랜더링까지 끝난 이후) 시점에 부가 작업을 하고 싶은 경우에 사용할 수 있다.
+- 핸들러를 실행하기 전, 후 (아직 랜더링 전) 그리고 완료 (랜더링까지 끝난 이후) 시점에 부가 작업을 하고 싶은 경우에 사용할 수 있다.
 - 여러 핸들러에서 반복적으로 사용하는 코드를 줄이고 싶을 때 사용할 수 있다.
 - 로깅, 인증 체크, Locale 변경 등...
 
@@ -761,7 +761,7 @@ HTTP 메시지 컨버터
 스프링 부트를 사용하는 경우
 
 - 기본적으로 JacksonJSON 2가 의존성에 들어있다.
-- 즉, JSON용 HTTP 메시지 컨버터가 기본으로 등록되어 있다.
+- 즉, JSON용 HTTP 메시지 컨버터가 기본으로 등록되어 있다$$.
 
 참고
 
@@ -905,7 +905,7 @@ Content Negotiation 설정
 학습 할 애노테이션
 
 - @RequestMapping
-- @GetMapping, @PostMapping, @PutMapping, ...
+  - @GetMapping, @PostMapping, @PutMapping, ...
 - @ModelAttribute
 - @RequestParam, @RequestHeader
 - @PathVariable, @MatrixVariable
@@ -925,7 +925,7 @@ HTTP Method
 
 - GET, POST, PUT, PATCH, DELETE, ...
 
-GET 요청
+ET 요청
 
 - 클라이언트가 서버의 리소스를 요청할 때 사용한다.
 - 캐싱 할 수 있다. (조건적인 GET으로 바뀔 수 있다.)
@@ -1035,27 +1035,27 @@ Not (!)을 사용해서 특정 미디어 타입이 아닌 경우로 맵핑 할 �
 
 특정한 헤더가 있는 요청을 처리하고 싶은 경우
 
-- @RequestMapping(headers = “key”)
+- @RequestMapping(headers = "key")
 
 특정한 헤더가 없는 요청을 처리하고 싶은 경우
 
-- @RequestMapping(headers = “! key”)
+- @RequestMapping(headers = "!key")
 
 특정한 헤더 키/값이 있는 요청을 처리하고 싶은 경우
 
-- @RequestMapping(headers = “key=value”)
+- @RequestMapping(headers = "key=value")
 
 특정한 요청 매개변수 키를 가지고 있는 요청을 처리하고 싶은 경우
 
-- @RequestMapping(params = “a”)
+- @RequestMapping(params = "a")
 
 특정한 요청 매개변수가 없는 요청을 처리하고 싶은 경우
 
-- @RequestMapping(params = “! a”)
+- @RequestMapping(params = "!a")
 
 특정한 요청 매개변수 키/값을 가지고 있는 요청을 처리하고 싶은 경우
 
-- @RequestMapping(params = “a=b”)
+- @RequestMapping(params = "a=b")
 
 ### 35. HTTP 요청 맵핑하기 5 부: HEAD와 OPTIONS 요청 처리
 
@@ -1072,7 +1072,6 @@ OPTIONS
 
 - 사용할 수 있는 HTTP Method 제공
 - 서버 또는 특정 리소스가 제공하는 기능을 확인할 수 있다.
-
 - 서버는 Allow 응답 헤더에 사용할 수 있는 HTTP Method 목록을 제공해야 한다.
 
 참고

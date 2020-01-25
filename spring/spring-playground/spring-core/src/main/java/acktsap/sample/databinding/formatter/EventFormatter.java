@@ -19,6 +19,8 @@ import acktsap.sample.databinding.Event;
  * New one. 추천하는 방식.
  *
  * Thread-safe.
+ * 
+ * Run {@link FormatterEventControllerTest}.
  */
 public class EventFormatter implements Formatter<Event> {
 

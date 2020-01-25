@@ -16,6 +16,8 @@ import acktsap.sample.databinding.Event;
  * New one.
  *
  * Stateless, Thread-safe
+ *
+ * Run {@link SpringEventControllerTest}.
  */
 public class EventConverter {
 
@@ -26,7 +28,7 @@ public class EventConverter {
     public Event convert(String source) {
       Event event = new Event();
       event.setId(Integer.parseInt(source));
-      event.setTitle("Converter used");
+      event.setTitle("Spring wired Converter used");
       return event;
     }
 

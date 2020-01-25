@@ -16,6 +16,8 @@ import acktsap.sample.databinding.Event;
  * WARN: this isn't thread-safe (stateful). DO NOT use as a bean
  *
  * 번거로움.. Object <-> String간만 가능.. Use Converter, Formatter instead.
+ *
+ * Run {@link EditorEventControllerTest}.
  */
 public class EventEditor extends PropertyEditorSupport {
 

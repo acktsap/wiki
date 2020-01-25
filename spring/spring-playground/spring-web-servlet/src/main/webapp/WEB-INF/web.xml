@@ -5,7 +5,7 @@
 <!--
 
 이 정보에 기반해서 servlet container가
-listener, filter, servlet을 탐지 from war file
+listener, filter, servlet을 war file에서 탐지
 
 Request processing
   filter1 -> filter2 -> filter3 -> ... -> servlet
@@ -15,7 +15,7 @@ Request processing
   <display-name>Archetype Created Web Application</display-name>
 
   <!-- spring!!! -->
-  <!-- spring context params -->
+  <!-- spring context params (root context) -->
   <context-param>
      <param-name>contextClass</param-name>
      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
