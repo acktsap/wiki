@@ -5,7 +5,7 @@
     <title>Create New Event</title>
 </head>
 <body>
-<form action="#" th:action="@{/events/form/limit}" method="post" th:object="${event}">
+<form action="#" th:action="@{/session/events/limit}" method="post" th:object="${event}">
     <p th:if="${#fields.hasErrors('limit')}" th:errors="*{limit}">Incorrect date</p>
     Limit: <input type="text" title="limit" th:field="*{limit}"/>
     <input type="submit" value="Create"/>

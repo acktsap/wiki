@@ -98,6 +98,7 @@ MVC 패턴의 단점
 - https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
 - https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html
 ```
+
 ### 4. 서블릿 소개
 
 가장 기본적인 서블릿 애플리케이션 만들기
@@ -1148,7 +1149,7 @@ ServletRequest(Response)
 HttpServletRequest(Response)
 ```
 
--> 요청 또는 응답 자체에 접근 가능한 API
+-> 요청 또는 응답 자체에 접근 가능한 API. Low level.
 
 ```java
 InputStream
@@ -1157,11 +1158,19 @@ OutputStream
 Writer
 ```
 
-->  요청 본문을 읽어오거나, 응답 본문을 쓸 때 사용할 수 있는 API
+->  ServletRequest에서 요청 본문을 읽어오거나, ServletResponse에응답 본문을 쓸 때 사용할 수 있는 API
 
-PushBuilder -> 스프링 5, HTTP/ 2 리소스 푸쉬에 사용
+```java
+PushBuilder
+```
 
-HttpMethod -> GET, POST, ... 등에 대한 정보
+-> 스프링 5, HTTP/2 리소스 푸쉬에 (client에 푸쉬) 사용
+
+```java
+HttpMethod
+```
+
+-> GET, POST, ... 등에 대한 정보. RequestMapping으로 했을 때 전부 받으니까 이때 처리해. 근데 비추임!
 
 ```java
 Locale
@@ -1169,21 +1178,41 @@ TimeZone
 ZoneId
 ```
 
--> LocaleResolver가 분석한 요청의 Locale 정보
+-> LocaleResolver가 분석한 요청의 Locale 정보. Handler에 locale 정보가 필요할 때 사용
 
-@PathVariable -> URI 템플릿 변수 읽을 때 사용
+```java
+@PathVariable
+```
 
-@MatrixVariable -> URI 경로 중에 키/값 쌍을 읽어 올 때 사용
+-> URI 템플릿 변수 읽을 때 사용
 
-@RequestParam -> 서블릿 요청 매개변수 값을 선언한 메소드 아규먼트 타입으로 변환해준다. 단순 타입인 경우에 이 애노테이션을 생략할 수 있다.
+```java
+@MatrixVariable
+```
 
-@RequestHeader -> 요청 헤더 값을 선언한 메소드 아규먼트 타입으로 변환해준다.
+-> URI 경로 중에 키/값 쌍을 읽어 올 때 사용
+
+```java
+@RequestParam
+```
+
+-> 서블릿 요청 매개변수 값을 선언한 메소드 아규먼트 타입으로 변환해준다. 단순 타입인 경우에 이 애노테이션을 생략할 수 있다.
+
+```java
+@RequestHeader
+```
+
+-> 요청 헤더 값을 선언한 메소드 아규먼트 타입으로 변환해준다.
 
 참고: https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-arguments
 
 핸들러 메소드 리턴: 주로 응답 또는 모델을 랜더링할 뷰에 대한 정보를 제공하는데 사용한다.
 
-@ResponseBody -> 리턴 값을 HttpMessageConverter를 사용해 응답 본문으로
+```java
+@ResponseBody 
+```
+
+-> 리턴 값을 HttpMessageConverter를 사용해 응답 본문으로
 사용한다.
 
 ```java
@@ -1191,20 +1220,31 @@ HttpEntity
 ReponseEntity
 ```
 
--> 응답 본문 뿐 아니라 헤더 정보까지, 전체 응답을 만들 때 사용한다.
+-> 응답 본문 뿐 아니라 헤더 정보까지, 전체 응답을 만들 때 사용한다. 보다 심도있는 Rest api를 설계할 때 사용
 
-String -> ViewResolver를 사용해서 뷰를 찾을 때 사용할 뷰 이름.
 
-View -> 암묵적인 모델 정보를 랜더링할 뷰 인스턴스
+```java
+String
+```
+
+-> (`@ResponseBody`가 없을 때)ViewResolver를 사용해서 뷰를 찾을 때 사용할 뷰 이름.
+
+```java
+View
+```
+
+-> ViewResolver를 안쓰고 그냥 바로 쓰고 싶을 때, 암묵적인 모델 정보를 랜더링할 뷰 인스턴스
 
 ```java
 Map
 Model
 ```
 
--> (RequestToViewNameTranslator를 통해서) 암묵적으로 판단한 뷰 랜더링할 때 사용할 모델 정보
+-> (`RequestToViewNameTranslator`를 통해서) 암묵적으로 판단한 뷰 랜더링할 때 사용할 모델 정보
 
+```java
 @ModelAttribute
+```
 
 -> (RequestToViewNameTranslator를 통해서) 암묵적으로 판단한 뷰 랜더링할 때 사용할 모델 정보에 추가한다. 이 애노테이션은 생략할 수 있다.
 
@@ -1460,6 +1500,7 @@ public String uploadFile(@RequestParam MultipartFile file,
   <h2 th:text="${message}"/>
 </div>
 ```
+
 파일 업로드 관련 스프링 부트 설정
 
 - MultipartAutoConfiguration

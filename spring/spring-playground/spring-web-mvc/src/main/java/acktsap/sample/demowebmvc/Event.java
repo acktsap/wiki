@@ -1,53 +1,28 @@
 package acktsap.sample.demowebmvc;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import java.time.LocalDate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Data;
 
+@Data
 public class Event {
+
+  public interface Group1 {
+  }
+  public interface Common {
+  }
 
   private Integer id;
 
-  @NotBlank
+  @NotBlank(groups = {Group1.class, Common.class})
   private String name;
 
-  @Min(0)
+  @Min(value = 0, groups = Common.class) // @Valid, @Validated랑 같이 사용
   private Integer limit;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate startDate;
 
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Integer getLimit() {
-    return limit;
-  }
-
-  public void setLimit(Integer limit) {
-    this.limit = limit;
-  }
-
-  public LocalDate getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(LocalDate startDate) {
-    this.startDate = startDate;
-  }
 }
