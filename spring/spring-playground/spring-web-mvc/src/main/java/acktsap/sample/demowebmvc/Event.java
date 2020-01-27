@@ -24,5 +24,5 @@ public class Event {
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate startDate;
-
+ 
 }

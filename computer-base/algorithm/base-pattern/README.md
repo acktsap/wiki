@@ -1,4 +1,25 @@
-# Base patterns
+# Base Patterns
+
+- [Base Patterns](#base-patterns)
+  - [Solving](#solving)
+  - [Data Structure](#data-structure)
+    - [Canonicalization](#canonicalization)
+    - [Separate data with an algorithm](#separate-data-with-an-algorithm)
+  - [Modeling](#modeling)
+    - [Explicit Formula (점화식)](#explicit-formula-%ec%a0%90%ed%99%94%ec%8b%9d)
+      - [Sum until n](#sum-until-n)
+      - [Tower of Hanoi](#tower-of-hanoi)
+  - [Proving](#proving)
+    - [Loop dominates Time Complexity](#loop-dominates-time-complexity)
+    - [Mathematical Induction (수학적귀납법)](#mathematical-induction-%ec%88%98%ed%95%99%ec%a0%81%ea%b7%80%eb%82%a9%eb%b2%95)
+    - [Loop Invariant](#loop-invariant)
+  - [Writing](#writing)
+    - [Use half-open interval in a range](#use-half-open-interval-in-a-range)
+    - [Always init on declaration](#always-init-on-declaration)
+    - [No floating point operation if possible](#no-floating-point-operation-if-possible)
+  - [Debugging](#debugging)
+    - [Logging middle result](#logging-middle-result)
+    - [Use assert on precondition](#use-assert-on-precondition)
 
 ## Solving
 
@@ -7,7 +28,7 @@
 3. Validate it
 4. Test with corner case (like -1, 0, 1)
 
-## Data structure
+## Data Structure
 
 ### Canonicalization
 
@@ -50,12 +71,44 @@ void move(int direction) {
 
 ### Explicit Formula (점화식)
 
-eg. sum until n
+- D(n) : divide
+- C(n) : combine
+- T(n) = D(n) + sigma[i_to_k](T(i)) + C(n)
+- Time Complexity : find basic operation & compute with it
 
-- For n >= 2, f(n) = f(n-1) + n
+#### Sum until n
+
+- For n >= 2, f(n) = f(n - 1) + n
 - For n == 1, f(n) = 1
+- Time complexity (basic operation : +)
+  ```text
+  T(n) = T(n - 1) + 1
+       = T(n - 2) + 2
+       = T(n - 3) + 3
+       =    ...
+       = T(1) + n - 1
+       = n - 1 since T(1) = 0
+  ```
 
-## Priving
+#### Tower of Hanoi
+
+![hanoi-tower](./img/hanio-tower.png)
+
+- For n >= 2
+  - f(n - 1) for source -> temp and temp -> destination, 1 for bottom movement
+  - f(n) = 2 * f(n - 1) + 1
+- For n == 1, f(n) = 1
+- Time complexity (basic operation : move)
+  ```text
+  T(n) = 2 * T(n - 1) + 1
+       = 2 * (2 * T(n - 2) + 1) + 1
+       = 2^2 * T(n - 2)) + 2
+       =      ...
+       = 2^(n-1) * T(1) + 2^(n-1) - 1
+       = 2^n - 1
+  ```
+
+## Proving
 
 ### Loop dominates Time Complexity
 

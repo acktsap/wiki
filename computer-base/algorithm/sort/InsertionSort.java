@@ -1,42 +1,22 @@
 import java.util.Arrays;
 
-// Average () : n^2 / 4 ~ O(n^2) 
-// Worst () : n*(n - 1) / 2 ~ O(n^2)
-// space : in place
 public class InsertionSort {
 
-  private interface Sort {
-    void sort(int[] E);
-  }
-
-  private static class InsertionSortImpl implements Sort {
-
-    @Override
-    public void sort(int[] E) {
-      insertionSort(E, E.length);
-    }
-
-    protected void insertionSort(int[] E, int n) {
-      for (int xindex = 1; xindex < n; ++xindex) {
-        int curr = E[xindex];
-        int key = curr;
-        int xLoc = shiftVac(E, xindex, key);
-        E[xLoc] = curr;
-      }
-    }
-    
-    protected int shiftVac(int[] E, int xindex, int key) {
-      int vacant = xindex;
-      int xLoc = 0;    // assume failure
-      while (vacant > 0) {
-        if (E[vacant - 1] <= key) {    // < : x, <= : o
-          xLoc = vacant; 
+  void sort(int[] arr) {
+    for (int i = 1; i < arr.length; ++i) {
+      final int target = arr[i];
+      int vacant = i;
+      // starting from vacant - 1
+      for (int j = vacant - 1; j >= 0; --j) {
+        if (arr[j] < target) {
           break;
         }
-        E[vacant] = E[vacant - 1];
-        --vacant;
+        // shift arr[j] to vacant
+        arr[vacant] = arr[j]; 
+        vacant = j;
       }
-      return xLoc;
+      // insert target to vacant
+      arr[vacant] = target;
     }
   }
 
@@ -50,12 +30,15 @@ public class InsertionSort {
         new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 } }
     };
 
-    final Sort sort = new InsertionSortImpl();
+    final InsertionSort sort = new InsertionSort();
     for (final Object[] parameter : parameters) {
       final int[] input = (int[]) parameter[0];
       final int[] expected = (int[]) parameter[1];
       sort.sort(input);
-      assert Arrays.equals(expected, input);
+      if (!Arrays.equals(expected, input)) {
+        throw new IllegalStateException("expected: " + Arrays.toString(expected) +
+            ", actual: " + Arrays.toString(input));
+      }
     }
   }
 
