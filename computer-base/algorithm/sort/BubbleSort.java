@@ -1,20 +1,20 @@
 import java.util.Arrays;
 
-public class InsertionSort {
+public class BubbleSort {
 
   void sort(int[] arr) {
-    for (int i = 1; i < arr.length; ++i) {
-      int keep = arr[i];
-      int vacant = i;
-      while (0 < vacant && arr[vacant - 1] >= keep) {
-        // shirt vacant
-        arr[vacant] = arr[vacant - 1];
-        --vacant;
+    int tmp;
+    for (int i = arr.length - 1; i >= 0; --i) {
+      for (int curr = 0; curr < i; ++curr) {
+        if (arr[curr] > arr[curr + 1]) {
+          tmp = arr[curr + 1];
+          arr[curr + 1] = arr[curr];
+          arr[curr] = tmp;
+        }
       }
-      arr[vacant] = keep;
     }
   }
-
+ 
   public static void main(String[] args) {
     final Object[][] parameters = {
       { new int[] { 2, 322, 0, 44, 100, 9, 10, 50 },
@@ -27,7 +27,7 @@ public class InsertionSort {
         new int[] { 1, 3, 4, 5, 5, 5, 6, 7, 9 } }
     };
 
-    final InsertionSort sort = new InsertionSort();
+    final BubbleSort sort = new BubbleSort();
     for (final Object[] parameter : parameters) {
       final int[] input = (int[]) parameter[0];
       final int[] expected = (int[]) parameter[1];
