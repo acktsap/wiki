@@ -1,72 +1,127 @@
 # Spring Core
 
 - [Spring Core](#spring-core)
-  - [5. Aspect Oriented Programming with Spring](#5-aspect-oriented-programming-with-spring)
-    - [5.1. AOP Concepts](#51-aop-concepts)
-    - [5.2. Spring AOP Capabilities and Goals](#52-spring-aop-capabilities-and-goals)
-    - [5.3. AOP Proxies](#53-aop-proxies)
-    - [5.4. @AspectJ support](#54-aspectj-support)
-      - [5.4.1. Enabling @AspectJ Support](#541-enabling-aspectj-support)
+  - [IoC Container](#ioc-container)
+    - [Dependency Injection 방법](#dependency-injection-%eb%b0%a9%eb%b2%95)
+    - [Terms](#terms)
+      - [Java Bean](#java-bean)
+      - [Plain Old Java Object](#plain-old-java-object)
+    - [Bean](#bean)
+    - [Bean Scope](#bean-scope)
+    - [Singleton Beans with Prototype-bean Dependencies](#singleton-beans-with-prototype-bean-dependencies)
+    - [Bean Lifecycle](#bean-lifecycle)
+      - [Creation](#creation)
+      - [Destory](#destory)
+    - [ApplicationContext](#applicationcontext)
+    - [@Autowired](#autowired)
+    - [@Component and @ComponentScan](#component-and-componentscan)
+  - [AOP (Aspect Oriented Programming)](#aop-aspect-oriented-programming)
+  - [References](#references)
 
-## 5. Aspect Oriented Programming with Spring
+## IoC Container
 
-OOP는 key unit이 class인 반면에 AOP는 aspect이다. AOP는 multiple types and objects간의 concern (eg. transaction management)에 대한 모듈화가 가능하게 해준다.
+IoC(Inversion of Control)이란 어떤 객체가 사용하는 ​의존 객체를 직접 만들어 사용하는게 아니라 주입 받아 사용하는 방법​을 말 함. 이를 Spring이 해줌. 이 때 주입하는 것을 Dependency Injection임.
 
-AOP가 IoC container에 꼭 필요한 것은 아니지만 middleware level에서의 상당히 유용한 solution을 제공해 준다.
+### Dependency Injection 방법
 
-Spring에서 AOP는 다음과 같이 사용된다.
+- Constructor argument based
+- Setter based
 
-- Provide declarative enterprise services.
-- 사용자가 custom aspects를 사용할 수 있게.
+### Terms
 
-### 5.1. AOP Concepts
+#### Java Bean
+
+여러개의 객체를 하나로 관리하는 클래스
+
+- Serializable
+- No args constructor
+- Getter, Setter for all members
+
+#### Plain Old Java Object
+
+프레임워크에 의존적인 무거운 객체를 사용하게 되는 것에 대한 불만으로 나옴. 그냥 일반 자바 객체. Spring은 POJO기반
+
+### Bean
+
+스프링 IoC 컨테이너가 관리 하는 객체.
+
+### Bean Scope
+
+- Singleton : 하나만 생성
+- Prototype : 매번 생성
+  - Request : HTTP request마다 한개.
+  - Session : Session마다 한개. Session객체의 lifecycle을 따름
+  - Application : Application마다 한개. ServletContext객체의 lifecycle을 따름
+  - Websocket : Websocket마다 한개. Websocket객체의 lifecycle을 따름
+
+### Singleton Beans with Prototype-bean Dependencies
+
+Prototype bean이 singleton bean을 참조하는 것은 문제가 없음. But singleton bean이 prototype bean을 참조하면 바뀌지 않는다는 문제가 있음.
+
+-> `@Scope("prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)`를 Prototype bean에 설정함으로써 해결 (Proxy 설정)
+
+### Bean Lifecycle
+
+#### Creation
+
+Instantiate
+
+Properties 설정
+
+setBeanName() of BeanNameAware
+
+setBeanFactory() of BeanFactoryAware
+
+setApplicationContext() of ApplicationContextAware
+
+PostProcessBeforeInitialization() of BeanPostProcessors
+
+afterpropertiesSet() of InitializingBeans
+
+custom init method
+
+postProcessAfterInitialization() of BeanPostProcessors
+
+Bean Ready
+
+#### Destory
+
+destroy() of DisposableBean
+
+custom destory method
+
+### ApplicationContext
+
+Spring IoC Container로써. 빈 설정 소스​로 부터 ​빈 ​정의​를 읽어들이고, 빈을 구성하고 제공​한다.
+
+다음과 같은 인터페이스를 상속한다.
+
+- BeanFactory : 빈 생성
+- ​EnvironmentCapable : 환경 설정
+- MessageSource : 국제화 설정
+- ApplicationEventPublisher : 이벤트 publish, 옵져버 패턴으로 구현
+- ResouceLoader : 리소스 로딩
+
+### @Autowired
+
+빈으로 등록되어 있는 `AutowiredAnnotationBeanPostProcessor​ extends BeanPostProcessor` 클래스가 DI를 해준다.
+
+### @Component and @ComponentScan
+
+`​ConfigurationClassPostProcessor​ extends ​BeanFactoryPostProcessor​`에의해 Bean으로 등록해줌
+
+## AOP (Aspect Oriented Programming)
+
+관점 지향 프로그램으로 object간의 concern에 집중한다. Spring에서는 runtime proxy로 구현한다.
 
 - Aspect : 여러 개의 클래스들 간의 concern.
-- Join point : 실행 중인 프로그램의 point (eg. method execution). 스프링에서는 항상 method execution임.
-- Advice : 특정한 join point에서 취해야 할 Action. Aspect에 전달 됨. 스프링을 포함한 대부분의 프레임워크에서 chain of intercepter로 구현.
-- Pointcut : Join point에 대한 predicate (eg. "aaa"라는 method). Advice는 Pointcut에 해당하는 Join point에서 실행 됨. 스프링에서는 AspectJ라는 것으로 표현.
-- Introduction : type 대신에 추가적인 method나 field를 선언할 수 있는 방법을 제공.
-- Target object : Aspect의 target object. Advised object라고도 불림. 스프링 AOP가 runtime proxy로 구현되어 있기 때문에 스프링에서는 항상 proxied object임. 
-- AOP proxy : AOP framework에서 aspect contract를 구현하기 위해 생성한 프록시 객체. Spring AOP에서는 JDK dynamic proxy또는 CGLIB proxy임.
-- Weaving : Advised object를 생성하기 위해 aspect를 application types or object과 linking하는 과정. Spring AOP에서는 runtime 단계에서 진행.
+- Join point : concern을 적용할 대상. 스프링에서는 항상 method execution임.
+- Pointcut : Join point에 대한 조건
+- Advice : join point에서 취해야 할 Action.
+- Weaving : Join point에 advice를 삽입하는 과정
 
-Spring AOP는 다음과 같은 advice를 제공한다.
+## References
 
-- Before advice : Before join point. 프로그램이 Join point로 가서 실행되는 것을 막을 수 없음.
-- After returning advice : Join point가 정상적으로 return한 경우
-- After throwing advice : Join point가 throw exception을 한 경우
-- After (finally) advice : Join point의 정상 종료 여부와 관계 없이 실행
-- Around advice : Join point를 감싸는 advice. Before, after invocation에 대해 customizing이 가능.
+https://ko.wikipedia.org/wiki/Plain_Old_Java_Object
 
-Around advice가 일반적으로 사용됨. 하지만 필요에 따라 가능한 한 범위가 제한된 advice를 사용하는 것을 추천.
-
-Pointcut에 match되는 join point를 찾는 개념이 AOP의 핵심임. 이는 object-oriented hierarchy에 관계 없이 target object를 구할 수 있음.
-
-### 5.2. Spring AOP Capabilities and Goals
-
-Spring AOP는 순수 java로 구현되어 있음. class loader를 건드릴 필요가 없기 때문에 servlet container 나 application server에 적합함.
-
-Spring AOP는 method execution만 join point로 처리함.
-
-다른 AOP framework는 AOP구현에 집중한다. 반면에 Spring AOP의 목표는 Spring IoC와 상호작용해서 여러 문제들을 해결하는데 있다.
-
-AspectJ와 경쟁관계가 아니라 서로 보완하는 관계라고 생각한다. 하지만 Spring에서는 IoC with AspectJ도 사용할 수 있게 기능을 제공한다. 그쪽 유저에게도 좋은 경험을 제공하려고.
-
-```text
-어떤 프레임워크를 사용할 때는 그 프레임워크에 종속적인 것을 사용하면 안된다. 하지만 몇몇 경우 프레임워크에 종속적인 것을 사용하는게 편리한 경우가 있다. 스프링 프레임워크에서는 두개의 방법을 모두 제공한다. 그래서 Spring에서도 @AspectJ와 함께 사용하는 것을 제공한다.
-```
-
-### 5.3. AOP Proxies
-
-Spring AOP는 JDK의 dynamic proxy를 사용한다. 이는 interface에 대한 proxy를 제공한다.
-
-Spring AOP에서 CGLIB proxy도 사용할 수 있다. 이는 class에 대한 proxy를 제공한다. 하지만 꼭 필요한 경우가 아니라면 권장되지 않는다.
-
-### 5.4. @AspectJ support
-
-AspectJ가 새 버전이 나와도 runtime만 바꾸면 되기 때문에 문제 없음.
-
-#### 5.4.1. Enabling @AspectJ Support
-
-
-
+http://pigbrain.github.io/spring/2016/03/04/BeanLifeCycle_on_Spring

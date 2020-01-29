@@ -214,7 +214,6 @@ public class HelloServlet extends HttpServlet {
 
 https://docs.oracle.com/cd/B14099_19/web.1012/b14017/filters.htm#i1000654
 
-
 ### 7. 스프링 IoC 컨테이너 연동
 
 ![dispatcher-servlet-context](./img/dispatcher-servlet-context.png)
@@ -454,7 +453,6 @@ public class WebConfig implements WebMvcConfigurer {
 - JSP 보다 Thymeleaf 선호
 - JSON 지원
 - 정적 리소스 지원 (+ 웰컴 페이지, 파비콘 등 지원)
-
 
 스프링 MVC 커스터마이징
 

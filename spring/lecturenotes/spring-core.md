@@ -115,7 +115,13 @@ Bean
   - Lifecycle Interface : Bean이 추가 됬을 때 뭔가 하고 싶다! 이럴 때 사용할 수 있음
     - `@PostConstruct` : 생성 되고 난 후 called
 
-![spring-bean-lifecycle](./img/spring-bean-lifecycle.png)
+Creation
+
+![spring-bean-lifecycle-creation](./img/spring-bean-lifecycle-creation.png)
+
+Destory
+
+![spring-bean-lifecycle-destory](./img/spring-bean-lifecycle-destroy.png)
 
 ApplicationContext : 실질적으로 사용하게 될 bean factory, 이것 저것 가지고 있음
 
@@ -1003,8 +1009,8 @@ AOP 적용 방법
 
 스프링 AOP 특징
 
-- 프록시프록시 기반의기반의 AOP ​​ 구현체
-- 스프링스프링 빈에만빈에만 AOP 를를 적용​적용​할 수 있다
+- 프록시 기반의 AOP ​​ 구현체
+- 스프링 빈에만 AOP 를를 적용​적용​할 수 있다
 
 - 모든 AOP 기능을 제공하는 것이 목적이 아니라, 스프링 IoC와 연동하여 엔터프라이즈
 애플리케이션에서 가장 흔한 문제에 대한 해결책을 제공하는 것이 목적.
@@ -1022,8 +1028,7 @@ AOP 적용 방법
 
 그래서 등장한 것이 스프링 AOP
 
-- 스프링 IoC 컨테이너가 제공하는 기반 시설과 Dynamic 프록시를 사용하여 여러
-복잡한 문제 해결.
+- 스프링 IoC 컨테이너가 제공하는 기반 시설과 Dynamic 프록시를 사용하여 여러 복잡한 문제 해결.
 - 동적 프록시: 동적으로 프록시 객체 생성하는 방법
 - 자바가 제공하는 방법은 인터페이스 기반 프록시 생성.
 - CGlib은 클래스 기반 프록시도 지원.

@@ -1,5 +1,16 @@
 # Http 1.1
 
+- [Http 1.1](#http-11)
+  - [Background](#background)
+  - [Terms](#terms)
+  - [Structure](#structure)
+    - [Simplest case](#simplest-case)
+    - [With intermediary](#with-intermediary)
+    - [With a cache](#with-a-cache)
+    - [Http over TCP/IP](#http-over-tcpip)
+  - [Keep-Alive](#keep-alive)
+  - [Reference](#reference)
+
 ## Background
 
 ```text
@@ -7,6 +18,8 @@ HTTP/1.0 does not sufficiently take into consideration the effects
 of hierarchical proxies, caching, the need for persistent connections,
 or virtual hosts
 ```
+
+> Http/1.0의 한계를 보완해서 만듬
 
 ## Terms
 
@@ -142,6 +155,8 @@ inbound/outbound
   and "outbound" means "traveling toward the user agent"
 ```
 
+> 그냥 이것저것..
+
 ## Structure
 
 ```text
@@ -150,12 +165,16 @@ request to the server in the form of a request method, URI, and
 protocol version, followed by a MIME-like message containing request
 modifiers, client information, and possible body content over a
 connection with a server.
+
 The server responds with a status line, including the message's protocol
 version and a success or error code, by a MIME-like message containing
 server information, entity metainformation, and possible entity-body content
 ```
 
-Simplest case
+> Client가 URI, protocol version, MIME-like message의 형태로 서버에게 요청.
+> Server는 message protocol version과 message content 그리고 response code를 client에 전송함
+
+### Simplest case
 
 ```text
 In the simplest case, this may be accomplished via a single connection (v)
@@ -166,7 +185,9 @@ between the user agent (UA) and the origin server (O).
       <----------------------- response chain
 ```
 
-With intermediary
+> Single User Agent and server
+
+### With intermediary
 
 ```text
 A more complicated situation occurs when one or more intermediaries
@@ -178,7 +199,9 @@ forms of intermediary: proxy, gateway, and tunnel.
       <------------------------------------- response chain
 ```
 
-With a cache
+> Proxy, gateway같은게 User Agent랑 server 사이에 추가
+
+### With a cache
 
 ```text
 Any party to the communication which is not acting as a tunnel may
@@ -192,7 +215,10 @@ request.
       <--------- response chain
 ```
 
-Http over TCP/IP
+> 중간 단계(tunnel) 에서 cache를 하게 되면 최종 server까지 가지 않고
+> 동일한 request에 대한 동일한 response를 보낼 수 있음
+
+### Http over TCP/IP
 
 ```text
 HTTP communication usually takes place over TCP/IP connections. The
@@ -201,14 +227,7 @@ not preclude HTTP from being implemented on top of any other protocol
 on the Internet, or on other networks.
 ```
 
-Persistent Connections
-
-```text
-In HTTP/1.0, most implementations used a new connection for each
-request/response exchange. In HTTP/1.1, a connection may be used for
-one or more request/response exchanges, although connections may be
-closed for a variety of reasons (see section 8.1).
-```
+> HTTP는 보통 TCP/IP 위에서 돌아감. 계층이 달라서 그럼. But 다른 프로토콜 위에서도 돌아갈 수 있음
 
 ## Keep-Alive
 
@@ -216,6 +235,11 @@ closed for a variety of reasons (see section 8.1).
 In HTTP/1.0, each connection is established by the client prior to
 the request and closed by the server after sending the response.
 However, some implementations implement the explicitly negotiated.
+
+In HTTP/1.0, most implementations used a new connection for each
+request/response exchange. In HTTP/1.1, a connection may be used for
+one or more request/response exchanges, although connections may be
+closed for a variety of reasons (see section 8.1).
 ```
 
 > 보통은 response받고 그냥 끊어버리는데 port를 열어둔 상태를 일정 기간 유지하자!

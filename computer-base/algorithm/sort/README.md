@@ -25,7 +25,7 @@
 ![insertion-sort](./img/insertion-sort.png)
 
 - Average 
-  - A(n) = n^2 / 4 ~ O(n^2) 
+  - A(n) = n^2 / 4 ~ O(n^2)
 - Worst
   - Keys are in reverse order. Have to complare all of keys before current target.
   - W(n) = 1 + 2 + 3 + ... + (n - 1) = n*(n - 1) / 2 ~ O(n^2)

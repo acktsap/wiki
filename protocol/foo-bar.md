@@ -1,5 +1,9 @@
 # Foo Bar
 
+- [Foo Bar](#foo-bar)
+  - [Summary](#summary)
+  - [References](#references)
+
 ## Summary
 
 foo
@@ -9,7 +13,7 @@ foo
 
 bar
 
-- The second metasyntactic variable, after foo and before baz.=
+- The second metasyntactic variable, after foo and before baz.
 - "Suppose we have two functions: FOO and BAR.  FOO calls BAR...."
 
 > 무슨 전쟁 이야기 나옴, 히스토리 디테일하게..\

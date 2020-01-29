@@ -1,5 +1,13 @@
 # Java Per Versions
 
+- [Java Per Versions](#java-per-versions)
+  - [Java 1.5](#java-15)
+  - [Java 1.7](#java-17)
+  - [Java 1.8](#java-18)
+  - [Java 1.10](#java-110)
+  - [Java 1.11](#java-111)
+  - [Java 1.12](#java-112)
+
 ## Java 1.5
 
 https://docs.oracle.com/javase/1.5.0/docs/relnotes/features.html
