@@ -1,5 +1,0 @@
-# Hyperledger
-
-## Concept
-
-## Structure

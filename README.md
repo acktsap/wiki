@@ -4,6 +4,8 @@
 - Commit message: "play". Please KEEP IT SIMPLE. Just run `./commit.sh`
 - Do not make directory more than 2 depth (except for directory convention like `src/main/java`)
 
+1-level techs are core. Always focus on those (you should be able to explain it without internet)
+
 ## Code
 
 ### Syntax
@@ -44,9 +46,10 @@ Code pattern is an idioms. First, core api, then library.
 
 ## Technologies
 
+Summarize it
 
-## Comments
-
-Modeling should be other temp private repository
-
-
+- History
+- Concept
+- Pros & cons
+- Alternative
+- Usage Pattern

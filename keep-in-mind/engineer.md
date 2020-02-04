@@ -2,6 +2,13 @@
 
 Performance vs Pride
 
+- [Engineering](#engineering)
+  - [Programming](#programming)
+  - [Seperation of Concerns](#seperation-of-concerns)
+  - [Everything is for human](#everything-is-for-human)
+  - [Engineering Mind](#engineering-mind)
+  - [Questions](#questions)
+
 ## Programming
 
 The process of creating a set of instructions that tell a computer how to perform a task.

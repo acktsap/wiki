@@ -1,10 +1,24 @@
 # JPA
 
-## JPA를 사용하는 이유
+- [JPA](#jpa)
+  - [Why JPA](#why-jpa)
+  - [Concept](#concept)
+  - [Persistant Context](#persistant-context)
+  - [Flush](#flush)
+  - [Entity LifeCycle](#entity-lifecycle)
+  - [Entity Mapping](#entity-mapping)
+  - [Entity Mapping Strategy](#entity-mapping-strategy)
+  - [One Way Association](#one-way-association)
+  - [Biddirectional Assotiation](#biddirectional-assotiation)
+  - [Type](#type)
+    - [Primitive, Embeded](#primitive-embeded)
+    - [Collection](#collection)
+
+## Why JPA
 
 https://gmlwjd9405.github.io/2019/08/03/reason-why-use-jpa.html
 
-## JPA란
+## Concept
 
 https://gmlwjd9405.github.io/2019/08/04/what-is-jpa.html
 
