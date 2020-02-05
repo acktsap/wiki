@@ -39,6 +39,7 @@
       - [Key-Value Model](#key-value-model)
       - [Document Model](#document-model)
       - [Column Model](#column-model)
+  - [References](#references)
 
 ## Why Database
 
@@ -285,3 +286,9 @@ eg. MongoDB
 대부분의 컬럼 모델 NoSQL 은 쓰기와 읽기 중에 쓰기에 더 특화되어 있다. 데이터를 먼저 커밋로그와 메모리에 저장한 후 응답하기 때문에 빠른 응답속도를 제공한다. 그렇기 때문에 읽기 연산 대비 쓰기 연산이 많은 서비스나 빠른 시간 안에 대량의 데이터를 입력하고 조회하는 서비스를 구현할 때 가장 좋은 성능을 보인다. 채팅 내용 저장, 실시간 분석을 위한 데이터 저장소 등의 서비스 구현에 적합하다.
 
 [위로](#database)
+
+## References
+
+https://github.com/JaeYeopHan/Interview_Question_for_Beginner/blob/master/Database
+
+https://chartworld.tistory.com/18

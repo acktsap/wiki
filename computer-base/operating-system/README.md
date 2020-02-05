@@ -4,10 +4,12 @@
   - [User Mode vs Kernal Mode](#user-mode-vs-kernal-mode)
   - [Process Management](#process-management)
     - [Process](#process)
+      - [Process state](#process-state)
+      - [Process in memory](#process-in-memory)
       - [Process Control Block](#process-control-block)
       - [Interprocess Communication](#interprocess-communication)
     - [Thread](#thread)
-    - [Multi Process vs Multi Thread](#multi-process-vs-multi-thread)
+    - [Process vs Thread](#process-vs-thread)
     - [Process Synchronization](#process-synchronization)
       - [Critical Section](#critical-section)
       - [Critical Section Problem](#critical-section-problem)
@@ -44,7 +46,10 @@
   - [Storage Management](#storage-management)
     - [Cache Locality](#cache-locality)
       - [Caching line](#caching-line)
-    - [Sync vs Async](#sync-vs-async)
+  - [Etc](#etc)
+    - [Blocking vs Non-Blocking](#blocking-vs-non-blocking)
+    - [Synchronous vs Asynchronous](#synchronous-vs-asynchronous)
+  - [References](#references)
 
 ---
 
@@ -60,21 +65,36 @@
 
 ### Process
 
-프로세스는 실행 중인 프로그램으로 디스크로부터 메모리에 적재되어 CPU 의 할당을 받을 수 있는 것을 말한다. 운영체제로부터 주소 공간, 파일, 메모리 등을 할당받을 수 있다. 구체적으로 살펴보면 프로세스는 함수의 매개변수, 복귀 주소와 로컬 변수와 같은 임시 자료를 갖는 프로세스 stack과 전역 변수들을 수록하는 data section을 포함한다. 또한 프로세스는 프로세스 실행 중에 동적으로 할당되는 메모리인 heap을 포함한다.
+프로세스는 실행 중인 프로그램으로 디스크로부터 메모리에 적재되어 CPU, Memory 등 Resource를 할당을 받을 수 있는 것을 말한다.
 
-Process state
+#### Process state
 
 ![process-state](./img/process-state.png)
 
-Process in memory
+- new
+- ready
+- running
+- waiting
+- terminated
+
+#### Process in memory
 
 ![process-in-memory](./img/process-in-memory.png)
+
+- Memory의 위에서 부터 차오르는 stack
+- Memory의 아래서부터 부터 차오르는 heap
+- 전역 변수 등을 저장하는 data section
 
 #### Process Control Block
 
 ![process-control-block](./img/process-control-block.png)
 
-PCB 는 특정 프로세스에 대한 중요한 정보를 저장하고 있는 운영체제의 자료구조이다. 운영체제는 프로세스를 관리하기 위해 프로세스의 생성과 동시에 고유한 PCB 를 생성한다. 프로세스는 CPU 를 할당받아 작업을 처리하다가도 프로세스 전환이 발생하면 진행하던 작업을 저장하고 CPU 를 반환해야 하는데, 이때 작업의 진행 상황을 모두 PCB 에 저장하게 된다. 그리고 다시 CPU 를 할당받게 되면 PCB 에 저장되어있던 내용을 불러와 이전에 종료됐던 시점부터 다시 작업을 수행한다.
+- Process number (PID)
+- Program counter : 다음 명령어의 주소를 저장
+- Process state : new, ready, running, waiting, terminated
+- Register : 값 저장소
+
+PCB 는 프로세스에 대한 정보를 저장. Context switching이 발생할 때 process의 정보를 저장. 다시 CPU 를 할당받게 되면 PCB의 내용을 불러와서 이전에 하던 작업을 재개.
 
 #### Interprocess Communication
 
@@ -82,22 +102,13 @@ TODO
 
 ### Thread
 
-스레드는 프로세스의 실행 단위라고 할 수 있다. 한 프로세스 내에서 동작되는 여러 실행 흐름으로 프로세스 내의 주소 공간이나 자원을 공유할 수 있다.  
-스레드는 스레드 ID, 프로그램 카운터, 레지스터 집합, 그리고 스택으로 구성된다. 같은 프로세스에 속한 다른 스레드와 코드, 데이터 섹션, 그리고 열린 파일이나 신호와 같은 운영체제 자원들을 공유한다.
-
-하나의 프로세스를 다수의 실행 단위로 구분하여 자원을 공유하고 자원의 생성과 관리의 중복성을 최소화하여 수행 능력을 향상시키는 것을 멀티스레딩이라고 한다. 이 경우 각각의 스레드는 독립적인 작업을 수행해야 하기 때문에 각자의 스택과 PC 레지스터 값을 갖고 있다.
-
-Thread in process
-
 ![thread in process](./img/thread-in-process.png)
 
-### Multi Process vs Multi Thread
+프로세스의 실행 단위. 한 프로세스 내에서 동작되는 여러 실행 흐름으로 프로세스 내의 주소 공간이나 자원을 공유할 수 있다. Thread ID, Program counter, register, stack 등으로 구성되며 같은 프로세스에 속한 다른 스레드와 자원을 공유할 수 있음. 이를 통해 작업 수행 능력을 향상 -> MultiThreading
 
-멀티 프로세스 방식은 하나의 프로세스가 죽더라도 다른 프로세스에는 영향을 끼치지 않고 정상적으로 수행된다는 장점이 있지만, 멀티 스레드보다 많은 메모리 공간과 CPU 시간을 차지한다는 단점이 존재한다.
+### Process vs Thread
 
-멀티 스레드는 멀티 프로세스보다 적은 메모리 공간을 차지하고 시스템 자원 소모가 적고 context switch가 빠르다. 스레드 간의 통신이 필요한 경우에도 별도의 자원을 이용하는 것이 아니라 전역 변수의 공간 또는 동적으로 할당된 공간인 Heap 영역을 이용하여 데이터를 주고받을 수 있다. 심지어 스레드의 context switch 는 프로세스 context switch 와는 달리 캐시 메모리를 비울 필요가 없기 때문에 더 빠르다.
-
-하지만 오류로 인해 하나의 스레드가 종료되면 전체 스레드가 종료될 수 있다. 또한 멀티 프로세스 기반으로 프로그래밍할 때는 프로세스 간 공유하는 자원이 없기 때문에 동일한 자원에 동시에 접근하는 일이 없었지만 멀티 스레딩을 기반으로 프로그래밍할 때는 이 부분을 신경써줘야 한다. 그렇기 때문에 멀티스레딩 환경에서는 동기화 작업이 필요하다. 하지만 이로 인해 병목현상이 발생하여 성능이 저하될 가능성이 높다. 그러므로 과도한 락으로 인한 병목현상을 줄여야 한다.
+Process는 CPU로부터 Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. Thread는 Process내의 자원을 공유하고 Context switching할 때 cache를 비울 필요가 없어서 MultiProcess보다 더 빠름. 다만 공유자원에 대한 동기화 문제가 있음.
 
 [위로](#Operating-System)
 
@@ -107,7 +118,7 @@ Thread in process
 
 #### Critical Section
 
-멀티 스레딩에 문제점에서 나오듯, 동일한 자원을 동시에 접근하는 작업(e.g. 공유하는 변수 사용, 동일 파일을 사용하는 등)을 실행하는 코드 영역을 Critical Section 이라 칭한다.
+동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역
 
 #### Critical Section Problem
 
@@ -483,10 +494,30 @@ Segmentation
 - Set Associative
 - Direct Map
 
-### Sync vs Async
+## Etc
 
-![sync-vs-async](./img/sync-vs-async.png)
+### Blocking vs Non-Blocking
+
+![blocking-io](./img/blocking-io.png)
+
+![non-blocking-io](./img/non-blocking-io.png)
+
+애플리케이션 실행 시 운영체제 대기 큐에 들어가면서 요청에 대한 system call이 완료된 후에 응답을 보낼 경우 blocking. 애플리케이션 실행 시 운영체제 대기 큐에 들어가지 않고 data 수신 여부와 관계없이 바로 응답을 보낼 경우 non-blocking. non-blocking의 경우 pooling으 하면
+
+I/O작업은 User Level(application)에서 직접 수행할 수 없음. I/O작업은 Kernel Level(OS)에서 일어나는 과정. I/O 작업을 처리하기 위해 User Level에 있던 Application이 system call을 함. 이 때 context-switching 이 발생. Kernel Level에서 I/O 작업이 끝나고 데이터를 반환 후 스레드에 걸렸던 block이 풀린다.
+
+### Synchronous vs Asynchronous
+
+![asynchronous-io](./img/asynchronous-io.png)
 
 메소드를 실행시킴과 `동시에` 반환 값이 기대되는 경우를 동기라고 표현하고 그렇지 않은 경우에 대해서 비동기라고 표현한다. 동시에라는 말은 실행되었을 때 값이 반환되기 전까지는 `blocking`되어 있다는 것을 의미한다. 비동기의 경우, `blocking`되지 않고 event queue에 넣거나 백그라운드 스레드에게 해당 task 를 위임하고 바로 다음 코드를 실행하기 때문에 기대되는 값이 바로 반환되지 않는다.
 
 [위로](#Operating-System)
+
+## References
+
+[Interview question](https://github.com/JaeYeopHan/Interview_Question_for_Beginner/tree/master/OS)
+
+[os book](http://os-book.com/OS9/slide-dir/index.html)
+
+[blocking, non-blocking, synchronous, Asynchronous](http://asfirstalways.tistory.com/348)
