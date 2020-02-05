@@ -9,17 +9,20 @@
     - Line Wrapping -> Never join already wrapped lines
 - Code template
   - Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files
+
     ```java
     /*
      * @copyright defined in LICENSE.txt
      */
-
     ```
+
 - Static import
   - Java -> Editor -> Content Assist -> Favorites
+
     ```java
     java.util.UUID.*        // randomUUID()
     java.util.Objects.*     // requireNonNull
+    ```
 
 - Highlight Current Variable : Java -> Editor -> Mark occurrences
 - Font size : General -> Appearance -> Colors and Fonts -> Java

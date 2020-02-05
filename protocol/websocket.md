@@ -1,5 +1,10 @@
 # WebSocket
 
+- [WebSocket](#websocket)
+  - [Background](#background)
+  - [Protocol Structure](#protocol-structure)
+  - [References](#references)
+
 ## Background
 
 ```text
@@ -20,6 +25,9 @@ This results in a variety of problems:
   outgoing connections to the incoming connection to track replies
 
 -> A simpler solution would be to use a single TCP connection for traffic in both directions
+
+> HTTP1.1은에서 bidirectional connection을 하려면 polling을해야 하고 header가 매번 날라가는 등 비효율적이었다.
+> Single TCP connection으로 bidirectional connection을 해보자!
 
 ## Protocol Structure
 

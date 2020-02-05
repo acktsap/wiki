@@ -21,6 +21,8 @@ Then programming is creating a set of instruction for solving some problem based
 
 ## Seperation of Concerns
 
+Modeling per concerns
+
 - Minimize modification on a spec changes
 - Maximize reuseability
 
