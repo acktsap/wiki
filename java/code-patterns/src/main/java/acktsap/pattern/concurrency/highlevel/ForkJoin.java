@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 import java.util.function.Supplier;
-import java8.util.stream.IntStreams;
+import java.util.stream.IntStream;
 
 public class ForkJoin {
 
@@ -87,7 +87,7 @@ public class ForkJoin {
   protected static int[] randomSrc() {
     int size = 1_000_000 + new Random().nextInt(1_000_000);
     Supplier<Integer> randomColor = () -> new Random().nextInt(256);
-    return IntStreams.range(0, size)
+    return IntStream.range(0, size)
         .map(i -> randomColor.get())
         .toArray();
   }

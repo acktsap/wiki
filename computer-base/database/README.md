@@ -5,13 +5,6 @@
     - [Performance](#performance)
   - [Logical Design](#logical-design)
     - [Normalization](#normalization)
-    - [Functional Dependency](#functional-dependency)
-    - [1NF](#1nf)
-    - [2NF](#2nf)
-    - [3NF](#3nf)
-    - [BCNF](#bcnf)
-    - [Pros and cons of normalization](#pros-and-cons-of-normalization)
-    - [De-normalization](#de-normalization)
     - [Entity-Relational Model](#entity-relational-model)
   - [Physical Design](#physical-design)
     - [Index](#index)
@@ -21,14 +14,17 @@
       - [Primary Index vs Secondary Index](#primary-index-vs-secondary-index)
       - [Composite Index](#composite-index)
       - [Indexing Considerations](#indexing-considerations)
+  - [Join](#join)
+    - [Cross Join](#cross-join)
+    - [Natural Join](#natural-join)
+    - [Inner Join](#inner-join)
+    - [Outer Join](#outer-join)
+      - [Left Outer Join](#left-outer-join)
+      - [Right Outer Join](#right-outer-join)
+    - [Inner Join vs Outer Join](#inner-join-vs-outer-join)
   - [Transaction](#transaction)
-    - [Lock on transaction](#lock-on-transaction)
-    - [Properties of transaction](#properties-of-transaction)
-    - [Transaction Status](#transaction-status)
-    - [트랜잭션을 사용할 때 주의할 점](#%ed%8a%b8%eb%9e%9c%ec%9e%ad%ec%85%98%ec%9d%84-%ec%82%ac%ec%9a%a9%ed%95%a0-%eb%95%8c-%ec%a3%bc%ec%9d%98%ed%95%a0-%ec%a0%90)
-    - [Deadlock](#deadlock)
-      - [What makes Deadlock](#what-makes-deadlock)
-      - [Reducing Deadlock](#reducing-deadlock)
+    - [Lock vs Transaction](#lock-vs-transaction)
+      - [Deadlock Example](#deadlock-example)
     - [Statement vs PrepareStatement](#statement-vs-preparestatement)
   - [NoSQL](#nosql)
     - [CAP Theorm & NoSQL](#cap-theorm--nosql)
@@ -43,13 +39,13 @@
 
 ## Why Database
 
-데이터베이스가 존재하기 이전에는 파일 시스템을 이용하여 데이터를 관리하였다. 파일 시스템을 이용해서 데이터를 저장하면 데이터를 각각의 파일 단위로 저장하며 이러한 일들을 처리하기 위한 독립적인 애플리케이션과 상호 연동이 되어야 한다. 이 경우 데이터 종속성 문제와 중복성, 데이터 무결성 등의 문제가 발생한다. 이를 해결하고자 한게 database이다.
+데이터를 그냥 파일 시스템을 통해 저장하면 데이터 `종속성`, `중복성`, `무결성` 등의 문제가 발생한다. 이를 해결하고자 한게 database이다.
 
 ### Performance
 
-디스크 I/O 를 어떻게 줄이느냐에서 시작된다. 디스크 I/O 란 디스크 드라이브의 플래터(원판)을 돌려서 읽어야 할 데이터가 저장된 위치로 디스크 헤더를 이동시킨 다음 데이터를 읽는 것을 의미한다. 이 때 데이터를 읽는데 걸리는 시간은 디스크 헤더를 움직여서 읽고 쓸 위치로 옮기는 단계에서 결정된다. 즉 디스크의 성능은 디스크 헤더의 위치 이동 없이 얼마나 많은 데이터를 한 번에 기록하느냐에 따라 결정된다고 볼 수 있다.
+데이터베이스의 퍼모먼스는 디스크 I/O에 달려있다. 디스크 I/O 란 디스크 드라이브의 플래터(원판)을 돌려서 데이터가 저장된 위치로 디스크 헤더를 이동시킨 다음 데이터를 읽는 과정을 거치는데, 이 때 헤더를 움직이는 시간이 읽기 속도에 큰 비중을 차지한다. 그래서 db의 성능은 디스크 헤더의 위치 이동 없이 얼마나 많은 데이터를 한 번에 처리할 수 있느냐가 중요하다.
 
-그렇기 때문에 순차 I/O 가 랜덤 I/O 보다 빠를 수 밖에 없다. 하지만 현실에서는 대부분의 I/O 작업이 랜덤 I/O 이다. 랜덤 I/O 를 순차 I/O 로 바꿔서 실행할 수는 없을까? 이러한 생각에서부터 시작되는 데이터베이스 쿼리 튜닝은 랜덤 I/O 자체를 줄여주는 것이 목적이라고 할 수 있다.
+그렇기 때문에 순차 I/O 가 랜덤 I/O 보다 빠를 수 밖에 없다. 하지만 현실에서는 대부분의 I/O 작업이 랜덤 I/O 이다. 데이터베이스 쿼리 튜닝은 "랜덤 I/O 를 순차 I/O 로 바꿔서 실행할 수는 없을까?" 라는 생각에서부터 시작된다.
 
 [위로](#Database)
 
@@ -57,46 +53,23 @@
 
 ### Normalization
 
-한 릴레이션에 여러 엔티티의 애트리뷰트들을 혼합하게 되면 정보가 중복 저장되며, 저장 공간을 낭비하게 된다. 또 중복된 정보로 인해 `갱신 이상`이 발생하게 된다. 동일한 정보를 한 릴레이션에는 변경하고, 나머지 릴레이션에서는 변경하지 않은 경우 어느 것이 정확한지 알 수 없게 되는 것이다. 이러한 문제를 해결하기 위한 것이 normalization이다.
+중복을 최소화하게 데이터를 구조화하는 프로세스를 **정규화**라고 한다. 이는 함수적 종속으로 정의되는데, X 와 Y가 속성집합일 때, X 값이 Y 값을 유일하게 결정한다면 X -> Y 라는 함수적 종속성이 있다고 한다. 정규화 형식으로는 1NF, 2NF, 3NF, BCNF등이 있다.
 
-### Functional Dependency
+![normalization](./img/normalization.jpeg)
+![bcnf](./img/bcnf.jpeg)
 
-X 와 Y 를 임의의 애트리뷰트 집합이라고 할 때, X 의 값이 Y 의 값을 유일하게(unique) 결정한다면 "X 는 Y 를 함수적으로 결정한다". 이것을 함수적 종속성이라고 부른다.
+- 1NF : 릴레이션에 속한 모든 속성의 도메인이 원자 값으로만 구성
+  - 해결방안 : 그냥 속성에 ,같은거 안넣음
+- 2NF : 1NF이면서 기본키의 일부에 종족적인 속성이 없는 경우 (eg. (X,Y)->Z일 때 X->Z가 없는 경우)
+  - 해결방안 : 기본키의 일부에 종속적인 속성들을 다른 테이블로 분리
+- 3NF
+  - 2NF이면서 이행적 함수 종속이 없는 경우를 말하는데 이행적 함수 종속(Transitive Functional Dependency)이란 X가 primary key일 때 X->Y이고, Y->Z라서 X->Z가 되는 경우를 의미. 3NF는 여기서 Y가 Primary attribute인 경우는 제외
+  - 해결방안 : Y->Z를 다른 테이블로 분리
+- BCNF : 3NF에서 Y가 primary attribute일 경우를 제외한다는 조건을 뺌
 
-### 1NF
-
-애트리뷰트의 도메인이 오직 `원자값`만을 포함하고, 튜플의 모든 애트리뷰트가 도메인에 속하는 하나의 값을 가져야 한다. 즉, 복합 애트리뷰트, 다중값 애트리뷰트, 중첩 릴레이션 등 비 원자적인 애트리뷰트들을 허용하지 않는 릴레이션 형태를 말한다.
-
-### 2NF
-
-모든 비주요 애트리뷰트들이 주요 애트리뷰트에 대해서 --완전 함수적 종속이면-- 제 2 정규형을 만족한다고 볼 수 있다. 완전 함수적 종속이란 `X -> Y` 라고 가정했을 때, X 의 어떠한 애트리뷰트라도 제거하면 더 이상 함수적 종속성이 성립하지 않는 경우를 말한다. 즉, 키가 아닌 열들이 각각 후보키에 대해 결정되는 릴레이션 형태를 말한다.
-
-### 3NF
+정규화를 하게 되면 중복 제거의 장점이 있으나 query를 해야 할 때 join을 해야 하는 단점이 있다. 그래서 query시 성능 저하가 심하게 발생하면 De-normalization을 수행하기도 한다.
 
 어떠한 비주요 애트리뷰트도 기본키에 대해서 --이행적으로 종속되지 않으면-- 제 3 정규형을 만족한다고 볼 수 있다. 이행 함수적 종속이란 `X - >Y`, `Y -> Z`의 경우에 의해서 추론될 수 있는 `X -> Z`의 종속관계를 말한다. 즉, 비주요 애트리뷰트가 비주요 애트리뷰트에 의해 종속되는 경우가 없는 릴레이션 형태를 말한다.
-
-### BCNF
-
-Boyce-Codd
-
-여러 후보 키가 존재하는 릴레이션에 해당하는 정규화 내용이다. 복잡한 식별자 관계에 의해 발생하는 문제를 해결하기 위해 제 3 정규형을 보완하는데 의미가 있다. 비주요 애트리뷰트가 후보키의 일부를 결정하는 분해하는 과정을 말한다.
-
-_각 정규형은 그의 선행 정규형보다 더 엄격한 조건을 갖는다._
-
-- 모든 제 2 정규형 릴레이션은 제 1 정규형을 갖는다.
-- 모든 제 3 정규형 릴레이션은 제 2 정규형을 갖는다.
-- 모든 BCNF 정규형 릴레이션은 제 3 정규형을 갖는다.
-
-수많은 정규형이 있지만 관계 데이터베이스 설계의 목표는 각 릴레이션이 3NF(or BCNF)를 갖게 하는 것이다.
-
-### Pros and cons of normalization
-
-- props : 삽입, 수정, 삭제 등의 각종 이상현상(Anomaly) 제거
-- cons : Query시 Join연산의 증가
-
-### De-normalization
-
-디스크 I/O 량이 많아서 조회 시 성능이 저하되거나, 테이블끼리의 경로가 너무 멀어 조인으로 인한 성능 저하가 예상되거나, 칼럼을 계산하여 조회할 때 성능이 저하될 것이 예상되는 경우 반정규화를 수행하게 된다. 일반적으로 조회에 대한 처리 성능이 중요하다고 판단될 때 부분적으로 반정규화를 고려하게 된다.
 
 ### Entity-Relational Model
 
@@ -152,75 +125,128 @@ _결론부터 말하자면 그렇지 않다._
 
 [위로](#Database)
 
+## Join
+
+### Cross Join
+
+Cartesin Product
+
+```sql
+-- explicit notation
+SELECT *
+FROM employees
+  CROSS JOIN dept_emp;
+
+-- implicit notation
+SELECT *
+FROM employees, dept_emp;
+```
+
+![cross-join](./img/cross-join.png)
+
+### Natural Join
+
+같은 이름을 가진 컬럼은 한 번만 추출
+
+```sql
+-- 명시적 표현법 (explicit notation)
+SELECT *
+FROM employees NATURAL JOIN dept_emp;
+```
+
+![natural-join](./img/natural-join.png)
+
+### Inner Join
+
+조건문을 만족시키는 행만 표시
+
+```sql
+-- explicit notation
+SELECT *
+FROM employees
+  INNER JOIN dept_emp
+    ON employees.emp_no = dept_emp.emp_no;
+
+-- implicit notation
+SELECT *
+FROM employees, dept_emp
+WHERE employees.emp_no = dept_emp.emp_no;
+```
+
+![inner-join](./img/inner-join.png)
+
+### Outer Join
+
+조건문에 만족시키지 않는 행도 표시
+
+#### Left Outer Join
+
+```sql
+SELECT *
+FROM table1
+  LEFT OUTER JOIN table2
+    ON table1.n = table2.n;
+```
+
+![left-outer-join](./img/left-outer-join.png)
+
+#### Right Outer Join
+
+```sql
+SELECT *
+FROM table1
+  RIGHT OUTER JOIN table2
+    ON table1.n = table2.n;
+```
+
+![right-outer-join](./img/right-outer-join.png)
+
+### Inner Join vs Outer Join
+
+Innter Join은 조건문에 만족시키는 것만 보여주는 반면에 Outer Join은 만족시키지 않는 부분도 보여줌 (기준에 따라, left, right)
+
+[위로](#database)
+
 ## Transaction
 
-트랜잭션은 작업의 --완전성-- 을 보장해주는 것이다. 즉, 논리적인 작업 셋을 모두 완벽하게 처리하거나 또는 처리하지 못할 경우에는 원 상태로 복구해서 작업의 일부만 적용되는 현상이 발생하지 않게 만들어주는 기능이다. 사용자의 입장에서는 작업의 논리적 단위로 이해를 할 수 있고 시스템의 입장에서는 데이터들을 접근 또는 변경하는 프로그램의 단위가 된다.
+All or nothing. 작업의 완전성을 보장해주는 것. 작업 셋을 모두 완벽하게 처리하거나 또는 처리하지 못할 경우에는 원 상태로 복구해서 일부만 적용되는 현상이 발생하지 않게 방지. 성질 (ACID)가 있다.
 
-### Lock on transaction
+- Atomicity(원자성) : 만약 트랜잭션 중간에 어떠한 문제가 발생한다면 트랜잭션에 해당하는 어떠한 작업 내용도 수행되어서는 안된다.
+- Consistency(일관성) : 트랜잭션이 완료된 다음의 상태에서도 트랜잭션이 일어나기 전의 상황과 동일하게 데이터의 일관성을 보장해야 한다.
+- Isolation(고립성) : 각각의 트랜잭션은 서로 간섭없이 독립적으로 수행되어야 한다.
+- Durability(지속성) : 트랜잭션이 정상적으로 종료된 다음에는 영구적으로 데이터베이스에 작업의 결과가 저장되어야 한다.
 
-잠금(Lock)과 트랜잭션은 서로 비슷한 개념 같지만 사실 잠금은 동시성을 제어하기 위한 기능이고 트랜잭션은 데이터의 정합성을 보장하기 위한 기능이다. 잠금은 여러 커넥션에서 동시에 동일한 자원을 요청할 경우 순서대로 한 시점에는 하나의 커넥션만 변경할 수 있게 해주는 역할을 한다. 여기서 자원은 레코드나 테이블을 말한다. 이와는 조금 다르게 트랜잭션은 꼭 여러 개의 변경 작업을 수행하는 쿼리가 조합되었을 때만 의미있는 개념은 아니다. 트랜잭션은 하나의 논리적인 작업 셋 중 하나의 쿼리가 있든 두 개 이상의 쿼리가 있든 관계없이 논리적인 작업 셋 자체가 100% 적용되거나 아무것도 적용되지 않아야 함을 보장하는 것이다. 예를 들면 HW 에러 또는 SW 에러와 같은 문제로 인해 작업에 실패가 있을 경우, 특별한 대책이 필요하게 되는데 이러한 문제를 해결하는 것이다.
+![transaction-status](./img/transaction-status.png)
 
-### Properties of transaction
-
-- 원자성(Atomicity) : 만약 트랜잭션 중간에 어떠한 문제가 발생한다면 트랜잭션에 해당하는 어떠한 작업 내용도 수행되어서는 안되며 아무런 문제가 발생되지 않았을 경우에만 모든 작업이 수행되어야 한다.
-- 일관성(Consistency) : 트랜잭션이 완료된 다음의 상태에서도 트랜잭션이 일어나기 전의 상황과 동일하게 데이터의 일관성을 보장해야 한다.
-- 고립성(Isolation) : 각각의 트랜잭션은 서로 간섭없이 독립적으로 수행되어야 한다.
-- 지속성(Durability) : 트랜잭션이 정상적으로 종료된 다음에는 영구적으로 데이터베이스에 작업의 결과가 저장되어야 한다.
-
-### Transaction Status
-
-![트랜잭션 상태 다이어그램](/Database/images/transaction-status.png)
-
-- Active : 트랜잭션의 활동 상태. 트랜잭션이 실행중이며 동작중인 상태
-- Failed : 트랜잭션 실패 상태. 트랜잭션이 더이상 정상적으로 진행 할 수 없는 상태
-- Partial Committed : 트랜잭션의 `Commit` 명령이 도착한 상태. 트랜잭션의 `commit`이전 `sql`문이 수행되고 `commit`만 남은 상태
+- Active : 활동 상태
+- Failed : 실패 상태
+- Partial Committed
+  - 트랜잭션의 `Commit` 명령이 도착한 상태. `commit`이전 `sql`문이 수행되고 `commit`만 남은 상태
   - `Commit`을 문제없이 수행할 수 있으면 `Committed` 상태로 전이, 오류가 발생하면 `Failed` 상태가 됨
-- Committed : 트랜잭션 완료 상태. 트랜잭션이 정상적으로 완료된 상태
-- Aborted : 트랜잭션이 취소 상태. 트랜잭션이 취소되고 트랜잭션 실행 이전 데이터로 돌아간 상태
+- Committed : 완료 상태
+- Aborted : 취소 상태. 트랜잭션이 취소되고 트랜잭션 실행 이전 데이터로 돌아간 상태
 
-### 트랜잭션을 사용할 때 주의할 점
+All or nothing이라는 좋은 점이 있으나 db collection의 수는 한정되어 있기때문에 전부 tx롤 해버리면 collection풀이 남아나질 않아서 성능이 느려지게 될 수 있음. 트렌젝션간 deadlock도 발행할 수 있음 (서로가 서로가 소유하고 있는 lock을 획득하려고 하고 있음)
 
-Connection의 갯수는 한정되어 있기 때문에 꼭 필요한 경우에만 사용하는 것이 좋다. 다 Transaction해버리면 transaction처리를 기다려서 동안 collection이 남아나질 않게 된다.
+### Lock vs Transaction
 
-### Deadlock
+Lock은 동시성을 제어하기 위한 기술, Transaction은 데이터의 정합성을 보장하기 위한 기술임. Lock같은 경우 여러 connection이 들어왔을 때 한개의 connection만 일을 하는 것을 일컷는데, transaction은 어떠한 논리적인 행위가 전부 수행되거나 아니면 하나도 수행되지 않아야 하는 것에 집중?한 기술임.
 
-복수의 트랜잭션을 사용하다보면 교착상태가 일어날수 있다. 교착상태란 두 개 이상의 트랜잭션이 특정 자원(테이블 또는 행)의 잠금(Lock)을 획득한 채 다른 트랜잭션이 소유하고 있는 잠금을 요구하면 아무리 기다려도 상황이 바뀌지 않는 상태가 된다.
+#### Deadlock Example
 
-#### What makes Deadlock
+![deadlock](./img/deadlock.png)
 
-교착상태의 예 (MySQL)
-
-MySQL [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control)에 따른 특성 때문에 트랜잭션에서 갱신 연산(Insert, Update, Delete)를 실행하면 잠금을 획득한다. (기본은 행에 대한 잠금)
-
-![classic deadlock 출처: https://darkiri.wordpress.com/tag/sql-server/](/Database/images/deadlock.png)
-
-트랜잭션 1이 테이블 B의 첫번째 행의 잠금을 얻고 트랜잭션 2도 테이블 A의 첫번째 행의 잠금을 얻었다고 하자.
+Transaction 1이 B table에 insert하고 Transaction 2가 A table에 insert를 침. 이 때 Tx1은 B에 대한 lock을 소유, Tx2는 A에 대한 Lock을 소유함. 그 후 Transaction 1이 A table에 insert하고 Transaction 2가 B table에 insert하면 lock을 얻지 못해서 deadlock걸림
 
 ```SQL
-Transaction 1> create table B (i1 int not null primary key) engine = innodb;
-Transaction 2> create table A (i1 int not null primary key) engine = innodb;
-
 Transaction 1> start transaction; insert into B values(1);
 Transaction 2> start transaction; insert into A values(1);
-```
 
-트랜잭션을 commit 하지 않은채 서로의 첫번째 행에 대한 잠금을 요청하면
-
-```SQL
 Transaction 1> insert into A values(1);
 Transaction 2> insert into B values(1);
+
 ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
 ```
-
-Deadlock 이 발생한다. 일반적인 DBMS는 교착상태를 독자적으로 검출해 보고한다.
-
-#### Reducing Deadlock
-
-- 트랜잭션을 자주 커밋한다.
-- 정해진 순서로 테이블에 접근한다. 위에서 트랜잭션 1 이 테이블 B -> A 의 순으로 접근했고,
-트랜잭션 2 는 테이블 A -> B의 순으로 접근했다. 트랜잭션들이 동일한 테이블 순으로 접근하게 한다.
-- 읽기 잠금 획득 (SELECT ~ FOR UPDATE)의 사용을 피한다.
-- 한 테이블의 복수 행을 복수의 연결에서 순서 없이 갱신하면 교착상태가 발생하기 쉽다, 이 경우에는 테이블 단위의 잠금을 획득해 갱신을 직렬화 하면 동시성을 떨어지지만 교착상태를 회피할 수 있다.
 
 [위로](#Database)
 
@@ -289,6 +315,20 @@ eg. MongoDB
 
 ## References
 
+Common
+
 https://github.com/JaeYeopHan/Interview_Question_for_Beginner/blob/master/Database
 
+Index
+
 https://chartworld.tistory.com/18
+
+Normalization
+
+https://yaboong.github.io/database/2018/03/09/database-normalization-1/
+
+https://magok-leaders-coding.tistory.com/4
+
+Join
+
+https://advenoh.tistory.com/23
