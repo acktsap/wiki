@@ -3,13 +3,9 @@
 - [Operating System](#operating-system)
   - [User Mode vs Kernal Mode](#user-mode-vs-kernal-mode)
   - [Process Management](#process-management)
-    - [Process](#process)
-      - [Process state](#process-state)
-      - [Process in memory](#process-in-memory)
-      - [Process Control Block](#process-control-block)
-      - [Interprocess Communication](#interprocess-communication)
-    - [Thread](#thread)
     - [Process vs Thread](#process-vs-thread)
+      - [Process state](#process-state)
+      - [Process Control Block](#process-control-block)
     - [Process Synchronization](#process-synchronization)
       - [Critical Section](#critical-section)
       - [Critical Section Problem](#critical-section-problem)
@@ -47,8 +43,7 @@
     - [Cache Locality](#cache-locality)
       - [Caching line](#caching-line)
   - [Etc](#etc)
-    - [Blocking vs Non-Blocking](#blocking-vs-non-blocking)
-    - [Synchronous vs Asynchronous](#synchronous-vs-asynchronous)
+    - [Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming](#blocking--non-blocking-io-synchronous--asynchronous-programming)
   - [References](#references)
 
 ---
@@ -63,9 +58,15 @@
 
 ## Process Management
 
-### Process
+### Process vs Thread
 
-프로세스는 실행 중인 프로그램으로 디스크로부터 메모리에 적재되어 CPU, Memory 등 Resource를 할당을 받을 수 있는 것을 말한다.
+![process-in-memory](./img/process-in-memory.png)
+
+![thread in process](./img/thread-in-process.png)
+
+Process는 CPU로부터 Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. Thread는 Process내의 자원을 공유하고 Context switching할 때 cache를 비울 필요가 없어서 MultiProcess보다 더 빠름. 다만 공유자원에 대한 동기화 문제가 있음.
+
+Memory의 차원에서는 Process는 heap (아래부터 참) data (위부터 참), stack 등이 있음. Thread의 경우 기반 프로세스의 heap, data영역 등은 공유하고 stack, register, program counter등은 따로 가짐.
 
 #### Process state
 
@@ -77,38 +78,16 @@
 - waiting
 - terminated
 
-#### Process in memory
-
-![process-in-memory](./img/process-in-memory.png)
-
-- Memory의 위에서 부터 차오르는 stack
-- Memory의 아래서부터 부터 차오르는 heap
-- 전역 변수 등을 저장하는 data section
-
 #### Process Control Block
 
 ![process-control-block](./img/process-control-block.png)
 
 - Process number (PID)
-- Program counter : 다음 명령어의 주소를 저장
 - Process state : new, ready, running, waiting, terminated
+- Program counter : 다음 명령어의 주소를 저장
 - Register : 값 저장소
 
-PCB 는 프로세스에 대한 정보를 저장. Context switching이 발생할 때 process의 정보를 저장. 다시 CPU 를 할당받게 되면 PCB의 내용을 불러와서 이전에 하던 작업을 재개.
-
-#### Interprocess Communication
-
-TODO
-
-### Thread
-
-![thread in process](./img/thread-in-process.png)
-
-프로세스의 실행 단위. 한 프로세스 내에서 동작되는 여러 실행 흐름으로 프로세스 내의 주소 공간이나 자원을 공유할 수 있다. Thread ID, Program counter, register, stack 등으로 구성되며 같은 프로세스에 속한 다른 스레드와 자원을 공유할 수 있음. 이를 통해 작업 수행 능력을 향상 -> MultiThreading
-
-### Process vs Thread
-
-Process는 CPU로부터 Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. Thread는 Process내의 자원을 공유하고 Context switching할 때 cache를 비울 필요가 없어서 MultiProcess보다 더 빠름. 다만 공유자원에 대한 동기화 문제가 있음.
+프로세스에 대한 정보를 저장. Context switching이 발생할 때 process의 정보를 저장하고 다시 CPU 를 할당받게 되면 PCB의 내용을 불러와서 이전에 하던 작업을 재개하는 식으로 사용됨.
 
 [위로](#Operating-System)
 
@@ -496,28 +475,34 @@ Segmentation
 
 ## Etc
 
-### Blocking vs Non-Blocking
+### Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming
 
 ![blocking-io](./img/blocking-io.png)
 
 ![non-blocking-io](./img/non-blocking-io.png)
 
-애플리케이션 실행 시 운영체제 대기 큐에 들어가면서 요청에 대한 system call이 완료된 후에 응답을 보낼 경우 blocking. 애플리케이션 실행 시 운영체제 대기 큐에 들어가지 않고 data 수신 여부와 관계없이 바로 응답을 보낼 경우 non-blocking. non-blocking의 경우 pooling으 하면
-
-I/O작업은 User Level(application)에서 직접 수행할 수 없음. I/O작업은 Kernel Level(OS)에서 일어나는 과정. I/O 작업을 처리하기 위해 User Level에 있던 Application이 system call을 함. 이 때 context-switching 이 발생. Kernel Level에서 I/O 작업이 끝나고 데이터를 반환 후 스레드에 걸렸던 block이 풀린다.
-
-### Synchronous vs Asynchronous
-
 ![asynchronous-io](./img/asynchronous-io.png)
 
-메소드를 실행시킴과 `동시에` 반환 값이 기대되는 경우를 동기라고 표현하고 그렇지 않은 경우에 대해서 비동기라고 표현한다. 동시에라는 말은 실행되었을 때 값이 반환되기 전까지는 `blocking`되어 있다는 것을 의미한다. 비동기의 경우, `blocking`되지 않고 event queue에 넣거나 백그라운드 스레드에게 해당 task 를 위임하고 바로 다음 코드를 실행하기 때문에 기대되는 값이 바로 반환되지 않는다.
+애플리케이션 실행 시 Kernal에 I/O를 요청한 후 운영체제 대기 큐에 들어가면서 system call이 완료된 후에 응답을 보낼 경우 blocking. 대기 큐에 들어가지 않고 바로 응답을 보낼 경우 non-blocking. non-blocking의 경우 I/O가 완료된 후 해야 하는 작업이 있는 경우 pooling을 하던지 callback을 넣던지 해야 함.
+
+Synchronous, asynchronous를 이야기 할 때는, Return시간을 어떤 시간에? 를 생각해야 함. 리턴 시간과 결과를 얻는 시간이 같으면 Synchronous, 시간이 다르면 Asynchronous이다.
+
+Asynchronous programming는 Non-blocking하고는 관점이 다름. Asynchronous programming을 위한 재료로써 Non-blockin I/O가 활용될 수 있으나 필수조건은 아님. I/O를 다른 스레드에 위임하고 그 스레드에서는 Blocking I/O를 하더라도 Asynchronous programming을 하는 것임.
 
 [위로](#Operating-System)
 
 ## References
 
-[Interview question](https://github.com/JaeYeopHan/Interview_Question_for_Beginner/tree/master/OS)
+Basic
 
-[os book](http://os-book.com/OS9/slide-dir/index.html)
+https://github.com/JaeYeopHan/Interview_Question_for_Beginner/tree/master/OS
 
-[blocking, non-blocking, synchronous, Asynchronous](http://asfirstalways.tistory.com/348)
+OS book
+
+http://os-book.com/OS9/slide-dir/index.html
+
+blocking, non-blocking, synchronous, Asynchronous
+
+http://asfirstalways.tistory.com/348
+
+https://tech.peoplefund.co.kr/2017/08/02/non-blocking-asynchronous-concurrency.html

@@ -41,7 +41,7 @@ public class DequeImpl {
      * Not synchronized. Wrapper is {@link Collections#synchronizedList
      * Collections.synchronizedList}.
      */
-    List<Integer> linkedList = new LinkedList<>(data);
+    Deque<Integer> linkedList = new LinkedList<>(data);
     System.out.println("LinkedList: " + linkedList);
   }
 

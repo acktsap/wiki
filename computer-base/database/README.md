@@ -22,10 +22,11 @@
       - [Left Outer Join](#left-outer-join)
       - [Right Outer Join](#right-outer-join)
     - [Inner Join vs Outer Join](#inner-join-vs-outer-join)
-  - [Transaction](#transaction)
+  - [Usage](#usage)
+    - [Transaction](#transaction)
     - [Lock vs Transaction](#lock-vs-transaction)
-      - [Deadlock Example](#deadlock-example)
-    - [Statement vs PrepareStatement](#statement-vs-preparestatement)
+    - [Statement vs PreparedStatement](#statement-vs-preparedstatement)
+    - [Replication vs Clustering](#replication-vs-clustering)
   - [NoSQL](#nosql)
     - [CAP Theorm & NoSQL](#cap-theorm--nosql)
       - [1. Consistency](#1-consistency)
@@ -51,6 +52,8 @@
 
 ## Logical Design
 
+스키마를 논리적으로 설계하는 과정
+
 ### Normalization
 
 중복을 최소화하게 데이터를 구조화하는 프로세스를 **정규화**라고 한다. 이는 함수적 종속으로 정의되는데, X 와 Y가 속성집합일 때, X 값이 Y 값을 유일하게 결정한다면 X -> Y 라는 함수적 종속성이 있다고 한다. 정규화 형식으로는 1NF, 2NF, 3NF, BCNF등이 있다.
@@ -69,13 +72,15 @@
 
 정규화를 하게 되면 중복 제거의 장점이 있으나 query를 해야 할 때 join을 해야 하는 단점이 있다. 그래서 query시 성능 저하가 심하게 발생하면 De-normalization을 수행하기도 한다.
 
-어떠한 비주요 애트리뷰트도 기본키에 대해서 --이행적으로 종속되지 않으면-- 제 3 정규형을 만족한다고 볼 수 있다. 이행 함수적 종속이란 `X - >Y`, `Y -> Z`의 경우에 의해서 추론될 수 있는 `X -> Z`의 종속관계를 말한다. 즉, 비주요 애트리뷰트가 비주요 애트리뷰트에 의해 종속되는 경우가 없는 릴레이션 형태를 말한다.
-
 ### Entity-Relational Model
+
+![batch-schema](./img/batch-schema.png)
 
 [위로](#Database)
 
 ## Physical Design
+
+스키마를 물리적으로 구현하는 과정
 
 ### Index
 
@@ -207,7 +212,9 @@ Innter Join은 조건문에 만족시키는 것만 보여주는 반면에 Outer 
 
 [위로](#database)
 
-## Transaction
+## Usage
+
+### Transaction
 
 All or nothing. 작업의 완전성을 보장해주는 것. 작업 셋을 모두 완벽하게 처리하거나 또는 처리하지 못할 경우에는 원 상태로 복구해서 일부만 적용되는 현상이 발생하지 않게 방지. 성질 (ACID)가 있다.
 
@@ -224,17 +231,9 @@ All or nothing. 작업의 완전성을 보장해주는 것. 작업 셋을 모두
   - 트랜잭션의 `Commit` 명령이 도착한 상태. `commit`이전 `sql`문이 수행되고 `commit`만 남은 상태
   - `Commit`을 문제없이 수행할 수 있으면 `Committed` 상태로 전이, 오류가 발생하면 `Failed` 상태가 됨
 - Committed : 완료 상태
-- Aborted : 취소 상태. 트랜잭션이 취소되고 트랜잭션 실행 이전 데이터로 돌아간 상태
+- Aborted : 취소 상태. 트랜잭션이 취소되고 Rollback된 상태
 
-All or nothing이라는 좋은 점이 있으나 db collection의 수는 한정되어 있기때문에 전부 tx롤 해버리면 collection풀이 남아나질 않아서 성능이 느려지게 될 수 있음. 트렌젝션간 deadlock도 발행할 수 있음 (서로가 서로가 소유하고 있는 lock을 획득하려고 하고 있음)
-
-### Lock vs Transaction
-
-Lock은 동시성을 제어하기 위한 기술, Transaction은 데이터의 정합성을 보장하기 위한 기술임. Lock같은 경우 여러 connection이 들어왔을 때 한개의 connection만 일을 하는 것을 일컷는데, transaction은 어떠한 논리적인 행위가 전부 수행되거나 아니면 하나도 수행되지 않아야 하는 것에 집중?한 기술임.
-
-#### Deadlock Example
-
-![deadlock](./img/deadlock.png)
+All or nothing이라는 좋은 점이 있으나 db collection의 수는 한정되어 있기때문에 전부 tx롤 해버리면 collection풀이 남아나질 않아서 성능이 느려지게 될 수 있음. transaction 과정간 lock을 거는데 서로가 서로가 소유하고 있는 lock을 획득하려고 하면 deadlock도 발행할 수 있음
 
 Transaction 1이 B table에 insert하고 Transaction 2가 A table에 insert를 침. 이 때 Tx1은 B에 대한 lock을 소유, Tx2는 A에 대한 Lock을 소유함. 그 후 Transaction 1이 A table에 insert하고 Transaction 2가 B table에 insert하면 lock을 얻지 못해서 deadlock걸림
 
@@ -248,15 +247,19 @@ Transaction 2> insert into B values(1);
 ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
 ```
 
-[위로](#Database)
+### Lock vs Transaction
 
-### Statement vs PrepareStatement
+Lock은 동시성을 제어하기 위한 기술, Transaction은 데이터의 정합성을 보장하기 위한 기술임. Lock같은 경우 여러 connection이 들어왔을 때 한개의 connection만 일을 하는 것을 일컷는데, transaction은 어떠한 논리적인 행위가 전부 수행되거나 아니면 하나도 수행되지 않아야 하는 것에 집중한 기술임. Transaction을 수행할 때 lock을 걸기도 함.
 
-우선 속도 면에서 `PreparedStatement`가 빠르다고 알려져 있다. 이유는 쿼리를 수행하기 전에 이미 쿼리가 컴파일 되어 있으며, 반복 수행의 경우 프리 컴파일된 쿼리를 통해 수행이 이루어지기 때문이다.
+### Statement vs PreparedStatement
 
-`PreparedStatement`에는 보통 변수를 설정하고 바인딩하는 `static sql`이 사용되고 `Statement`에서는 쿼리 자체에 조건이 들어가는 `dynamic sql`이 사용된다. `PreparedStatement`가 파싱 타임을 줄여주는 것은 분명하지만 `static sql`을 사용하는데 따르는 퍼포먼스 저하를 고려하지 않을 수 없다.
+Statement는 매번 컴파일을 하는 반면에 PreparedStatement는 한번만 컴파일을 한 후 값만 변경해서 재사용 하는 식임. 그래서 PreparsedStatement가 더 빠르고 `SQL Injection`도 방지해줘서 쓰는 것이 권장됨.
 
-하지만 성능을 고려할 때 시간 부분에서 가장 큰 비중을 차지하는 것은 테이블에서 레코드(row)를 가져오는 과정이고 SQL 문을 파싱하는 시간은 이 시간의 10 분의 1 에 불과하다. 그렇기 때문에 `SQL Injection` 등의 문제를 보완해주는 `PreparedStatement`를 사용하는 것이 옳다.
+[위로](#database)
+
+### Replication vs Clustering
+
+둘다 이중화이긴 한데 Replication은 Master-slave model로 비동기식으로 단순 복제를 하는 반면에 Clustering은 동기식으로 서로의 데이터를 복제한다. Replication은 Clustering에 비해 복제 속도는 빠르지만 master가 죽었을 때 자동 failover기능이 없어서 직접 failover를 해서 서비스가 멈춰있는 시간이 있다. Clustering은 자동 failover기능이 있지만 replication에 비해 데이터를 동기화 하는데 시간이 더 걸린다.
 
 [위로](#database)
 

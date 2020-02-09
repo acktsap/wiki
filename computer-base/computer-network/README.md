@@ -1,196 +1,172 @@
 # Computer Network
 
 - [Computer Network](#computer-network)
-  - [What is Computer Network](#What-is-Computer-Network)
-  - [Application Layer](#Application-Layer)
-    - [GET vs POST](#GET-vs-POST)
-    - [HTTPS](#HTTPS)
-    - [Socket](#Socket)
-    - [DNS](#DNS)
-  - [Transport Layer](#Transport-Layer)
-    - [TCP 3 way handshake](#TCP-3-way-handshake)
-    - [TCP vs UDP](#TCP-vs-UDP)
-  - [Network Layer](#Network-Layer)
-    - [Router](#Router)
-    - [IP](#IP)
-  - [Data Link, Physical Layer](#Data-Link-and-Physical-Layer)
-    - [Switch](#Switch)
-    - [LAN](#LAN)
-    - [WireLess](#WireLess)
-  - [Flow of Web](#Flow-of-web)
-
-  - [TCP와 UDP의 비교](#tcp와-udp의-비교)
-  - [HTTP 와 HTTPS](#http와-https)
-    - HTTP 의 문제점들
-  - [DNS Round Robin 방식](#dns-round-robin-방식)
-  - [웹 통신의 큰 흐름](#웹-통신의-큰-흐름)
-
-[뒤로](https://github.com/JaeYeopHan/for_beginner)
+  - [What is Computer Network](#what-is-computer-network)
+  - [OSI 7 Layer vs TCP/IP Layer](#osi-7-layer-vs-tcpip-layer)
+  - [Application Layer](#application-layer)
+    - [GET vs POST](#get-vs-post)
+    - [HTTPS](#https)
+    - [Domain](#domain)
+    - [Load Balancing](#load-balancing)
+    - [Keep Alive on HTTP](#keep-alive-on-http)
+  - [Transport Layer](#transport-layer)
+    - [TCP vs UDP](#tcp-vs-udp)
+    - [TCP 3 way handshaking](#tcp-3-way-handshaking)
+    - [TCP 4 way handshaking](#tcp-4-way-handshaking)
+    - [Keep Alive on TCP](#keep-alive-on-tcp)
+  - [Internet Layer](#internet-layer)
+    - [Router](#router)
+    - [Gateway](#gateway)
+  - [Network Interface Layer](#network-interface-layer)
+    - [Switch](#switch)
+  - [Web Flow](#web-flow)
+  - [References](#references)
 
 ## What is Computer Network
+
+서로 다른 노드간 서로 자원을 공유할 수 있게 해주는 디지털 망
+
+## OSI 7 Layer vs TCP/IP Layer
+
+![osi-7-layer](./img/osi-7-layer.jpeg)
+
+OSI 7 Layer (공식 표준)
+
+- Application Layer : 사용자에게 가장 가까운 계층. HTTP, FTP, SMTP 등이 있음
+- Presentational Layer : 데이터 표현이 상이한 응용 프로세스의 독립성을 제공하고 암호화함. JPEG, MPEG등이 있음
+- Session Layer : 어플리케이션간 세션을 관리하고 구축.
+- Transport Layer : 실제 데이터 전송. 오류 검출 및 복구와 흐름 제어를 제공. TCP, UDP등이 있음
+- Network Layer : 라우팅을 통해 Packet단위로 데이터를 전송. IP등이 있음.
+- DataLink Layer : 스위치 등의 장비를 통해 Frame단위로 데이터를 전송. MAC address를 가지고 통신
+- Physical Layer : 랜선, 허브 등을 통해 Bit를 전송.
+
+TCP/IP : de-facto standard (사실상 표준)
+
+- Application Layer : Application + Presentational + Session Layer of OSI 7 layer
+- Transport Layer : Transport Layer of OSI 7 layer
+- Internet Layer : Network Layer of OSI 7 layer
+- Network Interface Layer : DataLink + Physical Layer of OSI 7 layer
+
+[위로](#computer-network)
 
 ## Application Layer
 
 ### GET vs POST
 
-둘 다 HTTP 프로토콜을 이용해서 서버에 무엇인가를 요청할 때 사용하는 방식이다. 하지만 둘의 특징을 제대로 이해하여 기술의 목적에 맞게 알맞은 용도에 사용해야한다.
+둘다 HTTP request방법중 하나임.
 
-#### GET
+GET 방식은 요청하는 HTTP Request의 Header부분의 url에 데이터가 `?`식으로 담겨서 전송. 보통 정보를 조회할 때 사용함. 같은 요청에 대해서는 Browser단에서 cache를 해서 빠를 수 있음. But url에 담겨서 전송되기 때문에 크기가 제한적고 url에 정보가 다 드러나서 보안에 취약함.
 
-우선 GET 방식은 요청하는 데이터가 `HTTP Request Message`의 Header 부분의 url 에 담겨서 전송된다. 때문에 url 상에 `?` 뒤에 데이터가 붙어 request 를 보내게 되는 것이다. 이러한 방식은 url 이라는 공간에 담겨가기 때문에 전송할 수 있는 데이터의 크기가 제한적이다. 또 보안이 필요한 데이터에 대해서는 데이터가 그대로 url 에 노출되므로 `GET`방식은 적절하지 않다. (ex. password)
-
-#### POST
-
-POST 방식의 request 는 `HTTP Message의 Body` 부분에 데이터가 담겨서 전송된다. 때문에 바이너리 데이터를 요청하는 경우 POST 방식으로 보내야 하는 것처럼 데이터 크기가 GET 방식보다 크고 보안면에서 낫다.(하지만 보안적인 측면에서는 암호화를 하지 않는 이상 고만고만하다.)
-
-_그렇다면 이러한 특성을 이해한 뒤에는 어디에 적용되는지를 알아봐야 그 차이를 극명하게 이해할 수 있다._  
-우선 GET 은 가져오는 것이다. 서버에서 어떤 데이터를 가져와서 보여준다거나 하는 용도이지 서버의 값이나 상태 등을 변경하지 않는다. SELECT 적인 성향을 갖고 있다고 볼 수 있는 것이다. 반면에 POST 는 서버의 값이나 상태를 변경하기 위해서 또는 추가하기 위해서 사용된다.
-
-부수적인 차이점을 좀 더 살펴보자면 GET 방식의 요청은 브라우저에서 Caching 할 수 있다. 때문에 POST 방식으로 요청해야 할 것을 보내는 데이터의 크기가 작고 보안적인 문제가 없다는 이유로 GET 방식으로 요청한다면 기존에 caching 되었던 데이터가 응답될 가능성이 존재한다. 때문에 목적에 맞는 기술을 사용해야 하는 것이다.
+POST 방식은 HTTP Request의 Body 부분에 데이터가 담겨서 전송. 주로 서버의 값이나 상태를 변경하는데 사용됨. 크기의 제한이 GET 보다는 더 크고 보안면에서 당장 보이진 않으니 상대적으로 나음. But cache가 안됨. 기술적으로 어떤 header를 넣으면 cache가 되긴 하는데 browser단에서 막아버림. 에초에 그런 용로도 있는 method가 아니라서.
 
 ### HTTPS
 
-> HTTP 에 암호화와 인증, 그리고 완전성 보호를 더한 HTTPS
+HTTP로 통신하는 소켓 부분을 TLS로 덮어쓴 거임. TLS(Transport Layer Security)란 데이터를 전송하기 전에 암호화하고 복호화 하는 기술.
 
-`HTTPS`는 SSL 의 껍질을 덮어쓴 HTTP 라고 할 수 있다. 즉, HTTPS 는 새로운 애플리케이션 계층의 프로토콜이 아니라는 것이다. HTTP 통신하는 소켓 부분을 `SSL(Secure Socket Layer)` or `TLS(Transport Layer Security)`라는 프로토콜로 대체하는 것 뿐이다. HTTP 는 원래 TCP 와 직접 통신했지만, HTTPS 에서 HTTP 는 SSL 과 통신하고 --SSL 이 TCP 와 통신-- 하게 된다. SSL 을 사용한 HTTPS 는 암호화와 증명서, 안전성 보호를 이용할 수 있게 된다.
+1. 클라이언트가 서버에 접속하면 서버인증서(서버의 공개키를 인증기관이 전자서명으로 인증한 것)를 받음. 이때, 클라이언트 인증을 필요로 할 경우 클라이언트의 인증서를 전송.
+2. 클라이언트는 받은 서버 인증서를 분석(보통 브라우져에 있음)하여 신뢰할 수 있는 인증서인지를 검토한 후, 서버의 공개키를 추출
+3. 클라이언트가 대칭키로 사용할 임의의 메세지를 서버의 공개키로 암호화하여 서버에 전송
+4. 서버에서는 자신의 **개인키**로 복호화하여 그 키를 사용하여 대칭키 암호방식으로 메시지를 암호화하여 클라이언트와 통신
 
-HTTPS 의 SSL 에서는 공통키 암호화 방식과 공개키 암호화 방식을 혼합한 하이브리드 암호 시스템을 사용한다. 공통키를 공개키 암호화 방식으로 교환한 다음에 다음부터의 통신은 공통키 암호를 사용하는 방식이다.
+Plain HTTP에 비해 데이터가 안전해 진다는 장점이 있으나 암호화/복호화 하는데 비용이 더 들음.
 
-#### 모든 웹 페이지에서 HTTPS 를 사용하지 않는 이유
+### Domain
 
-평문 통신에 비해서 암호화 통신은 CPU 나 메모리 등 리소스가 많이 필요하다. 통신할 때마다 암호화를 하면 많은 리소스를 소비하기 때문에 서버 한 대당 처리할 수 있는 리퀘스트의 수가 줄어들게 된다. 그렇기 때문에 민감한 정보를 다룰 때만 HTTPS 에 의한 암호화 통신을 사용한다.
+숫자로만 이루어진 ip 는 사람들이 이해하거나 외우기가 어렵기에 편하게 쓰기위해 ip 별로 고유이름을 부여한 것. DNS서버에 domain name을 보내면 해당되는 ip를 알려줌.
+  
+### Load Balancing
 
-## DNS
+가상 ip를 통하여 하나의 서비스를 여러대의 서버가 분산 처리하는 메커니즘. 서버의 트래픽을 분산시켜 처리속도를 올릴 수 있고 서버의 장애가 발생하더라도 서비스가 중단되지 않는다는 장점이 있음. 하지만 부하를 어떤 식으로 나눌 것인가 등의 문제를 해결해야 함.
 
-### DNS round robin 방식
+- Round Robin : 각 서버에 돌아가면서 연결
+- Least Connection : 가장 적은 collection을 가지고 있는 서버에 연결
+- Weighted Least Connection : Least Connection의 서버에 가중치를 추가해서 가중치가 높은 서버에 먼저 분배
+- Response Time : 응답시간이 빠른 서버에 conneciton을 우선 분배
+- Hash : Hash 알고리즘을 적용하여 특정 서버에 connection을 연결한 클라이언트는 다음 연결에도 같은 서버에 연결. session관리에 편함.
 
-#### DNS Round Robin 방식의 문제점
+### Keep Alive on HTTP
 
-1.  서버의 수 만큼 공인 IP 주소가 필요함  
-    부하 분산을 위해 서버의 대수를 늘리기 위해서는 그 만큼의 공인 IP 가 필요하다.
+HTTP 는 비연결형 통신이기에 처리가 끝나면 연결을 해제함. 따라서 재요청시 커넥션을 다시 설정해야되는 비용이 큼. 이것을 해결하기 위해 Keepalive Timeout내에 재요청을하면 열려있는 커넥션을 통해 전송해서 커넥션을 재설정하는 비용을 줄임. But Keepalive timeout을 너무 길게 설정하면 keepalive하는 동안 다른 사용자가 연결을 못하게 될 수 있음.
 
-2.  균등하게 분산되지 않음  
-    모바일 사이트 등에서 문제가 될 수 있는데, 스마트폰의 접속은 캐리어 게이트웨이 라고 하는 프록시 서버를 경유 한다. 프록시 서버에서는 이름변환 결과가 일정 시간 동안 캐싱되므로 같은 프록시 서버를 경유 하는 접속은 항상 같은 서버로 접속된다. 또한 PC 용 웹 브라우저도 DNS 질의 결과를 캐싱하기 때문에 균등하게 부하분산 되지 않는다. DNS 레코드의 TTL 값을 짧게 설정함으로써 어느 정도 해소가 되지만, TTL 에 따라 캐시를 해제하는 것은 아니므로 반드시 주의가 필요하다.
-
-3.  서버가 다운되도 확인 불가  
-    DNS 서버는 웹 서버의 부하나 접속 수 등의 상황에 따라 질의결과를 제어할 수 없다. 웹 서버의 부하가 높아서 응답이 느려지거나 접속수가 꽉 차서 접속을 처리할 수 없는 상황인 지를 전혀 감지할 수가 없기 때문에 어떤 원인으로 다운되더라도 이를 검출하지 못하고 유저들에게 제공한다. 이때문에 유저들은 간혹 다운된 서버로 연결이 되기도 한다. DNS 라운드 로빈은 어디까지나 부하분산 을 위한 방법이지 다중화 방법은 아니므로 다른 S/W 와 조합해서 관리할 필요가 있다.
-
-_Round Robin 방식을 기반으로 단점을 해소하는 DNS 스케줄링 알고리즘이 존재한다. (일부만 소개)_
-
-#### weighted round-robin
-
-각각의 웹 서버에 가중치를 가미해서 분산 비율을 변경한다. 물론 가중치가 큰 서버일수록 빈번하게 선택되므로 처리능력이 높은 서버는 가중치를 높게 설정하는 것이 좋다.
-
-#### least-connection
-
-접속 클라이언트 수가 가장 적은 서버를 선택한다. 로드밸런서에서 실시간으로 connection 수를 관리하거나 각 서버에서 주기적으로 알려주는 것이 필요하다.
+[위로](#computer-network)
 
 ## Transport Layer
 
-### TCP 3-way-handshake
-
-http://asfirstalways.tistory.com/356
-
 ### TCP vs UDP
 
-#### UDP
+TCP (Transmission Control Protocol)은 데이터 전송의 신경을 쓰는 프로토콜로써 연결 지향형임. 흐름 제어 등을 통해 데이터 전송의 신뢰성을 보장할 수 있으나 그만큼 전송속도가 느리다는 단점이 있음.
 
-`UDP(User Datagram Protocol, 사용자 데이터그램 프로토콜)`는 --비연결형 프로토콜-- 이다. IP 데이터그램을 캡슐화하여 보내는 방법과 연결 설정을 하지 않고 보내는 방법을 제공한다. `UDP`는 흐름제어, 오류제어 또는 손상된 세그먼트의 수신에 대한 재전송을 --하지 않는다.-- 이 모두가 사용자 프로세스의 몫이다. `UDP`가 행하는 것은 포트들을 사용하여 IP 프로토콜에 인터페이스를 제공하는 것이다.
+UDP (User Datagram Protocol) 데이터를 일방적으로 보내는 것을 중요시 하는 프로토콜, 비연결형임. TCP보다 가볍고 빠르다는 장점이 있으나 데이터 전송의 신뢰성을 보장하지 않음.
 
-종종 클라이언트는 서버로 짧은 요청을 보내고, 짧은 응답을 기대한다. 만약 요청 또는 응답이 손실된다면, 클라이언트는 time out 되고 다시 시도할 수 있으면 된다. 코드가 간단할 뿐만 아니라 TCP 처럼 초기설정(initial setup)에서 요구되는 프로토콜보다 적은 메시지가 요구된다.
+### TCP 3 way handshaking
 
-`UDP`를 사용한 것들에는 `DNS`가 있다. 어떤 호스트 네임의 IP 주소를 찾을 필요가 있는 프로그램은, DNS 서버로 호스트 네임을 포함한 UDP 패킷을 보낸다. 이 서버는 호스트의 IP 주소를 포함한 UDP 패킷으로 응답한다. 사전에 설정이 필요하지 않으며 그 후에 해제가 필요하지 않다.
+![3-way-handshaking](./img/3-way-handshaking.png)
 
-#### TCP
+TCP에서 연결을 할 때 사용
 
-대부분의 인터넷 응용 분야들은 --신뢰성-- 과 --순차적인 전달-- 을 필요로 한다. UDP 로는 이를 만족시킬 수 없으므로 다른 프로토콜이 필요하여 탄생한 것이 `TCP`이다. `TCP(Transmission Control Protocol, 전송제어 프로토콜)`는 신뢰성이 없는 인터넷을 통해 종단간에 신뢰성 있는 --바이트 스트림을 전송-- 하도록 특별히 설계되었다. TCP 서비스는 송신자와 수신자 모두가 소켓이라고 부르는 종단점을 생성함으로써 이루어진다. TCP 에서 연결 설정(connection establishment)는 `3-way-handshake`를 통해 행해진다.
+초기 클라이언트 상태는 **CLOSED**, 서버의 상태는 **LISTEN**. 클라이언트가 서버에게 SYN(M) 신호를 보내고 **SYN_SENT**로 변경됨. SYN(M)을 받은 서버에서는 **SYN_RCV** 상태로 변경되고 ACK(M+1)와 함께 클라이언트의 포트도 열어달라는 요청으로 SYN(N)도 보냄. 둘다 받은 클라이언트는 **ESTABLISHED** 로 변경 응답신호로서 ACK(N + 1)를 서버에게 보낸다. ACK(N+1) 신호를 받은 서버는 **ESTABLISHED**상태가 됨.
 
-모든 TCP 연결은 전이중(full-duplex), 점대점(point to point)방식이다. 전이중이란 전송이 양방향으로 동시에 일어날 수 있음을 의미하며 점대점이란 각 연결이 정확히 2 개의 종단점을 가지고 있음을 의미한다. TCP 는 멀티캐스팅이나 브로드캐스팅을 지원하지 않는다.
+### TCP 4 way handshaking
 
-## HTTP와 HTTPS
+![4-way-handshaking](./img/4-way-handshaking.png)
 
-### HTTP 의 문제점
+TCP에서 연결을 해제할 때 사용
 
-- HTTP 는 평문 통신이기 때문에 도청이 가능하다.
-- 통신 상대를 확인하지 않기 때문에 위장이 가능하다.
-- 완전성을 증명할 수 없기 때문에 변조가 가능하다.
+A: 끊을게. B: 어 잠깐만 마저 하고, B: 어 다 했어 끊어. A : ok bye~
 
-_위 세 가지는 다른 암호화하지 않은 프로토콜에도 공통되는 문제점들이다._
+초기 서버와 클라이언트 상태는 **ESTABLISHED**. 클라이언트가 FIN을 서버에세 보내고 **FIN_WAIT_1** 상태로 변경.
+FIN 을 받은 서버는 **ClOSE_WAIT** 상태로 변경되고 ACK 를 보냄. ACK 를 받은 클라언트는 다시 **FIN_WAIT_2** 상태로 변경. 서버가 남은 데이터를 다 전송하고 나면 FIN 을 클라이언트에 보내고 **LAST_ACK** 상태로 변경. FIN 을 받은 클라이언트는 **TIME_WAIT** 상태로 변경되면서 응답으로 ACK 를 서버에 보내고, 자신은 일정시간이 지난 후 **CLOSED** 상태로 변경. 마지막으로 ACK를 받은 서버는 **CLOSED** 상태로 변경.
 
-### TCP/IP 는 도청 가능한 네트워크이다.
+### Keep Alive on TCP
 
-TCP/IP 구조의 통신은 전부 통신 경로 상에서 엿볼 수 있다. 패킷을 수집하는 것만으로 도청할 수 있다. 평문으로 통신을 할 경우 메시지의 의미를 파악할 수 있기 때문에 암호화하여 통신해야 한다.
+일정 시간동안 서로의 패킷 교환이 없을 경우 payload 가 없는 패킷을 주기적으로 보냄. 하나가 다운되었을 때 다른 하나가 열려있는 것을 정리하기 위해 사용.
 
-#### 보안 방법
+[위로](#computer-network)
 
-1.  통신 자체를 암호화  
-    `SSL(Secure Socket Layer)` or `TLS(Transport Layer Security)`라는 다른 프로토콜을 조합함으로써 HTTP 의 통신 내용을 암호화할 수 있다. SSL 을 조합한 HTTP 를 `HTTPS(HTTP Secure)` or `HTTP over SSL`이라고 부른다.
+## Internet Layer
 
-2.  콘텐츠를 암호화  
-    말 그대로 HTTP 를 사용해서 운반하는 내용인, HTTP 메시지에 포함되는 콘텐츠만 암호화하는 것이다. 암호화해서 전송하면 받은 측에서는 그 암호를 해독하여 출력하는 처리가 필요하다.
+### Router
 
-### 통신 상대를 확인하지 않기 때문에 위장이 가능하다.
+IP주소를 이용해 목적지 포트로 패킷을 전송하는 장치
 
-HTTP 에 의한 통신에는 상대가 누구인지 확인하는 처리는 없기 때문에 누구든지 리퀘스트를 보낼 수 있다. IP 주소나 포트 등에서 그 웹 서버에 액세스 제한이 없는 경우 리퀘스트가 오면 상대가 누구든지 무언가의 리스폰스를 반환한다. 이러한 특징은 여러 문제점을 유발한다.
+### Gateway
 
-1.  리퀘스트를 보낸 곳의 웹 서버가 원래 의도한 리스폰스를 보내야 하는 웹 서버인지를 확인할 수 없다.
-2.  리스폰스를 반환한 곳의 클라이언트가 원래 의도한 리퀘스트를 보낸 클라이언트인지를 확인할 수 없다.
-3.  통신하고 있는 상대가 접근이 허가된 상대인지를 확인할 수 없다.
-4.  어디의에서 누가 리퀘스트 했는지 확인할 수 없다.
-5.  의미없는 리퀘스트도 수신한다. —> DoS 공격을 방지할 수 없다.
+로컬망 라우터와 외부 망 라우터간의 통로
 
-#### 보완 방법
+[위로](#computer-network)
 
-위 암호화 방법으로 언급된 `SSL`로 상대를 확인할 수 있다. SSL 은 상대를 확인하는 수단으로 --증명서-- 를 제공하고 있다. 증명서는 신뢰할 수 있는 --제 3 자 기관에 의해-- 발행되는 것이기 때문에 서버나 클라이언트가 실재하는 사실을 증명한다. 이 증명서를 이용함으로써 통신 상대가 내가 통신하고자 하는 서버임을 나타내고 이용자는 개인 정보 누설 등의 위험성이 줄어들게 된다. 한 가지 이점을 더 꼽자면 클라이언트는 이 증명서로 본인 확인을 하고 웹 사이트 인증에서도 이용할 수 있다.
+## Network Interface Layer
 
-### 완전성을 증명할 수 없기 때문에 변조가 가능하다
+### Switch
 
-여기서 완전성이란 --정보의 정확성-- 을 의미한다. 서버 또는 클라이언트에서 수신한 내용이 송신측에서 보낸 내용과 일치한다라는 것을 보장할 수 없는 것이다. 리퀘스트나 리스폰스가 발신된 후에 상대가 수신하는 사이에 누군가에 의해 변조되더라도 이 사실을 알 수 없다. 이와 같이 공격자가 도중에 리퀘스트나 리스폰스를 빼앗아 변조하는 공격을 중간자 공격(Man-in-the-Middle)이라고 부른다.
+전송거리를 연장시켜주는 장치. MAC 주소를 통해 데이터를 전송.
 
-#### 보완 방법
+[위로](#computer-network)
 
-`MD5`, `SHA-1` 등의 해시 값을 확인하는 방법과 파일의 디지털 서명을 확인하는 방법이 존재하지만 확실히 확인할 수 있는 것은 아니다. 확실히 방지하기에는 `HTTPS`를 사용해야 한다. SSL 에는 인증이나 암호화, 그리고 다이제스트 기능을 제공하고 있다.
+## Web Flow
 
-[뒤로](https://github.com/JaeYeopHan/for_beginner)/[위로](#part-1-3-network)
-[뒤로](https://github.com/JaeYeopHan/for_beginner)/[위로](#part-1-3-network)
+우리가 Chrome 을 실행시켜 주소창에 특정 URL 값을 입력시키면 어떤 일이 일어나는가?
 
-## Flow of Web
-
-_우리가 Chrome 을 실행시켜 주소창에 특정 URL 값을 입력시키면 어떤 일이 일어나는가?_
-
-### in 브라우저
-
-1.  url 에 입력된 값을 브라우저 내부에서 결정된 규칙에 따라 그 의미를 조사한다.
-2.  조사된 의미에 따라 HTTP Request 메시지를 만든다.
-3.  만들어진 메시지를 웹 서버로 전송한다.
-
-이 때 만들어진 메시지 전송은 브라우저가 직접하는 것이 아니다. 브라우저는 메시지를 네트워크에 송출하는 기능이 없으므로 OS에 의뢰하여 메시지를 전달한다. 우리가 택배를 보낼 때 직접 보내는게 아니라, 이미 서비스가 이루어지고 있는 택배 시스템(택배 회사)을 이용하여 보내는 것과 같은 이치이다. 단, OS에 송신을 의뢰할 때는 도메인명이 아니라 ip주소로 메시지를 받을 상대를 지정해야 하는데, 이 과정에서 DNS서버를 조회해야 한다.
-
-### in 프로토콜 스택, LAN 어댑터
-
-1.  프로토콜 스택(운영체제에 내장된 네트워크 제어용 소프트웨어)이 브라우저로부터 메시지를 받는다.
-2.  브라우저로부터 받은 메시지를 패킷 속에 저장한다.
-3.  그리고 수신처 주소 등의 제어정보를 덧붙인다.
-4.  그런 다음, 패킷을 LAN 어댑터에 넘긴다.
-5.  LAN 어댑터는 패킷을(?) 전기신호로 변환시킨다.
-6.  신호를 LAN 케이블에 송출시킨다.
-
-프로토콜 스택은 통신 중 오류가 발생했을 때, 이 제어 정보를 사용하여 고쳐 보내거나, 각종 상황을 조절하는 등 다양한 역할을 하게 된다. 네트워크 세계에서는 비서가 있어서 우리가 비서에게 물건만 건네주면, 받는 사람의 주소와 각종 유의사항을 써준다! 여기서는 프로토콜 스택이 비서의 역할을 한다고 볼 수 있다.
-
-### in 허브, 스위치, 라우터
-
-1.  LAN 어댑터가 송신한 패킷은 스위칭 허브를 경우하여 인터넷 접속용 라우터에 도착한다.
-2.  라우터는 패킷을 프로바이더(통신사)에게 전달한다.
-3.  인터넷으로 들어가게 된다.
-
-### in 액세스 회선, 프로바이더
-
-1.  패킷은 인터넷의 입구에 있는 액세스 회선(통신 회선)에 의해 POP(Point Of Presence, 통신사용 라우터)까지 운반된다.
-2.  POP 를 거쳐 인터넷의 핵심부로 들어가게 된다.
-3.  수 많은 고속 라우터들 사이로 패킷이 목적지를 향해 흘러가게 된다.
+1. URL을 해석 (scheme:[//[user:password@]host[:port]][/]path[?query][#fragment])
+2. Domain Name Server를 조회 함
+3. ARP(Address Resolution Protocol)로 대상의 IP와 MAC주소를 알아냄
+4. TCP통신을 통해 Socket을 열음. 이 과정에서 3-hand-shaking이 일어남
+5. HTTP Protocol로 Request
+6. HTTP Server가 Response
+7. Browser가 rendering을 함
 
 [위로](#computer-network)
 
 ## References
 
 https://github.com/JaeYeopHan/Interview_Question_for_Beginner/tree/master/Network
+
+https://hyeonu1258.github.io/2018/03/10/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%ED%86%B5%EC%8B%A0%20%EB%A9%B4%EC%A0%91/
+
+3 way handshaking
+
+http://asfirstalways.tistory.com/356
+
+Web flow
+
+https://owlgwang.tistory.com/1

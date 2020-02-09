@@ -98,12 +98,13 @@ public class ForkJoin {
   // Another implementation of the fork/join framework is used by methods in the java.util.streams
   // package, which is part of Project Lambda scheduled for the Java SE 8 release
   public static void main(String[] args) {
-    final ForkJoinPool forkJoinPool =
-        new ForkJoinPool(2 * Runtime.getRuntime().availableProcessors());
-    System.out.println("Parallelism level size: " + forkJoinPool.getParallelism());
-    final int[] src = randomSrc();
-    final int[] destination = new int[src.length];
-    forkJoinPool.invoke(new ForkJoinAction(src, 0, src.length, destination));
+//    final ForkJoinPool forkJoinPool =
+//        new ForkJoinPool(2 * Runtime.getRuntime().availableProcessors());
+//    System.out.println("Parallelism level size: " + forkJoinPool.getParallelism());
+//    final int[] src = randomSrc();
+//    final int[] destination = new int[src.length];
+//    forkJoinPool.invoke(new ForkJoinAction(src, 0, src.length, destination));
+    while(true);
   }
 
 }
