@@ -2,7 +2,7 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.validator;
+package acktsap.sample.validation;
 
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,6 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-/**
- * Validator: 애플리케이션에서 사용하는 객체 검증용 인터페이스
- */
 @Component
 public class ValidatorRunner implements ApplicationRunner {
 

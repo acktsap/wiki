@@ -2,12 +2,15 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.validator;
+package acktsap.sample.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * Validator: 애플리케이션에서 사용하는 객체 검증용 인터페이스
+ */
 public class EventValidator implements Validator {
 
   @Override
@@ -18,10 +21,11 @@ public class EventValidator implements Validator {
   @Override
   public void validate(Object target, Errors errors) {
     // using utils
-    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "notempty", "Empty title is not allowed");
-    
+    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "notempty",
+        "Empty title is not allowed");
+
     // manual
-    Event event =  (Event) target;
+    Event event = (Event) target;
     if (null == event.getId()) {
       errors.reject("id", "notempty");
     }

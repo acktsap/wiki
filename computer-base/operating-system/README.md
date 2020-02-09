@@ -7,7 +7,6 @@
       - [Process state](#process-state)
       - [Process Control Block](#process-control-block)
     - [Process Synchronization](#process-synchronization)
-      - [Critical Section](#critical-section)
       - [Critical Section Problem](#critical-section-problem)
       - [Lock](#lock)
       - [Semaphores](#semaphores)
@@ -95,13 +94,10 @@ Memory의 차원에서는 Process는 heap (아래부터 참) data (위부터 참
 
 ### Process Synchronization
 
-#### Critical Section
-
-동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역
-
 #### Critical Section Problem
 
-Critical Section 을 함께 사용할 수 있는 프로토콜을 설계하는 것.
+Critical Section 동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역
+Critical Section Problem은 Critical Section을 함께 사용할 수 있는 프로토콜을 설계하는 것.
 
 Requirements
 

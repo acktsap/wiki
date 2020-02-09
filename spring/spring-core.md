@@ -8,15 +8,17 @@
     - [Spring Bean Scope](#spring-bean-scope)
     - [Singleton Beans with Prototype-bean Dependencies](#singleton-beans-with-prototype-bean-dependencies)
     - [ApplicationContext](#applicationcontext)
+  - [Spring Boot Application Flow](#spring-boot-application-flow)
     - [@Autowired](#autowired)
     - [@Component and @ComponentScan](#component-and-componentscan)
   - [AOP (Aspect Oriented Programming)](#aop-aspect-oriented-programming)
+  - [Converter vs Formatter](#converter-vs-formatter)
   - [References](#references)
 
 ## IoC Container
 
 IoC(Inversion of Control)이란 사용자가 작성한 프로그램이 framework로부터 흐름 제어를 받는 것을 말함.\
-Spring IoC Container는 Object간의 dependency를 주입시켜주는 역할을 함. 사용자가 직접 하는게 아니라. 이 때 주입시켜주는 것을 Dependency Injection이라고 함.
+Spring IoC Container는 객체간의 의존관계를 주입시켜주는 역할을 함. 이 때 주입시켜주는 것을 Dependency Injection이라고 함.
 
 Dependency Injection을 하는 방법으로는 Constructor에 인자로 넘기는 방법과 먼저 객체를 생성한 후 Setter를 통해 주입시키는 방법이 있음. 더 Deep하게는 reflection을 사용해서 내부 멤버에 접근해서 하는 방법도 있음.
 
@@ -24,7 +26,7 @@ Spring의 ApplicationContext implements BeanFactory가 IoC Container역할을 �
 
 ### Java Bean
 
-여러 객체를 하나의 객체에 담아두는 객체. NoArgsConstructor가 있어야 하고, serializable, member들은 로 선언,, member들에 getter, setter로 접근할 수 있어야 함.
+여러 객체를 하나의 객체에 담아두는 객체. NoArgsConstructor가 있어야 하고, serializable, member들은 로 선언, member들에 getter, setter로 접근할 수 있어야 함.
 
 해당 bean이 다른 application에도 사용될 수 있다는 장점이 있으나, zero-argument constructor로 인해 불완전한 상태로 초기화된다는 문제가 있음. 그리고 mutable하기 때문에 multi thread에서 동시성 문제도 발생할 수 있음.
 
@@ -34,36 +36,23 @@ Spring의 ApplicationContext implements BeanFactory가 IoC Container역할을 �
 
 ### Spring Bean
 
-스프링 IoC 컨테이너가 관리 하는 객체로 Spring에서 관리하는 LifeCycle이 있음.
+스프링 IoC 컨테이너가 관리 하는 객체. Bean 자체의 LifeCycle이 있음.
 
-생성시 먼저 Properties를 설정함. setBeanName, setBeanFactory, setApplicationContext등으로 우선 property를 설정함
-**Creation**
+Bean Creation시
 
-Instantiate
+- BeanNameAware의 setBeanName()
+- BeanFactoryAware의 setBeanFactory()
+- ApplicationContextAware의 setApplicationContext()
+- BeanPostProcessor의 postProcessBeforeInitialization()
+- InitializingBeans의 afterpropertiesSet()
+- Custom init method
+- BeanPostProcessors의 postProcessAfterInitialization()
+- Bean ready
 
-Properties 설정
+Destroy시
 
-setBeanName() of BeanNameAware
-
-setBeanFactory() of BeanFactoryAware
-
-setApplicationContext() of ApplicationContextAware
-
-PostProcessBeforeInitialization() of BeanPostProcessors
-
-afterpropertiesSet() of InitializingBeans
-
-custom init method
-
-postProcessAfterInitialization() of BeanPostProcessors
-
-Bean Ready
-
-**Destory**
-
-destroy() of DisposableBean
-
-custom destory method
+- DisposableBean의 destroy()
+- Custom destory method
 
 ### Spring Bean Scope
 
@@ -76,20 +65,20 @@ custom destory method
 
 ### Singleton Beans with Prototype-bean Dependencies
 
-Prototype bean이 singleton bean을 참조하는 것은 문제가 없음. But singleton bean이 prototype bean을 참조하면 바뀌지 않는다는 문제가 있음.
+Prototype bean이 singleton bean을 참조하는 것은 문제가 없음. But singleton bean이 prototype bean을 참조하면 바뀌지 않는다는 문제가 있음. 그래서 이를 Proxy설정으로 해결함. `@Scope("prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)`를 Prototype bean에 설정.
 
--> `@Scope("prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)`를 Prototype bean에 설정함으로써 해결 (Proxy 설정)
 ### ApplicationContext
 
-Spring IoC Container로써. 빈 설정 소스​로 부터 ​빈 ​정의​를 읽어들이고, 빈을 구성하고 제공​한다.
+Spring IoC Container로써. 빈 설정을 읽고 빈 정의를 제공함. 역할이 BeanFactory뿐만 아니라 여러 가지가 있음.
 
-다음과 같은 인터페이스를 상속한다.
+- ​EnvironmentCapable : Profile이나 Property을 제공. Profile은 bean들의 그룹 인데 test일 때는 어떤 거를 쓰고, dev에서는 어떤 빈들을 쓰고 이럴때 사용됨. Property는 그냥 key-value 형식의 property설정.
+- MessageSource : 국제화 설정에 대한 정보를 `message.properies` 같은 걸로 읽고. `getMessage(String. Locale)`같은 걸로 Locale에 맞는 message를 제공해주는 역할.
+- ApplicationEventPublisher : 이벤트 publish. EventListener를 등록한 후 applicationContext에서 event publish하면 이를 처리.
+- ResouceLoader : "classpath:xxx", "file://xxx" 등 각종 리소스를 로딩.
 
-- BeanFactory : 빈 생성
-- ​EnvironmentCapable : 환경 설정
-- MessageSource : 국제화 설정
-- ApplicationEventPublisher : 이벤트 publish, 옵져버 패턴으로 구현
-- ResouceLoader : 리소스 로딩
+## Spring Boot Application Flow
+
+- @ComponentScan에 설정되어 있는 패키지를 `ClassLoader.findResources()`에 요청
 
 ### @Autowired
 
@@ -101,13 +90,21 @@ Spring IoC Container로써. 빈 설정 소스​로 부터 ​빈 ​정의​�
 
 ## AOP (Aspect Oriented Programming)
 
-관점 지향 프로그램으로 object간의 concern에 집중한다. Spring에서는 runtime proxy로 구현한다.
+관점 지향 프로그램으로 Object간의 Concern에 집중해서 흩어진 관점을 모듈화 할 수 있는 프로그래밍 기법. 용어로는
 
-- Aspect : 여러 개의 클래스들 간의 concern.
-- Join point : concern을 적용할 대상. 스프링에서는 항상 method execution임.
-- Pointcut : Join point에 대한 조건
-- Advice : join point에서 취해야 할 Action.
-- Weaving : Join point에 advice를 삽입하는 과정
+- Aspect : Concern 자체
+- Join Point : Concern을 적용할 대상. 스프링에서는 항상 method execution임.
+- Pointcut : Join point에 대한 조건. 어디다 할건지?
+- Advice : Join point에서 취해야 할 Action.
+- Weaving : Join Point에 Advice를 삽입하는 과정
+
+Spring에서는 Proxy로 구현되어 있는데 Aspect같은 annotation을 spring bean 을 생성할 때 처리해서 대상 객체의 interface에 대한 dynamic proxy를 생성해서 request를 intercept?해서 구현. 구체적으로는 `AbstractAutoProxyCreator​ implements ​BeanPostProcessor`가 처리를 함.
+
+그냥 Proxy를 사용하지 않은 이유는 그냥 Proxy를 모든 클래스에 다 정의하려면 모든 메소드를 다 구현하고 해서 귀찮아서 사용.
+
+## Converter vs Formatter
+
+Formatter는 특정 타입을 Locale에 맞게 String간 변환해주는 거임. Printer(to string with locale), Parser(from string with locale)를 상속하고 있음. 반면에 Converter는 서로 다른 타입간 변환을 해주는 역할. Converter에 한 객체가 String일 경우 Formatter처럼 쓸 순 있으나 어찌됬건 역할이 다름.
 
 ## References
 

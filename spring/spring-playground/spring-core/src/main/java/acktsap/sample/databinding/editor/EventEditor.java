@@ -13,7 +13,7 @@ import acktsap.sample.databinding.Event;
  *
  * Old one.
  *
- * WARN: this isn't thread-safe (stateful). DO NOT use as a bean
+ * this even not thread-safe (stateful). DO NOT use as a bean
  *
  * 번거로움.. Object <-> String간만 가능.. Use Converter, Formatter instead.
  *

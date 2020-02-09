@@ -21,6 +21,7 @@ import acktsap.sample.databinding.Event;
  */
 public class EventConverter {
 
+  // Spring boot에서는 bean으로 등록하면 ConversionService가 이미 알고 있음.
   @Component
   public static class StringToEventConverter implements Converter<String, Event> {
 

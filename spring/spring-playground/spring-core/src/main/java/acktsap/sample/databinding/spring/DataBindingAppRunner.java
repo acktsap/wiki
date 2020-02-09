@@ -20,7 +20,7 @@ public class DataBindingAppRunner implements ApplicationRunner {
   public void run(ApplicationArguments args) throws Exception {
     System.out.println("--- Conversions ---");
     System.out.println(conversionService);
-
+    
     /**
      * spring boot일 경우 {@link DefaultFormattingConversionService}대신 {@link WebConversionService}을 사용
      *

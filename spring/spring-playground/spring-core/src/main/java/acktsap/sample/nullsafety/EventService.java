@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventService {
 
-  public String createEvent(@NonNull String name) {
+  public String createEvent(@NonNull final String name) {
     // recommaned (by acktsap)
-    String eventName = Objects.requireNonNull(name);
+    String eventName = Objects.requireNonNull(name, "Name most not null");
     return "Hello " + eventName;
   }
 

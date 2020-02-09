@@ -978,44 +978,50 @@ SpEL 구성
 
 ### AOP
 
-Aspect-oriendted Programming (AOP)은 OOP를 보완하는 수단으로, 흩어진 Aspect를
-
-모듈화 할 수 있는 프로그래밍 기법.
+Aspect-oriendted Programming (AOP)은 OOP를 보완하는 수단으로, 흩어진 Aspect를 모듈화 할 수 있는 프로그래밍 기법.
 
 흩어진 관심사 (Crosscutting Concerns)
 
+![crosscutting-concerns](./img/crosscutting-concerns.png)
+
 AOP를 적용하면?
+
+![aop](./img/aop.png)
 
 AOP 주요 개념
 
-- Aspect와 Target
-- Advice
-- Join point와 Pointcut
+- Aspect : 관심사
+- Target : 적용 대상
+- Advice : 어떤 것을 적용할건지
+- Join point : 정확히 어디다가 할건지? (method이전? 이후?)
+- Pointcut : 어디에 할건지
 
 AOP 구현체
 
 - https://en.wikipedia.org/wiki/Aspect-oriented_programming
 - 자바
-- AspectJ
-- 스프링 AOP
+- AspectJ : Spring AOP보다 더 다양한 구현체를 제공함
+- 스프링 AOP : AspectJ보다는 협소한 것을 제공
 
 AOP 적용 방법
 
-- 컴파일
-- 로드 타임
-- 런타임
+- 컴파일 : 컴파일 시 AOP를 적용하는 방법. 별도의 Compiler가 필요. Aspectj에서 사용.
+- 로드 타임 : ClassLoader에서 Weaving하는 방법. 별도의 Agent필요. Aspectj에서 사용.
+- 런타임 : Proxy기반으로 적용. Spring에서 사용
 
 ### Proxy based AOP
 
 스프링 AOP 특징
 
 - 프록시 기반의 AOP ​​ 구현체
-- 스프링 빈에만 AOP 를를 적용​적용​할 수 있다
+- 스프링 빈에만 AOP 를를 적용​​할 수 있다
 
 - 모든 AOP 기능을 제공하는 것이 목적이 아니라, 스프링 IoC와 연동하여 엔터프라이즈
 애플리케이션에서 가장 흔한 문제에 대한 해결책을 제공하는 것이 목적.
 
 프록시 패턴
+
+![aop-proxy-pattern](./img/aop-proxy-pattern.png)
 
 - 왜? (기존 코드 변경 없이) 접근 제어 또는 부가 기능 추가
 - 기존 코드를 건드리지 않고 성능을 측정해 보자. (프록시 패턴으로)
@@ -1025,16 +1031,17 @@ AOP 적용 방법
 - 매번 프록시 클래스를 작성해야 하는가?
 - 여러 클래스 여러 메소드에 적용하려면?
 - 객체들 관계도 복잡하고...
+- 귀찮음...
 
 그래서 등장한 것이 스프링 AOP
 
 - 스프링 IoC 컨테이너가 제공하는 기반 시설과 Dynamic 프록시를 사용하여 여러 복잡한 문제 해결.
-- 동적 프록시: 동적으로 프록시 객체 생성하는 방법
-- 자바가 제공하는 방법은 인터페이스 기반 프록시 생성.
-- CGlib은 클래스 기반 프록시도 지원.
+- Dynamic Proxy: 런타임에 동적으로 프록시 객체 생성하는 방법
+  - 자바가 제공하는 방법은 인터페이스 기반 프록시 생성.
+  - CGlib은 클래스 기반 프록시도 지원.
 - 스프링 IoC: 기존 빈을 대체하는 동적 프록시 빈을 만들어 등록 시켜준다.
-- 클라이언트 코드 변경 없음.
-- AbstractAutoProxyCreator​ implements ​BeanPostProcessor
+  - 클라이언트 코드 변경 없음.
+  - `AbstractAutoProxyCreator​ implements ​BeanPostProcessor`
 
 ### @AOP
 

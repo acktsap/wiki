@@ -13,22 +13,25 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
 
 /**
+ * SpEL : Spring Expression Language
+ *
  * #{"표현식"}
- * 
+ *
  * ${"프로퍼티"}
- * 
+ *
  * 표현식은 프로퍼티를 가질 수 있지만, 반대는 안 됨. #{${my.data} + 1}
- * 
+ *
  * eg. @PreAuthorize, @PostAuthorize, @Query, ...
- * 
+ *
  * See also
- * 
+ *
  * https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions-language-ref
  */
 @Component
 public class SpELRunner implements ApplicationRunner {
 
-  // expressions
+  /* expressions */
+
   @Value("#{1 + 1}")
   int value;
 
@@ -41,17 +44,23 @@ public class SpELRunner implements ApplicationRunner {
   @Value("hello")
   String hello;
 
-  // property
+
+  /* property */
+
   @Value("${server.port}")
   String myValue;
 
-  // expression + property
+
+  /* expression + property */
+
   @Value("#{${server.port} eq 8080}")
   boolean isMyValue;
 
-  // beans
-  @Value("#{sample.data}")
-  int sampleData;
+
+  /* beans */
+
+  @Value("#{sample}")
+  Sample sample;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -62,8 +71,8 @@ public class SpELRunner implements ApplicationRunner {
     System.out.println(hello);
     System.out.println(myValue);
     System.out.println(isMyValue);
-    System.out.println(sampleData);
-    
+    System.out.println(sample);
+
     ExpressionParser parser = new SpelExpressionParser();
     Expression expression = parser.parseExpression("100 + 44");
     Integer value = expression.getValue(Integer.class); // uses ConversionService

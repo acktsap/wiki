@@ -20,6 +20,9 @@ import acktsap.sample.databinding.Event;
  *
  * Thread-safe.
  * 
+ * Formatter는 Printer(to string with locale), Parser(from string with locale)를 해주는 역할. Converter는 서로
+ * 다른 타입간 변환만 해줌
+ * 
  * Run {@link FormatterEventControllerTest}.
  */
 public class EventFormatter implements Formatter<Event> {

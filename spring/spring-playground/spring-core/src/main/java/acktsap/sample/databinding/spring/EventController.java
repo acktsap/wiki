@@ -12,7 +12,6 @@ import acktsap.sample.databinding.Event;
 @RestController
 public class EventController {
 
-  // NOTE: Integer같은거는 Spring에 Default Converter가 있음!
   @GetMapping("/event/{event}")
   public String getEvent(@PathVariable Event event) {
     System.out.println(event);

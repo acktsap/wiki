@@ -4,13 +4,24 @@
 
 package acktsap.sample.spel;
 
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
 public class Sample {
 
   int data = 200;
+
+  public int getData() {
+    return data;
+  }
+
+  public void setData(int data) {
+    this.data = data;
+  }
+
+  @Override
+  public String toString() {
+    return "Sample [data=" + data + "]";
+  }
 
 }
