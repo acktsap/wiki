@@ -4,10 +4,11 @@
   - [User Mode vs Kernal Mode](#user-mode-vs-kernal-mode)
   - [Process Management](#process-management)
     - [Process vs Thread](#process-vs-thread)
-      - [Process state](#process-state)
-      - [Process Control Block](#process-control-block)
+    - [Multi-Process vs Multi-Thread](#multi-process-vs-multi-thread)
+    - [Process state](#process-state)
+    - [Context Switching](#context-switching)
     - [Process Synchronization](#process-synchronization)
-      - [Critical Section Problem](#critical-section-problem)
+      - [Critical Section](#critical-section)
       - [Lock](#lock)
       - [Semaphores](#semaphores)
       - [Monitors](#monitors)
@@ -63,11 +64,22 @@
 
 ![thread in process](./img/thread-in-process.png)
 
-Process는 CPU로부터 Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. Thread는 Process내의 자원을 공유하고 Context switching할 때 cache를 비울 필요가 없어서 MultiProcess보다 더 빠름. 다만 공유자원에 대한 동기화 문제가 있음.
+Process는 OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. Thread를 왜 쓰냐면 thread가 더 가볍기 때문임. Process간에는 서로 자원을 공유할 수 없음. 굳이 공유를 하려면 Pipe등을 사용해서 IPC(inner-process-communitaton)을 해야 하는데 번거로움. Process는 Context switching비용도 큼. 반면 Thread는 Process내의 자원을 공유하고 Context switching 비용도 적어서 더 가볍게 일을 할 수 있음. 메모리의 차원에서는 Process는 OS로부터 Code, Data, Stack, Heap을 할당받는데 Thread는 여기서 Code, Data, Heap을 공유하면서 별도의 Stack을 가짐. Lightweight Process라고 생각하면 됨.
 
-Memory의 차원에서는 Process는 heap (아래부터 참) data (위부터 참), stack 등이 있음. Thread의 경우 기반 프로세스의 heap, data영역 등은 공유하고 stack, register, program counter등은 따로 가짐.
+- Code : Code 자체를 구성하는 영역
+- Data : 전역변수 등의 정보가 저장
+- Heap : 동적으로 메모리를 할당하는 영역
+- Stack : Local variable, parameter, call stack frame등이 저장되는 영역
 
-#### Process state
+### Multi-Process vs Multi-Thread
+
+하나의 작업을 여러 개의 Process로 처리하느냐 여러 개의 thread로 처리하느냐임.
+
+여러 개의 Process로 처리하게 되면 Process들이 서로 독립적이기 때문에 하나가 죽어도 다른 Process에는 영향이 없음. But 서로 다른 Process간 자원 공유가 힘들고 Process가 Thread보다 Context switching비용이 더 큼.
+
+여러 개의 Thread로 처리하는 경우 한 프로세스 내의 자원을 공유하고 Process에 비해 Context switching 비용이 작음. But 자원을 공유하기 때문에 동기화 문제가 발생할 수 있음.
+
+### Process state
 
 ![process-state](./img/process-state.png)
 
@@ -77,16 +89,11 @@ Memory의 차원에서는 Process는 heap (아래부터 참) data (위부터 참
 - waiting
 - terminated
 
-#### Process Control Block
+### Context Switching
 
 ![process-control-block](./img/process-control-block.png)
 
-- Process number (PID)
-- Process state : new, ready, running, waiting, terminated
-- Program counter : 다음 명령어의 주소를 저장
-- Register : 값 저장소
-
-프로세스에 대한 정보를 저장. Context switching이 발생할 때 process의 정보를 저장하고 다시 CPU 를 할당받게 되면 PCB의 내용을 불러와서 이전에 하던 작업을 재개하는 식으로 사용됨.
+하나의 프로세스가 CPU를 사용 중인 상태에서 다른 프로세스가 CPU를 사용하도록 하는 작업. 이를 위해서는 정보를 저장하는 것이 필요한데 이것이 PCB(Process Control Block)임. PCB에는 PID, Process State, Program counter, Register등을 저장하는데 Context switching이 발생하는 경우 현재 Process의 상태를 PCB에 저장하고 실행하고 싶은 Process의 상태를 PCB로부터 로딩한 후 실행함.
 
 [위로](#Operating-System)
 
@@ -94,23 +101,17 @@ Memory의 차원에서는 Process는 heap (아래부터 참) data (위부터 참
 
 ### Process Synchronization
 
-#### Critical Section Problem
+#### Critical Section
 
-Critical Section 동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역
-Critical Section Problem은 Critical Section을 함께 사용할 수 있는 프로토콜을 설계하는 것.
+동일한 자원이 동시에 접근될 수 있는 코드 영역. 동시에 접근하는 문제를 해결하기 위해서는
 
-Requirements
-
-- Mutual Exclusion (상호 배제)  
-  프로세스 P1 이 Critical Section 에서 실행중이라면, 다른 프로세스들은 그들이 가진 Critical Section 에서 실행될 수 없다.
-- Progress (진행)  
-  Critical Section 에서 실행중인 프로세스가 없고, 별도의 동작이 없는 프로세스들만 Critical Section 진입 후보로서 참여될 수 있다.
-- Bounded Waiting (한정된 대기)  
-  P1 가 Critical Section 에 진입 신청 후 부터 받아들여질 때가지, 다른 프로세스들이 Critical Section 에 진입하는 횟수는 제한이 있어야 한다.
+- Mutual Exclusion (상호 배제) : 한 process가 critical section을 실행중이라면 다른 process는 실행 불가능
+- Progress (진행) : Critical section을 사용하는 process가 없다면 process가 접근할 수 있음
+- Bounded Waiting (한정된 대기) : Critical section을 사용하는 시간에는 한계가 있어서 다른 process가 기아 상태에 빠지지 않도록 함
 
 #### Lock
 
-하드웨어 기반 해결책으로써, 동시에 공유 자원에 접근하는 것을 막기 위해 Critical Section 에 진입하는 프로세스는 Lock 을 획득하고 Critical Section 을 빠져나올 때, Lock 을 방출함으로써 동시에 접근이 되지 않도록 한다.
+Critical Section에 대한 하드웨어 기반 해결책. Critical Section 에 진입하는 프로세스는 Lock 을 획득하고 Critical Section 을 빠져나올 때, Lock 을 방출함으로써 동시에 접근이 되지 않도록 한다.
 
 - Prevent interrupts while a shared variable was being modified
   - 단점 : 모든 프로세서에 인터럽트 중지를 요구하기 때문에 시간적인 효율성 측면에서 안좋을 수 있다.
@@ -153,15 +154,9 @@ Requirements
 
 #### Semaphores
 
-소프트웨어상에서 Critical Section 문제를 해결하기 위한 동기화 도구. 프로세스가 lock을 획득 할 때 까지 spin한다는 Spinlock을 한다.
+A useful way to think of a semaphore as used in the real-world system is as a record of how many units of a particular resource are available
 
-- Counting Semaphores
-  가용한 개수를 가진 자원에 대한 접근 제어용으로 사용되며, 세마포는 그 가용한 자원의 개수로 초기화 된다.
-  자원을 사용하면 세마포가 감소, 방출하면 세마포가 증가 한다.
-
-- Binary Semaphores
-  MUTEX 라고도 부르며, 상호배제의 (Mutual Exclusion)의 머릿글자를 따서 만들어졌다.
-  이름 그대로 0 과 1 사이의 값만 가능하며, 다중 프로세스들 사이의 Critical Section 문제를 해결하기 위해 사용한다.
+Critical Section에 대한 해결책으로 사용되는 변수로써 얼마큼의 해당 자원을 사용할 수 있느냐를 가르킨다고 볼 수 있음. 종류로는 count가 1인 Mutex와 count가 2 이상인 Counting Semaphore가 있음.
 
 Spinlock은 context switch가 필요 없다는 장점이 있으나 cpu시간이 낭비될 수 있다는 단점이 있다.
 
@@ -171,8 +166,6 @@ Spinlock은 context switch가 필요 없다는 장점이 있으나 cpu시간이 
 
 ADT(Abstract Data Type)의 일종으로 shared data와 그것에 대해 mutual exclusion을 보장하는 operation들을 포함한다.  
 공유자원에 접근하기 위한 키 획득과 자원 사용 후 해제를 모두 처리한다 (세마포어는 직접 키 해제와 공유자원 접근 처리가 필요하다).
-
-eg. Every Java Object has a monitor
 
 [위로](#Operating-System)
 

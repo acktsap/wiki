@@ -31,7 +31,7 @@
     - [CAP Theorm & NoSQL](#cap-theorm--nosql)
       - [1. Consistency](#1-consistency)
       - [2. Availability](#2-availability)
-    - [3. Partition Tolerance](#3-partition-tolerance)
+      - [3. Partition Tolerance](#3-partition-tolerance)
     - [저장 방식에 따른 NoSQL 분류](#%ec%a0%80%ec%9e%a5-%eb%b0%a9%ec%8b%9d%ec%97%90-%eb%94%b0%eb%a5%b8-nosql-%eb%b6%84%eb%a5%98)
       - [Key-Value Model](#key-value-model)
       - [Document Model](#document-model)
@@ -233,7 +233,7 @@ All or nothing. 작업의 완전성을 보장해주는 것. 작업 셋을 모두
 - Committed : 완료 상태
 - Aborted : 취소 상태. 트랜잭션이 취소되고 Rollback된 상태
 
-All or nothing이라는 좋은 점이 있으나 db collection의 수는 한정되어 있기때문에 전부 tx롤 해버리면 collection풀이 남아나질 않아서 성능이 느려지게 될 수 있음. transaction 과정간 lock을 거는데 서로가 서로가 소유하고 있는 lock을 획득하려고 하면 deadlock도 발행할 수 있음
+All or nothing이라는 좋은 점이 있으나 db collection의 수는 한정되어 있기때문에 전부 tx를 해버리면 collection풀이 남아나질 않아서 성능이 느려지게 될 수 있음. transaction 과정간 lock을 거는데 서로가 서로가 소유하고 있는 lock을 획득하려고 하면 deadlock도 발행할 수 있음
 
 Transaction 1이 B table에 insert하고 Transaction 2가 A table에 insert를 침. 이 때 Tx1은 B에 대한 lock을 소유, Tx2는 A에 대한 Lock을 소유함. 그 후 Transaction 1이 A table에 insert하고 Transaction 2가 B table에 insert하면 lock을 얻지 못해서 deadlock걸림
 
@@ -286,7 +286,7 @@ Statement는 매번 컴파일을 하는 반면에 PreparedStatement는 한번만
 
 몇몇 NoSQL 은 가용성을 보장하기 위해 데이터 복제(Replication)을 사용한다. 동일한 데이터를 다중 노드에 중복 저장하여 그 중 몇 대의 노드가 고장나도 데이터가 유실되지 않도록 하는 방법이다. 데이터 중복 저장 방법에는 동일한 데이터를 가진 저장소를 하나 더 생성하는 Master-Slave 복제 방법과 데이터 단위로 중복 저장하는 Peer-to-Peer 복제 방법이 있다.
 
-### 3. Partition Tolerance
+#### 3. Partition Tolerance
 
 네트워크 분할 허용성이란 지역적으로 분할된 네트워크 환경에서 동작하는 시스템에서 두 지역 간의 네트워크가 단절되거나 네트워크 데이터의 유실이 일어나더라도 각 지역 내의 시스템은 정상적으로 동작해야 함을 의미한다.
 
