@@ -98,7 +98,7 @@ Spring IoC Container로써. 빈 설정을 읽고 빈 정의를 제공함. 역할
 - Advice : Join point에서 취해야 할 Action.
 - Weaving : Join Point에 Advice를 삽입하는 과정
 
-Spring에서는 Proxy로 구현되어 있는데 Aspect같은 annotation을 spring bean 을 생성할 때 처리해서 대상 객체의 interface에 대한 dynamic proxy를 생성해서 request를 intercept?해서 구현. 구체적으로는 `AbstractAutoProxyCreator​ implements ​BeanPostProcessor`가 처리를 함.
+Spring에서는 Proxy로 구현되어 있는데 Aspect같은 annotation을 spring bean 을 생성할 때 처리해서 대상 객체의 interface에 대한 dynamic proxy를 생성해서 request를 intercept?해서 구현. Runtime에 하는 식임. 구체적으로는 `AbstractAutoProxyCreator​ implements ​BeanPostProcessor`가 처리를 함.
 
 그냥 Proxy를 사용하지 않은 이유는 그냥 Proxy를 모든 클래스에 다 정의하려면 모든 메소드를 다 구현하고 해서 귀찮아서 사용.
 
