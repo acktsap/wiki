@@ -2,7 +2,7 @@
 
 - [Database](#database)
   - [Why Database](#why-database)
-    - [Performance](#performance)
+  - [DB Performance](#db-performance)
   - [Logical Design](#logical-design)
     - [Normalization](#normalization)
     - [Entity-Relational Model](#entity-relational-model)
@@ -22,12 +22,12 @@
       - [Left Outer Join](#left-outer-join)
       - [Right Outer Join](#right-outer-join)
     - [Inner Join vs Outer Join](#inner-join-vs-outer-join)
-  - [Usage](#usage)
-    - [Transaction](#transaction)
+  - [Transaction](#transaction)
+    - [Transaction Deadlock](#transaction-deadlock)
     - [Lock vs Transaction](#lock-vs-transaction)
-    - [Statement vs PreparedStatement](#statement-vs-preparedstatement)
-    - [Replication vs Clustering](#replication-vs-clustering)
-  - [NoSQL](#nosql)
+  - [Statement vs PreparedStatement](#statement-vs-preparedstatement)
+  - [Replication vs Clustering](#replication-vs-clustering)
+  - [NoSQL (Just read)](#nosql-just-read)
     - [CAP Theorm & NoSQL](#cap-theorm--nosql)
       - [1. Consistency](#1-consistency)
       - [2. Availability](#2-availability)
@@ -40,13 +40,13 @@
 
 ## Why Database
 
-데이터를 그냥 파일 시스템을 통해 저장하면 데이터 `종속성`, `중복성`, `무결성` 등의 문제가 발생한다. 이를 해결하고자 한게 database이다.
+데이터를 그냥 파일 시스템을 통해 저장하면 해당 데이터 파일과 상호작용 하기 위한 프로그램도 짜야함. 분산되서 저장되면 데이터의 중복도 발생하고 혼돈의 카오스. 이를 해결하고자 한게 database.
 
-### Performance
+## DB Performance
 
-데이터베이스의 퍼모먼스는 디스크 I/O에 달려있다. 디스크 I/O 란 디스크 드라이브의 플래터(원판)을 돌려서 데이터가 저장된 위치로 디스크 헤더를 이동시킨 다음 데이터를 읽는 과정을 거치는데, 이 때 헤더를 움직이는 시간이 읽기 속도에 큰 비중을 차지한다. 그래서 db의 성능은 디스크 헤더의 위치 이동 없이 얼마나 많은 데이터를 한 번에 처리할 수 있느냐가 중요하다.
+디스크 I/O에 달려있음. 디스크에서 값을 읽으려면 디스크 원판을 돌려서 디스크 헤더가 읽게 해야 하는데 이게 시간이 좀 걸림. DB의 속도는 여기 달려 있음.
 
-그렇기 때문에 순차 I/O 가 랜덤 I/O 보다 빠를 수 밖에 없다. 하지만 현실에서는 대부분의 I/O 작업이 랜덤 I/O 이다. 데이터베이스 쿼리 튜닝은 "랜덤 I/O 를 순차 I/O 로 바꿔서 실행할 수는 없을까?" 라는 생각에서부터 시작된다.
+그렇기 때문에 순차 I/O 가 랜덤 I/O 보다 빠를 수 밖에 없음 But 대부분이 Random I/O임 현실에서는. 그래도 랜덤 I/O를 순차 I/O로 바꿔서 할 수는 없을까? 하는게 데이터베이스 쿼리 튜닝의 시작임.
 
 [위로](#Database)
 
@@ -56,10 +56,12 @@
 
 ### Normalization
 
-중복을 최소화하게 데이터를 구조화하는 프로세스를 **정규화**라고 한다. 이는 함수적 종속으로 정의되는데, X 와 Y가 속성집합일 때, X 값이 Y 값을 유일하게 결정한다면 X -> Y 라는 함수적 종속성이 있다고 한다. 정규화 형식으로는 1NF, 2NF, 3NF, BCNF등이 있다.
-
 ![normalization](./img/normalization.jpeg)
 ![bcnf](./img/bcnf.jpeg)
+
+중복을 최소화하게 데이터를 구조화하는 프로세스. 주로 함수적 종속으로 정의.
+
+함수적 종속 : X 와 Y가 속성집합일 때, X 값이 Y 값을 유일하게 결정하는 경우
 
 - 1NF : 릴레이션에 속한 모든 속성의 도메인이 원자 값으로만 구성
   - 해결방안 : 그냥 속성에 ,같은거 안넣음
@@ -70,7 +72,7 @@
   - 해결방안 : Y->Z를 다른 테이블로 분리
 - BCNF : 3NF에서 Y가 primary attribute일 경우를 제외한다는 조건을 뺌
 
-정규화를 하게 되면 중복 제거의 장점이 있으나 query를 해야 할 때 join을 해야 하는 단점이 있다. 그래서 query시 성능 저하가 심하게 발생하면 De-normalization을 수행하기도 한다.
+정규화를 하게 되면 중복 제거의 장점이 있으나 query를 해야 할 때 join을 해야 하는 단점이 있다. 그래서 query시 성능 저하가 심하게 발생하면 비정규화(De-normalization)을 수행하기도 한다.
 
 ### Entity-Relational Model
 
@@ -84,9 +86,7 @@
 
 ### Index
 
-DBMS 도 데이터베이스 테이블의 모든 데이터를 검색해서 원하는 결과를 가져 오려면 시간이 오래 걸린다. 그래서 칼럼의 값과 해당 레코드가 저장된 주소를 키와 값의 쌍으로 인덱스를 만들어 두어 검색 속도를 높일 수 있다.
-
-DBMS 의 인덱스는 항상 정렬된 상태를 유지하기 때문에 원하는 값을 탐색하는데는 빠르지만 새로운 값을 추가하거나 삭제, 수정하는 경우에는 쿼리문 실행 속도가 느려진다. 결론적으로 DBMS 에서 인덱스는 데이터의 저장 성능을 희생하고 그 대신 데이터의 읽기 속도를 높이는 기능이다. SELECT 쿼리 문장의 WHERE 조건절에 사용되는 칼럼이라고 전부 인덱스로 생성하면 데이터 저장 성능이 떨어지고 인덱스의 크기가 비대해져서 오히려 역효과만 불러올 수 있다.
+Column의 값과 해당 레코드가 저장된 주소를 키와 값의 쌍으로 인덱스를 만들어 두어 검색 속도를 높이는 것. 해당 값으로 검색 하는 경우 속도가 더 빨라지는 장점이 있으나 데이터를 Create/Update/Delete 하는 경우 Index도 같이 업데이트 시켜야 하기 때문에 느리다. 그렇기 때문에 필요한 경우에만 index를 잘 만들어서 써야 함.
 
 #### Indexing Algorithm
 
@@ -212,11 +212,9 @@ Innter Join은 조건문에 만족시키는 것만 보여주는 반면에 Outer 
 
 [위로](#database)
 
-## Usage
+## Transaction
 
-### Transaction
-
-All or nothing. 작업의 완전성을 보장해주는 것. 작업 셋을 모두 완벽하게 처리하거나 또는 처리하지 못할 경우에는 원 상태로 복구해서 일부만 적용되는 현상이 발생하지 않게 방지. 성질 (ACID)가 있다.
+All or nothing. 작업의 완전성을 보장해주는 것. 모두 완벽하게 처리하거나 처리하지 못할 경우에는 원 상태로 복구해서 일부만 적용되는 현상이 발생하지 않게 방지. 성질 (ACID)가 있다.
 
 - Atomicity(원자성) : 만약 트랜잭션 중간에 어떠한 문제가 발생한다면 트랜잭션에 해당하는 어떠한 작업 내용도 수행되어서는 안된다.
 - Consistency(일관성) : 트랜잭션이 완료된 다음의 상태에서도 트랜잭션이 일어나기 전의 상황과 동일하게 데이터의 일관성을 보장해야 한다.
@@ -235,6 +233,8 @@ All or nothing. 작업의 완전성을 보장해주는 것. 작업 셋을 모두
 
 All or nothing이라는 좋은 점이 있으나 db collection의 수는 한정되어 있기때문에 전부 tx를 해버리면 collection풀이 남아나질 않아서 성능이 느려지게 될 수 있음. transaction 과정간 lock을 거는데 서로가 서로가 소유하고 있는 lock을 획득하려고 하면 deadlock도 발행할 수 있음
 
+### Transaction Deadlock
+
 Transaction 1이 B table에 insert하고 Transaction 2가 A table에 insert를 침. 이 때 Tx1은 B에 대한 lock을 소유, Tx2는 A에 대한 Lock을 소유함. 그 후 Transaction 1이 A table에 insert하고 Transaction 2가 B table에 insert하면 lock을 얻지 못해서 deadlock걸림
 
 ```SQL
@@ -251,21 +251,21 @@ ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting trans
 
 Lock은 동시성을 제어하기 위한 기술, Transaction은 데이터의 정합성을 보장하기 위한 기술임. Lock같은 경우 여러 connection이 들어왔을 때 한개의 connection만 일을 하는 것을 일컷는데, transaction은 어떠한 논리적인 행위가 전부 수행되거나 아니면 하나도 수행되지 않아야 하는 것에 집중한 기술임. Transaction을 수행할 때 lock을 걸기도 함.
 
-### Statement vs PreparedStatement
+## Statement vs PreparedStatement
 
 Statement는 매번 컴파일을 하는 반면에 PreparedStatement는 한번만 컴파일을 한 후 값만 변경해서 재사용 하는 식임. 그래서 PreparsedStatement가 더 빠르고 `SQL Injection`도 방지해줘서 쓰는 것이 권장됨.
 
 [위로](#database)
 
-### Replication vs Clustering
+## Replication vs Clustering
 
-둘다 이중화이긴 한데 Replication은 Master-slave model로 비동기식으로 단순 복제를 하는 반면에 Clustering은 동기식으로 서로의 데이터를 복제한다. Replication은 Clustering에 비해 복제 속도는 빠르지만 master가 죽었을 때 자동 failover기능이 없어서 직접 failover를 해서 서비스가 멈춰있는 시간이 있다. Clustering은 자동 failover기능이 있지만 replication에 비해 데이터를 동기화 하는데 시간이 더 걸린다.
+둘다 이중화이긴 한데 Replication은 Master-slave model로 비동기식으로 단순 복제를 하는 반면에 Clustering은 동기식으로 서로의 데이터를 복제. Replication은 Clustering에 비해 복제 속도는 빠르지만 master가 죽었을 때 자동 failover기능이 없어서 직접 failover를 해서 서비스가 멈춰있는 시간이 있다. Clustering은 자동 failover기능이 있지만 replication에 비해 데이터를 동기화 하는데 시간이 더 걸린다.
 
 [위로](#database)
 
-## NoSQL
+## NoSQL (Just read)
 
-관계형 데이터 모델을 지양하며 대량의 분산된 데이터를 저장하고 조회하는 데 특화되었으며 스키마 없이 사용 가능하거나 느슨한 스키마를 제공하는 저장소.
+데이터 모델을 지양하며 대량의 분산된 데이터를 저장하고 조회하는 데 특화되었으며 스키마 없이 사용 가능하거나 느슨한 스키마를 제공하는 저장소.
 
 종류마다 쓰기/읽기 성능 특화, 2 차 인덱스 지원, 오토 샤딩 지원 같은 고유한 특징을 가진다. 대량의 데이터를 빠르게 처리하기 위해 메모리에 임시 저장하고 응답하는 등의 방법을 사용한다. 동적인 스케일 아웃을 지원하기도 하며, 가용성을 위하여 데이터 복제 등의 방법으로 관계형 데이터베이스가 제공하지 못하는 성능과 특징을 제공한다.
 
@@ -282,9 +282,7 @@ Statement는 매번 컴파일을 하는 반면에 PreparedStatement는 한번만
 
 #### 2. Availability
 
-가용성이란 모든 클라이언트의 읽기와 쓰기 요청에 대하여 항상 응답이 가능해야 함을 보증하는 것이며 내고장성이라고도 한다. 내고장성을 가진 NoSQL 은 클러스터 내에서 몇 개의 노드가 망가지더라도 정상적인 서비스가 가능하다.
-
-몇몇 NoSQL 은 가용성을 보장하기 위해 데이터 복제(Replication)을 사용한다. 동일한 데이터를 다중 노드에 중복 저장하여 그 중 몇 대의 노드가 고장나도 데이터가 유실되지 않도록 하는 방법이다. 데이터 중복 저장 방법에는 동일한 데이터를 가진 저장소를 하나 더 생성하는 Master-Slave 복제 방법과 데이터 단위로 중복 저장하는 Peer-to-Peer 복제 방법이 있다.
+모든 클라이언트의 읽기와 쓰기 요청에 대하여 항상 응답이 가능해야 함을 보증하는 것. NoSQL 은 가용성을 보장하기 위해 데이터 복제(Replication)을 사용한다. 동일한 데이터를 다중 노드에 중복 저장하여 그 중 몇 대의 노드가 고장나도 데이터가 유실되지 않도록 하는 방법이다. 데이터 중복 저장 방법에는 동일한 데이터를 가진 저장소를 하나 더 생성하는 Master-Slave 복제 방법과 데이터 단위로 중복 저장하는 Peer-to-Peer 복제 방법이 있다.
 
 #### 3. Partition Tolerance
 
