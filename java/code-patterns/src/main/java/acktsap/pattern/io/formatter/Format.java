@@ -6,28 +6,28 @@ package acktsap.pattern.io.formatter;
 
 public class Format {
 
-  /*
-   * d formats an integer value as a decimal value.
-   * 
-   * f formats a floating point value as a decimal value.
-   * 
-   * n outputs a platform-specific line terminator.
-   * 
-   * x formats an integer as a hexadecimal value.
-   * 
-   * s formats any value as a string.
-   * 
-   * tB formats an integer as a locale-specific month name
-   * 
-   * 
-   * In the Java programming language, the \n escape always generates the linefeed character
-   * (\u000A). Don't use \n unless you specifically want a linefeed character. To get the correct
-   * line separator for the local platform, use %n.
-   */
   public static void main(String[] args) {
+    /*
+     * d: formats an integer value as a decimal value.
+     * 
+     * f: formats a floating point value as a decimal value.
+     * 
+     * n: outputs a platform-specific line terminator.
+     * 
+     * x: formats an integer as a hexadecimal value.
+     * 
+     * s: formats any value as a string.
+     * 
+     * tB: formats an integer as a locale-specific month name
+     * 
+     * 
+     * In the Java programming language, the \n escape always generates the linefeed character
+     * (\u000A). Don't use \n unless you specifically want a linefeed character. To get the correct
+     * line separator for the local platform, use %n.
+     *
+     */
     final int i = 2;
     final double r = Math.sqrt(i);
-
     System.out.format("The square root of %d is %f.%n", i, r);
 
     /*

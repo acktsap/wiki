@@ -18,7 +18,6 @@ public class Print {
   public static void main(String[] args) {
     final int i1 = 2;
     final double r1 = Math.sqrt(i1);
-
     System.out.print("The square root of ");
     System.out.print(i1);
     System.out.print(" is ");

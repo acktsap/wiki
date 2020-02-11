@@ -25,11 +25,11 @@ public class ForkJoinSort {
   protected static class SerialMergeSort implements Sort {
 
     protected int[] temp;
-    
+
     public SerialMergeSort(int tempSize) {
       this.temp = new int[tempSize];
     }
-    
+
     public void sort(int[] arr) {
       sort(arr, 0, arr.length - 1);
     }
@@ -70,9 +70,9 @@ public class ForkJoinSort {
 
     protected final ForkJoinPool forkJoinPool =
         new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-    
+
     protected final int tempSize;
-    
+
     public ParallelMergeSort(int tempSize) {
       this.tempSize = tempSize;
     }
@@ -151,19 +151,19 @@ public class ForkJoinSort {
     long start = System.nanoTime() / 1_000_000;
     sort.sort(input);
     long end = System.nanoTime() / 1_000_000;
-    // if (!Arrays.equals(expected, input)) {
-    // throw new IllegalStateException("expected: " + Arrays.toString(expected) +
-    // ", actual: " + Arrays.toString(input) + "(Algorithm: " + sort.getClass() + ")");
-    // }
+    if (!Arrays.equals(expected, input)) {
+      throw new IllegalStateException("expected: " + Arrays.toString(expected) +
+          ", actual: " + Arrays.toString(input) + "(Algorithm: " + sort.getClass() + ")");
+    }
     System.out.println(Arrays.toString(input));
     System.out.printf("Elapsed time by %s: %dms %n", sort.getClass(), end - start);
   }
 
   public static void main(String[] args) {
-    Sort serial = new SerialMergeSort();
-    Sort parallel = new ParallelMergeSort();
-    run(serial);
-    run(parallel);
+    // Sort serial = new SerialMergeSort();
+    // Sort parallel = new ParallelMergeSort();
+    // run(serial);
+    // run(parallel);
   }
 
 }
