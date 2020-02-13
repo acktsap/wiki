@@ -1,7 +1,8 @@
 # Database
 
 - [Database](#database)
-  - [Why Database](#why-database)
+  - [Why](#why)
+  - [CAP](#cap)
   - [DB Performance](#db-performance)
   - [Logical Design](#logical-design)
     - [Normalization](#normalization)
@@ -27,32 +28,39 @@
     - [Lock vs Transaction](#lock-vs-transaction)
   - [Statement vs PreparedStatement](#statement-vs-preparedstatement)
   - [Replication vs Clustering](#replication-vs-clustering)
-  - [NoSQL (Just read)](#nosql-just-read)
+  - [NoSQL](#nosql)
     - [CAP Theorm & NoSQL](#cap-theorm--nosql)
-      - [1. Consistency](#1-consistency)
-      - [2. Availability](#2-availability)
-      - [3. Partition Tolerance](#3-partition-tolerance)
     - [저장 방식에 따른 NoSQL 분류](#%ec%a0%80%ec%9e%a5-%eb%b0%a9%ec%8b%9d%ec%97%90-%eb%94%b0%eb%a5%b8-nosql-%eb%b6%84%eb%a5%98)
       - [Key-Value Model](#key-value-model)
       - [Document Model](#document-model)
       - [Column Model](#column-model)
+  - [Ideas](#ideas)
+    - [NoSQL](#nosql-1)
   - [References](#references)
 
-## Why Database
+## Why
 
-데이터를 그냥 파일 시스템을 통해 저장하면 해당 데이터 파일과 상호작용 하기 위한 프로그램도 짜야함. 분산되서 저장되면 데이터의 중복도 발생하고 혼돈의 카오스. 이를 해결하고자 한게 database.
+컴퓨터는 계산기임. 데이터를 가지고 연산하는 기계. 그렇다면 이러한 데이터를 관리를 해야 함. 근데 그냥 파일로 관리하면 불편. 파일로 관리하면 일관성이 깨지기 쉬움 (여러 PC에서 분산해서 저장하기라도 하면 다 업뎃해야함. 또 이런거 해주는 프로그램 짜야함). 이것을 해결하기 위해 데이터를 개념적으로 한곳에 모으고 (database) 를 관리하는 프로그램을 만듬 (DBMS, DataBase Management System)
+
+## CAP
+
+데이터베이스를 분산해서 관리하면 다음의 3개 중 2개 초과를 보장할 수 없음
+  
+- Consistency : 분산된 데이터 간 동일한 시간에 조회하면 동일한 데이터를 얻는 것
+- Availability : 항상 이용가능한 것
+- Partition Tolerance  : 네트워크 장애가 발생해도 시스템이 정상적으로 운영되어야 함
+
+이게 왜 안되냐면 네트워크 장애가 발생하더라도 Partition tolerance를 보장한다고 해보자. Consistency를 보장하려면 다른 노드간 동기화를 하는 것을 기다려야함 (Availability 불만족). Avaliablity를 보장한다면 다른 노드간 동기화를 나중에 해야 함 (Consistency error). 그렇다고 Partition tolerance를 보장하지 않는다고 하면 분산해서 할 이유가 없음.
 
 ## DB Performance
 
-디스크 I/O에 달려있음. 디스크에서 값을 읽으려면 디스크 원판을 돌려서 디스크 헤더가 읽게 해야 하는데 이게 시간이 좀 걸림. DB의 속도는 여기 달려 있음.
-
-그렇기 때문에 순차 I/O 가 랜덤 I/O 보다 빠를 수 밖에 없음 But 대부분이 Random I/O임 현실에서는. 그래도 랜덤 I/O를 순차 I/O로 바꿔서 할 수는 없을까? 하는게 데이터베이스 쿼리 튜닝의 시작임.
+데이터를 읽으려면 결국 디스크를 뒤져야 함. 여기서 디스크 원판을 돌려서 디스크 헤더가 읽게 해야 하는데 원판 돌리는 시간이 좀 걸림. 그래서 순차 Access가 빠름. 근데 현실에서는 다 Random I/O. Random I/O를 순차 I/O를 바꿀 수 없을까? 이게 쿼리 튜닝의 시작.
 
 [위로](#Database)
 
 ## Logical Design
 
-스키마를 논리적으로 설계하는 과정
+데이터의 중복을 제거해서 저장하기 논리적으로 설계하는 과정.
 
 ### Normalization
 
@@ -263,15 +271,15 @@ Statement는 매번 컴파일을 하는 반면에 PreparedStatement는 한번만
 
 [위로](#database)
 
-## NoSQL (Just read)
+## NoSQL
 
-데이터 모델을 지양하며 대량의 분산된 데이터를 저장하고 조회하는 데 특화되었으며 스키마 없이 사용 가능하거나 느슨한 스키마를 제공하는 저장소.
+RDB는 현대의 3V (high-volume, high-velocity, and high-variety)의 데이터 시대에는 맞지 않음. RDB를 사용하면서 성능을 올리려면 Scale-up을 해야함. But 이는 비용이 많이 듬. 그래서 Scala-out을 해야 함. 또 요즘 시대에는 요구사항이 계속 바뀌어서 rdb의 엄격한 스키마 구조가 좋지 않음. 이런걸 해결하고자 분산 데이터베이스 기반으로 하는 느슨한 스키마를 갖는 데이터 저장소가 NoSQL.
 
 종류마다 쓰기/읽기 성능 특화, 2 차 인덱스 지원, 오토 샤딩 지원 같은 고유한 특징을 가진다. 대량의 데이터를 빠르게 처리하기 위해 메모리에 임시 저장하고 응답하는 등의 방법을 사용한다. 동적인 스케일 아웃을 지원하기도 하며, 가용성을 위하여 데이터 복제 등의 방법으로 관계형 데이터베이스가 제공하지 못하는 성능과 특징을 제공한다.
 
 ### CAP Theorm & NoSQL
 
-#### 1. Consistency
+1. Consistency
 
 일관성은 동시성 또는 동일성이라고도 하며 다중 클라이언트에서 같은 시간에 조회하는 데이터는 항상 동일한 데이터임을 보증하는 것을 의미한다. 이것은 관계형 데이터베이스가 지원하는 가장 기본적인 기능이지만 일관성을 지원하지 않는 NoSQL 을 사용한다면 데이터의 일관성이 느슨하게 처리되어 동일한 데이터가 나타나지 않을 수 있다. 느슨하게 처리된다는 것은 데이터의 변경을 시간의 흐름에 따라 여러 노드에 전파하는 것을 말한다. 이러한 방법을 최종적으로 일관성이 유지된다고 하여 최종 일관성 또는 궁극적 일관성을 지원한다고 한다.
 
@@ -280,11 +288,11 @@ Statement는 매번 컴파일을 하는 반면에 PreparedStatement는 한번만
 - 첫번째로 데이터의 저장 결과를 클라이언트로 응답하기 전에 모든 노드에 데이터를 저장하는 동기식 방법이 있다. 그만큼 느린 응답시간을 보이지만 데이터의 정합성을 보장한다.
 - 두번째로 메모리나 임시 파일에 기록하고 클라이언트에 먼저 응답한 다음, 특정 이벤트 또는 프로세스를 사용하여 노드로 데이터를 동기화하는 비동기식 방법이 있다. 빠른 응답시간을 보인다는 장점이 있지만, 쓰기 노드에 장애가 발생하였을 경우 데이터가 손실될 수 있다.
 
-#### 2. Availability
+2. Availability
 
 모든 클라이언트의 읽기와 쓰기 요청에 대하여 항상 응답이 가능해야 함을 보증하는 것. NoSQL 은 가용성을 보장하기 위해 데이터 복제(Replication)을 사용한다. 동일한 데이터를 다중 노드에 중복 저장하여 그 중 몇 대의 노드가 고장나도 데이터가 유실되지 않도록 하는 방법이다. 데이터 중복 저장 방법에는 동일한 데이터를 가진 저장소를 하나 더 생성하는 Master-Slave 복제 방법과 데이터 단위로 중복 저장하는 Peer-to-Peer 복제 방법이 있다.
 
-#### 3. Partition Tolerance
+3. Partition Tolerance
 
 네트워크 분할 허용성이란 지역적으로 분할된 네트워크 환경에서 동작하는 시스템에서 두 지역 간의 네트워크가 단절되거나 네트워크 데이터의 유실이 일어나더라도 각 지역 내의 시스템은 정상적으로 동작해야 함을 의미한다.
 
@@ -314,11 +322,20 @@ eg. MongoDB
 
 [위로](#database)
 
+## Ideas
+
+### NoSQL
+
+
 ## References
 
 Common
 
 https://github.com/JaeYeopHan/Interview_Question_for_Beginner/blob/master/Database
+
+CAP Theorm
+
+https://en.wikipedia.org/wiki/CAP_theorem
 
 Index
 
@@ -333,3 +350,11 @@ https://magok-leaders-coding.tistory.com/4
 Join
 
 https://advenoh.tistory.com/23
+
+NoSQL
+
+https://www.alachisoft.com/nosdb/why-nosql.html
+
+https://www.techrepublic.com/blog/the-enterprise-cloud/migrating-from-a-relational-to-a-nosql-cloud-database/
+
+https://nosql.mypopescu.com/post/540412780/from-mysql-to-mongodb-migration-steps

@@ -2,13 +2,6 @@
 
 Performance vs Pride
 
-- [Engineering](#engineering)
-  - [Programming](#programming)
-  - [Seperation of Concerns](#seperation-of-concerns)
-  - [Everything is for human](#everything-is-for-human)
-  - [Engineering Mind](#engineering-mind)
-  - [Questions](#questions)
-
 ## Programming
 
 The process of creating a set of instructions that tell a computer how to perform a task.
@@ -47,6 +40,13 @@ Simple is best. Don't make a dependency if possible.
 Solve problem **in a effective way**. Increase performence, in a simple way.
 
 Engineering is understanding performance, structure, limits of what you build, deeply
+
+## Tech
+
+- History (What for?)
+- Pros, Cons
+- Comparision
+
 
 ## Questions
 
