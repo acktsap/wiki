@@ -1,5 +1,17 @@
 # Graph
 
+- [Graph](#graph)
+  - [What isGraph](#what-isgraph)
+  - [Type of Graph](#type-of-graph)
+    - [directed graph](#directed-graph)
+    - [undirected graph](#undirected-graph)
+    - [weighted graph](#weighted-graph)
+    - [single graph](#single-graph)
+    - [multigraph](#multigraph)
+    - [unrooted graph](#unrooted-graph)
+    - [biparite graph](#biparite-graph)
+    - [DAG (Directed Acyclic Graph)](#dag-directed-acyclic-graph)
+
 ## What isGraph
 
 Represents relation among objects by G(V, E); V : vertices, E : edges
