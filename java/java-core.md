@@ -1,10 +1,11 @@
 # Java Core
 
 - [Java Core](#java-core)
+  - [Interface vs Abstract class](#interface-vs-abstract-class)
   - [Writing class](#writing-class)
   - [Type](#type)
     - [Primitive types](#primitive-types)
-    - [Boxed type, primitive type, AutoBoxing, Unboxing](#boxed-type-primitive-type-autoboxing-unboxing)
+    - [Wrapper class, primitive type, AutoBoxing, Unboxing](#wrapper-class-primitive-type-autoboxing-unboxing)
     - [Integer.valueOf vs Integer.parseInt](#integervalueof-vs-integerparseint)
   - [Access Modifier](#access-modifier)
   - [static, default method in interface](#static-default-method-in-interface)
@@ -12,9 +13,14 @@
     - [ArrayList vs LinkedList](#arraylist-vs-linkedlist)
     - [HashMap, LinkedHashMap, HashTable, ConcurrentHashMap](#hashmap-linkedhashmap-hashtable-concurrenthashmap)
     - [Lambda, FunctionalInterface](#lambda-functionalinterface)
+  - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
   - [Reflection](#reflection)
     - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
   - [References](#references)
+
+## Interface vs Abstract class
+
+Interface는 상태를 가질 수 없음. Abstract class는 상태를 가질 수 있음. 원래 1.8 이전까지는 interface에 구현도 가질 수 없었으나 default method가 추가된 이후 Interface와 abstract class의 차이점은 상태 여부임. 추가로 Interface는 다중구현을 할 수 있으나 abstract class는 다중상속이 불가능함. 또 interface에는 모든 method가 public이지만 abstract class에는 access modifier가 다 적용됨.
 
 ## Writing class
 
@@ -33,7 +39,11 @@
 - float: 4 byte, default: 0.0f
 - double: 8 byte, default: 0.0d
 
-### Boxed type, primitive type, AutoBoxing, Unboxing
+### Wrapper class, primitive type, AutoBoxing, Unboxing
+
+Java에서는 primitive type에 각각 해당하는 객체가 있음. 이를 Wrapper class라고 함.
+
+Autoboxing은 primitive type을 Wrapper class에 담을 때 자동으로 Wrapper class로 변환해주는 기능, Unboxing은 반대로 Wrapper class를 primitive type에 담을 때 자동으로 primitive type으로 변환해 주는 기능임. java 1.5부터 지원함.
 
 ### Integer.valueOf vs Integer.parseInt
 
@@ -82,6 +92,10 @@ jdk8부터 등장 Lambda를 쓰면 그냥 실질적으로 anonymous class가 박
 - `Function` : R apply(T t)
 - `Predicate` : boolean test(T t)
 
+## InputStream, OutputStream, Reader, Writer
+
+InputStream/OutputStream은 byte단위로 I/O을 하는 녀석. Reader/Writer는 char단위 (2 byte)로 I/O를 하는 녀석임.
+
 ## Reflection
 
 클래스의 구체적인 타입을 알지 못해도 클래스의 method, type, field를 접근하게 할 수 있게 해주는 api. Java의 Class에 대한 정보가 static영역에 올라가 있기 때문에 이것이 가능.
@@ -99,6 +113,10 @@ https://m.blog.naver.com/sthwin/221000179980
 Collection vs Stream
 
 https://javaconceptoftheday.com/collections-and-streams-in-java/
+
+AutoBoxing, Unboxing
+
+https://hyeonstorage.tistory.com/168
 
 Reflection
 

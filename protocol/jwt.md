@@ -1,5 +1,9 @@
 # JWT
 
+## History
+
+## Structure
+
 ## References
 
 2015

@@ -171,7 +171,7 @@ version and a success or error code, by a MIME-like message containing
 server information, entity metainformation, and possible entity-body content
 ```
 
-> Client가 URI, protocol version, MIME-like message의 형태로 서버에게 요청.
+> Client가 request method, URI, protocol version, MIME-like message (eg. text/plain, text/html)같은 것을 서버에게 요청.
 > Server는 message protocol version과 message content 그리고 response code를 client에 전송함
 
 ### Simplest case
@@ -243,7 +243,7 @@ closed for a variety of reasons (see section 8.1).
 ```
 
 > 보통은 response받고 그냥 끊어버리는데 port를 열어둔 상태를 일정 기간 유지하자!
-> Http Persistent Connections임
+> Http Persistent Connections임.
 
 ## Reference
 
