@@ -59,7 +59,6 @@ O	O	O	// group 2
 - Cannot go back(no cycle)
 - If no direction, there may be a cycle...
 
-
  o Path of Graph
 
     Permutation of connected edges

@@ -2,6 +2,7 @@
 
 Consists of
 
+- Descryption
 - Approach & Proving
-- Implementation
+- Implementation (in code)
 - Review

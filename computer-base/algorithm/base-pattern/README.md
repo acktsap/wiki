@@ -121,7 +121,7 @@ Approximately, 100_000_000 loop ~ 1 second. Not sure.
 System.out.println("Hello world");
 
 // O(N * log(N))
-Collections.sort()
+Collections.sort();
 
 // O(N) : Linear
 for (int i = 0; i < N; ++i) {

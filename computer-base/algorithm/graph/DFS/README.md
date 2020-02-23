@@ -3,7 +3,7 @@
 - [DFS](#dfs)
   - [Depth First Search](#depth-first-search)
   - [By recursion using adjacent matrix](#by-recursion-using-adjacent-matrix)
-  - [By recursion (map searching)](#by-recursion-map-searching)
+  - [Grid search (By recursion)](#grid-search-by-recursion)
   - [By stack (adjacent matrix)](#by-stack-adjacent-matrix)
   - [Time Complexity of DFS](#time-complexity-of-dfs)
   - [Usage of DFS](#usage-of-dfs)
@@ -61,50 +61,45 @@ void dfs(int from) {
 }
 ```
 
-## By recursion (map searching)
+## Grid search (By recursion)
 
-```cpp
-const int DIRECTION_NUM = 4;
-const int da[] = { 1, -1, 0, 0 };
-const int db[] = { 0, 0, -1, 1 };
+```java
+public class Solution {
+  protected static final int nDirection = 4;
+  protected static final int[] di = { 1, -1, 0, 0 };
+  protected static final int[] dj = { 0, 0, 1, -1 };
 
-vector<vector<int>> map;  // map, consist of 1, 0
-vector<vector<bool>> visited;  // whether visited or not for each map entry
+  public int dfsAll(final int[][] grid) {
+    final boolean[][] visited = new boolean[grid.length][grid[0].length];
+    int count = 0; // # of island
+    for (int i = 0; i < grid.length; ++i) {
+      for (int j = 0; j < grid[i].length; ++j) {
+        if (1 == grid[i][j] && !visited[i][j]) {
+          dfs(grid, visited, i, j);
+          ++count;
+        }
+      }
+    }
+    return count;
+  }
 
-bool isRightCoordinate(int a, int b) {
-  return 0 <= a && b <= map.size() - 1 && 0 <= b && b <= map[a].size() - 1;
-}
+  protected void dfs(final int[][] grid, final boolean[][] visited, final int i, final int j) {
+    // mark as visited
+    visited[i][j] = true;
 
-void dfsAll() {
-  // initialize to false
-  visited = vector< vector<bool> >(map.size(), vector<bool>(map.size(), false));
-  for (int a = 0; a < visited.size(); ++a) {
-    for (int b = 0; b < visited[a].size(); ++b) {
-      if (map[a][b] == 1 && !visited[a][b]) {
-        dfs(a, b);
+    // do something
+
+    // visit next
+    for (int n = 0; n < nDirection; ++n) {
+      final int nextI = i + di[n];
+      final int nextJ = j + dj[n];
+      if (0 <= nextI && nextI < grid.length &&
+          0 <= nextJ && nextJ < grid[i].length &&
+          1 == grid[nextI][nextJ] && !visited[nextI][nextJ]) {
+        dfs(grid, visited, nextI, nextJ);
       }
     }
   }
-}
-
-void dfs(int a, int b) {
-  // 1. mark from as visited
-  visited[a][b] = true;
-
-  // 2. process current vertex
-
-  // 3. search next vertex
-  for (int i = 0; i < DIRECTION_NUM; ++i) {
-    int nextA = a + da[i];
-    int nextB = b + db[i];
-
-    if (isRightCoordinate(nextA, nextB) &&
-        map[nextX][nextY] == 1 && !visited[nextX][nextY]) {
-      dfs(nextX, nextY);
-    }
-  }
-  // exit function, go back to previous vertex
-}
 ```
 
 ## By stack (adjacent matrix)
@@ -159,7 +154,7 @@ int dfsAll() {
     for (int j = 0; j < map[0].length; ++j) {
       if (!visited[i][j]) {
         dfs(i, j);
-        count++;
+        ++count;
       }
     }
   }

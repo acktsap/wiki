@@ -22,11 +22,13 @@
     ```java
     java.util.UUID.*        // randomUUID()
     java.util.Objects.*     // requireNonNull
+    org.slf4j.LoggerFactory.* // logback
     ```
 
 - Highlight Current Variable : Java -> Editor -> Mark occurrences
 - Font size : General -> Appearance -> Colors and Fonts -> Java
 - Import order : Java -> Code Style -> Organized Imports
+- Checkstyle warning color : General -> Editors -> Text Editors -> Annotations -> Checkstyle warning
 
 ## Plugins
 
