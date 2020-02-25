@@ -17,12 +17,16 @@
  *   if visited[nextI][nextJ] -> --count;
  *   if !visited[nextI][nextJ] -> --count; count += dfs(nextI, nextJ)
  *
+ * Proof & Complexity
+ *
+ * 그냥 꼼수 같은데...
+ *
+ *
  * Time : (# of node * 4)
  * 
  * Review
  *
- * 전체를 순회하면서 4방면을 뒤져보는 것이 아니라 차있는 grid를 찾아서 순회함.
- * 뭐.. 그냥 별거 없는듯..
+ * 전체를 순회하면서 4방면을 뒤져보는 것이 아니라 차있는 grid를 찾아서 순회.
  *
  */
 class IslandPerimeter {

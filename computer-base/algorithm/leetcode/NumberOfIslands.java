@@ -11,7 +11,14 @@
  * 
  * dfsAll이 끝날 때 마다 ++count를 하고 return하면 될 듯.
  *
- * Time : O(n*m) where n is # of x and y is # of y
+ * Proof & Complexity
+ *
+ * Loop Invarient : dfsAll에서 dfs를 한번 호출하면
+ *
+ * - 호출한 (i, j)와 연결되어 있는 point들에 대해 visited[i][j] == true
+ * - 이전에 비해 count가 1 증가
+ *
+ * Time : O(n*m) where n is # of i and y is # of j
  * 
  * Review
  * 
@@ -26,18 +33,10 @@ class NumberOfIslands {
   protected static final int nDirection = 4;
   
   public int numIslands(final char[][] grid) {
-    final boolean[][] visited = setup(grid);
+    final boolean[][] visited = new boolean[grid.length][grid[0].length];
     return dfsAll(grid, visited);
   }
-  
-  protected boolean[][] setup(final char[][] grid) {
-    final boolean[][] visited = new boolean[grid.length][];
-    for (int y = 0; y < grid.length; ++y) {
-      visited[y] = new boolean[grid[y].length];
-    }
-    return visited;
-  }
-  
+
   protected int dfsAll(final char[][] grid, final boolean[][] visited) {
     int count = 0;
     for (int i = 0; i < grid.length; ++i) {
