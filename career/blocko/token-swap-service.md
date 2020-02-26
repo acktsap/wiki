@@ -79,6 +79,7 @@ MySQL, Blockchain (Aergo / Ethereum / Binance)
 ## What you did
 
 - Maintanence
+- Split batch processing
 
 ## What you got?
 
