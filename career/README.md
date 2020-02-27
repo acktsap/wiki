@@ -15,7 +15,8 @@ TBD
 
 - Language : Java, Kotlin, JavaScript(ES6), TypeScript, golang, ShellScript, C++
 - Framework / Library: Spring, Grpc, React.js, Vaadin, Qt
-- Flatform : Ubuntu, MySQL, Tomcat, Atom, PostgreSQL
+- Server : Tomcat, Docker, MySQL, PostgreSQL
+- Platform : Ubuntu, Atom
 - Tools : git, gradle, jira, Eclipse, Intellij, vscode
 
 ## Projects
