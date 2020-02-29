@@ -11,8 +11,6 @@
  * 
  * dfsAll이 끝날 때 마다 ++count를 하고 return하면 될 듯.
  *
- * Proof & Complexity
- *
  * Loop Invarient : dfsAll에서 dfs를 한번 호출하면
  *
  * - 호출한 (i, j)와 연결되어 있는 point들에 대해 visited[i][j] == true
@@ -26,6 +24,7 @@
  * char인걸 잊고 1하고 비교했음... '1'하고 비교했어야 했는데.
  * visited를 setup할 때 어떻게 해야 하나 고민했으나
  * for문을 돌면서 하는 식으로 함.
+ * -> new booolean[][] 이러면 됨
  */
 class NumberOfIslands {
   protected static final int[] di = { 1, -1, 0, 0 };
@@ -52,6 +51,7 @@ class NumberOfIslands {
   
   protected void dfs(final char[][] grid, final boolean[][] visited, final int i, final int j) {
     visited[i][j] = true;
+
     for (int n = 0; n < nDirection; ++n) {
       final int nextI = i + di[n];
       final int nextJ = j + dj[n];
@@ -71,8 +71,8 @@ class NumberOfIslands {
                        { '1', '1', '0', '1', '0' },
                        { '1', '1', '0', '0', '0' },
                        { '0', '0', '0', '0', '0' },
-        }
-        , 1
+        },
+        1,
       },
       {
         new char[][] {
@@ -80,8 +80,15 @@ class NumberOfIslands {
                        { '1', '1', '0', '0', '0' },
                        { '0', '0', '1', '0', '0' },
                        { '0', '0', '0', '1', '1' },
-        }
-        , 3
+        },
+        3,
+        new char[][] {
+                       { '1', '0', '1', '0', '1' },
+                       { '0', '1', '0', '1', '0' },
+                       { '1', '0', '1', '0', '1' },
+                       { '0', '1', '0', '1', '0' },
+        },
+        10,
       },
     };
     final NumberOfIslands solution = new NumberOfIslands();

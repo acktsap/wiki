@@ -78,9 +78,9 @@ MySQL, Blockchain (Aergo / Ethereum / Binance)
 
 ## What you did
 
+- 정산 서비스 개선
 - Maintanence
-- Split batch processing
 
 ## What you got?
 
-- 실 서비스 운영
+- 실 서비스에 대한 유지보수 및 운영
