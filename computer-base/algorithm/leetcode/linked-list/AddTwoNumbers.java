@@ -18,17 +18,19 @@ import java.util.List;
  *   Output: 7 -> 0 -> 8
  *   Explanation: 342 + 465 = 807.
  *
- * Approach
+ * Approach & Proof
  *
  * Loop Invarient
  *
  *  - pre holds pre pointer
  *  - left holds l1 pointer or null
- *  - left holds l2 pointer or null
+ *  - right holds l2 pointer or null
  *  - overflow == 1 if pre has overflow
  *
- * Space : O(n)
- * Time  : O(n)
+ * Complexity
+ *
+ *  - Space : O(n)
+ *  - Time  : O(n)
  * 
  * Review
  *

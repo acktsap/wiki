@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class ListNode {
-  public static ListNode of(final int[] arr) {
+  static ListNode of(final int[] arr) {
     if (arr.length == 0) {
       return null;
     }
@@ -21,7 +21,7 @@ class ListNode {
   ListNode next;
   ListNode(int x) { val = x; }
 
-  public int[] toArray() {
+  int[] toArray() {
     final List<Integer> list = new ArrayList<>();
     ListNode curr = this;
     while (null != curr) {

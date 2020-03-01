@@ -3,12 +3,14 @@
  *
  * https://leetcode.com/problems/xxx
  *
- * Approach
+ * Approach & Proof 
  *
- * Proof & Complexity
- * 
+ * Complexity
+ *
+ *  - Time  :
+ *  - Space :
+ *
  * Review
- *
  */
 class Template {
   public static void main(final String[] args) {

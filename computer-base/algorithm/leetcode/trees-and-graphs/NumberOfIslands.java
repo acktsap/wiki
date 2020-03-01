@@ -7,7 +7,7 @@
  * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
  * Jou may assume all four edges of the grid are all surrounded by water.
  *
- * Approach
+ * Approach & Proof
  * 
  * dfsAll이 끝날 때 마다 ++count를 하고 return하면 될 듯.
  *
@@ -16,7 +16,9 @@
  * - 호출한 (i, j)와 연결되어 있는 point들에 대해 visited[i][j] == true
  * - 이전에 비해 count가 1 증가
  *
- * Time : O(n*m) where n is # of i and y is # of j
+ * Complexity
+ *
+ * - Time : O(n*m) where n is # of i and y is # of j
  * 
  * Review
  * 
@@ -32,6 +34,10 @@ class NumberOfIslands {
   protected static final int nDirection = 4;
   
   public int numIslands(final char[][] grid) {
+    if (0 == grid.length) {
+      return 0;
+    }
+
     final boolean[][] visited = new boolean[grid.length][grid[0].length];
     return dfsAll(grid, visited);
   }
@@ -65,6 +71,10 @@ class NumberOfIslands {
 
   public static void main(final String[] args) {
     final Object[][] parameters = new Object[][] {
+      {
+        new char[0][0],
+        0,
+      },
       {
         new char[][] {
                        { '1', '1', '1', '1', '0' },
