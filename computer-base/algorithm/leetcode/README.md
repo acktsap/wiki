@@ -2,7 +2,8 @@
 
 ## Algorithm Design
 
-Write it down
+- Write it down
+- Validate with loop invarient (set of states which have to hold some condition)
 
 ## Function Requirements
 

@@ -29,6 +29,10 @@ class Template {
     for (final Object[] parameter : parameters) {
       final char[][] grid = (char[][]) parameter[0];
       final int expected = (int) parameter[1];
+      if (!Arrays.equals(expected, actual)) {
+        throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
+            ", but was: " + Arrays.toString(actual));
+      }
     }
   }
 }

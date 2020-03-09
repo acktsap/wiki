@@ -8,12 +8,13 @@
   - Customizing
     - Line Wrapping -> Never join already wrapped lines
 - Code template
-  - Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files
+  - Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files & Check automatically add comments
 
     ```java
     /*
      * @copyright defined in LICENSE.txt
      */
+
     ```
 
 - Static import
