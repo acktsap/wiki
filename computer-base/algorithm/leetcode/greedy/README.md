@@ -1,30 +1,20 @@
+# Greedy
 
-====== Greedy-Algorithm ======
+## Strategy
 
+1. Divide into sub-problems
+2. Define a greedy algorithm which staisfies
+    1. Greedy choice property : ∃ optimal solution which contains our solution on sub-problem\
+       Assume ∃ other optimal solution, prove that we can modify it to our solution
+    2. Optimal Substructure : ∑ Optimal solution of subproblem -> Optimal final solution; Mostly obvious
 
-    Receipe? Tips?
-    VS bruce force? VS dynamic programming?
-    Example 1[activity selection problem, feel it]
-
-
-
- o Receipe
-
-    1. Divide into sub-problems
-    2. Define a greedy algorithm which staisfies
-        a. Greedy choice property : ∃ optimal solution which contains our solution on sub-problem
-            Assume ∃ other optimal solution, prove that we can modify it to our solution
-        b. Optimal Substructure : ∑ Optimal solution of subproblem -> Optimal final solution; Mostly obvious
-
-    - Tips : Sorting is the great way to select greedily easily
+- Tips : Sorting is the great way to select greedily easily
 
 
- o VS bruce force? VS dynamic programming?
+## VS bruce force? VS dynamic programming?
 
-    Same on dividing & solving sub-problem
-    Difference : Bruce force, dynamic programing consider entire selection
-                 But Greedy-Algorithm consider only current stage
-
+- Same on dividing & solving sub-problem
+- Difference : Bruce force, dynamic programing consider entire selection. But Greedy-Algorithm consider only current stage.
 
  o Example 1[activity selection problem, feel it]
 

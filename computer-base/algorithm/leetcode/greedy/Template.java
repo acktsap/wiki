@@ -25,7 +25,6 @@ class Template {
         1
       },
     };
-
     final Template solution = new Template();
     for (final Object[] parameter : parameters) {
       final char[][] grid = (char[][]) parameter[0];
