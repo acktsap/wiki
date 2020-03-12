@@ -1,0 +1,4 @@
+dependencies {
+  implementation 'org.hibernate:hibernate-core:5.4.12.Final'
+  implementation 'com.h2database:h2:1.4.200'
+}

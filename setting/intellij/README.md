@@ -2,13 +2,29 @@
 
 ## Instruction
 
+- Code Style: Editor -> Code Style -> Java [google style guide github](https://github.com/google/styleguide)
 - Keymap: Eclipse
-- Disable auto save: System Settings -> Synchronization -> Uncheck except for last one
+- Disable auto save: System Settings -> Synchronization -> Uncheck second and third one
+- JDK Version: File -> Project Structure -> Project -> Project SDK, Project language level
+- Build and run: Build, Execution, Deployment -> Build Tools -> Gradle -> Set 'Build and running', 'Run test using'
+- Code template
+  - Editor -> File and Code Templates -> Class
+
+    ```java
+    /*
+     * @copyright defined in LICENSE.txt
+     */
+
+    ```
+- VM options : $IDEA_HOME/bin/idea.vmoptions
+
 
 ## Plugins
 
-- Vim
-- Relative line number
+- IdeaVim
+- Relative Line Numbers
+- Lombok
+- CheckStyle-IDEA
 
 ## View
 
