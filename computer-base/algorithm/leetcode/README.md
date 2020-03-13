@@ -4,6 +4,7 @@
 
 - Write it down
 - Validate with loop invarient (set of states which have to hold some condition)
+- Validate with a recursive function
 
 ## Function Requirements
 
