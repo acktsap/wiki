@@ -1,5 +1,4 @@
-Brute-Force
-===========
+# Brute-Force
 
 ![brute-force](./img/brute-force.jpg)
 

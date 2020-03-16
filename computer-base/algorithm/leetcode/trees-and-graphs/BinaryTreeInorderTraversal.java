@@ -21,21 +21,24 @@ import java.util.LinkedList;
  * 
  * Output: [1,3,2]
  *
+ *
  * Approach & Proof
  *
  * dfs(left)
  * ret.push(curr.val)
  * dfs(right)
  *
+ *
  * Complexity
  *
  *  - Time  : O(n), traverse each tree node
  *  - Space : O(n), call depth can be n in worst case
  * 
+ *
  * Review
  *
  * null check를 함수 호출 전에 할 것인가 아니면 호출 후 할 것인가?
- * -> 둘다 하는게 좋을거 같음
+ * -> 경우에 따라 둘다 하는게 좋을거 같음. 여기서는 root에서만
  *
  */
 class BinaryTreeInorderTraversal {
@@ -54,9 +57,9 @@ class BinaryTreeInorderTraversal {
       return;
     }
     
-    if (null != curr.left) dfs(curr.left, traversals);
+    dfs(curr.left, traversals);
     traversals.add(curr.val);
-    if (null != curr.right) dfs(curr.right, traversals);
+    dfs(curr.right, traversals);
   }
 
   public static void main(final String[] args) {

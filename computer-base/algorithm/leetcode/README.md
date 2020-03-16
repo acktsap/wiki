@@ -3,8 +3,9 @@
 ## Algorithm Design
 
 - Write it down
-- Validate with loop invarient (set of states which have to hold some condition)
-- Validate with a recursive function
+- Validate with
+  - Loop invarient (set of states which have to hold some condition)
+  - Recursive function (점화식)
 
 ## Function Requirements
 

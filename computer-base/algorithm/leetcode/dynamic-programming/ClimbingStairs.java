@@ -28,6 +28,7 @@ import java.util.Arrays;
  *   2. 1 step + 2 steps
  *   3. 2 steps + 1 step
  * 
+ *
  * Approach & Proof 
  *
  * f(1) = 1
@@ -35,10 +36,12 @@ import java.util.Arrays;
  * f(n) = f(n - 1) + f(n - 2)
  *      = (first is 1 plus left n - 1) + (first is 2 plus left n - 2)
  *
+ *
  * Complexity
  *
  *  - Time  : O(n)
  *  - Space : O(n)
+ *
  *
  * Review
  * 
@@ -49,6 +52,7 @@ import java.util.Arrays;
  * 문제를 역시 잘 읽어봐야 해
  * 
  * 이거 그냥 피보나치라서 직전 2개만 저장해도 되는데 걍 이렇게 함
+ *
  */
 class ClimbingStairs {
   protected int[] cache;

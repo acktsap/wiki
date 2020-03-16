@@ -19,6 +19,7 @@ import java.util.Map;
  * Because nums[0] + nums[1] = 2 + 7 = 9,
  * return [0, 1].
  *
+ *
  * Approach & Proof 
  *
  * 루프 돌 때 마다 
@@ -26,14 +27,16 @@ import java.util.Map;
  * 이것은 j기준으로 target까지 채우기 위한 left값임
  * target - num[j] (== left) 를 key로 하는게 있으면 그걸 값으로 해서 break
  *
- * Loop Invariant
+ * loop invariant
  *
  * - left2Index: i - 1까지 target이 되기 까지 필요한 값을 들고 있음
+ *
  *
  * Complexity
  *
  *  - Time  : O(n)
  *  - Space : O(n)
+ *
  *
  * Review
  *
@@ -47,6 +50,7 @@ import java.util.Map;
  *  - get
  *  - containsKey
  *  - containsValue
+ *
  */
 class TwoSum {
   public int[] twoSum(final int[] nums, final int target) {
