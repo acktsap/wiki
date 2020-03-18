@@ -1,26 +1,5 @@
 # Base Patterns
 
-- [Base Patterns](#base-patterns)
-  - [Solving](#solving)
-  - [Data Structure](#data-structure)
-    - [Canonicalization](#canonicalization)
-    - [Separate data with an algorithm](#separate-data-with-an-algorithm)
-  - [Modeling](#modeling)
-    - [Explicit Formula (점화식)](#explicit-formula-%ec%a0%90%ed%99%94%ec%8b%9d)
-      - [Sum until n](#sum-until-n)
-      - [Tower of Hanoi](#tower-of-hanoi)
-  - [Proving](#proving)
-    - [Loop dominates Time Complexity](#loop-dominates-time-complexity)
-    - [Mathematical Induction (수학적귀납법)](#mathematical-induction-%ec%88%98%ed%95%99%ec%a0%81%ea%b7%80%eb%82%a9%eb%b2%95)
-    - [Loop Invariant](#loop-invariant)
-  - [Writing](#writing)
-    - [Use half-open interval in a range](#use-half-open-interval-in-a-range)
-    - [Always init on declaration](#always-init-on-declaration)
-    - [No floating point operation if possible](#no-floating-point-operation-if-possible)
-  - [Debugging](#debugging)
-    - [Logging middle result](#logging-middle-result)
-    - [Use assert on precondition](#use-assert-on-precondition)
-
 ## Solving
 
 1. Understand carefully
@@ -44,16 +23,17 @@ eg. 2/4, 3/6 -> 1/2
 String getMonthName(int month) {
   if (mount == 1) return "January";
   if (mount == 2) return "February";
-  if (mount == 3) return "March";
-  return "December";
+  return "March";
 }
 
 // to
-String[] monthName = { "January", "February", "March", "December" };
+String[] monthName = { "January", "February", "March" };
 String getMonthName(int month) {
   return monthName[month - 1];
 }
+```
 
+```java
 // from
 void move(int direction) {
   if (direction == 1) moveLeft();
@@ -81,6 +61,7 @@ void move(int direction) {
 - For n >= 2, f(n) = f(n - 1) + n
 - For n == 1, f(n) = 1
 - Time complexity (basic operation : +)
+
   ```text
   T(n) = T(n - 1) + 1
        = T(n - 2) + 2
@@ -121,7 +102,8 @@ Approximately, 100_000_000 loop ~ 1 second. Not sure.
 System.out.println("Hello world");
 
 // O(N * log(N))
-Collections.sort();
+Collections.sort(collection);
+Arrays.sort(arr);
 
 // O(N) : Linear
 for (int i = 0; i < N; ++i) {
@@ -166,7 +148,7 @@ eg. 100개의 도미노
 int[] arr;
 
 // to
-int[] arr = { 1, 2, 3 };
+int[] arr = new int[] { 1, 2, 3 };
 ```
 
 ### No floating point operation if possible
@@ -189,7 +171,7 @@ sqrt((a - b) * (a - b)) == r
 int sum = 0;
 for (int i = 0; i < 3; ++i) {
   sum += i;
-  System.out.format("i: %d, sum: %d\n", i, sum);
+  System.out.format("i: %d, sum: %d%n", i, sum);
 }
 ```
 

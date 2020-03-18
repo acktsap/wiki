@@ -39,25 +39,26 @@ class MergeTwoSortedList {
     ListNode pre = dummy;
     ListNode left = l1;
     ListNode right = l2;
-    while (left != null && right != null) {
+    while (null != left && null != right) {
       if (left.val < right.val) {
         pre.next = new ListNode(left.val);
+        pre = pre.next;
         left = left.next;
       } else {
         pre.next = new ListNode(right.val);
+        pre = pre.next;
         right = right.next;
       }
-      pre = pre.next;
     }
     while (null != left) {
       pre.next = new ListNode(left.val);
-      left = left.next;
       pre = pre.next;
+      left = left.next;
     }
     while (null != right) {
       pre.next = new ListNode(right.val);
-      right = right.next;
       pre = pre.next;
+      right = right.next;
     }
     return dummy.next;
   }

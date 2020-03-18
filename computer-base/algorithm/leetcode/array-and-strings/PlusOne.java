@@ -32,8 +32,8 @@ import java.util.Arrays;
  *
  * loop invariant
  *
- * before
- * - index > 0
+ * - index보다 작은 곳은 아직 처리가 안됨, 큰거는 처리
+ * - 0 < index
  * - ret[index] == 10 or < 10
  *
  *
@@ -50,24 +50,23 @@ import java.util.Arrays;
  */
 class PlusOne {
   public int[] plusOne(final int[] digits) {
-    final int ret[] = new int[digits.length + 1];
+    final int[] ret = new int[digits.length + 1];
     for (int i = 1; i < ret.length; ++i) {
       ret[i] = digits[i - 1];
     }
-    
-    // plus one
+
+    ret[ret.length - 1] += 1;
     int index = ret.length - 1;
-    ret[index] += 1;
-    // process overflow
     while (0 < index) {
-      if (ret[index] != 10) {
+      if (ret[index] < 10) {
         break;
       }
       ret[index - 1] += 1;
-      ret[index] = 0;
+      ret[index] = ret[index] % 10;
       --index;
     }
-    return ret[0] == 0 ? Arrays.copyOfRange(ret, 1, ret.length) : ret;
+
+    return ret[0] == 1 ? ret : Arrays.copyOfRange(ret, 1, ret.length);
   }
 
   public static void main(final String[] args) {

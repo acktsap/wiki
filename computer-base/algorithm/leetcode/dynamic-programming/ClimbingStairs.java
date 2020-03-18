@@ -55,26 +55,25 @@ import java.util.Arrays;
  *
  */
 class ClimbingStairs {
-  protected int[] cache;
-  
   public int climbStairs(final int n) {
-    this.cache = new int[n + 1];
+    final int[] cache = new int[n + 1];
     Arrays.fill(cache, -1);
-    return calculate(n);
+    return calculate(n, cache);
   }
-  
-  protected int calculate(final int n) {
+
+  protected int calculate(final int n, final int[] cache) {
     if (n == 1) {
       return 1;
     }
     if (n == 2) {
       return 2;
     }
+
     if (cache[n] != -1) {
       return cache[n];
     }
 
-    cache[n] = calculate(n - 1) + calculate(n - 2);
+    cache[n] = calculate(n - 1, cache) + calculate(n - 2, cache);
     return cache[n];
   }
 

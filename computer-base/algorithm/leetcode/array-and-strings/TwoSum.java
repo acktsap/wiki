@@ -41,7 +41,7 @@ import java.util.Map;
  * Review
  *
  * 처음에 map의 key에 target - nums[i]를 넣음..
- * j기준으로는 nums[i]를 넣어야 key값이 left가 되는건데
+ * j 기준으로는 nums[i]를 넣어야 key값이 left가 되는건데
  *
  * java map이 contains가 없고 containsKey가 있다는걸 첨알음
  * 맨날 value = map.get("key"); if (null != value) 이래서 그런가..
@@ -56,16 +56,14 @@ class TwoSum {
   public int[] twoSum(final int[] nums, final int target) {
     final int[] ret = new int[2];
     final Map<Integer, Integer> left2Index = new HashMap<>();
-    int i = 0;
-    while (i < nums.length) {
-      final int left = target - nums[i];
-      if (left2Index.containsKey(left)) {
-        ret[0] = left2Index.get(left);
+    for (int i = 0; i < nums.length; ++i) {
+      final int next = nums[i];
+      if (null != left2Index.get(next)) {
+        ret[0] = left2Index.get(next);
         ret[1] = i;
         break;
       }
-      left2Index.put(nums[i], i);
-      ++i;
+      left2Index.put(target - next, i);
     }
     return ret;
   }

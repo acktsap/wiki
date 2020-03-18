@@ -28,6 +28,7 @@ import java.util.LinkedList;
  *   [15,7]
  * ]
  *
+ *
  * Approach & Proof
  *
  * BFS는queue에 다음에 탐색할 것을 누적해서 집어넣는 원리임
@@ -44,10 +45,12 @@ import java.util.LinkedList;
  *  - 순차 : left -> right
  *  - 역순 : right -> left
  *
+ *
  * Complexity
  *
  *  - Time  : O(n), # of nodes in a tree
  *  - Space : O(max node count of single level)
+ *
  *
  * Review
  *
@@ -57,6 +60,7 @@ import java.util.LinkedList;
  * - push -> add 
  * - top -> getLast 
  * - pop -> removeLast 
+ *
  *
  */
 class BinaryTreeZigzagLevelOrderTraversal {

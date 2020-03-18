@@ -13,17 +13,19 @@ import java.util.stream.Collectors;
  *
  * Let k be a size of array and '..' be a range
  *
- * f(1..k) = merge(f(1..k/2), f(k/2..k))
- * f(m..m+1) = merge(lists[m], lists[m+1])
  * f(1) = lists[0]
+ * f(m..m+1) = merge(lists[m], lists[m+1])
+ * f(1..k) = merge(f(1..k/2), f(k/2..k))
+ *
  *
  * Complexity
  *
  * Let n be an average length of list.
  *  - Time
- *    - merge of each depth * # of depth = k * n * log(k)
+ *    - merge comparision of each depth * # of depth = k * n * log(k)
  *    - k*n -> k레벨에서는 대충 k개의 list가 n번 비교를 함
  *  - Space : n * k (한쪽으로 쏠린 케이스)
+ *
  *
  * Review
  *
@@ -34,6 +36,7 @@ import java.util.stream.Collectors;
  * ..
  * return dummy.next;
  * dummy는 건드리지 마라.. curr을 건들려라
+ *
  */
 class MergeKSortedList {
   public ListNode mergeKLists(final ListNode[] lists) {
@@ -41,46 +44,46 @@ class MergeKSortedList {
   }
 
   protected ListNode mergeInRange(final ListNode[] lists, final int start, final int end) {
-    if (end <= start) return null;
-    if (end - start == 1) return lists[start];
+    if ((end - start) == 0) {
+      return null;
+    }
+    if ((end - start) == 1) {
+      return lists[start];
+    }
+    if ((end - start) == 2) {
+      return merge(lists[start], lists[start + 1]);
+    }
 
     final int mid = (start + end) / 2;
     return merge(mergeInRange(lists, start, mid), mergeInRange(lists, mid, end));
   }
 
-  protected ListNode merge(final ListNode left, final ListNode right) {
+  protected ListNode merge(final ListNode l1, final ListNode l2) {
     final ListNode dummy = new ListNode(0);
-
-    ListNode curr = dummy;
-    ListNode leftCurr = left;
-    ListNode rightCurr = right;
-    while (null != leftCurr && null != rightCurr) {
-      if (leftCurr.val < rightCurr.val) {
-        curr.next = new ListNode(leftCurr.val);
-        leftCurr = leftCurr.next;
+    ListNode pre = dummy;
+    ListNode left = l1;
+    ListNode right = l2;
+    while (null != left && null != right) {
+      if (left.val < right.val) {
+        pre.next = new ListNode(left.val);
+        pre = pre.next;
+        left = left.next;
       } else {
-        curr.next = new ListNode(rightCurr.val);
-        rightCurr = rightCurr.next;
-      }
-      curr = curr.next;
-    }
-
-    if (null != leftCurr) {
-      while (null != leftCurr) {
-        curr.next = new ListNode(leftCurr.val);
-        leftCurr = leftCurr.next;
-        curr = curr.next;
+        pre.next = new ListNode(right.val);
+        pre = pre.next;
+        right = right.next;
       }
     }
-
-    if (null != rightCurr) {
-      while (null != rightCurr) {
-        curr.next = new ListNode(rightCurr.val);
-        rightCurr = rightCurr.next;
-        curr = curr.next;
-      }
+    while (null != left) {
+      pre.next = new ListNode(left.val);
+      pre = pre.next;
+      left = left.next;
     }
-
+    while (null != right) {
+      pre.next = new ListNode(right.val);
+      pre = pre.next;
+      right = right.next;
+    }
     return dummy.next;
   }
 

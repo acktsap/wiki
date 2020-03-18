@@ -53,12 +53,12 @@ class MoveZeros {
         ++i;
         ++j;
       } else {
-        if (nums[j] == 0) {
-          ++j;
-        } else {
+        if (nums[j] != 0) {
           nums[i] = nums[j];
           nums[j] = 0;
           ++i;
+          ++j;
+        } else { // nums[j] == 0
           ++j;
         }
       }

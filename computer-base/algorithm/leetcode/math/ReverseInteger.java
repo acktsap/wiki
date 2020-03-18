@@ -29,33 +29,33 @@
  *
  * Approach & Proof 
  *
- * Invariant
+ * loop invariant
  *
  *  - ret holds processed value (eg. 3 in 123)
- *  - val holds left (eg. 12 in 123)
+ *  - curr holds left (eg. 12 in 123)
+ *
  *
  * Complexity
  *
  *  - Time  : O(1)
  *  - Space : O(1)
  *
+ *
  * Review
  *
- * Overflow check를 10을 곱한 값 / 10 과 10을 곱하기 전의 값을 비교를 한다는 것이 인상깊었음
+ * Overflow check를 '(10 * val) / 10 == val'으로 한다는게 재밌음
+ *
  */
 class ReverseInteger {
   public int reverse(final int x) {
     int ret = 0;
-    int val = x;
-    while (val != 0) {
-      // overflow check
-      final int next = ret * 10;
-      if ((next / 10) != ret) {
+    int curr = x;
+    while (curr != 0) {
+      if ((10 * ret) / 10 != ret) {
         return 0;
       }
-      
-      ret = next + val % 10;
-      val /= 10;
+      ret = 10 * ret + curr % 10;
+      curr /= 10;
     }
     return ret;
   }

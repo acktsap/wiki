@@ -11,6 +11,7 @@ import java.util.Arrays;
  * Do not allocate extra space for another array,
  * you must do this by modifying the input array in-place with O(1) extra memory.
  *
+ *
  * Approach & Proof 
  *
  * Recursively
@@ -20,6 +21,7 @@ import java.util.Arrays;
  * f(str. left, right) = swap(left, right) + f(str, left - 1, right + 1);
  * f(str. left, right) = do nothing    where right < left
  *
+ *
  * Complexity
  *
  * Let n be length of str
@@ -27,9 +29,11 @@ import java.util.Arrays;
  *  - Time  : O(n / 2)
  *  - Space : log(n)
  *
+ *
  * Review
  *
  * 간단하구만
+ *
  */
 class ReverseString {
   public void reverseString(final char[] str) {
@@ -37,9 +41,9 @@ class ReverseString {
   }
 
   protected void swap(final char[] str, final int left, final int right) {
-    if (right <= left) return;
+    if (left >= right) return;
 
-    char tmp = str[left];
+    final char tmp = str[left];
     str[left] = str[right];
     str[right] = tmp;
     swap(str, left + 1, right - 1);

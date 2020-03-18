@@ -1,6 +1,4 @@
-Divisor
-======
-
+# Math
 
 ## Finding all the divisor
 
