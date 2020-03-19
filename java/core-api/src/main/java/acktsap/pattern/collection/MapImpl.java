@@ -4,7 +4,8 @@
 
 package acktsap.pattern.collection;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MapImpl {
 
-  static List<Integer> keys = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+  static List<Integer> keys = asList(12, 2, 33, 4, 75, 62);
   static String value = "v";
 
   public static void main(String[] args) {

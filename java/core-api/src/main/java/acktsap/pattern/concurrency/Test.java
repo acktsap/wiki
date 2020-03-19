@@ -23,7 +23,7 @@ public class Test {
       return 0;
     };
     final long start = System.nanoTime();
-    List<Callable<?>> tasks = new ArrayList<>();
+    List<Callable<Integer>> tasks = new ArrayList<>();
     for (int i = 0; i < nCore * 2; ++i) {
       tasks.add(task);
     }

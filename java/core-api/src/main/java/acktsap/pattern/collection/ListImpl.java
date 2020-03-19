@@ -4,15 +4,16 @@
 
 package acktsap.pattern.collection;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
 public class ListImpl {
 
-  static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+  static List<Integer> data = asList(12, 2, 33, 4, 75, 62);
 
   /**
    * ArrayList vs LinkedList.
@@ -32,7 +33,7 @@ public class ListImpl {
      * 
      * See {@link Vector#add}, {@link Vector#remove}.
      */
-    List<Integer> vector = new Vector<Integer>(data);
+    List<Integer> vector = new Vector<>(data);
     System.out.println("Vector: " + vector);
 
     /**

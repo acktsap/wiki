@@ -25,7 +25,7 @@ public class Print {
     System.out.println(".");
 
     final int i2 = 5;
-    final double r2 = Math.sqrt(i1);
+    final double r2 = Math.sqrt(i2);
     System.out.println("The square root of " + i2 + " is " + r2 + ".");
   }
 

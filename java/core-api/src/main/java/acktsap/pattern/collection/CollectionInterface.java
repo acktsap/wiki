@@ -4,18 +4,21 @@
 
 package acktsap.pattern.collection;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class CollectionInterface {
 
-  static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+  static List<Integer> data = asList(new Integer[] {12, 2, 33, 4, 75, 62});
 
-  /**
+  /*
    * A {@code Collection} is simply an object that groups multiple elements into a single unit.
    * Collections are used to store, retrieve, manipulate, and communicate aggregate data. It
    * contains the followings:
@@ -41,19 +44,18 @@ public class CollectionInterface {
   public static void main(String[] args) {
     Collection<Integer> collections = new ArrayList<>(data);
 
-    /**
+    /*
      * Traverse with for-each construct.
      *
      * The for-each construct allows you to concisely traverse a collection or array using a for
      * loop.
      */
     System.out.print("Traverse with for-each: ");
-    for (final Integer collection : collections) {
-      System.out.print(collection + " ");
+    for (Integer collection : collections) {
+      System.out.println(collection + " ");
     }
-    System.out.println();
 
-    /**
+    /*
      * Traverse with iterator.
      *
      * It enables you to traverse through a collection and to remove elements from the collection
@@ -66,20 +68,21 @@ public class CollectionInterface {
     }
     System.out.println();
 
-    /**
+    /*
      * Bulk operations (xxxAll).
      */
     collections.removeAll(Collections.singleton(12));
     System.out.println("After removeAll: " + collections);
+    collections.addAll(asList(1, 2, 3));
+    System.out.println("After addAll: " + collections);
 
-    /**
+    /*
      * Convert to Array.
      */
-    Object[] objectArray = collections.toArray();
-    Integer[] integerArray = collections.toArray(new Integer[0]);
-    System.out.println("Converted Object array: " + objectArray);
-    System.out.println("Converted Integer array: " + integerArray);
-
+    Object[] objects = collections.toArray();
+    Integer[] integers = collections.toArray(new Integer[0]);
+    System.out.println("Converted Object array: " + Arrays.toString(objects));
+    System.out.println("Converted Integer array: " + Arrays.toString(integers));
   }
 
 }

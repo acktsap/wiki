@@ -28,7 +28,7 @@ public class Format {
      */
     final int i = 2;
     final double r = Math.sqrt(i);
-    System.out.format("The square root of %d is %f.%n", i, r);
+    System.out.format("The square root of %d is %.6f %n", i, r);
 
     /*
      * 1$: 1st argument

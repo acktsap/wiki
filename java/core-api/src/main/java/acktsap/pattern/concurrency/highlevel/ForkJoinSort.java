@@ -6,7 +6,7 @@ package acktsap.pattern.concurrency.highlevel;
 
 import static java.util.Collections.shuffle;
 import static java.util.stream.Collectors.toList;
-import com.google.common.primitives.Ints;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
@@ -144,9 +144,9 @@ public class ForkJoinSort {
 
   protected static void run(final Sort sort) {
     List<Integer> list = IntStream.range(0, size).mapToObj(Integer::new).collect(toList());;
-    int[] expected = Ints.toArray(list);;
+    int[] expected = list.stream().mapToInt(i -> i).toArray();
     shuffle(list);
-    int[] input = Ints.toArray(list);
+    int[] input = list.stream().mapToInt(i -> i).toArray();
 
     long start = System.nanoTime() / 1_000_000;
     sort.sort(input);

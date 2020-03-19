@@ -4,7 +4,8 @@
 
 package acktsap.pattern.collection;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.TreeSet;
 
 public class SetImpl {
 
-  static List<Integer> data = Arrays.asList(new Integer[] {12, 2, 33, 4, 75, 62});
+  static List<Integer> data = asList(12, 2, 33, 4, 75, 62);
 
   /**
    * A Set is a Collection that cannot contain duplicate elements.

@@ -1,0 +1,128 @@
+- Common -
+
+45초 소개
+
+
+- Programming -
+
+명령형 프로그래밍 vs 선언형 프로그래밍
+함수형 프로그래밍
+   
+
+- Java -
+
+hashmap, linked hashmap, hashtable, concurrenthashmap
+java object 필수요소 (tostring hashcode equals)
+forkjoin pool
+jce 정리
+jar spec 정리 (jar spec 8 구글검색)
+parallel stream
+ClassLoader
+comparable, comparitor
+
+내부 클래스 403
+
+Exception 체계 : 415
+
+Try with resources : 437
+
+java.lang classses : 450
+
+Collection : 578
+
+Generics : 670
+
+Annotation : 702
+
+Lambda, Stream : 794
+
+I/O : https://docs.oracle.com/javase/tutorial/essential/io/cl.html
+
+JPA
+persist context, flush, lifecycle정리
+model1
+model2
+model3
+model4
+model5
+model6
+jpa-shop spring project에 정리
+springdata-shop spring project에 정리
+
+g1 gc
+
+
+- Spring -
+
+context on spring
+spring �� Ű�m ���� �ϵ��� ������?
+spring mvc�� ���� ���� (ó������ ������)
+spring security filter chain ������ ����
+spring security oauth
+spring security docs���� ����
+jpa ��ຸ�� ��������
+spring jpa docs���� ����
+spring jpa docs���� �ǽ�
+
+
+- Database -
+
+entity relational diagram
+db index
+nosql basic concept
+migrate from rdb to nosql
+transaction 처리
+
+
+- Operating System -
+
+
+- Network -
+
+subnet mask class
+
+
+- Algorithm -
+
+subsum
+brute force
+quicksort
+
+
+- Architecture
+
+MVC
+Scale out, Scale up
+Ʈ������ ��������?
+
+
+- Web -
+
+Http0.7, 1.1, 2.0
+Http 3.0
+Https
+Rest
+CSRF 정리
+jwt spec
+oauth 1.0a
+oauth 2.0
+SSL : https://swalloow.github.io/https-ssl
+
+
+- Blockchain -
+
+eos ����, �� ����, aergo�� ����
+blockchain consensus
+hyperledger ����, �� ����, kafka���, aergo�� ����
+
+
+- Techs -
+
+grpc
+was
+
+
+- Career -
+
+money 2020
+
