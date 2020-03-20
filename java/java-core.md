@@ -11,13 +11,25 @@
     - [Access Modifier](#access-modifier)
     - [static, default method in interface](#static-default-method-in-interface)
     - [Java Class정의 필수요소](#java-class%ec%a0%95%ec%9d%98-%ed%95%84%ec%88%98%ec%9a%94%ec%86%8c)
+    - [Annotation](#annotation)
+    - [Generics](#generics)
+    - [Exception](#exception)
+    - [ClassLoader](#classloader)
   - [Collection vs Stream](#collection-vs-stream)
-    - [ArrayList, LinkedList, Vector](#arraylist-linkedlist-vector)
-    - [HashMap, LinkedHashMap, ConcurrentHashMap, HashTable](#hashmap-linkedhashmap-concurrenthashmap-hashtable)
+    - [ArrayList, LinkedList](#arraylist-linkedlist)
+    - [Vector vs ArrayList](#vector-vs-arraylist)
+    - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
+    - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
     - [Lambda, FunctionalInterface](#lambda-functionalinterface)
-  - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
+  - [Concurrency](#concurrency)
+    - [ForkJoinPool](#forkjoinpool)
+  - [I/O](#io)
+    - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
+    - [NIO](#nio)
+    - [Stream vs Channel](#stream-vs-channel)
   - [Reflection](#reflection)
     - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
+  - [Jar](#jar)
   - [References](#references)
 
 ## Type
@@ -83,32 +95,109 @@ jdk 8 부터 등장. static의 경우 jdk7까지는 일관성을 위해 안만�
 
 ### Java Class정의 필수요소
 
-toString, hashCode, equals
+equals, hashcode, toString을 항상 재정의해야한다. equals, hashcode는 HashSet, HashMap에 필요하다. toString은 사람이 읽기 편한 형태로 표현해야 한다. Comparable도 구현할지 고민해봐야 함. Comparable을 구현하면 객체 사이에 자연적인 순서가 생기기 때문에 `Arrays.sort()`, `Collections.sort()`같은거를 자연스럽게 이용할 수 있음.
 
-TBD
+### Annotation
+
+java 5부터 추가된 것으로 Annotation처리를 통해 MetaPrograming이 가능하게 함.
+
+### Generics
+
+java 5부터 추가된 것으로 다양한 타입에 대해 compile type checking을 해주는 기능. Compile하면 Generics정보는 사라지고 특정 타입으로 변경됨.
+
+### Exception
+
+Throwable이 최고 조상이고 크게 Error, Exception, RuntimeException으로 나눌 수 있음. 부모 자손 관계는 다음과 같음.
+
+- Throwable
+  - Error
+    - OutOfMemoryError
+    - ...
+  - Exception
+    - IOException
+    - ...
+    - RuntimeException
+      - NullPointerException
+      - ...
+
+Error는 심각한 에러를 의미하고 (eg. StackOverflow) Exception은 에러 처리가 강제됨. RuntimeException은 에러 처리가 강제되진 않음.
+
+### ClassLoader
+
+Class를 Loading하는 녀석으로 hierarchy가 있다. 대표적으로는 다음의 3가지 ClassLoader가 있다.
+
+- Bootstrap ClassLoader : 'jre/lib/rt.jar' 안의 클래스를 Loading함. Native C로 구현되어 있음
+- ExtClassLoader : 'jre/lib/ext' 안의 jar들을 Loading 함. URLClassLoader를 상속
+- AppClassLoader : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading. URLClassLoader를 상속. 커스텀 클래스로더는 이걸 상속하면 됨.
+
+Class를 Loading하는 규칙은
+
+1. Delegation : 부모에서 먼저 찾는다
+2. Visibility : 하위 클래스로더는 상위 클래스로더가 로딩한 클래스를 볼 수 있지만 상위 클래스로더는 하위가 로딩한 것을 볼 수 없음
+3. Uniqueness : 한번 로딩한거는 다시 로딩 하지 않는다
+
+Java 9에서는 ExtClassLoader -> PlatformClassLoader, AppClassLoader -> SystemClassLoader로 이름이 바뀜
 
 ## Collection vs Stream
 
-Collection은 등 자료를 저장하는 것에 대한 추상화로 List, Set, Map 등이 있음. Stream은 자료를 처리하는 방식에 대한 추상화로 map, filter, flatMap등이 있음. Iterating을 할 때 Collection은 외부에서 사용자가 직접 해야하는 반면에 Stream은 내부적으로 자체적으로 함. Stream의 경우 map, filter, map 이런거 막 묶어놔도 실질적으로 for문은 terminal operation이 나와야만 실행함.
+Collection은 등 자료를 저장하는 것에 대한 추상화로 List, Set, Map 등이 있음. Stream은 자료를 처리하는 방식에 대한 추상화로 map, filter, flatMap등이 있음. Iterating을 할 때 Collection은 외부에서 사용자가 직접 해야하는 반면에 Stream은 내부적으로 자체적으로 함. Stream의 경우 map, filter, map 이런거 막 묶어놔도 실질적으로 for문은 terminal operation이 나와야만 실행함. Stream의 경우 Parallel stream을 사용할 수 있으나 이 경우 공통 forkJoinPool을 사용하기 때문에 여러개가 이걸 사용하는 경우 오히려 성능 저하가 발생할 수 있음.
 
-### ArrayList, LinkedList, Vector
+### ArrayList, LinkedList
 
 둘다 List의 구현체인데 ArrayList는 내부적으로 값을 배열로 저장. LinkedList는 내부적으로 노드들의 연결로 저장함. ArrayList는 값을 추가할 때 capacity가 가득 찬 경우 이를 늘려주는 연산을 해야 하지만 random access가 빠름. LinkedList는 값을 추가할 때 뒤에 그냥 연결만 해주면 되지만 random access를 할 경우 해당 index만큼 iterating을 해야함. ArrayList는 값을 중간에 빼면 뒤에 있는 값들을 shift해줘야 하는데 LinkedList는 그냥 중간에 있는 녀석의 연결만 끊으면 됨. Iterating할 때 ArrayList가 주소들로 연결되어 있는 LinkedList보다 Locality의 관점에서 더 좋을 수 있음. Locality는 현재 참조하는 값에 인접한 값을 참조할 경우 이를 cache에 저장해 두면 더 빠른 것을 말함.
 
-### HashMap, LinkedHashMap, ConcurrentHashMap, HashTable
+### Vector vs ArrayList
+
+Vector는 Java 1.0부터 있었고 ArrayList는 Java 1.2부터 있었음. 둘다 내부적으로 Array로 값을 저쟝하고 동적으로 크기를 증가시키지만, Vector는 method에 모두 synchronized가 걸려 있는 반면에 ArrayList는 걸려있지 않음. Vector는 단일 thread에서도 lock을 걸기 때문에 ArrayList에 비해 성능이 느릴 수 있음.
+
+### HashMap vs LinkedHashMap vs TreeMap
+
+HashMap은 일반적인 HashMap이고 LinkedHashMap은 HashMap에 내부적으로 LinkedList로 저장해서 Iterating시 insertion order가 보장된다. TreeMap은 Comparator를 기반으로 Red-Black Tree로 저장한다. HashMap, LinkedHashMap은 put, get에 O(1)이 보장되지만 TreeMap은 O(log(n))의 시간이 걸림. HashMap은 내부적으로 array로 저장하는데 `hash & (n - 1)`의 index에 값을 저장함. collision이 나는 경우 separate chaining방식으로 해당 index의 값에 LinkedList (1.8부터는 TreeNode, TreeNode의 경우 O(log(n)을 보장), LinkedList는 O(n))로 저장함.
+
+### HashTable vs ConcurrentHashMap
+
+HashTable 1.0부터, ConcurrentHashMap은 1.5부터 등장. HashTable은 모든 method에 synchronized가 걸려있는 반면에 ConcurrentHashMap은 일부만 synchronized를 걸어서 더 빠른 성능을 보장함. 구체적으로 하면 HashMap이 array의 `hash & (n - 1)` index에 separate chaining의 방식으로 저장하는데 여기 이 index만 synchronized를 걸어버림. 그래서 다른 bucket에 대해서는 동시에 처리를 할 수 있음.
 
 ### Lambda, FunctionalInterface
 
-jdk8부터 등장 Lambda를 쓰면 그냥 실질적으로 anonymous class가 박혀있음 `() ->` 이거는 syntax sugar일 뿐. `@FunctionalInterface`를 통해 interface에 함수가 한개인거를 강제할 수 있음. method가 하나인 인터페이스를 자바가 몇개 제공해줌. 주로 stream과 함께 사용
+jdk8부터 등장 Lambda를 쓰면 그냥 실질적으로 anonymous class가 박혀있음 `() ->` 이거는 syntax sugar일 뿐. `@FunctionalInterface`를 통해 interface에 함수가 한개인거를 강제할 수 있음. FunctionalInterface와 일반 Interface의 차이점은 method갯수임. `@FunctionalInterface`가 없더라도 method가 한개인 interface는 lambda로 쓸 수 있음. method가 하나인 인터페이스를 자바가 몇개 제공해줌.
 
+- `Runnable` : void run()
 - `Supplier` : T get()
 - `Consumer` : void accept()
 - `Function` : R apply(T t)
 - `Predicate` : boolean test(T t)
 
-## InputStream, OutputStream, Reader, Writer
+## Concurrency
 
-InputStream/OutputStream은 byte단위로 I/O을 하는 녀석. Reader/Writer는 char단위 (2 byte)로 I/O를 하는 녀석임.
+### ForkJoinPool
+
+Work-stealing pool로 fork를 통해 분리하고 join을 통해 합침. 일반 ExecutorService 와는 각 Thread들이 개별 queue를 가지고 자기의 task queue가 비어있으면 다른 thread의 task를 가져와서 처리함으로써 최적의 성능을 낼 수 있음. forkjoinpool을 사용할 때는 작업을 독립적인 작업으로 균등하게 분할해야 함.
+
+## I/O
+
+### InputStream, OutputStream, Reader, Writer
+
+InputStream / OutputStream은 byte단위로 I/O을 하는 녀석. Reader / Writer는 char단위 (2 byte)로 I/O를 하는 녀석임.
+
+### NIO
+
+![java-io](./img/java-io.jpg)
+
+Non-blocking IO x, New IO임. 1.3부터 추가되었는데 기존의 Java I/O는 kernal buffer를 직접 handling할 수 없어서 느렸음. 즉 I/O를 위해서는
+
+1. JVM이 Kernal에 I/O를 요청
+2. Kernal이 system call을 함
+3. Disk Controller가 디스크로부터 파일을 읽어옴
+4. DMA (Direct Memory Access)를 이용해서 kernal buffer로 복사
+5. JVM 내부 buffer로 복사
+
+여기서 JVM 내부 buffer로 복사를 해야 한다는 문제점이 있었다. 이는 Thread에 blocking이 발생하고, 내부 buffer가 GC의 대상이 된다는 문제점이 있었다.\
+이것을 해결하기 위해 Kernal의 buffer에 directly하게 접근하게 할 수 있는 `ByteBuffer`라는 클래스를 제공 (다른 `Buffer`들은 기존의 방식과 똑같음).
+
+### Stream vs Channel
+
+Stream은 one-way라서 I/O 둘다를 위해서는 InputStream, OutputStream 두개가 필요함. But Channel은 two-way라서 한개만 있어도 됨. 내부적으로 처리는 stream의 경우 구현체에 따라 byte부터 Object까지 가능하지만 Channel은 Buffer만 사용함. Stream은 Blocking방식만 가능하지만 Channel에는 Non-blocking방식도 가능함.
 
 ## Reflection
 
@@ -118,20 +207,42 @@ InputStream/OutputStream은 byte단위로 I/O을 하는 녀석. Reader/Writer는
 
 그냥 Proxy는 메소드를 다 정의해야함. DynamicProxy는 Reflection을 통해 실행되는 method를 가져와서 동적으로 처리할 수 있음. 구체적으로는 InvocationHandler로 함.
 
+## Jar
+
+TBD
+
 ## References
 
 valueOf, parseInt
 
 https://m.blog.naver.com/sthwin/221000179980
 
-Collection vs Stream
-
-https://javaconceptoftheday.com/collections-and-streams-in-java/
-
 AutoBoxing, Unboxing
 
 https://hyeonstorage.tistory.com/168
 
+ClassLoader
+
+https://homoefficio.github.io/2018/10/13/Java-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C%EB%8D%94-%ED%9B%91%EC%96%B4%EB%B3%B4%EA%B8%B0/
+
 Reflection
 
 https://brunch.co.kr/@kd4/8
+
+Jar spec
+
+https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jar.html
+
+Collection vs Stream
+
+https://javaconceptoftheday.com/collections-and-streams-in-java/
+
+ForkJoinPool, Parallel Stream
+
+https://m.blog.naver.com/PostView.nhn?blogId=tmondev&logNo=220945933678&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+
+NIO
+
+http://eincs.com/2009/08/java-nio-bytebuffer-channel-file/
+
+https://homoefficio.github.io/2016/08/06/Java-NIO%EB%8A%94-%EC%83%9D%EA%B0%81%EB%A7%8C%ED%81%BC-non-blocking-%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4/

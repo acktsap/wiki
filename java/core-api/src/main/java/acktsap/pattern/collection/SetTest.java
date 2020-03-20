@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class SetImpl {
+public class SetTest {
 
   static List<Integer> data = asList(12, 2, 33, 4, 75, 62);
 

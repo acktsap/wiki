@@ -9,37 +9,9 @@
 함수형 프로그래밍
    
 
-- Java -
-
-hashmap, linked hashmap, hashtable, concurrenthashmap
-java object 필수요소 (tostring hashcode equals)
-forkjoin pool
-jce 정리
-jar spec 정리 (jar spec 8 구글검색)
-parallel stream
-ClassLoader
-comparable, comparitor
-
-내부 클래스 403
-
-Exception 체계 : 415
-
-Try with resources : 437
-
-java.lang classses : 450
-
-Collection : 578
-
-Generics : 670
-
-Annotation : 702
-
-Lambda, Stream : 794
-
-I/O : https://docs.oracle.com/javase/tutorial/essential/io/cl.html
+- Java, Spring -
 
 JPA
-persist context, flush, lifecycle정리
 model1
 model2
 model3
@@ -48,21 +20,17 @@ model5
 model6
 jpa-shop spring project에 정리
 springdata-shop spring project에 정리
+15장 spring-data-jpa에 에정리
+
+Spring
+context on spring
+spring core 보기
+spring mvc 보기
+spring security filter chain 정리
+spring security oauth
+spring security docs 보고 정리
 
 g1 gc
-
-
-- Spring -
-
-context on spring
-spring �� Ű�m ���� �ϵ��� ������?
-spring mvc�� ���� ���� (ó������ ������)
-spring security filter chain ������ ����
-spring security oauth
-spring security docs���� ����
-jpa ��ຸ�� ��������
-spring jpa docs���� ����
-spring jpa docs���� �ǽ�
 
 
 - Database -

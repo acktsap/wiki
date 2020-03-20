@@ -11,7 +11,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DequeImpl {
+public class DequeTest {
 
   static List<Integer> data = asList(12, 2, 33, 4, 75, 62);
 

@@ -14,27 +14,12 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MapImpl {
+public class MapTest {
 
   static List<Integer> keys = asList(12, 2, 33, 4, 75, 62);
   static String value = "v";
 
   public static void main(String[] args) {
-    /**
-     * Legacy Hash Table implementation of the {@code Map} interface.
-     *
-     * (The {@code Hashtable} class is roughly equivalent to {@code HashMap}, except that it is
-     * synchronized.
-     *
-     * {@link ConcurrentHashMap} handles synchronization carefully (like synchronized only on hashed
-     * index value) whereas {@link Hashtable} just uses synchronized keyword.
-     * 
-     * See {@link Hashtable#get} and {@link Hashtable#put}.
-     */
-    Map<Integer, String> hashTable = new Hashtable<>();
-    keys.forEach(k -> hashTable.put(k, value));
-    System.out.println("Hashtable: " + hashTable); // arbitary order
-
     /**
      * Hash Table implementation of the {@code Map} interface.
      *
@@ -49,7 +34,7 @@ public class MapImpl {
      *
      * Not synchronized. Wrapped one is {@link Collections#synchronizedMap
      * Collections.synchronizedMap}.
-     * 
+     *
      * See {@link HashMap#get} and {@link HashMap#put}.
      */
     Map<Integer, String> hashMap = new HashMap<>();
@@ -78,16 +63,31 @@ public class MapImpl {
     /**
      * Hash table and linked list implementation of the {@code Map} interface, with predictable
      * iteration order.
-     * 
+     *
      * This implementation differs from {@code HashMap} in that it maintains a doubly-linked list
      * running through all of its entries. This linked list defines the iteration ordering,
-     * 
+     *
      * Not synchronized. Wrapped one is {@link Collections#synchronizedMap
      * Collections.synchronizedMap}.
      */
     Map<Integer, String> linkedHashMap = new LinkedHashMap<>();
     keys.forEach(k -> linkedHashMap.put(k, value));
     System.out.println("LinkedHashMap: " + linkedHashMap); // insertion order
+
+    /**
+     * Legacy Hash Table implementation of the {@code Map} interface.
+     *
+     * (The {@code Hashtable} class is roughly equivalent to {@code HashMap}, except that it is
+     * synchronized.
+     *
+     * {@link ConcurrentHashMap} handles synchronization carefully (like synchronized only on hashed
+     * index value) whereas {@link Hashtable} just uses synchronized keyword.
+     *
+     * See {@link Hashtable#get} and {@link Hashtable#put}.
+     */
+    Map<Integer, String> hashTable = new Hashtable<>();
+    keys.forEach(k -> hashTable.put(k, value));
+    System.out.println("Hashtable: " + hashTable); // arbitary order
 
     /**
      * A hash table supporting full concurrency of retrievals and high expected concurrency for

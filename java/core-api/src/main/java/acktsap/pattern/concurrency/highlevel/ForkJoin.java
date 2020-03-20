@@ -5,6 +5,7 @@
 package acktsap.pattern.concurrency.highlevel;
 
 import java.util.Random;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
@@ -84,8 +85,9 @@ public class ForkJoin {
   }
 
   protected static int[] randomSrc() {
-    int size = 1_000_000 + new Random().nextInt(1_000_000);
-    Supplier<Integer> randomColor = () -> new Random().nextInt(256);
+    Random random = new Random();
+    int size = 1_000_000 + random.nextInt(1_000_000);
+    Supplier<Integer> randomColor = () -> random.nextInt(256);
     return IntStream.range(0, size)
         .map(i -> randomColor.get())
         .toArray();
@@ -97,13 +99,12 @@ public class ForkJoin {
   // Another implementation of the fork/join framework is used by methods in the java.util.streams
   // package, which is part of Project Lambda scheduled for the Java SE 8 release
   public static void main(String[] args) {
-    // final ForkJoinPool forkJoinPool =
-    // new ForkJoinPool(2 * Runtime.getRuntime().availableProcessors());
-    // System.out.println("Parallelism level size: " + forkJoinPool.getParallelism());
-    // final int[] src = randomSrc();
-    // final int[] destination = new int[src.length];
-    // forkJoinPool.invoke(new ForkJoinAction(src, 0, src.length, destination));
-    while (true);
+    final ForkJoinPool forkJoinPool =
+        new ForkJoinPool(2 * Runtime.getRuntime().availableProcessors());
+    System.out.println("Parallelism level size: " + forkJoinPool.getParallelism());
+    final int[] src = randomSrc();
+    final int[] destination = new int[src.length];
+    forkJoinPool.invoke(new ForkJoinAction(src, 0, src.length, destination));
   }
 
 }

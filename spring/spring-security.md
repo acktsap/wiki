@@ -14,6 +14,7 @@
     - [OAuth Login](#oauth-login)
     - [OAuth Client](#oauth-client)
     - [OAuth Resource Server](#oauth-resource-server)
+  - [References](#references)
 
 ## Features
 
@@ -40,3 +41,7 @@
 ### OAuth Client
 
 ### OAuth Resource Server
+
+## References
+
+https://docs.spring.io/spring-security/site/docs/current/reference/html5/

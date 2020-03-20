@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-public class ListImpl {
+public class ListTest {
 
   static List<Integer> data = asList(12, 2, 33, 4, 75, 62);
 
