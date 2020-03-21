@@ -115,14 +115,6 @@ Bean
   - Lifecycle Interface : Bean이 추가 됬을 때 뭔가 하고 싶다! 이럴 때 사용할 수 있음
     - `@PostConstruct` : 생성 되고 난 후 called
 
-Creation
-
-![spring-bean-lifecycle-creation](./img/spring-bean-lifecycle-creation.png)
-
-Destory
-
-![spring-bean-lifecycle-destory](./img/spring-bean-lifecycle-destroy.png)
-
 ApplicationContext : 실질적으로 사용하게 될 bean factory, 이것 저것 가지고 있음
 
 - BeanFactory

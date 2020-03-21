@@ -11,21 +11,9 @@
 
 - Java, Spring -
 
-JPA
-model1
-model2
-model3
-model4
-model5
-model6
-jpa-shop spring project에 정리
-springdata-shop spring project에 정리
-15장 spring-data-jpa에 에정리
-
-Spring
-context on spring
-spring core 보기
-spring mvc 보기
+jpa-model4
+jpa-model5
+jpa-model6
 spring security filter chain 정리
 spring security oauth
 spring security docs 보고 정리
@@ -42,6 +30,7 @@ migrate from rdb to nosql
 transaction 처리
 
 
+
 - Operating System -
 
 
@@ -53,13 +42,11 @@ subnet mask class
 - Algorithm -
 
 subsum
-brute force
 quicksort
 
 
 - Architecture
 
-MVC
 Scale out, Scale up
 Ʈ������ ��������?
 
@@ -69,12 +56,12 @@ Scale out, Scale up
 Http0.7, 1.1, 2.0
 Http 3.0
 Https
-Rest
 CSRF 정리
 jwt spec
 oauth 1.0a
 oauth 2.0
 SSL : https://swalloow.github.io/https-ssl
+was
 
 
 - Blockchain -
@@ -87,10 +74,8 @@ hyperledger ����, �� ����, kafka���, aergo�� ��
 - Techs -
 
 grpc
-was
 
 
-- Career -
+- Carrer -
 
-money 2020
-
+예상질문하고 한번 작성하고 정리해보기

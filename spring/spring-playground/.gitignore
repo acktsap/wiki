@@ -11,3 +11,6 @@ bin/
 
 # assembly
 !/*assembly/src/assembly/bin/
+
+# intellij
+.idea

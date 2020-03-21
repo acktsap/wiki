@@ -18,11 +18,11 @@ multiple input -> apply to multiple view
 
 !["no mvc origin img"](./img/mvc_origin.png)
 
-It's been misunderstood. Everyone say their own opinions. According to [original paper](https://heim.ifi.uio.no/~trygver/2007/MVC_Originals.pdf), real is
+It's been misunderstood. Everyone say their own opinions. Real is
 
-- Model : Models represent knowledge. A model could be a single object (rather uninteresting), or it could be some structure of objects.
-- View : A view is a (visual) representation of its model. It would ordinarily highlight certain attributes of the model and suppress others. It is thus acting as a presentation filter.
-- Controller : A controller is the link between a user and the system. It provides the user with input by arranging for relevant views to present themselves in appropriate places on the screen. It provides means for user output by presenting the user with menus or other means of giving commands and data. The controller receives such user output, translates it into the appropriate messages and passes these messages on to one or more of the views.
+- Model : represent knowledge.
+- View : a visual representation of its model
+- Controller : a link between a user and the system. It provides the user with input by arranging for relevant views to present themselves in appropriate places on the screen. It provides means for user output by presenting the user with menus or other means of giving commands and data. The controller receives such user output, translates it into the appropriate messages and passes these messages on to one or more of the views.
 
 According to Martin Fowler, the primary benefit of this original version of the MVC pattern is **Separated Presentation** which he defines like this:
 
@@ -52,11 +52,6 @@ Note that in the original one, controller never directly interact with view.
 
 Here, controller directly interact with view. This is **necessary evil**. Since in the web, view cannot be updated without http response which is processed by application (mostly by controller in application).
 
-### See also
-
-- [evolution of mvc](https://stephenwalther.com/archive/2008/08/24/the-evolution-of-mvc)
-- [MVC vs Flux](https://code.i-harness.com/ko-kr/q/1fe5f1e)
-
 ## Flux
 
 ### Concept
@@ -70,6 +65,15 @@ Here, controller directly interact with view. This is **necessary evil**. Since 
 
 Facebook insists data is bidirectional in mvc. But in flux, data is unidirectional. I think it is just a loosely coupled reactive version of original mvc pattern.
 
-### See also
+## SOC on view layer
 
+- Fetch raw data
+- Refine raw value
+- Display (convert if necessary)
+
+## References
+
+- [mvc original paper](https://heim.ifi.uio.no/~trygver/2007/MVC_Originals.pdf)
+- [evolution of mvc](https://stephenwalther.com/archive/2008/08/24/the-evolution-of-mvc)
+- [MVC vs Flux](https://code.i-harness.com/ko-kr/q/1fe5f1e)
 - [flux official docs](https://haruair.github.io/flux/docs/overview.html#content)

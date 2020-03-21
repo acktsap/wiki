@@ -1,5 +1,7 @@
 # Api Design
 
+## Core
+
 Keep it simple stupid
 
 Make it consistant (convention over configuration)

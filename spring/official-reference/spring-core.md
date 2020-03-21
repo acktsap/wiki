@@ -67,6 +67,3 @@ Spring AOP에서 CGLIB proxy도 사용할 수 있다. 이는 class에 대한 pro
 AspectJ가 새 버전이 나와도 runtime만 바꾸면 되기 때문에 문제 없음.
 
 #### 5.4.1. Enabling @AspectJ Support
-
-
-

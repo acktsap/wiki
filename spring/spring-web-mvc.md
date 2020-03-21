@@ -17,7 +17,7 @@
 
 ### Servlet 동작 과정
 
-1. Servlet Container가 Servle을 init한다 (요청시)
+1. Servlet Container가 Servlet을 init한다 (요청시)
 2. 요청을 받을 시 doService가 처리한다. 보통 doGet이나 doPost같은 것으로 처리한다.
 3. Servlet Container가 종료될 때 destroy를 호출한다.
 
@@ -35,11 +35,13 @@ Servlet스펙에 대한 구현체로 하나의 컨트롤러 (Front Controller)�
 
 ### Dispatcher Servlet 동작 과정
 
+![dispatcher-servlet-process](./img/dispatcher-servlet-process.png)
+
 1. Request
 2. HandlerMapping : Handler (controller)를 찾음
-3. HandlerInterpreter : pre-processing
+3. HandlerIntercepter : pre-processing
 4. HandlerAdaptor : Handler (controller)를 실행
-5. HandlerInterpreter : post-processing
+5. HandlerIntercepter : post-processing
 6. ViewResolver : view를 찾음
 7. Render view
 
@@ -56,4 +58,4 @@ Java Application 위에 Embedded Tomcat이 있고 그 위에 Dispatcher Servlet�
 
 ## References
 
-https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%EC%84%9C%EB%B8%94%EB%A6%BF
+https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html

@@ -1,4 +1,4 @@
-package acktsap.helloworld;
+package acktsap.entity;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -6,30 +6,31 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JpaMain {
+public class EntityMain {
 
   public static void logic(EntityManager entityManager) {
     // 생성
     String id = "id1";
-    Member member = new Member();
+    SuperMember member = new SuperMember();
     member.setId(id);
     member.setUsername("지한");
     member.setAge(2);
 
     // 등록 및 조회
     entityManager.persist(member);
-    Member member1 = entityManager.find(Member.class, id);
+    SuperMember member1 = entityManager.find(SuperMember.class, id);
     System.out.println("findMember=" + member1.getUsername() + ", age=" + member1.getAge());
 
     // 수정
     member.setAge(20);
 
     // 한 건 조회
-    Member member2 = entityManager.find(Member.class, id);
+    SuperMember member2 = entityManager.find(SuperMember.class, id);
     System.out.println("findMember=" + member2.getUsername() + ", age=" + member2.getAge());
 
     // 목록 조회
-    List<Member> members = entityManager.createQuery("select m from Member m", Member.class)
+    List<SuperMember> members = entityManager
+        .createQuery("select m from SuperMember m", SuperMember.class)
         .getResultList();
     System.out.println("members.size=" + members.size());
 
@@ -39,7 +40,8 @@ public class JpaMain {
 
   public static void main(String[] args) {
     // 엔티티 매니저 팩토리 생성
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpabook");
+    EntityManagerFactory entityManagerFactory = Persistence
+        .createEntityManagerFactory("jpa-entity");
     EntityManager entityManager = entityManagerFactory.createEntityManager(); // 엔티티 매니저 생성
 
     EntityTransaction tx = entityManager.getTransaction(); // 트랜잭션 기능 획득
