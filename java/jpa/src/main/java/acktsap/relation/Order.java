@@ -17,6 +17,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/*
+
+  Fetch
+    - @OneToOne, @ManyToOne : default is FetchType.EAGER
+    - @OneToMany, @ManyToMany : default is FetchType.LAZY
+    - 권장되는 것은 모두 LAZY로 설정해 두는 것
+
+  Cascade : 한개의 Entity를 영속 상태로 만들 때 연관된 Entity도 영속관계로 만들건지 설정
+    - All
+    - PERSIST
+    - MERGE
+    - REMOVE
+    - REFRESH
+    - DETACH
+
+ */
 @Entity
 @Table(name = "ORDERS")
 public class Order extends BaseEntity {
@@ -33,7 +49,8 @@ public class Order extends BaseEntity {
   /*
     @ManyToOne : N:1관계를  Mapping 할 때 사용
       - optional : false로 하면 연관된 entity가 항상 있어야 함. default : true
-      이거만 해둬도 단방향 Mapping 은 끝남
+      - fetch : Proxy같은거를 써서 나중에 loading할건지 (FetchType.LAZY) 바로 Loading할건지 (FetchType.EAGER)
+
     @JoinColumn : 외래키를 Mapping 할 때 사용
       - name : 왜래 키 이름 (기본값 : 필드명 + _ + 참조하는 테이블의 기본 키 컬럼명)
    */

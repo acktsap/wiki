@@ -19,6 +19,16 @@ public class Member extends BaseEntity {
 
   private String name;
 
+  /*
+     @Embedded : JPA에서 @Embeddable로 정의된 값 타입을 사용할 수 있게 해줌
+
+     Member table정의에 이렇게 나옴
+       ...
+       city varchar(255),
+       street varchar(255),
+       zipcode varchar(255),
+       ...
+   */
   @Embedded
   private Address address;
 

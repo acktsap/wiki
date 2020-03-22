@@ -48,16 +48,16 @@ public class SuperMember {
   // id varchar(255) not null,
   // primary key (id)
   @Id
-  @Column(name = "id")
+  @Column(name = "ID")
   private String id;
 
   // name varchar(10) not null,
   // 이런거는 DDL에만 영향주고 실행에는 영향 없음
-  @Column(name = "name", nullable = false, length = 10)
+  @Column(name = "NAME", nullable = false, length = 10)
   private String username;
 
   // age integer
-  @Column(name = "age")
+  @Column(name = "AGE")
   private Integer age;
 
   /*

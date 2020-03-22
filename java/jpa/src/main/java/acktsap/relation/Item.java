@@ -11,6 +11,30 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
+/*
+  @Inheritance : 상속 mapping을 지정 여기서는 Single Table 전략 사용
+    - SINGLE_TABLE : A single table per class hierarchy. 구준 컬럼 필요
+    - TABLE_PER_CLASS : A table per concrete entity class.
+    - JOINED : subtable과 supertable를 join해서 subclass에 값을 할당
+
+  @DiscriminatorColumn
+    - 부모 table 에 구분 컬럼을 지정. 여기서는 DTYPE
+
+  create table Item (
+     DTYPE varchar(31) not null,
+      ITEM_ID bigint not null,
+      name varchar(255),
+      price integer not null,
+      stockQuantity integer not null,
+      artist varchar(255),
+      etc varchar(255),
+      author varchar(255),
+      isbn varchar(255),
+      actor varchar(255),
+      director varchar(255),
+      primary key (ITEM_ID)
+  )
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")

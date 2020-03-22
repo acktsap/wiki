@@ -3,6 +3,11 @@ package acktsap.relation;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+/*
+  @DiscriminatorValue
+    - 자손 table의 구분 컬럼 설정
+    - 여기서는 "A"
+ */
 @Entity
 @DiscriminatorValue("A")
 public class Album extends Item {

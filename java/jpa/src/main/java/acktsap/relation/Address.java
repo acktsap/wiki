@@ -2,6 +2,12 @@ package acktsap.relation;
 
 import javax.persistence.Embeddable;
 
+/*
+  @Embeddable : JPA에서 값 타입을 직접 정의해서 사용할 수 있게 해줌
+
+  값 타입을 정의할 때는 equals, hashCode, toString을 정의하는 것을 잊지 말자!
+  (원래 Java model을 정의할 때도 그렇지만..)
+ */
 @Embeddable
 public class Address {
 

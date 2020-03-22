@@ -23,7 +23,7 @@ Use HTTP status codes for handling error
 - Stateless : 각 요청 간 클라이언트의 콘텍스트가 서버에 저장되어서는 안 된다. HTTP Protocol을 따름. 구현이 단순해짐.
 - Cacheable : 클라이언트는 응답을 캐싱할 수 있어야 한다. HTTP 프로토콜을 그대로 사용하므로 기존의 인프라를 그대로 활용할 수 있다.
 - Self-descriptiveness : REST API 메시지만 보고도 쉽게 이해할 수 있도록 JSON을 이용해 직관적으로 이해가 가능한 자체 표현 구조로 되어있음.
-- 계층형 구조가 가능 : 계층 구조를 통해 보안, LB, 암호화 계층, Proxy, Gateway등을 둘 수 있음. 구조상의 유연성을 높임.
+- Hirarchical Architecture : 계층 구조를 통해 보안, LB, 암호화 계층, Proxy, Gateway등을 둘 수 있음. 구조상의 유연성을 높임.
 
 Use base domain with integer version (no v1.2)
 

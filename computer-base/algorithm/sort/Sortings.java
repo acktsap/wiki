@@ -11,10 +11,10 @@ public class Sortings {
   // O(n) on best (loop only for statement)
   // O(n^2) on worst (1 + 2 + 3 + 4 + ... + n - 1 ~ O(N^2))
   static class InsertionSort implements Sort {
-    public void sort(int[] arr) {
+    public void sort(final int[] arr) {
       // 1. for all 1 ... arr.length - 1
       for (int i = 1; i < arr.length; ++i) {
-        int keep = arr[i];
+        final int keep = arr[i];
         int vacant = i;
         while (0 <  vacant && arr[vacant - 1] > keep) {
           // 2. shift vacant
@@ -99,12 +99,12 @@ public class Sortings {
   static class MergeSort implements Sort {
     protected int[] tmp;
 
-    public synchronized void sort(int[] arr) {
+    public void sort(final int[] arr) {
       this.tmp = new int[arr.length];
       sort(arr, 0, arr.length - 1);
     }
 
-    protected void sort(int[] arr, int start, int end) {
+    protected void sort(final int[] arr, final int start, final int end) {
       if (start < end) {
         int mid = (start + end) / 2;
         // divive
@@ -115,7 +115,7 @@ public class Sortings {
       }
     }
 
-    protected void merge(int[] arr, int start, int mid, int end) {
+    protected void merge(final int[] arr, final int start, final int mid, final int end) {
       int curr = start;
       int left = start;
       int right = mid + 1;
@@ -167,8 +167,8 @@ public class Sortings {
 
     protected void heapify(int[] arr, int size, int target) {
       int largest = target;
-      int left = 2 * largest + 1;
-      int right = 2 * largest + 2;
+      final int left = 2 * largest + 1;
+      final int right = 2 * largest + 2;
 
       if (left < size && arr[left] > arr[largest]) {
         largest = left;
@@ -178,13 +178,34 @@ public class Sortings {
       }
 
       if (largest != target) {
-        int tmp = arr[target];
+        final int tmp = arr[target];
         arr[target] = arr[largest];
         arr[largest] = tmp;
         heapify(arr, size, largest);
       }
     }
   }
+
+  static class QuickSort implements Sort {
+    public void sort(final int[] arr) {
+      sort(arr, 0, arr.length - 1);
+    }
+
+    protected void sort(final int[] arr, final int start, final int end) {
+      final int index = partition(arr, start, end);
+      if (start < end) {
+        sort(arr, start, index - 1);
+      }
+      if (index < end) {
+        sort(arr, index, end);
+      }
+    }
+
+    protected int partition(final int[] arr, final int start, final int end) {
+      return 0;
+    }
+  }
+
 
 
   /* main */
