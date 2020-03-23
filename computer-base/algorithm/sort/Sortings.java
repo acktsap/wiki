@@ -192,17 +192,37 @@ public class Sortings {
     }
 
     protected void sort(final int[] arr, final int start, final int end) {
-      final int index = partition(arr, start, end);
       if (start < end) {
-        sort(arr, start, index - 1);
-      }
-      if (index < end) {
-        sort(arr, index, end);
+        final int pivot = partition(arr, start, end);
+        sort(arr, start, pivot - 1);
+        sort(arr, pivot + 1, end);
       }
     }
 
     protected int partition(final int[] arr, final int start, final int end) {
-      return 0;
+      // TODO: not yet implemented
+      int pivot = arr[start];
+      int i = start + 1;
+      int j = end;
+
+      // two pointer, loop invarient : i < j
+      while (i < j) {
+        while (j <= end && pivot < arr[j]) --j;
+        while (start <= i && arr[i] < pivot) ++i;
+
+        // not crossed yet
+        if (i < j) {
+          int tmp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = tmp;
+        }
+      }
+
+      // swap pivot with left partition end
+      int tmp = arr[pivot];
+      arr[pivot] = arr[j];
+      arr[j] = tmp;
+      return j;
     }
   }
 
@@ -218,18 +238,20 @@ public class Sortings {
       new ShellSort(),
       new MergeSort(),
       new HeapSort(),
+      // new QuickSort(),
     };
     Arrays.asList(sorts).stream().forEach(s -> {
       final Object[][] parameters = {
         { new int[] { 2, 322, 0, 44, 100, 9, 10, 50 },
           new int[] { 0, 2, 9, 10, 44, 50, 100, 322 } },
-        { new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 },
-          new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 } },
+        { new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 },
+          new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } },
         { new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
           new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 } },
         { new int[] { 1, 5, 3, 5, 5, 6, 7, 4, 9 },
           new int[] { 1, 3, 4, 5, 5, 5, 6, 7, 9 } }
       };
+
       for (final Object[] parameter : parameters) {
         final int[] input = (int[]) parameter[0];
         final int[] expected = (int[]) parameter[1];

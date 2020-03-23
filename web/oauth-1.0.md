@@ -5,4 +5,6 @@
 
 ## References
 
-[2007](https://tools.ietf.org/html/rfc5849)
+2007
+
+https://tools.ietf.org/html/rfc5849

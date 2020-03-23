@@ -9,8 +9,6 @@
     - [Entity-Relational Model](#entity-relational-model)
   - [Physical Design](#physical-design)
     - [Index](#index)
-      - [Indexing Algorithm](#indexing-algorithm)
-        - [B+ Tree](#b-tree)
         - [Hash](#hash)
       - [Primary Index vs Secondary Index](#primary-index-vs-secondary-index)
       - [Composite Index](#composite-index)
@@ -94,13 +92,9 @@
 
 ### Index
 
-Column의 값과 해당 레코드가 저장된 주소를 키와 값의 쌍으로 인덱스를 만들어 두어 검색 속도를 높이는 것. 해당 값으로 검색 하는 경우 속도가 더 빨라지는 장점이 있으나 데이터를 Create/Update/Delete 하는 경우 Index도 같이 업데이트 시켜야 하기 때문에 느리다. 그렇기 때문에 필요한 경우에만 index를 잘 만들어서 써야 함.
+Column의 값과 해당 레코드가 저장된 주소를 키와 값의 쌍으로 인덱스를 만들어 두어 검색 속도를 높이는 것. 해당 값으로 검색 하는 경우 속도가 더 빨라지는 장점이 있으나 데이터를 CUD (Create/Update/Delete) 하는 경우 Index도 같이 업데이트 시켜줘야 하는 단점이 있음.
 
-#### Indexing Algorithm
-
-##### B+ Tree
-
-일반적으로 사용되는 인덱스 알고리즘은 B+ Tree 알고리즘이다. B+ Tree 인덱스는 칼럼의 값을 변형하지 않고(사실 값의 앞부분만 잘라서 관리한다.), 원래의 값을 이용해 인덱싱하는 알고리즘이다.
+B+ Tree 인덱스는 칼럼의 값을 변형하지 않고 (사실 값의 앞부분만 잘라서 관리한다.), 원래의 값을 이용해 인덱싱하는 알고리즘이다.
 
 그렇다면 왜 B+ Tree를 사용할까? 데이터에 접근하는 시간복잡도가 O(1)인 hash table 이 더 효율적일 것 같은데? SELECT 질의의 조건에는 부등호(<>) 연산도 포함이 된다. hash table 을 사용하게 된다면 등호(=) 연산이 아닌 부등호 연산의 경우에 문제가 발생한다. 동등 연산(=)에 특화된 `hashtable`은 데이터베이스의 자료구조로 적합하지 않다.
 

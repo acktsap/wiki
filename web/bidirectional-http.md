@@ -1,5 +1,13 @@
 # Known Issues and Best Practices for Bidirectional HTTP
 
+- [Known Issues and Best Practices for Bidirectional HTTP](#known-issues-and-best-practices-for-bidirectional-http)
+  - [History](#history)
+  - [HTTP Long Pooling](#http-long-pooling)
+  - [HTTP Streaming](#http-streaming)
+  - [Server Push Technique](#server-push-technique)
+  - [Best Practice for Bidirectional HTTP](#best-practice-for-bidirectional-http)
+  - [References](#references)
+
 ## History
 
 ```text
@@ -15,8 +23,8 @@ responsiveness of the application since data is queued until the
 server receives the next poll request from the client.
 ```
 
-> Server가 Client으로부터 요청이 들어오지 않는 이상 connection을 맺는 방법이 없음.
-> 그래서 Client가 pooling을 해야 함... But 이것은 bandwidth의 낭비가 발생.
+> Server가 Client으로부터 요청이 들어오지 않는 이상 connection을 맺는 방법이 없음.\
+> 그래서 Client가 pooling을 해야 함... But 이것은 bandwidth의 낭비가 발생.\
 > 이것을 해결하려고 시도한 몇가지 방법이 있음.
 
 ## HTTP Long Pooling
@@ -31,8 +39,7 @@ reduces the network latency because the client and the server do not
 need to open and close the connection.
 ```
 
-> connection을 계속 열어두고 데이터를 조각조각 계속 보내는 형식.
-> connection을 다시 맺지 않아도 된다는 장점이 있음.
+> connection을 계속 열어두고 데이터를 조각조각 계속 보내는 형식. connection을 다시 맺지 않아도 된다는 장점이 있음.
 
 ```text
 The HTTP streaming mechanism is based on the capability of the server
@@ -52,11 +59,9 @@ End of File (EOF):  This is actually the default approach for
   HTTP/1.0 where the connections are not persistent.  Clients do not
   need to know the size of the body they are reading; instead they
   expect to read the body until the server closes the connection.
-```
 
-> HTTP streaming에서는 content length에 대한 정보를 담기 위해 3가지 방법이 있음 (위 참고)
+> HTTP streaming에서는 content length에 대한 정보를 담기 위해 길이 정보를 Header에 포함하거나 EOF를 보내는 방식이 있음.
 
-```text
 Network Intermediaries:  The HTTP protocol allows for intermediaries
   (proxies, transparent proxies, gateways, etc.) to be involved in
   the transmission of a response from the server to the client.
@@ -96,8 +101,8 @@ Framing Techniques:  Using HTTP streaming, several application
   level.
 ```
 
-> Network intermediaries가 있으면 streaming하는것들 막 cache할 수 있음.
-> Streaming하면 계속 쌓여서 가끔 재시작 해줘야 함. TCP/IP기반이라서 packet loss일 경우 retransmit도 해야 함. 이런 저런 이유로 제대로 하려면 Latency가 높아짐.
+> Network intermediaries가 있으면 streaming하는것들 막 cache할 수 있음.\
+> Streaming하면 계속 쌓여서 가끔 재시작 해줘야 함. TCP/IP기반이라서 packet loss일 경우 retransmit도 해야 함. 이런 저런 이유로 제대로 하려면 Latency가 높아짐.\
 > 또 Frame단위로 조각조각 받아오기 때문에 데이터를 다 받아야 처리할 수 있는 경우 Client단에서 Buffering이 생길 수 있음. 비슷한 이유로 조각 조각 오기 때문에 이것들을 조립하는 것을 Application 단에서 해야 함.
 
 ## Server Push Technique

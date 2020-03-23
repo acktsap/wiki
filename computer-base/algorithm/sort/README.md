@@ -75,9 +75,16 @@ Concept, Best, Worst time Complexity, Space complexity
 
 ## Quick Sort
 
-- Best : O(nlog(n))
-- Worst : O(n^2)
+pivot (보통 첫번째 element로 설정)을 기준으로 왼쪽, 오른쪽으로 분할 (partition)하고 이를 나눈 partition에도 재귀적으로 반복하는 구조
+
+- Best
+  - 딱 절반씩 나눠지는 경우 재귀 호출은 log(n)이고 각 단계에서의 비교횟수는 n임 (각 depth에 총 n개의 element가 있음)
+  - O(nlog(n))
+- Worst
+  - Partition이 계속 불균등하게 나누어지는 경우. 특히 정렬된 list에 대해 정렬을 수행하는 경우 순환 호출의 깊이가 n임. 각 단계에서의 비교 횟수는 n임.
+  - O(n^2)
 - Space : In place
+- Average : O(nlog(n)), 시간복잡도가 O(nlog(n))인 다른 정렬들에 비해서도 빠름! 먼 거리의 데이터를 교환할 뿐만 아니라 pivot이 다음 정렬에서 제외되는 특성 때문임.
 
 ## Heap Sort
 

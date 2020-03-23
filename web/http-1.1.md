@@ -61,7 +61,7 @@ content negotiation
 
 variant
   A resource may have one, or more than one, representation(s)
-  associated with it at any given instant. 
+  associated with it at any given instant.
 
 client
   A program that establishes connections for the purpose of sending
@@ -171,7 +171,7 @@ version and a success or error code, by a MIME-like message containing
 server information, entity metainformation, and possible entity-body content
 ```
 
-> Client가 request method, URI, protocol version, MIME-like message (eg. text/plain, text/html)같은 것을 서버에게 요청.
+> Client가 request method, URI, protocol version, MIME-like message (eg. text/plain, text/html)같은 것을 서버에게 요청.\
 > Server는 message protocol version과 message content 그리고 response code를 client에 전송함
 
 ### Simplest case
@@ -189,7 +189,6 @@ between the user agent (UA) and the origin server (O).
 
 ### With intermediary
 
-```text
 A more complicated situation occurs when one or more intermediaries
 are present in the request/response chain. There are three common
 forms of intermediary: proxy, gateway, and tunnel.
@@ -197,13 +196,11 @@ forms of intermediary: proxy, gateway, and tunnel.
       request chain -------------------------------------->
     UA -----v----- A -----v----- B -----v----- C -----v----- O
       <------------------------------------- response chain
-```
 
 > Proxy, gateway같은게 User Agent랑 server 사이에 추가
 
 ### With a cache
 
-```text
 Any party to the communication which is not acting as a tunnel may
 employ an internal cache for handling requests. The effect of a cache
 is that the request/response chain is shortened if one of the
@@ -213,25 +210,20 @@ request.
       request chain ---------->
     UA -----v----- A -----v----- B - - - - - - C - - - - - - O
       <--------- response chain
-```
 
-> 중간 단계(tunnel) 에서 cache를 하게 되면 최종 server까지 가지 않고
-> 동일한 request에 대한 동일한 response를 보낼 수 있음
+> 중간 단계(tunnel) 에서 cache를 하게 되면 최종 server까지 가지 않고. 동일한 request에 대한 동일한 response를 보낼 수 있음
 
 ### Http over TCP/IP
 
-```text
 HTTP communication usually takes place over TCP/IP connections. The
 default port is TCP 80 [19], but other ports can be used. This does
 not preclude HTTP from being implemented on top of any other protocol
 on the Internet, or on other networks.
-```
 
 > HTTP는 보통 TCP/IP 위에서 돌아감. 계층이 달라서 그럼. But 다른 프로토콜 위에서도 돌아갈 수 있음
 
 ## Keep-Alive
 
-```text
 In HTTP/1.0, each connection is established by the client prior to
 the request and closed by the server after sending the response.
 However, some implementations implement the explicitly negotiated.
@@ -240,9 +232,8 @@ In HTTP/1.0, most implementations used a new connection for each
 request/response exchange. In HTTP/1.1, a connection may be used for
 one or more request/response exchanges, although connections may be
 closed for a variety of reasons (see section 8.1).
-```
 
-> 보통은 response받고 그냥 끊어버리는데 port를 열어둔 상태를 일정 기간 유지하자!
+> 보통은 response받고 그냥 끊어버리는데 port를 열어둔 상태를 일정 기간 유지하자!\
 > Http Persistent Connections임.
 
 ## Reference

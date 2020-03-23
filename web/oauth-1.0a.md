@@ -5,4 +5,6 @@
 
 ## References
 
-[2009](https://oauth.net/core/1.0a/)
+2009
+
+https://oauth.net/core/1.0a/

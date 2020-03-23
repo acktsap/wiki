@@ -1,5 +1,14 @@
 # UI Architecture patterns
 
+- [UI Architecture patterns](#ui-architecture-patterns)
+  - [Goal](#goal)
+  - [Model View Controller](#model-view-controller)
+    - [Origin](#origin)
+    - [201x](#201x)
+  - [Flux](#flux)
+  - [SOC on view layer](#soc-on-view-layer)
+  - [References](#references)
+
 ## Goal
 
 Separate viewer and business logic & make it to flexible!
@@ -26,13 +35,11 @@ It's been misunderstood. Everyone say their own opinions. Real is
 
 According to Martin Fowler, the primary benefit of this original version of the MVC pattern is **Separated Presentation** which he defines like this:
 
-```text
 Ensure that any code that manipulates presentation only manipulates presentation, pushing all domain and data source logic into clearly separated areas of the program
 
 or more easily
 
 Make a clear division between domain objects that model our perception of the real world, and presentation objects that are the GUI elements we see on the screen
-```
 
 MVC was originally used in GUI. In GUI, MVC means
 
@@ -41,6 +48,8 @@ MVC was originally used in GUI. In GUI, MVC means
 - Controller : Collects user input and modifies the model. For example, the controller might collect mouse clicks and keystrokes and update the Model
 
 Note that in the original one, controller never directly interact with view.
+
+> 원래 주장한 개념은 Model: 값을 담고 있음. View: Model에 근거해서 뭔가를 보여줌. Controller: user로부터 input을 받아서 model을 갱신. view를 바꾸진 않음.
 
 ### 201x
 
@@ -52,18 +61,18 @@ Note that in the original one, controller never directly interact with view.
 
 Here, controller directly interact with view. This is **necessary evil**. Since in the web, view cannot be updated without http response which is processed by application (mostly by controller in application).
 
+> Web에서는 Controller가 user로부터 input을 받는 것을 같은데 controller가 view를 선택함! web이라서 어쩔 수 없음.
+
 ## Flux
 
-### Concept
+![flux-architecture](./img/flux-architecture.png)
 
-!["flux"](./img/flux.png)
+- View : 사용자 Input을 받고 action을 발생시킴
+- Action : action타입과 action에 대한 payload값을 가지고 있음
+- Dispatcher : action을 받아서 store에 dispath해줌
+- Store : action을 받아서 model을 update하고 view를 update함
 
-- View : Viewer including action creator. Receipt user input and process it into action
-- Action : Holds action type and payload having real data
-- Dispatcher : Receive action and dispatches to related stores
-- Store : Receive any action and make an event to update view
-
-Facebook insists data is bidirectional in mvc. But in flux, data is unidirectional. I think it is just a loosely coupled reactive version of original mvc pattern.
+Facebook이 제안한 구조로 현대 web mvc에서 bidirectional을 없애버림. unidirectional하게 바꿔버림. 그냥 전통적인 MVC라고 볼 수 있음.
 
 ## SOC on view layer
 
