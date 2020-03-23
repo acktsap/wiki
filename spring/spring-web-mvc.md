@@ -13,7 +13,7 @@
 
 ## Servlet
 
-자바를 사용하여 웹페이지를 동적으로 생성하는 서버측 프로그램 혹은 스펙. Servlet Container위에서 돌아간다.
+자바를 사용하여 동적으로 웹페이지를 생성해 주는 서버측 프로그램 혹은 스펙. Tomcat이나 Jetty 같은 Servlet Container위에서 돌아간다.
 
 ### Servlet 동작 과정
 
@@ -23,15 +23,15 @@
 
 ### Servlet Listener
 
-Web Application에서 발행하는 이벤트를 감지하고 이벤트에 해당하는 작업을 하는 component
+Web Application에서 발행하는 이벤트를 감지하고 이벤트에 해당하는 작업을 하는 녀석.
 
 ### Servlet Filter
 
-들어온 요청을 서블릿으로 보내고, 또 서블릿이 작성한 응답을 클라이언트로 보내기 전에 전처리를 하는 component. 보통 filter chain형태로 구현
+요청을 Servlet으로 보낼 때 또는 Servlet이 작성한 response를 클라이언트로 보내기 전에 전처리를 하는 녀석으로 보통 filter chain형태로 구현
 
 ## DispatcherServlet
 
-Servlet스펙에 대한 구현체로 하나의 컨트롤러 (Front Controller)로 요청을 받아서 dispatch해서 처리를 하는 서블릿
+Spring에서 제공하는 Servlet스펙에 대한 구현체로 하나의 컨트롤러 (Front Controller)로 요청을 받은 후 dispatch해서 처리를 하는 서블릿
 
 ### Dispatcher Servlet 동작 과정
 
@@ -47,14 +47,15 @@ Servlet스펙에 대한 구현체로 하나의 컨트롤러 (Front Controller)�
 
 ### Dispatcher Servlet over Servlet Container
 
-DispatcherServlet을 Servlet Container에 등록 (eg. web.xml)\
-`ContextLoaderListener`라는 Lister 구현체가 ApplicatonContext를 초기화\
-Servlet Container에 *.war 파일이 올라간 후\
-DispatcherServlet이 Servlet의 일종으로써, ContextLoaderListener가 IoC Container로써 돌아가는 형태
+![servlet-container](./img/servlet-container.png)
+
+`DispatcherServlet`을 Servlet에 등록하고 `ContextLoaderListener`를 Listener에 등록하면 `ContextLoaderListener`가 ApplicatonContext를 초기화하고 DispatcherServlet이 Front Controller역할을 해서 동작하는 형태.
 
 ### Embedded Tomcat
 
-Java Application 위에 Embedded Tomcat이 있고 그 위에 Dispatcher Servlet이 올라가는 형태임
+![embeded-tomcat](./img/embeded-tomcat.png)
+
+Spring Application 위에 Embedded Tomcat이 있고 그 위에 Dispatcher Servlet이 올라가는 형태. Ioc Container는 Embedded Tomcat밖에 있음.
 
 ## References
 

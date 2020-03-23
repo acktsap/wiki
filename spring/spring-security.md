@@ -3,11 +3,10 @@
 - [Spring Security](#spring-security)
   - [Features](#features)
     - [Authentication](#authentication)
+      - [PasswordEncoder](#passwordencoder)
     - [Protection Against Exploits](#protection-against-exploits)
       - [CSRF](#csrf)
-      - [CSRF Considerations](#csrf-considerations)
       - [HTTP Response Headers](#http-response-headers)
-      - [TLS](#tls)
   - [Servlet Application](#servlet-application)
     - [Big Picture](#big-picture)
     - [Authentication](#authentication-1)
@@ -21,9 +20,13 @@
 
 ### Authentication
 
-Spring Security는 Username, password로 자원에 대한 인증 (authentication)과 허가 (authorization)을 하는 방법을 제공해줌. 여기서 password는 `PasswordEncoder`라는 것을 사용해서 단방향 hash를 통해 안전하게 저장을 함. 처음에는 단순히 sha256같은 단순한 hash를 사용했으나 hash function에 대해서 결과값을 미리 저장해둔 Rainbow table같은 것을 공격자가 사용할 수 있기 때문에 salt + userpassword를 hash한 것을 가지고 hash함. salt + userpassword의 조합이 너무 많아서 Rainbow table같은거를 사용할 수가 없음.
+Spring Security는 Username, password로 자원에 대한 인증 (authentication)과 허가 (authorization)을 하는 방법을 제공해줌.
 
-Spring Security에서는 이것을 할 수 있는 여러 가지 구현체를 제공함. But 좋은 알고리즘은 상황마다 다를 수 있기 때문에 한단계 추상화한 DelegatingPasswordEncoder를 제공함. 이것을 통해 하위호환도 가능하고 Encoding방식의 update도 수월하게 할 수 있음.
+#### PasswordEncoder
+
+여기서 password는 `PasswordEncoder`라는 것을 사용해서 단방향 hash를 통해 안전하게 저장을 함. 처음에는 단순히 sha256같은 단순한 hash를 사용했으나 hash function에 대해서 결과값을 미리 저장해둔 Rainbow table같은 것을 공격자가 사용할 수 있기 때문에 salt + userpassword를 hash한 것을 가지고 hash함. salt + userpassword의 조합이 너무 많아서 **Rainbow table**같은거를 사용할 수가 없음.
+
+Spring Security에서는 이것을 할 수 있는 여러 가지 구현체를 제공함. But 좋은 알고리즘은 상황마다 다를 수 있기 때문에 한단계 추상화한 `DelegatingPasswordEncoder`를 제공함. 이것을 통해 하위호환도 가능하고 Encoding방식의 update도 수월하게 할 수 있음.
 
 ```java
 PasswordEncoder passwordEncoder =
@@ -114,17 +117,9 @@ SameSite는 쿠키를 받은 사이트와 같은 사이트인 경우에만 쿠�
 Set-Cookie: JSESSIONID=randomid; Domain=bank.example.com; Secure; HttpOnly; SameSite=Lax
 ```
 
-#### CSRF Considerations
-
-TBD
-
 #### HTTP Response Headers
 
 HTTP의 Security를 높이기 위한 다양한 header들이 있음. 이것들에 대한 dsl을 제공함.
-
-#### TLS
-
-Web은 HTTPS로 동작해야함. Spring Security에서는 HTTP로 들어온 것을 HTTPS로 redirect시키는 것을 제공. 그리고 HSTS를 기본으로 설정해줌.
 
 ## Servlet Application
 

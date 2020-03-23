@@ -6,11 +6,11 @@
 
 ## Floating Point Number
 
-IEEE 754표준으로 정의. 32 bit의 경우 1 bit 의 부호 비트, 8 bit의 지수, 나머지 23 bit의 가수부로 구성됨.
+컴퓨터에서 실수를 표현하기 위한 방식으로 고정소수점보다 많은 수를 표현하려고 창안됨. 32 bit의 경우 1 bit 의 부호 비트, 8 bit의 지수, 나머지 23 bit의 가수부로 구성됨.
 
 ![floating-point-number](./img/floating-point-number.png)
 
-118.625를 표현한다면
+-118.625를 표현한다면
 
 1. 음수이므로, 부호부는 1
 2. 이진법으로 나타내면 1110110.101

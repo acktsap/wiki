@@ -9,14 +9,11 @@
     - [Context Switching](#context-switching)
     - [Process Synchronization](#process-synchronization)
       - [Critical Section](#critical-section)
-      - [Lock](#lock)
       - [Semaphores](#semaphores)
+      - [Spinlock](#spinlock)
       - [Monitors](#monitors)
     - [Process Scheduling](#process-scheduling)
-      - [Long Term Scheduler](#long-term-scheduler)
-      - [Medium Term Scheduler](#medium-term-scheduler)
-      - [Short Term Scheduler](#short-term-scheduler)
-    - [Schedulering Algorithm](#schedulering-algorithm)
+    - [Schedulering Algorithm (On Short Term Scheduler)](#schedulering-algorithm-on-short-term-scheduler)
       - [First Come, First Served (FCFS)](#first-come-first-served-fcfs)
       - [Shortest Job First (SJF)](#shortest-job-first-sjf)
       - [Shortest Remaining Time First (SRT)](#shortest-remaining-time-first-srt)
@@ -24,9 +21,8 @@
       - [Round Robin](#round-robin)
     - [Deadlocks](#deadlocks)
   - [Memory Management](#memory-management)
-    - [Swapping](#swapping)
     - [Fragmentation](#fragmentation)
-      - [Compation](#compation)
+    - [Compation](#compation)
     - [Segmentation](#segmentation)
     - [Paging](#paging)
     - [Virtual Memory](#virtual-memory)
@@ -64,12 +60,11 @@
 
 ![thread in process](./img/thread-in-process.png)
 
-Process는 OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. Thread를 왜 쓰냐면 thread가 더 가볍기 때문임. Process간에는 서로 자원을 공유할 수 없음. 굳이 공유를 하려면 Pipe등을 사용해서 IPC(inner-process-communitaton)을 해야 하는데 번거로움. Process는 Context switching비용도 큼. 반면 Thread는 Process내의 자원을 공유하고 Context switching 비용도 적어서 더 가볍게 일을 할 수 있음. 메모리의 차원에서는 Process는 OS로부터 Code, Data, Stack, Heap을 할당받는데 Thread는 여기서 Code, Data, Heap을 공유하면서 별도의 Stack을 가짐. Lightweight Process라고 생각하면 됨.
+Process는 OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석. Thread는 이러한 Process의 실행 단위. 차이점은
 
-- Code : Code 자체를 구성하는 영역
-- Data : 전역변수 등의 정보가 저장
-- Heap : 동적으로 메모리를 할당하는 영역
-- Stack : Local variable, parameter, call stack frame등이 저장되는 영역
+- Process는 Thread보다 상대적으로 무겁고 Context Switching비용이 큼.
+- 자원 공유의 측면에서는, 서로 다른 Process간에는 다른 memory space를 사용해서 자원을 공유할 수가 없음. But Thread는 한 Process내의 같은 memory space를 공유하기 때문에 자원의 공유가 쉬움
+- 메모리의 측면에서는 Process는 code, data, heap, stack등으로 구성되어있는 반면 Thread는 Process 내의 code, data, heap등을 공유하고 별도의 stack을 가짐
 
 ### Multi-Process vs Multi-Thread
 
@@ -83,17 +78,13 @@ Process는 OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석. Thr
 
 ![process-state](./img/process-state.png)
 
-- new
-- ready
-- running
-- waiting
-- terminated
+처음에 만들어 지면 new, ready queue에 들어가면 ready, scheduling되서 cpu의 자원을 할당받으면 running, I/O등 다른 작업을 기다릴 때는 waiting I/O작업이 끝나면 다시 ready. process가 끝나면 terminated
 
 ### Context Switching
 
 ![process-control-block](./img/process-control-block.png)
 
-하나의 프로세스가 CPU를 사용 중인 상태에서 다른 프로세스가 CPU를 사용하도록 하는 작업. 이를 위해서는 정보를 저장하는 것이 필요한데 이것이 PCB(Process Control Block)임. PCB에는 PID, Process State, Program counter, Register등을 저장하는데 Context switching이 발생하는 경우 현재 Process의 상태를 PCB에 저장하고 실행하고 싶은 Process의 상태를 PCB로부터 로딩한 후 실행함.
+CPU가 어떤 프로세스를 처리하다가 다른 프로세스를 처리하고 싶을 때 하는 작업. 이 때 현재 실행하고 있는 프로세스의 상태를 저장하고 다른 프로세스의 상태를 불러와서 실행하는 작업이 필요. 상태를 저장하는 것이 PCB(Process Control Block). PCB에는 PID, Process State, Program counter, Register등이 저장이 되요.
 
 [위로](#Operating-System)
 
@@ -109,63 +100,17 @@ Process는 OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석. Thr
 - Progress (진행) : Critical section을 사용하는 process가 없다면 process가 접근할 수 있음
 - Bounded Waiting (한정된 대기) : Critical section을 사용하는 시간에는 한계가 있어서 다른 process가 기아 상태에 빠지지 않도록 함
 
-#### Lock
-
-Critical Section에 대한 하드웨어 기반 해결책. Critical Section 에 진입하는 프로세스는 Lock 을 획득하고 Critical Section 을 빠져나올 때, Lock 을 방출함으로써 동시에 접근이 되지 않도록 한다.
-
-- Prevent interrupts while a shared variable was being modified
-  - 단점 : 모든 프로세서에 인터럽트 중지를 요구하기 때문에 시간적인 효율성 측면에서 안좋을 수 있다.
-- Atomic instruction
-  - test_and_set() instruction
-
-    ```cpp
-    boolean test_and_set(boolean *target) {
-      boolean rv = *target;
-      *target = true;
-      return rv;
-    }
-
-    do {
-      while (test_and_set(&lock))
-      ; /* do nothing */
-      /* critical section */
-      lock = false;
-      /* remainder section */
-    } while (true);
-    ```
-
-  - compare_and_swap() instruction
-
-    ```cpp
-    int compare_and_swap(int *value, int expected, int new_value) {
-      int temp = *value;
-      if (*value == expected)
-        *value = new_value;
-      return temp;
-    }
-    do {
-    while (compare_and_swap(&lock, 0, 1) != 0)
-      ; /* do nothing */
-      /* critical section */
-      lock = 0;
-      /* remainder section */
-    } while (true);
-    ```
-
 #### Semaphores
 
-A useful way to think of a semaphore as used in the real-world system is as a record of how many units of a particular resource are available
+Critical Section에 대한 해결책으로 사용되는 것으로 해당 자원을 얼마만큼 사용할 수 있느냐를 가르킨다고 볼 수 있음. 종류로는 count가 1인 Mutex와 count가 2 이상인 Counting Semaphore가 있음.
 
-Critical Section에 대한 해결책으로 사용되는 변수로써 얼마큼의 해당 자원을 사용할 수 있느냐를 가르킨다고 볼 수 있음. 종류로는 count가 1인 Mutex와 count가 2 이상인 Counting Semaphore가 있음.
+#### Spinlock
 
-Spinlock은 context switch가 필요 없다는 장점이 있으나 cpu시간이 낭비될 수 있다는 단점이 있다.
-
-단점으로는 Critical Section 에 진입해야하는 프로세스는 진입 코드를 계속 반복 실행해야 해서 CPU 시간을 낭비한다는 것이 있다(Busy Waiting).
+Spinlock은 Critical Section에 진입이 불가능 할 때 진입이 가능할 때 까지 loop를 돌면서 재시도하는 방식. context switching가 필요 없다는 장점이 있으나 cpu시간이 낭비될 수 있다는 단점이 있다 (Busy Waiting).
 
 #### Monitors
 
-ADT(Abstract Data Type)의 일종으로 shared data와 그것에 대해 mutual exclusion을 보장하는 operation들을 포함한다.  
-공유자원에 접근하기 위한 키 획득과 자원 사용 후 해제를 모두 처리한다 (세마포어는 직접 키 해제와 공유자원 접근 처리가 필요하다).
+공유 자원과 그것에 대한 mutual exclusion을 보장하는 operation들을 포함하는 일종의 ADT(Abstract Data Type). 공유자원에 접근할 때 세마포어는 공유 자원에 접근하기 위한 키 획득과 해제를 직접 해야 하지만 Monitor는 이것들을 추상화해서 처리한다. Java에서 synchronized를 거는게 monitor lock이라고 불리는데 이게 이 monitor임. Java에서 synchronized를 걸면 bytecode에 monitorenter, monitorexit이 삽입됨.
 
 [위로](#Operating-System)
 
@@ -173,41 +118,21 @@ ADT(Abstract Data Type)의 일종으로 shared data와 그것에 대해 mutual e
 
 ### Process Scheduling
 
-프로세스를 스케줄링하기 위한 Queue 에는 세 가지 종류가 존재한다.
+Process Scheduling은 다중 프로그래밍이 가능하게 하는 기법으로 Process를 queue에 넣고 관리함.
 
-- Job Queue : 현재 시스템 내에 있는 모든 프로세스의 집합
-- Ready Queue : 현재 메모리 내에 있으면서 CPU 를 잡아서 실행되기를 기다리는 프로세스의 집합
-- Device Queue : Device I/O 작업을 대기하고 있는 프로세스의 집합
+Queue의 종류에는
 
-각각의 Queue 에 프로세스들을 넣고 빼주는 스케줄러에도 크게 세 가지 종류가 존재한다.
+- Job Queue : 모든 process의 집합
+- Ready Queue : 메모리에 있으면서 CPU의 할당을 기다리는 process의 집합
+- Device Queue : Device I/O 작업을 대기하고 있는 process의 집합
 
-#### Long Term Scheduler
+Scheduler에도 기간 별로 종류가 있는데.
 
-- Job scheduler
-- 메모리와 디스크 사이의 스케줄링을 담당
-- 프로세스에 memory를 할당 (admit)
-- degree of Multiprogramming (메모리 상의 프로세스 갯수) 제어
-- 프로세스의 상태 : New -> Ready (in memory)
+- Long Term Scheduler : 메모리와 디스크 사이의 스케줄링을 담당하며 Degree of Multiprogramming을 관리.
+- Medium Term Scheduler : 여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫓아내는 녀석으로 이러한 작업을 Swapping이라고 함.
+- Short Term Scheduler : 메모리와 CPU 사이의 스케줄링을 담당하며 Ready Queue 에 존재하는 프로세스 중 어떤 Process에 CPU를 할당할지 결정함.
 
-#### Medium Term Scheduler
-
-- Swapper
-- 여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫓아냄 (swapping)
-- 프로세스에게서 memory 를 deallocate
-- degree of Multiprogramming (메모리 상의 프로세스 갯수) 제어
-- 프로세스의 상태 : Ready -> Suspended
-- Suspended(stopped) : 외부적인 이유로 프로세스의 수행이 정지된 상태로 메모리에서 내려간 상태를 의미한다. 프로세스 전부 디스크로 swap out 된다. blocked 상태는 다른 I/O 작업을 기다리는 상태이기 때문에 스스로 ready state 로 돌아갈 수 있지만 이 상태는 외부적인 이유로 suspending 되었기 때문에 스스로 돌아갈 수 없다.
-
-#### Short Term Scheduler
-
-- CPU scheduler
-- CPU 와 메모리 사이의 스케줄링을 담당
-- Ready Queue 에 존재하는 프로세스 중 어떤 프로세스를 running 시킬지 결정
-- 프로세스의 상태 : Ready -> Running -> Waiting (for I/O) -> Ready
-
-### Schedulering Algorithm
-
-Ready Queue에 있는 것을 대상으로 CPU를 어떻게 할당할 것인가.
+### Schedulering Algorithm (On Short Term Scheduler)
 
 #### First Come, First Served (FCFS)
 
@@ -285,7 +210,12 @@ Ready Queue에 있는 것을 대상으로 CPU를 어떻게 할당할 것인가.
 
 ### Deadlocks
 
-세마포가 Ready Queue 를 가지고 있고, 둘 이상의 프로세스가 Critical Section 진입을 무한정 기다리고 있고, Critical Section 에서 실행되는 프로세스는 진입 대기 중인 프로세스가 실행되야만 빠져나올 수 있는 상황을 지칭한다.
+두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황을 말하며 4가지 조건이 동시에 성립해야만 발생
+
+- Mutual exclusion : 자원은 한 번에 한 프로세스만이 사용할 수 있음
+- Hold and wait : 하나의 자원을 점유하고 있으면서 다른 프로세스에 할당되어 사용하고 있는 자원을 점유하기 위해 대기하는 프로세스가 있어야 함
+- No preemption : 자원에 대한 선점이 불가능
+- Circular wait : 자원을 대기하는 프로세스간 Cycle이 있어야 함 (e. A -> B, B -> C, C -> A)
 
 [위로](#Operating-System)
 
@@ -293,27 +223,17 @@ Ready Queue에 있는 것을 대상으로 CPU를 어떻게 할당할 것인가.
 
 ## Memory Management
 
-각각의 프로세스는 독립된 메모리 공간을 갖고, 운영체제 혹은 다른 프로세스의 메모리 공간에 접근할 수 없는 제한이 걸려있다. 운영체제만이 운영체제 메모리 영역과 사용자 메모리 영역의 접근에 제약을 받지 않는다.
-
-### Swapping
+### Fragmentation
 
 ![swapping](./img/swapping.png)
 
-메모리의 관리를 위해 사용되는 기법. 표준 Swapping 방식으로는 round-robin 과 같은 스케줄링의 다중 프로그래밍 환경에서 CPU 할당 시간이 끝난 프로세스의 메모리를 보조 기억장치(e.g. 하드디스크)로 내보내고 다른 프로세스의 메모리를 불러 들일 수 있다.
+Swapping에 대해서 먼저 설명을 해야 하는데 Swapping이란 메모리의 관리를 위해 사용되는 기법으로 Memory에 있는 Process를 Disk로 내보내고 다시 불러오는 작업을 하는 것을 말함.
 
-- Swap in : Disk -> Memory
-- Swap out : Memory -> Disk
+Swapping이 반복되다 보면 프로세스들이 차지하는 메모리 사이에 사용하지 못는 작은 자유공간들이 생기는데 이것을 단편화라고 말함. 단편화에는 Process가 듬성 듬성 올라와 있어서 다 붙이면 다른 Process를 올릴 수 있는데 올리지 못하는 상태인 외부 단편화와 Process에 메모리를 할당할 때 partition단위로 할당해서 partition내에 실제 사용하지 않는 부분이 생기는 내부 단변화로 나눈다.
 
-### Fragmentation
+### Compation
 
-프로세스들이 메모리에 적재되고 제거되는 일이 반복되다보면, 프로세스들이 차지하는 메모리 틈 사이에 사용 하지 못할 만큼의 작은 자유공간들이 늘어나게 되는데, 이것이 단편화이다. 단편화는 2 가지 종류로 나뉜다.
-
-- External Fragmentation: 메모리 공간 중 사용하지 못하게 되는 일부분. 물리 메모리(RAM)에서 사이사이 남는 공간들을 모두 합치면 충분한 공간이 되는 부분들이 분산되어 있을때 발생한다고 볼 수 있다.
-- Internal Fragmentation: 메모리를 할당할 때 partition단위로 할당한다. 예를 들면 partition 단위가 18,464 바이트이고 프로세스가 실제로 사용하는 메모리 공간이 18,462 바이트이면 2 바이트의 공간이 남는다. 이를 내부단편화라고 부른다.
-
-#### Compation
-
-외부 단편화를 해소하기 위해 프로세스가 사용하는 공간들을 한쪽으로 몰아, 자유공간을 확보하는 방법론 이지만, 작업효율이 좋지 않다.
+외부 단편화를 해소하기 위해 프로세스가 사용하는 공간들을 한쪽으로 몰아, 자유공간을 확보하는 기법. JVM의 Old Generation에서 이 작업을 함.
 
 | `Process A` | free | `Process B` | free | `Process C` | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; free &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | `Process D` |
 | ----------- | ---- | ----------- | ---- | ----------- | :--------------------------------------------------------------------------------------: | ----------- |
@@ -322,8 +242,6 @@ Ready Queue에 있는 것을 대상으로 CPU를 어떻게 할당할 것인가.
 | ----------- | ----------- | ----------- | :---------: | ------------------------------------------------------------------------------------------------------------------ |
 
 ### Segmentation
-
-Segmentation
 
 ![segmentation](./img/segmentation.png)
 

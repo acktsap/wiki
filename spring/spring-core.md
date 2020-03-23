@@ -18,25 +18,21 @@
 
 ## IoC Container
 
-IoC(Inversion of Control)이란 사용자가 작성한 프로그램이 framework로부터 흐름 제어를 받는 것을 말함. Spring IoC Container는 객체간의 의존관계를 주입시켜주는 역할을 함. 이 때 주입시켜주는 것을 Dependency Injection이라고 함.
+IoC (Inversion of Control)이란 사용자가 작성한 코드가 framework로부터 흐름 제어를 받는 것을 함. Framework의 기본적인 속성임. Spring IoC Container는 객체간의 의존관계에 대한 제어를 해서 의존관계를 주입시켜줌. 이 때 주입시켜주는 것을 Dependency Injection이라고 함.
 
-Dependency Injection을 하는 방법으로는 Constructor에 인자로 넘기는 방법과 먼저 객체를 생성한 후 Setter를 통해 주입시키는 방법이 있음. 더 Deep하게는 reflection을 사용해서 내부 멤버에 접근해서 하는 방법도 있음.
-
-Spring의 ApplicationContext implements BeanFactory가 IoC Container역할을 함.
+Dependency Injection을 하는 방법으로는 Setter를 통해 하는 방법과 생성자를 통해 하거나 Java의 reflection을 사용해서 내부 멤버에 접근해서 하는 방법도 있음. Spring은 이것을 자동으로 알아서 해줌. Spring의 ApplicationContext가 IoC Container역할을 함.
 
 ### Java Bean
 
-여러 객체를 하나의 객체에 담아두는 객체. NoArgsConstructor가 있어야 하고, serializable, member들은 로 선언, member들에 getter, setter로 접근할 수 있어야 함.
-
-해당 bean이 다른 application에도 사용될 수 있다는 장점이 있으나, zero-argument constructor로 인해 불완전한 상태로 초기화된다는 문제가 있음. 그리고 mutable하기 때문에 multi thread에서 동시성 문제도 발생할 수 있음.
+여러 객체를 하나의 객체에 담아두는 객체. 몇가지 조건이 있는데 인자 없는 생성자가 있어야 하고, Serializable을 상속, member들은 private로 선언, member들에 getter, setter로 접근할 수 있어야 함. 해당 객체가 다른 application에도 사용될 수 있다는 장점이 있으나, 인자 없는 생성자 때문에 불완전한 상태로 초기화 되고 mutable하기 때문에 동시성 문제도 발생할 수 있음.
 
 ### Plain Old Java Object
 
-프레임워크에 의존적인 무거운 객체를 사용하게 되는 것에 대한 불만으로 나옴. 프레임워크 등에 의존적이지 않은 일반 자바 객체. Spring은 POJO기반에 기반해서 DI를 xml로 설정했었음. But 요즘은 annotation으로 xml을 대체해서 의존적임.
+프레임워크에 의존적인 무거운 객체를 사용하게 되는 것에 대한 불만으로 나옴. 프레임워크 등에 의존적이지 않은 일반 자바 객체. Spring은 원래 POJO기반에 기반해서 의존성 주입을 를 xml로 설정했었음. But 요즘은 `@Autowired`같은 annotation으로 설정해서 의존적임.
 
 ### Spring Bean
 
-스프링 IoC 컨테이너가 관리 하는 객체. Bean 자체의 LifeCycle이 있음.
+스프링 IoC Container, 즉 ApplicationContext가 관리하는 객체. Bean 자체의 LifeCycle이 있음.
 
 ### Spring Bean LifeCycle (Scope)
 

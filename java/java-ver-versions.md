@@ -13,8 +13,7 @@
 
 ## Java LTS
 
-Long-Term Support의 줄임말로 해당 버전은 다른 버전에 비해 오랫동안 유지보수가 됨.\
-Java에서는 8, 11버전이 LTS 임
+Long-Term Support의 줄임말로 해당 버전은 다른 버전에 비해 오랫동안 유지보수가 됨. Java에서는 8, 11버전이 LTS 임
 
 ## Java 1.5
 
