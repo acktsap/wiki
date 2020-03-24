@@ -22,12 +22,13 @@
     - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
     - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
   - [Concurrency](#concurrency)
+    - [Volatile](#volatile)
     - [ForkJoinPool](#forkjoinpool)
     - [Atomic Operation](#atomic-operation)
   - [I/O](#io)
     - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
     - [NIO](#nio)
-    - [Stream vs Channel](#stream-vs-channel)
+    - [Stream (I/O) vs Channel](#stream-io-vs-channel)
   - [Reflection](#reflection)
     - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
   - [Jar](#jar)
@@ -54,7 +55,7 @@ Java에는 primitive type에 각각 해당하는 클래스가 있음. 이를 Wra
 
 ### Integer.valueOf vs Integer.parseInt
 
-valueOf는 Wrapper class object를 반환, parseInt는 primitive type을 반환. valueOf에서 -128 ~ 127의 범위는 객체 cache를 사용해서 return. 다른 값들은 객체를 새로 생성.
+valueOf는 Wrapper class object를 반환, parseInt는 primitive type을 반환. valueOf가 내부적으로 parseInt를 사용. valueOf에서 -128 ~ 127의 범위는 객체 cache를 사용해서 return. 다른 값들은 객체를 새로 생성.
 
 ```java
 public static Integer valueOf(int i) {
@@ -165,46 +166,64 @@ Lambda는 jdk8부터 등장한것으로 그냥 anonymous class 에 syntax suger�
 
 ## Concurrency
 
+### Volatile
+
+- 한 thread에서 수정한 값이 cache에만 저장되어 있어서 다른 thread에 보이지 않는 메모리의 가시성 문제를 해결하기 위한 것
+- 이 키워드를 쓴 변수에 대해서는 cache를 사용하지 않고 memory만 사용
+- jvm이 4 byte단위로 연산하기 때문에 8바이트를 사용하는 long, double에 대해서는 2개의 연산이 필요해서 동작하지 않음.
+
 ### ForkJoinPool
 
-Work-stealing pool로 fork를 통해 분리하고 join을 통해 합침. 일반 ExecutorService 와는 각 Thread들이 개별 queue를 가지고 자기의 task queue가 비어있으면 다른 thread의 task를 가져와서 처리함으로써 최적의 성능을 낼 수 있음. forkjoinpool을 사용할 때는 작업을 독립적인 작업으로 균등하게 분할해야 함.
+- Thread pool의 일종으로 특정 기준에 따라 fork을 계속 하고 join을 통해 결과를 합치는 식으로 동작.
+- 각 Thread들이 개별 queue를 가지고 자기의 task queue가 비어있으면 다른 thread의 task를 뺏어와서 작업하기 때문에 multi-core환경에서 최적의 성능을 낼 수 있음. 그래서 Work-Stealing Pool이라고도 함.
+- 가능하면 작업을 동등하게 나누는 것이 CPU를 최대한 활용할 수 있음.
 
 ### Atomic Operation
 
-Compare and Swap으로 CPU Cache와 memory에 있는 값이 다른 가시성 문제를 해결한 operation으로 cache와 memory의 값을 비교해서 값이 다르면 실패하고 재시도를 함.
+- CPU Cache에 있는 값과 memory에 있는 값이 다른 가시성 문제를 해결한 operation
+- Cache와 memory의 값을 비교해서 값이 다르면 실패하고 재시도를 하는 Compare and Swap (CAS)를 함
+- 
 
 ## I/O
 
 ### InputStream, OutputStream, Reader, Writer
 
-InputStream / OutputStream은 byte단위로 I/O을 하는 녀석. Reader / Writer는 char단위 (2 byte)로 I/O를 하는 녀석임.
+- InputStream / OutputStream : 은 byte단위로 I/O를 수행
+- Reader / Writer : char단위 (2 byte)로 I/O를 수행. 문자열 처리를 위한 것.
 
 ### NIO
 
 ![java-io](./img/java-io.jpg)
 
-Non-blocking IO x, New IO임. 1.3부터 추가되었는데 기존의 Java I/O는 kernal buffer를 직접 handling할 수 없어서 느렸음. 즉 I/O를 위해서는
+- New I/O (Non-blocking I/O 아님)로 기존의 느린 I/O를 보완하기 위한 것
+- 기존의 I/O
+  1. JVM이 Kernal에 I/O를 요청
+  2. Kernal이 system call을 함
+  3. Disk Controller가 디스크로부터 파일을 읽어서 DMA를 통해 (Direct Memory Access)를 이용해서 kernal buffer로 복사
+  4. JVM 내부 buffer로 복사
+   -> 이것 자체가 느리고 내부 버퍼가 GC되어야 하는 문제점이 있음.
+- 이것을 해결하기 위해 Kernal의 buffer에 directly하게 접근하게 할 수 있는 방법이 NIO 로 `ByteBuffer`라는 클래스를 제공
 
-1. JVM이 Kernal에 I/O를 요청
-2. Kernal이 system call을 함
-3. Disk Controller가 디스크로부터 파일을 읽어옴
-4. DMA (Direct Memory Access)를 이용해서 kernal buffer로 복사
-5. JVM 내부 buffer로 복사
+### Stream (I/O) vs Channel
 
-여기서 JVM 내부 buffer로 복사를 해야 한다는 문제점이 있었다. 이는 Thread에 blocking이 발생하고, 내부 buffer가 GC의 대상이 된다는 문제점이 있었다.\
-이것을 해결하기 위해 Kernal의 buffer에 directly하게 접근하게 할 수 있는 `ByteBuffer`라는 클래스를 제공 (다른 `Buffer`들은 기존의 방식과 똑같음).
-
-### Stream vs Channel
-
-Stream은 one-way라서 I/O 둘다를 위해서는 InputStream, OutputStream 두개가 필요함. But Channel은 two-way라서 한개만 있어도 됨. 내부적으로 처리는 stream의 경우 구현체에 따라 byte부터 Object까지 가능하지만 Channel은 Buffer만 사용함. Stream은 Blocking방식만 가능하지만 Channel에는 Non-blocking방식도 가능함.
-
+- Stream
+  - one-way라서 I/O 둘다를 위해서는 InputStream, OutputStream 두개가 필요함.
+  - 상세 구현에 따라 byte 단위부터 object 단위까지 처리
+  - Blocking만 가능
+- Channel
+  - two-way라서 I/O 둘다를 한개로 처리 가능
+  - Buffer단위로만 처리
+  - Non-blocking도 가능
+  
 ## Reflection
 
-클래스의 구체적인 타입을 알지 못해도 클래스의 method, type, field를 접근하게 할 수 있게 해주는 api. Java의 Class에 대한 정보가 static영역에 올라가 있기 때문에 이것이 가능.
+- 클래스의 구체적인 타입을 알지 못해도 클래스의 method, type, field를 접근하게 할 수 있게 해주는 api
+- Java의 Class에 대한 정보가 static영역에 올라가 있기 때문에 이것이 가능.
 
 ### Proxy vs DynamicProxy
 
-그냥 Proxy는 메소드를 다 정의해야함. DynamicProxy는 Reflection을 통해 실행되는 method를 가져와서 동적으로 처리할 수 있음. 구체적으로는 InvocationHandler로 함.
+- Proxy : interface (또는 class)에 해당하는 메소드를 다 정의해야함
+- DynamicProxy : Reflection을 통해 실행되는 method를 가져와서 직접 다 정의하지 않고도 동적으로 처리할 수 있음
 
 ## Jar
 

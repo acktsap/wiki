@@ -30,8 +30,8 @@ Long-Term Support의 줄임말로 해당 버전은 다른 버전에 비해 오�
 ## Java 1.8
 
 - Lambda Expression : anonymous class에 대한 간략한 표현이 가능
-- default methods : interface에 method를 정의할 수 있음. 구현체들을 바꾸지 않고 기능을 추가하기 위해 제공.
 - java.util.stream : 데이터 처리에 대해 추상화된 method들을 함수형으로 제공.
+- default methods : interface에 method를 정의할 수 있음. 구현체들을 바꾸지 않고 기능을 추가하기 위해 제공.
 - Removal or PermGen in JVM : 각종 메타 정보를 OS가 관리하는 영역으로 옮겨 Perm 영역의 사이즈 제한을 없앤 것이라 할 수 있다.
 
 ## Java 1.9

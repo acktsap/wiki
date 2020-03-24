@@ -98,10 +98,10 @@ GC를 하기 위해 JVM이 멈추는 것. 이 시간을 Suspend time이라고 �
 ![jvm-serial-minor-gc2](./img/jvm-serial-minor-gc2.png)
 ![jvm-serial-minor-gc3](./img/jvm-serial-minor-gc3.png)
 
+![jvm-major-mark-sweep-compaction](./img/jvm-major-mark-sweep-compaction.png)
+
 - Young Generation : Serial Copy Algorithm
 - Old Generation : Serial Mark-Sweep-Compaction
-
-![jvm-major-mark-sweep-compaction](./img/jvm-major-mark-sweep-compaction.png)
 
 ### Parallel Collector
 
@@ -124,10 +124,8 @@ GC를 하기 위해 JVM이 멈추는 것. 이 시간을 Suspend time이라고 �
 - Old Generation : **Parallel Mark-Summary-Compaction**
   - Mark : Multi Thread, Region별로 Live Object를 Marking
   - Summary : Single Thread, Region별로 Live Object의 Density에 따라 Dense Prefix를 설정.
-    Dense Prefix 보다 이전의 주소는 GC대상에서 제외해서 GC수행시간을 줄임.
-  - Compact : Multi Thread, Dense Prefix이후의 주소보다 큰 곳에 있는 객체를 대상으로 Swap-Compaction.\
-    Compaction대상의 객체들을 왼편으로 몰아넣음.\
-    -> 계속 이러다 보면 주소의 왼쪽으로 갈수록 오래 살아남은 녀석이 있을 확률이 높게됨!!
+  - Compaction : Multi Thread, Dense Prefix이후의 주소에 있는 객체를 대상으로 Sweep & Compaction한 후 대상의 객체들을 왼편으로 몰아넣음
+    - 계속 이러다 보면 주소의 왼쪽으로 갈수록 오래 살아남은 녀석이 있을 확률이 높게됨!!
 
 ### CMS (Concurrent Mark Sweep) Collector
 
