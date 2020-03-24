@@ -11,12 +11,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 public class CollectionInterface {
-
-  static List<Integer> data = asList(new Integer[] {12, 2, 33, 4, 75, 62});
 
   /*
    * A {@code Collection} is simply an object that groups multiple elements into a single unit.
@@ -42,13 +38,10 @@ public class CollectionInterface {
    * collection.
    */
   public static void main(String[] args) {
-    Collection<Integer> collections = new ArrayList<>(data);
+    Collection<Integer> collections = new ArrayList<>(asList(12, 2, 33, 4, 75, 62));
 
     /*
      * Traverse with for-each construct.
-     *
-     * The for-each construct allows you to concisely traverse a collection or array using a for
-     * loop.
      */
     System.out.print("Traverse with for-each: ");
     for (Integer collection : collections) {
@@ -57,12 +50,9 @@ public class CollectionInterface {
 
     /*
      * Traverse with iterator.
-     *
-     * It enables you to traverse through a collection and to remove elements from the collection
-     * selectively.
      */
-    Iterator<Integer> it = collections.iterator();
     System.out.print("Traverse with iterator: ");
+    Iterator<Integer> it = collections.iterator();
     while (it.hasNext()) {
       System.out.print(it.next() + " ");
     }
@@ -80,7 +70,7 @@ public class CollectionInterface {
      * Convert to Array.
      */
     Object[] objects = collections.toArray();
-    Integer[] integers = collections.toArray(new Integer[0]);
+    Integer[] integers = collections.toArray(new Integer[]{});
     System.out.println("Converted Object array: " + Arrays.toString(objects));
     System.out.println("Converted Integer array: " + Arrays.toString(integers));
   }

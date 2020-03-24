@@ -25,11 +25,11 @@ public class NamedBreak {
         System.out.println("프로그램을 종료합니다.");
         break;
       } else if (!(1 <= menu && menu <= 3)) {
-        System.out.println("메뉴를 잘못 선택하셨습니다.(종료는 0)");
+        System.out.println("메뉴를 잘못 선택하셨습니다.(종료는 0 exit은 99)");
         continue;
       }
 
-      for (; ; ) {
+      while (true) {
         System.out.print("계산할 값을 입력하세요.(계산 종료:0, 전체 종료:99)>");
         tmp = scanner.nextLine();   // 화면에서 입력받은 내용을 tmp에 저장
         num = Integer.parseInt(tmp); // 입력받은 문자열(tmp)을 숫자로 변환

@@ -15,20 +15,21 @@ public class TokenScan {
    * The scanner API breaks input into individual tokens associated with bits of data.
    */
   public static void main(String[] args) throws IOException {
-    Scanner s = null;
+    Scanner scanner = null;
     try {
-      final String resource =
+      String resource =
           Thread.currentThread().getClass().getResource("/xanadu.txt").getPath();
-      s = new Scanner(new BufferedReader(new FileReader(resource)));
+      scanner = new Scanner(new BufferedReader(new FileReader(resource)));
 
       // default: WHITESPACE_PATTERN
-      s.useDelimiter(",\\s*");
-      while (s.hasNext()) {
-        System.out.println(s.next());
+      scanner.useDelimiter(",\\s*");
+
+      while (scanner.hasNext()) {
+        System.out.println("Next token: " + scanner.next());
       }
     } finally {
-      if (null != s) {
-        s.close();
+      if (null != scanner) {
+        scanner.close();
       }
     }
   }

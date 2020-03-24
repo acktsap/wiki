@@ -21,6 +21,21 @@ public class MapTest {
 
   public static void main(String[] args) {
     /**
+     * Legacy Hash Table implementation of the {@code Map} interface.
+     *
+     * (The {@code Hashtable} class is roughly equivalent to {@code HashMap}, except that it is
+     * synchronized.
+     *
+     * {@link ConcurrentHashMap} handles synchronization carefully (like synchronized only on hashed
+     * index value) whereas {@link Hashtable} just uses synchronized keyword to all methods.
+     *
+     * See {@link Hashtable#get} and {@link Hashtable#put}.
+     */
+    Map<Integer, String> hashTable = new Hashtable<>();
+    keys.forEach(k -> hashTable.put(k, value));
+    System.out.println("Hashtable: " + hashTable); // arbitary order
+
+    /**
      * Hash Table implementation of the {@code Map} interface.
      *
      * (The {@code HashMap} class is roughly equivalent to {@code Hashtable}, except that it is
@@ -75,27 +90,15 @@ public class MapTest {
     System.out.println("LinkedHashMap: " + linkedHashMap); // insertion order
 
     /**
-     * Legacy Hash Table implementation of the {@code Map} interface.
-     *
-     * (The {@code Hashtable} class is roughly equivalent to {@code HashMap}, except that it is
-     * synchronized.
-     *
-     * {@link ConcurrentHashMap} handles synchronization carefully (like synchronized only on hashed
-     * index value) whereas {@link Hashtable} just uses synchronized keyword.
-     *
-     * See {@link Hashtable#get} and {@link Hashtable#put}.
-     */
-    Map<Integer, String> hashTable = new Hashtable<>();
-    keys.forEach(k -> hashTable.put(k, value));
-    System.out.println("Hashtable: " + hashTable); // arbitary order
-
-    /**
      * A hash table supporting full concurrency of retrievals and high expected concurrency for
      * updates. This class obeys the same functional specification as {@link java.util.Hashtable}.
      *
      * Even though all operations are thread-safe, retrieval operations do <em>not</em> entail
      * locking, and there is <em>not</em> any support for locking the entire table in a way that
      * prevents all access.
+     *
+     * It only lock to a (hashcode & (array length - 1)) bucket. Therefore, another bucket can be
+     * used by other thread.
      *
      * See {@link ConcurrentHashMap#put}.
      */

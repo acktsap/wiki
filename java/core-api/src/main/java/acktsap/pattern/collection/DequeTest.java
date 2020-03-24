@@ -30,8 +30,15 @@ public class DequeTest {
      * This class is likely to be faster than {@link Stack} when used as a stack, and faster than
      * {@link LinkedList} when used as a queue.
      */
-    Deque<Integer> arrayDeque = new ArrayDeque<>(data);
+    Deque<Integer> arrayDeque = new ArrayDeque<>();
     System.out.println("ArrayDeque: " + arrayDeque);
+    arrayDeque.push(111);
+    arrayDeque.push(222);
+    System.out.println("Poped one: " + arrayDeque.pop()); // 222
+    arrayDeque.clear();
+    arrayDeque.add(111);
+    arrayDeque.add(222);
+    System.out.println("Pool one: " + arrayDeque.poll()); // 111
 
     /**
      * Doubly-linked list implementation.

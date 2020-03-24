@@ -43,6 +43,7 @@ public class LockObject {
 
       } finally {
         if (!(myLock && yourLock)) {
+          // if not both bowed, release lock
           if (myLock) {
             lock.unlock();
           }
@@ -58,7 +59,7 @@ public class LockObject {
       if (impendingBow(bower)) {
         try {
           System.out.format("%s: %s has"
-              + " bowed to me!%n",
+                  + " bowed to me!%n",
               this.name, bower.getName());
           bower.bowBack(this);
         } finally {
@@ -67,16 +68,16 @@ public class LockObject {
         }
       } else {
         System.out.format("%s: %s started"
-            + " to bow to me, but saw that"
-            + " I was already bowing to"
-            + " him.%n",
+                + " to bow to me, but saw that"
+                + " I was already bowing to"
+                + " him.%n",
             this.name, bower.getName());
       }
     }
 
     public void bowBack(Friend bower) {
       System.out.format("%s: %s has" +
-          " bowed back to me!%n",
+              " bowed back to me!%n",
           this.name, bower.getName());
     }
   }
@@ -93,7 +94,7 @@ public class LockObject {
 
     public void run() {
       Random random = new Random();
-      for (;;) {
+      while (true) {
         try {
           Thread.sleep(random.nextInt(10));
         } catch (InterruptedException e) {

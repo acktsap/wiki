@@ -4,9 +4,10 @@
 
 - Code Style: Editor -> Code Style -> Java [google style guide github](https://github.com/google/styleguide)
 - Keymap: Eclipse
+  - Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap -> Windows -> Project)
 - Disable auto save: System Settings -> Synchronization -> Uncheck second and third one
 - JDK Version: File -> Project Structure -> Project -> Project SDK, Project language level
-- Build and run: Build, Execution, Deployment -> Build Tools -> Gradle -> Set 'Build and running', 'Run test using'
+- Build and run: Build, Execution, Deployment -> Build Tools -> Gradle -> Set 'Build and running', 'Run test using' as Intellij
 - Code template
   - Editor -> File and Code Templates -> Class
 

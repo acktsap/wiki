@@ -44,8 +44,9 @@ public class ExecutorApi {
     for (Object[] parameter : parameters) {
       ExecutorService executorService = (ExecutorService) parameter[0];
       String serviceName = (String) parameter[1];
-
       System.out.format("--- Running with %s ---%n", serviceName);
+
+      // make runnable
       CountDownLatch latch = new CountDownLatch(count);
       Runnable task = () -> {
         try {
@@ -56,7 +57,7 @@ public class ExecutorApi {
             latch.getCount());
         latch.countDown();
       };
-      
+
       Stream<Runnable> taskStream = IntStream.range(0, count).mapToObj(i -> task);
       if (executorService instanceof ScheduledExecutorService) {
         System.out.format(

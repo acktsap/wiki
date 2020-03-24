@@ -49,8 +49,9 @@ public class SetTest {
      * Not synchronized. Wrapped one is {@link Collections#synchronizedSortedSet
      * Collections.synchronizedSortedSet}.
      */
-    Set<Integer> treeSet = new TreeSet<>(data);
-    System.out.println("TreeSet: " + treeSet); // order by value
+    Set<Integer> treeSet = new TreeSet<>((l, r) -> r.compareTo(l));
+    treeSet.addAll(data);
+    System.out.println("TreeSet: " + treeSet); // reverse order
 
     /**
      * HashTable + Linked List implementation.
@@ -66,6 +67,6 @@ public class SetTest {
      * 
      */
     Set<Integer> linkedHashSet = new LinkedHashSet<>(data);
-    System.out.println("LinkedHashSet: " + linkedHashSet); // keep insertion order
+    System.out.println("LinkedHashSet: " + linkedHashSet); // insertion order
   }
 }

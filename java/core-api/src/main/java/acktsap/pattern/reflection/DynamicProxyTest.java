@@ -17,36 +17,28 @@ import java.util.Arrays;
  * Dynamic proxy classes are useful to an application or library that needs to provide type-safe
  * reflective dispatch of invocations on objects that present interface APIs.
  */
-public class DynamicProxy {
+public class DynamicProxyTest {
 
-  interface Foo {
+  interface Test {
 
-    Object bar(Object obj);
+    Object run(Object obj);
   }
 
   static class CustonInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method m, Object[] args) {
-      Object result = "test";
-      try {
-        System.out.println("before method: " + m.getName() + ", args: " + Arrays.toString(args));
-      } catch (Exception e) {
-        throw new RuntimeException("unexpected invocation exception: " +
-            e.getMessage());
-      } finally {
-        System.out.println("after method " + m.getName());
-      }
-      return result;
+      System.out.println("method: " + m.getName() + ", args: " + Arrays.toString(args));
+      return "test ret";
     }
   }
 
   public static void main(String[] args) {
-    Foo foo = (Foo) Proxy.newProxyInstance(
-        Foo.class.getClassLoader(),
-        new Class[]{Foo.class},
+    Test foo = (Test) Proxy.newProxyInstance(
+        Test.class.getClassLoader(),
+        new Class[]{Test.class},
         new CustonInvocationHandler());
-    Object ret = foo.bar("Hello");
+    Object ret = foo.run("Hello");
     System.out.println("Return: " + ret);
   }
 

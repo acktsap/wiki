@@ -17,7 +17,7 @@ public class BindingTest {
 
     void method() {
       System.out.println("Child1 Method");
-      System.out.println("  x=" + x);  // same as this.x
+      System.out.println("  x=" + x);  // this.x
       System.out.println("  super.x=" + super.x); // 100
       System.out.println("  this.x="  + this.x); // 200
     }
@@ -41,9 +41,9 @@ public class BindingTest {
     // method는 항상 실제 객체를 사용
     Parent1 parent1 = new Child1();
     Child1 child1 = new Child1();
-    System.out.println("parent1.x = " + parent1.x);
+    System.out.println("parent1.x = " + parent1.x); // 100
     parent1.method(); // call Child1.method
-    System.out.println("child1.x = " + child1.x);
+    System.out.println("child1.x = " + child1.x); // 200
     child1.method();
 
     System.out.println();
@@ -51,9 +51,9 @@ public class BindingTest {
     // always use parent one
     Parent2 parent2 = new Child2();
     Child2 child2 = new Child2();
-    System.out.println("parent2.x = " + parent2.x);
+    System.out.println("parent2.x = " + parent2.x); // 100
     parent2.method();
-    System.out.println("child2.x = " + child2.x);
+    System.out.println("child2.x = " + child2.x); // 100
     child2.method();
   }
 }

@@ -3,10 +3,10 @@
 - [Java Core](#java-core)
   - [Type](#type)
     - [Primitive types](#primitive-types)
-    - [Wrapper class, primitive type, AutoBoxing, Unboxing](#wrapper-class-primitive-type-autoboxing-unboxing)
+    - [Wrapper Class, AutoBoxing, Unboxing](#wrapper-class-autoboxing-unboxing)
     - [Integer.valueOf vs Integer.parseInt](#integervalueof-vs-integerparseint)
   - [Class](#class)
-    - [Overloading vs Overridding](#overloading-vs-overridding)
+    - [Overridding vs Overloading](#overridding-vs-overloading)
     - [Interface vs Abstract class](#interface-vs-abstract-class)
     - [Access Modifier](#access-modifier)
     - [static, default method in interface](#static-default-method-in-interface)
@@ -20,9 +20,10 @@
     - [Vector vs ArrayList](#vector-vs-arraylist)
     - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
     - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
-    - [Lambda, FunctionalInterface](#lambda-functionalinterface)
+    - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
   - [Concurrency](#concurrency)
     - [ForkJoinPool](#forkjoinpool)
+    - [Atomic Operation](#atomic-operation)
   - [I/O](#io)
     - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
     - [NIO](#nio)
@@ -47,20 +48,15 @@
 - float: 4 byte, default: 0.0f
 - double: 8 byte, default: 0.0d
 
-### Wrapper class, primitive type, AutoBoxing, Unboxing
+### Wrapper Class, AutoBoxing, Unboxing
 
-Java에서는 primitive type에 각각 해당하는 객체가 있음. 이를 Wrapper class라고 함.
-
-Autoboxing은 primitive type을 Wrapper class에 담을 때 자동으로 Wrapper class로 변환해주는 기능, Unboxing은 반대로 Wrapper class를 primitive type에 담을 때 자동으로 primitive type으로 변환해 주는 기능임. java 1.5부터 지원함.
+Java에는 primitive type에 각각 해당하는 클래스가 있음. 이를 Wrapper class라고 함. Java 5부터 Wrapper class랑 primitive class간 자동으로 변환해 주는데 이를 AutoBoxing(primitive tyep -> wrapper class)과 Unboxing(wrapper class -> primitive type)이라고 함
 
 ### Integer.valueOf vs Integer.parseInt
 
-valueOf는 Boxed object를 반환, parseInt는 primitive type을 반환함. valueOf가 내부적으로 parseInt사용. valueOf에서 -128 ~ 127의 범위는 객체 cache를 사용해서 return. 다른 값들은 객체를 새로 생성. cache는 Integer가 immutable type이라서 가능함
+valueOf는 Wrapper class object를 반환, parseInt는 primitive type을 반환. valueOf에서 -128 ~ 127의 범위는 객체 cache를 사용해서 return. 다른 값들은 객체를 새로 생성.
 
 ```java
-public static Integer valueOf(String s, int radix) throws NumberFormatException {
-  return Integer.valueOf(parseInt(s,radix));
-}
 public static Integer valueOf(int i) {
   final int offset = 128;
   if (i >= -128 && i <= 127) { // must cache
@@ -74,19 +70,19 @@ public static Integer valueOf(int i) {
 
 객체를 정의해 놓은 것. 실제 객체는 instance라고 부름.
 
-### Overloading vs Overridding
+### Overridding vs Overloading
 
-Overloading은 부모의 method를 자손이 재정의하는 것이고 Overridding은 같은 이름의 method를 여러개 정의하는 것임. Overridding의 경우에는 method의 parameter쪽 signature이 달라야 함. return은 영향을 주지 않음.`
+Overridding은 부모의 method를 자손이 재정의하는 것이고 Overloading은 같은 이름의 method를 여러개 정의하는 것. Overloading의 경우에는 return은 영향을 주지 않음. method의 parameter쪽 signature이 달라야 가능.
 
 ### Interface vs Abstract class
 
-Interface는 상태를 가질 수 없음. Abstract class는 상태를 가질 수 있음. 원래 1.8 이전까지는 interface에 구현도 가질 수 없었으나 default method가 추가된 이후 Interface와 abstract class의 차이점은 상태 여부임. 추가로 Interface는 다중구현을 할 수 있으나 abstract class는 다중상속이 불가능함. 또 interface에는 모든 method가 public이지만 abstract class에는 access modifier가 다 적용됨.
+Interface는 상태를 가질 수 없음. Abstract class는 상태를 가질 수 있음. 원래 1.8 이전까지는 interface에 구현도 가질 수 없었으나 java 8에 default method가 추가된 이후 Interface와 abstract class의 차이점은 상태 여부임. 추가로 Interface는 다중구현을 할 수 있으나 abstract class는 다중상속이 불가능함. 또 interface에는 모든 method가 public이지만 abstract class에는 access modifier가 다 적용됨.
 
 ### Access Modifier
 
 - public : 전부가능
-- default : 안적은거, 같은 패키지만 가능, 모듈화 할 때 사용
-- protected : 같은 패키지, 자손들에게서
+- protected : 같은 패키지, 자손들
+- default (안적은거) : 같은 패키지만
 - private : 클래스 내부에서만
 
 ### static, default method in interface
@@ -95,11 +91,11 @@ jdk 8 부터 등장. static의 경우 jdk7까지는 일관성을 위해 안만�
 
 ### Java Class정의 필수요소
 
-equals, hashcode, toString을 항상 재정의해야한다. equals, hashcode는 HashSet, HashMap에 필요하다. toString은 사람이 읽기 편한 형태로 표현해야 한다. Comparable도 구현할지 고민해봐야 함. Comparable을 구현하면 객체 사이에 자연적인 순서가 생기기 때문에 `Arrays.sort()`, `Collections.sort()`같은거를 자연스럽게 이용할 수 있음.
+equals, hashcode, toString을 항상 재정의해야한다. equals, hashcode는 HashSet, HashMap에 필요. toString은 사람이 읽기 편한 형태로 표현해야 한다는 권장사항임. 비슷한 수준에서 Comparable도 구현할지 고민해봐야 함. Comparable을 구현해서 객체 사이의 순서를 구현해 주면 `Arrays.sort()`, `Collections.sort()`같은거를 별도의 Comparitor 없이 사용할 수 있음.
 
 ### Annotation
 
-java 5부터 추가된 것으로 Annotation처리를 통해 MetaPrograming이 가능하게 함.
+java 5부터 추가된 것으로 Annotation처리를 통해 MetaPrograming을 해서 bolierplate code를 줄이는게 그 목적이 있음. 이것을 잘 쓴 예시로는 Lombok, Spring Framework가 있음.
 
 ### Generics
 
@@ -118,25 +114,20 @@ Throwable이 최고 조상이고 크게 Error, Exception, RuntimeException으로
     - ...
     - RuntimeException
       - NullPointerException
+      - UnSupportedOperationException
       - ...
 
 Error는 심각한 에러를 의미하고 (eg. StackOverflow) Exception은 에러 처리가 강제됨. RuntimeException은 에러 처리가 강제되진 않음.
 
 ### ClassLoader
 
-Class를 Loading하는 녀석으로 hierarchy가 있다. 대표적으로는 다음의 3가지 ClassLoader가 있다.
+Class를 Loading하는 녀석으로 대표적으로 다음의 3가지 ClassLoader가 있다.
 
 - Bootstrap ClassLoader : 'jre/lib/rt.jar' 안의 클래스를 Loading함. Native C로 구현되어 있음
-- ExtClassLoader : 'jre/lib/ext' 안의 jar들을 Loading 함. URLClassLoader를 상속
-- AppClassLoader : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading. URLClassLoader를 상속. 커스텀 클래스로더는 이걸 상속하면 됨.
+- ExtClassLoader (PlatformClassLoader in java9) : 'jre/lib/ext' 안의 jar들을 Loading 함
+- AppClassLoader (SystemClassLoader in java 9) : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading.
 
-Class를 Loading하는 규칙은
-
-1. Delegation : 부모에서 먼저 찾는다
-2. Visibility : 하위 클래스로더는 상위 클래스로더가 로딩한 클래스를 볼 수 있지만 상위 클래스로더는 하위가 로딩한 것을 볼 수 없음
-3. Uniqueness : 한번 로딩한거는 다시 로딩 하지 않는다
-
-Java 9에서는 ExtClassLoader -> PlatformClassLoader, AppClassLoader -> SystemClassLoader로 이름이 바뀜
+ClassLoader간에는 hierarchy가 있어서 class를 찾을 때 부모에서 먼저 찾고 자손에서 찾는 식임. 그래서 상위 클래스로더는 상위 클래스로더가 로드한 클래스를 볼 수 있지만 부모에서는 자손이 로드한 것을 볼 수 없음.
 
 ## Collection vs Stream
 
@@ -144,23 +135,27 @@ Collection은 등 자료를 저장하는 것에 대한 추상화로 List, Set, M
 
 ### ArrayList, LinkedList
 
-둘다 List의 구현체인데 ArrayList는 내부적으로 값을 배열로 저장. LinkedList는 내부적으로 노드들의 연결로 저장함. ArrayList는 값을 추가할 때 capacity가 가득 찬 경우 이를 늘려주는 연산을 해야 하지만 random access가 빠름. LinkedList는 값을 추가할 때 뒤에 그냥 연결만 해주면 되지만 random access를 할 경우 해당 index만큼 iterating을 해야함. ArrayList는 값을 중간에 빼면 뒤에 있는 값들을 shift해줘야 하는데 LinkedList는 그냥 중간에 있는 녀석의 연결만 끊으면 됨. Iterating할 때 ArrayList가 주소들로 연결되어 있는 LinkedList보다 Locality의 관점에서 더 좋을 수 있음. Locality는 현재 참조하는 값에 인접한 값을 참조할 경우 이를 cache에 저장해 두면 더 빠른 것을 말함.
+둘다 List의 구현체인데 ArrayList는 내부적으로 값을 배열로 저장. LinkedList는 내부적으로 노드들의 연결로 저장함. ArrayList는 array로 내부 구현을 하기 때문에 random access를 constant time에 할 수 있으나 ArrayList는 값을 추가할 때 capacity가 가득 찬 경우 이를 늘려주는 연산을 해야 하고 중간에 있는 원소를 삭제를 할 경우 뒤에 있는 값들을 모두 다시 복사해줘야함. LinkedList는 값의 추가나 삭제를 할 때 그냥 node의 연결을 해주거나 끊어주면 되지만 index로 access을 할 때 그 index까지 iterating 해야함. Iterating할 때 값들이 붙어있는 ArrayList가 Node들의 주소로 연결되어 있는 LinkedList보다 Locality의 관점에서 더 좋을 수 있음. Locality는 현재 참조하는 값에 인접한 값을 참조할 경우 이를 cache에 저장해 두면 더 빠른 것을 말함.
 
 ### Vector vs ArrayList
 
-Vector는 Java 1.0부터 있었고 ArrayList는 Java 1.2부터 있었음. 둘다 내부적으로 Array로 값을 저쟝하고 동적으로 크기를 증가시키지만, Vector는 method에 모두 synchronized가 걸려 있는 반면에 ArrayList는 걸려있지 않음. Vector는 단일 thread에서도 lock을 걸기 때문에 ArrayList에 비해 성능이 느릴 수 있음.
+Vector는 Java 1.0부터 있었고 ArrayList는 Java 1.2부터 있었음. 둘다 내부적으로 Array로 값을 저쟝하고 동적으로 크기를 증가시키지만, Vector는 method에 모두 synchronized가 걸려 있는 반면에 ArrayList는 걸려있지 않음. Vector는 단일 thread에서도 monitor lock을 걸기 때문에 ArrayList에 비해 성능이 느릴 수 있음.
 
 ### HashMap vs LinkedHashMap vs TreeMap
 
-HashMap은 일반적인 HashMap이고 LinkedHashMap은 HashMap에 내부적으로 LinkedList로 저장해서 Iterating시 insertion order가 보장된다. TreeMap은 Comparator를 기반으로 Red-Black Tree로 저장한다. HashMap, LinkedHashMap은 put, get에 O(1)이 보장되지만 TreeMap은 O(log(n))의 시간이 걸림. HashMap은 내부적으로 array로 저장하는데 `hash & (n - 1)`의 index에 값을 저장함. collision이 나는 경우 separate chaining방식으로 해당 index의 값에 LinkedList (1.8부터는 TreeNode, TreeNode의 경우 O(log(n)을 보장), LinkedList는 O(n))로 저장함.
+HashMap은 일반적인 HashMap이고 LinkedHashMap은 HashMap에 내부적으로 LinkedList로 저장해서 Iterating시 insertion order가 보장된다. TreeMap은 Comparator를 기반으로 Red-Black Tree로 저장. HashMap, LinkedHashMap은 put, get에 O(1)이 보장되지만 TreeMap은 O(log(n))의 시간이 걸림.
+
+HashMap은 내부적으로 array로 저장하는데 `hashCode() & (n - 1)`의 index에 값을 저장함. collision이 나는 경우 separate chaining방식으로 해당 index의 값에 LinkedList (1.8부터는 TreeNode, TreeNode의 경우 bucket안에서 search가 O(log(m)을 보장), LinkedList는 O(m))로 저장함.
 
 ### HashTable vs ConcurrentHashMap
 
-HashTable 1.0부터, ConcurrentHashMap은 1.5부터 등장. HashTable은 모든 method에 synchronized가 걸려있는 반면에 ConcurrentHashMap은 일부만 synchronized를 걸어서 더 빠른 성능을 보장함. 구체적으로 하면 HashMap이 array의 `hash & (n - 1)` index에 separate chaining의 방식으로 저장하는데 여기 이 index만 synchronized를 걸어버림. 그래서 다른 bucket에 대해서는 동시에 처리를 할 수 있음.
+HashTable 1.0부터, ConcurrentHashMap은 1.5부터 등장. HashTable은 모든 method에 synchronized가 걸려있는 반면에 ConcurrentHashMap은 synchronized을 최소한으로 걸어서 더 빠른 성능을 보장함. 구체적으로 하면 HashMap이 array의 `hash & (n - 1)` index에 node의 separate chaining의 방식으로 저장하는데 그 bucket만 synchronized를 걸어버림. 그래서 다른 bucket에 대해서는 동시에 처리를 할 수 있음.
 
-### Lambda, FunctionalInterface
+### Lambda, @FunctionalInterface
 
-jdk8부터 등장 Lambda를 쓰면 그냥 실질적으로 anonymous class가 박혀있음 `() ->` 이거는 syntax sugar일 뿐. `@FunctionalInterface`를 통해 interface에 함수가 한개인거를 강제할 수 있음. FunctionalInterface와 일반 Interface의 차이점은 method갯수임. `@FunctionalInterface`가 없더라도 method가 한개인 interface는 lambda로 쓸 수 있음. method가 하나인 인터페이스를 자바가 몇개 제공해줌.
+Lambda는 jdk8부터 등장한것으로 그냥 anonymous class 에 syntax suger를 붙인것 뿐임. `@FunctionalInterface`를 통해 interface에 함수가 한개인거를 강제해서 컴파일 시 체크를 해주는 annotation임. FunctionalInterface와 일반 Interface의 차이점은 method갯수임 `@FunctionalInterface`는 한개만 강제되고 일반 interface는 여러개가 올 수 있음. `@FunctionalInterface`가 없더라도 method가 한개인 interface는 lambda로 쓸 수 있음.
+
+자바에서 기본적으로 제공해주는 함수형 인터페이스는 다음과 같음.
 
 - `Runnable` : void run()
 - `Supplier` : T get()
@@ -173,6 +168,10 @@ jdk8부터 등장 Lambda를 쓰면 그냥 실질적으로 anonymous class가 박
 ### ForkJoinPool
 
 Work-stealing pool로 fork를 통해 분리하고 join을 통해 합침. 일반 ExecutorService 와는 각 Thread들이 개별 queue를 가지고 자기의 task queue가 비어있으면 다른 thread의 task를 가져와서 처리함으로써 최적의 성능을 낼 수 있음. forkjoinpool을 사용할 때는 작업을 독립적인 작업으로 균등하게 분할해야 함.
+
+### Atomic Operation
+
+Compare and Swap으로 CPU Cache와 memory에 있는 값이 다른 가시성 문제를 해결한 operation으로 cache와 memory의 값을 비교해서 값이 다르면 실패하고 재시도를 함.
 
 ## I/O
 
@@ -240,6 +239,10 @@ https://javaconceptoftheday.com/collections-and-streams-in-java/
 ForkJoinPool, Parallel Stream
 
 https://m.blog.naver.com/PostView.nhn?blogId=tmondev&logNo=220945933678&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+
+CAP
+
+https://beomseok95.tistory.com/225
 
 NIO
 

@@ -37,20 +37,21 @@ public class TryWithResourceEx {
 
   public static void main(String args[]) {
     try (CloseableResource cr = new CloseableResource()) {
-      cr.exceptionWork(false); // 예외가 발생하지 않는다.
+      cr.exceptionWork(false);
     } catch (WorkException e) {
       System.exit(-1);
     } catch (CloseException e) { // catch
-      e.printStackTrace();
+      System.out.println("Catch: " + e);
     }
-    System.out.println("------------------");
+    System.out.println();
 
     try (CloseableResource cr = new CloseableResource()) {
-      cr.exceptionWork(true); // 예외가 발생한다.
-    } catch (WorkException e) { // catch
-      e.printStackTrace();
-      // WorkException Suppressed CloseException
+      cr.exceptionWork(true); // throw exception
+    } catch (WorkException e) {
+      // WorkException Suppress CloseException
       // you can get it by e.getSuppressed()
+      // exception이 동시에 여러개 발생할 수 없기에 suppress함
+      System.out.println("Catch: " + e);
       System.out.println("Suppressed: " + Arrays.toString(e.getSuppressed()));
     } catch (CloseException e) {
       System.exit(-1);

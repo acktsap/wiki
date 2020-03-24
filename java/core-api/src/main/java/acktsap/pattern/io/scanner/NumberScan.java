@@ -16,25 +16,28 @@ public class NumberScan {
    * The scanner API breaks input into individual tokens associated with bits of data.
    */
   public static void main(String[] args) throws IOException {
-    Scanner s = null;
+    Scanner scanner = null;
     try {
-      double sum = 0;
-      final String resource =
+      String file =
           Thread.currentThread().getClass().getResource("/usnumbers.txt").getPath();
-      s = new Scanner(new BufferedReader(new FileReader(resource)));
+      scanner = new Scanner(new BufferedReader(new FileReader(file)));
 
-      s.useLocale(Locale.US); // can read 32,767 as representing integer
-      while (s.hasNext()) {
-        if (s.hasNextDouble()) {
-          sum += s.nextDouble();
+      // can read 32,767 as representing integer
+      scanner.useLocale(Locale.US);
+
+      double sum = 0;
+      while (scanner.hasNext()) {
+        if (scanner.hasNextDouble()) {
+          sum += scanner.nextDouble();
         } else {
-          s.next();
+          // just pass it
+          scanner.next();
         }
       }
-      System.out.println(sum);
+      System.out.println("Sum: " + sum);
     } finally {
-      if (null != s) {
-        s.close();
+      if (null != scanner) {
+        scanner.close();
       }
     }
 

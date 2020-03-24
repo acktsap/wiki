@@ -16,19 +16,16 @@ import java.util.stream.IntStream;
 
 public class ForkJoinSort {
 
-  protected static int size = 10;
+  protected static int size = 100_000;
 
   interface Sort {
+
     void sort(int[] arr);
   }
 
   protected static class SerialMergeSort implements Sort {
 
-    protected int[] temp;
-
-    public SerialMergeSort(int tempSize) {
-      this.temp = new int[tempSize];
-    }
+    protected int[] temp = new int[size];
 
     public void sort(int[] arr) {
       sort(arr, 0, arr.length - 1);
@@ -71,16 +68,10 @@ public class ForkJoinSort {
     protected final ForkJoinPool forkJoinPool =
         new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
-    protected final int tempSize;
+    protected final int[] temp = new int[size];
 
-    public ParallelMergeSort(int tempSize) {
-      this.tempSize = tempSize;
-    }
-
-    @Override
     public void sort(int[] arr) {
       try {
-        int[] temp = new int[tempSize];
         forkJoinPool.submit(new SortAction(temp, arr, 0, arr.length - 1));
         forkJoinPool.awaitTermination(5000L, TimeUnit.MILLISECONDS);
       } catch (InterruptedException e) {
@@ -112,9 +103,8 @@ public class ForkJoinSort {
           SortAction left = new SortAction(temp, arr, start, mid);
           SortAction right = new SortAction(temp, arr, mid + 1, end);
           invokeAll(left, right);
-        } else {
-          merge(arr, start, mid, end);
         }
+        merge(arr, start, mid, end);
       }
 
       protected void merge(int[] arr, int start, int mid, int end) {
@@ -143,7 +133,8 @@ public class ForkJoinSort {
   }
 
   protected static void run(final Sort sort) {
-    List<Integer> list = IntStream.range(0, size).mapToObj(Integer::new).collect(toList());;
+    List<Integer> list = IntStream.range(0, size).mapToObj(Integer::new).collect(toList());
+    ;
     int[] expected = list.stream().mapToInt(i -> i).toArray();
     shuffle(list);
     int[] input = list.stream().mapToInt(i -> i).toArray();
@@ -155,15 +146,14 @@ public class ForkJoinSort {
       throw new IllegalStateException("expected: " + Arrays.toString(expected) +
           ", actual: " + Arrays.toString(input) + "(Algorithm: " + sort.getClass() + ")");
     }
-    System.out.println(Arrays.toString(input));
     System.out.printf("Elapsed time by %s: %dms %n", sort.getClass(), end - start);
   }
 
   public static void main(String[] args) {
-    // Sort serial = new SerialMergeSort();
-    // Sort parallel = new ParallelMergeSort();
-    // run(serial);
-    // run(parallel);
+    Sort serial = new SerialMergeSort();
+    Sort parallel = new ParallelMergeSort();
+    run(serial);
+    run(parallel);
   }
 
 }

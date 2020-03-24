@@ -8,17 +8,17 @@ public class InnerEx5 {
 
   static class Outer {
 
-    int value = 10;  // Outer.this.value
+    int value = 10;
 
     class Inner {
 
-      int value = 20;  // this.value
+      int value = 20;
 
       void method1() {
         int value = 30;
-        System.out.println("           value :" + value);
-        System.out.println("      this.value :" + this.value);
-        System.out.println("Outer.this.value :" + Outer.this.value);
+        System.out.println("           value :" + value); // 30
+        System.out.println("      this.value :" + this.value); // 20
+        System.out.println("Outer.this.value :" + Outer.this.value); // 10
       }
     }
   }

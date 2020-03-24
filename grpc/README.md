@@ -16,7 +16,7 @@ HTTP/2.0기반으로 Server Push, Multiplexing, frame이나 header에 대한 높
 
 ## GRPC vs Binary blob over HTTP/2.0
 
-HTTP/2.0기반으로 이루어져 있으나 HTTP/2.0이 제공하지 않는 다양한 기능을 지원하는 것으로 알음. 또 Protobuf를 사용하면 높은 메시지 압축률을 보여줌.
+GRPC가 HTTP/2.0기반으로 이루어져 있으나 HTTP/2.0이 제공하지 않는 다양한 기능을 지원하는 것으로 알음. 또 Protobuf를 사용하면 높은 메시지 압축률을 보여줌.
 
 ## GRPC vs REST API over HTTP/1.1
 

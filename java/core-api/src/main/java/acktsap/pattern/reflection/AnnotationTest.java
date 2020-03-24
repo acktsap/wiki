@@ -2,18 +2,27 @@ package acktsap.pattern.reflection;
 
 import acktsap.pattern.reflection.AnnotationTest.DateTime;
 import acktsap.pattern.reflection.AnnotationTest.TestInfo;
-import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
+/**
+ * Reflection : Class에 대한 정보를 추출할 수 있는 Java에서 제공해 주는 API
+ */
 @Deprecated
 @TestInfo(testedBy = "aaa", testDate = @DateTime(yymmdd = "160101", hhmmss = "235959"))
 public class AnnotationTest {
 
-  // 정의할 때
+  private String testedBy = "unset";
+
+  public String getTestedBy() {
+    return testedBy;
+  }
+
   // @Target : Annotation이 올 수 있는 곳
   // @Retention : 얼마나 지속될건지 (SOURCE, COMPILE, RUNTIME)
   // @Documented : Javadoc에 포함될건지
@@ -45,23 +54,30 @@ public class AnnotationTest {
   enum TestType {FIRST, FINAL}
 
   public static void main(String args[]) {
-    Class<AnnotationTest> clazz = AnnotationTest.class;
+    AnnotationTest test = new AnnotationTest();
+    Class<? extends AnnotationTest> clazz = test.getClass();
 
     // get TestInfo annotation
-    TestInfo anno = clazz.getAnnotation(TestInfo.class);
-    System.out.println("anno.testedBy()=" + anno.testedBy());
-    System.out.println("anno.testDate().yymmdd()=" + anno.testDate().yymmdd());
-    System.out.println("anno.testDate().hhmmss()=" + anno.testDate().hhmmss());
-    for (String str : anno.testTools()) {
-      System.out.println("testTools=" + str);
-    }
+    TestInfo testInfo = clazz.getAnnotation(TestInfo.class);
+    System.out.println("anno.testedBy()=" + testInfo.testedBy());
+    System.out.println("anno.testDate().yymmdd()=" + testInfo.testDate().yymmdd());
+    System.out.println("anno.testDate().hhmmss()=" + testInfo.testDate().hhmmss());
+    System.out.println("anno.testTools=" + Arrays.toString(testInfo.testTools()));
     System.out.println();
 
     // get all annotations
-    Annotation[] annoArr = clazz.getAnnotations();
     System.out.println("All annotations");
-    for (Annotation a : annoArr) {
-      System.out.println(a);
+    System.out.println(Arrays.toString(clazz.getAnnotations()));
+
+    // inject testby by annotation
+    try {
+      System.out.println("Fields: " + Arrays.toString(clazz.getDeclaredFields()));
+      System.out.println("Before inject: " + test.getTestedBy());
+      Field field = clazz.getDeclaredField("testedBy");
+      field.set(test, testInfo.testedBy());
+      System.out.println("After inject: " + test.getTestedBy());
+    } catch (Exception e) {
+      throw new IllegalStateException(e);
     }
   }
 }

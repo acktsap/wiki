@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 public class Parallelism {
@@ -21,13 +22,15 @@ public class Parallelism {
     /*
      * Concurrent Reduction.
      */
+    // ordered
     Map<Integer, List<Integer>> serialReduction = collections.stream()
         .collect(Collectors.groupingBy(i -> i % 2));
-    System.out.println("Serial reduction: " + serialReduction); // ordered
+    System.out.println("Serial reduction: " + serialReduction);
 
-    Map<Object, List<Integer>> parallelReduction = collections.parallelStream()
+    // keep order
+    ConcurrentMap<Integer, List<Integer>> parallelReduction = collections.parallelStream()
         .collect(Collectors.groupingByConcurrent(i -> i % 2));
-    System.out.println("Parallel reduction: " + parallelReduction); // no order
+    System.out.println("Parallel reduction: " + parallelReduction);
 
     System.out.println();
 
@@ -39,25 +42,23 @@ public class Parallelism {
     Comparator<Integer> normal = Integer::compare;
     Comparator<Integer> reversed = normal.reversed();
     Collections.sort(collections, reversed);
-    collections.stream()
-        .forEach(e -> System.out.print(e + " "));
+    collections.stream().forEach(e -> System.out.print(e + " "));
     System.out.println();
 
     // parallelStream uses common forkjoinpool internally
+    // no order
     System.out.print("Parallel stream: ");
-    collections.parallelStream()
-        .forEach(e -> System.out.print(e + " "));
+    collections.parallelStream().forEach(e -> System.out.print(e + " "));
     System.out.println();
-
     System.out.print("Another parallel stream: ");
-    collections.parallelStream()
-        .forEach(e -> System.out.print(e + " "));
+    collections.parallelStream().forEach(e -> System.out.print(e + " "));
     System.out.println();
 
+    // keep order
     System.out.print("With forEachOrdered: ");
-    collections.parallelStream()
-        .forEachOrdered(e -> System.out.print(e + " "));
+    collections.parallelStream().forEachOrdered(e -> System.out.print(e + " "));
     System.out.println();
+
 
     /*
      * Laziness: Intermediate operations are lazy because they do not start processing the contents
@@ -65,8 +66,6 @@ public class Parallelism {
      *
      * Terminal operations: reduce, average, ...
      */
-
-    System.out.println();
 
 
     /*
@@ -81,12 +80,12 @@ public class Parallelism {
 
       String concatenatedString = listOfStrings.stream()
           // Don't do this! Interference occurs here.
-          .peek(s -> listOfStrings.add("three"))
-          .reduce((a, b) -> a + " " + b)
-          .get();
+          .peek(s -> listOfStrings.add(s))
+          .reduce((acc, curr) -> acc + " " + curr)
+          .orElseThrow(() -> new IllegalStateException());
       System.out.println("Concatenated string: " + concatenatedString);
     } catch (Exception e) {
-      System.out.println("Exception caught: " + e.toString());
+      System.out.println("Exception caught: " + e);
     }
 
     System.out.println();
@@ -107,8 +106,7 @@ public class Parallelism {
     System.out.println("");
 
     // keeps order
-    serialStorage.stream()
-        .forEachOrdered(e -> System.out.print(e + " "));
+    serialStorage.stream().forEachOrdered(e -> System.out.print(e + " "));
     System.out.println("");
 
     System.out.println("Parallel stream:");
@@ -123,8 +121,7 @@ public class Parallelism {
     System.out.println("");
 
     // order is differ even for 'forEachOrdered'
-    parallelStorage.stream()
-        .forEachOrdered(e -> System.out.print(e + " "));
+    parallelStorage.stream().forEachOrdered(e -> System.out.print(e + " "));
     System.out.println("");
   }
 
