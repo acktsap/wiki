@@ -3,7 +3,7 @@
 - [GRPC](#grpc)
   - [What is it](#what-is-it)
   - [GRPC vs Binary blob over HTTP/2.0](#grpc-vs-binary-blob-over-http20)
-  - [GRPC vs REST API over HTTP/1.1](#grpc-vs-rest-api-over-http11)
+  - [GRPC vs Rest API over HTTP/1.1](#grpc-vs-rest-api-over-http11)
   - [References](#references)
 
 ## What is it
@@ -21,9 +21,14 @@
 - GRPC는 HTTP/2.0이 제공하지 않는 다양한 기능을 지원
 - GRPC는 Protobuf를 사용해서 높은 메시지 압축률을 보여줌
 
-## GRPC vs REST API over HTTP/1.1
+## GRPC vs Rest API over HTTP/1.1
 
-GRPC는 HTTP/2.0, protobuf를 사용해서 높은 압축률을 자랑하고 양방향 통신이 가능하지만 규약이 필요하고 REST API보다 복잡하고 binary의 형태로 전송해서 사람이 읽기 힘들다는 단점이 있음. REST API는 text의 형태로 전송해서 해서 사람이 읽기 편하고 상대적으로 간단하지만 단방향만 지원하고 GRPC에 비해 느리다.
+- GRPC
+  - 장점 : HTTP/2.0기반으로 속도가 빠르고 양방향 통신이 가능
+  - 단점 : 규약을 정의해야 하는 등 상대적으로 복잡하고 binary의 형태로 전송해서 사람이 읽기 힘듬
+- Rest API
+  - 장점 : 상대적으로 간단하고 text로 전송해서 사람이 읽기 쉬움
+  - 단점 : 느리고 단방향 통신만 지원
 
 ## References
 

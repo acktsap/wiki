@@ -2,9 +2,9 @@
 
 - [JPA](#jpa)
   - [Problem of SQL Oriented Development](#problem-of-sql-oriented-development)
-  - [Concept](#concept)
+  - [ORM & JPA](#orm--jpa)
   - [How JPA works](#how-jpa-works)
-  - [EntityManager](#entitymanager)
+  - [EntityManagerFactory, EntityManager](#entitymanagerfactory-entitymanager)
   - [Persistant Context](#persistant-context)
     - [Read](#read)
     - [Create](#create)
@@ -22,15 +22,14 @@
   - OOP
     - 상속이 있음
     - 양방향 연관관계가 없음. 만들려면 단방향 연관관계를 2개 만들어야 함
-    - 객체 그래프를 탐색할 때 reference가 있어서 자유롭게 탐색할 수 있음.
   - RDB
     ![jpa-rdb-super-sub-relation](./img/jpa-rdb-super-sub-relation.png)
     - 상속이 없음. 비슷한 걸로 Table supertype-subtype이 있으나 저장할 때 각 테이블에 insert를 날려야 하고 조회할 때 join을 해야 함
-    - 기본적으로 앙뱡향 join이 가능함.
+    - 기본적으로 앙뱡향 join이 가능
   ![jpa-object-graph-searching](./img/jpa-object-graph-searching.png)
   - 객체 그래프 탐색을 할 때 OOP는 reference가 있어서 자유롭게 탐색할 수 있으나 SQL을 객체에 Mapping하는 과정에서 객체 그래프의 대상이 query가 되었는지 알 수 없음. 이를 Entity 신뢰의 문제라고 함
 
-## Concept
+## ORM & JPA
 
 - ORM(Object-Relational Mapping) 객체는 객체대로 설계하고 RDB는 RDB대로 설계하면 중간에서 이를 매핑해주는 녀석임
 - JPA(Java Persistence API)는 Java진영의 ORM표준 스펙. 구현체로 Hibernate, EclipseLink, DataNucleus가 있음
@@ -41,7 +40,7 @@
 ![jpa-insert-structure](./img/jpa-insert-structure.png)
 ![jpa-select-structure](./img/jpa-select-structure.png)
 
-- Application과 JDBC사이에서 동작. 사용자가 JPA를 통해 요청을 하면 내부적으로 JDBC를 사용해서 SQL을 호출하는 식임. 쿼리를 JPA가 만들어주기 때문에 사용자는 신경 안써도 됨
+- Application과 JDBC사이에서 동작. 사용자가 JPA를 통해 요청을 하면 알아서 JDBC를 이용해서 쿼리를 실행해 줌
   - Insert
     1. 개발자는 JPA에 Member 객체를 넘김
     2. JPA가 엔티티를 분석해서 적절한 INSERT SQL을 생성
@@ -53,10 +52,10 @@
     4. JPA가 DB로부터 결과를 받아옴
     5. JPA가 결과(ResultSet)를 객체에 모두 매핑해서 return
 
-## EntityManager
+## EntityManagerFactory, EntityManager
 
 - EntityManagerFactory : EntityManager를 생성하는 녀석으로 내부적으로 DB connection pool을 사용함. Application loading시점에 딱 하나만 생성되어야 함
-- EntityManager : Entity의 CRUD를 하는 녀석. 변경을 하기 전에 Transaction을 실행
+- EntityManager : Entity의 CRUD를 하는 객체. 변경을 하기 전에 Transaction을 실행
 
 ```java
 // application loading 시점에 DB 당 딱 하나만 생성되어야 한다.
@@ -79,15 +78,13 @@ entityManagerFactory.close();
 
 ![jpa-persistence-context](./img/jpa-persistence-context.png)
 
-- Entity를 영구히 저장하는 환경으로 User Application과 DB의 사이에 위치. EntityManager를 하나 생성하면 1:1로 Persistant Context가 생성
+- Entity를 영구히 저장하는 환경으로 User Application과 DB의 사이에 위치. EntityManager마다 생성됨
+- query를 쌓아뒀다가 한번에 요청할 수 있는 buffering, 똑같은 요청에 대해 db를 안거치고 바로 return해주는 caching의 기능을 할 수 있음
 - Entity의 LifeCycle
   - new/transient (비영속) : 객체를 새로 생성한 것으로 Persistent Context와 관계가 없는 상태
   - managed (영속) : Persistant Context에 저장된 상태
   - detatched (준영속) : Persistant Context에서 지운 상태
   - removed (삭제) : 실제 DB에 삭제를 요청한 상태
-- 장점
-  - Persistant Context를 시용하면 query를 쌓아뒀다가 한번에 요청할 수 있는 buffering이 가능
-  - 똑같은 값에 대해 query를 두번 날리지 않고 cache된 것을 리턴하는 caching
 
 ```java
 EntityManager entityManager = entityManagerFactory.createEntityManager();

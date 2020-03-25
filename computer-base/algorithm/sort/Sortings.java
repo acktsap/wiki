@@ -17,6 +17,7 @@ public class Sortings {
         final int keep = arr[i];
         int vacant = i;
         // 2. shift vacant
+        // vacant - 1 : pre
         while (0 < vacant && arr[vacant - 1] > keep) {
           arr[vacant] = arr[vacant - 1];
           --vacant;
@@ -67,7 +68,7 @@ public class Sortings {
   // O(nlog(n)) on best
   // O(n^2) on worst
   static class ShellSort implements Sort {
-    public void sort(int[] arr) {
+    public void sort(final int[] arr) {
       for (int gap = arr.length / 2; gap > 0; gap /= 2) {
         // odd gap is better
         if (gap % 2 == 0) {
@@ -79,6 +80,7 @@ public class Sortings {
           for (int j = i + gap; j < arr.length; j += gap) {
             int keep = arr[j];
             int vacant = j;
+            // vacant - gap : pre
             while (0 <= (vacant - gap) && arr[vacant - gap] > keep) {
               arr[vacant] = arr[vacant - gap];
               vacant = vacant - gap;
@@ -198,18 +200,25 @@ public class Sortings {
       }
     }
 
-    protected int partition(final int[] arr, final int start, final int end) {
-      // TODO: not yet implemented
+    public static int partition(final int[] arr, final int start, final int end) {
       int pivot = arr[start];
-      int i = start + 1;
+      int i = start;
       int j = end;
 
-      // two pointer, loop invarient : i < j
+      // two pointer
+      // loop invariant
+      //   - i < j
+      //   - i : holds first element where > pivot
+      //   - j : holds first element where < pivot
       while (i < j) {
-        while (j <= end && pivot < arr[j]) --j;
-        while (i < j && arr[i] < pivot) ++i;
+        while (pivot < arr[j]) {
+          --j;
+        }
+        while (i < j && arr[i] <= pivot) {
+          ++i;
+        }
 
-        // not crossed yet
+        // if not crossed yet
         if (i < j) {
           int tmp = arr[i];
           arr[i] = arr[j];
@@ -217,11 +226,10 @@ public class Sortings {
         }
       }
 
-      // swap pivot with left partition end
-      int tmp = arr[pivot];
-      arr[pivot] = arr[j];
-      arr[j] = tmp;
-      return j;
+      // now i holds pivot location
+      arr[start] = arr[i];
+      arr[i] = pivot;
+      return i;
     }
   }
 
@@ -237,8 +245,9 @@ public class Sortings {
       new ShellSort(),
       new MergeSort(),
       new HeapSort(),
-      // new QuickSort(),
+      new QuickSort(),
     };
+
     Arrays.asList(sorts).stream().forEach(s -> {
       final Object[][] parameters = {
         { new int[] { 2, 322, 0, 44, 100, 9, 10, 50 },
