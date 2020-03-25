@@ -151,10 +151,8 @@ GC를 하기 위해 JVM이 멈추는 것. 이 시간을 Suspend time이라고 �
 
 ![jvm-g1](./img/jvm-g1.png)
 
-- CMS를 대체하기 위해 만들어짐. 물리적 Generation을 없애고 Region단위로 나눔
 - Garbage First -> Garbage로 가득 차 있는 Region부터 GC를 수행
-- Young Generation : Snapshot-At-The-Beginning
-- Old Generation : Snapshot-At-The-Beginning
+- CMS를 대체하기 위해 만들어짐. Heap을 Region단위로 나누어서 GC를 수행하기 때문에 stop-the-world시간이 짧음
 
 ## GC Tuning
 

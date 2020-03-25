@@ -16,12 +16,12 @@ public class Sortings {
       for (int i = 1; i < arr.length; ++i) {
         final int keep = arr[i];
         int vacant = i;
-        while (0 <  vacant && arr[vacant - 1] > keep) {
-          // 2. shift vacant
+        // 2. shift vacant
+        while (0 < vacant && arr[vacant - 1] > keep) {
           arr[vacant] = arr[vacant - 1];
-          vacant = vacant - 1;
+          --vacant;
         }
-        // 3. insert to vacant
+        // 3. insert into vacant
         arr[vacant] = keep;
       }
     }
@@ -29,10 +29,9 @@ public class Sortings {
 
   // O(n^2) on both best, worst
   static class SelectionSort implements Sort {
-    public void sort(int[] arr) {
-      int tmp = 0;
+    public void sort(final int[] arr) {
       // 1. for all 0 ... arr.length - 1
-      for (int i = 0; i < arr.length - 1; ++i) {
+      for (int i = 0; i < arr.length; ++i) {
         // 2. find min
         int min = i;
         for (int j = i + 1; j < arr.length; ++j) {
@@ -42,7 +41,7 @@ public class Sortings {
         }
         // 3. swap min
         if (min != i) {
-          tmp = arr[i];
+          int tmp = arr[i];
           arr[i] = arr[min];
           arr[min] = tmp;
         }
@@ -52,14 +51,13 @@ public class Sortings {
 
   // O(n^2) on both best, worst
   static class BubbleSort implements Sort {
-    public void sort(int[] arr) {
-      int tmp = 0;
+    public void sort(final int[] arr) {
       for (int i = arr.length - 1; i > 0; --i) {
         for (int j = 0; j < i; ++j) {
           if (arr[j] > arr[j + 1]) {
-            tmp = arr[j + 1];
-            arr[j + 1] = arr[j];
-            arr[j] = tmp;
+            int tmp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = tmp;
           }
         }
       }
@@ -106,7 +104,7 @@ public class Sortings {
 
     protected void sort(final int[] arr, final int start, final int end) {
       if (start < end) {
-        int mid = (start + end) / 2;
+        final int mid = (start + end) / 2;
         // divive
         sort(arr, start, mid);
         sort(arr, mid + 1, end);
@@ -123,12 +121,13 @@ public class Sortings {
       while (left <= mid && right <= end) {
         if (arr[left] < arr[right]) {
           tmp[curr] = arr[left];
+          ++curr;
           ++left;
         } else {
           tmp[curr] = arr[right];
+          ++curr;
           ++right;
         }
-        ++curr;
       }
       // if left is left
       while (left <= mid) {
@@ -208,7 +207,7 @@ public class Sortings {
       // two pointer, loop invarient : i < j
       while (i < j) {
         while (j <= end && pivot < arr[j]) --j;
-        while (start <= i && arr[i] < pivot) ++i;
+        while (i < j && arr[i] < pivot) ++i;
 
         // not crossed yet
         if (i < j) {

@@ -8,15 +8,18 @@
 
 ## What is it
 
-Google Remote Procedure Calls의 약자로 구글이 내부 microservice에 Stubby라는 RPC를 쓰고 있었음. 이것을 공개해보자! 해서 나온게 GRPC.
-
-HTTP/2.0기반으로 Server Push, Multiplexing, frame이나 header에 대한 높은 압축률을 자랑함. GRPC를 쓰려면 RPC에 대한 규약을 정의해둬야 하는데 보통 쓰는게 protobuf임. 미리 정해둔 규약에 기반해서 RPC를 위한 코드를 다양한 언어로 생성할 수 있기 때문에 확장성이 좋음.
-
-하지만 단점이 있는데 규약을 정해야 해서 REST API등에 비해 상대적으로 복잡함. 그리고 메시지의 형태가 binary의 형태로 전송되기 때문에 사람이 읽기 힘들고 브라우저에서 지원하지 않음.
+- Google Remote Procedure Calls의 약자로 구글이 내부 microservice에 Stubby라는 불리던 RPC를 공개용으로 만든 것
+- 장점
+  - HTTP/2.0기반으로 Multiplexing, 양방향 통신이 가능하며 header, frame에 대한 높은 압축
+  - protobuf로 rpc 규약을 정해두면 다양한 언어로 rpc를 실행하는 코드를 생성할 수 있어서 확장성이 좋음
+- 단점
+  - 규약을 정해야 해서 Rest API같은 것에 비해 상대적으로 복잡
+  - Message가 binary의 형태로 전송되어서 사람이 읽기 힘듬
 
 ## GRPC vs Binary blob over HTTP/2.0
 
-GRPC가 HTTP/2.0기반으로 이루어져 있으나 HTTP/2.0이 제공하지 않는 다양한 기능을 지원하는 것으로 알음. 또 Protobuf를 사용하면 높은 메시지 압축률을 보여줌.
+- GRPC는 HTTP/2.0이 제공하지 않는 다양한 기능을 지원
+- GRPC는 Protobuf를 사용해서 높은 메시지 압축률을 보여줌
 
 ## GRPC vs REST API over HTTP/1.1
 
