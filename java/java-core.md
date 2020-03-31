@@ -224,10 +224,6 @@ Lambda는 jdk8부터 등장한것으로 그냥 anonymous class 에 syntax suger�
 - Proxy : interface (또는 class)에 해당하는 메소드를 다 정의해야함
 - DynamicProxy : Reflection을 통해 실행되는 method를 가져와서 직접 다 정의하지 않고도 동적으로 처리할 수 있음
 
-## Jar
-
-TBD
-
 ## References
 
 valueOf, parseInt
@@ -245,10 +241,6 @@ https://homoefficio.github.io/2018/10/13/Java-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%
 Reflection
 
 https://brunch.co.kr/@kd4/8
-
-Jar spec
-
-https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jar.html
 
 Collection vs Stream
 

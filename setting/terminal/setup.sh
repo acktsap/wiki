@@ -37,3 +37,5 @@ cat << EOF >> $HOME_ZSHRC
 source $PWD/$ZSHRC_ADD_FILE
 EOF
 fi
+
+echo -e "\nLink and copy is done.. make sure run 'install.sh'\n"

@@ -2,10 +2,25 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-// 소인수분해
-public class PrimeFactorization {
+/*
+ * Descryption
+ *
+ * 소인수분해
+ *
+ *
+ * Approach & Proof 
+ *
+ *
+ * Complexity
+ *
+ *
+ * Review
+ *
+ *
+ */
+class PrimeFactorization {
 
-  List<Integer> factor(final int n) {
+  public List<Integer> factor(final int n) {
     final List<Integer> ret = new ArrayList<>();
     ret.add(1);
 
@@ -34,8 +49,8 @@ public class PrimeFactorization {
       { 17, new Integer[] { 1, 17 } },
       { 24, new Integer[] { 1, 2, 2, 2, 3 } }
     };
-    PrimeFactorization algo = new PrimeFactorization()
-    for (Object[] parameter : parameters) {
+    final PrimeFactorization algo = new PrimeFactorization();
+    for (final Object[] parameter : parameters) {
       final Integer n = (Integer) parameter[0];
       final List<Integer> expected = Arrays.asList((Integer[]) parameter[1]);
       final List<Integer> actual = algo.factor(n);

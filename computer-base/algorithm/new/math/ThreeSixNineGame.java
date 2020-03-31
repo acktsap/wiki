@@ -5,19 +5,24 @@ import java.lang.StringBuilder;
  *
  * n을 받아서 369게임에 맞게 출력. 짝은 '-'로 출력.
  *
+ *
  * Approach & Proof 
  *
  * n을 10으로 나머지 연산하고 해당 자리 처리
  * n /= 10하고 n이 0일때 까지 반복
+ *
  *
  * Complexity
  *
  *  - Time  : O(1)
  *  - Space : O(1)
  *
+ *
  * Review
  *
  * 0에 대해서 처리를 처음에 못함. 0 % 3도 0이거늘. 역시 테스트 케이스를 잘 작성해야해
+ *
+ *
  */
 class ThreeSixNineGame {
   public String game(final int n) {
