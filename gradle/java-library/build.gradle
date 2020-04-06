@@ -1,0 +1,114 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
+}
+
+subprojects {
+  apply plugin: 'java-library'
+  apply plugin: 'maven-publish'
+  apply plugin: 'checkstyle'     // lint
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "junit:junit:${junitVersion}"
+  }
+
+
+  /* java-library */
+
+  java {
+    sourceCompatibility = sourceJavaVersion
+    targetCompatibility = targetJavaVersion
+    withJavadocJar()
+    withSourcesJar()
+  }
+
+  javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+      options.addBooleanOption('html5', true)
+    }
+  }
+
+
+  /* maven-publish */
+
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        // groupId, version is automatically generated
+        // corresponding to project.groupId and project.version
+        artifactId = "custom-" + project.name
+        from components.java
+
+        // optional : custom pom file
+        pom {
+          name = 'My Library'
+          description = 'A concise description of my library'
+          url = 'http://www.example.com/library'
+          licenses {
+            license {
+              name = 'The Apache License, Version 2.0'
+              url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+          }
+          developers {
+            developer {
+              id = 'acktsap'
+              name = 'Taeik Lim'
+              email = 'sibera21@gmail.com'
+            }
+          }
+          scm {
+            connection = 'scm:git:git://example.com/my-library.git'
+            developerConnection = 'scm:git:ssh://example.com/my-library.git'
+            url = 'http://example.com/my-library/'
+          }
+        }
+      }
+    }
+
+    // optional : custom repository config
+    repositories {
+      maven {
+        def releasesRepoUrl = "https://buildDir/repos/releases"
+        def snapshotsRepoUrl = "https://buildDir/repos/snapshots"
+        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        credentials {
+          // cat ~/.gradle/gradle.properties prints
+          // systemProp.mavenUser=someuser
+          // systemProp.mavenPassword=somepassword
+          //
+          // or you can use
+          // ./gradlew publish -DmavenUser=user -DmavenPassword=password
+          username System.getProperty("mavenUser")
+          password System.getProperty("mavenPassword")
+        }
+      }
+    }
+  }
+
+
+  /* checkstyle */
+
+  checkstyle {
+    toolVersion checkstyleVersion
+    sourceSets = [ project.sourceSets.main ] // exclude test codes
+    configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
+  }
+
+}

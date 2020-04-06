@@ -11,8 +11,7 @@
     - [Access Modifier](#access-modifier)
     - [static, default method in interface](#static-default-method-in-interface)
     - [Java Class정의 필수요소](#java-class%ec%a0%95%ec%9d%98-%ed%95%84%ec%88%98%ec%9a%94%ec%86%8c)
-    - [Annotation](#annotation)
-    - [Generics](#generics)
+    - [Annotation, Generics](#annotation-generics)
     - [Exception](#exception)
     - [ClassLoader](#classloader)
   - [Collection vs Stream](#collection-vs-stream)
@@ -51,11 +50,14 @@
 
 ### Wrapper Class, AutoBoxing, Unboxing
 
-Java에는 primitive type에 각각 해당하는 클래스가 있음. 이를 Wrapper class라고 함. Java 5부터 Wrapper class랑 primitive class간 자동으로 변환해 주는데 이를 AutoBoxing(primitive tyep -> wrapper class)과 Unboxing(wrapper class -> primitive type)이라고 함
+- Wrapper class : primitive type에 각각 해당하는 클래스
+- AutoBoxing : primitive type -> Wrapper class로 자동으로 변환해 주는 것 (java 5부터 지원)
+- Unboxing : Wrapper class -> primitive type 로 자동으로 변환해 주는 것 (java 5부터 지원)
 
 ### Integer.valueOf vs Integer.parseInt
 
-valueOf는 Wrapper class object를 반환, parseInt는 primitive type을 반환. valueOf가 내부적으로 parseInt를 사용. valueOf에서 -128 ~ 127의 범위는 객체 cache를 사용해서 return. 다른 값들은 객체를 새로 생성.
+- Integer.valueOf : Wrapper class(Integer)를 반환. -128~127에 대해서는 미리 만들어둔 객체를 반환
+- Integer.parseInt : primitive type(int)을 반환
 
 ```java
 public static Integer valueOf(int i) {
@@ -69,15 +71,28 @@ public static Integer valueOf(int i) {
 
 ## Class
 
-객체를 정의해 놓은 것. 실제 객체는 instance라고 부름.
+객체를 정의해 놓은 것으로 실제 객체는 instance라고 부름
 
 ### Overridding vs Overloading
 
-Overridding은 부모의 method를 자손이 재정의하는 것이고 Overloading은 같은 이름의 method를 여러개 정의하는 것. Overloading의 경우에는 return은 영향을 주지 않음. method의 parameter쪽 signature이 달라야 가능.
+- Overridding
+  - 부모의 method를 자손이 재정의하는 것
+- Overloading
+  - 같은 이름의 method를 여러개 정의하는 것. Method의 signature가 다르면 가능
+  - method의 return type은 영향을 주지 않고 parameter쪽이 달라야 가능
 
 ### Interface vs Abstract class
 
-Interface는 상태를 가질 수 없음. Abstract class는 상태를 가질 수 있음. 원래 1.8 이전까지는 interface에 구현도 가질 수 없었으나 java 8에 default method가 추가된 이후 Interface와 abstract class의 차이점은 상태 여부임. 추가로 Interface는 다중구현을 할 수 있으나 abstract class는 다중상속이 불가능함. 또 interface에는 모든 method가 public이지만 abstract class에는 access modifier가 다 적용됨.
+- Interface
+  - 상태를 가질 수 없음
+  - 1.8 이전까지는 기본 구현을 할 수 없었음. 1.8 이후부터 default method가 추가되서 가능
+  - 모든 method가 public
+  - 다중상속이 가능
+- Abstract class
+  - 상태를 가질 수 있음 (field 가능)
+  - 기본 구현 가능
+  - method에 접근지정자를 설정할 수 있음
+  - 다중상속이 불가능
 
 ### Access Modifier
 
@@ -88,51 +103,62 @@ Interface는 상태를 가질 수 없음. Abstract class는 상태를 가질 수
 
 ### static, default method in interface
 
-jdk 8 부터 등장. static의 경우 jdk7까지는 일관성을 위해 안만들었음. Collections가 그래서 있는 것. static은 기본적으로 public임. default method는 interface에 method를 추가할 경우 그것을 상속하는 모든 클래스가 이를 구현해야 되서 추가됨. 해당 method에 대한 기본 동작을 제공. 이것으로 인해 추상 클래스와 인터페이스의 차이점은 상태를 가지느냐 안가지느냐 밖에 없게 됨.
+- 둘다 java 8부터 추가
+- static method
+  - jdk7까지는 일관성을 위해 안만들었음. Collections가 그래서 있는 것
+- default method
+  - interface에 method를 추가할 경우 그것을 상속하는 모든 클래스가 이를 구현해야 되서 추가
+  - 이것으로 인해 추상 클래스와 인터페이스의 차이점은 상태를 가지느냐 안가지느냐 밖에 없게 됨
 
 ### Java Class정의 필수요소
 
-equals, hashcode, toString을 항상 재정의해야한다. equals, hashcode는 HashSet, HashMap에 필요. toString은 사람이 읽기 편한 형태로 표현해야 한다는 권장사항임. 비슷한 수준에서 Comparable도 구현할지 고민해봐야 함. Comparable을 구현해서 객체 사이의 순서를 구현해 주면 `Arrays.sort()`, `Collections.sort()`같은거를 별도의 Comparitor 없이 사용할 수 있음.
+- equals, hashCode : Set, Map에서 사용
+- toString : 사람이 읽기 편한 형태로, 권장사항임
+- Comparable : 객체 사이의 자연적인 순서를 표현. `Arrays.sort()`, `Collections.sort()` 같은거를 별도의 Comparitor 없이 사용할 수 있음. 권장사항.
 
-### Annotation
+### Annotation, Generics
 
-java 5부터 추가된 것으로 Annotation처리를 통해 MetaPrograming을 해서 bolierplate code를 줄이는게 그 목적이 있음. 이것을 잘 쓴 예시로는 Lombok, Spring Framework가 있음.
-
-### Generics
-
-java 5부터 추가된 것으로 다양한 타입에 대해 compile type checking을 해주는 기능. Compile하면 Generics정보는 사라지고 특정 타입으로 변경됨.
+- 둘다 java 5부터 추가
+- Annotation
+  - Annotation처리를 통해 MetaPrograming을 해서 bolierplate code를 줄이려고 나옴
+  - 잘 쓴 예시로는 Lombok, Spring Framework가 있음
+- Generics
+  - 다양한 타입에 대해 compile type checking을 해주는 기능
+  - Compile하면 Generics정보는 사라지고 특정 타입으로 변경됨
 
 ### Exception
 
-Throwable이 최고 조상이고 크게 Error, Exception, RuntimeException으로 나눌 수 있음. 부모 자손 관계는 다음과 같음.
-
-- Throwable
-  - Error
+- Throwable : 최고 조상
+  - Error : 심각한 에러
     - OutOfMemoryError
     - ...
-  - Exception
+  - Exception : 사용하는 쪽에서 에러 처리가 강제
     - IOException
     - ...
-    - RuntimeException
+    - RuntimeException : 사용하는 쪽에서 에러 처리가 강제되진 않음
       - NullPointerException
       - UnSupportedOperationException
       - ...
 
-Error는 심각한 에러를 의미하고 (eg. StackOverflow) Exception은 에러 처리가 강제됨. RuntimeException은 에러 처리가 강제되진 않음.
-
 ### ClassLoader
 
-Class를 Loading하는 녀석으로 대표적으로 다음의 3가지 ClassLoader가 있다.
-
-- Bootstrap ClassLoader : 'jre/lib/rt.jar' 안의 클래스를 Loading함. Native C로 구현되어 있음
-- ExtClassLoader (PlatformClassLoader in java9) : 'jre/lib/ext' 안의 jar들을 Loading 함
-- AppClassLoader (SystemClassLoader in java 9) : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading.
-
-ClassLoader간에는 hierarchy가 있어서 class를 찾을 때 부모에서 먼저 찾고 자손에서 찾는 식임. 그래서 상위 클래스로더는 상위 클래스로더가 로드한 클래스를 볼 수 있지만 부모에서는 자손이 로드한 것을 볼 수 없음.
+- Class를 Loading하는 녀석
+  - Bootstrap ClassLoader : 'jre/lib/rt.jar' 안의 클래스를 Loading함. Native C로 구현되어 있음
+  - ExtClassLoader (PlatformClassLoader in java9) : 'jre/lib/ext' 안의 jar들을 Loading 함
+  - AppClassLoader (SystemClassLoader in java 9) : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading.
+- ClassLoader간에는 hierarchy가 있어서 class를 찾을 때 부모에서 먼저 찾고 자손에서 찾는 식임. 그래서 상위 클래스로더는 상위 클래스로더가 로드한 클래스를 볼 수 있지만 부모에서는 자손이 로드한 것을 볼 수 없음.
 
 ## Collection vs Stream
 
-Collection은 등 자료를 저장하는 것에 대한 추상화로 List, Set, Map 등이 있음. Stream은 자료를 처리하는 방식에 대한 추상화로 map, filter, flatMap등이 있음. Iterating을 할 때 Collection은 외부에서 사용자가 직접 해야하는 반면에 Stream은 내부적으로 자체적으로 함. Stream의 경우 map, filter, map 이런거 막 묶어놔도 실질적으로 for문은 terminal operation이 나와야만 실행함. Stream의 경우 Parallel stream을 사용할 수 있으나 이 경우 공통 forkJoinPool을 사용하기 때문에 여러개가 이걸 사용하는 경우 오히려 성능 저하가 발생할 수 있음.
+- Collection
+  - 자료를 저장하는 것에 대한 추상화
+  - List, Set, Map 등이 있음
+  - Iterating을 사용자가 직접 해야함
+- Stream
+  - 자료를 처리하는 방식에 대한 추상화
+  - map, filter, flatMap등의 operation이 적용됨
+  - Iterating을 내부적으로 해서 terminal operation (reduce, collect)이 와야만 iterating 실행
+  - 내부적으로 forkJoinPool을 사용하는 parallel stream이라는 것도 있음
 
 ### ArrayList, LinkedList
 
@@ -176,7 +202,6 @@ Lambda는 jdk8부터 등장한것으로 그냥 anonymous class 에 syntax suger�
 
 - Thread pool의 일종으로 특정 기준에 따라 fork을 계속 하고 join을 통해 결과를 합치는 식으로 동작.
 - 각 Thread들이 개별 queue를 가지고 자기의 task queue가 비어있으면 다른 thread의 task를 뺏어와서 작업하기 때문에 multi-core환경에서 최적의 성능을 낼 수 있음. 그래서 Work-Stealing Pool이라고도 함.
-- 가능하면 작업을 동등하게 나누는 것이 CPU를 최대한 활용할 수 있음.
 
 ### Atomic Operation
 
@@ -207,11 +232,9 @@ Lambda는 jdk8부터 등장한것으로 그냥 anonymous class 에 syntax suger�
 
 - Stream
   - one-way라서 I/O 둘다를 위해서는 InputStream, OutputStream 두개가 필요함.
-  - 상세 구현에 따라 byte 단위부터 object 단위까지 처리
   - Blocking만 가능
 - Channel
   - two-way라서 I/O 둘다를 한개로 처리 가능
-  - Buffer단위로만 처리
   - Non-blocking도 가능
   
 ## Reflection

@@ -177,12 +177,7 @@
 ### Virtual Memory
 
 - 가상 주소 공간을 실제 물리 메모리 보다 크게 잡아서 메모리 용량보다 더 많은 process를 올리는 기법
-- 프로그램 실행 시작 시에 프로그램 전체를 Memory에 올리지 않고 필요한 것만 올리는 Depend Paging (요구 페이징)을 사용
-- 장점
-  - 공유 라이브러리의 페이지가 다른 프로세스간 공유될 수 있음
-  - Process간 공유 메모리를 통해 통신
-- 단점
-  - Page fault가 발생
+- 프로그램 실행 시작 시에 프로그램 전체를 Memory에 올리지 않고 필요한 것만 올리는 Depend Paging (요구 페이징)을 사용. 그렇기 때문에 필요한 page가 없는 경우 page fault가 발생
 - Page fault가 발생하면 page를 디스크에서 가져와야함. But 이 때 물리 메모리가 가득 차 있는 경우 page replacement가 이루어져야함
 - Page Replacement Algorithm
   - First-In First-Out (FIFO) : 가장 먼저 메모리에 들어온 페이지를 교체

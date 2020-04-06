@@ -208,10 +208,12 @@ public class Sortings {
       // two pointer
       // loop invariant
       //   - i < j
-      //   - i : holds first element where > pivot
-      //   - j : holds first element where < pivot
+      //   - start..i : holds values <= pivot
+      //   - j..end : holds values > pivot
+      //   - i : holds first element > pivot
+      //   - j : holds first element < pivot
       while (i < j) {
-        while (pivot < arr[j]) {
+        while (i < j && pivot < arr[j]) {
           --j;
         }
         while (i < j && arr[i] <= pivot) {
@@ -226,7 +228,7 @@ public class Sortings {
         }
       }
 
-      // now i holds pivot location
+      // now i holds last element of left partition
       arr[start] = arr[i];
       arr[i] = pivot;
       return i;
