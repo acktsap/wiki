@@ -52,6 +52,8 @@ Bitcoin, Ethreum 두개의 Chain DB는 거의 같음 (block들의 chain), State 
 
 Blockchain
 
+http://homoefficio.github.io/2016/01/23/BlockChain-%EA%B8%B0%EC%B4%88-%EA%B0%9C%EB%85%90/
+
 https://homoefficio.github.io/2017/11/19/블록체인-한-번에-이해하기/
 
 https://hyperledger-fabric.readthedocs.io/en/latest/blockchain.html

@@ -20,6 +20,7 @@
     - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
     - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
     - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
+    - [Java에 Closure가 있는가](#java%ec%97%90-closure%ea%b0%80-%ec%9e%88%eb%8a%94%ea%b0%80)
   - [Concurrency](#concurrency)
     - [Volatile](#volatile)
     - [ForkJoinPool](#forkjoinpool)
@@ -30,7 +31,6 @@
     - [Stream (I/O) vs Channel](#stream-io-vs-channel)
   - [Reflection](#reflection)
     - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
-  - [Jar](#jar)
   - [References](#references)
 
 ## Type
@@ -162,33 +162,80 @@ public static Integer valueOf(int i) {
 
 ### ArrayList, LinkedList
 
-둘다 List의 구현체인데 ArrayList는 내부적으로 값을 배열로 저장. LinkedList는 내부적으로 노드들의 연결로 저장함. ArrayList는 array로 내부 구현을 하기 때문에 random access를 constant time에 할 수 있으나 ArrayList는 값을 추가할 때 capacity가 가득 찬 경우 이를 늘려주는 연산을 해야 하고 중간에 있는 원소를 삭제를 할 경우 뒤에 있는 값들을 모두 다시 복사해줘야함. LinkedList는 값의 추가나 삭제를 할 때 그냥 node의 연결을 해주거나 끊어주면 되지만 index로 access을 할 때 그 index까지 iterating 해야함. Iterating할 때 값들이 붙어있는 ArrayList가 Node들의 주소로 연결되어 있는 LinkedList보다 Locality의 관점에서 더 좋을 수 있음. Locality는 현재 참조하는 값에 인접한 값을 참조할 경우 이를 cache에 저장해 두면 더 빠른 것을 말함.
+- 둘다 List의 구현체
+- ArrayList
+  - 내부적으로 배열로 저장
+  - random access를 constant time에 가능
+  - 값을 추가할 때 capacity가 가득 찬 경우 새로운 배열을 만들어서 기존 값들을 복사를 해줘야 함
+  - 값을 삭제할 때는 뒤에 있는 값들을 모두 다시 복사해줘야함
+  - Iterating시 locality의 관점에서 LinkedList보다 좋을 수 있음
+- LinkedList
+  - 내부적으로 노드들의 연결로 저장
+  - random access를 위해서는 해당 index까지 iterating을 해야 함
+  - 값을 추가할 때 새로운 노드를 만들어서 연결을 해주면 됨
+  - 값을 삭제할 때는 노드의 연결을 끊어주면 됨
+  - Iterating시 locality의 관점에서 ArrayList보다 안좋을 수 있음
 
 ### Vector vs ArrayList
 
-Vector는 Java 1.0부터 있었고 ArrayList는 Java 1.2부터 있었음. 둘다 내부적으로 Array로 값을 저쟝하고 동적으로 크기를 증가시키지만, Vector는 method에 모두 synchronized가 걸려 있는 반면에 ArrayList는 걸려있지 않음. Vector는 단일 thread에서도 monitor lock을 걸기 때문에 ArrayList에 비해 성능이 느릴 수 있음.
+- 둘다 List의 구현체, 내부적으로 배열로 값을 저장
+- Vector
+  - Since 1.0
+  - 모든 method에 synchronized가 걸려 있음
+  - single thread일 때 monitor lock때문에 ArrayList보다 느림
+- ArrayList
+  - Since 1.2
+  - 모든 method에 걸려 있지 않음
+  - single thread일 때 monitor lock이 없어서 Vector보다 빠름
 
 ### HashMap vs LinkedHashMap vs TreeMap
 
-HashMap은 일반적인 HashMap이고 LinkedHashMap은 HashMap에 내부적으로 LinkedList로 저장해서 Iterating시 insertion order가 보장된다. TreeMap은 Comparator를 기반으로 Red-Black Tree로 저장. HashMap, LinkedHashMap은 put, get에 O(1)이 보장되지만 TreeMap은 O(log(n))의 시간이 걸림.
-
-HashMap은 내부적으로 array로 저장하는데 `hashCode() & (n - 1)`의 index에 값을 저장함. collision이 나는 경우 separate chaining방식으로 해당 index의 값에 LinkedList (1.8부터는 TreeNode, TreeNode의 경우 bucket안에서 search가 O(log(m)을 보장), LinkedList는 O(m))로 저장함.
+- HashMap
+  - 일반적인 HashTable 구현체
+  - put, get에 O(1)
+  - 내부적으로 array로 저장하는데 `hashCode() & (n - 1)`의 index에 값을 저장하고 이를 bucket이라고 부름
+  - Collision의 경우 separate chaining방식으로 해당 index의 값에 LinkedList로 저장
+  - 1.8부터는 TreeNode, TreeNode의 경우 bucket안에서 search가 O(log(m)을 보장), LinkedList는 O(m)로 저장
+- LinkedHashMap
+  - HashMap에 내부적으로 Linked로 저장해서 Iterating시 insertion order를 보장
+  - put, get에 O(1)
+- TreeMap
+  - Comparator를 기반으로 Red-Black Tree로 값을 저장
+  - put, get에 O(log(n))
 
 ### HashTable vs ConcurrentHashMap
 
-HashTable 1.0부터, ConcurrentHashMap은 1.5부터 등장. HashTable은 모든 method에 synchronized가 걸려있는 반면에 ConcurrentHashMap은 synchronized을 최소한으로 걸어서 더 빠른 성능을 보장함. 구체적으로 하면 HashMap이 array의 `hash & (n - 1)` index에 node의 separate chaining의 방식으로 저장하는데 그 bucket만 synchronized를 걸어버림. 그래서 다른 bucket에 대해서는 동시에 처리를 할 수 있음.
+- HashTable
+  - Since 1.0
+  - 모든 method에 synchronized가 걸려있음
+- ConcurrentHashMap
+  - Since 1.5
+  - synchronized를 최소한으로 걸음. `hash & (n - 1)`에 해당하는 bucket에만 synchronized가 걸려 있음
+  - 다른 bucket에 대해서는 동시에 처리를 할 수 있음
 
 ### Lambda, @FunctionalInterface
 
-Lambda는 jdk8부터 등장한것으로 그냥 anonymous class 에 syntax suger를 붙인것 뿐임. `@FunctionalInterface`를 통해 interface에 함수가 한개인거를 강제해서 컴파일 시 체크를 해주는 annotation임. FunctionalInterface와 일반 Interface의 차이점은 method갯수임 `@FunctionalInterface`는 한개만 강제되고 일반 interface는 여러개가 올 수 있음. `@FunctionalInterface`가 없더라도 method가 한개인 interface는 lambda로 쓸 수 있음.
+- Lambda
+  - jdk8부터 등장
+  - 그냥 anonymous class 에 syntax suger를 붙인것 뿐임
+  - `@FunctionalInterface` annotation하고 관계 없이 method가 1개인 인터페이스에 쓸 수 있음
+- `@FunctionalInterface`
+  - 함수가 한개인거를 강제해서 컴파일 시 체크를 해주는 annotation
+  - `@FunctionalInterface`가 붙어있는 interface vs 일반 interface
+    - `@FunctionalInterface`가 붙어있는 interface : method1가 한개만 가능
+    - 일반 interface : method가 2개 이상 가능
+- 자바에서 기본적으로 제공해주는 함수형 인터페이스
+  - `Runnable` : void run()
+  - `Supplier` : T get()
+  - `Consumer` : void accept()
+  - `Function` : R apply(T t)
+  - `Predicate` : boolean test(T t)
 
-자바에서 기본적으로 제공해주는 함수형 인터페이스는 다음과 같음.
+### Java에 Closure가 있는가
 
-- `Runnable` : void run()
-- `Supplier` : T get()
-- `Consumer` : void accept()
-- `Function` : R apply(T t)
-- `Predicate` : boolean test(T t)
+- Closure는 부모 scope에 묶인 변수를 binding하기 위한 기술
+- Java에서는 둘러싼 변수가 final로 선언되어 있을 경우에만 참조 가능
+- 변경하려면 reference참조를 통해 하거나 field를 통해 simulation 해야 함
 
 ## Concurrency
 

@@ -152,7 +152,8 @@ GC를 하기 위해 JVM이 멈추는 것. 이 시간을 Suspend time이라고 �
 ![jvm-g1](./img/jvm-g1.png)
 
 - Garbage First -> Garbage로 가득 차 있는 Region부터 GC를 수행
-- CMS를 대체하기 위해 만들어짐. Heap을 Region단위로 나누어서 GC를 수행하기 때문에 stop-the-world시간이 짧음
+- CMS를 대체하기 위해 만들어짐. Heap을 Region단위로 나누어서 GC를 수행
+- CMS에 비해 GC의 단위가 작기 때문에 stop-the-world시간이 짧고 stop-the-world도 그 region을 사용하는 곳에서만 일어남
 
 ## GC Tuning
 
