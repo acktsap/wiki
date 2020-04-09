@@ -19,11 +19,11 @@ Long-Term Support의 줄임말로 해당 버전은 다른 버전에 비해 오�
 
 - Generics : Compile-time type safety를 여러 타입에 대해 제공하는 기술.
 - Annotations : Annotation처리를 통해 boilerplate code를 줄임. 선언적 프로그래밍이 가능하게 함.
-- Auto Boxing : Primitive type의 Wrapper class와 primitive type간 자동으로 변환해줌.
+- Auto Boxing, Unboxing : Primitive type의 Wrapper class와 primitive type간 자동으로 변환해줌.
 
 ## Java 1.7
 
-- Try-with-resources : AutoClosable을 상속한 객체들에 대해서 자동으로 close
+- Try-with-resources : `AutoClosable`을 상속한 객체들에 대해서 자동으로 close
 - Garbare-First (G1) garbage collectors의 공식적인 추가
 - Fork-Join Pool : 분할 정복과 비슷, 나눠서 일하고 합친다
 

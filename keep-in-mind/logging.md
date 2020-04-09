@@ -34,20 +34,11 @@ debugging sessions are transient.
 
 ### WARN vs ERROR
 
-```text
-Think about you pushing a new feature of your shiny fintech (bank) application to production,
-which unfortunately triggers the infamous Hibernate LazyLoadingException whenever a user tries
-to display the recent transactions for his bank account.
+Think about you pushing a new feature of your shiny fintech (bank) application to production, which unfortunately triggers the infamous Hibernate LazyLoadingException whenever a user tries to display the recent transactions for his bank account.
 
-That sounds like a pretty strong OMG situation, and you’ll want these errors to be logged
-as "ERRORS" - and trigger appropriate reactive measures.
+That sounds like a pretty strong OMG situation, and you’ll want these errors to be logged as "ERRORS" - and trigger appropriate reactive measures.
 
-Then think about a batch job, which imports transactions on a daily or weekly basis.
-As is the case quite often, some records might be malformed and thus cannot be imported into the system.
-Someone, a person, needs to have a look at these records manually and fix them.
-But likely this isn’t as time-sensitive and urgent as the error case,
-so you’ll choose to log these items with the WARN level.
-```
+Then think about a batch job, which imports transactions on a daily or weekly basis. As is the case quite often, some records might be malformed and thus cannot be imported into the system. Someone, a person, needs to have a look at these records manually and fix them. But likely this isn’t as time-sensitive and urgent as the error case, so you’ll choose to log these items with the WARN level.
 
 ## Tips
 
@@ -56,4 +47,3 @@ No not log sensitive information (eg. user credentials, credit card number, ..)
 ## References
 
 [how to log](https://www.marcobehler.com/guides/a-guide-to-logging-in-java#_how_to_log)
-

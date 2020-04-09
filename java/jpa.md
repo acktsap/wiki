@@ -31,8 +31,8 @@
 
 ## ORM & JPA
 
-- ORM(Object-Relational Mapping) 객체는 객체대로 설계하고 RDB는 RDB대로 설계하면 중간에서 이를 매핑해주는 녀석임
-- JPA(Java Persistence API)는 Java진영의 ORM표준 스펙. 구현체로 Hibernate, EclipseLink, DataNucleus가 있음
+- ORM (Object-Relational Mapping) 객체는 객체대로 설계하고 RDB는 RDB대로 설계하면 중간에서 이를 매핑해주는 녀석
+- JPA (Java Persistence API)는 Java진영의 ORM표준 스펙. 구현체로 Hibernate, EclipseLink, DataNucleus가 있음
 
 ## How JPA works
 
@@ -81,7 +81,7 @@ entityManagerFactory.close();
 - Entity를 영구히 저장하는 환경으로 User Application과 DB의 사이에 위치. EntityManager마다 생성됨
 - query를 쌓아뒀다가 한번에 요청할 수 있는 buffering, 똑같은 요청에 대해 db를 안거치고 바로 return해주는 caching의 기능을 할 수 있음
 - Entity의 LifeCycle
-  - new/transient (비영속) : 객체를 새로 생성한 것으로 Persistent Context와 관계가 없는 상태
+  - new / transient (비영속) : 객체를 새로 생성한 것으로 Persistent Context와 관계가 없는 상태
   - managed (영속) : Persistant Context에 저장된 상태
   - detatched (준영속) : Persistant Context에서 지운 상태
   - removed (삭제) : 실제 DB에 삭제를 요청한 상태
@@ -177,7 +177,7 @@ entityManager.persist(member);
 
 entityManager.flush(); // 강제 호출 (쿼리가 DB 에 반영됨)
 
-tx.commit();
+tx.commit(); // flush 암시적으로 실행
 ```
 
 ```java

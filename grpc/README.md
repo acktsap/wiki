@@ -2,6 +2,7 @@
 
 - [GRPC](#grpc)
   - [What is it](#what-is-it)
+  - [*.proto를 작성할 때 고려해야 할 점](#proto%eb%a5%bc-%ec%9e%91%ec%84%b1%ed%95%a0-%eb%95%8c-%ea%b3%a0%eb%a0%a4%ed%95%b4%ec%95%bc-%ed%95%a0-%ec%a0%90)
   - [GRPC vs Binary blob over HTTP/2.0](#grpc-vs-binary-blob-over-http20)
   - [GRPC vs Rest API over HTTP/1.1](#grpc-vs-rest-api-over-http11)
   - [References](#references)
@@ -16,10 +17,19 @@
   - 규약을 정해야 해서 Rest API같은 것에 비해 상대적으로 복잡
   - Message가 binary의 형태로 전송되어서 사람이 읽기 힘듬
 
+## *.proto를 작성할 때 고려해야 할 점
+
+- 하위호환을 지키기 위해서는
+- Update
+  - field number를 바꾸지 말라
+  - 쓸모없는 field를 reserved로 변경한 후 새로운 field를 추가하라
+- Remove
+  - 쓸모없는 field를 reserved로 변경하라
+
 ## GRPC vs Binary blob over HTTP/2.0
 
 - GRPC는 HTTP/2.0이 제공하지 않는 다양한 기능을 지원
-- GRPC는 Protobuf를 사용해서 높은 메시지 압축률을 보여줌
+- eg. Protobuf를 사용해서 높은 메시지 압축률을 보여줌
 
 ## GRPC vs Rest API over HTTP/1.1
 

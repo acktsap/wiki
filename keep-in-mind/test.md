@@ -13,4 +13,3 @@ Behavior-driven test
 - given
 - when
 - then
-

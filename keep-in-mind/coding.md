@@ -5,8 +5,10 @@
 ```java
 public int test(final Object object, final int val) {
   // verify method precondition
-  Object.requireNonNull(object, () -> "Object must not null);
-  assert 0 < val;
+  Object.requireNonNull(object, () -> "Object must not null");
+  if (val <= 0) {
+    throw new IllegalArgumentException("val must be > 0")
+  }
 
   // log parameters as debug
   logger.debug("Object: {}, val: {}", object, val);

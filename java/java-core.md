@@ -8,7 +8,7 @@
   - [Class](#class)
     - [Overridding vs Overloading](#overridding-vs-overloading)
     - [Interface vs Abstract class](#interface-vs-abstract-class)
-    - [Access Modifier](#access-modifier)
+    - [Access Modifier (접근지정자)](#access-modifier-%ec%a0%91%ea%b7%bc%ec%a7%80%ec%a0%95%ec%9e%90)
     - [static, default method in interface](#static-default-method-in-interface)
     - [Java Class정의 필수요소](#java-class%ec%a0%95%ec%9d%98-%ed%95%84%ec%88%98%ec%9a%94%ec%86%8c)
     - [Annotation, Generics](#annotation-generics)
@@ -94,7 +94,7 @@ public static Integer valueOf(int i) {
   - method에 접근지정자를 설정할 수 있음
   - 다중상속이 불가능
 
-### Access Modifier
+### Access Modifier (접근지정자)
 
 - public : 전부가능
 - protected : 같은 패키지, 자손들
@@ -103,6 +103,7 @@ public static Integer valueOf(int i) {
 
 ### static, default method in interface
 
+- Since java 8
 - 둘다 java 8부터 추가
 - static method
   - jdk7까지는 일관성을 위해 안만들었음. Collections가 그래서 있는 것
@@ -114,11 +115,11 @@ public static Integer valueOf(int i) {
 
 - equals, hashCode : Set, Map에서 사용
 - toString : 사람이 읽기 편한 형태로, 권장사항임
-- Comparable : 객체 사이의 자연적인 순서를 표현. `Arrays.sort()`, `Collections.sort()` 같은거를 별도의 Comparitor 없이 사용할 수 있음. 권장사항.
+- Comparable : 객체 사이의 자연적인 순서를 표현. `Arrays.sort()`, `Collections.sort()` 같은거를 별도의 Comparator 없이 사용할 수 있음. 권장사항임
 
 ### Annotation, Generics
 
-- 둘다 java 5부터 추가
+- Since java 5
 - Annotation
   - Annotation처리를 통해 MetaPrograming을 해서 bolierplate code를 줄이려고 나옴
   - 잘 쓴 예시로는 Lombok, Spring Framework가 있음
@@ -143,9 +144,9 @@ public static Integer valueOf(int i) {
 ### ClassLoader
 
 - Class를 Loading하는 녀석
-  - Bootstrap ClassLoader : 'jre/lib/rt.jar' 안의 클래스를 Loading함. Native C로 구현되어 있음
-  - ExtClassLoader (PlatformClassLoader in java9) : 'jre/lib/ext' 안의 jar들을 Loading 함
-  - AppClassLoader (SystemClassLoader in java 9) : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading.
+  - Bootstrap ClassLoader : 'jre/lib/rt.jar' 안의 클래스를 Loading. Native C로 구현되어 있음
+  - ExtClassLoader (PlatformClassLoader in java 9) : 'jre/lib/ext' 안의 jar들을 Loading
+  - AppClassLoader (SystemClassLoader in java 9) : classpath에 있거나 manifest의 classpath값으로 지정된 경로에서 class를 loading
 - ClassLoader간에는 hierarchy가 있어서 class를 찾을 때 부모에서 먼저 찾고 자손에서 찾는 식임. 그래서 상위 클래스로더는 상위 클래스로더가 로드한 클래스를 볼 수 있지만 부모에서는 자손이 로드한 것을 볼 수 없음.
 
 ## Collection vs Stream
@@ -193,15 +194,16 @@ public static Integer valueOf(int i) {
 - HashMap
   - 일반적인 HashTable 구현체
   - put, get에 O(1)
-  - 내부적으로 array로 저장하는데 `hashCode() & (n - 1)`의 index에 값을 저장하고 이를 bucket이라고 부름
-  - Collision의 경우 separate chaining방식으로 해당 index의 값에 LinkedList로 저장
-  - 1.8부터는 TreeNode, TreeNode의 경우 bucket안에서 search가 O(log(m)을 보장), LinkedList는 O(m)로 저장
 - LinkedHashMap
   - HashMap에 내부적으로 Linked로 저장해서 Iterating시 insertion order를 보장
   - put, get에 O(1)
 - TreeMap
   - Comparator를 기반으로 Red-Black Tree로 값을 저장
   - put, get에 O(log(n))
+- HashMap 구현
+  - 내부적으로 array로 저장하는데 `hashCode() & (n - 1)`의 index에 값을 저장. 이를 bucket이라고 부름
+  - Collision의 경우 separate chaining방식으로 해당 index의 값에 LinkedList로 저장. Search는 O(m)
+  - 1.8부터는 TreeNode로 저장. bucket안에서 search가 O(log(m)
 
 ### HashTable vs ConcurrentHashMap
 
@@ -210,19 +212,18 @@ public static Integer valueOf(int i) {
   - 모든 method에 synchronized가 걸려있음
 - ConcurrentHashMap
   - Since 1.5
-  - synchronized를 최소한으로 걸음. `hash & (n - 1)`에 해당하는 bucket에만 synchronized가 걸려 있음
-  - 다른 bucket에 대해서는 동시에 처리를 할 수 있음
+  - synchronized를 최소한으로 걸음. `hash & (n - 1)`에 해당하는 bucket에만 synchronized가 걸려 있음. 다른 bucket에 대해서는 동시에 처리를 할 수 있음
 
 ### Lambda, @FunctionalInterface
 
+- 둘다 Since 1.8
 - Lambda
-  - jdk8부터 등장
   - 그냥 anonymous class 에 syntax suger를 붙인것 뿐임
   - `@FunctionalInterface` annotation하고 관계 없이 method가 1개인 인터페이스에 쓸 수 있음
 - `@FunctionalInterface`
   - 함수가 한개인거를 강제해서 컴파일 시 체크를 해주는 annotation
   - `@FunctionalInterface`가 붙어있는 interface vs 일반 interface
-    - `@FunctionalInterface`가 붙어있는 interface : method1가 한개만 가능
+    - `@FunctionalInterface`가 붙어있는 interface : method가 한개만 가능
     - 일반 interface : method가 2개 이상 가능
 - 자바에서 기본적으로 제공해주는 함수형 인터페이스
   - `Runnable` : void run()
@@ -235,7 +236,7 @@ public static Integer valueOf(int i) {
 
 - Closure는 부모 scope에 묶인 변수를 binding하기 위한 기술
 - Java에서는 둘러싼 변수가 final로 선언되어 있을 경우에만 참조 가능
-- 변경하려면 reference참조를 통해 하거나 field를 통해 simulation 해야 함
+- 변경하려면 reference참조를 통해 해야 함
 
 ## Concurrency
 
@@ -271,17 +272,16 @@ public static Integer valueOf(int i) {
   1. JVM이 Kernal에 I/O를 요청
   2. Kernal이 system call을 함
   3. Disk Controller가 디스크로부터 파일을 읽어서 DMA를 통해 (Direct Memory Access)를 이용해서 kernal buffer로 복사
-  4. JVM 내부 buffer로 복사
-   -> 이것 자체가 느리고 내부 버퍼가 GC되어야 하는 문제점이 있음.
+  4. JVM 내부 buffer로 복사 : 이것 자체가 느리고 내부 버퍼가 GC되어야 하는 문제점이 있음.
 - 이것을 해결하기 위해 Kernal의 buffer에 directly하게 접근하게 할 수 있는 방법이 NIO 로 `ByteBuffer`라는 클래스를 제공
 
 ### Stream (I/O) vs Channel
 
 - Stream
-  - one-way라서 I/O 둘다를 위해서는 InputStream, OutputStream 두개가 필요함.
+  - One-way라서 I/O 둘다를 위해서는 InputStream, OutputStream 두개가 필요함.
   - Blocking만 가능
 - Channel
-  - two-way라서 I/O 둘다를 한개로 처리 가능
+  - Two-way라서 I/O 둘다를 한개로 처리 가능
   - Non-blocking도 가능
   
 ## Reflection
@@ -292,7 +292,7 @@ public static Integer valueOf(int i) {
 ### Proxy vs DynamicProxy
 
 - Proxy : interface (또는 class)에 해당하는 메소드를 다 정의해야함
-- DynamicProxy : Reflection을 통해 실행되는 method를 가져와서 직접 다 정의하지 않고도 동적으로 처리할 수 있음
+- DynamicProxy : Reflection을 통해 실행되는 method를 가져와서 직접 다 정의하지 않고도 동적으로 proxy 처리를 할 수 있음
 
 ## References
 

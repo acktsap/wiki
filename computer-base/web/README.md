@@ -19,12 +19,12 @@
 
 ## HTTP
 
-- HTTP (HyperText Transfer Protocol)는 웹에서 request-response를 받을 수 있는 규약임
-- HTTP/0.9 : 초기의 Protocol로 GET방식으로 단순히 데이터를 받아오는 것만 제공함. Header도 없음.
+- HTTP (HyperText Transfer Protocol). 웹에서 request-response를 받을 수 있는 규약
+- HTTP/0.9 : 초기의 Protocol로 GET방식으로 단순히 데이터를 받아오는 것만 제공. Header도 없음.
 - HTTP/1.0 : 0.9에서 HEAD, POST등 여러 기능을 추가
 - HTTP/1.1
   - 1.0의 단점을 보완하고 DELETE, PUT등 추가
-  - Keep-Alive :  특정 timeout 이내에 요청이 오면 이전에 만든 Connection을 재사용하는 방법을 제공함
+  - Keep-Alive : 특정 timeout 이내에 요청이 오면 이전에 만든 Connection을 재사용하는 방법을 제공
 - HTTP/2.0
   - HTTP/1.1과 호환을 유지하면서 속도만 빠르게 할려고 나옴
   - 연결형. 양방향 통신이 가능
@@ -72,8 +72,8 @@
 
 ## URI
 
-- Uniform Resource Identifier의 약자로 Resource를 식별하기 위한 표준임. schema://authority/path 이런 식으로 구분됨
-- URL (Uniform Resource Locator)와 URN (Uniform Resource Name)을 포함함.
+- Uniform Resource Identifier의 약자로 Resource를 식별하기 위한 표준임. schema://authority/path 이런 식으로 구분
+- URL (Uniform Resource Locator)와 URN (Uniform Resource Name)을 포함
 
 ## JWT
 
@@ -84,6 +84,7 @@
 ## CSRF
 
 - Cross Site Request Forger의 약자로 유효한 쿠키를 가지고 사용자가 원하지 않는 요청을 하는 것
+- 정상 사이트를 방문해서 정상 쿠키를 얻은 후 이상한 사이트를 방문해서 해당 쿠키로 사용자가 원하지 않는 요청을 하는 식임
 - 방지법
   - input form에 csrf라는 hidden value를 삽입해서 요청 시 csrf도 같이 보내는 방식
   - SameSite Header를 사용해서 쿠키를 생성한 서버와 다른 사이트에서는 쿠키를 사용하지 않음
@@ -99,10 +100,10 @@
 - Cookie
   - 클라이언트에 대한 정보를 클라이언트의 PC에 저장하기 위해 서버에서 클라이언트로 보내는 정보
 - Session
-  - 일정 시간 동안 사용자로부터 들어오는 요구를 하나의 상태로 보고 그것에 ID를 부여하여 일정하게 유지시키는 기술로 서버에 세션값을 저장
-  - Client단에서는 보통 Cookie에 Session값을 저장
+  - 일정 시간 동안 사용자로부터 들어오는 요구를 하나의 상태로 보고 그것에 ID를 부여하여 일정하게 유지시키는 기술. 서버에 세션값을 저장해서 처리
+  - Client에서 보통 Cookie에 Session값을 저장
 - Cache
-  - 같은 요청에 대해 네트워크를 타지 않으려고 하는 것
+  - 같은 요청에 대해 네트워크를 타지 않으려고 값을 중간 레이어에서 저장해두는 것
   - Browser단에서 GET요청, Proxy server 등에서 사용할 수 있음
 
 ## Rest API

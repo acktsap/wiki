@@ -8,7 +8,9 @@
 
 ## Concept
 
-엔터프라이즈에서 바로 사용할 수 있는 블록체인 솔루션을 추구해서 만들어짐. 이더 기반해서 만든 것으로 이더하고 구조가 비슷함. Consensus만 EOS와 같은 DPOS. 즉 이더와 같이 nonce기반이고 blockchain에 대한 정보를 담고 있는 chain db와 account에 대한 정보가 담겨 있는 state db로 이루어져 있음.
+- 엔터프라이즈에서 바로 사용할 수 있는 블록체인 솔루션을 추구
+- 이더 기반해서 만든 것으로 이더하고 구조가 비슷. Consensus만 EOS와 같은 DPOS
+- 이더와 같이 nonce기반이고 blockchain에 대한 정보를 담고 있는 chain db와 account에 대한 정보가 담겨 있는 state db로 이루어져 있음
 
 ## When new tx comes
 

@@ -1,6 +1,6 @@
 # Learning
 
-Learn by 
+Learn by
 
 - Summarize core concepts
 - Practice usage with a useful pattern
