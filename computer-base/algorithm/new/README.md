@@ -35,6 +35,8 @@ Write those well-known algorithms into patterns.
 
 Use java only. Use primitive type and array only if possible.
 
+DO NOT make it complex. Design a simple algorithm.
+
 ## Modeling
 
 Write it down with pseudo code 

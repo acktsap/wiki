@@ -4,10 +4,17 @@
 
 - One slow-runner and the other fast-runner.
   ```java
+  // find first i
   int i = 0;
-  int j = 1;
+  while (i < arr.length && {some_condition}) {
+    ++i;
+  }
+
+  // do logic
+  int j = i + 1;
   while (j < arr.length) {
     // do something
+    // no loop here if possible
   }
   ```
 - One pointer starts from the beginning while the other pointer starts from the end.
@@ -16,6 +23,7 @@
   int j = arr.length - 1;
   while (i < j) {
     // do something
+    // no loop here if possible
   }
   ```
 
