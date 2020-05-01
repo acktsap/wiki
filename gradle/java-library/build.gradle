@@ -1,3 +1,4 @@
+// need for plugins
 buildscript {
   repositories {
     mavenLocal()
@@ -6,10 +7,27 @@ buildscript {
   }
 }
 
-subprojects {
+allprojects {
+  // need for custom root tasks
   apply plugin: 'java-library'
-  apply plugin: 'maven-publish'
+  apply plugin: 'jacoco'         // coverage
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
+}
+
+subprojects {
+  // here, java-library and jacoco are redundant. Just keep it for clarity
+  apply plugin: 'java-library'
   apply plugin: 'checkstyle'     // lint
+  apply plugin: 'jacoco'         // coverage
+  apply plugin: 'maven-publish'  // publish
+  apply plugin: 'com.github.johnrengelman.shadow' // shadow jar
+
+  def projectName = "custom-" + project.name
 
   repositories {
     mavenLocal()
@@ -34,14 +52,52 @@ subprojects {
   java {
     sourceCompatibility = sourceJavaVersion
     targetCompatibility = targetJavaVersion
-    withJavadocJar()
+    compileJava.options.encoding = "UTF-8"
+    compileTestJava.options.encoding = "UTF-8"
     withSourcesJar()
+    withJavadocJar()
   }
 
   javadoc {
-    if(JavaVersion.current().isJava9Compatible()) {
+    if (JavaVersion.current().isJava9Compatible()) {
       options.addBooleanOption('html5', true)
     }
+  }
+
+
+  /* checkstyle */
+
+  checkstyle {
+    toolVersion checkstyleVersion
+    sourceSets = [project.sourceSets.main] // exclude test codes
+    configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
+  }
+
+  // custom lint task
+  task lint {
+    dependsOn check
+  }
+
+
+  /* jacoco */
+
+  jacoco {
+    toolVersion jacocoVersion
+  }
+
+  jacocoTestReport {
+    dependsOn test   // default : not depends on test
+    reports {
+      xml.enabled = true
+      html.enabled = true
+      csv.enabled false
+      xml.destination file("${buildDir}/reports/jacoco/report.xml")
+    }
+  }
+
+  // custom coverage task
+  task coverage {
+    dependsOn jacocoTestReport
   }
 
 
@@ -52,7 +108,7 @@ subprojects {
       maven(MavenPublication) {
         // groupId, version is automatically generated
         // corresponding to project.groupId and project.version
-        artifactId = "custom-" + project.name
+        artifactId = projectName
         from components.java
 
         // optional : custom pom file
@@ -102,13 +158,39 @@ subprojects {
     }
   }
 
-
-  /* checkstyle */
-
-  checkstyle {
-    toolVersion checkstyleVersion
-    sourceSets = [ project.sourceSets.main ] // exclude test codes
-    configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
+  // install task
+  task install {
+    dependsOn publishToMavenLocal
   }
 
 }
+
+
+/* root tasks */
+
+task allcoverage(type: JacocoReport) {
+  def targetProjects = subprojects.findAll {
+    // exclude library-tools project. This is an example
+    it.name != 'library-tools'
+  }
+  dependsOn = targetProjects.coverage
+  targetProjects.each { sourceSets it.sourceSets.main }
+  executionData.from = files(targetProjects.jacocoTestReport.executionData)
+  reports {
+    xml.enabled = true
+    html.enabled = true
+    csv.enabled false
+    xml.destination file("${buildDir}/reports/jacoco/report.xml")
+  }
+}
+
+task alljavadoc(type: Javadoc) {
+  def targetProjects = subprojects;
+  source targetProjects.collect { it.sourceSets.main.allJava }
+  classpath = files(targetProjects.collect { it.sourceSets.main.compileClasspath })
+  destinationDir = file("${buildDir}/docs/javadoc")
+  if (JavaVersion.current().isJava9Compatible()) {
+    options.addBooleanOption('html5', true)
+  }
+}
+

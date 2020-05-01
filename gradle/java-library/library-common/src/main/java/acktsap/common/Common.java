@@ -1,4 +1,4 @@
-package acktsap.sample;
+package acktsap.common;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

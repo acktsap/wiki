@@ -1,4 +1,4 @@
 /**
  * A core library.
  */
-package acktsap.sample;
+package acktsap.core;

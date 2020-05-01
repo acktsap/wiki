@@ -1,9 +1,8 @@
-package acktsap.sample;
+package acktsap.common;
 
 import static java.util.UUID.randomUUID;
 import static org.junit.Assert.assertNotNull;
 
-import acktsap.sample.Common;
 import org.junit.Test;
 
 public class CommonTest {
@@ -12,6 +11,7 @@ public class CommonTest {
   public void test() {
     final Common common = new Common(randomUUID().toString());
     assertNotNull(common);
+    assertNotNull(common.getValue());
   }
 
 }

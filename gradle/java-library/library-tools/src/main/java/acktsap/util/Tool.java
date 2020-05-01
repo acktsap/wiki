@@ -1,4 +1,4 @@
-package acktsap.sample;
+package acktsap.util;
 
 import static java.util.Arrays.asList;
 import static org.slf4j.LoggerFactory.getLogger;

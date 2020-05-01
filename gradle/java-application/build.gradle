@@ -19,6 +19,9 @@ subprojects {
     jcenter()
   }
 
+  compileJava.options.encoding = "UTF-8"
+  compileTestJava.options.encoding = "UTF-8"
+
   dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"

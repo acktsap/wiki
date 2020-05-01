@@ -1,8 +1,9 @@
-package acktsap.sample;
+package acktsap.tool;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
+import acktsap.util.Tool;
 import java.util.List;
 import org.junit.Test;
 
