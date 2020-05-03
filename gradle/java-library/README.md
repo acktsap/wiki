@@ -7,10 +7,11 @@
 - Lint: `./gradlew lint`
 - Test: `./gradlew test`
 - Coverage (including test): `./gradlew coverage` (individual), `./gradlew allcoverage` (all)
-- Build (also lint, test): `./gradlew clean build`
+- Build (also lint, test): `./gradlew build`
 - Docs: `./gradlew javadoc` (individual), `./gradlew alljavadoc` (all)
-- Install to local: `./gradlew clean install`
+- Install to local: `./gradlew install`
 - Shadow Jar: `./gradle shadowJar`
+- Micro bmt: `./gradle jmh`
 
 ## Useful gradle commands
 
@@ -26,3 +27,4 @@
 - [jacoco plugin](https://docs.gradle.org/current/userguide/jacoco_plugin.html)
 - [maven publish plugin](https://docs.gradle.org/current/userguide/publishing_maven.html)
 - [shadow jar plugin](https://github.com/johnrengelman/shadow)
+- [jmh plugin](https://github.com/melix/jmh-gradle-plugin)

@@ -1,31 +1,25 @@
-// need for plugins
 buildscript {
   repositories {
     mavenLocal()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
     mavenCentral()
     jcenter()
   }
-}
 
-allprojects {
-  // need for custom root tasks
-  apply plugin: 'java-library'
-  apply plugin: 'jacoco'         // coverage
-
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
+  dependencies {
+    classpath "me.champeau.gradle:jmh-gradle-plugin:${jmhVersion}"
+    classpath "com.github.jengelman.gradle.plugins:shadow:${shadowJarVersion}"
   }
 }
 
 subprojects {
-  // here, java-library and jacoco are redundant. Just keep it for clarity
   apply plugin: 'java-library'
   apply plugin: 'checkstyle'     // lint
   apply plugin: 'jacoco'         // coverage
   apply plugin: 'maven-publish'  // publish
-  apply plugin: 'com.github.johnrengelman.shadow' // shadow jar
+  apply plugin: "me.champeau.gradle.jmh"  // micro bmt
 
   def projectName = "custom-" + project.name
 
@@ -73,7 +67,6 @@ subprojects {
     configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
   }
 
-  // custom lint task
   task lint {
     dependsOn check
   }
@@ -158,39 +151,48 @@ subprojects {
     }
   }
 
-  // install task
   task install {
     dependsOn publishToMavenLocal
   }
 
 }
 
+// root project
+project(":") {
+  apply plugin: 'java-library'
+  apply plugin: 'jacoco'         // coverage
 
-/* root tasks */
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
 
-task allcoverage(type: JacocoReport) {
-  def targetProjects = subprojects.findAll {
-    // exclude library-tools project. This is an example
-    it.name != 'library-tools'
+  task allcoverage(type: JacocoReport) {
+    def targetProjects = subprojects.findAll {
+      // exclude library-tools project. This is an example
+      it.name != 'library-tools'
+    }
+    dependsOn = targetProjects.coverage
+    targetProjects.each { sourceSets it.sourceSets.main }
+    executionData.from = files(targetProjects.jacocoTestReport.executionData)
+    reports {
+      xml.enabled = true
+      html.enabled = true
+      csv.enabled false
+      xml.destination file("${buildDir}/reports/jacoco/report.xml")
+    }
   }
-  dependsOn = targetProjects.coverage
-  targetProjects.each { sourceSets it.sourceSets.main }
-  executionData.from = files(targetProjects.jacocoTestReport.executionData)
-  reports {
-    xml.enabled = true
-    html.enabled = true
-    csv.enabled false
-    xml.destination file("${buildDir}/reports/jacoco/report.xml")
-  }
-}
 
-task alljavadoc(type: Javadoc) {
-  def targetProjects = subprojects;
-  source targetProjects.collect { it.sourceSets.main.allJava }
-  classpath = files(targetProjects.collect { it.sourceSets.main.compileClasspath })
-  destinationDir = file("${buildDir}/docs/javadoc")
-  if (JavaVersion.current().isJava9Compatible()) {
-    options.addBooleanOption('html5', true)
+  task alljavadoc(type: Javadoc) {
+    def targetProjects = subprojects;
+    source targetProjects.collect { it.sourceSets.main.allJava }
+    classpath = files(targetProjects.collect { it.sourceSets.main.compileClasspath })
+    destinationDir = file("${buildDir}/docs/javadoc")
+    if (JavaVersion.current().isJava9Compatible()) {
+      options.addBooleanOption('html5', true)
+    }
   }
+
 }
 

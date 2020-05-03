@@ -121,6 +121,7 @@ export EDITOR=nvim
 alias ll='ls -alF'
 alias vi='nvim'
 alias vim='nvim'
+alias vimdiff="vimdiff -c 'set wrap' -c 'wincmd w' -c 'set wrap'"
 
 # Additional
 if [ ! -z $(which direnv | grep bin) ]; then

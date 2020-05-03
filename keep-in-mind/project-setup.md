@@ -4,7 +4,7 @@
   - Latest version
   - Compatibility
   - Architecture
-  - Build from source
+  - Build
     - Prerequisites
     - Install dependencies
     - Lint
