@@ -10,24 +10,64 @@ buildscript {
 
   dependencies {
     classpath "me.champeau.gradle:jmh-gradle-plugin:${jmhVersion}"
-    classpath "com.github.jengelman.gradle.plugins:shadow:${shadowJarVersion}"
   }
 }
 
-subprojects {
+// configure java plugin and repositories
+allprojects {
   apply plugin: 'java-library'
-  apply plugin: 'checkstyle'     // lint
-  apply plugin: 'jacoco'         // coverage
-  apply plugin: 'maven-publish'  // publish
-  apply plugin: "me.champeau.gradle.jmh"  // micro bmt
-
-  def projectName = "custom-" + project.name
+  apply plugin: 'idea'
 
   repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
   }
+
+  /* java-library */
+
+  compileJava.options.encoding = "UTF-8"
+  compileTestJava.options.encoding = "UTF-8"
+
+  java {
+    sourceCompatibility = sourceJavaVersion
+    targetCompatibility = targetJavaVersion
+    withSourcesJar()
+    withJavadocJar()
+  }
+
+  javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+      options.addBooleanOption('html5', true)
+    }
+  }
+
+
+  /* idea */
+
+  idea {
+    module {
+      outputDir file('build/classes/java/main')
+      testOutputDir file('build/classes/java/test')
+    }
+  }
+
+}
+
+// exclude assembly
+def javaLibraryProjects = [
+    project(':library-tools'),
+    project(':library-common'),
+    project(':library-core')
+]
+
+configure(javaLibraryProjects) {
+  apply plugin: 'checkstyle'              // lint
+  apply plugin: 'jacoco'                  // coverage
+  apply plugin: 'maven-publish'           // publish
+  apply plugin: "me.champeau.gradle.jmh"  // micro bmt
+
+  def projectName = "custom-" + project.name
 
   dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
@@ -38,24 +78,6 @@ subprojects {
 
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
     testImplementation "junit:junit:${junitVersion}"
-  }
-
-
-  /* java-library */
-
-  java {
-    sourceCompatibility = sourceJavaVersion
-    targetCompatibility = targetJavaVersion
-    compileJava.options.encoding = "UTF-8"
-    compileTestJava.options.encoding = "UTF-8"
-    withSourcesJar()
-    withJavadocJar()
-  }
-
-  javadoc {
-    if (JavaVersion.current().isJava9Compatible()) {
-      options.addBooleanOption('html5', true)
-    }
   }
 
 
@@ -155,22 +177,29 @@ subprojects {
     dependsOn publishToMavenLocal
   }
 
+
+  /* jmh */
+
+  jmh {
+    include += '.*Benchmark'
+    fork = 2
+    benchmarkMode = ['thrpt']
+    resultFormat = 'JSON'
+    timeUnit = 's'
+    threads = 2 * Runtime.runtime.availableProcessors()
+    jmhVersion = '1.21'
+    duplicateClassesStrategy = 'warn'
+  }
+
 }
 
 // root project
 project(":") {
-  apply plugin: 'java-library'
-  apply plugin: 'jacoco'         // coverage
-
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-  }
+  apply plugin: 'jacoco'  // coverage
 
   task allcoverage(type: JacocoReport) {
-    def targetProjects = subprojects.findAll {
-      // exclude library-tools project. This is an example
+    def targetProjects = javaLibraryProjects.findAll {
+      // exclude library-tools project for example
       it.name != 'library-tools'
     }
     dependsOn = targetProjects.coverage
@@ -185,7 +214,7 @@ project(":") {
   }
 
   task alljavadoc(type: Javadoc) {
-    def targetProjects = subprojects;
+    def targetProjects = javaLibraryProjects;
     source targetProjects.collect { it.sourceSets.main.allJava }
     classpath = files(targetProjects.collect { it.sourceSets.main.compileClasspath })
     destinationDir = file("${buildDir}/docs/javadoc")
@@ -195,4 +224,3 @@ project(":") {
   }
 
 }
-

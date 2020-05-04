@@ -1,11 +1,26 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:${shadowJarVersion}"
+  }
+}
+
 apply plugin: 'com.github.johnrengelman.shadow' // fat jar
 
 // When using Shadow in a multi-project build,
 // project dependencies will be treated the same as external dependencies
 dependencies {
-  api project(":library-common")
-  api project(":library-core")
-  api project(":library-tools")
+  api project(':library-common')
+  api project(':library-core')
+  api project(':library-tools')
 }
 
 shadowJar {
@@ -20,4 +35,8 @@ shadowJar {
   relocate "org.slf4j", "${prefix}.org.slf4j"
   relocate "com.google", "${prefix}.com.google"
   relocate "ch.qos.logback", "${prefix}.ch.qos.logback"
+
+  doLast {
+    println "Shadow jar is generated in '${project.buildDir}/libs'"
+  }
 }

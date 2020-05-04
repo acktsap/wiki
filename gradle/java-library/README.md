@@ -4,19 +4,21 @@
 
 - Prerequisite
   - jdk8
+- Clean: `./gradlew clean`
 - Lint: `./gradlew lint`
 - Test: `./gradlew test`
-- Coverage (including test): `./gradlew coverage` (individual), `./gradlew allcoverage` (all)
-- Build (also lint, test): `./gradlew build`
+  - Coverage (including test): `./gradlew coverage` (individual), `./gradlew allcoverage` (all)
+  - Benchmark Test: `./gradle {target_project}:jmh`
 - Docs: `./gradlew javadoc` (individual), `./gradlew alljavadoc` (all)
+- Build (also lint, test): `./gradlew build`
+  - Shadow Jar: `./gradle shadowJar` (generated in `./library-assembly/build/libs`)
 - Install to local: `./gradlew install`
-- Shadow Jar: `./gradle shadowJar`
-- Micro bmt: `./gradle jmh`
 
 ## Useful gradle commands
 
 - Upgrade gradle wrapper: `./gradlew wrapper --gradle-version x.x.x`
 - List available tasks: `./gradlew tasks`
+- Stop gradle daemon: `./gradlew --stop`
 - Run task in a specific sub-project : `./gradlew {sub_project}:{some_task}` (eg. `./gradlew library-core:test`)
 
 ## See also

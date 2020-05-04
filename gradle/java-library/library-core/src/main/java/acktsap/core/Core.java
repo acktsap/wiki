@@ -23,4 +23,15 @@ public class Core {
     return common.getValue();
   }
 
+  /**
+   * Calculate.
+   *
+   * @param left  a left value
+   * @param right a right value
+   * @return a calculation result
+   */
+  public int calculate(int left, int right) {
+    return left + right;
+  }
+
 }
