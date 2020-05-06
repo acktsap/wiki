@@ -100,8 +100,8 @@ configure(javaLibraryProjects) {
     toolVersion jacocoVersion
   }
 
+  // need test task before executing
   jacocoTestReport {
-    dependsOn test   // default : not depends on test
     reports {
       xml.enabled = true
       html.enabled = true

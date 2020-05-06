@@ -80,7 +80,7 @@ Facebook이 제안한 구조로 현대 web mvc에서 bidirectional을 없애버�
 - Refine raw value
 - Display (convert if necessary)
 
-## References
+## See also
 
 - [mvc original paper](https://heim.ifi.uio.no/~trygver/2007/MVC_Originals.pdf)
 - [evolution of mvc](https://stephenwalther.com/archive/2008/08/24/the-evolution-of-mvc)
