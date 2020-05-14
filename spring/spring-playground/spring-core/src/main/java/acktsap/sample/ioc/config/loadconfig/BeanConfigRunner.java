@@ -2,7 +2,7 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.sample.ioc.config.run;
+package acktsap.sample.ioc.config.loadconfig;
 
 import acktsap.sample.ioc.config.ApplicationConfig;
 import acktsap.sample.ioc.config.BookService;
@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanRunner implements ApplicationRunner {
+public class BeanConfigRunner implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
