@@ -123,7 +123,10 @@ alias vi='nvim'
 alias vim='nvim'
 alias vimdiff="vimdiff -c 'set wrap' -c 'wincmd w' -c 'set wrap'"
 
+
 # Additional
+
+# direnv
 if [ ! -z $(which direnv | grep bin) ]; then
   eval "$(direnv hook zsh)"
 fi

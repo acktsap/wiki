@@ -27,27 +27,31 @@ function main() {
     echo "Unsupported os type"
     exit -1
   fi
-  echo "install with '$COMMAND'"
+  echo "Install with '$COMMAND'"
 
   # vim
   if [[ -z $(which vim | grep bin) ]]; then
+    echo "Installing vim.."
     ${COMMAND} vim
   fi
 
   # nvim
   if [[ -z $(which nvim) ]]; then
+    echo "Installing neovim.."
     ${COMMAND} neovim
   fi
 
   # vim vundle plugin
   local vundle="$HOME/.vim/bundle/Vundle.vim"
   if [[ ! -d "$vundle" ]]; then
+    echo "Installing Vundle.vim.."
     git clone https://github.com/VundleVim/Vundle.vim.git "$vundle"
   fi
 
   # z shell
   local zshell_location=$(which zsh)
   if [[ -z ${zshell_location} ]]; then
+    echo "Installing zsh.."
     ${COMMAND} zsh
     zshell_location=$(which zsh)
     [ -z $(sudo grep ${zshell_location} /etc/shells) ] && sudo bash -c "echo ${zshell_location} >> /etc/shells"
@@ -57,7 +61,14 @@ function main() {
 
   # direnv
   if [[ -z $(which direnv | grep bin) ]]; then
+    echo "Installing direnv.."
     ${COMMAND} direnv
+  fi
+
+  # tmux
+  if [[ -z $(which tmux | grep bin) ]]; then
+    echo "Installing tmux.."
+    ${COMMAND} tmux
   fi
 }
 
