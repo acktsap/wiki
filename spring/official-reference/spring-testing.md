@@ -72,8 +72,36 @@ Spring은 Unit Testing을 위한 mock object와 util class들을 제공해줌.
 
 ### Annotations
 
-- Spring Testing Annotations
-  - TestContext framework와 함께 사용할 수 있는 annotation들을 제공함.
+- Spring Testing Annotations : TestContext framework와 함께 사용할 수 있는 annotation들을 제공
+  - @BootstrapWith : Spring TestContext를 설정
+  - @ContextConfiguration : 테스트용 ApplicationContext 설정
+  - @WebAppConfiguration : @ContextConfiguration랑 같이 쓰여야 함. file:src/main/webapp를 기반으로 WebApplicationContext load함
+  - @ContextHierarchy : @ContextConfiguration간 hierarchy를 정의
+  - @ActiveProfiles : 테스트용 Profiles 설정
+  - @TestPropertySource : 테스트용 PropertySources (in the Environment for an ApplicationContext) 설정
+  - @DynamicPropertySource
+  - @DirtiesContext
+  - @TestExecutionListeners
+  - @Commit
+  - @Rollback
+  - @BeforeTransaction
+  - @AfterTransaction
+  - @Sql
+  - @SqlConfig
+  - @SqlMergeMode
+  - @SqlGroup
+- Standard Annotation Support : Spring 일반 annotation 지원
+  - @Autowired
+  - @Qualifier
+  - @Value
+  - @Resource (javax.annotation) if JSR-250 is present
+  - @ManagedBean (javax.annotation) if JSR-250 is present
+  - @Inject (javax.inject) if JSR-330 is present
+  - @Named (javax.inject) if JSR-330 is present
+  - @PersistenceContext (javax.persistence) if JPA is present
+  - @PersistenceUnit (javax.persistence) if JPA is present
+  - @Required
+  - @Transactional (org.springframework.transaction.annotation) with limited attribute support
 
 ## Reference
 

@@ -28,5 +28,4 @@ public class ConverterEventControllerTest {
         .andExpect(content().string("1"));
   }
 
-
 }
