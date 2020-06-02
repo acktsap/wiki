@@ -1,8 +1,0 @@
-dependencies {
-  implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-  implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
-
-  implementation "org.apache.tika:tika-core:${tikaVersion}"
-
-  testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-}

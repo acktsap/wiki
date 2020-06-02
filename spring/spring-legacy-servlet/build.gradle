@@ -1,0 +1,9 @@
+dependencies {
+  // why compileOnly? -> servelt container가 runtime시 제공해 줌
+  compileOnly "javax.servlet:javax.servlet-api:${servletVersion}"
+
+  // spring ioc integtation
+  implementation "org.springframework:spring-webmvc:${springVersion}"
+
+  runtimeOnly "com.h2database:h2:${h2Version}"
+}

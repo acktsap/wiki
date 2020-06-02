@@ -1,9 +1,8 @@
 rootProject.name = 'spring-playground'
 
 include ':spring-core'
-include ':spring-web-mvc-helloworld'
-include ':spring-web-servlet'
+include ':spring-data-access'
 include ':spring-web-config'
-include ':spring-web-mvc'
-include ':spring-jpa'
-include ':spring-test'
+include ':spring-legacy-servlet'
+include ':spring-web-servlet'
+include ':spring-testing'
