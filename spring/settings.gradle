@@ -1,8 +1,12 @@
 rootProject.name = 'spring-playground'
 
+# core
 include ':spring-core'
 include ':spring-data-access'
 include ':spring-web-config'
 include ':spring-legacy-servlet'
 include ':spring-web-servlet'
 include ':spring-testing'
+
+# extra
+include ':spring-batch'

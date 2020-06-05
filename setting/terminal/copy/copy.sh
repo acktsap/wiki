@@ -16,21 +16,30 @@ cd "$SCRIPT_HOME"
 CURRENT_FILE=$(basename $0)
 FILES=$(find * ! -name "$CURRENT_FILE")
 for FILE in ${FILES[@]}; do
-  CANONICAL_FILE_PATH="$SCRIPT_HOME/$FILE"
-  DEST=""
+  DEST_DIR=""
+  DEST_FILE=""
   case $FILE in
     *.vim)
-      DEST="$HOME/.vim/colors"
+      DEST_DIR="$HOME/.vim/colors"
+      DEST_FILE="$FILE"
       ;;
     config)
-      DEST="$HOME/.ssh"
+      DEST_DIR="$HOME/.ssh"
+      DEST_FILE="config"
+      ;;
+    gitconfig)
+      DEST_DIR="$HOME"
+      DEST_FILE=".gitconfig"
       ;;
   esac
-  mkdir -p "$DEST"
-  if [[ ! -f "$DEST/$FILE" ]]; then
-    echo "Copy to $DEST"
-    cp "$CANONICAL_FILE_PATH" "$DEST/$FILE"
+  mkdir -p "$DEST_DIR"
+
+  CANONICAL_FILE_PATH="$SCRIPT_HOME/$FILE"
+  DEST="$DEST_DIR/$DEST_FILE"
+  if [[ ! -f "$DEST" ]]; then
+    echo "Copying $FILE to $DEST"
+    cp "$CANONICAL_FILE_PATH" "$DEST"
   else
-    echo "Not copy to '$DEST/$FILE'. It already exists"
+    echo "Not copying $FILE to $DEST. It already exists"
   fi
 done

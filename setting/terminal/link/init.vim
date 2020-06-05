@@ -83,7 +83,7 @@ Plugin 'majutsushi/tagbar'                " show tagbar
 " intellisence
 " youcompleteme
 "   cd ~/.vim/bundle/YouCompleteMe
-"   python3 install.py --all
+"   ./install.py --clang-completer
 "   python3 -m pip install --user --upgrade pynvim
 Plugin 'valloric/youcompleteme'           " autocomplete
 

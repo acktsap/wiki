@@ -42,3 +42,8 @@ Check
 eg. java
 
 Find cycle in 'import ...' statements
+
+## Comment
+
+주석 없는 코드가 최고라고 생각하지만 도메인을 구현한 경우에는 무조건 comment를 다는게 좋은 듯
+
