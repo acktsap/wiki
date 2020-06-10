@@ -6,11 +6,17 @@ package acktsap.pattern.collection.aggregation;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Aggregation {
 
@@ -60,14 +66,43 @@ public class Aggregation {
         .filter(i -> 1 != i)
         .map(i -> 2 * i)
         .map(Object::toString)
-        .collect(Collectors.toList());
+        .collect(toList());
     System.out.println("Collected by toList: " + simpleCollected);
 
-    // Collect with groupingBy.
-    Map<Integer, List<Integer>> groupByCollected = collections.stream()
+    // Collect with groupingBy to List.
+    Map<Integer, List<Integer>> groupingByCollected = collections.stream()
         .filter(i -> 1 != i)
         .map(i -> 3 * i)
         .collect(groupingBy(i -> i % 2));
-    System.out.println("Collected by groupingBy: " + groupByCollected);
+    System.out.println("Collected by groupingByCollected: " + groupingByCollected);
+
+    // Paged List
+    int[] raw = IntStream.range(0, new Random().nextInt(30)).toArray();
+    int pageSize = 5;
+    Map<Integer, List<Integer>> pagedList = IntStream.range(0, raw.length)
+        .mapToObj(i -> new Pair<>(i, raw[i]))
+        .collect(groupingBy(i -> i.left / pageSize, mapping(j -> j.right, toList())));
+    System.out.println("Paged list: " + pagedList);
+
+    // Paged Array
+    List<Integer[]> pagedArray = pagedList.values().stream()
+        .map(l -> l.toArray(new Integer[0]))
+        .collect(toList());
+    System.out.print("Paged array: [");
+    pagedArray.forEach(p -> System.out.print(Arrays.toString(p)));
+    System.out.println("]");
   }
+
+  static class Pair<T, R> {
+
+    protected final T left;
+    protected final R right;
+
+    public Pair(T left, R right) {
+      this.left = left;
+      this.right = right;
+    }
+
+  }
+
 }
