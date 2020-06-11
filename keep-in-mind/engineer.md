@@ -1,6 +1,12 @@
 # Engineering
 
-Performance vs Pride
+## Rule
+
+0. 코드에 꿈과 희망을..!
+1. 알았던 거지만 까먹은 뭔가 발생하면 그거 다 다시 복습.
+2. 새로운 지식 떠오르는거 다 queue에 쌓아뒀다가 집가서 (또는 여유시간에) 처리.
+3. 프로젝트 할 때마다 커리어 정리.
+4. 이 기술을 왜 쓰는가? 장단점은? 대안은?
 
 ## Programming
 
@@ -47,11 +53,9 @@ Engineering is understanding performance, structure, limits of what you build, d
 - Pros, Cons
 - Comparision
 
-
 ## Questions
 
 - What kind of problem does it solve? No alternatives for this one?
 - Is it simple enough? fancy? beautiful?
 - Is is effective enough?
 - What kind of stuffs need to be changed when spec changes?
-

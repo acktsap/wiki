@@ -2,8 +2,8 @@
 
 ## Before making pull request
 
-- Always rebase to a base branch before making pull request.
-- Prefer squash commit over merge commit.
+- rebase해서 최신 commit하고 맞추셈
+- 이왕이면 squash해서 하나의 commit으로 하는게 좋음
 
 ## Commit message
 
