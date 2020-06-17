@@ -5,6 +5,7 @@
 package acktsap.pattern.collection.aggregation;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
@@ -13,9 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Aggregation {
@@ -91,6 +90,18 @@ public class Aggregation {
     System.out.print("Paged array: [");
     pagedArray.forEach(p -> System.out.print(Arrays.toString(p)));
     System.out.println("]");
+
+    // Grouping by with enum
+    Map<TestEnum, List<Pair<TestEnum, Integer>>> groupingByEnum = IntStream
+        .range(0, 15)
+        .mapToObj(i -> new Pair<>(i % 2 == 0 ? TestEnum.One : TestEnum.Two, i))
+        .collect(groupingBy(Pair::getLeft, toList()));
+    for (TestEnum testEnum : TestEnum.values()) {
+      // best practice using getOrDefault since value of groupingBy is null if classifier target is null
+      // System.out.printf("Enum: %s, values: %s%n", testEnum, groupingByEnum.get(testEnum));
+      System.out.printf("Enum: %s, values: %s%n", testEnum,
+          groupingByEnum.getOrDefault(testEnum, emptyList()));
+    }
   }
 
   static class Pair<T, R> {
@@ -103,6 +114,27 @@ public class Aggregation {
       this.right = right;
     }
 
+    public T getLeft() {
+      return left;
+    }
+
+    public R getRight() {
+      return right;
+    }
+
+    @Override
+    public String toString() {
+      return "Pair{" +
+          "left=" + left +
+          ", right=" + right +
+          '}';
+    }
+  }
+
+  enum TestEnum {
+    None,
+    One,
+    Two
   }
 
 }
