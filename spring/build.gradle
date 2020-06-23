@@ -28,6 +28,7 @@ subprojects {
     testImplementation "org.projectlombok:lombok:${lombokVersion}"
 //    testImplementation "junit:junit:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
   }
 
 }

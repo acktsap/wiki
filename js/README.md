@@ -1,6 +1,24 @@
 # Notice
 
-## Used utils
+## Install
+
+### Nvm
+
+- Install : `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`
+- Install node version 8 : `nvm install 8`
+- Install node version 8.1.5 : `nvm install 8.1.5`
+- List installed : `nvm ls`
+- Use 8.x.x version : `nvm 8`
+- Use 8.1.5 version : `nvm 8.1.5`
+
+### Yarn
+
+- Install : `node install --global yarn@x.x.x`
+
+
+[Installing nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+## Utils
 
 This template is based on `rollup`.  
 Javascript module bundlers are in chaos there are too many module bunder.
