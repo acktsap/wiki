@@ -1,5 +1,31 @@
 # Markdown
 
+- [Markdown](#markdown)
+  - [1. Header](#1-header)
+    - [Title](#title)
+    - [Subtitle](#subtitle)
+    - [Headers](#headers)
+    - [Horizontal line](#horizontal-line)
+  - [2. Lists](#2-lists)
+    - [Ordered list](#ordered-list)
+    - [Unordered list](#unordered-list)
+    - [Nested list](#nested-list)
+  - [3. Font](#3-font)
+    - [Italics](#italics)
+    - [Bold](#bold)
+    - [Both italics and bold](#both-italics-and-bold)
+    - [Cancelline](#cancelline)
+    - [Blockquotes](#blockquotes)
+  - [4. Etc](#4-etc)
+    - [Line ending (ending with 2 spaces)](#line-ending-ending-with-2-spaces)
+    - [Inline code](#inline-code)
+    - [Code block with syntax highlighting](#code-block-with-syntax-highlighting)
+    - [Link](#link)
+    - [Image](#image)
+    - [Table](#table)
+    - [Collapsible](#collapsible)
+  - [See also](#see-also)
+
 ## 1. Header
 
 ### Title
@@ -237,6 +263,26 @@ Header 1 | Header 2
 -------- | --------
 cell 1   | cell 2
 column 1 | column 2
+
+### Collapsible
+
+<details><summary>Click Me</summary>
+<p>
+
+Hidden contents
+
+</p>
+</details>
+
+```html
+<details><summary>Click Me</summary>
+<p>
+
+Hidden contents
+
+</p>
+</details>
+```
 
 ## See also
 

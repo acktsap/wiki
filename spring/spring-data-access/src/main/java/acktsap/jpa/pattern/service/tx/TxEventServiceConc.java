@@ -4,22 +4,18 @@ import acktsap.jpa.pattern.model.Event;
 import acktsap.jpa.pattern.repository.EventHistoryRepository;
 import acktsap.jpa.pattern.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class TxEventServiceConc implements BeanFactoryAware {
+public class TxEventServiceConc {
 
   private final EventRepository eventRepository;
   private final EventHistoryRepository eventHistoryRepository;
-
-  @Setter
-  private BeanFactory beanFactory;
+  private final BeanFactory beanFactory;
 
   public void callsTxOperation(Event event, String change) {
     // to use proxy object wrapped by Transactional annotation

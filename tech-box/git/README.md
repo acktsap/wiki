@@ -411,3 +411,30 @@ user.name, user.email should be setted
 git config --global user.name Taeik Lim
 git config --global user.email sibera21@gmail.com
 ```
+
+### Sparse checkout
+
+```sh
+# init
+git init ${SOME_PROJECT}
+cd ${SOME_PROJECT}
+
+# config sparse checkout
+git config core.sparseCheckout true
+
+# add remote
+git remote add -f origin <REMOTE_URL>
+
+# set sparse target into git/info/sparse-checkout
+echo "script/sys-script" >> .git/info/sparse-checkout
+echo "script/user-script/user1" >> .git/info/sparse-checkout
+
+# pull
+git pull origin master
+```
+
+## Reference
+
+Sparse checkout
+
+https://www.lesstif.com/gitbook/git-clone-20776761.html
