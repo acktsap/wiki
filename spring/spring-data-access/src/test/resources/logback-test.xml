@@ -9,7 +9,10 @@
     <appender-ref ref="STDOUT" />
   </root>
 
-  <logger name="jdbc" level="DEBUG"/>
-  <logger name="org.hibernate" level="DEBUG" />
+  <logger name="jdbc" level="INFO"/>
+  <logger name="org.springframework.transaction" level="DEBUG"/>
+  <logger name="org.springframework.transaction.support" level="DEBUG"/>
+  <logger name="org.springframework.test" level="DEBUG"/>
+  <logger name="org.hibernate" level="INFO" />
 
 </configuration>

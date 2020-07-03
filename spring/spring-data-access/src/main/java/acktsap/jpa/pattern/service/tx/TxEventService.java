@@ -4,8 +4,6 @@ import acktsap.jpa.pattern.model.Event;
 
 public interface TxEventService {
 
-  void callsTxOperation(Event event, String change);
-
-  void txOperation(Event event, String change);
+  void callsFailTxOperation(Event event, String change);
 
 }

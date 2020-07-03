@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    auto-commit: false
