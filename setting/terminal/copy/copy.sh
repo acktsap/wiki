@@ -27,12 +27,12 @@ for FILE in ${FILES[@]}; do
       DEST_DIR="$HOME/.ssh"
       DEST_FILE="config"
       ;;
-    gitconfig)
-      DEST_DIR="$HOME"
-      DEST_FILE=".gitconfig"
-      ;;
   esac
-  mkdir -p "$DEST_DIR"
+
+  if [[ ! -d "$DEST_DIR" ]]; then
+    echo "Making directory $DEST_DIR"
+    mkdir -p "$DEST_DIR"
+  fi
 
   CANONICAL_FILE_PATH="$SCRIPT_HOME/$FILE"
   DEST="$DEST_DIR/$DEST_FILE"

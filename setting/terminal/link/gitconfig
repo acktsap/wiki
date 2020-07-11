@@ -7,5 +7,8 @@
 # you have to keep it manually for each repository
 # git config --local user.name "${USER_NAME}"
 # git config --local user.email "${USER_EMAIL}"
+# eg. 
+# git config --local user.name "Taeik Lim"
+# git config --local user.email "sibera21@gmail.com"
 [user]
-	useConfigOnly = true
+  useConfigOnly = true

@@ -56,7 +56,14 @@ function main() {
     zshell_location=$(which zsh)
     [ -z $(sudo grep ${zshell_location} /etc/shells) ] && sudo bash -c "echo ${zshell_location} >> /etc/shells"
     chsh -s ${zshell_location}
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+
+  # oh my zsh
+  local oh_my_zsh_location="$HOME/.oh-my-zsh"
+  if [[ ! -d ${oh_my_zsh_location} ]]; then
+    echo "Installing oh-my-zsh.."
+    # https://github.com/ohmyzsh/ohmyzsh#unattended-install
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   fi
 
   # direnv
@@ -70,6 +77,14 @@ function main() {
     echo "Installing tmux.."
     ${COMMAND} tmux
   fi
+
+  # git
+  if [[ -z $(which tig | grep bin) ]]; then
+    echo "Installing tig.."
+    ${COMMAND} tig
+  fi
+
+  echo -e "\nInstalling is done.. make sure run 'setup-settings.sh'\n"
 }
 
 main "$@"
