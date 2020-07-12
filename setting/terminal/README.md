@@ -2,8 +2,7 @@
 
 ## Setup
 
-- Install : `install.sh`
-- Setup settings : `setup-settings.sh`
+- Setup : `setup.sh`
 - Setup vim : `vi .` and :PluginInstall
 
 ## Color

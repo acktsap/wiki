@@ -4,23 +4,20 @@ function array() {
   echo "-- array --"
 
   # declare array
-  IP_LIST=("localhost" "127.0.0.1")
+  local ip_list=("localhost" "127.0.0.1")
 
   # print "localhost"
-  echo ${IP_LIST[0]}
+  echo ${ip_list[0]}
 
   # iterating with *
-  for IP in ${IP_LIST[*]}; do
-    echo $IP
+  for ip in ${ip_list[*]}; do
+    echo "${ip}"
   done
 
   # iterating with @
-  for IP in ${IP_LIST[@]}; do
-    echo $IP
+  for ip in ${ip_list[@]}; do
+    echo "${ip}"
   done
-
-  # undeclare array
-  unset IP_LIST
 }
 
 array
