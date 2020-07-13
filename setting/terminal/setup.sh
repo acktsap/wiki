@@ -3,8 +3,9 @@
 # Setup terminal utils
 
 #######################################
+# Prepare absolute path of current script.
 # Outputs:
-#   SCRIPT_HOME an absolute path where current script is located
+#   SCRIPT_HOME an absolute path where current script is located.
 #######################################
 function set_script_home() {
   # identify source directory
@@ -21,9 +22,9 @@ function set_script_home() {
 }
 
 #######################################
-# Prepare install command .
+# Prepare install command.
 # Outputs:
-#   INSTALL_COMMAND variable is set as install command
+#   INSTALL_COMMAND variable is set as install command.
 #######################################
 function prepare_install_command() {
   echo "$OSTYPE detected.."
