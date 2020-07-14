@@ -1,1 +1,1 @@
-git add . && git commit -m "play" && git push
+git add . && git commit -s -m "play" && git push

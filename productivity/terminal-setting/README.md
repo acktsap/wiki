@@ -11,7 +11,8 @@ https://github.com/sindresorhus/hyper-snazzy
 
 ### Iterm
 
-- Import: Iterm preference -> profiles -> colors -> color presets -> import
+- Import color presets : Profiles -> colors -> color presets -> import, import Snazzy.itermcolors
+- Text size : Profile -> Text, text size as 13
 
 ### Window terminal
 
