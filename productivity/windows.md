@@ -28,7 +28,6 @@ https://www.youtube.com/watch?v=AtNGid45FOI
   - vscode
   - jdk
   - git
-  - [jdk](https://blog.benelog.net/installing-jdk.html)
 
 ## Shortcut
 
