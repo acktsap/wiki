@@ -17,16 +17,20 @@ public int test(final Object object, final int val) {
   final int calculated = hash + val;
   for (final Integer num : this.values) {
     calculated = 36 ^ (calculated + num);
-    logger.trace("Calculated: {}..", calculated); // log process flow details as trace
+    // log process flow details as trace
+    logger.trace("Calculated: {}..", calculated); 
   }
-  logger.debug("Save calculated: {}", calculated); // log process flow as debug
+
+  // log process flow as debug
+  logger.debug("Save calculated: {}", calculated); 
   repository.save(hash, calculated);
 
   // space between calculation in same concept
   if (object.equals(new Object("test")) {
     final String fileName = "aaa";
-    logger.debug("Save {} to {}", object, fileName); // log I/O as debug
-    // save object to a file
+
+    // log I/O as debug
+    logger.debug("Save {} to {}", object, fileName); 
   }
 
   return 0;

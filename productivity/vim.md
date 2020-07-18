@@ -154,3 +154,7 @@ operator    [number]    motion
 - present working directory : `:pwd`
 - linux function manual : `shift + k`
 - run shell command :! ${command}
+
+## Vim Setting
+
+http://blog.joncairns.com/2014/03/using-vim-as-a-multi-language-ide/
