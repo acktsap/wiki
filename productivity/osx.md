@@ -28,13 +28,12 @@
   - Chrome
   - Firefox
   - KakaoTalk
-- Dev
+- Development Environment
   - Brew
   - Iterm2
   - Intellij
   - vscode
-  - jdk
-  - git
+  - Slack
 
 ## Shortcuts
 

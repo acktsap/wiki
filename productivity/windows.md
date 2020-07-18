@@ -22,12 +22,10 @@ https://www.youtube.com/watch?v=AtNGid45FOI
   - avira (anti-virus)
   - 반디집
   - Pdf Viewer
-- Dev
+- Development Environment
   - Intellij
   - nodepad++
   - vscode
-  - jdk
-  - git
 
 ## Shortcut
 
