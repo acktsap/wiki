@@ -16,16 +16,14 @@ https://www.youtube.com/watch?v=AtNGid45FOI
 
 ### Downloads
 
-- Basic
-  - Chrome
-  - Firefox
-  - avira (anti-virus)
-  - 반디집
-  - Pdf Viewer
-- Development Environment
-  - Intellij
-  - nodepad++
-  - vscode
+- Chrome
+- Firefox
+- avira (anti-virus)
+- 반디집
+- Pdf Viewer
+- Intellij
+- nodepad++
+- vscode
 
 ## Shortcut
 

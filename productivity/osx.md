@@ -24,16 +24,19 @@
 
 ### Downloads
 
-- Basic
-  - Chrome
-  - Firefox
-  - KakaoTalk
-- Development Environment
-  - Brew
-  - Iterm2
-  - Intellij
-  - vscode
-  - Slack
+- Chrome
+- Firefox
+- KakaoTalk
+- Brew
+- Iterm2
+- Intellij
+- vscode
+- Slack
+- Dropbox
+
+## Etc
+
+Make workspace dir & pin it to the finder
 
 ## Shortcuts
 
