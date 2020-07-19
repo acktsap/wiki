@@ -131,6 +131,10 @@ if [ ! -z $(which direnv | grep bin) ]; then
   eval "$(direnv hook zsh)"
 fi
 
+# jdk setting (change path)
+alias usejdk11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
+alias usejdk14="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home"
+
 
 
 #####################################################################

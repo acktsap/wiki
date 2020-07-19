@@ -24,6 +24,7 @@ https://www.youtube.com/watch?v=AtNGid45FOI
 - Intellij
 - nodepad++
 - vscode
+- Acrobat Pdf Reader
 
 ## Shortcut
 

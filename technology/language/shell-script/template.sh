@@ -18,7 +18,6 @@ function set_script_home() {
     [[ $source != /* ]] && source="$SCRIPT_HOME/$source"
   done
   SCRIPT_HOME="$( cd -P "$( dirname "$source" )" >/dev/null && pwd )"
-  cd "$SCRIPT_HOME"
 }
 
 #######################################

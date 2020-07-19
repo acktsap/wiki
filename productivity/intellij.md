@@ -1,14 +1,17 @@
 # Intellij settting
 
-## Instruction
+## Setting
 
-- Code Style: Editor > Code Style > Java [google style guide github](https://github.com/google/styleguide)
+- Code Style : Editor > Code Style
+- Project
+  - Open File With Single Click
+  - Always Select Opened File
 - Keymap: Eclipse
   - Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
 - Show whitespace : Editor > General > Appearance > Show whitespace
 - Disable auto save: System Settings -> Synchronization -> Uncheck second and third one
-- JDK Version: File > Project Structure > Project > Project SDK, Project language level
-- Build and run: Build, Execution, Deployment > Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
+- JDK Version : File > Project Structure > Project > Project SDK, Project language level
+- Build and run using : Build, Execution, Deployment > Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
 - Code template
   - Editor > File and Code Templates > Class
 
@@ -18,7 +21,7 @@
      */
 
     ```
-- VM options: $IDEA_HOME/bin/idea.vmoptions
+- VM options : $IDEA_HOME/bin/idea.vmoptions
 - Wird card import config
   - Normal : File > Settings > Project Settings > Code Style > Java > Imports > General > Class count to use import with '*'
   - Static : File > Settings > Project Settings > Code Style > Java > Imports > General > Names count to use static import with '*'

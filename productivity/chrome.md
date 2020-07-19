@@ -10,4 +10,13 @@
 
 ## Bookmark
 
-TODO
+Backup
+
+```sh
+# backup
+cp "/Users/${USER}/Library/Application Support/Google/Chrome/Default/Bookmarks" ${path_to_backup}
+
+# restore
+cp ${path_to_backup} "/Users/${USER}/Library/Application Support/Google/Chrome/Default/Bookmarks"
+```
+

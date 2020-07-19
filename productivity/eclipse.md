@@ -1,6 +1,6 @@
 # Eclipse setting
 
-## Instruction
+## Setting
 
 - Formatter
   - Preference -> Java -> Code style -> Formatter [google style guide github](https://github.com/google/styleguide)

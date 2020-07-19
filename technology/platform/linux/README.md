@@ -1,7 +1,5 @@
 # Linux
 
-- [Linux](#linux)
-
 ## IPC (Inner-Process Communication)
 
 - Pipe

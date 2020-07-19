@@ -33,6 +33,7 @@
 - vscode
 - Slack
 - Dropbox
+- Acrobat Pdf Reader
 
 ## Etc
 
@@ -48,5 +49,10 @@ Make workspace dir & pin it to the finder
 > cd /Library/Java/JavaVirtualMachines/zulu-8.jdk
 > mv Info.plist Info.plist.disabled
 ```
+
+### 취소선 단축키
+
+https://www.clien.net/service/board/cm_mac/13752933
+
 
 [osx system java version](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x)

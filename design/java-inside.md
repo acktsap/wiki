@@ -28,9 +28,26 @@ kotlin이 이미 있으나 java 생태계와의 원활한 호환성을 위해서
 
 [javainside project](https://github.com/acktsap/javainside/projects/1)
 
-## Apis
+## Features
 
-TBD
+- 주체
+  - 유동닉
+  - 고정닉
+- 갤러리
+  - 모든 갤러리 정보 조회
+  - 모든 마이너 갤러리 정보 조회
+- 글
+  - 작성
+  - 열람
+  - 수정
+  - 삭제
+  - 추천
+  - 비추천
+- 댓글
+  - 작성
+  - 열람
+  - 수정
+  - 삭제
 
 ## References
 
