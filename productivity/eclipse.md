@@ -2,34 +2,49 @@
 
 ## Setting
 
-- Formatter
-  - Preference -> Java -> Code style -> Formatter [google style guide github](https://github.com/google/styleguide)
-  - Usage : command + shift + f (osx) or alt + shift + f (windows)
-  - Customizing
-    - Line Wrapping -> Never join already wrapped lines
-- Code template
-  - Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files & Check automatically add comments
+## Formatter
 
-    ```java
-    /*
-     * @copyright defined in LICENSE.txt
-     */
+- Preference -> Java -> Code style -> Formatter [google style guide github](https://github.com/google/styleguide)
+- Usage : command + shift + f (osx) or alt + shift + f (windows)
+- Customizing
+  - Line Wrapping -> Never join already wrapped lines
 
-    ```
+### Code template
 
-- Static import
-  - Java -> Editor -> Content Assist -> Favorites
+- Copyright comment new file : Preference -> Java -> Code Templates -> Comments -> Files & Check automatically add comments
 
-    ```java
-    java.util.UUID.*        // randomUUID()
-    java.util.Objects.*     // requireNonNull
-    org.slf4j.LoggerFactory.* // logback
-    ```
+```java
+/*
+  * @copyright defined in LICENSE.txt
+  */
 
-- Highlight Current Variable : Java -> Editor -> Mark occurrences
-- Font size : General -> Appearance -> Colors and Fonts -> Java
-- Import order : Java -> Code Style -> Organized Imports
-- Checkstyle warning color : General -> Editors -> Text Editors -> Annotations -> Checkstyle warning
+```
+
+### Static import
+
+Java -> Editor -> Content Assist -> Favorites
+
+```java
+java.util.UUID.*        // randomUUID()
+java.util.Objects.*     // requireNonNull
+org.slf4j.LoggerFactory.* // logback
+```
+
+### Highlight Current Variable
+
+Java -> Editor -> Mark occurrences
+
+### Font size
+
+General -> Appearance -> Colors and Fonts -> Java
+
+### Import order
+
+Java -> Code Style -> Organized Imports
+
+### Checkstyle warning color
+
+General -> Editors -> Text Editors -> Annotations -> Checkstyle warning
 
 ## Plugins
 
@@ -39,7 +54,9 @@
 - [Lombok](https://projectlombok.org/download)
 - CheckStyle
 
-## View
+## Shortcuts
+
+### View
 
 - Maximize / unmaximize
   - Ctrl + M
@@ -53,13 +70,13 @@
   - Go to definition : F3
   - Show hierarchy of class : F4
 
-## File
+### File
 
 - New : Ctrl + N (in project explorer)
 - Move
 - Remove : Delete
 
-## Edit
+### Edit
 
 - Vim
   - Insert, copy and paste, delete of
@@ -72,7 +89,7 @@
   - Extract variable : Command + Shift + L
   - Extract method : Command + Shift + M
 
-## Search
+### Search
 
 - Resources : Command + Shift + R
 - Classes : Command + Shift + T
@@ -81,7 +98,7 @@
 - Referer : ?
 - Call Hierarchy : Command + Alt + H
 
-## Run, Debug
+### Run, Debug
 
 - Run current file : Command + F11
 - Debug current file
@@ -89,4 +106,3 @@
 - Step into
 - Step over
 - Resume
-

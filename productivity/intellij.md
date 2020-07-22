@@ -2,29 +2,58 @@
 
 ## Setting
 
-- Code Style : Editor > Code Style
-- Project
-  - Open File With Single Click
-  - Always Select Opened File
-- Keymap: Eclipse
-  - Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
-- Show whitespace : Editor > General > Appearance > Show whitespace
-- Disable auto save: System Settings -> Synchronization -> Uncheck second and third one
-- JDK Version : File > Project Structure > Project > Project SDK, Project language level
-- Build and run using : Build, Execution, Deployment > Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
-- Code template
-  - Editor > File and Code Templates > Class
+### Code Style
 
-    ```java
-    /*
-     * @copyright defined in LICENSE.txt
-     */
+Editor > Code Style
 
-    ```
-- VM options : $IDEA_HOME/bin/idea.vmoptions
-- Wird card import config
-  - Normal : File > Settings > Project Settings > Code Style > Java > Imports > General > Class count to use import with '*'
-  - Static : File > Settings > Project Settings > Code Style > Java > Imports > General > Names count to use static import with '*'
+### Project
+
+- Open File With Single Click
+- Always Select Opened File
+
+### Keymap
+
+Eclipse
+
+Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
+
+### Show whitespace
+
+- Editor > General > Appearance > Show whitespace
+
+### Disable auto save
+
+System Settings -> Synchronization -> Uncheck second and third one
+
+### JDK Version
+
+File > Project Structure > Project > Project SDK, Project language level
+
+### Build and run using
+
+Build, Execution, Deployment > Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
+
+Need rebuild (build -> rebuild)
+
+### Code template
+
+Editor > File and Code Templates > Class
+
+```java
+/*
+ * @copyright defined in LICENSE.txt
+ */
+
+```
+
+### VM options
+
+$IDEA_HOME/bin/idea.vmoptions
+
+### Wird card import config
+
+- Normal : File > Settings > Project Settings > Code Style > Java > Imports > General > Class count to use import with '*'
+- Static : File > Settings > Project Settings > Code Style > Java > Imports > General > Names count to use static import with '*'
 
 ## Plugins
 
@@ -33,7 +62,9 @@
 - Lombok
 - CheckStyle-IDEA
 
-## View
+## Shortcuts
+
+### View
 
 - Maximize / unmaximize
 - Closing
@@ -46,13 +77,13 @@
   - Go to definition : F3
   - Show hierarchy of class : F4
 
-## File
+### File
 
 - New : Ctrl + N (in project explorer)
 - Move
 - Remove : Delete
 
-## Edit
+### Edit
 
 - Vim
   - Insert, copy and paste, delete of
@@ -65,7 +96,7 @@
   - Extract variable : Command + Shift + L
   - Extract method : Command + Shift + M
 
-## Search
+### Search
 
 - Resources : Command + Shift + R
 - Classes : Command + Shift + T
@@ -74,7 +105,7 @@
 - Referer : ?
 - Call Hierarchy : Command + Alt + H
 
-## Run, Debug
+### Run, Debug
 
 - Run current file : Command + F11
 - Debug current file
