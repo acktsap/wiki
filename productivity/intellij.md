@@ -58,7 +58,7 @@ $IDEA_HOME/bin/idea.vmoptions
 ## Plugins
 
 - IdeaVim
-- Relative Line Numbers
+- Relative Line Numbers -> `:set rnu` via IdeaVim plugin
 - Lombok
 - CheckStyle-IDEA
 

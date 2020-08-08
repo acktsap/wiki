@@ -1,0 +1,17 @@
+# git
+!.gitignore
+
+# gradle
+.gradle
+build/
+!gradle-wrapper.jar
+
+# eclipse
+bin/
+.classpath
+.project
+.settings/
+
+# indellij
+.idea
+out

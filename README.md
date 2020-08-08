@@ -9,4 +9,6 @@
 - **Just play**. DO NOT focus on structure.
 - Commit message: "play". Please KEEP IT SIMPLE. Just run `./commit.sh`
 
-reorg in progress..
+## See also
+
+[computer science \[wikipedia\]](https://en.wikipedia.org/wiki/Computer_science)
