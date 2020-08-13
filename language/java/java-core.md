@@ -8,9 +8,9 @@
   - [Class](#class)
     - [Overridding vs Overloading](#overridding-vs-overloading)
     - [Interface vs Abstract class](#interface-vs-abstract-class)
-    - [Access Modifier (접근지정자)](#access-modifier-%ec%a0%91%ea%b7%bc%ec%a7%80%ec%a0%95%ec%9e%90)
+    - [Access Modifier (접근지정자)](#access-modifier-접근지정자)
     - [static, default method in interface](#static-default-method-in-interface)
-    - [Java Class정의 필수요소](#java-class%ec%a0%95%ec%9d%98-%ed%95%84%ec%88%98%ec%9a%94%ec%86%8c)
+    - [Java Class정의 필수요소](#java-class정의-필수요소)
     - [Annotation, Generics](#annotation-generics)
     - [Exception](#exception)
     - [ClassLoader](#classloader)
@@ -20,8 +20,9 @@
     - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
     - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
     - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
-    - [Java에 Closure가 있는가](#java%ec%97%90-closure%ea%b0%80-%ec%9e%88%eb%8a%94%ea%b0%80)
+    - [Java에 Closure가 있는가](#java에-closure가-있는가)
   - [Concurrency](#concurrency)
+    - [Java Thread & Kernal thread](#java-thread--kernal-thread)
     - [Volatile](#volatile)
     - [ForkJoinPool](#forkjoinpool)
     - [Atomic Operation](#atomic-operation)
@@ -240,6 +241,10 @@ public static Integer valueOf(int i) {
 
 ## Concurrency
 
+### Java Thread & Kernal thread
+
+- Java thread는 기본적으로 user thread나 Kernal thread에 mapping되어서 실행됨
+
 ### Volatile
 
 - 한 thread에서 수정한 값이 cache에만 저장되어 있어서 다른 thread에 보이지 않는 메모리의 가시성 문제를 해결하기 위한 것
@@ -329,3 +334,7 @@ NIO
 http://eincs.com/2009/08/java-nio-bytebuffer-channel-file/
 
 https://homoefficio.github.io/2016/08/06/Java-NIO%EB%8A%94-%EC%83%9D%EA%B0%81%EB%A7%8C%ED%81%BC-non-blocking-%ED%95%98%EC%A7%80-%EC%95%8A%EB%8B%A4/
+
+Java thread & Kernal thread
+
+https://stackoverflow.com/questions/18278425/are-java-threads-created-in-user-space-or-kernel-space
