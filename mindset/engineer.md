@@ -1,5 +1,12 @@
 # Engineering
 
+- [Engineering](#engineering)
+  - [Rule](#rule)
+  - [Programming](#programming)
+  - [Everything is for human](#everything-is-for-human)
+  - [Engineering Mind](#engineering-mind)
+  - [Work pattern](#work-pattern)
+
 ## Rule
 
 0. 코드에 꿈과 희망을..!
@@ -19,21 +26,6 @@ Abstraction is modeling some processing to solve some problem as a language of c
 
 Then programming is creating a set of instruction for solving some problem based on model.
 
-## Seperation of Concerns
-
-Modeling per concerns
-
-- Minimize modification on a spec changes
-- Maximize reuseability
-
-It represents as **SOLID** in OOP
-
-- Single Responsibility Principle : A class should only have a single responsibility. One changes to spec affects to an one class.
-- Open-Closed Principle : Open for extension and closed for modification
-- Liskov Substitution Principle : Objects should be replaceable with instances of their subtypes without modification
-- Interface Segregation Principle : Many client-specific interfaces are better than one general-purpose interface
-- Dependency Inversion Principle : One should depend upon abstractions not concretions (eg. dependency injection)
-
 ## Everything is for human
 
 **Technology** is for human. It should solve some problem human is struggle with.
@@ -44,13 +36,13 @@ Simple is best. Don't make a dependency if possible.
 
 ## Engineering Mind
 
-Solve problem **in a effective way**. Increase performence, in a simple way.
+First, DO NOT ignore cost. Cost is time. Your time is limited. Focus on output.
 
-Engineering is understanding performance, structure, limits of what you build, deeply
+Second, Solve problem **in a effective way**. Increase performence, in a simple way. Engineering is understanding performance, structure, limits of what you build, deeply.
 
-## Questions
+## Work pattern
 
-- What kind of problem does it solve? No alternatives for this one?
-- Is it simple enough? fancy? beautiful?
-- Is is effective enough?
-- What kind of stuffs need to be changed when spec changes?
+패턴 발견 -> 기계적인 작업 -> 패턴 개선
+
+- Pattern Generation : 기술 탐색, 학습 등 패턴을 익히는 과정. 잠을 푹 자고 정신이 맑아야 함. 음악 듣지 않고 집중해서 잘 해야.
+- 기계적 작업 : 만들어진 패턴을 가지고 기계적으로 하는 것. 컨디션 안좋을 때 해도 괜찮음.

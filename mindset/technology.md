@@ -8,8 +8,6 @@
 
 사용법을 기반으로 한 좋은 패턴들은 어떠한 것들이 있다.
 
-## Structure
-
 - History & Concept
 - Pros & Cons
 - Alternative

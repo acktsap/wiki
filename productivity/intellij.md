@@ -46,9 +46,13 @@ Editor > File and Code Templates > Class
 
 ```
 
+### Disable Quick Documentation by Mouse
+
+Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation on mouse move
+
 ### VM options
 
-$IDEA_HOME/bin/idea.vmoptions
+`$IDEA_HOME/bin/idea.vmoptions`
 
 ### Wird card import config
 

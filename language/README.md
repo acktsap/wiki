@@ -2,7 +2,7 @@
 
 Programming language에 대한
 
-- Syntax
+- Syntax : 기본 문법
 - Pattern : core api를 사용하든 library를 사용하든
 
 ## Syntax

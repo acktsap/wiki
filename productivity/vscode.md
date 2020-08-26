@@ -10,3 +10,4 @@
 
 - Vim
 - Markdown All in One
+- r
