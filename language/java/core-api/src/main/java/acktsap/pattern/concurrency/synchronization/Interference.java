@@ -8,9 +8,9 @@ import java.util.stream.IntStream;
 
 public class Interference {
 
-  protected static class Counter {
+    protected static class Counter {
 
-    private int c = 0;
+        private int c = 0;
 
     public void increment() {
       c++;

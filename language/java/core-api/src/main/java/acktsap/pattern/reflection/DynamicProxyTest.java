@@ -20,72 +20,72 @@ import java.util.Arrays;
  */
 public class DynamicProxyTest {
 
-  interface Test {
+    interface Test {
 
-    Object run1(Object obj);
+        Object run1(Object obj);
 
-    Object run2(Object obj);
-  }
-
-  static class TestImpl implements Test {
-
-    @Override
-    public Object run1(Object obj) {
-      return "TestImpl::run1";
+        Object run2(Object obj);
     }
 
-    @Override
-    public Object run2(Object obj) {
-      return "TestImpl::run2";
+    static class TestImpl implements Test {
+
+        @Override
+        public Object run1(Object obj) {
+            return "TestImpl::run1";
+        }
+
+        @Override
+        public Object run2(Object obj) {
+            return "TestImpl::run2";
+        }
+
     }
 
-  }
+    static class CustomInvocationHandler1 implements InvocationHandler {
 
-  static class CustomInvocationHandler1 implements InvocationHandler {
+        @Override
+        public Object invoke(Object proxy, Method m, Object[] args)
+            throws InvocationTargetException, IllegalAccessException {
+            System.out.println("method: " + m.getName() + ", args: " + Arrays.toString(args));
+            return "CustomInvocationHandler::invoke";
+        }
 
-    @Override
-    public Object invoke(Object proxy, Method m, Object[] args)
-        throws InvocationTargetException, IllegalAccessException {
-      System.out.println("method: " + m.getName() + ", args: " + Arrays.toString(args));
-      return "CustomInvocationHandler::invoke";
     }
 
-  }
+    static class CustomInvocationHandler2 implements InvocationHandler {
 
-  static class CustomInvocationHandler2 implements InvocationHandler {
+        Test delegate;
 
-    Test delegate;
+        CustomInvocationHandler2(Test test) {
+            this.delegate = test;
+        }
 
-    CustomInvocationHandler2(Test test) {
-      this.delegate = test;
-    }
-
-    @Override
-    public Object invoke(Object proxy, Method m, Object[] args)
-        throws InvocationTargetException, IllegalAccessException {
-      System.out.println("method: " + m.getName() + ", args: " + Arrays.toString(args));
+        @Override
+        public Object invoke(Object proxy, Method m, Object[] args)
+            throws InvocationTargetException, IllegalAccessException {
+            System.out.println("method: " + m.getName() + ", args: " + Arrays.toString(args));
 //      return "CustomInvocationHandler::invoke";
-      return m.invoke(delegate, args);
+            return m.invoke(delegate, args);
+        }
+
     }
 
-  }
+    public static void main(String[] args) {
+        // not using impl
+        Test foo = (Test) Proxy.newProxyInstance(
+            Test.class.getClassLoader(),
+            new Class[]{Test.class},
+            new CustomInvocationHandler1());
+        System.out.println(foo.run1("test"));
+        System.out.println(foo.run2("test"));
 
-  public static void main(String[] args) {
-    // not using impl
-    Test foo = (Test) Proxy.newProxyInstance(
-        Test.class.getClassLoader(),
-        new Class[]{Test.class},
-        new CustomInvocationHandler1());
-    System.out.println(foo.run1("test"));
-    System.out.println(foo.run2("test"));
-
-    // using impl
-    Test bar = (Test) Proxy.newProxyInstance(
-        Test.class.getClassLoader(),
-        new Class[]{Test.class},
-        new CustomInvocationHandler2(new TestImpl()));
-    System.out.println(bar.run1("test"));
-    System.out.println(bar.run2("test"));
-  }
+        // using impl
+        Test bar = (Test) Proxy.newProxyInstance(
+            Test.class.getClassLoader(),
+            new Class[]{Test.class},
+            new CustomInvocationHandler2(new TestImpl()));
+        System.out.println(bar.run1("test"));
+        System.out.println(bar.run2("test"));
+    }
 
 }

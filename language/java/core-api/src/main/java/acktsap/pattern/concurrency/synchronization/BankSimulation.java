@@ -10,11 +10,11 @@ public class BankSimulation {
 
     protected int amount = 0;
 
-    protected boolean filled = false;
+      protected boolean filled = false;
 
-    public synchronized void deposit(final int amount) {
-      while (filled) {
-        try {
+      public synchronized void deposit(final int amount) {
+          while (filled) {
+              try {
           wait();
         } catch (InterruptedException e) {
         }

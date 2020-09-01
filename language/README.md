@@ -1,16 +1,15 @@
 # Language
 
-Programming language에 대한
-
-- Syntax : 기본 문법
-- Pattern : core api를 사용하든 library를 사용하든
+About programming language
 
 ## Syntax
 
+Basic syntax
+
 - Comment
-  - On variable
-  - On method
-  - On file
+  - Single line
+  - Multi line
+  - ...
 - Declaration
   - Variable
   - Method
@@ -22,6 +21,8 @@ Programming language에 대한
   - ...
 
 ## Pattern
+
+Official Api + Library
 
 - Data Structure (also internal structure)
 - I/O handling
