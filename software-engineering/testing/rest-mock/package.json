@@ -1,0 +1,14 @@
+{
+  "name": "rest-mock",
+  "version": "0.0.1",
+  "description": "Rest mock server using prism",
+  "main": "index.js",
+  "scripts": {
+    "mock": "prism mock"
+  },
+  "author": "Taeik lim",
+  "license": "MIT",
+  "dependencies": {
+    "@stoplight/prism-cli": "^4.0.0"
+  }
+}

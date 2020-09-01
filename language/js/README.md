@@ -13,8 +13,7 @@
 
 ### Yarn
 
-- Install : `node install --global yarn@x.x.x`
-
+- Install : `npm install -g yarn@x.x.x` or `npm install -g yarn`
 
 [Installing nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
