@@ -1,0 +1,3 @@
+" ideaVim plugin config
+set rnu
+set nu
