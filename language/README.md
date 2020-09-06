@@ -6,19 +6,19 @@ About programming language
 
 Basic syntax
 
-- Comment
-  - Single line
-  - Multi line
-  - ...
-- Declaration
-  - Variable
-  - Method
-  - Class, Interface
-  - ...
+- Hello world (also Comment)
+- Variable
+- Control flow
+  - Conditional expressions
+  - Loop
+- Function
+- Primitive Type
+  - Kinds
+  - Operator & Operations
 - Module
   - Importing
   - Exporting
-  - ...
+- ... (Class, Interface, ...)
 
 ## Pattern
 

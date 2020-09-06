@@ -18,8 +18,8 @@ java진영에서 maven 대신할 build tool
 - A general-purpose build tool
   - 범용 build tool임. c도 가능. But dependency management를 maven repository쪽만 할 수 있다는게 단점.
   - 그렇다고 다 작성할필요는 ㄴㄴ. 이미 작성된 Plugin을 사용하면 됨 (eg. java-application, java-library)
-- Core model is based on **tasks**
-  - Based on Directed Acyclic Graphs (DAGs) of tasks
+- Core model is based on **projects** & **tasks**
+  - Based on Directed Acyclic Graphs (DAGs) of tasks on project
   - Incremental Build : 변경된거만 재빌드
 - Fixed build phases
   - Initialization : setup & which project?
@@ -43,7 +43,7 @@ java진영에서 maven 대신할 build tool
       vcsUrl = 'https://github.com/gradle/gradle-site-plugin'
     }
     ```
-  - Build scripts operate against an API : Avoid putting much, imperative logic in your build scripts. use declarative one (task).
+  - Build scripts operate against an API : Avoid putting much, imperative logic in your build scripts. use **declarative one using** (pre defined task).
 
 ## Installation
 
@@ -53,9 +53,10 @@ java진영에서 maven 대신할 build tool
 ## Core command
 
 - wrapper : `gradle wrapper`
+- show projects : `./gradlew projects`
 - show tasks : `./gradlew tasks`
+- help task  : `./gradlew help --task ${TASK_NAME}`
 - show dependencies : `./gradlew :dependencies` or `./gradlew :a:b:dependencies` (where a:b is subproject)
-
 
 ## References
 

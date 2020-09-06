@@ -1,5 +1,0 @@
-package api
-
-fun main() {
-
-}

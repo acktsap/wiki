@@ -1,0 +1,2 @@
+rootProject.name = 'kotlin-code-patterns'
+include ':core'

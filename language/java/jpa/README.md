@@ -1,4 +1,6 @@
-# JPA Core
+# Java Jpa
+
+- Jpa usage pattern
 
 ## Prerequisite
 
