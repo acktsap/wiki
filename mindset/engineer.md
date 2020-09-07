@@ -1,20 +1,20 @@
 # Engineering
 
-- [Engineering](#engineering)
-  - [Rule](#rule)
-  - [Programming](#programming)
-  - [Everything is for human](#everything-is-for-human)
-  - [Engineering Mind](#engineering-mind)
-  - [Work pattern](#work-pattern)
+# Technology
 
-## Rule
+기술은 문제를 해결하기 위한 방법, 노하우, 패턴이다.
 
-0. 코드에 꿈과 희망을..!
-1. 알았던 거지만 까먹은 뭔가 발생하면 그거 다 다시 복습.
-2. 새로운 지식 떠오르는거 다 queue에 쌓아뒀다가 집가서 (또는 여유시간에) 처리.
-3. 프로젝트 할 때마다 커리어 정리.
-4. 이 기술을 왜 쓰는가? 장단점은? 대안은?
-5. 이 기술의 기본 api는? 좋은 패턴은? 참고할 만한 패턴들은?
+어떤 문제가 있고 이를 해결하기 위한 방안으로 이러이러한 것들이 있다!
+
+그리고 이 기술은 이러한거고 기본 사용법은 이렇게 따라해볼 수 있다.
+
+사용법을 기반으로 한 좋은 패턴들은 어떠한 것들이 있다.
+
+- History & Concept
+- Pros & Cons
+- Alternative
+- Basic Usage (core api)
+- Useful Pattern
 
 ## Programming
 

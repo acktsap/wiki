@@ -1,8 +1,5 @@
 # Design Basic
 
-- [Design Basic](#design-basic)
-  - [Seperation of Concerns](#seperation-of-concerns)
-
 ## Seperation of Concerns
 
 Modeling per concerns

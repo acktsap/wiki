@@ -1,8 +1,5 @@
 # Context
 
-- [Context](#context)
-  - [Consideration](#consideration)
-
 ## Consideration
 
 무엇에 대한?
