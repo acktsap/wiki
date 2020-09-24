@@ -1,0 +1,26 @@
+{
+  "name": "firefox-extension-test",
+  "version": "0.0.1",
+  "description": "firefox-extension-test",
+  "scripts": {
+    "start": "web-ext run -s ./src",
+    "build": "web-ext build -s ./src --overwrite-dest -a dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acktsap/xxx.git"
+  },
+  "keywords": [
+    "firefox",
+    "extension"
+  ],
+  "author": "Taeik lim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acktsap/xxx/issues"
+  },
+  "homepage": "https://github.com/acktsap/xxx#readme",
+  "devDependencies": {
+    "web-ext": "^5.1.0"
+  }
+}
