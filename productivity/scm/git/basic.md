@@ -29,7 +29,6 @@
     - [pull](#pull)
     - [push](#push)
   - [Config](#config)
-  - [Practice](#practice)
   - [Tips](#tips)
     - [Pull Request](#pull-request)
     - [checkout to the remote branch](#checkout-to-the-remote-branch)
@@ -38,6 +37,8 @@
     - [.gitignore renew](#gitignore-renew)
     - [git rebase](#git-rebase)
     - [User.name, user.email](#username-useremail)
+    - [Sparse checkout](#sparse-checkout)
+  - [Reference](#reference)
 
 ## Basic
 
@@ -98,7 +99,7 @@ git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] FI
 
 ```sh
 # add file 'test.lua'
-git add fuck.lua
+git add test.lua
 
 # add file of current directory recursively
 git add .
@@ -276,73 +277,6 @@ git config --list
 
 # unset user.name
 git config --unset user.name
-```
-
-## Practice
-
-Questions
-
-```sh
-1. Make a git repository in the current folder. What is created?
-2. Make an new file "new.txt". Is is tracked? How to check it?
-3. Make it tracked[3 ways. just by file name, file extension, all file]?
-4. Now, type git status. is the new file tracked? staged?
-5. Make an new file "ignore.log" file. Make it ignored to add command.
-6. Commit the current staged files[2 ways. by vim, just by commit command]?
-7. How to check a commit log?
-8. Make a new branch NewBranch, TrashBranch.
-9. List all the branches.
-10. Remove branch TrashBranch.
-11. Checkout to the NewBranch.
-12. Make a new file branchNew.txt & commit it with message "branch commit"
-13. Checkout to master[basic branch]. Is the commit "branch commit" applied?
-14. Apply changes in the branch NewBranch to the master.
-```
-
-Answers
-
-```sh
-1. Make a git repository in the current folder. What is created?
-  -> git init; .git/ file is created. Which store a lot of git informations.
-
-2. Make an new file "new.txt". Is is tracked? How to check it?
-  -> No; git status
-
-3. Make it tracked[3 ways. just by file name, file extension, all file]?
-  -> 1) git add new.txt; 2) git add *.txt; 3) git add .
-
-4. Now, type git status. Is the new file tracked? staged?
-  -> Yes; Yes
-
-5. Make an new file "ignore.log" file. Make it ignored to add command.
-  -> touch .gitignore; add "*.log"
-
-6. Commit the current staged files[2 ways. by vim, just by commit command]?
-  -> 1) git commit; type commit message; :wq; 2) git commit -m "my_message"
-
-7. How to check a commit log?
-  -> git log
-
-8. Make a new branch NewBranch
-  -> git branch NewBranch
-
-9. Check the branch status
-  -> git branch -a
-
-10. Remove branch TrashBranch.
-  -> git branch -d TrashBranch
-
-11. Checkout to the NewBranch.
-  -> git checkout NewBranch
-
-12. Make a new file branchNew.txt & commit it with message "branch commit"
-  -> git commit -m "branch commit"
-
-13. Checkout to master[basic branch]. Is the commit "branch commit" applied?
-  -> git checkout master; No
-
-14. Apply changes in the branch NewBranch to the master.
-  -> git merge NewBranch
 ```
 
 ## Tips
