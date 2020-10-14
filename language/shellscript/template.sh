@@ -36,6 +36,7 @@ function print_help() {
 
 function some_function() {
   [[ $# -eq 0 ]] && print_help && exit 1
+
   while getopts "e:p:cun:h" FLAG; do
     case $FLAG in
       e) ENDPOINT=$OPTARG ;;
@@ -46,6 +47,7 @@ function some_function() {
       h|\?) print_help ; exit 1 ;; # no argument value
     esac
   done
+
   echo "  endpoint : $ENDPOINT"
   echo "  port : $PORT"
   echo "  enable client : $ENABLE_RUN_MAKE_CLIENT"
