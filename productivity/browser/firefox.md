@@ -49,8 +49,14 @@ Import bookmark from chrome
 
 https://support.mozilla.org/ko/kb/import-bookmarks-google-chrome
 
-Backup
+Import from file
 
-```sh
-todo
-```
+http://kb.mozillazine.org/Import_bookmarks#Import_from_file
+
+Exporting bookmark
+
+기본적으로 firefox 3이상에서는 sqlite에 북마크를 저장. but `about:config` 에 들어가서 `browser.bookmarks.autoExportHTML` 를 true로 하면 `bookmarks.html` file이 생성됨
+
+http://kb.mozillazine.org/Export_bookmarks
+
+http://kb.mozillazine.org/Browser.bookmarks.autoExportHTML

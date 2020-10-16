@@ -29,11 +29,12 @@ function set_script_home() {
 function parse_argument() {
   [[ $# -eq 0 ]] && print_help && exit 1
 
-  while getopts "b:f:o:h" FLAG; do
+  while getopts "t:f:brh" FLAG; do
     case $FLAG in
-      b) readonly BROWSER=$OPTARG ;;
+      t) readonly BROWSER=$OPTARG ;;
       f) BOOKMARK_BACKUP_PATH=$OPTARG ;;
-      o) readonly OPERATION=$OPTARG ;;
+      b) readonly OPERATION="backup" ;;
+      r) readonly OPERATION="restore" ;;
       h|\?) print_help ; exit 1 ;;
     esac
   done
@@ -48,14 +49,10 @@ function parse_argument() {
     exit -1
   fi
 
-  if [[ $OPERATION != "backup" && $OPERATION != "restore" ]]; then
-    echo -e "Invalid operation type"
+  if [[ -z "$OPERATION" ]]; then
+    echo "must set [-b | -r]"
     exit -1
   fi
-
-  echo "  browser : $BROWSER"
-  echo "  bookmark file path : $BOOKMARK_BACKUP_PATH"
-  echo "  operation : $OPERATION"
 }
 
 #######################################
@@ -64,9 +61,10 @@ function parse_argument() {
 #######################################
 function print_help() {
   echo "Options"
-  echo "    -b : a browser type (chrome | whale | firefox)"
+  echo "    -t : a browser type (chrome | whale | firefox)"
   echo "    -f : a target file path"
-  echo "    -o : an operation (backup | copy)"
+  echo "    -b : backup"
+  echo "    -r : restore"
   echo "    -h : print help"
 }
 
@@ -84,7 +82,8 @@ function find_bookmark() {
     elif [[ "$BROWSER" == "whale" ]]; then 
       readonly BOOKMARK_PATH="/Users/$USER/Library/Application Support/Naver/Whale/Default/Bookmarks"
     elif [[ "$BROWSER" == "firefox" ]]; then 
-      # TODO
+      # see 'Note' on http://kb.mozillazine.org/Export_bookmarks
+      readonly BOOKMARK_PATH="/Users/$USER/Library/Application Support/Firefox/Profiles/jugaer2x.default-release/bookmarks.html"
     fi
   else 
     echo "Unsupported type $os"
@@ -99,11 +98,20 @@ function find_bookmark() {
 #   BOOKMARK_BACKUP_PATH a path where browser bookmark backup file is located
 #######################################
 function do_operation() {
-  # todo
-  local source="$BOOKMARK_PATH"
-  local target="$BOOKMARK_BACKUP_PATH"
-  echo "$source"
-  echo "$target"
+  if [[ "$OPERATION" == "backup" ]]; then
+    local source="$BOOKMARK_PATH"
+    local target="$SCRIPT_HOME/$BOOKMARK_BACKUP_PATH"
+  elif [[ "$OPERATION" == "restore" ]]; then 
+    # firefox doesn't support html with default configuration
+    if [[ "$BROWSER" == "firefox" ]]; then
+      echo "import firefox bookmark manually (see 'http://kb.mozillazine.org/Import_bookmarks#Import_from_file')"
+      exit -1
+    fi
+    local source="$SCRIPT_HOME/$BOOKMARK_BACKUP_PATH"
+    local target="$BOOKMARK_PATH"
+  fi
+
+  cp "$source" "$target"
 }
 
 function main() {

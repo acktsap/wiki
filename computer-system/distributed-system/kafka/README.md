@@ -1,5 +1,0 @@
-# Kafka
-
-Apache Kafka
-
-TODO

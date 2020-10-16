@@ -3,7 +3,7 @@
   di = diff .
   ca = diff --cached .
   lo = log --graph --abbrev-commit --decorate --format=format:'%C(cyan)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(yellow)%d%C(reset)' --all
-  up = "!git remote -v update && git status -u no"
+  pu = "!git remote -v update && git status -u no"
   cl = "!git fetch --prune && git branch | grep -v $(git branch --show-current) | xargs git branch -D"
 
 # you have to keep it manually for each repository
