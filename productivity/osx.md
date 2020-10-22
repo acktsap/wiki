@@ -24,16 +24,38 @@
 
 ### Downloads
 
-- Chrome
+Browser
+
 - Firefox
+- Chrome
+
+Co-work
+
 - KakaoTalk
+- Slack
+
+Dev
+
 - Brew
 - Iterm2
 - Intellij
 - vscode
-- Slack
-- Dropbox
+
+Utils
+
+- [CopyClip](https://apps.apple.com/us/app/copyclip-clipboard-history/id595191960?mt=12) : Managing Clipboard History
+- [Alfred](https://www.alfredapp.com) : 알프레드
+  - Disable stotlight on 'Keyboard Shortcuts > Spotlight -> Show Spotlight search'
+- [Spectacle](https://www.spectacleapp.com/) : A Window Manager
+- [gif brewery 3 by gfycat](https://apps.apple.com/kr/app/gif-brewery-3-by-gfycat/id1081413713?mt=12) : gif generator
+
+Docs
+
 - Acrobat Pdf Reader
+
+See also
+
+https://link.medium.com/1qxMH7jnMab
 
 ## Etc
 
