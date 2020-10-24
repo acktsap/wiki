@@ -1,0 +1,9 @@
+rootProject.name = 'spring-framework'
+
+include ':spring-core'
+include ':spring-data-access'
+include ':spring-web-config'
+include ':spring-legacy-servlet'
+include ':spring-web-servlet'
+include ':spring-testing'
+include ':spring-batch'
