@@ -10,13 +10,21 @@
 - jstat : jdk6 or higher, monitoring gc, classloading status, jvm status, etc..
 - jps : show jvm process
 
+jcmd show all commands
+
 ```sh
-> jcmd <pid> help
+jcmd <pid> help
 ```
 
 ## Thread dump
 
+```sh
+jcmd <pid> Thread.print
+```
+
 ## Heap Profiling
+
+Terms
 
 - Shallow Heap : A memory directly used by a object
 - Retained Heap : Shallow Heap + A sum of memory of objects only referred by a single referee object
@@ -31,11 +39,10 @@ jcmd <pid> GC.heap_dump $PWD/dump.hprof
 jcmd <pid> GC.heap_dump $PWD/alldump.hprof -all
 ```
 
-### View
+View
 
-MAT : Eclipse Memory Analyzer, A dump file analyzer
+- MAT : Eclipse Memory Analyzer, A dump file analyzer
+  - Install : marketplace -> Find 'memory analyzer' -> Restart -> Find **Memory Analysis** in the perspective
+  - Usage : File -> Open Heap Dump -> Select dump binary
+  - heap size 단위는 **byte**
 
-- Install : marketplace -> Find 'memory analyzer' -> Restart -> Find **Memory Analysis** in the perspective
-- Usage : File -> Open Heap Dump -> Select dump binary
-
-heap size 단위는 **byte**
