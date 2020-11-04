@@ -14,6 +14,11 @@ Tabs
 - [X] Open links in tabs instead of new windows
 - [ ] When you open a link in a new tab, switch to it immediately
 
+Zoom
+
+- Default zoom : 110~120%
+- [X] Zoom text only
+
 ### Home
 
 Firefox Home Content
