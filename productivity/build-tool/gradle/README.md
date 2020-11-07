@@ -52,11 +52,12 @@ java진영에서 maven 대신할 build tool
 
 ## Core command
 
-- wrapper : `gradle wrapper`
-- show projects : `./gradlew projects`
-- show tasks : `./gradlew tasks`
-- help task  : `./gradlew help --task ${TASK_NAME}`
-- show dependencies : `./gradlew :dependencies` or `./gradlew :a:b:dependencies` (where a:b is subproject)
+- Wrapper : `gradle wrapper`
+  - Upgrade wrapper version: `./gradlew wrapper --gradle-version x.x.x`
+- Show projects : `./gradlew projects`
+- Show tasks : `./gradlew tasks`
+- Help task  : `./gradlew help --task ${TASK_NAME}`
+- Show dependencies : `./gradlew :dependencies` or `./gradlew :a:b:dependencies` (where a:b is subproject)
 
 ## References
 

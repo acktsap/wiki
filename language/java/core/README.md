@@ -1,8 +1,4 @@
-# Java Core
-
-- Java syntax
-- Java core api usage pattern
-- Library usage pattern
+# Java
 
 ## References
 

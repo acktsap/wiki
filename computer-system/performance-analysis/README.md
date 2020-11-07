@@ -30,7 +30,6 @@ real에서 요청이 어떤 형식으로 자주 오는지 생각하고 거기 �
   - CPU에 다른 application이 돌고 있지는 않은지? 다른 Thread pool이 있는지?
   - Thread pool이 너무 큰 경우 Context switching으로 인해 L1, L2 cache가 날아가버림
 
-
 ## References
 
 Thread pool size

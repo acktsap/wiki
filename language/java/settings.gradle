@@ -1,3 +1,5 @@
-rootProject.name = 'java-code-patterns'
+rootProject.name = 'java'
+
 include ':core'
-include ':jpa'
+include ':external:orm'
+include ':external:json'

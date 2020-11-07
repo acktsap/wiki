@@ -1,6 +1,6 @@
 # Language
 
-About programming language
+About programming language. Need practice.
 
 ## Syntax
 

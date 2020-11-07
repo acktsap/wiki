@@ -50,7 +50,7 @@
 
 ### Constant Pool
 
-![constant-pool](img/constant-pool.png)
+![jvm-constant-pool](./img/jvm-constant-pool.png)
 
 - 똑같은 값의 경우 같은 인스턴스를 가리키는 식으로 Constant pool을 만듬
 - String 같은 경우 이럼
@@ -73,7 +73,7 @@
 
 ### Card Table
 
-![card-table](img/card-table.png)
+![jvm-card-table](./img/jvm-card-table.png)
 
 - Minor GC를 할 때 Old Generation이 참조하면 GC의 대상이 되서는 안된다
 - 그런데 그렇다고 Old Generation을 전부 파보기에는 너무 많다
