@@ -1,5 +1,5 @@
 # Java
 
-## References
+Oracle Java SE guide
 
-https://docs.oracle.com/javase/8/docs/
+https://docs.oracle.com/en/java/javase/
