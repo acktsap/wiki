@@ -7,20 +7,21 @@ import java.util.Locale;
 
 public class DayOfWeekTest {
 
+  // DayOfWeek : MONDAY through SUNDAY
   public static void main(String[] args) {
     /* creation */
 
     // from TemporalAccessor
-    DayOfWeek current = DayOfWeek.from(LocalDate.now());
-    System.out.println("DayOfWeek.from(LocalDate.now()): " + current);
+    DayOfWeek now = DayOfWeek.from(LocalDate.now());
+    System.out.println("DayOfWeek.from(LocalDate.now()) : " + now);
 
     // of number
-    DayOfWeek a = DayOfWeek.of(1); // 1 ~ 7 (MON ~ SUN)
-    System.out.println("of(1): " + a);
+    DayOfWeek monday = DayOfWeek.of(1); // 1 ~ 7 (MON ~ SUN)
+    System.out.println("DayOfWeek.of(1) : " + monday);
 
     // enum use
     DayOfWeek tuesday = DayOfWeek.TUESDAY;
-    System.out.println("DayOfWeek.TUESDAY: " + tuesday);
+    System.out.println("DayOfWeek.TUESDAY : " + tuesday);
 
 
     /* api */
@@ -28,7 +29,7 @@ public class DayOfWeekTest {
     DayOfWeek dayOfWeek = DayOfWeek.from(LocalDate.now());
 
     // plus & minus
-    System.out.println("dayOfWeek.plus(3): " + dayOfWeek.plus(3));  // prints THURSDAY
+    System.out.println("dayOfWeek.plus(3) : " + dayOfWeek.plus(3));  // prints THURSDAY
 
     // print by locale
     System.out.println("== Print by locale ==");

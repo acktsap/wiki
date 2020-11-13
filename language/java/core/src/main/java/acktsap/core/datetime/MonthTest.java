@@ -7,16 +7,17 @@ import java.util.Locale;
 
 public class MonthTest {
 
+  // Month : JANUARY through DECEMBER
   public static void main(String[] args) {
     /* creation */
 
     // from TemporalAccessor
-    Month current = Month.from(LocalDate.now());
-    System.out.println("Month.from(LocalDate.now()): " + current);
+    Month now = Month.from(LocalDate.now());
+    System.out.println("Month.from(LocalDate.now()) : " + now);
 
     // enum use
     Month february = Month.FEBRUARY;
-    System.out.println("Month.FEBRUARY: " + february);
+    System.out.println("Month.FEBRUARY : " + february);
 
 
     /* api */
@@ -24,16 +25,16 @@ public class MonthTest {
     Month month = Month.from(LocalDate.now());
 
     // print min/max length
-    System.out.println("month.minLength(): " + month.minLength());
-    System.out.println("month.maxLength(): " + month.maxLength());
+    System.out.println("month.minLength() : " + month.minLength());
+    System.out.println("month.maxLength() : " + month.maxLength());
 
     // gets the day-of-year corresponding to the first day of this mont
     // leapYear (윤년) 에 따라 하루 차이남
-    System.out.println("month.firstDayOfYear(false): " + month.firstDayOfYear(false));
-    System.out.println("month.firstDayOfYear(true): " + month.firstDayOfYear(true));
+    System.out.println("month.firstDayOfYear(false) : " + month.firstDayOfYear(false));
+    System.out.println("month.firstDayOfYear(true) : " + month.firstDayOfYear(true));
 
     // get first month of this quarter
-    System.out.println("month.firstMonthOfQuarter(): " + month.firstMonthOfQuarter());
+    System.out.println("month.firstMonthOfQuarter() : " + month.firstMonthOfQuarter());
 
     // print by locale
     System.out.println("== Print by locale ==");

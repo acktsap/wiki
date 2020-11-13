@@ -34,7 +34,6 @@ minus    instance       Returns a copy of the target object with an amount of ti
 to       instance       Converts this object to another type.
 at       instance       Combines this object with another.
 
-
 ## References
 
 https://docs.oracle.com/javase/tutorial/datetime/overview/index.html
