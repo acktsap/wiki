@@ -6,6 +6,13 @@
 
 https://blog.benelog.net/installing-jdk.html
 
+osx
+
+```sh
+brew tap AdoptOpenJDK/openjdk
+brew cask install adoptopenjdk14
+```
+
 ## JavaScript Runtime
 
 ### Nvm

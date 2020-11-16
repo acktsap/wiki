@@ -4,11 +4,13 @@
 
 ### Eclipse
 
-eclipse -> import -> existing gradle project
+Eclipse -> Import -> Existing Gradle Project
 
 ### Intellij
 
-intellij -> project -> open -> gradle project
+Intellij -> Project -> Open -> Gradle Project
+
+Editor -> Code Style -> Import `./rule/***.xml`
 
 ## Run
 

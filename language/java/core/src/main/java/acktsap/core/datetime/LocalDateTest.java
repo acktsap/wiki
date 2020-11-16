@@ -39,8 +39,6 @@ public class LocalDateTest {
     // comparision
     LocalDate epochDay = LocalDate.ofEpochDay(0);
     System.out.println("localDate.isAfter(epochDay) : " + localDate.isAfter(epochDay));
-
-    // https://docs.oracle.com/javase/tutorial/datetime/iso/date.html
   }
 
 }

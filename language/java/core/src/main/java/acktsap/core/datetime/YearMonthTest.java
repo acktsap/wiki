@@ -4,12 +4,13 @@ import static java.time.Month.FEBRUARY;
 
 import java.time.YearMonth;
 
-public class YearOrMonthTest {
+public class YearMonthTest {
 
-  // YearOfMonth : the month of a specific year
+  // YearMonth : the month of a specific year
   public static void main(String[] args) {
     /* creation */
 
+    // now
     YearMonth now = YearMonth.now();
     System.out.println("YearMonth.now() : " + now);
 

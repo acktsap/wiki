@@ -1,4 +1,4 @@
-# Intellij settting
+# Intellij Settting
 
 ## Setting
 
