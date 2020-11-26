@@ -103,6 +103,13 @@ Then think about a batch job, which imports transactions on a daily or weekly ba
 
 No not log sensitive information (eg. user credentials, credit card number, ..)
 
+## Working With Legacy Code
+
+- 수정하기 전에 테스트 코드를 짜라. 그러면 코드에 대해서 더 잘 알게 될것.
+- 도메인 문서를 읽자 (있다면).
+- Refactoring을 하라면 한번에 한개씩 바꾸고 한개씩 테스트 해라. 어떤 Side effect가 있을지 모른다. Infinitest같은 툴을 써라.
+- 도메인이 이미 복잡해서 어쩔 수 없이 깔끔해 보이지 않는 코드가 나올 때가 있다.. 그냥 적당히 포기하자.
+
 ## References
 
 [how to log](https://www.marcobehler.com/guides/a-guide-to-logging-in-java#_how_to_log)
