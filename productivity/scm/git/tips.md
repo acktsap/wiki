@@ -95,6 +95,20 @@ echo "script/user-script/user1" >> .git/info/sparse-checkout
 git pull origin master
 ```
 
+## Show commit message only
+
+```sh
+# git log -n --format=%s (n에 다른거 넣어도 ㄱㅊ)
+git log -1 --format=%s
+```
+
+## Git hook
+
+```sh
+# git log -n --format=%s (n에 다른거 넣어도 ㄱㅊ)
+git log -1 --format=%s
+```
+
 ## Reference
 
 Sparse checkout
