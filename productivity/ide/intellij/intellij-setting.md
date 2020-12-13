@@ -65,6 +65,13 @@ Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation o
 - Relative Line Numbers -> `:set rnu` via IdeaVim plugin
 - Lombok
 - CheckStyle-IDEA
+- [Save actions](https://plugins.jetbrains.com/plugin/7642-save-actions/versions)
+  - Settings > Other settings > Save actions
+    - General
+      - [X] Activate save actions on save
+    - Formatting Actions
+      - [X] Optimize imports
+      - [X] Reformat file
 
 ## Shortcuts
 

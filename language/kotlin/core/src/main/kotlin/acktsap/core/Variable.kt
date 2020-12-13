@@ -1,4 +1,4 @@
-package syntax
+package acktsap.core
 
 /* Top-level */
 val PI = 3.14

@@ -1,5 +1,5 @@
 // package definition
-package syntax
+package acktsap.core
 
 /*
     entry point

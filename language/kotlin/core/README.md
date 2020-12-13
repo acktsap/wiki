@@ -1,6 +1,6 @@
-# Kotlin core apis, concepts
+# Kotlin Core
 
-## Philosophy
+## Kotlin Philosophy
 
 Simple, safe, compatible with java\
 A core part of intellij is written in kotlin\
