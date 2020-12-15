@@ -1,4 +1,4 @@
-package acktsap.core
+package acktsap.core.basic
 
 /* Top-level */
 val PI = 3.14

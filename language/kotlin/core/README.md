@@ -9,4 +9,5 @@ Nice modern language
 
 ## References
 
+- [kotlin official guide](https://kotlinlang.org/docs/reference/)
 - [kotlin using gradle](https://kotlinlang.org/docs/reference/using-gradle.html)
