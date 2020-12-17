@@ -125,3 +125,10 @@ Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation o
 - Step into
 - Step over
 - Resume
+
+## Tips
+
+### Heap size
+
+Change `-Xms, -Xmx` in `/Users/$USER/Library/Application Support/JetBrains/IdeaIC2020.1/idea.vmoptions`
+

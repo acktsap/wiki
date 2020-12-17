@@ -4,7 +4,7 @@
 
 Trigger job
 
-- Rest request
+- Rest
 - Run process and exit
 
 ## Job Type

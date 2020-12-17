@@ -1,8 +1,6 @@
 # Wiki
 
-CS & CE 관련 concept semantic tree. Concept & 실행 가능한 practice를 기록.
-
-~~[~~semantic tree~~](https://en.wikipedia.org/wiki/Semantic_resolution_tree) 아님~~.
+CS & CE 관련 concept tree. Concept & 실행 가능한 practice를 기록.
 
 ## How to use
 

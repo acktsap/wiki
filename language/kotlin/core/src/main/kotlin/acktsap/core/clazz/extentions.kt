@@ -57,7 +57,8 @@ fun main() {
         fun Rectangle.getName() = "Rectangle"
 
         // calls 'Shape.getName()'
-        fun printClassName(s: Shape) = println(s.getName())
+        fun printClassName(shape: Shape) = println(shape.getName())
+
         printClassName(Rectangle()) // Shape
     }
 
@@ -80,7 +81,9 @@ fun main() {
 
     Spec("Nullable receiver") {
         fun Any?.beautify(): String {
-            if (this == null) return "Hey null"
+            if (this == null) {
+                return "Hey null"
+            }
             return toString()
         }
 
@@ -109,6 +112,67 @@ fun main() {
     }
 
     Spec("Declaring extensions as members") {
-        // todo: https://kotlinlang.org/docs/reference/extensions.html#declaring-extensions-as-members
+        class Host(val hostName: String)
+
+        class Connection(val host: Host, val port: Int) {
+            // extension as member
+            fun Host.connectionInfo() = "$hostName:${port}"
+
+            fun connect() {
+                // use extension
+                println("Connecting to ${host.connectionInfo()}..")
+            }
+
+            // on name collision, extension receiver takes precedence
+            fun Host.nameCollision() {
+                println(toString()) // calls Host.toString
+                println(this@Connection.toString()) // calls Connection.toString
+            }
+
+            fun nameCollision() {
+                host.nameCollision()
+            }
+        }
+
+        val host = Host("localhost")
+        val connection = Connection(host, 8080)
+
+        connection.connect() // Connecting to localhost:8080..
+
+        // error, extension is inside Connection class
+        // host.printConnection()
+
+        connection.nameCollision()
+    }
+
+    Spec("Declaring extensions as members as open") {
+        open class Base
+
+        class Derived : Base()
+
+        open class BaseCaller {
+            // base extension
+            open fun Base.print() = println("Base extension in BaseCaller")
+
+            open fun Derived.print() = println("Derived extension in BaseCaller")
+
+            fun call(b: Base) = b.print()
+        }
+
+        class DerivedCaller : BaseCaller() {
+            // overridden extension
+            override fun Base.print() = println("Base extension in DerivedCaller")
+
+            override fun Derived.print() = println("Derived extension in DerivedCaller")
+        }
+
+        // extension receiver is resolved statically
+        BaseCaller().call(Base())   // Base extension  in BaseCaller
+        // extension receiver is resolved statically
+        BaseCaller().call(Derived())   // Base extension in BaseCaller
+        // dispatch receiver is resolved virtually
+        DerivedCaller().call(Base())  // Base extension in DerivedCaller
+        // extension receiver is resolved statically
+        DerivedCaller().call(Derived())  // Base extension in DerivedCaller
     }
 }
