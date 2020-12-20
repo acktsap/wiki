@@ -1,4 +1,4 @@
-# Java
+# Java Core
 
 Oracle Java SE guide
 

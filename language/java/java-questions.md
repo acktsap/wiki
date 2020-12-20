@@ -1,6 +1,6 @@
-# Java Core
+# Java Questions
 
-- [Java Core](#java-core)
+- [Java Questions](#java-questions)
   - [Type](#type)
     - [Primitive types](#primitive-types)
     - [Wrapper Class, AutoBoxing, Unboxing](#wrapper-class-autoboxing-unboxing)
@@ -270,7 +270,7 @@ public static Integer valueOf(int i) {
 
 ### NIO
 
-![java-io](./img/java-io.jpg)
+![java-io](core/img/java-io.jpg)
 
 - New I/O (Non-blocking I/O 아님)로 기존의 느린 I/O를 보완하기 위한 것
 - 기존의 I/O

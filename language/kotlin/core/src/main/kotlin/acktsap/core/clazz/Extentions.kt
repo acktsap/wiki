@@ -1,7 +1,7 @@
 package acktsap.core.clazz
 
 import acktsap.core.Spec
-import acktsap.core.external.externalExtension
+import acktsap.core.clazz.external.externalExtension
 
 /*
     the ability to extend a class with new functionality
@@ -33,7 +33,7 @@ class MyClass {
 fun MyClass.Companion.print() = println("Companion")
 
 fun main() {
-    Spec("function extension") {
+    Spec("Function extension") {
         fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
             // can use this keyword
             val tmp = this[index1]
@@ -47,7 +47,7 @@ fun main() {
         println(list) // 2, 1
     }
 
-    Spec("extensions are resolved statically") {
+    Spec("Extensions are resolved statically") {
         open class Shape
 
         class Rectangle : Shape()
@@ -62,7 +62,7 @@ fun main() {
         printClassName(Rectangle()) // Shape
     }
 
-    Spec("function extension on member") {
+    Spec("Function extension on member") {
         class Example {
             // the member always wins on extention
             fun method() = println("Class method")
