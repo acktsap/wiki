@@ -47,6 +47,7 @@ History
 - Dark Reader
 - LastPass
 - Perfect Home
+- Octotree - GitHub code tree
 
 ## Bookmark
 
