@@ -19,7 +19,7 @@
 - CONTRIBUTING.md
 - BRANCH-AND-RELEASE.md
 
-## Common Configs
+## Build Configuration
 
 - Compatibility
 - Dependencies version
