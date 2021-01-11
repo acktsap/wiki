@@ -4,13 +4,9 @@
 
 package acktsap.core.collection;
 
-import static java.util.Arrays.asList;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
+import static java.util.Arrays.asList;
 
 public class CollectionInterface {
 

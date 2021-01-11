@@ -18,5 +18,9 @@ end_of_line = crlf
 # [indentation-tab]
 indent_style = space
 
+# [4-spaces-tab]
+indent_size = 2
+tab_width = 2
+
 # [no-trailing-spaces]
 trim_trailing_whitespace = true
