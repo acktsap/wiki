@@ -106,12 +106,7 @@
 
 ## References
 
-https://ko.wikipedia.org/wiki/Plain_Old_Java_Object
+- [Spring Core](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html)
+- [POJO](https://ko.wikipedia.org/wiki/Plain_Old_Java_Object)
+- [AOP](https://engkimbs.tistory.com/746)
 
-Official
-
-https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html
-
-AOP
-
-https://engkimbs.tistory.com/746

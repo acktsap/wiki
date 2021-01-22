@@ -19,8 +19,8 @@ public class SynchronizedObject {
         private String name;
 
         private void check(int red,
-            int green,
-            int blue) {
+                           int green,
+                           int blue) {
             if (red < 0 || red > 255
                 || green < 0 || green > 255
                 || blue < 0 || blue > 255) {
@@ -29,9 +29,9 @@ public class SynchronizedObject {
         }
 
         public SynchronizedRGB(int red,
-            int green,
-            int blue,
-            String name) {
+                               int green,
+                               int blue,
+                               String name) {
             check(red, green, blue);
             this.red = red;
             this.green = green;
@@ -40,9 +40,9 @@ public class SynchronizedObject {
         }
 
         public void set(int red,
-            int green,
-            int blue,
-            String name) {
+                        int green,
+                        int blue,
+                        String name) {
             check(red, green, blue);
             synchronized (this) {
                 this.red = red;

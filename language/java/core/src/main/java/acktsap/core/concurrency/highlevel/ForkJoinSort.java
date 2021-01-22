@@ -4,15 +4,15 @@
 
 package acktsap.core.concurrency.highlevel;
 
-import static java.util.Collections.shuffle;
-import static java.util.stream.Collectors.toList;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
+
+import static java.util.Collections.shuffle;
+import static java.util.stream.Collectors.toList;
 
 public class ForkJoinSort {
 

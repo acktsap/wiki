@@ -11,27 +11,27 @@ import java.util.Scanner;
 
 public class TokenScan {
 
-  /*
-   * The scanner API breaks input into individual tokens associated with bits of data.
-   */
-  public static void main(String[] args) throws IOException {
-    Scanner scanner = null;
-    try {
-      String resource =
-          Thread.currentThread().getClass().getResource("/xanadu.txt").getPath();
-      scanner = new Scanner(new BufferedReader(new FileReader(resource)));
+    /*
+     * The scanner API breaks input into individual tokens associated with bits of data.
+     */
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = null;
+        try {
+            String resource =
+                Thread.currentThread().getClass().getResource("/xanadu.txt").getPath();
+            scanner = new Scanner(new BufferedReader(new FileReader(resource)));
 
-      // default: WHITESPACE_PATTERN
-      scanner.useDelimiter(",\\s*");
+            // default: WHITESPACE_PATTERN
+            scanner.useDelimiter(",\\s*");
 
-      while (scanner.hasNext()) {
-        System.out.println("Next token: " + scanner.next());
-      }
-    } finally {
-      if (null != scanner) {
-        scanner.close();
-      }
+            while (scanner.hasNext()) {
+                System.out.println("Next token: " + scanner.next());
+            }
+        } finally {
+            if (null != scanner) {
+                scanner.close();
+            }
+        }
     }
-  }
 
 }

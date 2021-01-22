@@ -1,34 +1,34 @@
 buildscript {
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-  }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
 }
 
 subprojects {
-  apply plugin: 'java'
+    apply plugin: 'java'
 
-  sourceCompatibility = sourceJavaVersion
-  targetCompatibility = targetJavaVersion
+    sourceCompatibility = sourceJavaVersion
+    targetCompatibility = targetJavaVersion
 
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-  }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
 
-  dependencies {
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    dependencies {
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        implementation "org.slf4j:slf4j-api:${slf4jVersion}"
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
 
-    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+        testImplementation "org.projectlombok:lombok:${lombokVersion}"
 //    testImplementation "junit:junit:${junitVersion}"
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
-    testImplementation "org.assertj:assertj-core:${assertjVersion}"
-  }
+        testImplementation "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
+        testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    }
 
 }

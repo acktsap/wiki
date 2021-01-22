@@ -15,7 +15,7 @@ public class Test {
     public static void main(String[] args) throws Exception {
         int nCore = Runtime.getRuntime().availableProcessors();
         // ExecutorService executors = Executors.newFixedThreadPool(nCore * 2);
-           ExecutorService executors = Executors.newFixedThreadPool(nCore);
+        ExecutorService executors = Executors.newFixedThreadPool(nCore);
         Callable<Integer> task = () -> {
             for (int i = 0; i < 100_000; ++i) {
                 System.out.println("IO");

@@ -98,6 +98,34 @@ GIT_HASH=$(git rev-parse HEAD)
 echo "$GIT_HASH\n"
 ```
 
+### pre-push
+
+push전에
+
+```sh
+#!/bin/sh
+
+# Called by "git push" after it has checked the remote status, but before anything has been pushed.
+# If this script exits with a non-zero status nothing will be pushed.
+
+REMOTE_NAME="$1"
+URL="$2"
+
+FORBIDDEN_BRANCHES=(
+  "master"
+  "develop"
+)
+CURRENT_BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+for FORBIDDEN_BRANCH in ${FORBIDDEN_BRANCHES[@]}; do
+  if [ "$CURRENT_BRANCH" = "$FORBIDDEN_BRANCH" ]; then
+      echo "push to $FORBIDDEN_BRANCH is forbidden (forbidden : ${FORBIDDEN_BRANCHES[@]})"
+      exit -1
+  fi
+done
+```
+
+
 ## Etc
 
 이외에도 `.git/hooks`에 보면 다른 hook들이 많음. 필요 시 참고할 것.

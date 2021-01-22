@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,15 +18,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Event {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID")
-  Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    Long id;
 
-  @Column(name = "STRING_VALUE")
-  String stringValue = "";
+    @Column(name = "STRING_VALUE")
+    String stringValue = "";
 
-  @Column(name = "INT_VALUE")
-  int intValue = 0;
+    @Column(name = "INT_VALUE")
+    int intValue = 0;
 
 }

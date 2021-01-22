@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Create New Event</title>
+    <meta charset="UTF-8">
+    <title>Create New Event</title>
 </head>
 <body>
 <!-- 
@@ -15,12 +15,12 @@
 
  -->
 <form action="#" th:action="@{/form}" method="post" th:object="${event}">
-  <!-- 에러 보여줌 -->
-	<p th:if="${#fields.hasErrors('limit')}" th:errors="*{limit}">Incorrect limit</p>
-	<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
-	<input type="text" title="name" th:field="*{name}"/>
-	<input type="text" title="limit" th:field="*{limit}"/>
-	<input type="submit" value="Create"/>
+    <!-- 에러 보여줌 -->
+    <p th:if="${#fields.hasErrors('limit')}" th:errors="*{limit}">Incorrect limit</p>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
+    <input type="text" title="name" th:field="*{name}"/>
+    <input type="text" title="limit" th:field="*{limit}"/>
+    <input type="submit" value="Create"/>
 </form>
 
 </body>

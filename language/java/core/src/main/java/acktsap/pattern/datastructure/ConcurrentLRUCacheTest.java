@@ -6,12 +6,12 @@ package acktsap.pattern.datastructure;
 
 public class ConcurrentLRUCacheTest {
 
-  protected class ConcurrentLRUCache {
+    protected class ConcurrentLRUCache {
 
-  }
+    }
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-  }
+    }
 
 }

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Event List</title>
+    <meta charset="UTF-8"/>
+    <title>Event List</title>
 </head>
 <body>
-	<h1>이벤트 목록</h1>
-	<table>
-	 <tr>
-	   <th>이름</th>
-	   <th>참가 인원</th>
-	   <th>시작</th>
-	   <th>종료</th>
-	 </tr>
-	 <!-- events : model에서 전랄됨 -->
-	 <tr th:each="event: ${events}">
-	   <td th:text="${event.name}">이벤트 이름</td>
-	   <td th:text="${event.limitOfEnrollment}">100<td>
-	   <td th:text="${event.startDateTime}">2020.01.07 10:00</td>
-	   <td th:text="${event.endDateTime}">2020.01.07 12:00</td>
-	 </tr>
-	</table>
+<h1>이벤트 목록</h1>
+<table>
+    <tr>
+        <th>이름</th>
+        <th>참가 인원</th>
+        <th>시작</th>
+        <th>종료</th>
+    </tr>
+    <!-- events : model에서 전랄됨 -->
+    <tr th:each="event: ${events}">
+        <td th:text="${event.name}">이벤트 이름</td>
+        <td th:text="${event.limitOfEnrollment}">100
+        <td>
+        <td th:text="${event.startDateTime}">2020.01.07 10:00</td>
+        <td th:text="${event.endDateTime}">2020.01.07 12:00</td>
+    </tr>
+</table>
 </body>
 </html>

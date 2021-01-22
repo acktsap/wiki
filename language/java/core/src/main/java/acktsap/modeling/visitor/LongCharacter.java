@@ -6,9 +6,9 @@ package acktsap.modeling.visitor;
 
 public class LongCharacter implements Character {
 
-  @Override
-  public void attack(Attack attack) {
-    attack.action(this);
-  }
+    @Override
+    public void attack(Attack attack) {
+        attack.action(this);
+    }
 
 }

@@ -1,21 +1,21 @@
 buildscript {
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-  }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
 }
 
 subprojects {
-  apply plugin: 'java'
+    apply plugin: 'java'
 
-  sourceCompatibility = 1.14
-  targetCompatibility = 1.14
+    sourceCompatibility = 1.14
+    targetCompatibility = 1.14
 
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-  }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
 
 }

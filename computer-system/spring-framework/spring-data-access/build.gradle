@@ -1,8 +1,8 @@
 dependencies {
-  implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
-  // database
-  runtimeOnly "com.h2database:h2:${h2Version}"
+    // database
+    runtimeOnly "com.h2database:h2:${h2Version}"
 
-  testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }

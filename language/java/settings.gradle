@@ -1,5 +1,4 @@
 rootProject.name = 'java'
 
 include ':core'
-include ':external:orm'
-include ':external:json'
+include ':external'

@@ -6,6 +6,6 @@ package acktsap.modeling.visitor;
 
 public interface Character {
 
-  void attack(Attack attack);
+    void attack(Attack attack);
 
 }

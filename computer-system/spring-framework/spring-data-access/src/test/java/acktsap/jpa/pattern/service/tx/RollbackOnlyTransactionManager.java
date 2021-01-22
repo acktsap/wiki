@@ -2,13 +2,16 @@ package acktsap.jpa.pattern.service.tx;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 import javax.persistence.EntityManagerFactory;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
+
+import lombok.extern.slf4j.Slf4j;
 
 /*
   custom tx manager로 해서 REQUIRES_NEW 로 되어 있는 것을 test method에서 확인할 수 있게 하려고 했음
@@ -19,32 +22,32 @@ import org.springframework.transaction.TransactionStatus;
 @Slf4j
 public class RollbackOnlyTransactionManager implements PlatformTransactionManager {
 
-  protected final PlatformTransactionManager delegate;
+    protected final PlatformTransactionManager delegate;
 
-  protected final Set<TransactionStatus> statuses = ConcurrentHashMap.newKeySet();
+    protected final Set<TransactionStatus> statuses = ConcurrentHashMap.newKeySet();
 
-  public RollbackOnlyTransactionManager(EntityManagerFactory entityManagerFactory) {
-    this.delegate = new JpaTransactionManager(entityManagerFactory);
-  }
+    public RollbackOnlyTransactionManager(EntityManagerFactory entityManagerFactory) {
+        this.delegate = new JpaTransactionManager(entityManagerFactory);
+    }
 
-  @Override
-  public TransactionStatus getTransaction(TransactionDefinition definition)
-      throws TransactionException {
-    log.info("getTransaction (current object: {}, definition: {})", this, definition.getClass());
-    TransactionStatus transactionStatus = delegate.getTransaction(definition);
-    transactionStatus.setRollbackOnly();
-    return transactionStatus;
-  }
+    @Override
+    public TransactionStatus getTransaction(TransactionDefinition definition)
+            throws TransactionException {
+        log.info("getTransaction (current object: {}, definition: {})", this, definition.getClass());
+        TransactionStatus transactionStatus = delegate.getTransaction(definition);
+        transactionStatus.setRollbackOnly();
+        return transactionStatus;
+    }
 
-  @Override
-  public void commit(TransactionStatus status) throws TransactionException {
-    log.info("[Commit]");
-    delegate.commit(status);
-  }
+    @Override
+    public void commit(TransactionStatus status) throws TransactionException {
+        log.info("[Commit]");
+        delegate.commit(status);
+    }
 
-  @Override
-  public void rollback(TransactionStatus status) throws TransactionException {
-    log.info("[Rollback]");
-    delegate.rollback(status);
-  }
+    @Override
+    public void rollback(TransactionStatus status) throws TransactionException {
+        log.info("[Rollback]");
+        delegate.rollback(status);
+    }
 }

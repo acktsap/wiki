@@ -19,8 +19,8 @@ public class ImmutableObject {
         final private String name;
 
         private void check(int red,
-            int green,
-            int blue) {
+                           int green,
+                           int blue) {
             if (red < 0 || red > 255
                 || green < 0 || green > 255
                 || blue < 0 || blue > 255) {
@@ -29,9 +29,9 @@ public class ImmutableObject {
         }
 
         public ImmutableRGB(int red,
-            int green,
-            int blue,
-            String name) {
+                            int green,
+                            int blue,
+                            String name) {
             check(red, green, blue);
             this.red = red;
             this.green = green;
@@ -41,9 +41,9 @@ public class ImmutableObject {
 
         // withXXX이 패턴
         public ImmutableRGB with(int red,
-            int green,
-            int blue,
-            String name) {
+                                 int green,
+                                 int blue,
+                                 String name) {
             check(red, green, blue);
             return new ImmutableRGB(red, green, blue, name);
         }

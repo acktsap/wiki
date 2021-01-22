@@ -2,7 +2,7 @@
 
 About programming language. Need practice.
 
-## Syntax
+## Spec
 
 Basic syntax
 
@@ -22,7 +22,7 @@ Basic syntax
 
 ## Pattern
 
-Official Api + Library
+Official Api & Library usage pattern
 
 - Data Structure (also internal structure)
 - I/O handling
