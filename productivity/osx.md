@@ -20,6 +20,7 @@
   - 이동속도 : 6
   - 클릭 : 가볍게
 - Engery Saver
+  - Battery -> Uncheck Slightly dim the display while on battery power
   - Battery Health -> Enable battery health management 
 
 ### Downloads

@@ -12,3 +12,12 @@ CS & CE 관련 concept tree. Concept & 실행 가능한 practice를 기록.
 [computer science \[wikipedia\]](https://en.wikipedia.org/wiki/Computer_science)
 
 [Elon Musk's learning rule](https://entrepreneurshandbook.co/elon-musks-2-rules-for-learning-anything-faster-cf9a79fba35)
+
+
+- concept
+  - design
+- instance
+  - os
+    - linux
+    - osx
+- dev-env
