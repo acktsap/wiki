@@ -15,7 +15,7 @@ https://en.wikipedia.org/wiki/Programming_language
   - Exception handling
   - Class
   - ...
-- Problem solving : To solve some problem using official api or external library
+- Pattern : Patterns to solve some problem using official api or external library
   - Data Structure
   - String Handling
   - I/O
