@@ -23,7 +23,7 @@ Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Window
 
 ### Disable auto save
 
-System Settings -> Synchronization -> Uncheck second and third one
+System Settings -> Synchronization -> Uncheck all
 
 ### JDK Version
 
@@ -52,7 +52,14 @@ Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation o
 
 ### VM options
 
-`$IDEA_HOME/bin/idea.vmoptions`
+Help -> Edit Custom VM Options (or shift + shift -> enter custom vm options)
+
+```sh
+-Xms2g
+-Xmx2g
+...
+-
+```
 
 ### Wird card import config
 

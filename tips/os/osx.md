@@ -4,16 +4,22 @@
 
 ### Setting
 
-- Display
-  - Scaled -> Larger Text랑 Default 사이
+- Appearance
 - Dock
   - Position on screen : Right
   - Size : 33%
   - Magnification : 50%
   - Check automatically hide and show the dock
+- Sound
+  - Sound Effects -> Alert volume to 0
 - Keyboard
-  - Modifier Keys : Caps Lock -> Control
-  - Shortcut -> Input Sources -> Select the previous input source : option + space
+  - Modifier Keys
+    - Caps Lock -> Control
+    - External keyboard only
+      - Control -> Control
+      - Option -> Command
+      - Command -> Optional
+  - Shortcut -> Input Sources -> Select the previous input source : Option + Space (⌥ + Space)
   - Function Keys : ${customizing}
 - Trackpad
   - 탭하여 클릭하기
@@ -22,6 +28,8 @@
 - Engery Saver
   - Battery -> Uncheck Slightly dim the display while on battery power
   - Battery Health -> Enable battery health management 
+- Display
+  - Scaled -> Larger Text랑 Default 사이
 
 ### Downloads
 
