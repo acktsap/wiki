@@ -1,0 +1,19 @@
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-batch:${springBootVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testImplementation "org.springframework.batch:spring-batch-test:${springBootVersion}"
+
+    // h2
+    developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    runtimeOnly "com.h2database:h2:${h2Version}"
+
+    // for web launcher
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+}

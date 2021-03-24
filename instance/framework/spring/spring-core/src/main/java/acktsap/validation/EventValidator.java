@@ -4,6 +4,7 @@
 
 package acktsap.validation;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -11,6 +12,7 @@ import org.springframework.validation.Validator;
 /**
  * Validator: 애플리케이션에서 사용하는 객체 검증용 인터페이스
  */
+@Component
 public class EventValidator implements Validator {
 
     @Override

@@ -35,4 +35,5 @@ What if a step fails?
 
 ## See also
 
+- [general batch principle and guidelines](https://docs.spring.io/spring-batch/docs/current/reference/html/spring-batch-intro.html#batchArchitectureConsiderations)
 - [spring batch processing strategy](https://docs.spring.io/spring-batch/docs/current/reference/html/spring-batch-intro.html#batchProcessingStrategy)

@@ -14,11 +14,13 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-@Component
-public class ValidatorRunner implements ApplicationRunner {
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-    @Autowired
-    Validator validator;
+@Component
+@RequiredArgsConstructor
+public class ValidatorRunner implements ApplicationRunner {
+    private final Validator validator;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
