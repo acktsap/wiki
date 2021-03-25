@@ -19,14 +19,20 @@ subprojects {
     }
 
     dependencies {
+        // lombok
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
-        implementation "org.slf4j:slf4j-api:${slf4jVersion}"
-
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        // loggin
+        implementation "org.slf4j:slf4j-api:${slf4jVersion}"
         runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
 
-        testImplementation "org.projectlombok:lombok:${lombokVersion}"
-//    testImplementation "junit:junit:${junitVersion}"
+        // test lombok
+        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        // test
+        testImplementation "junit:junit:${junitVersion}"
         testImplementation "org.junit.jupiter:junit-jupiter-engine:${junit5Version}"
         testImplementation "org.assertj:assertj-core:${assertjVersion}"
     }

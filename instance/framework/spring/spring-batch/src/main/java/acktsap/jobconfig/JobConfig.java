@@ -13,11 +13,13 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import lombok.RequiredArgsConstructor;
 
 /**
- *{{@link EnableBatchProcessing} enables
+ *
+ * {@link EnableBatchProcessing} enables
  *
  * - JobRepository: bean name "jobRepository"
  * - JobLauncher: bean name "jobLauncher"
@@ -25,6 +27,10 @@ import lombok.RequiredArgsConstructor;
  * - PlatformTransactionManager: bean name "transactionManager"
  * - JobBuilderFactory: bean name "jobBuilders"
  * - StepBuilderFactory: bean name "stepBuilders"
+ *
+ * The user should to provide a DataSource as a bean in the context, or else implement BatchConfigurer in the configuration.
+ * If a user does not provide a DataSource within the context, a Map based JobRepository will be used.
+ * If multiple DataSources are defined in the context, the one annotated with {@link Primary} will be used.
  *
  */
 @Configuration
@@ -77,7 +83,7 @@ public class JobConfig {
                 public void validate(JobParameters parameters) throws JobParametersInvalidException {
                     String value = parameters.getString("kk");
                     // print twice.. why??
-                    System.out.println("kk: " + value);
+                    System.out.println("validate (kk: " + value + ")");
                 }
             })
             .start(playerLoad)
@@ -89,7 +95,7 @@ public class JobConfig {
         return this.stepBuilderFactory.get("playerLoad")
             .tasklet((contribution, chunkContext) -> {
                 String jobName = chunkContext.getStepContext().getJobName();
-                System.out.println(jobName + " - playerLoad");
+                System.out.printf("[%s] %s - %s%n", Thread.currentThread().getName(), jobName, "playerLoad");
                 return RepeatStatus.FINISHED;
             })
             .build();

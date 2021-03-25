@@ -2,7 +2,7 @@ package acktsap.jobconfig;
 
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 
-// Just for snippets
+// Just for snippets for case
 // @Component
 public class CustomBatchConfiguer extends DefaultBatchConfigurer {
 
@@ -12,8 +12,8 @@ public class CustomBatchConfiguer extends DefaultBatchConfigurer {
     protected JobRepository createJobRepository() throws Exception {
         JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
         factory.setDataSource(dataSource);
-        factory.setTransactionManager(transactionManager);
-        factory.setIsolationLevelForCreate("ISOLATION_REPEATABLE_READ");
+        factory.setTransactionManager(getTransactionManager());
+        factory.setIsolationLevelForCreate("ISOLATION_REPEATABLE_READ"); // here
         return factory.getObject();
     }
      */
@@ -24,8 +24,8 @@ public class CustomBatchConfiguer extends DefaultBatchConfigurer {
     protected JobRepository createJobRepository() throws Exception {
         JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
         factory.setDataSource(dataSource);
-        factory.setTransactionManager(transactionManager);
-        factory.setTablePrefix("TEST_");
+        factory.setTransactionManager(getTransactionManager());
+        factory.setTablePrefix("TEST_"); // here
         return factory.getObject();
     }
      */
@@ -35,7 +35,7 @@ public class CustomBatchConfiguer extends DefaultBatchConfigurer {
     @Override
     protected JobRepository createJobRepository() throws Exception {
         MapJobRepositoryFactoryBean factory = new MapJobRepositoryFactoryBean();
-        factory.setTransactionManager(transactionManager);
+        factory.setTransactionManager(getTransactionManager());
         return factory.getObject();
     }
      */
@@ -46,8 +46,8 @@ public class CustomBatchConfiguer extends DefaultBatchConfigurer {
     protected JobRepository createJobRepository() throws Exception {
         JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
         factory.setDataSource(dataSource);
-        factory.setDatabaseType("db2");
-        factory.setTransactionManager(transactionManager);
+        factory.setDatabaseType("db2"); // here
+        factory.setTransactionManager(getTransactionManager());
         return factory.getObject();
     }
      */
@@ -57,8 +57,8 @@ public class CustomBatchConfiguer extends DefaultBatchConfigurer {
     @Override
     protected JobLauncher createJobLauncher() throws Exception {
         SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
-        jobLauncher.setJobRepository(jobRepository);
-        jobLauncher.setTaskExecutor(new SimpleAsyncTaskExecutor());
+        jobLauncher.setJobRepository(getJobRepository());
+        jobLauncher.setTaskExecutor(new SimpleAsyncTaskExecutor()); // here
         jobLauncher.afterPropertiesSet();
         return jobLauncher;
     }
