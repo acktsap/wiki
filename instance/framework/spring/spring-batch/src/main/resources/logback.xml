@@ -9,5 +9,7 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <!-- for more detail about tx, set to DEBUG -->
+    <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="INFO"/>
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="INFO"/>
 </configuration>

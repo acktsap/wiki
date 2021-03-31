@@ -1,7 +1,10 @@
 package acktsap.pattern.datetime;
 
+import acktsap.pattern.Pattern;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
@@ -9,38 +12,46 @@ public class DayOfWeekTest {
 
     // DayOfWeek : MONDAY through SUNDAY
     public static void main(String[] args) {
-        /* creation */
+        Pattern.d("Creation").p(() -> {
+            // from TemporalAccessor (LocalDate)
+            DayOfWeek fromLocalDate = DayOfWeek.from(LocalDate.now());
+            System.out.println(fromLocalDate);
 
-        // from TemporalAccessor
-        DayOfWeek now = DayOfWeek.from(LocalDate.now());
-        System.out.println("DayOfWeek.from(LocalDate.now()) : " + now);
+            // from TemporalAccessor (LocalDateTime)
+            DayOfWeek fromLocalDateTime = DayOfWeek.from(LocalDateTime.now());
+            System.out.println(fromLocalDateTime);
 
-        // of number
-        DayOfWeek monday = DayOfWeek.of(1); // 1 ~ 7 (MON ~ SUN)
-        System.out.println("DayOfWeek.of(1) : " + monday);
+            // of
+            DayOfWeek ofNumber = DayOfWeek.of(1); // 1 ~ 7 (MON ~ SUN)
+            System.out.println(ofNumber);
 
-        // enum use
-        DayOfWeek tuesday = DayOfWeek.TUESDAY;
-        System.out.println("DayOfWeek.TUESDAY : " + tuesday);
+            // enum use
+            System.out.println(DayOfWeek.TUESDAY);
+        });
 
+        Pattern.d("Plus & minus").p(() -> {
+            DayOfWeek dayOfWeek = DayOfWeek.from(LocalDate.now());
 
-        /* api */
+            System.out.println(dayOfWeek.plus(1));
+            System.out.println(dayOfWeek.minus(1));
+        });
 
-        DayOfWeek dayOfWeek = DayOfWeek.from(LocalDate.now());
+        Pattern.d("Print by locale").p(() -> {
+            DayOfWeek dayOfWeek = DayOfWeek.from(LocalDate.now());
 
-        // plus & minus
-        System.out.println("dayOfWeek.plus(3) : " + dayOfWeek.plus(3));  // prints THURSDAY
+            System.out.println("default locale");
+            Locale defaultLocale = Locale.getDefault();
+            System.out.println(dayOfWeek.getDisplayName(TextStyle.FULL, defaultLocale));
+            System.out.println(dayOfWeek.getDisplayName(TextStyle.SHORT, defaultLocale));
+            System.out.println(dayOfWeek.getDisplayName(TextStyle.NARROW, defaultLocale));
 
-        // print by locale
-        System.out.println("== Print by locale ==");
-        Locale defaultLocale = Locale.getDefault();
-        System.out.println(dayOfWeek.getDisplayName(TextStyle.FULL, defaultLocale));
-        System.out.println(dayOfWeek.getDisplayName(TextStyle.SHORT, defaultLocale));
-        System.out.println(dayOfWeek.getDisplayName(TextStyle.NARROW, defaultLocale));
-        Locale germany = Locale.GERMANY;
-        System.out.println(dayOfWeek.getDisplayName(TextStyle.FULL, germany));
-        System.out.println(dayOfWeek.getDisplayName(TextStyle.SHORT, germany));
-        System.out.println(dayOfWeek.getDisplayName(TextStyle.NARROW, germany));
+            System.out.println("germany locale");
+            Locale germany = Locale.GERMANY;
+            System.out.println(dayOfWeek.getDisplayName(TextStyle.FULL, germany));
+            System.out.println(dayOfWeek.getDisplayName(TextStyle.SHORT, germany));
+            System.out.println(dayOfWeek.getDisplayName(TextStyle.NARROW, germany));
+        });
+
     }
 
 }
