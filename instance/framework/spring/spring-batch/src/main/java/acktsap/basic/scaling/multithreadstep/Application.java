@@ -1,4 +1,4 @@
-package acktsap.basic.scaling;
+package acktsap.basic.scaling.multithreadstep;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

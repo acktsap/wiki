@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.chunkoriented;
+package acktsap.basic.scaling.multithreadstep;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,7 +19,8 @@ import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
@@ -31,39 +32,45 @@ import lombok.RequiredArgsConstructor;
 public class JobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
+    private final int poolSize = Runtime.getRuntime().availableProcessors() * 2;
+
+    @Bean
+    public TaskExecutor taskExecutor() {
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setCorePoolSize(poolSize);
+        taskExecutor.setMaxPoolSize(poolSize);
+        return taskExecutor;
+    }
 
     @Bean
     public Job sampleJob(JobRepository jobRepository, Step sampleStep) {
         return this.jobBuilderFactory.get("sampleJob")
-            .repository(jobRepository) // default is "jobRepository" bean
             .start(sampleStep)
             .build();
     }
 
     @Bean
-    public Step sampleStep(PlatformTransactionManager transactionManager) {
-        // tx 1 : 3 read, 3 process, 3 write
-        // tx 2 : 3 read, 3 process, 3 write
-        // tx 3 : 2 read, 2 process, 2 write
+    public Step sampleStep(TaskExecutor taskExecutor) {
         return this.stepBuilderFactory.get("sampleStep")
-            .transactionManager(transactionManager) // default is "transactionManager" bean
-            .<List<Integer>, List<String>>chunk(3) // chunk : # of items to be processed before tx is commited
+            .<List<Integer>, List<String>>chunk(3)
             .reader(new ItemReader<>() {
-                private int count = 1;
+                private int cursor = 1;
 
+                // 동시성 제어를 위해 synchronized
                 @Override
-                public List<Integer> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+                public synchronized List<Integer> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
                     // repeat until return null
-                    if (count > 8) {
+
+                    if (cursor > 8) {
                         return null;
                     }
 
                     List<Integer> datas = IntStream.range(1, 4).boxed()
-                        .map(v -> v * count)
+                        .map(v -> v * cursor)
                         .collect(toList());
-                    ++count;
+                    ++cursor;
 
-                    System.out.printf("[%s] Read %s%n", getCallBackMethod(), datas);
+                    System.out.printf("[%s %s] Read %s%n", Thread.currentThread().getName(), getCallBackMethod(), datas);
 
                     return datas;
                 }
@@ -72,15 +79,33 @@ public class JobConfig {
                 List<String> processed = datas.stream()
                     .map(v -> String.format("'%d'", v))
                     .collect(toList());
-                System.out.printf("[%s] Process %s to %s%n", getCallBackMethod(), datas, processed);
+                System.out.printf("[%s %s] Process %s to %s%n", Thread.currentThread().getName(), getCallBackMethod(), datas, processed);
                 return processed;
             })
             .writer(data -> {
                 List<String> flattened = data.stream()
                     .flatMap(Collection::stream)
                     .collect(toList());
-                System.out.printf("[%s] Write %s%n", getCallBackMethod(), flattened);
+                System.out.printf("[%s %s] Write %s%n", Thread.currentThread().getName(), getCallBackMethod(), flattened);
             })
+            .taskExecutor(taskExecutor) // chunk 단위로 (tx 단위) thread에 맡김
+            /*
+                throttleLimit : default : 4, 이 사이즈만큼 pool이 동시에 실행됨
+
+                동작 (이 과정이 tx 한개임)
+
+                1. throttleLimit 만큼 pool에 task를 던짐.
+                2. task를 받은 pool은 reader에서 chunk size만큼 읽음 (또는 null이 리턴될때까지)
+                3. 각각 읽은 것들을 가지고 processor -> writer 탐
+             */
+            .throttleLimit(poolSize)
+            /*
+                이걸로 하면 결과가 다름.
+                poolSize로 하면 여러개가 동시에 실행되지만 3으로 하면 max 3개가 실행되서
+                3개 thread가 각각 3, 3, 2개 처리하게 됨.
+                위에꺼로 하면 poolSize가 8보다 크면 각각 1개씩 처리하는 방식으로 됨
+             */
+            // .throttleLimit(3)
             .build();
     }
 

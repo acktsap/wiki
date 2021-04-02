@@ -114,6 +114,19 @@ for(Object item: items){
 itemWriter.write(processedItems);
 ```
 
+## Scalling
+
+### Remote Chunking
+
+![remote-chunking](./img/remote-chunking.png)
+
+- Step processing is split across multiple processes, communicating with each other through some middleware.
+- Works best if the manager is not a bottleneck, so the processing must be more expensive than the reading of item.
+
+### Partitioning
+
+![partitioning-overview](./img/partitioning-overview.png)
+
 ## References
 
 - [spring batch official docs](https://docs.spring.io/spring-batch/docs/current/reference/html/index.html)
