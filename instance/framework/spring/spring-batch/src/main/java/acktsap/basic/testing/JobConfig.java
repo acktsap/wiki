@@ -3,14 +3,18 @@ package acktsap.basic.testing;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Optional;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,12 +47,18 @@ public class JobConfig {
     @Bean
     public Step playerLoadStep() {
         return this.stepBuilderFactory.get("playerLoadStep")
-            .tasklet((contribution, chunkContext) -> {
-                String jobName = chunkContext.getStepContext().getJobName();
-                System.out.printf("[%s] %s - %s%n", Thread.currentThread().getName(), jobName, "playerLoad");
-                return RepeatStatus.FINISHED;
-            })
+            .tasklet(playerLoadTasklet(null))
             .build();
+    }
+
+    @StepScope
+    @Bean
+    public Tasklet playerLoadTasklet(@Value("#{stepExecutionContext['player']}")String player) {
+        return (contribution, chunkContext) -> {
+            String actualPlayer = Optional.ofNullable(player).orElse("default player");
+            System.out.printf("[%s] load %s%n", Thread.currentThread().getName(), actualPlayer);
+            return RepeatStatus.FINISHED;
+        };
     }
 
     @Bean
@@ -73,4 +83,5 @@ public class JobConfig {
             })
             .build();
     }
+
 }

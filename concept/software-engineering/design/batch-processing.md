@@ -1,5 +1,7 @@
 # Batch Processing
 
+Batch = Job + Time
+
 ## Scheduling
 
 Trigger job
@@ -7,7 +9,7 @@ Trigger job
 - Rest
 - Run process and exit
 
-## Job Type
+## Task Type
 
 - Read (Extract)
 - Process (Transform)
@@ -15,18 +17,24 @@ Trigger job
 
 ## Transaction
 
-Key unit. It determines concurrency level.
+Use transaction on a data which should succeed or fail as a complete unit; it can never be only partially complete.
 
-## Concurrency
+## Performance
 
-Run step in concurrent to improve performance. Not just single machine, but also multiple machine for scale out.
+### Concurrency
+
+Use concurrency on **bottleneck**.
+
+### Partitioning
+  
+Divide data into partition. Process each partition by process or thread or machine.
 
 ## Failover
 
 What if a step fails?
 
-- Save processing stage
-- Restart on that stage
+- Save processing stage.
+- Restart on that stage.
 
 ## Test
 

@@ -32,8 +32,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBatchTest
 @SpringBootTest(properties = {
-    "spring.batch.job.names=footballJob",
-    "spring.batch.job.enabled=false"
+    "spring.batch.job.names=footballJob"
 }, classes = TestBatchConfig.class)
 class SpringBootBasedTest {
     @Autowired

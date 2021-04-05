@@ -1,5 +1,7 @@
 package acktsap.basic.testing;
 
+import java.util.UUID;
+
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.configuration.annotation.BatchConfigurer;
@@ -19,7 +21,7 @@ public class TestBatchConfig {
     @Bean
     public DataSource testDataSource() {
         return new EmbeddedDatabaseBuilder()
-            .setName("testdb")
+            .setName(UUID.randomUUID().toString())
             .setType(EmbeddedDatabaseType.H2)
             .addScript("classpath:org/springframework/batch/core/schema-h2.sql")
             .addScript("classpath:sql/test.sql")

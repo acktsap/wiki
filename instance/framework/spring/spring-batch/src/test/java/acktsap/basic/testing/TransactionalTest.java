@@ -21,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBatchTest
 @SpringBootTest(properties = {
-    "spring.batch.job.names=footballJob",
-    "spring.batch.job.enabled=false"
+    "spring.batch.job.names=footballJob"
 }, classes = TestBatchConfig.class)
 class TransactionalTest {
     @Autowired

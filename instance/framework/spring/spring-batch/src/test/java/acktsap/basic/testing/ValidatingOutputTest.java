@@ -17,8 +17,7 @@ import org.springframework.core.io.FileSystemResource;
 
 @SpringBatchTest
 @SpringBootTest(properties = {
-    "spring.batch.job.names=writeJob",
-    "spring.batch.job.enabled=false"
+    "spring.batch.job.names=writeJob"
 }, classes = TestBatchConfig.class)
 class ValidatingOutputTest {
     @Autowired

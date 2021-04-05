@@ -22,8 +22,7 @@ import org.springframework.test.context.TestPropertySource;
  */
 @SpringBatchTest
 @TestPropertySource(properties = {
-    "spring.batch.job.names=footballJob",
-    "spring.batch.job.enabled=false"
+    "spring.batch.job.names=footballJob"
 })
 @ContextConfiguration(classes = {JobConfig.class, TestBatchConfig.class})  /* 이거 bean별로 다해줘야함 */
 class ContextConfigurationBasedTest {
