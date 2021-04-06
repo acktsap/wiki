@@ -2,6 +2,6 @@
 
 무엇인가 실체화된 기술이나 플랫폼 같은 것
 
-- Core Concept (Introduction, Design Principle, Architecture, etc...)
-- Basic Api Snippets
-- Patterns
+- Core concept (Introduction, Design Principle, Architecture, etc...)
+- Basic api snippets
+- Pattern snippets

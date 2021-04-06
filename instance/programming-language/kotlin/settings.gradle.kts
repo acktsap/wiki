@@ -1,3 +1,4 @@
 rootProject.name = "kotlin"
 
-include(":core")
+include(":basic")
+include(":coroutine")

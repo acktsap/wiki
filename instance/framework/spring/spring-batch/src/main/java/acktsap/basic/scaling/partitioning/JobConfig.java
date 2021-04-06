@@ -7,7 +7,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.partition.PartitionHandler;
@@ -50,7 +49,6 @@ public class JobConfig {
     }
 
     @Bean
-    @JobScope // to use lazy binding of parameter
     public Step step1Manager() {
         return this.stepBuilderFactory.get("step1:manager")
             .partitioner("step1", partitioner())
@@ -80,7 +78,6 @@ public class JobConfig {
     // PartitionHandler : controls the execution of a partitioned StepExecution
     // BATCH_STEP_EXECUTION in the meta db ensures that each partitioned step is executed once
     @Bean
-    @StepScope
     public PartitionHandler partitionHandler() {
         // TaskExecutorPartitionHandler : executes Step instances locally in separate threads
         TaskExecutorPartitionHandler partitionHandler = new TaskExecutorPartitionHandler();

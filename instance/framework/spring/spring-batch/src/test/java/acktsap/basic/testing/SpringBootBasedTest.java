@@ -14,15 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
+ *
  * Recommanded way.
  *
- * 의존성 전부 주입시키기 힘들어서 어쩔 수 없이 {@link org.springframework.boot.test.context.SpringBootTest}를 쓰는 경우.
+ * 의존성 전부 주입시키기 위해  {@link org.springframework.boot.test.context.SpringBootTest}를 쓰는 경우.
  *
  * {@link org.springframework.batch.test.context.SpringBatchTest} registers
  *
  * - JobLauncherTestUtils (requires a single Job bean)
  * - JobRepositoryTestUtils (requires a DataSource bean)
- *
  *
  * {@link org.springframework.boot.test.context.SpringBootTest}
  *
@@ -43,7 +43,9 @@ class SpringBootBasedTest {
 
     @Test
     void testFootballJob() throws Exception {
-        JobParameters jobParameter = new JobParametersBuilder().toJobParameters();
+        JobParameters jobParameter = new JobParametersBuilder()
+            .addString("action", "in")
+            .toJobParameters();
         JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameter);
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }

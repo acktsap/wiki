@@ -3,7 +3,6 @@ package acktsap.basic.testing;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Optional;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -47,16 +46,15 @@ public class JobConfig {
     @Bean
     public Step playerLoadStep() {
         return this.stepBuilderFactory.get("playerLoadStep")
-            .tasklet(playerLoadTasklet(null))
+            .tasklet(playerLoadTasklet(null, null))
             .build();
     }
 
     @StepScope
     @Bean
-    public Tasklet playerLoadTasklet(@Value("#{stepExecutionContext['player']}")String player) {
+    public Tasklet playerLoadTasklet(@Value("#{stepExecutionContext['player']}") String player, @Value("#{jobParameters['action']}") String action) {
         return (contribution, chunkContext) -> {
-            String actualPlayer = Optional.ofNullable(player).orElse("default player");
-            System.out.printf("[%s] load %s%n", Thread.currentThread().getName(), actualPlayer);
+            System.out.printf("[%s] load %s (action: %s)%n", Thread.currentThread().getName(), player, action);
             return RepeatStatus.FINISHED;
         };
     }
