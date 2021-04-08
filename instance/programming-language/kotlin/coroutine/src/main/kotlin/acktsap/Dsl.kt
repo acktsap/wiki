@@ -7,6 +7,4 @@ inline fun Block(description: String, block: () -> Unit) {
     println()
 }
 
-inline fun printlnWithData(message: Any?) {
-    System.out.println("[${Thread.currentThread().name} in ${System.currentTimeMillis()}ms] $message")
-}
+fun printWithThread(message: Any?) = println("[${Thread.currentThread().name}] $message")
