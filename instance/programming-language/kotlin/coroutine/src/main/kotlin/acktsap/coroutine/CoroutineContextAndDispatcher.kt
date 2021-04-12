@@ -3,6 +3,7 @@ package acktsap.coroutine
 import acktsap.Block
 import acktsap.printWithThread
 import kotlinx.coroutines.*
+import java.util.*
 
 fun main() {
     Block("Dispatchers and threads") {
@@ -155,11 +156,11 @@ fun main() {
             val activity = Activity()
             activity.doSomething()
             printWithThread("Launched coroutines")
-            delay(200L)
+            delay(250L)
 
             printWithThread("Destroying activity!")
             activity.destroy()
-            delay(1000) // visually confirm that they don't work
+            delay(500) // visually confirm that they don't work
         }
     }
 

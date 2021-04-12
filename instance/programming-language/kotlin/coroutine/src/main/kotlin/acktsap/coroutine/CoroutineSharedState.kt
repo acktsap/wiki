@@ -1,9 +1,12 @@
 package acktsap.coroutine
 
 import acktsap.Block
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 
 fun main() {
     Block("Mutual exclusion") {
@@ -12,10 +15,14 @@ fun main() {
             var counter = 0
 
             withContext(Dispatchers.Default) {
-                repeat(1000) {
-                    // protect each increment with lock
-                    mutex.withLock {
-                        counter++
+                repeat(100) {
+                    launch {
+                        repeat(100) {
+                            // protect each increment with lock
+                            mutex.withLock {
+                                counter++
+                            }
+                        }
                     }
                 }
             }
