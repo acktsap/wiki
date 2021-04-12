@@ -2,35 +2,45 @@ package acktsap.coroutine
 
 import acktsap.Block
 import acktsap.printWithThread
-import kotlinx.coroutines.*
-import java.net.URL
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.time.Duration
 import java.util.concurrent.Executors
 import kotlin.system.measureTimeMillis
 
 fun main() {
     Block("IO Blocking Comparison") {
+        val request = HttpRequest.newBuilder()
+            .uri(URI.create("https://www.naver.com:91"))
+            .timeout(Duration.ofSeconds(5))
+            .build()
+
         val nProcessor = Runtime.getRuntime().availableProcessors()
-        val url = "https://www.bing.com/"
-        val tryCount = nProcessor * 10
-        val printEach = false
+        val tryCount = 2 * nProcessor
 
-        fun request(url: String) {
-            // cpu process
-            (1..100_000).reduce { acc, next -> acc + next }
-
-            // io request
-            URL(url).readBytes()
+        fun request() {
+            try {
+                val client = HttpClient.newHttpClient()
+                client.send(request, HttpResponse.BodyHandlers.ofString())
+            } catch (ignored: Exception) {
+            }
         }
 
         runBlocking {
-            val executorSevice = Executors.newFixedThreadPool(nProcessor)
+            val executorSevice = Executors.newFixedThreadPool(2 * nProcessor)
             val threadPoolMs = measureTimeMillis {
                 val futures = (1..tryCount).map {
+                    // started가 한번에 찍힌 이후 finished가 한번에 찍힘
                     executorSevice.submit {
-                        request(url)
-                        if (printEach) {
-                            printWithThread("finished (executorSevice)")
-                        }
+                        printWithThread("started (executorSevice)")
+                        request()
+                        printWithThread("finished (executorSevice)")
                     }
                 }
                 futures.forEach { it.get() }
@@ -46,11 +56,13 @@ fun main() {
                  */
                 withContext(Dispatchers.Default) {
                     repeat(tryCount) {
+                        // started가 core개수만큼씩만 한번에 찍힘
+                        // Dispatchers.Default는 core 수만큼 thread가 있는데
+                        // 다 blocking이 되어서 다른 task로 context switching이 미발생
                         launch {
-                            request(url)
-                            if (printEach) {
-                                printWithThread("finished (Dispatchers.Default)")
-                            }
+                            printWithThread("started (Dispatchers.Default)")
+                            request()
+                            printWithThread("finished (Dispatchers.Default)")
                         }
                     }
                 }
@@ -67,11 +79,12 @@ fun main() {
                  */
                 withContext(Dispatchers.IO) {
                     repeat(tryCount) {
+                        // started가 한번에 찍힌 이후 finished가 한번에 찍힘
+                        // Dispatchers.IO는 I/O intensive job을 위해 pool size를 넉넉하게 잡아놓음
                         launch {
-                            request(url)
-                            if (printEach) {
-                                printWithThread("finished (Dispatchers.IO)")
-                            }
+                            printWithThread("started (Dispatchers.IO)")
+                            request()
+                            printWithThread("finished (Dispatchers.IO)")
                         }
                     }
                 }

@@ -6,45 +6,34 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.4.20"
+    kotlin("jvm") version "1.4.32"
 }
 
-subprojects {
-    apply(plugin = "kotlin")
+apply(plugin = "kotlin")
 
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
+repositories {
+    mavenCentral()
+    jcenter()
+}
 
-    tasks {
-        compileKotlin {
-            kotlinOptions {
-                val compileJvmTarget = "11"
-                freeCompilerArgs = listOf("-Xjsr305=strict")
-                jvmTarget = compileJvmTarget
-            }
-        }
-        compileTestKotlin {
-            kotlinOptions {
-                val testJvmTarget = "11"
-                freeCompilerArgs = listOf("-Xjsr305=strict")
-                jvmTarget = testJvmTarget
-            }
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            val compileJvmTarget = "11"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = compileJvmTarget
         }
     }
-
-    dependencies {
-        // Align versions of all Kotlin components
-        implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
-        // Use the Kotlin JDK 8 standard library.
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-        // Use the Kotlin test library.
-        testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-        // Use the Kotlin JUnit integration.
-        testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    compileTestKotlin {
+        kotlinOptions {
+            val testJvmTarget = "11"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = testJvmTarget
+        }
     }
+}
+
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
 }

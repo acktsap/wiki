@@ -1,13 +1,9 @@
-# Kotlin
+# Kotlin Language
 
-## Kotlin Philosophy
+## Import
 
-Simple, safe, compatible with java\
-A core part of intellij is written in kotlin\
-Focus on practical\
-Nice modern language
+Intellij -> Project -> Open -> Gradle Project
 
-## References
+## Run
 
-- [kotlin official guide](https://kotlinlang.org/docs)
-- [kotlin using gradle](https://kotlinlang.org/docs/gradle.html)
+Type on each classes which contains main method

@@ -6,3 +6,5 @@ inline fun Block(description: String, block: () -> Unit) {
     block()
     println()
 }
+
+fun printWithThread(message: String) = println("[${Thread.currentThread().name}]${message}")
