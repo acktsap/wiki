@@ -1,6 +1,6 @@
 package acktsap.pattern.future;
 
-import acktsap.pattern.Pattern;
+import acktsap.Block;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class CompletableFutureTest {
 
     public static void main(String[] args) {
-        Pattern.d("Exceptionally").p(() -> {
+        Block.d("Exceptionally").p(() -> {
             CompletableFuture<Object> exceptionally = CompletableFuture.supplyAsync(() -> {
                 throw new UnsupportedOperationException("failed");
             }).exceptionally(actual -> {
@@ -22,12 +22,12 @@ public class CompletableFutureTest {
             System.out.println("value : " + exceptionally.get());
         });
 
-        Pattern.d("Join").p(() -> {
+        Block.d("Join").p(() -> {
             CompletableFuture<String> joinFuture = CompletableFuture.supplyAsync(() -> "value");
             System.out.println("joinFuture.join() : " + joinFuture.join());
         });
 
-        Pattern.d("Join error stace trace").p(() -> {
+        Block.d("Join error stace trace").p(() -> {
             CompletableFuture<String> joinError = CompletableFuture.supplyAsync(() -> {
                 throw new IllegalStateException("error");
             });
@@ -44,12 +44,12 @@ public class CompletableFutureTest {
             }
         });
 
-        Pattern.d("Get").p(() -> {
+        Block.d("Get").p(() -> {
             CompletableFuture<String> getFuture = CompletableFuture.supplyAsync(() -> "value");
             System.out.println("getFuture.get() : " + getFuture.get());
         });
 
-        Pattern.d("Get stace trace").p(() -> {
+        Block.d("Get stace trace").p(() -> {
             try {
                 CompletableFuture<String> getError = CompletableFuture.supplyAsync(() -> {
                     throw new IllegalStateException("error");
@@ -61,7 +61,7 @@ public class CompletableFutureTest {
             }
         });
 
-        Pattern.d("Run in parallel and waiting for all tasks to complete").p(() -> {
+        Block.d("Run in parallel and waiting for all tasks to complete").p(() -> {
             long allStartTime = System.currentTimeMillis();
             CompletableFuture<?>[] futures = IntStream.range(0, Runtime.getRuntime().availableProcessors())
                 .mapToObj($ -> CompletableFuture.runAsync(() -> {

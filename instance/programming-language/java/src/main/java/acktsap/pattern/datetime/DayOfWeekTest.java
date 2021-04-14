@@ -1,6 +1,6 @@
 package acktsap.pattern.datetime;
 
-import acktsap.pattern.Pattern;
+import acktsap.Block;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ public class DayOfWeekTest {
 
     // DayOfWeek : MONDAY through SUNDAY
     public static void main(String[] args) {
-        Pattern.d("Creation").p(() -> {
+        Block.d("Creation").p(() -> {
             // from TemporalAccessor (LocalDate)
             DayOfWeek fromLocalDate = DayOfWeek.from(LocalDate.now());
             System.out.println(fromLocalDate);
@@ -29,14 +29,14 @@ public class DayOfWeekTest {
             System.out.println(DayOfWeek.TUESDAY);
         });
 
-        Pattern.d("Plus & minus").p(() -> {
+        Block.d("Plus & minus").p(() -> {
             DayOfWeek dayOfWeek = DayOfWeek.from(LocalDate.now());
 
             System.out.println(dayOfWeek.plus(1));
             System.out.println(dayOfWeek.minus(1));
         });
 
-        Pattern.d("Print by locale").p(() -> {
+        Block.d("Print by locale").p(() -> {
             DayOfWeek dayOfWeek = DayOfWeek.from(LocalDate.now());
 
             System.out.println("default locale");

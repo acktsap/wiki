@@ -1,4 +1,4 @@
-# Java Language
+# Java
 
 ## Import
 
@@ -14,7 +14,7 @@ Editor -> Code Style -> Import `./rule/***.xml`
 
 ## Run
 
-Type on each classes which contains main method
+Run main method
 
 ### Eclipse
 

@@ -6,8 +6,7 @@ import legacy.total1 as total
 // import api.total2 as total
 
 fun main() {
-    Student("lim", 100, 100).total();
+    Student("lim", 100, 100).total()
     // actual code in java
     // FuncKt.total1(new Student("name", 0, 0));
 }
-

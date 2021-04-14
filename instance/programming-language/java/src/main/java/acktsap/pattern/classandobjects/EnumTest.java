@@ -1,6 +1,6 @@
 package acktsap.pattern.classandobjects;
 
-import acktsap.pattern.Pattern;
+import acktsap.Block;
 
 public class EnumTest {
 
@@ -38,7 +38,7 @@ public class EnumTest {
 
     public static void main(String[] args) {
 
-        Pattern.d("Enum conversion").p(() -> {
+        Block.d("Enum conversion").p(() -> {
             for (Source source : Source.values()) {
                 System.out.printf("from '%s' to '%s'%n", source, Target.valueOf(source.name()));
             }

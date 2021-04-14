@@ -14,4 +14,3 @@ package legacy.pattern
 // pros : No unmanaged state
 // cons : Too many constructor
 // kotlin : no builder pattern
-

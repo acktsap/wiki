@@ -2,7 +2,6 @@ package acktsap.language.types
 
 import acktsap.Block
 
-
 // In kotlin, everything is an object in the sense that
 // we can call member functions and properties on any variable
 fun main() {

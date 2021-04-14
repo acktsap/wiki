@@ -5,6 +5,6 @@ summary: Assignment for Week 4 of the Coursera <a href="https://www.coursera.org
   for Java Developers</a> course
 programming_language: Kotlin
 content:
-- Rationals
-- Board
+  - Rationals
+  - Board
 mode: Study

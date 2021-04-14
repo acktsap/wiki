@@ -1,38 +1,33 @@
 package legacy
 
 object KSingleton {
-  fun foo() {
-
-  }
+    fun foo() {
+    }
 }
 
 class Comp {
-  fun foo() {
-
-  }
-
-  companion object {
-    fun bar() {
-
+    fun foo() {
     }
-  }
+
+    companion object {
+        fun bar() {
+        }
+    }
 }
 
 open class singleton2 {
-  open fun foo() {
-
-  }
+    open fun foo() {
+    }
 }
 
 fun main() {
-  // KSingleton.INSTANCE.foo() in java. like single pattern in java
-  KSingleton.foo()
+    // KSingleton.INSTANCE.foo() in java. like single pattern in java
+    KSingleton.foo()
 
 //  Comp().bar()
 
-  val a = object : singleton2() {
-    override fun foo() {
-
+    val a = object : singleton2() {
+        override fun foo() {
+        }
     }
-  }
 }

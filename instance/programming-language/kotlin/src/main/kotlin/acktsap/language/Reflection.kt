@@ -7,5 +7,4 @@ package acktsap.language
  * that allows for introspecting the structure of your own program at runtime.
  */
 fun main() {
-
 }

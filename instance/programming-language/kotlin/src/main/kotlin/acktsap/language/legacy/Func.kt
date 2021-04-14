@@ -1,4 +1,4 @@
-//@file:JvmName(name: "Func")
+// @file:JvmName(name: "Func")
 
 package legacy
 
@@ -9,14 +9,14 @@ fun add(a: Int, b: Int): Int {
 }
 
 // return type inference
-fun add2(a: Int, b: Int) = a + b;
+fun add2(a: Int, b: Int) = a + b
 
 // default argument
-fun add3(a: Int = 1, b: Int = 0) = a + b;
+fun add3(a: Int = 1, b: Int = 0) = a + b
 
 // generate 3 methods
 @JvmOverloads
-fun add4(a: Int = 1, b: Int = 0) = a + b;
+fun add4(a: Int = 1, b: Int = 0) = a + b
 
 fun addException(a: Int = 1, b: Int = 0): Int {
     println("A: $a, B: $b")
@@ -28,7 +28,6 @@ fun useRun() {
     try {
 //    JavaFunc().run2()
     } catch (e: IOException) {
-
     }
 }
 
@@ -86,25 +85,19 @@ fun Student.total3(): Int {
     return score0 + score1
 }
 
-open class Human {
-
-}
+open class Human
 
 fun Human.getJob(): String {
     return "I don't know"
 }
 
-class Police : Human() {
-
-}
+class Police : Human()
 
 fun Police.getJob(): String {
     return "Police"
 }
 
-class Criminal : Human() {
-
-}
+class Criminal : Human()
 
 fun Criminal.getJob(): String {
     return "No job"
@@ -145,7 +138,6 @@ fun main(args: Array<String>) {
     val human: Human = Police()
     println(human.getJob()) // i don't know
 
-
     // kotlin regard all list, set, map, array as an array
 
     // default: immutable list
@@ -156,7 +148,6 @@ fun main(args: Array<String>) {
 
     // a fake
     (list as MutableList).add(3)
-
 
     // string
     val a = "I am a student"

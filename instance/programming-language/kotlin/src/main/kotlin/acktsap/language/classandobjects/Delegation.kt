@@ -47,12 +47,13 @@ fun main() {
     }
 
     Block("Delegation to a generic") {
-        println("""
+        println(
+            """
              delegation to a generic interface is impossible
              since jvm cannot represent a class with type parameter as a superclass
              see https://discuss.kotlinlang.org/t/class-delegation-to-generic/4681
-        """.trimIndent())
+            """.trimIndent()
+        )
         // class SomeClass<T>(t: T) : T by t
     }
 }
-

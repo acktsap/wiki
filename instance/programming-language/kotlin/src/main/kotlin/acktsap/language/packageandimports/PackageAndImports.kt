@@ -27,7 +27,7 @@ fun main() {
                     kotlin.jvm.*
                 JS:
                     kotlin.js.*
-        """.trimIndent()
+            """.trimIndent()
         )
     }
 
@@ -44,10 +44,11 @@ fun main() {
         // java.util.Objects
         println(Objects.isNull(null)) // true
         // java.util.Vector
-        println(Vector<Int>(1).apply {
-            add(1)
-            add(2)
-        }) // [1, 2]
+        println(
+            Vector<Int>(1).apply {
+                add(1)
+                add(2)
+            }
+        ) // [1, 2]
     }
 }
-

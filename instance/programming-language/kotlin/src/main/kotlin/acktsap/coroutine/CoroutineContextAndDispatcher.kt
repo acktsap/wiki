@@ -3,7 +3,6 @@ package acktsap.coroutine
 import acktsap.Block
 import acktsap.printWithThread
 import kotlinx.coroutines.*
-import java.util.*
 
 fun main() {
     Block("Dispatchers and threads") {

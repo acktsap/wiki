@@ -93,9 +93,9 @@ fun main() {
 
     Block("When with variable (since 1.3)") {
         fun execute() = listOf(
-                IllegalStateException(),
-                UnsupportedOperationException(),
-                RuntimeException()
+            IllegalStateException(),
+            UnsupportedOperationException(),
+            RuntimeException()
         ).random()
 
         val ret = when (val response = execute()) {

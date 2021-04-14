@@ -83,13 +83,15 @@ fun main() {
     }
 
     Block("Return at anonymous function") {
-        listOf(1, 2, 3, 4, 5).forEach(fun(value: Int) {
-            if (value == 3) {
-                return // return the anonymous function
+        listOf(1, 2, 3, 4, 5).forEach(
+            fun(value: Int) {
+                if (value == 3) {
+                    return // return the anonymous function
+                }
+                // print 1, 2
+                println(value)
             }
-            // print 1, 2
-            println(value)
-        })
+        )
     }
 
     Block("Use return to break loop") {

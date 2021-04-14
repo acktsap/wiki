@@ -4,7 +4,7 @@
 
 package acktsap.pattern.io;
 
-import acktsap.pattern.Pattern;
+import acktsap.Block;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -12,7 +12,7 @@ import java.util.Properties;
 public class ResourcesIO {
 
     public static void main(String[] args) {
-        Pattern.d("Load by Class").p(() -> {
+        Block.d("Load by Class").p(() -> {
             Properties properties = new Properties();
             try (InputStream in = ResourcesIO.class.getResourceAsStream("/resources.properties")) {
                 properties.load(in);
@@ -24,7 +24,7 @@ public class ResourcesIO {
             System.out.println("nokey=" + properties.getProperty("nokey", "default value"));
         });
 
-        Pattern.d("Load by ClassLoader").p(() -> {
+        Block.d("Load by ClassLoader").p(() -> {
             Properties properties = new Properties();
             try (InputStream in = ResourcesIO.class.getClassLoader().getResourceAsStream("resources.properties")) {
                 properties.load(in);

@@ -1,19 +1,19 @@
 package acktsap;
 
-public final class Pattern {
+public final class Block {
     private final String description;
 
-    public static Pattern d(String description) {
-        return new Pattern(description);
+    public static Block d(String description) {
+        return new Block(description);
     }
 
-    private Pattern(String description) {
+    private Block(String description) {
         this.description = description;
     }
 
     public void p(DangerousRunnable pattern) {
         try {
-            System.out.printf("== Pattern(\"%s\") ==%n", description);
+            System.out.printf("== %s ==%n", description);
             pattern.run();
             System.out.println();
         } catch (Exception e) {

@@ -48,5 +48,4 @@ fun b(): Nothing? {
 
 // no use (use keyword as a variable)
 fun `should for null test`() {
-
 }

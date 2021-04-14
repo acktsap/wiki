@@ -1,4 +1,1 @@
 rootProject.name = 'java'
-
-include ':core'
-include ':external'

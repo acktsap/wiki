@@ -1,8 +1,6 @@
 package legacy
 
-interface MyInterface {
-
-}
+interface MyInterface
 
 class MyClass1 : MyInterface
 
@@ -61,7 +59,6 @@ fun main(m: MyInterface): String {
         null
     }
 
-
     // when
     // cons
     // 1. conflicts with mockito when
@@ -92,4 +89,3 @@ fun main(m: MyInterface): String {
         // else -> TODO()
     }
 }
-

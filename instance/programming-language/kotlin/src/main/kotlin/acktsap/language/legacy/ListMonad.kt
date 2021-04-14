@@ -1,5 +1,4 @@
 package legacy
 
 fun main() {
-
 }

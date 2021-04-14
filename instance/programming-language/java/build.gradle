@@ -6,16 +6,27 @@ buildscript {
     }
 }
 
-subprojects {
-    apply plugin: 'java'
+apply plugin: 'java'
 
-    sourceCompatibility = 1.14
-    targetCompatibility = 1.14
+sourceCompatibility = 1.14
+targetCompatibility = 1.14
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        jcenter()
-    }
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
 
+dependencies {
+    // jpa
+    implementation 'org.hibernate:hibernate-core:5.4.12.Final'
+    implementation 'com.h2database:h2:1.4.200'
+
+    // guava
+    implementation("com.google.guava:guava:30.1-jre")
+
+    // caffeine
+    implementation 'com.github.ben-manes.caffeine:caffeine:2.8.8'
+    implementation 'com.github.ben-manes.caffeine:guava:2.8.8' // extension
+    implementation 'com.github.ben-manes.caffeine:jcache:2.8.8' // extension
 }

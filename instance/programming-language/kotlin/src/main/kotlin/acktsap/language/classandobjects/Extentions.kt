@@ -8,7 +8,6 @@ import acktsap.language.classandobjects.external.externalExtension
     without having to inherit from the class or use design patterns such as Decorator
  */
 
-
 /* Extension properties (local extension of properties is not allowed) */
 
 val <T> List<T>.lastIndex: Int
@@ -116,7 +115,7 @@ fun main() {
 
         class Connection(val host: Host, val port: Int) {
             // extension as member
-            fun Host.connectionInfo() = "$hostName:${port}"
+            fun Host.connectionInfo() = "$hostName:$port"
 
             fun connect() {
                 // use extension
@@ -167,12 +166,12 @@ fun main() {
         }
 
         // extension receiver is resolved statically
-        BaseCaller().call(Base())   // Base extension  in BaseCaller
+        BaseCaller().call(Base()) // Base extension  in BaseCaller
         // extension receiver is resolved statically
-        BaseCaller().call(Derived())   // Base extension in BaseCaller
+        BaseCaller().call(Derived()) // Base extension in BaseCaller
         // dispatch receiver is resolved virtually
-        DerivedCaller().call(Base())  // Base extension in DerivedCaller
+        DerivedCaller().call(Base()) // Base extension in DerivedCaller
         // extension receiver is resolved statically
-        DerivedCaller().call(Derived())  // Base extension in DerivedCaller
+        DerivedCaller().call(Derived()) // Base extension in DerivedCaller
     }
 }
