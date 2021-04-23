@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "web-extension-test",
   "scripts": {
-    "start": "web-ext run -s ./src",
+    "start": "web-ext run -s ./src --browser-console --start-url https://duckduckgo.com",
     "build": "web-ext build -s ./src --overwrite-dest -a dist"
   },
   "repository": {
