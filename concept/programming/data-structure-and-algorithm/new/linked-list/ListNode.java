@@ -3,14 +3,14 @@ import java.util.Arrays;
 import java.util.List;
 
 class ListNode {
-  static ListNode of(final int[] arr) {
+  static ListNode of(int[] arr) {
     if (arr.length == 0) {
       return null;
     }
 
-    final ListNode dummy = new ListNode(0);
+    ListNode dummy = new ListNode(0);
     ListNode pre = dummy;
-    for (final int val : arr) {
+    for (int val : arr) {
       pre.next = new ListNode(val);
       pre = pre.next;
     }
@@ -22,7 +22,7 @@ class ListNode {
   ListNode(int x) { val = x; }
 
   int[] toArray() {
-    final List<Integer> list = new ArrayList<>();
+    List<Integer> list = new ArrayList<>();
     ListNode curr = this;
     while (null != curr) {
       list.add(curr.val);

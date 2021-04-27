@@ -67,8 +67,8 @@ class SearchInBinarySearchTree {
     }
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         TreeNode.of(4, 2, 7, 1, 3),
         TreeNode.of(2, 1, 3)
@@ -78,11 +78,11 @@ class SearchInBinarySearchTree {
         null
       },
     };
-    final SearchInBinarySearchTree solution = new SearchInBinarySearchTree();
-    for (final Object[] parameter : parameters) {
-      final TreeNode input = (TreeNode) parameter[0];
-      final TreeNode expected = (TreeNode) parameter[1];
-      final TreeNode actual = solution.searchBST(input);
+    SearchInBinarySearchTree solution = new SearchInBinarySearchTree();
+    for (Object[] parameter : parameters) {
+      TreeNode input = (TreeNode) parameter[0];
+      TreeNode expected = (TreeNode) parameter[1];
+      TreeNode actual = solution.searchBST(input);
       if (actual.equals(expected)) {
         throw new IllegalStateException("Expected: " + expected +
             ", but was: " + actual);

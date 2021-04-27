@@ -49,8 +49,8 @@ import java.util.Arrays;
  *
  */
 class PlusOne {
-  public int[] plusOne(final int[] digits) {
-    final int[] ret = new int[digits.length + 1];
+  public int[] plusOne(int[] digits) {
+    int[] ret = new int[digits.length + 1];
     for (int i = 1; i < ret.length; ++i) {
       ret[i] = digits[i - 1];
     }
@@ -69,8 +69,8 @@ class PlusOne {
     return ret[0] == 1 ? ret : Arrays.copyOfRange(ret, 1, ret.length);
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 0 },
         new int[] { 1 },
@@ -88,11 +88,11 @@ class PlusOne {
         new int[] { 1, 0, 0, 0 },
       },
     };
-    final PlusOne solution = new PlusOne();
-    for (final Object[] parameter : parameters) {
-      final int[] input = (int[]) parameter[0];
-      final int[] expected = (int[]) parameter[1];
-      final int[] actual = solution.plusOne(input);
+    PlusOne solution = new PlusOne();
+    for (Object[] parameter : parameters) {
+      int[] input = (int[]) parameter[0];
+      int[] expected = (int[]) parameter[1];
+      int[] actual = solution.plusOne(input);
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual));

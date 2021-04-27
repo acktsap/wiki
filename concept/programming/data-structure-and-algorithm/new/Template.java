@@ -18,8 +18,8 @@
  *
  */
 class Template {
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new char[][] {
                        { '1', '1', '1', '1', '0' },
@@ -30,10 +30,12 @@ class Template {
         1
       },
     };
-    final Template solution = new Template();
-    for (final Object[] parameter : parameters) {
-      final char[][] grid = (char[][]) parameter[0];
-      final int expected = (int) parameter[1];
+
+    var solution = new Template();
+    for (Object[] parameter : parameters) {
+      char[][] grid = (char[][]) parameter[0];
+      int expected = (int) parameter[1];
+
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual));

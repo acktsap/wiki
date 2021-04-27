@@ -64,21 +64,21 @@ import java.util.LinkedList;
  *
  */
 class BinaryTreeZigzagLevelOrderTraversal {
-  public List<List<Integer>> zigzagLevelOrder(final TreeNode root) {
+  public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
     if (null == root) {
       return Collections.emptyList();
     }
     
-    final List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    List<List<Integer>> ret = new LinkedList<List<Integer>>();
     Deque<TreeNode> nextLevel = new LinkedList<>();
     nextLevel.add(root);
     int level = 0;
     while (!nextLevel.isEmpty()) {
-      final Deque<TreeNode> currLevel = nextLevel;
+      Deque<TreeNode> currLevel = nextLevel;
       nextLevel = new LinkedList<>();
       ret.add(new LinkedList<>());
       while (!currLevel.isEmpty()) {
-        final TreeNode curr = currLevel.getLast();
+        TreeNode curr = currLevel.getLast();
         ret.get(level).add(curr.val);
         if (level % 2 == 0) {
           if (null != curr.left) nextLevel.add(curr.left);
@@ -94,8 +94,8 @@ class BinaryTreeZigzagLevelOrderTraversal {
     return ret;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new Integer[] { 3, 9, 20, null, null, 15, 7 },
         new int[][] { 
@@ -105,11 +105,11 @@ class BinaryTreeZigzagLevelOrderTraversal {
         },
       },
     };
-    final BinaryTreeInorderTraversal solution = new BinaryTreeInorderTraversal();
-    for (final Object[] parameter : parameters) {
-      final Integer[] tree = (Integer[]) parameter[0];
-      final int[][] expected = (int[][]) parameter[1];
-      final int[][] actual = solution.inorderTraversal(TreeNode.of(tree)).stream()
+    BinaryTreeInorderTraversal solution = new BinaryTreeInorderTraversal();
+    for (Object[] parameter : parameters) {
+      Integer[] tree = (Integer[]) parameter[0];
+      int[][] expected = (int[][]) parameter[1];
+      int[][] actual = solution.inorderTraversal(TreeNode.of(tree)).stream()
                                  .map(i -> i.toArray(new Integer[]{}));
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +

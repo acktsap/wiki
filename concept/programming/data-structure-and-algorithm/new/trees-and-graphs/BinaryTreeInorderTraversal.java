@@ -42,17 +42,17 @@ import java.util.LinkedList;
  *
  */
 class BinaryTreeInorderTraversal {
-  public List<Integer> inorderTraversal(final TreeNode root) {
+  public List<Integer> inorderTraversal(TreeNode root) {
     if (null == root) {
       return Collections.emptyList();
     }
     
-    final List<Integer> traversals = new LinkedList<>();
+    List<Integer> traversals = new LinkedList<>();
     dfs(root, traversals);
     return traversals;
   }
   
-  protected void dfs(final TreeNode curr, final List<Integer> traversals) {
+  protected void dfs(TreeNode curr, List<Integer> traversals) {
     if (null == curr) {
       return;
     }
@@ -62,18 +62,18 @@ class BinaryTreeInorderTraversal {
     dfs(curr.right, traversals);
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new Integer[] { 1, null, 2, 3 },
         new Integer[] { 1, 3, 2 }
       },
     };
-    final BinaryTreeInorderTraversal solution = new BinaryTreeInorderTraversal();
-    for (final Object[] parameter : parameters) {
-      final Integer[] tree = (Integer[]) parameter[0];
-      final Integer[] expected = (Integer[]) parameter[1];
-      final Integer[] actual = solution.inorderTraversal(TreeNode.of(tree)).toArray(new Integer[] {});
+    BinaryTreeInorderTraversal solution = new BinaryTreeInorderTraversal();
+    for (Object[] parameter : parameters) {
+      Integer[] tree = (Integer[]) parameter[0];
+      Integer[] expected = (Integer[]) parameter[1];
+      Integer[] actual = solution.inorderTraversal(TreeNode.of(tree)).toArray(new Integer[] {});
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but actual: " + Arrays.toString(actual));

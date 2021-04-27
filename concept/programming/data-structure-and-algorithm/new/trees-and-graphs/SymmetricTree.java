@@ -39,14 +39,14 @@
  *
  */
 class SymmetricTree {
-  public boolean isSymmetric(final TreeNode root) {
+  public boolean isSymmetric(TreeNode root) {
     if (null == root) {
       return true;
     }
     return isSymmetric(root.left, root.right);
   }
   
-  protected boolean isSymmetric(final TreeNode left, final TreeNode right) {
+  protected boolean isSymmetric(TreeNode left, TreeNode right) {
     if (null == left && null == right) {
       return true;
     }
@@ -55,12 +55,12 @@ class SymmetricTree {
       return false;
     }
     
-    final boolean curr = left.val == right.val;
+    boolean curr = left.val == right.val;
     return curr && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
   }
   
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new Integer[] { 1, 2, 2, 3, 4, 4, 3 }, 
         true,
@@ -70,11 +70,11 @@ class SymmetricTree {
         false,
       },
     };
-    final SymmetricTree solution = new SymmetricTree();
-    for (final Object[] parameter : parameters) {
-      final Integer[] input = (Integer[]) parameter[0];
-      final boolean expected = (boolean) parameter[1];
-      final boolean actual = solution.isSymmetric(TreeNode.of(input));
+    SymmetricTree solution = new SymmetricTree();
+    for (Object[] parameter : parameters) {
+      Integer[] input = (Integer[]) parameter[0];
+      boolean expected = (boolean) parameter[1];
+      boolean actual = solution.isSymmetric(TreeNode.of(input));
       if (expected != actual) {
         throw new IllegalStateException("Expected: " + expected +
             ", but was: " + actual);

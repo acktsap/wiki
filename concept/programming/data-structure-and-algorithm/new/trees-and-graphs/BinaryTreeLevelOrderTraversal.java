@@ -47,17 +47,17 @@ import java.util.LinkedList;
  *
  */
 class BinaryTreeLevelOrderTraversal {
-  public List<List<Integer>> levelOrder(final TreeNode root) {
+  public List<List<Integer>> levelOrder(TreeNode root) {
     if (null == root) {
       return Collections.emptyList();
     }
 
-    final List<List<Integer>> ret = new LinkedList<>();
+    List<List<Integer>> ret = new LinkedList<>();
     dfs(root, ret, 0); // depth starts from 0
     return ret;
   }
   
-  protected void dfs(final TreeNode node, final List<List<Integer>> ret, final int depth) {
+  protected void dfs(TreeNode node, List<List<Integer>> ret, int depth) {
     // check next (if necessary)
     if (null == node) {
       return;
@@ -74,18 +74,18 @@ class BinaryTreeLevelOrderTraversal {
     dfs(node.right, ret, depth + 1);
   }
   
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new Integer[] { 1, null, 2, 3 },
         new Integer[] { 1, 3, 2 }
       },
     };
-    final BinaryTreeLevelOrderTraversal solution = new BinaryTreeLevelOrderTraversal();
-    for (final Object[] parameter : parameters) {
-      final Integer[] tree = (Integer[]) parameter[0];
-      final Integer[] expected = (Integer[]) parameter[1];
-      final Integer[] actual = solution.inorderTraversal(TreeNode.of(tree)).toArray(new Integer[] {});
+    BinaryTreeLevelOrderTraversal solution = new BinaryTreeLevelOrderTraversal();
+    for (Object[] parameter : parameters) {
+      Integer[] tree = (Integer[]) parameter[0];
+      Integer[] expected = (Integer[]) parameter[1];
+      Integer[] actual = solution.inorderTraversal(TreeNode.of(tree)).toArray(new Integer[] {});
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but actual: " + Arrays.toString(actual));

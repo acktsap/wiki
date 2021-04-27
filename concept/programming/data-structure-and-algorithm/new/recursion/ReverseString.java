@@ -36,32 +36,32 @@ import java.util.Arrays;
  *
  */
 class ReverseString {
-  public void reverseString(final char[] str) {
+  public void reverseString(char[] str) {
     swap(str, 0, str.length - 1);
   }
 
-  protected void swap(final char[] str, final int left, final int right) {
+  protected void swap(char[] str, int left, int right) {
     if (left >= right) return;
 
-    final char tmp = str[left];
+    char tmp = str[left];
     str[left] = str[right];
     str[right] = tmp;
     swap(str, left + 1, right - 1);
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new char[] { 'h', 'e', 'l', 'l', 'o' },
         new char[] { 'o', 'l', 'l', 'e', 'h' },
       },
     };
 
-    final ReverseString solution = new ReverseString();
-    for (final Object[] parameter : parameters) {
-      final char[] input = (char[]) parameter[0];
-      final char[] expected = (char[]) parameter[1];
-      final char[] actual = Arrays.copyOf(expected, expected.length);
+    ReverseString solution = new ReverseString();
+    for (Object[] parameter : parameters) {
+      char[] input = (char[]) parameter[0];
+      char[] expected = (char[]) parameter[1];
+      char[] actual = Arrays.copyOf(expected, expected.length);
       solution.reverseString(input);
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +

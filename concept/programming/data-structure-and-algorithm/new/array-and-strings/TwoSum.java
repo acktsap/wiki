@@ -53,11 +53,11 @@ import java.util.Map;
  *
  */
 class TwoSum {
-  public int[] twoSum(final int[] nums, final int target) {
-    final int[] ret = new int[2];
-    final Map<Integer, Integer> left2Index = new HashMap<>();
+  public int[] twoSum(int[] nums, int target) {
+    int[] ret = new int[2];
+    Map<Integer, Integer> left2Index = new HashMap<>();
     for (int i = 0; i < nums.length; ++i) {
-      final int next = nums[i];
+      int next = nums[i];
       if (null != left2Index.get(next)) {
         ret[0] = left2Index.get(next);
         ret[1] = i;
@@ -68,8 +68,8 @@ class TwoSum {
     return ret;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 2, 7, 11, 15 },
         9,
@@ -81,12 +81,12 @@ class TwoSum {
         new int[] { 1, 4 }
       },
     };
-    final TwoSum solution = new TwoSum();
-    for (final Object[] parameter : parameters) {
-      final int[] nums = (int[]) parameter[0];
-      final int target = (int) parameter[1];
-      final int[] expected = (int[]) parameter[2];
-      final int[] actual = solution.twoSum(nums, target);
+    TwoSum solution = new TwoSum();
+    for (Object[] parameter : parameters) {
+      int[] nums = (int[]) parameter[0];
+      int target = (int) parameter[1];
+      int[] expected = (int[]) parameter[2];
+      int[] actual = solution.twoSum(nums, target);
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual));

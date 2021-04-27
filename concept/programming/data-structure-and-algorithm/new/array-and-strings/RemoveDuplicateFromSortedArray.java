@@ -57,7 +57,7 @@ import java.util.Arrays;
  *
  */
 class RemoveDuplicateFromSortedArray {
-  public int removeDuplicates(final int[] nums) {
+  public int removeDuplicates(int[] nums) {
     if (null == nums || nums.length == 0) {
       return 0;
     }
@@ -79,8 +79,8 @@ class RemoveDuplicateFromSortedArray {
     return i;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { },
         new int[] { },
@@ -103,12 +103,12 @@ class RemoveDuplicateFromSortedArray {
       },
     };
 
-    final RemoveDuplicateFromSortedArray solution = new RemoveDuplicateFromSortedArray();
-    for (final Object[] parameter : parameters) {
-      final int[] input = (int[]) parameter[0];
-      final int[] expected = (int[]) parameter[1];
-      final int size = solution.removeDuplicates(input);
-      final int[] actual = Arrays.copyOfRange(input, 0, size);
+    RemoveDuplicateFromSortedArray solution = new RemoveDuplicateFromSortedArray();
+    for (Object[] parameter : parameters) {
+      int[] input = (int[]) parameter[0];
+      int[] expected = (int[]) parameter[1];
+      int size = solution.removeDuplicates(input);
+      int[] actual = Arrays.copyOfRange(input, 0, size);
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual));

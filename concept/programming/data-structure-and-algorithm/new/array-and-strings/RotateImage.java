@@ -66,8 +66,8 @@ import java.util.Arrays;
  *
  */
 class RotateImage {
-  public void rotate(final int[][] matrix) {
-    final int n = matrix.length;
+  public void rotate(int[][] matrix) {
+    int n = matrix.length;
 
     // transpose (left-bottom <-> right-top)
     for (int i = 0; i < n; ++i) {
@@ -85,15 +85,15 @@ class RotateImage {
 
   }
 
-  protected void swap(final int[][] matrix, final int i1, final int j1,
-      final int i2, final int j2) {
-    final int tmp = matrix[i1][j1];
+  protected void swap(int[][] matrix, int i1, int j1,
+      int i2, int j2) {
+    int tmp = matrix[i1][j1];
     matrix[i1][j1] = matrix[i2][j2];
     matrix[i2][j2] = tmp;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[][] {
                        { 1, 2, 3 },
@@ -122,10 +122,10 @@ class RotateImage {
       },
     };
 
-    final RotateImage solution = new RotateImage();
-    for (final Object[] parameter : parameters) {
-      final int[][] matrix = (int[][]) parameter[0];
-      final int[][] expected = (int[][]) parameter[1];
+    RotateImage solution = new RotateImage();
+    for (Object[] parameter : parameters) {
+      int[][] matrix = (int[][]) parameter[0];
+      int[][] expected = (int[][]) parameter[1];
       solution.rotate(matrix);
       for (int i = 0; i < matrix.length; ++i) {
         if (!Arrays.equals(expected[i], matrix[i])) {

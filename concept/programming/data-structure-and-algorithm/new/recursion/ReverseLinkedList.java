@@ -45,7 +45,7 @@ import java.util.Arrays;
  *
  */
 class ReverseLinkedList {
-  public ListNode reverseListRecursive(final ListNode head) {
+  public ListNode reverseListRecursive(ListNode head) {
     if (null == head) {
       return null;
     }
@@ -54,22 +54,22 @@ class ReverseLinkedList {
       return head;
     }
 
-    final ListNode next = head.next;
+    ListNode next = head.next;
     head.next = null;
     return concat(next, head);
   }
 
-  protected ListNode concat(final ListNode curr, final ListNode reversed) {
+  protected ListNode concat(ListNode curr, ListNode reversed) {
     if (null == curr) {
       return reversed;
     }
 
-    final ListNode keep = curr.next;
+    ListNode keep = curr.next;
     curr.next = reversed;
     return concat(keep, curr);
   }
 
-  public ListNode reverseListIterative(final ListNode head) {
+  public ListNode reverseListIterative(ListNode head) {
     if (null == head) {
       return null;
     }
@@ -91,8 +91,8 @@ class ReverseLinkedList {
   }
 
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 1 },
         new int[] { 1 },
@@ -107,18 +107,18 @@ class ReverseLinkedList {
       },
     };
 
-    final ReverseLinkedList solution = new ReverseLinkedList();
-    for (final Object[] parameter : parameters) {
-      final int[] input = (int[]) parameter[0];
-      final int[] expected = (int[]) parameter[1];
+    ReverseLinkedList solution = new ReverseLinkedList();
+    for (Object[] parameter : parameters) {
+      int[] input = (int[]) parameter[0];
+      int[] expected = (int[]) parameter[1];
 
-      final int[] actual1 = solution.reverseListRecursive(ListNode.of(input)).toArray();
+      int[] actual1 = solution.reverseListRecursive(ListNode.of(input)).toArray();
       if (!Arrays.equals(expected, actual1)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual1));
       }
 
-      final int[] actual2 = solution.reverseListIterative(ListNode.of(input)).toArray();
+      int[] actual2 = solution.reverseListIterative(ListNode.of(input)).toArray();
       if (!Arrays.equals(expected, actual2)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual2));

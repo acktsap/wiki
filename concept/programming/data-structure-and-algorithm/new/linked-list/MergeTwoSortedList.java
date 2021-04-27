@@ -34,8 +34,8 @@ import java.util.Arrays;
  *
  */
 class MergeTwoSortedList {
-  public ListNode mergeTwoLists(final ListNode l1, final ListNode l2) {
-    final ListNode dummy = new ListNode(0);
+  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(0);
     ListNode pre = dummy;
     ListNode left = l1;
     ListNode right = l2;
@@ -63,8 +63,8 @@ class MergeTwoSortedList {
     return dummy.next;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 1, 2 },
         new int[] { 3, 4 },
@@ -76,12 +76,12 @@ class MergeTwoSortedList {
         new int[] { 1, 1, 2, 3, 4, 4 },
       },
     };
-    final MergeTwoSortedList solution = new MergeTwoSortedList();
-    for (final Object[] parameter : parameters) {
-      final int[] l1 = (int[]) parameter[0];
-      final int[] l2 = (int[]) parameter[1];
-      final int[] expected = (int[]) parameter[2];
-      final int[] actual = solution.mergeTwoLists(ListNode.of(l1), ListNode.of(l2)).toArray();
+    MergeTwoSortedList solution = new MergeTwoSortedList();
+    for (Object[] parameter : parameters) {
+      int[] l1 = (int[]) parameter[0];
+      int[] l2 = (int[]) parameter[1];
+      int[] expected = (int[]) parameter[2];
+      int[] actual = solution.mergeTwoLists(ListNode.of(l1), ListNode.of(l2)).toArray();
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", actual: " + Arrays.toString(actual));

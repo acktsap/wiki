@@ -6,10 +6,10 @@
     - [Data Structure](#data-structure)
       - [Canonicalization](#canonicalization)
       - [Separate data with an algorithm](#separate-data-with-an-algorithm)
-    - [Explicit Formula (점화식)](#explicit-formula-%ec%a0%90%ed%99%94%ec%8b%9d)
+    - [Explicit Formula (점화식)](#explicit-formula-점화식)
   - [Proving](#proving)
     - [Loop dominates Time Complexity](#loop-dominates-time-complexity)
-    - [Mathematical Induction (수학적귀납법)](#mathematical-induction-%ec%88%98%ed%95%99%ec%a0%81%ea%b7%80%eb%82%a9%eb%b2%95)
+    - [Mathematical Induction (수학적귀납법)](#mathematical-induction-수학적귀납법)
     - [Loop Invariant](#loop-invariant)
     - [Test with corner case](#test-with-corner-case)
   - [Implemenation](#implemenation)
@@ -170,10 +170,10 @@ Just like -1, 0, 1 in `if (n <= 0) ...`
 
 ```java
 // from
-final int[] invalid;
+int[] invalid;
 
 // to
-final int[] valid = new int[] { 1, 2, 3 };
+int[] valid = new int[] { 1, 2, 3 };
 ```
 
 ### No floating point operation if possible
@@ -199,7 +199,7 @@ if ((a - b) * (a - b) == (r * r)) {
 
 ```java
 /* precondition : node != null */
-void dfs(final TreeNode curr) {
+void dfs(TreeNode curr) {
   // check parameter
   if (null == curr) {
     return;

@@ -46,16 +46,16 @@
  *
  */
 class SingleNumber {
-  public int singleNumber(final int[] nums) {
+  public int singleNumber(int[] nums) {
     int ret = 0;
-    for (final int num : nums) {
+    for (int num : nums) {
       ret = ret ^ num;
     }
     return ret;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 2, 2, 1 },
         1,
@@ -65,11 +65,11 @@ class SingleNumber {
         4,
       },
     };
-    final SingleNumber solution = new SingleNumber();
-    for (final Object[] parameter : parameters) {
-      final int[] input = (int[]) parameter[0];
-      final int expected = (int) parameter[1];
-      final int actual = solution.singleNumber(input);
+    SingleNumber solution = new SingleNumber();
+    for (Object[] parameter : parameters) {
+      int[] input = (int[]) parameter[0];
+      int expected = (int) parameter[1];
+      int actual = solution.singleNumber(input);
       if (expected != actual) {
         throw new IllegalStateException("Expected: " + expected +
             ", but was: " + actual);

@@ -49,3 +49,14 @@ vector<int> twoSum(vector<int>& numbers, int target) {
   return vector<int>();
 }
 ```
+
+## Tips
+
+Always check IndexOutOfBoundException before getting it.
+
+```java
+while (index < s.length() && s.charAt(index) == ' ') {
+  ++index;
+}
+```
+

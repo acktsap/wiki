@@ -36,7 +36,7 @@ import java.util.Arrays;
  *
  */
 class SwapNodesInPairs {
-  public ListNode swapPairs(final ListNode head) {
+  public ListNode swapPairs(ListNode head) {
     if (null == head) {
       return null;
     }
@@ -44,26 +44,26 @@ class SwapNodesInPairs {
       return head;
     }
 
-    final ListNode hold = head.next.next;
-    final ListNode next = head.next;
+    ListNode hold = head.next.next;
+    ListNode next = head.next;
     next.next = head;
     head.next = swapPairs(hold);
     return next;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 1, 2, 3, 4 },
         new int[] { 2, 1, 4, 3 },
       },
     };
 
-    final SwapNodesInPairs solution = new SwapNodesInPairs();
-    for (final Object[] parameter : parameters) {
-      final int[] input = (int[]) parameter[0];
-      final int[] expected = (int[]) parameter[1];
-      final int[] actual = solution.swapPairs(ListNode.of(input)).toArray();
+    SwapNodesInPairs solution = new SwapNodesInPairs();
+    for (Object[] parameter : parameters) {
+      int[] input = (int[]) parameter[0];
+      int[] expected = (int[]) parameter[1];
+      int[] actual = solution.swapPairs(ListNode.of(input)).toArray();
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual));

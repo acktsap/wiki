@@ -11,10 +11,10 @@ public class Sortings {
   // O(n) on best (loop only for statement)
   // O(n^2) on worst (1 + 2 + 3 + 4 + ... + n - 1 ~ O(N^2))
   static class InsertionSort implements Sort {
-    public void sort(final int[] arr) {
+    public void sort(int[] arr) {
       // 1. for all 1 ... arr.length - 1
       for (int i = 1; i < arr.length; ++i) {
-        final int keep = arr[i];
+        int keep = arr[i];
         int vacant = i;
         // 2. shift vacant
         // vacant - 1 : pre
@@ -30,7 +30,7 @@ public class Sortings {
 
   // O(n^2) on both best, worst
   static class SelectionSort implements Sort {
-    public void sort(final int[] arr) {
+    public void sort(int[] arr) {
       // 1. for all 0 ... arr.length - 1
       for (int i = 0; i < arr.length; ++i) {
         // 2. find min
@@ -52,7 +52,7 @@ public class Sortings {
 
   // O(n^2) on both best, worst
   static class BubbleSort implements Sort {
-    public void sort(final int[] arr) {
+    public void sort(int[] arr) {
       for (int i = arr.length - 1; i > 0; --i) {
         for (int j = 0; j < i; ++j) {
           if (arr[j] > arr[j + 1]) {
@@ -68,7 +68,7 @@ public class Sortings {
   // O(nlog(n)) on best
   // O(n^2) on worst
   static class ShellSort implements Sort {
-    public void sort(final int[] arr) {
+    public void sort(int[] arr) {
       for (int gap = arr.length / 2; gap > 0; gap /= 2) {
         // odd gap is better
         if (gap % 2 == 0) {
@@ -99,14 +99,14 @@ public class Sortings {
   static class MergeSort implements Sort {
     protected int[] tmp;
 
-    public void sort(final int[] arr) {
+    public void sort(int[] arr) {
       this.tmp = new int[arr.length];
       sort(arr, 0, arr.length - 1);
     }
 
-    protected void sort(final int[] arr, final int start, final int end) {
+    protected void sort(int[] arr, int start, int end) {
       if (start < end) {
-        final int mid = (start + end) / 2;
+        int mid = (start + end) / 2;
         // divive
         sort(arr, start, mid);
         sort(arr, mid + 1, end);
@@ -115,7 +115,7 @@ public class Sortings {
       }
     }
 
-    protected void merge(final int[] arr, final int start, final int mid, final int end) {
+    protected void merge(int[] arr, int start, int mid, int end) {
       int curr = start;
       int left = start;
       int right = mid + 1;
@@ -168,8 +168,8 @@ public class Sortings {
 
     protected void heapify(int[] arr, int size, int target) {
       int largest = target;
-      final int left = 2 * largest + 1;
-      final int right = 2 * largest + 2;
+      int left = 2 * largest + 1;
+      int right = 2 * largest + 2;
 
       if (left < size && arr[left] > arr[largest]) {
         largest = left;
@@ -179,7 +179,7 @@ public class Sortings {
       }
 
       if (largest != target) {
-        final int tmp = arr[target];
+        int tmp = arr[target];
         arr[target] = arr[largest];
         arr[largest] = tmp;
         heapify(arr, size, largest);
@@ -188,19 +188,19 @@ public class Sortings {
   }
 
   static class QuickSort implements Sort {
-    public void sort(final int[] arr) {
+    public void sort(int[] arr) {
       sort(arr, 0, arr.length - 1);
     }
 
-    protected void sort(final int[] arr, final int start, final int end) {
+    protected void sort(int[] arr, int start, int end) {
       if (start < end) {
-        final int pivot = partition(arr, start, end);
+        int pivot = partition(arr, start, end);
         sort(arr, start, pivot - 1);
         sort(arr, pivot + 1, end);
       }
     }
 
-    public static int partition(final int[] arr, final int start, final int end) {
+    public static int partition(int[] arr, int start, int end) {
       int pivot = arr[start];
       int i = start;
       int j = end;
@@ -240,7 +240,7 @@ public class Sortings {
   /* main */
 
   public static void main(String[] args) {
-    final Sort[] sorts = {
+    Sort[] sorts = {
       new InsertionSort(),
       new SelectionSort(),
       new BubbleSort(),
@@ -251,7 +251,7 @@ public class Sortings {
     };
 
     Arrays.asList(sorts).stream().forEach(s -> {
-      final Object[][] parameters = {
+      Object[][] parameters = {
         { new int[] { 2, 322, 0, 44, 100, 9, 10, 50 },
           new int[] { 0, 2, 9, 10, 44, 50, 100, 322 } },
         { new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 },
@@ -262,9 +262,9 @@ public class Sortings {
           new int[] { 1, 3, 4, 5, 5, 5, 6, 7, 9 } }
       };
 
-      for (final Object[] parameter : parameters) {
-        final int[] input = (int[]) parameter[0];
-        final int[] expected = (int[]) parameter[1];
+      for (Object[] parameter : parameters) {
+        int[] input = (int[]) parameter[0];
+        int[] expected = (int[]) parameter[1];
         s.sort(input);
         if (!Arrays.equals(expected, input)) {
           throw new IllegalStateException("expected: " + Arrays.toString(expected) +

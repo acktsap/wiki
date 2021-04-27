@@ -27,12 +27,12 @@
  *
  */
 class IslandPerimeter {
-  protected static final int nDirection = 4;
-  protected static final int[] di = { 1, -1, 0, 0 };
-  protected static final int[] dj = { 0, 0, 1, -1 };
+  protected static int nDirection = 4;
+  protected static int[] di = { 1, -1, 0, 0 };
+  protected static int[] dj = { 0, 0, 1, -1 };
 
-  public int islandPerimeter(final int[][] grid) {
-    final boolean[][] visited = new boolean[grid.length][grid[0].length];
+  public int islandPerimeter(int[][] grid) {
+    boolean[][] visited = new boolean[grid.length][grid[0].length];
     int ret = 0;
     for (int i = 0; i < grid.length; ++i) {
       for (int j = 0; j < grid[i].length; ++j) {
@@ -45,12 +45,12 @@ class IslandPerimeter {
     return ret;
   }
 
-  protected int dfs(final int[][] grid, final boolean[][] visited, final int i, final int j) {
+  protected int dfs(int[][] grid, boolean[][] visited, int i, int j) {
     visited[i][j] = true;
     int count = 4;
     for (int n = 0; n < nDirection; ++n) {
-      final int nextI = i + di[n];
-      final int nextJ = j + dj[n];
+      int nextI = i + di[n];
+      int nextJ = j + dj[n];
       if (0 <= nextI && nextI < grid.length &&
             0 <= nextJ && nextJ < grid[i].length) {
         if (1 == grid[nextI][nextJ]) {
@@ -62,8 +62,8 @@ class IslandPerimeter {
     return count;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[][] {
                        { 0, 1, 0, 0 },
@@ -74,11 +74,11 @@ class IslandPerimeter {
         , 16
       },
     };
-    final IslandPerimeter solution = new IslandPerimeter();
-    for (final Object[] parameter : parameters) {
-      final int[][] grid = (int[][]) parameter[0];
-      final int expected = (int) parameter[1];
-      final int actual = solution.islandPerimeter(grid);
+    IslandPerimeter solution = new IslandPerimeter();
+    for (Object[] parameter : parameters) {
+      int[][] grid = (int[][]) parameter[0];
+      int expected = (int) parameter[1];
+      int actual = solution.islandPerimeter(grid);
       if (expected != actual) {
         throw new IllegalStateException("Expected: " + expected + ", but actual: " + actual);
       }

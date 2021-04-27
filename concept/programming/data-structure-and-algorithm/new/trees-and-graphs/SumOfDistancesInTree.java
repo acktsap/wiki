@@ -28,9 +28,9 @@ import java.util.Arrays;
  */
 class SumOfDistancesInTree {
   public int[] sumOfDistancesInTree(int N, int[][] edges) {
-    final int[] ret = new int[N];
-    final int[][] cache = new int[N][N];
-    final int[][] adjacents = buildAdjacentMatrix(N, edges);
+    int[] ret = new int[N];
+    int[][] cache = new int[N][N];
+    int[][] adjacents = buildAdjacentMatrix(N, edges);
     for (int i = 0; i < N; ++i) {
       for (int j = 0; j < N; ++j) {
         if (i != j) {
@@ -48,11 +48,11 @@ class SumOfDistancesInTree {
     return ret;
   }
 
-  protected int[][] buildAdjacentMatrix(final int size, final int[][] edges) {
-    final int[][] adjacents = new int[size][size];
-    for (final int[] edge : edges) {
-      final int i = edge[0];
-      final int j = edge[1];
+  protected int[][] buildAdjacentMatrix(int size, int[][] edges) {
+    int[][] adjacents = new int[size][size];
+    for (int[] edge : edges) {
+      int i = edge[0];
+      int j = edge[1];
       adjacents[i][j] = 1;
       adjacents[j][i] = 1;  // undirected
     }
@@ -60,7 +60,7 @@ class SumOfDistancesInTree {
   }
 
   // dfs
-  protected int distance(final int[][] adjacents, final int[][] cache, final int i, final int j) {
+  protected int distance(int[][] adjacents, int[][] cache, int i, int j) {
     if (0 != cache[i][j]) {
       return cache[i][j];
     }
@@ -83,20 +83,20 @@ class SumOfDistancesInTree {
     return cache[i][j];
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         6,
         new int[][] { { 0, 1 }, { 0, 2 }, { 2, 3 }, { 2, 4 }, { 2, 5 } },
         new int[] { 8, 12, 6, 10, 10, 10 },
       },
     };
-    final SumOfDistancesInTree solution = new SumOfDistancesInTree();
-    for (final Object[] parameter : parameters) {
-      final int n = (int) parameter[0];
-      final int[][] edges = (int[][]) parameter[1];
-      final int[] expected = (int[]) parameter[2];
-      final int[] actual = solution.sumOfDistancesInTree(n, edges);
+    SumOfDistancesInTree solution = new SumOfDistancesInTree();
+    for (Object[] parameter : parameters) {
+      int n = (int) parameter[0];
+      int[][] edges = (int[][]) parameter[1];
+      int[] expected = (int[]) parameter[2];
+      int[] actual = solution.sumOfDistancesInTree(n, edges);
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but actual: " + Arrays.toString(actual));

@@ -186,7 +186,7 @@ int shortestPath(vector<int>& path, vector<bool>& visited, int currentLength) {
 
       int cand = shortestPath(path, visited, currentLength + distances[here][next]);
 
-      // calc final solution with a subproblem
+      // calc last solution with a subproblem
       ret = min(ret, cand);
       path.pop_back();
       visited[next] = false;

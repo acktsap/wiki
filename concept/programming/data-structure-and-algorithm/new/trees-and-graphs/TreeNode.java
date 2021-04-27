@@ -1,7 +1,7 @@
 import java.util.List;
 
 class TreeNode {
-  static TreeNode of(final Integer[] tree) {
+  static TreeNode of(Integer[] tree) {
     if (0 == tree.length) {
       return null;
     }
@@ -12,5 +12,5 @@ class TreeNode {
   TreeNode left;
   TreeNode right;
 
-  TreeNode(final int x) { this.val = x; }
+  TreeNode(int x) { this.val = x; }
 }

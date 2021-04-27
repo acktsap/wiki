@@ -55,13 +55,13 @@ import java.util.Arrays;
  *
  */
 class ClimbingStairs {
-  public int climbStairs(final int n) {
-    final int[] cache = new int[n + 1];
+  public int climbStairs(int n) {
+    int[] cache = new int[n + 1];
     Arrays.fill(cache, -1);
     return calculate(n, cache);
   }
 
-  protected int calculate(final int n, final int[] cache) {
+  protected int calculate(int n, int[] cache) {
     if (n == 1) {
       return 1;
     }
@@ -77,18 +77,18 @@ class ClimbingStairs {
     return cache[n];
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       { 2, 2 },
       { 3, 3 },
       { 5, 8 },
       { 40, 165580141 },
     };
-    final ClimbingStairs solution = new ClimbingStairs();
-    for (final Object[] parameter : parameters) {
-      final int input = (int) parameter[0];
-      final int expected = (int) parameter[1];
-      final int actual = solution.climbStairs(input);
+    ClimbingStairs solution = new ClimbingStairs();
+    for (Object[] parameter : parameters) {
+      int input = (int) parameter[0];
+      int expected = (int) parameter[1];
+      int actual = solution.climbStairs(input);
       if (expected != actual) {
         throw new IllegalStateException("Expected: " + expected +
             ", but was: " + actual);

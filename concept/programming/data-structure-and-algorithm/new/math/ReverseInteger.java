@@ -47,7 +47,7 @@
  *
  */
 class ReverseInteger {
-  public int reverse(final int x) {
+  public int reverse(int x) {
     int ret = 0;
     int curr = x;
     while (curr != 0) {
@@ -60,8 +60,8 @@ class ReverseInteger {
     return ret;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       { 0, 0 },
       { 123, 321 },
       { -123, -321 },
@@ -69,11 +69,11 @@ class ReverseInteger {
       { 1234556678, 0 },
       { 1534236469, 0 },
     };
-    final ReverseInteger solution = new ReverseInteger();
-    for (final Object[] parameter : parameters) {
-      final int input = (int) parameter[0];
-      final int expected = (int) parameter[1];
-      final int actual = solution.reverse(input);
+    ReverseInteger solution = new ReverseInteger();
+    for (Object[] parameter : parameters) {
+      int input = (int) parameter[0];
+      int expected = (int) parameter[1];
+      int actual = solution.reverse(input);
       if (expected != actual) {
         throw new IllegalStateException("Expected: " + expected + ", but actual: " + actual);
       }

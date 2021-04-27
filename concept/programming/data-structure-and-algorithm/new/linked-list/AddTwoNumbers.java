@@ -39,14 +39,14 @@ import java.util.List;
  */
 class AddTwoNumbers {
 
-  public ListNode addTwoNumbers(final ListNode l1, final ListNode l2) {
-    final ListNode dummy = new ListNode(0);
+  public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(0);
     ListNode pre = dummy;
     ListNode left = l1;
     ListNode right = l2;
     int overflow = 0;
     while (null != left && null != right) {
-      final int val = left.val + right.val + overflow;
+      int val = left.val + right.val + overflow;
       pre.next = new ListNode(val % 10);
       overflow = val / 10;
       pre = pre.next;
@@ -54,14 +54,14 @@ class AddTwoNumbers {
       right = right.next;
     }
     while (null != left) {
-      final int val = left.val + overflow;
+      int val = left.val + overflow;
       pre.next = new ListNode(val % 10);
       overflow = val / 10;
       pre = pre.next;
       left = left.next;
     }
     while (null != right) {
-      final int val = right.val + overflow;
+      int val = right.val + overflow;
       pre.next = new ListNode(val % 10);
       overflow = val / 10;
       pre = pre.next;
@@ -74,8 +74,8 @@ class AddTwoNumbers {
     return dummy.next;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 2, 4, 3 },
         new int[] { 5, 6, 4 },
@@ -92,12 +92,12 @@ class AddTwoNumbers {
         new int[] { 5, 6, 4 },
       },
     };
-    final AddTwoNumbers solution = new AddTwoNumbers();
-    for (final Object[] parameter : parameters) {
-      final int[] l1 = (int[]) parameter[0];
-      final int[] l2 = (int[]) parameter[1];
-      final int[] expected = (int[]) parameter[2];
-      final int[] actual = solution.addTwoNumbers(ListNode.of(l1), ListNode.of(l2)).toArray();
+    AddTwoNumbers solution = new AddTwoNumbers();
+    for (Object[] parameter : parameters) {
+      int[] l1 = (int[]) parameter[0];
+      int[] l2 = (int[]) parameter[1];
+      int[] expected = (int[]) parameter[2];
+      int[] actual = solution.addTwoNumbers(ListNode.of(l1), ListNode.of(l2)).toArray();
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", actual: " + Arrays.toString(actual));

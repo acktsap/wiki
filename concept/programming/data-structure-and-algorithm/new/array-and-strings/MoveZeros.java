@@ -45,7 +45,7 @@ import java.util.Arrays;
  *
  */
 class MoveZeros {
-  public void moveZeroes(final int[] nums) {
+  public void moveZeroes(int[] nums) {
     int i = 0; // to write
     int j = 1; // to read
     while (j < nums.length) {
@@ -65,8 +65,8 @@ class MoveZeros {
     }
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[] { 0, 1, 0, 3, 12 },
         new int[] { 1, 3, 12, 0, 0 },
@@ -80,10 +80,10 @@ class MoveZeros {
         new int[] { 1 },
       },
     };
-    final MoveZeros solution = new MoveZeros();
-    for (final Object[] parameter : parameters) {
-      final int[] input = (int[]) parameter[0];
-      final int[] expected = (int[]) parameter[1];
+    MoveZeros solution = new MoveZeros();
+    for (Object[] parameter : parameters) {
+      int[] input = (int[]) parameter[0];
+      int[] expected = (int[]) parameter[1];
       solution.moveZeroes(input);
       if (!Arrays.equals(expected, input)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +

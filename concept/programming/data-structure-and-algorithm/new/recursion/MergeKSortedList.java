@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  *
  * Collectors : java.util.stream안에 있다
  *
- * final ListNode dummy = new ListNode(0);
+ * ListNode dummy = new ListNode(0);
  * ListNode curr = dummy;
  * ..
  * return dummy.next;
@@ -39,11 +39,11 @@ import java.util.stream.Collectors;
  *
  */
 class MergeKSortedList {
-  public ListNode mergeKLists(final ListNode[] lists) {
+  public ListNode mergeKLists(ListNode[] lists) {
     return mergeInRange(lists, 0, lists.length);
   }
 
-  protected ListNode mergeInRange(final ListNode[] lists, final int start, final int end) {
+  protected ListNode mergeInRange(ListNode[] lists, int start, int end) {
     if ((end - start) == 0) {
       return null;
     }
@@ -54,12 +54,12 @@ class MergeKSortedList {
       return merge(lists[start], lists[start + 1]);
     }
 
-    final int mid = (start + end) / 2;
+    int mid = (start + end) / 2;
     return merge(mergeInRange(lists, start, mid), mergeInRange(lists, mid, end));
   }
 
-  protected ListNode merge(final ListNode l1, final ListNode l2) {
-    final ListNode dummy = new ListNode(0);
+  protected ListNode merge(ListNode l1, ListNode l2) {
+    ListNode dummy = new ListNode(0);
     ListNode pre = dummy;
     ListNode left = l1;
     ListNode right = l2;
@@ -87,8 +87,8 @@ class MergeKSortedList {
     return dummy.next;
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       {
         new int[][]
         {
@@ -111,15 +111,15 @@ class MergeKSortedList {
       },
     };
 
-    final MergeKSortedList solution = new MergeKSortedList();
-    for (final Object[] parameter : parameters) {
-      final int[][] lists = (int[][]) parameter[0];
-      final int[] expected = (int[]) parameter[1];
-      final ListNode[] input = Arrays.asList(lists).stream()
+    MergeKSortedList solution = new MergeKSortedList();
+    for (Object[] parameter : parameters) {
+      int[][] lists = (int[][]) parameter[0];
+      int[] expected = (int[]) parameter[1];
+      ListNode[] input = Arrays.asList(lists).stream()
             .map(ListNode::of)
             .collect(Collectors.toList())
             .toArray(new ListNode[] { });
-      final int[] actual = solution.mergeKLists(input).toArray();
+      int[] actual = solution.mergeKLists(input).toArray();
       if (!Arrays.equals(expected, actual)) {
         throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
             ", but was: " + Arrays.toString(actual));

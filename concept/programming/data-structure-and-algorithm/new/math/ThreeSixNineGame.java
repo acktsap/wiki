@@ -25,11 +25,11 @@ import java.lang.StringBuilder;
  *
  */
 class ThreeSixNineGame {
-  public String game(final int n) {
-    final StringBuilder sb = new StringBuilder();
+  public String game(int n) {
+    StringBuilder sb = new StringBuilder();
     int left = n;
     while (0 != left) {
-      final int curr = left % 10;
+      int curr = left % 10;
       if (0 != curr && curr % 3 == 0) {
         sb.append('-');
       }
@@ -38,8 +38,8 @@ class ThreeSixNineGame {
     return sb.length() == 0 ? Integer.toString(n) : sb.toString();
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       { 0, "0" },
       { 1, "1" },
       { 13, "-" },
@@ -53,11 +53,11 @@ class ThreeSixNineGame {
       { 13_006_905, "---" },
       { 2_147_483_647, "--" },
     };
-    final ThreeSixNineGame solution = new ThreeSixNineGame();
-    for (final Object[] parameter : parameters) {
-      final int input = (int) parameter[0];
-      final String expected = (String) parameter[1];
-      final String actual = solution.game(input);
+    ThreeSixNineGame solution = new ThreeSixNineGame();
+    for (Object[] parameter : parameters) {
+      int input = (int) parameter[0];
+      String expected = (String) parameter[1];
+      String actual = solution.game(input);
       if (!expected.equals(actual)) {
         throw new IllegalStateException(String.format("Expected: %d, but actual: %d (input: %d)", expected, actual, input));
       }

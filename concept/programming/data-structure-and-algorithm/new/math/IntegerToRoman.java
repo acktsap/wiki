@@ -131,8 +131,8 @@ class IntegerToRoman {
     return sb.toString();
   }
 
-  public static void main(final String[] args) {
-    final Object[][] parameters = new Object[][] {
+  public static void main(String[] args) {
+    Object[][] parameters = new Object[][] {
       { 3, "III" },
         { 4, "IV" },
         { 9, "IX" },
@@ -141,10 +141,10 @@ class IntegerToRoman {
         { 1994, "MCMXCIV" }
     };
 
-    final IntegerToRoman solution = new IntegerToRoman();
-    for (final Object[] parameter : parameters) {
-      final int value = (int) parameter[0];
-      final String expected = (String) parameter[1];
+    IntegerToRoman solution = new IntegerToRoman();
+    for (Object[] parameter : parameters) {
+      int value = (int) parameter[0];
+      String expected = (String) parameter[1];
 
       String actualByRecursion = solution.intToRomanRecursion(value);
       if (!actualByRecursion.equals(expected)) {
