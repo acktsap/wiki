@@ -1,5 +1,7 @@
 # Browser Extention
 
+WIP
+
 ## Prerequisite
 
 ### Nvm
@@ -18,10 +20,15 @@
 
 - Install dependencies
   - `yarn install`
-- Run on default browser
-  - `yarn run start` (`yarn run start -- --help` for help)
+- Run
+  - Firefox
+    - `yarn run start:firefox` or `yarn run start`
+  - Chrome
+    - `yarn run start:chrome`
+- Build
+  - `yarn run build`
 - Bundle
-  - `yarn run build` (`yarn run build -- --help` for help)
+  - `yarn run package`
 - Install to browser
   - [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
     - about:debugging -> This Firefox -> Load Temporary Add-on -> select 'src'
@@ -30,7 +37,5 @@
 
 ## References
 
-- [MDN your second extension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_second_WebExtension)
-- [dev tools](https://extensionworkshop.com/documentation/develop/browser-extension-development-tools/)
-  - [Boilerplate code generation](https://webextensions.in/)
-  - [Web ext: a cli tool for web extension](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/)
+- [web-ext-webpack-plugin](https://github.com/hiikezoe/web-ext-webpack-plugin/blob/master/README.md)
+- [https://github.com/birtles/rikaichamp](https://github.com/birtles/rikaichamp)
