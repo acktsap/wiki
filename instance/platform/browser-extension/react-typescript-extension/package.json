@@ -1,9 +1,8 @@
 {
-  "name": "react-extension-test",
+  "name": "react-typescript-extension-test",
   "version": "0.0.1",
-  "description": "react-extension-test",
+  "description": "react-typescript-extension-test",
   "scripts": {
-    "startbackup": "web-ext run -s ./src --browser-console --start-url https://duckduckgo.com",
     "start": "yarn run start:firefox",
     "start:firefox": "webpack -w --env target=firefox",
     "start:chrome": "webpack -w --env target=chrome",
@@ -24,6 +23,9 @@
   },
   "homepage": "https://github.com/acktsap/xxx#readme",
   "devDependencies": {
+    "copy-webpack-plugin": "^8.1.1",
+    "ts-loader": "^9.1.1",
+    "typescript": "^4.2.4",
     "web-ext": "^6.1.0",
     "web-ext-plugin": "^1.1.0",
     "webpack": "^5.36.0",

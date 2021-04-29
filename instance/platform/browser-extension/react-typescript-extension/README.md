@@ -1,6 +1,11 @@
 # Browser Extention
 
-WIP
+todo
+
+- react
+- lint
+- minimize
+- es5 support
 
 ## Prerequisite
 
@@ -37,5 +42,8 @@ WIP
 
 ## References
 
+- [webpack-core-concept](https://webpack.js.org/concepts/)
+- [webpack-typescript-loader](https://webpack.js.org/guides/typescript/)
 - [web-ext-webpack-plugin](https://github.com/hiikezoe/web-ext-webpack-plugin/blob/master/README.md)
+- [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin)
 - [https://github.com/birtles/rikaichamp](https://github.com/birtles/rikaichamp)
