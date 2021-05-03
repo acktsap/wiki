@@ -78,9 +78,9 @@ class ZigZagConversion {
     }
 
     StringBuilder sb = new StringBuilder();
+    int gap = 2 * numRows - 2;
     for (int i = 0; i < numRows; ++i) {
       int j = i;
-      int gap = 2 * numRows - 2;
       while (j < s.length()) {
         sb.append(s.charAt(j));
         if (i != 0 && i != (numRows - 1) && (j + (gap - 2 * i)) < s.length()) {

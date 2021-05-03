@@ -1,5 +1,9 @@
 package acktsap.basic.jobconfig;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
@@ -10,6 +14,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +47,7 @@ import lombok.RequiredArgsConstructor;
 public class JobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
+    private final JobLauncher jobLauncher;
 
     @Bean
     public Job footballJob(Step playerLoad) {
@@ -52,10 +58,21 @@ public class JobConfig {
 
     @Bean
     public Job noRestartJob(Step playerLoad) {
-        return this.jobBuilderFactory.get("noRestartJob")
+        Job noRestartJob = this.jobBuilderFactory.get("noRestartJob")
             .preventRestart()
             .start(playerLoad)
             .build();
+
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+        executorService.schedule(() -> {
+            try {
+                jobLauncher.run(noRestartJob, new JobParameters());
+            } catch (Exception e) {
+                e.printStackTrace(System.out);
+                executorService.shutdownNow();
+            }
+        }, 3000L, TimeUnit.MILLISECONDS);
+        return noRestartJob;
     }
 
     @Bean

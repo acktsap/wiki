@@ -2,7 +2,6 @@
 
 todo
 
-- react
 - lint
 - minimize
 - es5 support
@@ -42,8 +41,17 @@ todo
 
 ## References
 
-- [webpack-core-concept](https://webpack.js.org/concepts/)
-- [webpack-typescript-loader](https://webpack.js.org/guides/typescript/)
-- [web-ext-webpack-plugin](https://github.com/hiikezoe/web-ext-webpack-plugin/blob/master/README.md)
-- [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin)
-- [https://github.com/birtles/rikaichamp](https://github.com/birtles/rikaichamp)
+- webpack
+  - [webpack-core-concept](https://webpack.js.org/concepts/)
+  - [webpack-typescript-loader](https://webpack.js.org/guides/typescript/)
+  - css
+    - [webpack-css-loader](https://webpack.js.org/loaders/css-loader/)
+    - [webpack-style-loader](https://webpack.js.org/loaders/style-loader/)
+    - [webpack-sass-loader](https://webpack.js.org/loaders/sass-loader/)
+  - web extension
+    - [web-ext-webpack-plugin](https://github.com/hiikezoe/web-ext-webpack-plugin/blob/master/README.md)
+  - html
+    - [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin)
+- github
+  - [https://github.com/birtles/rikaichamp](https://github.com/birtles/rikaichamp)
+  - [https://github.com/kryptokinght/react-extension-boilerplate](https://github.com/kryptokinght/react-extension-boilerplate)

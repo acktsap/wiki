@@ -130,7 +130,8 @@ operator    [number]    motion
 - insert from the above line : `O`
 - substitute the current character : `s`
 - substitute the current line : `S`
-- to normal mode : `<ESC>` or `Ctrl + [`
+- to normal mode : `<ESC>` or `Ctrl + [` or `Ctrl + c`
+- to normal mode and back to insert mode just after one move : `Ctrl + o`
 
 
 ## File management

@@ -12,13 +12,28 @@ const commonConfig = {
     content: path.resolve(__dirname, './src/content_scripts'),
     background: path.resolve(__dirname, './src/background_scripts'),
     popup: path.resolve(__dirname, './src/popup'),
+    option: path.resolve(__dirname, './src/option'),
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader', // typescript webpack loader
+        loader: 'ts-loader', // interprets typescript
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css|scss?$/,
+        use: [
+          'css-loader', // reads css files as a string
+          {
+            loader: 'style-loader', // creates <style> tag
+            options: {
+              // use single <style> ... </style> tag
+              injectType: 'singletonStyleTag',
+            }, 
+          },
+          'sass-loader', // interprets sass
+        ]
       },
     ],
   },

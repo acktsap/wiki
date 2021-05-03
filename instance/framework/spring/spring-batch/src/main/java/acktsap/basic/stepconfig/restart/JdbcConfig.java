@@ -1,4 +1,4 @@
-package acktsap.basic.scaling.parallelstep;
+package acktsap.basic.stepconfig.restart;
 
 import javax.sql.DataSource;
 

@@ -13,7 +13,7 @@ It's not a scheduler. It is intended to work in conjunction with a scheduler.
 
 ## Architecture
 
-![spring-batch-layers](./img/spring-batch-layers.png)
+![spring-batch-layers](img/spring-batch-layers.png)
 
 Layered Architecture
 
@@ -27,14 +27,14 @@ Layered Architecture
 
 ## Core Concept
 
-![spring-batch-reference-model](./img/spring-batch-reference-model.png)
+![spring-batch-reference-model](img/spring-batch-reference-model.png)
 
 A Job has one to many steps, each of which has exactly one ItemReader, one ItemProcessor, and one ItemWriter.\
 A job needs to be launched (with JobLauncher), and metadata needs to be stored in JobRepository.
 
 ### Job
 
-![job-heirarchy](./img/job-heirarchy.png)
+![job-heirarchy](img/spring-batch-job-heirarchy.png)
 
 - Job : Job configuration including name, step ordering, restartable, etc..
 - JobInstance : The concept of a logical job run.
@@ -48,7 +48,7 @@ A job needs to be launched (with JobLauncher), and metadata needs to be stored i
 
 ### Step
 
-![job-heirarchy-with-steps](./img/job-heirarchy-with-steps.png)
+![job-heirarchy-with-steps](img/spring-batch-job-heirarchy-with-steps.png)
 
 - Step : A domain object that encapsulates an independent, sequential phase of a batch job.
 - StepExecution : A single attempt to execute a Step.
@@ -88,7 +88,7 @@ ExecutionContext ecJob=jobExecution.getExecutionContext();
 
 ### Chunk-oriented Processing
 
-![chunk-oriented-processing-with-item-processor](./img/chunk-oriented-processing-with-item-processor.png)
+![chunk-oriented-processing-with-item-processor](img/spring-batch-chunk-oriented-processing-with-item-processor.png)
 
 - Reading the data one at a time and creating 'chunks' that are written out within a transaction boundary.
 
@@ -118,14 +118,14 @@ itemWriter.write(processedItems);
 
 ### Remote Chunking
 
-![remote-chunking](./img/remote-chunking.png)
+![remote-chunking](img/spring-batch-remote-chunking.png)
 
 - Step processing is split across multiple processes, communicating with each other through some middleware.
 - Works best if the manager is not a bottleneck, so the processing must be more expensive than the reading of item.
 
 ### Partitioning
 
-![partitioning-overview](./img/partitioning-overview.png)
+![partitioning-overview](img/spring-batch-partitioning-overview.png)
 
 ## References
 

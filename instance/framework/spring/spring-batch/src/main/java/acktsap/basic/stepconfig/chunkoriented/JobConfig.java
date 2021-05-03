@@ -42,9 +42,9 @@ public class JobConfig {
 
     @Bean
     public Step sampleStep(PlatformTransactionManager transactionManager) {
-        // tx 1 : 3 read, 3 process, 3 write
-        // tx 2 : 3 read, 3 process, 3 write
-        // tx 3 : 2 read, 2 process, 2 write
+        // transaction 1 : 3 read, 3 process, 3 write
+        // transaction 2 : 3 read, 3 process, 3 write
+        // transaction 3 : 2 read, 2 process, 2 write
         return this.stepBuilderFactory.get("sampleStep")
             .transactionManager(transactionManager) // default is "transactionManager" bean
             .<List<Integer>, List<String>>chunk(3) // chunk : # of items to be processed before tx is commited
@@ -86,7 +86,7 @@ public class JobConfig {
 
     private String getCallBackMethod() {
         TransactionSynchronization transactionSynchronization = TransactionSynchronizationManager.getSynchronizations().get(0);
-        return String.format("%s@%s", transactionSynchronization.getClass().getSimpleName(), transactionSynchronization.hashCode());
+        return String.format("%s@%08x", transactionSynchronization.getClass().getSimpleName(), transactionSynchronization.hashCode());
     }
 
 }
