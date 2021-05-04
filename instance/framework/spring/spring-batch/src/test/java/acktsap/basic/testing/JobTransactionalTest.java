@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(properties = {
     "spring.batch.job.names=footballJob"
 }, classes = TestBatchConfig.class)
-class TransactionalTest {
+class JobTransactionalTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 

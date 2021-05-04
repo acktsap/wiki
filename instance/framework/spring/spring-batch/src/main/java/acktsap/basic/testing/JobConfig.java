@@ -12,7 +12,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -29,17 +28,17 @@ public class JobConfig {
 
     @Bean
     @ConditionalOnProperty(name = "spring.batch.job.names", havingValue = "footballJob")
-    public Job footballJob(@Qualifier("playerLoadStep") Step playerLoadStep) {
+    public Job footballJob() {
         return this.jobBuilderFactory.get("footballJob")
-            .start(playerLoadStep)
+            .start(playerLoadStep())
             .build();
     }
 
     @Bean
     @ConditionalOnProperty(name = "spring.batch.job.names", havingValue = "writeJob")
-    public Job writeJob(@Qualifier("writeStep") Step writeStep) {
+    public Job writeJob() {
         return this.jobBuilderFactory.get("writeJob")
-            .start(writeStep)
+            .start(writeStep())
             .build();
     }
 
