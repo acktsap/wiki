@@ -43,7 +43,7 @@ todo
 
 - webpack
   - [webpack-core-concept](https://webpack.js.org/concepts/)
-  - [webpack-typescript-loader](https://webpack.js.org/guides/typescript/)
+  - [webpack-typescript-loader](https://webpack.js.org/guides/typescript/) // not used
   - css
     - [webpack-css-loader](https://webpack.js.org/loaders/css-loader/)
     - [webpack-style-loader](https://webpack.js.org/loaders/style-loader/)
@@ -52,6 +52,12 @@ todo
     - [web-ext-webpack-plugin](https://github.com/hiikezoe/web-ext-webpack-plugin/blob/master/README.md)
   - html
     - [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin)
+  - eslint
+    - [eslint-webpack-plugin](https://webpack.js.org/plugins/eslint-webpack-plugin/)
+- [eslint](https://eslint.org/docs/user-guide/getting-started)
+- [babel](https://babeljs.io/docs/en/)
 - github
   - [https://github.com/birtles/rikaichamp](https://github.com/birtles/rikaichamp)
   - [https://github.com/kryptokinght/react-extension-boilerplate](https://github.com/kryptokinght/react-extension-boilerplate)
+- general setting
+  - [creating-react-app-with-typescript-eslint-with-webpack5](https://www.carlrippon.com/creating-react-app-with-typescript-eslint-with-webpack5/)

@@ -4,6 +4,9 @@ const path = require('path')
 // copy plugin to copy *.html, *.css, ...
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// eslint
+const ESLintPlugin = require('eslint-webpack-plugin');
+
 // integrate the web-ext run and lint commands into the webpack process
 const WebExtPlugin = require('web-ext-plugin')
 
@@ -17,22 +20,38 @@ const commonConfig = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'ts-loader', // interprets typescript
+        test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
+        use: {
+          // babel : convert ECMAScript 2015+ code into backword compatible one
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
       },
       {
-        test: /\.css|scss?$/,
+        test: /\.css|scss?$/i,
         use: [
-          'css-loader', // reads css files as a string
           {
-            loader: 'style-loader', // creates <style> tag
+            loader: 'style-loader', // creates 'style' nodes
             options: {
               // use single <style> ... </style> tag
               injectType: 'singletonStyleTag',
             }, 
           },
-          'sass-loader', // interprets sass
+          'css-loader', // translate css int CommonJS
+          {
+            loader: 'sass-loader', // interprets sass
+            options: {
+              implementation: require('sass'),
+            }, 
+          },
+          
         ]
       },
     ],
@@ -59,6 +78,9 @@ const firefoxConfig = {
         },
       ],
     }),
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
+    }),
     new WebExtPlugin({
       sourceDir: path.resolve(__dirname, 'build'), // web-ext --source-dir
       startUrl: "https://duckduckgo.com", // web-ext --start-url
@@ -80,6 +102,9 @@ const chromeConfig = {
           },
         },
       ],
+    }),
+    new ESLintPlugin({
+      extensions: ["js", "jsx", "ts", "tsx"],
     }),
     new WebExtPlugin({
       sourceDir: path.resolve(__dirname, 'build'),

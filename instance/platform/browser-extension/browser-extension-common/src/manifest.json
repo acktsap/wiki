@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "browser-extension-test",
-  "description": "test",
-  "version": "0.0.1",
+  "name": "browser-extension",
+  "description": "test description",
+  "version": "0.1.0",
   "icons": {
-    "32": "icons/beasts-32.png",
-    "48": "icons/beasts-48.png"
+    "32": "icons/beasts-30.png",
+    "64": "icons/beasts-60.png"
   },
   "background": {
     "scripts": [
@@ -26,7 +26,7 @@
     }
   ],
   "browser_action": {
-    "default_icon": "icons/beast-32.png",
+    "default_icon": "icons/beasts-30.png",
     "default_title": "browser-extension",
     "default_popup": "popup/index.html"
   },

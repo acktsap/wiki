@@ -1,9 +1,11 @@
 {
-  "name": "web-extension-test",
-  "version": "0.0.1",
-  "description": "web-extension-test",
+  "name": "browser-extension",
+  "version": "0.1.0",
+  "description": "browser-extension",
   "scripts": {
-    "start": "web-ext run -s ./src --browser-console --start-url https://duckduckgo.com",
+    "start": "yarn run start:firefox",
+    "start:firefox": "web-ext run -s ./src --browser-console --start-url https://duckduckgo.com --target firefox-desktop",
+    "start:chrome": "web-ext run -s ./src --browser-console --start-url https://duckduckgo.com --target chromium",
     "build": "web-ext build -s ./src --overwrite-dest -a dist"
   },
   "repository": {
