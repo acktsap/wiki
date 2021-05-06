@@ -1,26 +1,19 @@
 # Browser Extention
 
-todo
+## Build from source
 
-- lint
-- minimize
-- es5 support
+### Prerequisite
 
-## Prerequisite
+- Nvm
+  - [Download](https://github.com/nvm-sh/nvm#install--update-script)
+  - setup (use version described in `.nvmrc`)
+    - `nvm install` (if not installed)
+    - `nvm use`
+- Yarn
+  - Install
+    - npm install --global yarn
 
-### Nvm
-
-- [Download](https://github.com/nvm-sh/nvm#install--update-script)
-- setup (use version described in `.nvmrc`)
-  - `nvm install` (if not installed)
-  - `nvm use`
-
-### Yarn
-
-- Install
-  - npm install --global yarn
-
-## Build
+### Build
 
 - Install dependencies
   - `yarn install`
@@ -29,15 +22,17 @@ todo
     - `yarn run start:firefox` or `yarn run start`
   - Chrome
     - `yarn run start:chrome`
+- Lint
+  - `yarn run lint`
 - Build
   - `yarn run build`
 - Bundle
   - `yarn run package`
 - Install to browser
   - [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
-    - about:debugging -> This Firefox -> Load Temporary Add-on -> select 'src'
+    - about:debugging -> This Firefox -> Load Temporary Add-on -> select 'build'
   - Chrome
-    - chrome://extensions/ -> Developer mode -> Load unpacked -> select 'src'
+    - chrome://extensions/ -> Developer mode -> Load unpacked -> select 'build'
 
 ## References
 

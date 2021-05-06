@@ -1,20 +1,19 @@
 # Browser Extention
 
-## Prerequisite
+## Build from source
 
-### Nvm
+### Prerequisite
 
-- [Download](https://github.com/nvm-sh/nvm#install--update-script)
-- setup (use version described in `.nvmrc`)
-  - `nvm install` (if not installed)
-  - `nvm use`
+- Nvm
+  - [Download](https://github.com/nvm-sh/nvm#install--update-script)
+  - setup (use version described in `.nvmrc`)
+    - `nvm install` (if not installed)
+    - `nvm use`
+- Yarn
+  - Install
+    - npm install --global yarn
 
-### Yarn
-
-- Install
-  - npm install --global yarn
-
-## Build
+### Build
 
 - Install dependencies
   - `yarn install`

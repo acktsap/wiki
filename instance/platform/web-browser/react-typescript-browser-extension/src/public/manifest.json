@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "react-browser-extension",
+  "name": "react-typescript-browser-extension",
   "description": "test description",
   "version": "0.1.0",
   "icons": {
@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": [
-        "*://*.mozilla.org/*"
+        "<all_urls>"
       ],
       "js": [
         "content.js"

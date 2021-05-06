@@ -10,7 +10,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 // integrate the web-ext run and lint commands into the webpack process
 const WebExtPlugin = require('web-ext-plugin')
 
-const commonConfig = {
+const baseConfigs = {
   entry: {
     content: path.resolve(__dirname, './src/content_scripts'),
     background: path.resolve(__dirname, './src/background_scripts'),
@@ -51,7 +51,6 @@ const commonConfig = {
               implementation: require('sass'),
             }, 
           },
-          
         ]
       },
     ],
@@ -63,10 +62,6 @@ const commonConfig = {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
   },
-}
-
-const firefoxConfig = {
-  ...commonConfig,
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
@@ -80,49 +75,41 @@ const firefoxConfig = {
     }),
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
-    }),
-    new WebExtPlugin({
-      sourceDir: path.resolve(__dirname, 'build'), // web-ext --source-dir
-      startUrl: "https://duckduckgo.com", // web-ext --start-url
-      browserConsole: true, // web-ext --browser-console
-      target: "firefox-desktop" // web-ext --target
-    }),
+    })
   ],
 }
 
-const chromeConfig = {
-  ...commonConfig,
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: 'src/public',
-          globOptions: {
-            ignore: ['*.js', '*.ts', '*.tsx'],
-          },
-        },
-      ],
-    }),
-    new ESLintPlugin({
-      extensions: ["js", "jsx", "ts", "tsx"],
-    }),
-    new WebExtPlugin({
-      sourceDir: path.resolve(__dirname, 'build'),
-      startUrl: "https://duckduckgo.com",
-      browserConsole: true,
-      target: "chromium"
-    }),
-  ],
+const configFirefox = (configs) => {
+  const webExtPlugin = new WebExtPlugin({
+    sourceDir: path.resolve(__dirname, 'build'), // web-ext --source-dir
+    startUrl: "https://duckduckgo.com", // web-ext --start-url
+    browserConsole: true, // web-ext --browser-console
+    target: "firefox-desktop" // web-ext --target
+  });
+
+  configs.plugins.push(webExtPlugin);
+}
+
+const configChrome = (configs) => {
+  const webExtPlugin = new WebExtPlugin({
+    sourceDir: path.resolve(__dirname, 'build'),
+    startUrl: "https://duckduckgo.com",
+    browserConsole: true,
+    target: "chromium"
+  });
+
+  configs.plugins.push(webExtPlugin);
 }
 
 module.exports = (env, argv) => {
-  let configs = [];
+  const configs = baseConfigs;
+
   if (env.target === 'firefox') {
-    configs.push({ ...firefoxConfig });
+    configFirefox(configs)
   } else if (env.target === 'chrome') {
-    configs.push({ ...chromeConfig });
+    configChrome(configs);
   } else {
-    configs.push({ ...firefoxConfig }); // default : firefox
+    configFirefox(configs)
   }
 
   return configs;

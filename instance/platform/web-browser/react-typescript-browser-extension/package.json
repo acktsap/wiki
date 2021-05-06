@@ -1,13 +1,13 @@
 {
-  "name": "react-typescript-extension",
+  "name": "react-typescript-browser-extension",
   "version": "0.1.0",
-  "description": "react-typescript-extension",
+  "description": "react-typescript-browser-extension",
   "scripts": {
     "start": "yarn run start:firefox",
-    "start:firefox": "webpack -w --env target=firefox",
-    "start:chrome": "webpack -w --env target=chrome",
+    "start:firefox": "webpack -w --env target=firefox --mode=production",
+    "start:chrome": "webpack -w --env target=chrome --mode=production",
     "lint": "eslint ./src --fix",
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "package": "yarn run build && web-ext build -s build --overwrite-dest -a dist"
   },
   "repository": {
