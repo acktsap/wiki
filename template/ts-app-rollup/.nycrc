@@ -1,0 +1,28 @@
+{
+  "extension": [
+    ".ts",
+    ".tsx"
+  ],
+  "description": "Code coverage generation setting",
+  "check-coverage": true,
+  "per-file": true,
+  "lines": 90,
+  "statements": 90,
+  "functions": 90,
+  "branches": 80,
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/index.ts"
+  ],
+  "ignore-class-method": "methodToIgnore",
+  "reporter": [
+    "text",
+    "html"
+  ],
+  "cache": true,
+  "all": true,
+  "temp-dir": "./coverage/.nyc_output",
+  "report-dir": "./coverage"
+}

@@ -1,0 +1,226 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    classpath "me.champeau.gradle:jmh-gradle-plugin:${jmhVersion}"
+  }
+}
+
+// configure java plugin and repositories
+allprojects {
+  apply plugin: 'java-library'
+  apply plugin: 'idea'
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
+
+  /* java-library */
+
+  compileJava.options.encoding = "UTF-8"
+  compileTestJava.options.encoding = "UTF-8"
+
+  java {
+    sourceCompatibility = sourceJavaVersion
+    targetCompatibility = targetJavaVersion
+    withSourcesJar()
+    withJavadocJar()
+  }
+
+  javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+      options.addBooleanOption('html5', true)
+    }
+  }
+
+
+  /* idea */
+
+  idea {
+    module {
+      outputDir file('build/classes/java/main')
+      testOutputDir file('build/classes/java/test')
+    }
+  }
+
+}
+
+// exclude assembly
+def javaLibraryProjects = [
+    project(':library-tools'),
+    project(':library-common'),
+    project(':library-core')
+]
+
+configure(javaLibraryProjects) {
+  apply plugin: 'checkstyle'              // lint
+  apply plugin: 'jacoco'                  // coverage
+  apply plugin: 'maven-publish'           // publish
+  apply plugin: "me.champeau.gradle.jmh"  // micro bmt
+
+  def projectName = "custom-" + project.name
+
+  dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "junit:junit:${junitVersion}"
+  }
+
+
+  /* checkstyle */
+
+  checkstyle {
+    toolVersion checkstyleVersion
+    sourceSets = [project.sourceSets.main] // exclude test codes
+    configFile = file("${project.rootProject.projectDir}/config/checkstyle.xml")
+  }
+
+  task lint {
+    dependsOn check
+  }
+
+
+  /* jacoco */
+
+  jacoco {
+    toolVersion jacocoVersion
+  }
+
+  // need test task before executing
+  jacocoTestReport {
+    reports {
+      xml.enabled = true
+      html.enabled = true
+      csv.enabled false
+      xml.destination file("${buildDir}/reports/jacoco/report.xml")
+    }
+  }
+
+  // custom coverage task
+  task coverage {
+    dependsOn jacocoTestReport
+  }
+
+
+  /* maven-publish */
+
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        // groupId, version is automatically generated
+        // corresponding to project.groupId and project.version
+        artifactId = projectName
+        from components.java
+
+        // optional : custom pom file
+        pom {
+          name = 'My Library'
+          description = 'A concise description of my library'
+          url = 'http://www.example.com/library'
+          licenses {
+            license {
+              name = 'The Apache License, Version 2.0'
+              url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+          }
+          developers {
+            developer {
+              id = 'acktsap'
+              name = 'Taeik Lim'
+              email = 'sibera21@gmail.com'
+            }
+          }
+          scm {
+            connection = 'scm:git:git://example.com/my-library.git'
+            developerConnection = 'scm:git:ssh://example.com/my-library.git'
+            url = 'http://example.com/my-library/'
+          }
+        }
+      }
+    }
+
+    // optional : custom repository config
+    repositories {
+      maven {
+        def releasesRepoUrl = "https://buildDir/repos/releases"
+        def snapshotsRepoUrl = "https://buildDir/repos/snapshots"
+        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        credentials {
+          // cat ~/.gradle/gradle.properties prints
+          // systemProp.mavenUser=someuser
+          // systemProp.mavenPassword=somepassword
+          //
+          // or you can use
+          // ./gradlew publish -DmavenUser=user -DmavenPassword=password
+          username System.getProperty("mavenUser")
+          password System.getProperty("mavenPassword")
+        }
+      }
+    }
+  }
+
+  task install {
+    dependsOn publishToMavenLocal
+  }
+
+
+  /* jmh */
+
+  jmh {
+    include += '.*Benchmark'
+    fork = 2
+    benchmarkMode = ['thrpt']
+    resultFormat = 'JSON'
+    timeUnit = 's'
+    threads = 2 * Runtime.runtime.availableProcessors()
+    jmhVersion = '1.21'
+    duplicateClassesStrategy = 'warn'
+  }
+
+}
+
+// root project
+project(":") {
+  apply plugin: 'jacoco'  // coverage
+
+  task allcoverage(type: JacocoReport) {
+    def targetProjects = javaLibraryProjects.findAll {
+      // exclude library-tools project for example
+      it.name != 'library-tools'
+    }
+    dependsOn = targetProjects.coverage
+    targetProjects.each { sourceSets it.sourceSets.main }
+    executionData.from = files(targetProjects.jacocoTestReport.executionData)
+    reports {
+      xml.enabled = true
+      html.enabled = true
+      csv.enabled false
+      xml.destination file("${buildDir}/reports/jacoco/report.xml")
+    }
+  }
+
+  task alljavadoc(type: Javadoc) {
+    def targetProjects = javaLibraryProjects;
+    source targetProjects.collect { it.sourceSets.main.allJava }
+    classpath = files(targetProjects.collect { it.sourceSets.main.compileClasspath })
+    destinationDir = file("${buildDir}/docs/javadoc")
+    if (JavaVersion.current().isJava9Compatible()) {
+      options.addBooleanOption('html5', true)
+    }
+  }
+
+}

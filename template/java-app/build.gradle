@@ -1,0 +1,42 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'checkstyle'   // lint
+
+  sourceCompatibility = sourceJavaVersion
+  targetCompatibility = targetJavaVersion
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+  }
+
+  compileJava.options.encoding = "UTF-8"
+  compileTestJava.options.encoding = "UTF-8"
+
+  dependencies {
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "junit:junit:${junitVersion}"
+  }
+
+  checkstyle {
+    toolVersion checkstyleVersion
+    sourceSets = [ project.sourceSets.main ] // exclude test codes
+    configFile = file("${project.rootProject.projectDir}/checkstyle.xml")
+  }
+
+}

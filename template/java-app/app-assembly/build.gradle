@@ -1,0 +1,18 @@
+apply plugin: 'distribution'
+
+dependencies {
+  implementation project(':app-main')
+  implementation project(':app-tools')
+}
+
+distributions {
+  main {
+    baseName = rootProject.name
+    contents {
+      from {'src/assembly'}
+      into('lib') {
+        from (project.configurations.runtimeClasspath)
+      }
+    }
+  }
+}

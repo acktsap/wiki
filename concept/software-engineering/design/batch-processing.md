@@ -31,10 +31,10 @@ Divide data into partition. Process each partition by process or thread or machi
 
 ## Failover
 
-What if a step fails?
+### Restart
 
-- Save processing stage.
-- Restart on that stage.
+- Save processing stage & restart on that stage.
+- Remove all the batch result prefious one (by date) & start from the beginning.
 
 ## Test
 

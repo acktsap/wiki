@@ -1,0 +1,34 @@
+{
+  "name": "@acktsap/core",
+  "version": "0.0.1",
+  "description": "Sample core module project.",
+  "main": "dist/core.cjs.js",
+  "module": "dist/core.esm.js",
+  "browser": "dist/core.umd.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn run type-check -- --watch",
+    "lint": "eslint --fix \"./src/**/*.ts\"",
+    "test": "yarn run lint && nyc mocha --exit --require babel-register-ts --recursive \"./test/**/*.ts\"",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "rollup -c ./scripts/rollup.config.js ",
+    "build": "rm -rf ./dist && yarn run test && yarn run build:types && yarn run build:js",
+    "docs": "typedoc --out docs ./src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acktsap/monorepo-library.git"
+  },
+  "keywords": [
+    "core"
+  ],
+  "author": "acktsap",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acktsap/monorepo-library/issues"
+  },
+  "homepage": "https://github.com/acktsap/monorepo-library#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}
