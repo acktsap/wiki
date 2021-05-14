@@ -1,4 +1,4 @@
-package acktsap.basic.testing;
+package acktsap.basic.testing.job;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -19,11 +19,13 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import acktsap.basic.testing.TestBatchConfig;
+
 @SpringBatchTest
 @SpringBootTest(properties = {
-    "spring.batch.job.names=chunkJob"
+    "spring.batch.job.names=footballJob"
 }, classes = TestBatchConfig.class)
-class ChunkJobTransactionalTest {
+class SpringBootBasedTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
@@ -37,26 +39,22 @@ class ChunkJobTransactionalTest {
         this.jdbcOperations = new JdbcTemplate(dataSource);
     }
 
-    // deadlock at `TaskletStep$ChunkTransactionCallback.doInTransaction - semaphore.acquire()`
-    // see also https://github.com/spring-projects/spring-batch/issues/2021
-    @Transactional
     @Test
     void testFootballJob() throws Exception {
+        JobParameters jobParametes = new JobParametersBuilder()
+            .addString("action", "in")
+            .toJobParameters();
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParametes);
+        then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+    }
+
+    @Transactional
+    @Test
+    void testFootballJobTransaction() throws Exception {
         this.jdbcOperations.update("INSERT INTO CUSTOMER VALUES (?, ?, ?)", 1, "cat", 200);
 
         JobParameters jobParameter = new JobParametersBuilder().toJobParameters();
         JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameter);
-        then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
-    }
-
-    // deadlock at `TaskletStep$ChunkTransactionCallback.doInTransaction - semaphore.acquire()`
-    // see also https://github.com/spring-projects/spring-batch/issues/2021
-    @Transactional
-    @Test
-    void testPlayerLoadStep() throws Exception {
-        this.jdbcOperations.update("INSERT INTO CUSTOMER VALUES (?, ?, ?)", 1, "cat", 200);
-
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("chunkStep");
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 }

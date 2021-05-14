@@ -1,4 +1,4 @@
-package acktsap.basic.testing;
+package acktsap.basic.testing.job;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -19,11 +19,13 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import acktsap.basic.testing.TestBatchConfig;
+
 @SpringBatchTest
 @SpringBootTest(properties = {
-    "spring.batch.job.names=footballJob"
+    "spring.batch.job.names=chunkJob"
 }, classes = TestBatchConfig.class)
-class JobTransactionalTest {
+class ChunkJobTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
@@ -37,22 +39,27 @@ class JobTransactionalTest {
         this.jdbcOperations = new JdbcTemplate(dataSource);
     }
 
-    @Transactional
     @Test
     void testFootballJob() throws Exception {
-        this.jdbcOperations.update("INSERT INTO CUSTOMER VALUES (?, ?, ?)", 1, "cat", 200);
-
-        JobParameters jobParameter = new JobParametersBuilder().toJobParameters();
-        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameter);
+        JobParameters jobParameters = new JobParametersBuilder()
+            .addString("prefix", "tt")
+            .toJobParameters();
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
+    // deadlock at `TaskletStep$ChunkTransactionCallback.doInTransaction - semaphore.acquire()`
+    // reason : it never commits
+    // see also https://github.com/spring-projects/spring-batch/issues/2021
     @Transactional
     @Test
-    void testPlayerLoadStep() throws Exception {
+    void testFootballJobTransaction() throws Exception {
         this.jdbcOperations.update("INSERT INTO CUSTOMER VALUES (?, ?, ?)", 1, "cat", 200);
 
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("playerLoadStep");
+        JobParameters jobParameters = new JobParametersBuilder()
+            .addString("prefix", "tt")
+            .toJobParameters();
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 }

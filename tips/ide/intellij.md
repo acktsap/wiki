@@ -82,6 +82,8 @@ Help -> Edit Custom VM Options (or shift + shift -> enter custom vm options)
 
 ## Shortcuts
 
+Use eclispe keymap.
+
 ### View
 
 - Maximize / unmaximize

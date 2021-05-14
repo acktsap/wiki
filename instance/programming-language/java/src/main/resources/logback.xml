@@ -1,0 +1,12 @@
+<configuration>
+    <variable scope="context" name="jobName" value="%replace([%X{jobName}] ){'\\[\\] ', ''}"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.$M - ${jobName}%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

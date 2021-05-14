@@ -3,8 +3,10 @@ package acktsap.basic.testing;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,14 +27,15 @@ public class ChunkJobConfig {
         return this.jobBuilderFactory.get("chunkJob")
             .start(this.stepBuilderFactory.get("chunkStep")
                 .<String, String>chunk(3)
-                .reader(reader())
+                .reader(reader(null))
                 .writer(writer())
                 .build()
             ).build();
     }
 
+    @StepScope
     @Bean
-    public ItemReader<String> reader() {
+    public ItemReader<String> reader(@Value("#{jobParameters['prefix']}") String prefix) {
         return new ItemReader<>() {
             private int count = 1;
 
@@ -45,7 +48,7 @@ public class ChunkJobConfig {
 
                 int next = count;
                 count++;
-                return Integer.toString(next);
+                return prefix + ":" + Integer.toString(next);
             }
         };
     }
