@@ -23,28 +23,28 @@ public class MediaMappingControllerTest {
     @Test
     public void testMediaJson() throws Exception {
         mockMvc.perform(get("/media/json")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("mediaJson"));
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("mediaJson"));
     }
 
     @Test
     public void testMediaJsonUtf8() throws Exception {
         mockMvc.perform(get("/media/json")
-                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("mediaJson"));
+            .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("mediaJson"));
     }
 
     @Test
     public void testMediaTextJson() throws Exception {
         mockMvc.perform(get("/media/textjson")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("mediaTextJson"));
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("mediaTextJson"));
     }
 
     /**
@@ -53,9 +53,9 @@ public class MediaMappingControllerTest {
     @Test
     public void shouldFailOnJsonAccept() throws Exception {
         mockMvc.perform(get("/media/textjson")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isNotAcceptable()); // 406
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotAcceptable()); // 406
     }
 
     /**
@@ -66,8 +66,8 @@ public class MediaMappingControllerTest {
     @Test
     public void shouldFailOnNotJsonAccept() throws Exception {
         mockMvc.perform(get("/media/notjson")
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isNotAcceptable()); // 406
+            .contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isNotAcceptable()); // 406
     }
 
 }

@@ -32,7 +32,7 @@ public class RollbackOnlyTransactionManager implements PlatformTransactionManage
 
     @Override
     public TransactionStatus getTransaction(TransactionDefinition definition)
-            throws TransactionException {
+        throws TransactionException {
         log.info("getTransaction (current object: {}, definition: {})", this, definition.getClass());
         TransactionStatus transactionStatus = delegate.getTransaction(definition);
         transactionStatus.setRollbackOnly();

@@ -35,7 +35,7 @@ public class ArgumentsWebConfig implements WebMvcConfigurer {
 
         @Override
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-                                 Object handler) throws Exception {
+            Object handler) throws Exception {
             HttpSession session = request.getSession();
             if (session.getAttribute("visitTime") == null) {
                 session.setAttribute("visitTime", LocalDateTime.now());

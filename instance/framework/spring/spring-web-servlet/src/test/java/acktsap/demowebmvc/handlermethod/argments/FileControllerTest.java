@@ -24,14 +24,14 @@ public class FileControllerTest {
     @Test
     public void fileUploadTest() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
-                "file",
-                "test.txt",
-                "text/plain",
-                "hello file".getBytes());
+            "file",
+            "test.txt",
+            "text/plain",
+            "hello file".getBytes());
 
         this.mockMvc.perform(multipart("/file").file(file))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection());
+            .andDo(print())
+            .andExpect(status().is3xxRedirection());
     }
 
 }

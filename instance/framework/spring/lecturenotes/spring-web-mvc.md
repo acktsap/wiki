@@ -17,29 +17,19 @@
 이 강좌는 스프링 MVC 동작 원리와 설정 방법 그리고 애노테이션 기반 MVC 활용 방법에 대해 다루고 있으며 다음과 같은 특징이 있습니다
 
 1. 아쉽지만 Webflux는 다루지 않습니다.  
-   스프링 프레임워크 5 버전부터 리액티브 스택 기반으로 웹 애플리케이션을 개발할 때 사용할 수
-   있는 스프링 Webflux를 제공하지만 이번 강좌에서 다루는 기술 스택과 차이가 크기 때문에 이번
-   강좌에서 다루지 않습니다.
+   스프링 프레임워크 5 버전부터 리액티브 스택 기반으로 웹 애플리케이션을 개발할 때 사용할 수 있는 스프링 Webflux를 제공하지만 이번 강좌에서 다루는 기술 스택과 차이가 크기 때문에 이번 강좌에서 다루지 않습니다.
 
 2. 서블릿에 대해 학습합니다.  
-   이번 강좌에서는 스프링 MVC 동작 원리를 이해하는데 필요한 서블릿 기능에 대해 학습합니다.
-   따라서 서블릿 기반 웹 애플리케이션 개발이 처음이거나 스프링 MVC 동작 원리가 궁금했던
-   학생 또는 개발자에게 유용할 것입니다.
+   이번 강좌에서는 스프링 MVC 동작 원리를 이해하는데 필요한 서블릿 기능에 대해 학습합니다. 따라서 서블릿 기반 웹 애플리케이션 개발이 처음이거나 스프링 MVC 동작 원리가 궁금했던 학생 또는 개발자에게 유용할 것입니다.
 
 3. 타임리프를 주로 사용합니다.  
-   스프링 MVC 기능 학습에 필요한 뷰를 만들 때 타임리프(Thymeleaf)를 사용합니다. 하지만
-   타임리프와 JSP(Java Server Pages) 또는 기타 다른 뷰 템플릿 엔진에 대해서 자세히
-   학습하지는 않습니다. 이번 강좌는 스프링 MVC에 집중하겠습니다.
+   스프링 MVC 기능 학습에 필요한 뷰를 만들 때 타임리프(Thymeleaf)를 사용합니다. 하지만 타임리프와 JSP(Java Server Pages) 또는 기타 다른 뷰 템플릿 엔진에 대해서 자세히 학습하지는 않습니다. 이번 강좌는 스프링 MVC에 집중하겠습니다.
 
 4. 스프링 부트  
-  이번 강좌도 스프링 부트를 사용하여 예제 프로젝트를 만들고 코딩하지만, 스프링 부트 없이
-  설정하는 방법도 학습합니다. 그러면 스프링 부트가 제공하는 자동 설정을 보다 잘 이해할 수
-  있을 뿐 아니라 스프링 MVC 설정을 원하는 대로 고쳐 사용할 수 있을 것입니다.
+   이번 강좌도 스프링 부트를 사용하여 예제 프로젝트를 만들고 코딩하지만, 스프링 부트 없이 설정하는 방법도 학습합니다. 그러면 스프링 부트가 제공하는 자동 설정을 보다 잘 이해할 수 있을 뿐 아니라 스프링 MVC 설정을 원하는 대로 고쳐 사용할 수 있을 것입니다.
 
 5. 테스트 친화적 개발  
-   뷰를 만들고 요청을 보내는 방법으로 스프링 MVC 기능을 확인하고 학습할 수도 있지만 테스트
-   코드를 작성하여 확인하는 방법을 익히는 것 또한 효율적이며 중요합니다. 따라서 이번
-   강좌에서는 모든 스프링 MVC 기능을 코드로 테스트 하는 방법도 소개합니다.
+   뷰를 만들고 요청을 보내는 방법으로 스프링 MVC 기능을 확인하고 학습할 수도 있지만 테스트 코드를 작성하여 확인하는 방법을 익히는 것 또한 효율적이며 중요합니다. 따라서 이번 강좌에서는 모든 스프링 MVC 기능을 코드로 테스트 하는 방법도 소개합니다.
 
 원활한 학습을 위해 이번 강좌를 수강하기 전에 다음 강좌 수강을 고려해 주시기 바랍니다.
 
@@ -67,16 +57,16 @@
 스프링 MVC로 웹 애플리케이션 개발하기 소개
 
 - M: 모델
-  - 평범한 자바 객체 POJO
-  - 도메인 객체 또는 DTO로 화면에 전달할 또는 화면에서 전달 받은 데이터를 담고 있는 객체
+    - 평범한 자바 객체 POJO
+    - 도메인 객체 또는 DTO로 화면에 전달할 또는 화면에서 전달 받은 데이터를 담고 있는 객체
 - V: 뷰
-  - HTML. JSP, 타임리프, XML, ...
-  - 데이터를 보여주는 역할. 다양한 형태로 보여줄 수 있다.
+    - HTML. JSP, 타임리프, XML, ...
+    - 데이터를 보여주는 역할. 다양한 형태로 보여줄 수 있다.
 - C: 컨트롤러, 스프링 @MVC
-  - 사용자 입력을 받아 모델 객체의 데이터를 변경하거나, 모델 객체를 뷰에 전달하는 역할
-  - 입력값 검증
-  - 입력 받은 데이터로 모델 객체 변경
-  - 변경된 모델 객체를 뷰에 전달
+    - 사용자 입력을 받아 모델 객체의 데이터를 변경하거나, 모델 객체를 뷰에 전달하는 역할
+    - 입력값 검증
+    - 입력 받은 데이터로 모델 객체 변경
+    - 변경된 모델 객체를 뷰에 전달
 
 MVC 패턴의 장점
 
@@ -131,11 +121,11 @@ MVC 패턴의 단점
 서블릿 생명주기 : 서블릿 컨테이너가 서블릿을 실행하는 과정
 
 - 서블릿 컨테이너가 서블릿 인스턴스의 init() 메소드를 호출하여 초기화 한다.
-  - 최초 요청을 받았을 때 한번 초기화 하고 나면 그 다음 요청부터는 이 과정을 생략한다.
+    - 최초 요청을 받았을 때 한번 초기화 하고 나면 그 다음 요청부터는 이 과정을 생략한다.
 - 서블릿이 초기화 된 다음부터 클라이언트의 요청을 처리할 수 있다. 각 요청은 별도의 쓰레드로 처리하고 이때 서블릿 인스턴스의 service() 메소드를 호출한다.
-  - 이 안에서 HTTP 요청을 받고 클라이언트로 보낼 HTTP 응답을 만든다.
-  - service()는 보통 HTTP Method에 따라 doGet(), doPost() 등으로 처리를 위임한다.
-  - 따라서 보통 doGet() 또는 doPost()를 구현한다.
+    - 이 안에서 HTTP 요청을 받고 클라이언트로 보낼 HTTP 응답을 만든다.
+    - service()는 보통 HTTP Method에 따라 doGet(), doPost() 등으로 처리를 위임한다.
+    - 따라서 보통 doGet() 또는 doPost()를 구현한다.
 - 서블릿 컨테이너 판단에 따라 해당 서블릿을 메모리에서 내려야 할 시점에 destroy()를 호출한다.
 
 ### 5. 서블릿 애플리케이션 개발
@@ -197,11 +187,11 @@ public class HelloServlet extends HttpServlet {
 
 - 웹 애플리케이션에서 발생하는 주요 이벤트를 감지하고 각 이벤트에 특별한 작업이 필요한 경우에 사용할 수 있다.
 - 서블릿 컨텍스트 수준의 이벤트
-  - 컨텍스트 라이프사이클 이벤트
-  - 컨텍스트 애트리뷰트 변경 이벤트
+    - 컨텍스트 라이프사이클 이벤트
+    - 컨텍스트 애트리뷰트 변경 이벤트
 - 세션 수준의 이벤트
-  - 세션 라이프사이클 이벤트
-  - 세션 애트리뷰트 변경 이벤트
+    - 세션 라이프사이클 이벤트
+    - 세션 애트리뷰트 변경 이벤트
 
 서블릿 필터
 
@@ -248,7 +238,8 @@ DispatcherServlet
 
 - 스프링 MVC의 핵심.
 - Front Controller 역할을 한다. (모든 요청을 controller 하나만 받는 것. 받아서 공통 처리를 하고 Dispatch해서 요청을 넘겨줌. 이런게 없으면 endpoint마다 servlet config를 추가해줘야함 web.xml에)
-- Root WebApplicationContext가 있는 경우 그것을 논리적인 부모로 해서 새로운 context를 만들어줌 (Servlet WebApplicationContext). 그래서 Root의 WebApplicationContext에는 웹과 관련된게 없음 Servlet의 WebApplicationContext에만 있음
+- Root WebApplicationContext가 있는 경우 그것을 논리적인 부모로 해서 새로운 context를 만들어줌 (Servlet WebApplicationContext). 그래서 Root의 WebApplicationContext에는 웹과 관련된게 없음
+  Servlet의 WebApplicationContext에만 있음
 
 참고
 
@@ -275,23 +266,25 @@ DispatcherServlet 동작 순서
 2. (HandlerMapping에게 위임하여) 요청을 처리할 handler를 찾는다.
 3. (등록되어 있는 핸들러 어댑터 중에) 해당 handler를 실행할 수 있는 HandlerAdaptor를 찾는다.
 4. 찾아낸 HandlerAdaptor를 사용해서 핸들러의 응답을 처리한다.
-  - Handler의 리턴값을 보고 어떻게 처리할지 판단한다.
-  - (view가 있는 경우) 뷰 이름에 해당하는 뷰를 찾아서 모델 데이터를 랜더링한다.
-  - @ResponseEntity가 있다면 Converter를 사용해서 응답 본문을 만든다.
+
+- Handler의 리턴값을 보고 어떻게 처리할지 판단한다.
+- (view가 있는 경우) 뷰 이름에 해당하는 뷰를 찾아서 모델 데이터를 랜더링한다.
+- @ResponseEntity가 있다면 Converter를 사용해서 응답 본문을 만든다.
+
 5. (부가적으로) 예외가 발생했다면, 예외 처리 핸들러에 요청 처리를 위임한다.
 6. 최종적으로 응답을 보낸다.
 
 See code
 
 - DispatcherServlet
-  - `DispatcherServlet#doService`
-  - `DispatcherServlet#doDispatch`
+    - `DispatcherServlet#doService`
+    - `DispatcherServlet#doDispatch`
 - HandlerMapping
-  - `RequestMappingHandlerMapping` : `@RequestMapping`이 있는 경우
-  - `BeanNameUrlHandlerMapping` : view가 있을 경우 
+    - `RequestMappingHandlerMapping` : `@RequestMapping`이 있는 경우
+    - `BeanNameUrlHandlerMapping` : view가 있을 경우
 - HandlerAdapter
-  - `RequestMappingHandlerAdapter` : `@RequestMapping`이 있는 경우
-  - `SimpleControllerHandlerAdapter` : view가 있을 경우
+    - `RequestMappingHandlerAdapter` : `@RequestMapping`이 있는 경우
+    - `SimpleControllerHandlerAdapter` : view가 있을 경우
 
 ```java
 @org.springframework.stereotype.Controller( "/simple" )
@@ -309,8 +302,8 @@ public class SimpleController implements Controller {
 ViewResolver
 
 - `InternalResourceViewResolver`
-  - Prefix
-  - Suffix
+    - Prefix
+    - Suffix
 
 ```java
 @Configuration
@@ -402,10 +395,9 @@ DispatcherServlet 초기화
 
 스프링 부트 사용하지 않는 스프링 MVC
 
-- 서블릿 컨네이너(ex, 톰캣)에 등록한 웹 애플리케이션(WAR)에 DispatcherServlet을
-등록한다.
-  - web.xml에 서블릿 등록.
-  - 또는 WebApplicationInitializer에 자바 코드로 서블릿 등록 (스프링 3.1+, 서블릿 3.0+).
+- 서블릿 컨네이너(ex, 톰캣)에 등록한 웹 애플리케이션(WAR)에 DispatcherServlet을 등록한다.
+    - web.xml에 서블릿 등록.
+    - 또는 WebApplicationInitializer에 자바 코드로 서블릿 등록 (스프링 3.1+, 서블릿 3.0+).
 - 세부 구성 요소는 빈 설정하기 나름 (spring boot와는 다르게 주관에 따라 빈이 설정되어 있지 않음).
 
 스프링 부트를 사용하는 스프링 MVC
@@ -476,9 +468,9 @@ public class WebConfig implements WebMvcConfigurer {
 참고
 
 - https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-jsp-
-limitations
+  limitations
 - https://github.com/spring-projects/spring-boot/tree/v2.1.1.RELEASE/spring-boot-
-samples/spring-boot-sample-web-jsp (샘플 프로젝트)
+  samples/spring-boot-sample-web-jsp (샘플 프로젝트)
 
 의존성 추가
 
@@ -546,8 +538,7 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 
 도메인 클래스 컨버터
 
-- 스프링 데이터 JPA가 제공하는 Repository를 사용해서 ID에 해당하는 엔티티를
-읽어옵니다.
+- 스프링 데이터 JPA가 제공하는 Repository를 사용해서 ID에 해당하는 엔티티를 읽어옵니다.
 
 의존성 설정
 
@@ -573,6 +564,7 @@ public class Person {
 ...
 
 ```
+
 리파지토리 추가
 
 ```java
@@ -626,8 +618,8 @@ vs 서블릿 필터
 
 - https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/HandlerInterceptor.html
 - https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/AsyncHandlerInterceptor.html
-- http://forum.spring.io/forum/spring-projects/web/20146-what-is-the-difference-between-using-a-filter-and-interceptor (스프링 개발자 Mark Fisher의 서블릿 필터와의 차이점에
-대한 답변 참고)
+- http://forum.spring.io/forum/spring-projects/web/20146-what-is-the-difference-between-using-a-filter-and-interceptor (스프링 개발자 Mark Fisher의 서블릿 필터와의
+  차이점에 대한 답변 참고)
 
 ### 23. 핸들러 인터셉터 2 부: 만들고 등록하기
 
@@ -688,8 +680,8 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 스프링 MVC 리소스 핸들러 맵핑 등록
 
 - 가장 낮은 우선 순위로 등록.
-  - 다른 핸들러 맵핑이 “/” 이하 요청을 처리하도록 허용하고
-  - 최종적으로 리소스 핸들러가 처리하도록.
+    - 다른 핸들러 맵핑이 “/” 이하 요청을 처리하도록 허용하고
+    - 최종적으로 리소스 핸들러가 처리하도록.
 - DefaultServletHandlerConfigurer
 
 리소스 핸들러 설정
@@ -698,9 +690,9 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 - 어디서 리소스를 찾을 것인가
 - 캐싱
 - ResourceResolver: 요청에 해당하는 리소스를 찾는 전략
-  - 캐싱, 인코딩(gzip, brotli), WebJar, ...
+    - 캐싱, 인코딩(gzip, brotli), WebJar, ...
 - ResourceTransformer: 응답으로 보낼 리소스를 수정하는 전략
-  - 캐싱, CSS 링크, HTML5 AppCache, ...
+    - 캐싱, CSS 링크, HTML5 AppCache, ...
 
 스프링 부트
 
@@ -718,8 +710,7 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 
 HTTP 메시지 컨버터
 
-- 요청 본문에서 메시지를 읽어들이거나(@RequestBody), 응답 본문에 메시지를 작성할
-때(@ResponseBody) 사용한다.
+- 요청 본문에서 메시지를 읽어들이거나(@RequestBody), 응답 본문에 메시지를 작성할 때(@ResponseBody) 사용한다.
 
 기본 HTTP 메시지 컨버터
 
@@ -740,9 +731,9 @@ HTTP 메시지 컨버터
 - 기본으로 등록해주는 컨버터에 새로운 컨버터 추가하기: extendMessageConverters
 - 기본으로 등록해주는 컨버터는 다 무시하고 새로 컨버터 설정하기: configureMessageConverters
 - **의존성 추가로 컨버터 등록하기 (추천)**
-  - 메이븐 또는 그래들 설정에 의존성을 추가하면 그에 따른 컨버터가 자동으로 등록된다.
-  - WebMvcConfigurationSupport
-  - (이 기능 자체는 스프링 프레임워크의 기능임, 스프링 부트 아님.)
+    - 메이븐 또는 그래들 설정에 의존성을 추가하면 그에 따른 컨버터가 자동으로 등록된다.
+    - WebMvcConfigurationSupport
+    - (이 기능 자체는 스프링 프레임워크의 기능임, 스프링 부트 아님.)
 
 참고
 
@@ -849,7 +840,6 @@ Content Negotiation 설정
 
 - 요청 본문 또는 응답 본문을 어떤 (MIME) 타입으로 보내야 하는지 결정하는 전략을 설정한다.
 
-
 ### 29. 스프링 MVC 설정 마무리
 
 스프링 MVC 설정은 즉 DispatcherServlet이 사용할 여러 빈 설정.
@@ -881,7 +871,6 @@ Content Negotiation 설정
 - WebMvcConfigurer로 시작
 - @Bean으로 MVC 구성 요소 직접 등록
 
-
 ## 3 부. 스프링 MVC 활용
 
 ### 30. 스프링 MVC 핵심 기술 소개
@@ -904,7 +893,7 @@ Content Negotiation 설정
 학습 할 애노테이션
 
 - @RequestMapping
-  - @GetMapping, @PostMapping, @PutMapping, ...
+    - @GetMapping, @PostMapping, @PutMapping, ...
 - @ModelAttribute
 - @RequestParam, @RequestHeader
 - @PathVariable, @MatrixVariable
@@ -1000,15 +989,14 @@ URI, URL, URN 햇갈린다
 URI 확장자 맵핑 지원
 
 - 이 기능은 권장하지 않습니다. (스프링 부트에서는 기본으로 이 기능을 사용하지 않도록 설정 해 줌)
-  - 보안 이슈 (RFD Attack)
-  - URI 변수, Path 매개변수, URI 인코딩을 사용할 때 할 때 불명확 함.
+    - 보안 이슈 (RFD Attack)
+    - URI 변수, Path 매개변수, URI 인코딩을 사용할 때 할 때 불명확 함.
 
 RFD Attack
 
 - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/reflected-file-download-a-new-web-attack-vector/
 - https://www.owasp.org/index.php/Reflected_File_Download
 - https://pivotal.io/security/cve- 2015 - 5211
-
 
 ### 33. HTTP 요청 맵핑하기 3 부: 미디어 타입 맵핑
 
@@ -1117,18 +1105,10 @@ OPTIONS
 다음 요청을 처리할 수 있는 핸들러 메소드를 맵핑하는 @RequestMapping (또는 @GetMapping, @PostMapping 등)을 정의하세요.
 
 1. GET /events
-2. GET /events/1,
-    GET /events/2,
-    GET /events/3,
-    ...
+2. GET /events/1, GET /events/2, GET /events/3, ...
 3. POST /events CONTENT-TYPE: application/json ACCEPT: application/json
-4. DELETE /events/1,
-    DELETE /events/2,
-    DELETE /events/3,
-    ...
-5. PUT /events/1 CONTENT-TYPE: application/json ACCEPT: application/json,
-    PUT /events/2 CONTENT-TYPE: application/json ACCEPT: application/json,
-    ...
+4. DELETE /events/1, DELETE /events/2, DELETE /events/3, ...
+5. PUT /events/1 CONTENT-TYPE: application/json ACCEPT: application/json, PUT /events/2 CONTENT-TYPE: application/json ACCEPT: application/json, ...
 
 ### 38. 핸들러 메소드 1 부: 지원하는 메소드 아규먼트와 리턴
 
@@ -1210,8 +1190,7 @@ ZoneId
 @ResponseBody 
 ```
 
--> 리턴 값을 HttpMessageConverter를 사용해 응답 본문으로
-사용한다.
+-> 리턴 값을 HttpMessageConverter를 사용해 응답 본문으로 사용한다.
 
 ```java
 HttpEntity
@@ -1219,7 +1198,6 @@ ReponseEntity
 ```
 
 -> 응답 본문 뿐 아니라 헤더 정보까지, 전체 응답을 만들 때 사용한다. 보다 심도있는 Rest api를 설계할 때 사용
-
 
 ```java
 String
@@ -1247,7 +1225,6 @@ Model
 -> (RequestToViewNameTranslator를 통해서) 암묵적으로 판단한 뷰 랜더링할 때 사용할 모델 정보에 추가한다. 이 애노테이션은 생략할 수 있다.
 
 참고: https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-return-types
-
 
 ### 39. 핸들러 메소드 2 부: URI 패턴
 
@@ -1284,7 +1261,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-typeconversion
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-matrix-variables
-
 
 ### 40. 핸들러 메소드 3 부: @RequestMapping
 
@@ -1348,7 +1324,7 @@ public class WebConfig implements WebMvcConfigurer {
 참고
 
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-
-ann-modelattrib-method-args
+  ann-modelattrib-method-args
 
 ### 43. 핸들러 메소드 6 부: @Validated
 
@@ -1357,7 +1333,6 @@ ann-modelattrib-method-args
 @Valid 애노테이션에는 그룹을 지정할 방법이 없다.
 
 @Validated는 스프링이 제공하는 애노테이션으로 그룹 클래스를 설정할 수 있다.
-
 
 ### 44. 핸들러 메소드 7 부: 폼 서브밋 (에러 처리)
 
@@ -1369,7 +1344,6 @@ ann-modelattrib-method-args
 타임리프 사용시 바인딩 에러 보여주기
 
 - https://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#field-errors
-
 
 ```html
 <p th:if="${#fields.hasErrors('limit')}" th:errors="*{limit}">Incorrect date</p>
@@ -1464,8 +1438,7 @@ XPath
 MultipartFile
 
 - 파일 업로드시 사용하는 메소드 아규먼트
-- MultipartResolver 빈이 설정 되어 있어야 사용할 수 있다. (스프링 부트 자동 설정이 해
-줌)
+- MultipartResolver 빈이 설정 되어 있어야 사용할 수 있다. (스프링 부트 자동 설정이 해 줌)
 - POST multipart/form-data 요청에 들어있는 파일을 참조할 수 있다.
 - List<MultipartFile> 아큐먼트로 여러 파일을 참조할 수도 있다.
 
@@ -1507,15 +1480,14 @@ public String uploadFile(@RequestParam MultipartFile file,
 참고
 
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-
-multipart-forms
+  multipart-forms
 - https://spring.io/guides/gs/uploading-files/
 
 ### 51. 핸들러 메소드 14 부: ResponseEntity
 
 파일 리소스를 읽어오는 방법
 
-- 스프링 ResourceLoader 사용하기
-파일 다운로드 응답 헤더에 설정할 내용
+- 스프링 ResourceLoader 사용하기 파일 다운로드 응답 헤더에 설정할 내용
 
 - Content-Disposition: 사용자가 해당 파일을 받을 때 사용할 파일 이름
 - Content-Type: 어떤 파일인가
@@ -1558,8 +1530,7 @@ public ResponseEntity<Resource> downloadFile(@PathVariable String filename) thro
 
 @RequestBody
 
-- 요청 본문(body)에 들어있는 데이터를 HttpMessageConveter를 통해 변환한 객체로
-받아올 수 있다.
+- 요청 본문(body)에 들어있는 데이터를 HttpMessageConveter를 통해 변환한 객체로 받아올 수 있다.
 - @Valid 또는 @Validated를 사용해서 값을 검증 할 수 있다.
 - BindingResult 아규먼트를 사용해 코드로 바인딩 또는 검증 에러를 확인할 수 있다.
 
@@ -1594,9 +1565,9 @@ ResponseEntity
 참고
 
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-
-ann-responsebody
+  ann-responsebody
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-
-ann-responseentity
+  ann-responseentity
 
 ### 54. 핸들러 메소드 17 부: 정리
 
@@ -1611,7 +1582,6 @@ ann-responseentity
 - https://github.com/spring-projects/spring-petclinic
 - 컨트롤러 코드 위주로...
 
-
 ### 55. 모델: @ModelAttribute 또 다른 사용법
 
 @ModelAttribute의 다른 용법
@@ -1619,7 +1589,7 @@ ann-responseentity
 - @RequestMapping을 사용한 핸들러 메소드의 아규먼트에 사용하기 (이미 살펴 봤습니다.)
 - @Controller 또는 @ControllerAdvice (이 애노테이션은 뒤에서 다룹니다.)를 사용한 클래스에서 모델 정보를 초기화 할 때 사용한다.
 - @RequestMapping과 같이 사용하면 해당 메소드에서 리턴하는 객체를 모델에 넣어 준다.
-  - RequestToViewNameTranslator
+    - RequestToViewNameTranslator
 
 @ModelAttribute 메소드
 

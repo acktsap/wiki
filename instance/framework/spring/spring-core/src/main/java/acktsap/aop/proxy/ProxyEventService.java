@@ -21,21 +21,21 @@ public class ProxyEventService implements EventService {
         long start = System.currentTimeMillis();
         defaultEventService.createEvent();
         System.out.printf("Class: %s, time: %s%n", getClass(),
-                System.currentTimeMillis() - start);
+            System.currentTimeMillis() - start);
     }
 
     public void publishEvent() {
         long start = System.currentTimeMillis();
         defaultEventService.publishEvent();
         System.out.printf("Class: %s, time: %s%n", getClass(),
-                System.currentTimeMillis() - start);
+            System.currentTimeMillis() - start);
     }
 
     public void deleteEvent() {
         long start = System.currentTimeMillis();
         defaultEventService.deleteEvent();
         System.out.printf("Class: %s, time: %s%n", getClass(),
-                System.currentTimeMillis() - start);
+            System.currentTimeMillis() - start);
     }
 
 }

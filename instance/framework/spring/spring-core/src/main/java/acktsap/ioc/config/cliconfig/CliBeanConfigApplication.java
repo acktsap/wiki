@@ -14,8 +14,8 @@ public class CliBeanConfigApplication {
     // run with program arguments
     public static void main(String[] args) {
         new SpringApplicationBuilder(CliBeanConfigApplication.class)
-                .web(WebApplicationType.NONE)
-                .run(args);
+            .web(WebApplicationType.NONE)
+            .run(args);
     }
 
 }

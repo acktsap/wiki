@@ -55,11 +55,11 @@ public class FileDownloadController {
         String mediaType = tika.detect(file);
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachement; filename=\"" + resource.getFilename() + "\"") // 파일 이름
-                .header(HttpHeaders.CONTENT_TYPE, mediaType) // 파일 타입
-                .header(HttpHeaders.CONTENT_LENGTH, file.length() + "") // 파일 사이즈
-                .body(resource);
+            .header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachement; filename=\"" + resource.getFilename() + "\"") // 파일 이름
+            .header(HttpHeaders.CONTENT_TYPE, mediaType) // 파일 타입
+            .header(HttpHeaders.CONTENT_LENGTH, file.length() + "") // 파일 사이즈
+            .body(resource);
     }
 
 }

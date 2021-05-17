@@ -20,7 +20,7 @@ public class FileDownloadControllerTest {
     @Test
     public void testFileDownload() throws Exception {
         mockMvc.perform(get("/file/test.jpg"))
-                .andExpect(status().isOk());
+            .andExpect(status().isOk());
     }
 
 }

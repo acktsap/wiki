@@ -39,16 +39,16 @@ public class FlattenTransactionManagerTest {
         // bean 등록하면 autoconfigure 안해주고 전부 이거만 씀
         @Bean
         public PlatformTransactionManager flattenTransactionManager(
-                EntityManagerFactory entityManagerFactory) {
+            EntityManagerFactory entityManagerFactory) {
 
             return new PlatformTransactionManager() {
 
                 protected final PlatformTransactionManager delegate = new JpaTransactionManager(
-                        entityManagerFactory);
+                    entityManagerFactory);
 
                 @Override
                 public TransactionStatus getTransaction(TransactionDefinition transactionDefinition)
-                        throws TransactionException {
+                    throws TransactionException {
                     TransactionDefinition definition = transactionDefinition;
                     try {
                         TransactionAspectSupport.currentTransactionStatus();
@@ -124,7 +124,7 @@ public class FlattenTransactionManagerTest {
 
         @Transactional
         public void txCall() {
-            ((TestClass) AopContext.currentProxy()).indirectRequireNewCall();
+            ((TestClass)AopContext.currentProxy()).indirectRequireNewCall();
         }
 
         @Transactional(propagation = Propagation.REQUIRES_NEW)

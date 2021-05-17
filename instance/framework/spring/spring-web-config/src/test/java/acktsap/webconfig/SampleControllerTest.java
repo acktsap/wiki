@@ -50,9 +50,9 @@ public class SampleControllerTest {
     @Test
     public void hello() throws Exception {
         this.mockMvc.perform(get("/hello")
-                .param("name", "keesun"))
-                .andDo(print())
-                .andExpect(content().string("hello keesun"));
+            .param("name", "keesun"))
+            .andDo(print())
+            .andExpect(content().string("hello keesun"));
     }
 
     /**
@@ -65,9 +65,9 @@ public class SampleControllerTest {
         EntityPerson savedPerson = personRepository.save(newPerson);
 
         this.mockMvc.perform(get("/hello2")
-                .param("id", savedPerson.getId().toString()))
-                .andDo(print())
-                .andExpect(content().string("hello keesun"));
+            .param("id", savedPerson.getId().toString()))
+            .andDo(print())
+            .andExpect(content().string("hello keesun"));
     }
 
     /**
@@ -76,9 +76,9 @@ public class SampleControllerTest {
     @Test
     public void helloStaticDefault() throws Exception {
         this.mockMvc.perform(get("/index.html"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(Matchers.containsString("Hello Index")));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string(Matchers.containsString("Hello Index")));
     }
 
     /**
@@ -87,10 +87,10 @@ public class SampleControllerTest {
     @Test
     public void helloStaticCustom() throws Exception {
         this.mockMvc.perform(get("/mobile/index.html"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(Matchers.containsString("Hello Mobile")))
-                .andExpect(header().exists(HttpHeaders.CACHE_CONTROL));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string(Matchers.containsString("Hello Mobile")))
+            .andExpect(header().exists(HttpHeaders.CACHE_CONTROL));
     }
 
     /**
@@ -99,10 +99,10 @@ public class SampleControllerTest {
     @Test
     public void stringMessage() throws Exception {
         this.mockMvc.perform(get("/message")
-                .content("hello"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+            .content("hello"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello"));
     }
 
     @Test
@@ -114,15 +114,15 @@ public class SampleControllerTest {
         String jsonString = objectMapper.writeValueAsString(person);
 
         this.mockMvc.perform(get("/jsonMessage")
-                // contentType을 참조해서 converter 정함 : json
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .content(jsonString))
-                .andDo(print())
-                .andExpect(status().isOk())
-                // jsonPath 사용할 수 있음
-                .andExpect(jsonPath("$.id").value(2019L))
-                .andExpect(jsonPath("$.name").value("keesun"));
+            // contentType을 참조해서 converter 정함 : json
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .accept(MediaType.APPLICATION_JSON_UTF8)
+            .content(jsonString))
+            .andDo(print())
+            .andExpect(status().isOk())
+            // jsonPath 사용할 수 있음
+            .andExpect(jsonPath("$.id").value(2019L))
+            .andExpect(jsonPath("$.name").value("keesun"));
     }
 
     @Test
@@ -137,15 +137,15 @@ public class SampleControllerTest {
         String xmlString = stringWriter.toString();
 
         this.mockMvc.perform(get("/jsonMessage")
-                // contentType을 참조해서 converter 정함 : xml
-                .contentType(MediaType.APPLICATION_XML)
-                .accept(MediaType.APPLICATION_XML)
-                .content(xmlString))
-                .andDo(print())
-                .andExpect(status().isOk())
-                // xpath 사용할 수 있음
-                .andExpect(xpath("person/name").string("keesun"))
-                .andExpect(xpath("person/id").string("2019"));
+            // contentType을 참조해서 converter 정함 : xml
+            .contentType(MediaType.APPLICATION_XML)
+            .accept(MediaType.APPLICATION_XML)
+            .content(xmlString))
+            .andDo(print())
+            .andExpect(status().isOk())
+            // xpath 사용할 수 있음
+            .andExpect(xpath("person/name").string("keesun"))
+            .andExpect(xpath("person/id").string("2019"));
     }
 
 }

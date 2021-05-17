@@ -20,7 +20,7 @@ public class MultiFilePartControllerTest {
     @Test
     public void test() throws Exception {
         mockMvc.perform(get("/uripattern"))
-                .andExpect(status().isOk());
+            .andExpect(status().isOk());
     }
 
 }

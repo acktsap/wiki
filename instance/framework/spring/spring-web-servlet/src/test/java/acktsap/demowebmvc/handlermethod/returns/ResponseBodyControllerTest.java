@@ -36,10 +36,10 @@ public class ResponseBodyControllerTest {
         String json = objectMapper.writeValueAsString(event);
 
         mockMvc.perform(post("/responsebody")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
-                .andDo(print())
-                .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
+            .andDo(print())
+            .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -51,10 +51,10 @@ public class ResponseBodyControllerTest {
         String json = objectMapper.writeValueAsString(event);
 
         mockMvc.perform(post("/responsebody/entity")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
-                .andDo(print())
-                .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
+            .andDo(print())
+            .andExpect(status().isBadRequest());
     }
 
 }

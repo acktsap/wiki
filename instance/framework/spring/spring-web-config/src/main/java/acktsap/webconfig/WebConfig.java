@@ -87,16 +87,16 @@ public class WebConfig implements WebMvcConfigurer {
 
         // 특정 패턴에만 적용하는 방법
         registry.addInterceptor(new AnotherInterceptor())
-                .addPathPatterns("/hello")
-                .order(-1);
+            .addPathPatterns("/hello")
+            .order(-1);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/mobile/**")
-                .addResourceLocations("classpath:/mobile/")
-                // cache setting -> http code : 304 가 나옴
-                .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
+            .addResourceLocations("classpath:/mobile/")
+            // cache setting -> http code : 304 가 나옴
+            .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
     }
 
     /**
@@ -117,7 +117,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     //// {@link WebMvcConfigurer} 사용해서 config 끝
 
-
     /**
      * XML MessageConverter : OXM(Object-XML Mapper) 라이브러리 중에 스프링이 지원하는 의존성 추가
      *
@@ -135,7 +134,6 @@ public class WebConfig implements WebMvcConfigurer {
         jaxb2Marshaller.setPackagesToScan(EntityPerson.class.getPackage().toString());
         return jaxb2Marshaller;
     }
-
 
     /**
      * {@link DispatcherServlet} 설정같은거 이렇게 빈으로 설정 가능함. Low-level한 방법임. 이렇게 안하고 위에처럼 함.

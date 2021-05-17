@@ -1,23 +1,17 @@
 # Spring Core
 
-스프링프레임워크(이하스프링)5.1버전이출시되었습니다.버전이올라갈수록스프링은다양한
-프로그래밍기법과기능을제공하지만스프링의핵심기술은크게변하지않았습니다.
+스프링프레임워크(이하스프링)5.1버전이출시되었습니다.버전이올라갈수록스프링은다양한 프로그래밍기법과기능을제공하지만스프링의핵심기술은크게변하지않았습니다.
 
-즉,IoC컨테이너,AOP그리고몇몇핵심API는스프링을탄탄하게지탱하는디딤돌과같습니다.따라서
-스프링핵심기술을이해한다면,스프링이제공하는JDBC,테스트,MVC관련기능뿐아니라,스프링
+즉,IoC컨테이너,AOP그리고몇몇핵심API는스프링을탄탄하게지탱하는디딤돌과같습니다.따라서 스프링핵심기술을이해한다면,스프링이제공하는JDBC,테스트,MVC관련기능뿐아니라,스프링
 부트와스프링데이터JPA와같은여러다른스프링프로젝트도빠르고정확히이해할수있습니다.
 
-구체적으로이번강좌에서는​스프링IoC​(InversionofControl)컨테이너와빈그리고​스프링AOP​(Aspect
-OrientedProgramming)에대해자세히학습합니다.또한,스프링이제공하는여러기능의기반이되는
+구체적으로이번강좌에서는​스프링IoC​(InversionofControl)컨테이너와빈그리고​스프링AOP​(Aspect OrientedProgramming)에대해자세히학습합니다.또한,스프링이제공하는여러기능의기반이되는
 Resource,Validation,데이터바인딩과같은스프링의여러​추상API​와Null관련유틸리티도학습합니다.
 
-이번강좌는IoC,AOP,PSA에대해들어는봤지만,실제스프링으로코딩을해본적이없는분들또는핵심
-기술에대한이해없이MVC로웹애플리케이션개발만해온개발자또는학생을대상으로합니다.따라서
-소개와이해를중심으로설명하기때문에매우깊이있게다루진않습니다.심화학습을하고싶으신
-분들께는이번강좌를추천하지않습니다.
+이번강좌는IoC,AOP,PSA에대해들어는봤지만,실제스프링으로코딩을해본적이없는분들또는핵심 기술에대한이해없이MVC로웹애플리케이션개발만해온개발자또는학생을대상으로합니다.따라서
+소개와이해를중심으로설명하기때문에매우깊이있게다루진않습니다.심화학습을하고싶으신 분들께는이번강좌를추천하지않습니다.
 
-이번강좌는스프링부트를사용하며스프링핵심기술을학습합니다따라서스프링부트기반의프로젝트를
-사용하고있는개발자또는학생에게유용한스프링강좌입니다.스프링부트가제공하는여러기능이
+이번강좌는스프링부트를사용하며스프링핵심기술을학습합니다따라서스프링부트기반의프로젝트를 사용하고있는개발자또는학생에게유용한스프링강좌입니다.스프링부트가제공하는여러기능이
 스프링의핵심기술과어떻게관련이있는지이해할수있습니다.
 
 Goal
@@ -31,32 +25,32 @@ Goal
 Contents
 
 - [Spring Core](#spring-core)
-  - [Spring Basic](#spring-basic)
-  - [IoC Container and Bean](#ioc-container-and-bean)
-    - [IoC Container](#ioc-container)
-    - [ApplicationContext](#applicationcontext)
-    - [@Autowire](#autowire)
-    - [@Component and @ComponentScan](#component-and-componentscan)
-    - [Bean Scope](#bean-scope)
-    - [Environment - Profile](#environment---profile)
-    - [Environment - Property](#environment---property)
-    - [MessageSource](#messagesource)
-    - [ApplicationEventPublisher](#applicationeventpublisher)
-    - [ResourceLoader](#resourceloader)
-  - [Resource / Validation](#resource--validation)
-    - [Resource](#resource)
-    - [Validation](#validation)
-  - [Data Binding](#data-binding)
-    - [PropertyEditor](#propertyeditor)
-    - [Converter and Formatter](#converter-and-formatter)
-  - [SpEL](#spel)
-    - [Spring Expression Language](#spring-expression-language)
-  - [Spring AOP](#spring-aop)
-    - [AOP](#aop)
-    - [Proxy based AOP](#proxy-based-aop)
-    - [@AOP](#aop-1)
-  - [Advanced](#advanced)
-    - [Null-safety](#null-safety)
+    - [Spring Basic](#spring-basic)
+    - [IoC Container and Bean](#ioc-container-and-bean)
+        - [IoC Container](#ioc-container)
+        - [ApplicationContext](#applicationcontext)
+        - [@Autowire](#autowire)
+        - [@Component and @ComponentScan](#component-and-componentscan)
+        - [Bean Scope](#bean-scope)
+        - [Environment - Profile](#environment---profile)
+        - [Environment - Property](#environment---property)
+        - [MessageSource](#messagesource)
+        - [ApplicationEventPublisher](#applicationeventpublisher)
+        - [ResourceLoader](#resourceloader)
+    - [Resource / Validation](#resource--validation)
+        - [Resource](#resource)
+        - [Validation](#validation)
+    - [Data Binding](#data-binding)
+        - [PropertyEditor](#propertyeditor)
+        - [Converter and Formatter](#converter-and-formatter)
+    - [SpEL](#spel)
+        - [Spring Expression Language](#spring-expression-language)
+    - [Spring AOP](#spring-aop)
+        - [AOP](#aop)
+        - [Proxy based AOP](#proxy-based-aop)
+        - [@AOP](#aop-1)
+    - [Advanced](#advanced)
+        - [Null-safety](#null-safety)
 
 ## Spring Basic
 
@@ -77,8 +71,8 @@ https://docs.spring.io/spring/docs/current/spring-framework-reference/overview.h
 스프링의 역사
 
 - 2003 년 등장 (개발은 이미 그 이전부터 진행됐고)
-  - 등장시 Java EE 표준과 싸우는 것처럼 보였지만 실제론 JEE 스팩 구현 모음체(+알파).
-  - Servlet, WebSocket, Bean Validation, JPA, Dependency Injection, ...
+    - 등장시 Java EE 표준과 싸우는 것처럼 보였지만 실제론 JEE 스팩 구현 모음체(+알파).
+    - Servlet, WebSocket, Bean Validation, JPA, Dependency Injection, ...
 - 최근까지 주로 서블릿 기반 애플리케이션을 만들 때 사용해 옴.
 - 스프링 5 부터는 WebFlux 지원으로 서블릿 기반이 아닌 서버 애플리케이션도 개발할 수 있게 됨.
 
@@ -108,12 +102,12 @@ Bean
 
 - 스프링 IoC 컨테이너가 관리 하는 객체.
 - 장점
-  - 의존성 관리
-  - Scope
-    - 싱글톤: 하나, 기본적으로 설정
-    - 프로포토타입: 매번 다른 객체
-  - Lifecycle Interface : Bean이 추가 됬을 때 뭔가 하고 싶다! 이럴 때 사용할 수 있음
-    - `@PostConstruct` : 생성 되고 난 후 called
+    - 의존성 관리
+    - Scope
+        - 싱글톤: 하나, 기본적으로 설정
+        - 프로포토타입: 매번 다른 객체
+    - Lifecycle Interface : Bean이 추가 됬을 때 뭔가 하고 싶다! 이럴 때 사용할 수 있음
+        - `@PostConstruct` : 생성 되고 난 후 called
 
 ApplicationContext : 실질적으로 사용하게 될 bean factory, 이것 저것 가지고 있음
 
@@ -152,57 +146,57 @@ AppcliationContext
   ```
 
 - AnnotationConfigApplicationContext (Java) : Scan bean with a configuration
-  - Java bean config
+    - Java bean config
 
-    ```java
-    @Configuration
-    class ApplicationConfig {
-      @Bean
-      public BookRepository bookRepository() {
-        return new BookRepository();
+      ```java
+      @Configuration
+      class ApplicationConfig {
+        @Bean
+        public BookRepository bookRepository() {
+          return new BookRepository();
+        }
+        @Bean
+        public BookService bookService() {
+          return new BookService();
+        }
       }
-      @Bean
-      public BookService bookService() {
-        return new BookService();
+      ```
+
+      ```java
+      ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+      String[] names = context.getBeanDefinitioNames()
+      BookService bookService = (BookService) context.getBean("bookService");
+      ```
+
+    - ComponentScan
+
+      ```java
+      @Configuration
+      @ComponentScan(basePackageClasses = io.acktsap.DemoApplication.class)
+      class ApplicationConfig {
       }
-    }
-    ```
+      ```
 
-    ```java
-    ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-    String[] names = context.getBeanDefinitioNames()
-    BookService bookService = (BookService) context.getBean("bookService");
-    ```
-
-  - ComponentScan
-
-    ```java
-    @Configuration
-    @ComponentScan(basePackageClasses = io.acktsap.DemoApplication.class)
-    class ApplicationConfig {
-    }
-    ```
-
-    ```java
-    // same as previous one
-    ```
+      ```java
+      // same as previous one
+      ```
 
 빈 설정
 
 - 빈 명세서
 - 빈에 대한 정의를 담고 있다
-  - 이름
-  - 클래스
-  - 스코프
-  - 생성자 아규먼트 (constructor)
-  - 프로퍼트 (setter)
-  - ..
+    - 이름
+    - 클래스
+    - 스코프
+    - 생성자 아규먼트 (constructor)
+    - 프로퍼트 (setter)
+    - ..
 
 컴포넌트 스캔
 
 - 설정 방법
-  - XML 설정에서는 context:component-scan
-  - 자바 설정에서 `@ComponentScan`
+    - XML 설정에서는 context:component-scan
+    - 자바 설정에서 `@ComponentScan`
 - 특정 패키지 이하의 모든 클래스 중에 `@Component` 애노테이션을 사용한 클래스를 빈으로 자동으로 등록 해 줌
 
 ### @Autowire
@@ -262,8 +256,8 @@ AppcliationContext
 - 해당 타입의 빈이 없는 경우 -> error
 - 해당 타입의 빈이 한 개인 경우 -> ok
 - 해당 타입의 빈이 여러 개인 경우 빈 이름으로 시도
-  - 같은 이름의 빈 찾으면 해당 빈 사용 -> ok
-  - 같은 이름 못 찾으면 실패 -> error
+    - 같은 이름의 빈 찾으면 해당 빈 사용 -> ok
+    - 같은 이름 못 찾으면 실패 -> error
 
 eg.
 
@@ -322,11 +316,11 @@ public class BookService {
 
 - 첫시간에 잠깐 언급했던 빈 라이프사이클 기억하세요?
 - `BeanPostProcessor`
-  - 새로 만든 빈 인스턴스를 수정할 수 있는 라이프 사이클 인터페이스
+    - 새로 만든 빈 인스턴스를 수정할 수 있는 라이프 사이클 인터페이스
 - `AutowiredAnnotationBeanPostProcessor​ extends BeanPostProcessor`
-  - 스프링이 제공하는 @Autowired와 @Value 애노테이션 그리고 JSR-330의 @Inject 애노테이션을 지원하는 애노테이션 처리기.
-  - Bean으로 등록되어 있음
-  - 이름가지고 찾기, 타입가지고 찾기 등등의 일을 함
+    - 스프링이 제공하는 @Autowired와 @Value 애노테이션 그리고 JSR-330의 @Inject 애노테이션을 지원하는 애노테이션 처리기.
+    - Bean으로 등록되어 있음
+    - 이름가지고 찾기, 타입가지고 찾기 등등의 일을 함
 
 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/config/BeanPostProcessor.html
 
@@ -388,10 +382,10 @@ Bean Scope
   ```
 
 - Prototype
-  - Request
-  - Session
-  - WebSocket
-  - ...
+    - Request
+    - Session
+    - WebSocket
+    - ...
 
   ```java
   @Component
@@ -408,30 +402,30 @@ Bean Scope
 
 - Singleton 빈이 참조하는 Prototype bean이 항상 같음 -> 이상함!!
 - 업데이트 하려면
-  - Scoped-Proxy : Proxy proto instance가 bean으로 주입 됨
+    - Scoped-Proxy : Proxy proto instance가 bean으로 주입 됨
 
-    ```java
-    @Component
-    @Scope("prototype", proxyMode = ScopedProxyMode.TARGET_CLASS) // proxy로 이 bean을 감싸라!
-    public class Proto {
-    }
-    ```
-
-  - Object-Provider : 비추, Single bean이 spring 코드에 의존성을 가짐
-
-    ```java
-    @Component
-    public class Single {
-      @Autowired
-      ObjectFactory<Proto> proto;
-
-      public Proto getProto() {
-        return proto.getIfAvailable();
+      ```java
+      @Component
+      @Scope("prototype", proxyMode = ScopedProxyMode.TARGET_CLASS) // proxy로 이 bean을 감싸라!
+      public class Proto {
       }
-    }
-    ```
+      ```
 
-  - Provider (표준)
+    - Object-Provider : 비추, Single bean이 spring 코드에 의존성을 가짐
+
+      ```java
+      @Component
+      public class Single {
+        @Autowired
+        ObjectFactory<Proto> proto;
+  
+        public Proto getProto() {
+          return proto.getIfAvailable();
+        }
+      }
+      ```
+
+    - Provider (표준)
 
 싱글톤 객체 사용시 주의할 점
 
@@ -462,7 +456,7 @@ Profile
 
 - 클래스에 정의
 
-  - `@Configuration @Profile(“test”)`
+    - `@Configuration @Profile(“test”)`
 
   ```java
   @Configuration
@@ -475,17 +469,17 @@ Profile
   }
   ```
 
-  - `@Component @Profile("test")`
+    - `@Component @Profile("test")`
 
-    ```java
-    @Repository
-    @Profile("test") // only on "test" profile
-    public class TestBookRepository implements BookRepository {
-    }
-    ```
+      ```java
+      @Repository
+      @Profile("test") // only on "test" profile
+      public class TestBookRepository implements BookRepository {
+      }
+      ```
 
 - 메소드에 정의
-  - `@Bean @Profile("test")`
+    - `@Bean @Profile("test")`
 
   ```java
   @Configuration
@@ -544,11 +538,11 @@ Property
 프로퍼티에는 우선 순위가 있다.
 
 - StandardServletEnvironment의 우선순위
-  - ServletConfig 매개변수
-  - ServletContext 매개변수
-  - JNDI (java:comp/env/)
-  - JVM 시스템 프로퍼티 (-Dkey="value")
-  - JVM 시스템 환경 변수 (운영 체제 환경 변수)
+    - ServletConfig 매개변수
+    - ServletContext 매개변수
+    - JNDI (java:comp/env/)
+    - JVM 시스템 프로퍼티 (-Dkey="value")
+    - JVM 시스템 환경 변수 (운영 체제 환경 변수)
 
 `@PropertySource`
 
@@ -753,10 +747,10 @@ public void run() {
 
 - 상속 받은 인터페이스
 - 주요 메소드
-  - getInputStream()
-  - exists()
-  - isOpen()
-  - getDescription() : 전체 경로 포함한 파일 이름 또는 실제 URL
+    - getInputStream()
+    - exists()
+    - isOpen()
+    - getDescription() : 전체 경로 포함한 파일 이름 또는 실제 URL
 
 구현체
 
@@ -769,19 +763,18 @@ public void run() {
 리소스 읽어오기
 
 - Resource의 타입은 locaion 문자열과 ​ **ApplicationContext 의의 타입​에 따라 결정** 된다.
-  - ClassPathXmlApplicationContext -> ClassPathResource
-  - FileSystemXmlApplicationContext -> FileSystemResource
-  - WebApplicationContext -> ServletContextResource
+    - ClassPathXmlApplicationContext -> ClassPathResource
+    - FileSystemXmlApplicationContext -> FileSystemResource
+    - WebApplicationContext -> ServletContextResource
 
   ```java
   ApplicationContext classPathCtx = new ClassPathXmlApplicationContext("classpath.xml");
   ApplicationContext fileSystemCtx = new FileSystemXmlApplicationContext("file.xml");
   ```
 
-- ApplicationContext 의의 타입에 상관없이 리소스 타입을 강제하려면 java.net.URL
-  접두어 (+ classpath:) 중중 하나를 사용할 수 있다. (추천)
-  - classpath: ​​me/whiteship/config.xml -> ClassPathResource
-  - file:// ​​/some/resource/path/config.xml -> FileSystemResource
+- ApplicationContext 의의 타입에 상관없이 리소스 타입을 강제하려면 java.net.URL 접두어 (+ classpath:) 중중 하나를 사용할 수 있다. (추천)
+    - classpath: ​​me/whiteship/config.xml -> ClassPathResource
+    - file:// ​​/some/resource/path/config.xml -> FileSystemResource
 
   ```java
   ApplicationContext context = new ClassPathXmlApplicationContext("classpath.xml");
@@ -800,8 +793,7 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 
 - 어떤한 계층과도 관계가 없다. => 모든 계층(웹, 서비스, 데이터)에서 사용해도 좋다
 
-- 구현체 중 하나로, JSR-303(Bean Validation 1.0)과 JSR-349(Bean Validation 1.1)을
-지원한다. (​LocalValidatorFactoryBean​)
+- 구현체 중 하나로, JSR-303(Bean Validation 1.0)과 JSR-349(Bean Validation 1.1)을 지원한다. (​LocalValidatorFactoryBean​)
 - DataBinder에 들어가 바인딩 할 때 같이 사용되기도 한다.
 
 인터페이스
@@ -834,10 +826,8 @@ https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframe
 PropertyEditor
 
 - 스프링 3.0 이전까지 DataBinder가 변환 작업 사용하던 인터페이스
-- 쓰레드-세이프 하지 않음 (상태 정보 저장 하고 있음, 따라서 싱글톤 빈으로 등록해서
-쓰다가는...)
-- Object와 String 간의 변환만 할 수 있어, 사용 범위가 제한적 임. (그래도 그런 경우가
-대부분이기 때문에 잘 사용해 왔음. 조심해서..)
+- 쓰레드-세이프 하지 않음 (상태 정보 저장 하고 있음, 따라서 싱글톤 빈으로 등록해서 쓰다가는...)
+- Object와 String 간의 변환만 할 수 있어, 사용 범위가 제한적 임. (그래도 그런 경우가 대부분이기 때문에 잘 사용해 왔음. 조심해서..)
 
 ```java
 public class EventPropertyEditor extends PropertyEditorSupport {
@@ -912,8 +902,7 @@ ConversionService
 
 Spring Boot
 
-- 웹 애플리케이션인 경우에 DefaultFormattingConversionSerivce를 상속하여 만든
-WebConversionService ​​를 빈으로 등록해 준다.
+- 웹 애플리케이션인 경우에 DefaultFormattingConversionSerivce를 상속하여 만든 WebConversionService ​​를 빈으로 등록해 준다.
 - Formatter와 Converter 빈을 찾아 자동으로 등록해 준다.
 
 [To up](#spring-core)
@@ -929,8 +918,7 @@ WebConversionService ​​를 빈으로 등록해 준다.
 - 객체 그래프를 조회하고 조작하는 기능을 제공한다
 
 - Unified EL​과 비슷하지만, 메소드 호출을 지원하며, 문자열 템플릿 기능도 제공한다.
-- OGNL, MVEL, JBOss EL 등 자바에서 사용할 수 있는 여러 EL이 있지만, SpEL은
-모든 스프링 프로젝트 전반에 걸쳐 사용할 EL로 만들었다.
+- OGNL, MVEL, JBOss EL 등 자바에서 사용할 수 있는 여러 EL이 있지만, SpEL은 모든 스프링 프로젝트 전반에 걸쳐 사용할 EL로 만들었다.
 - 스프링 3.0 부터 지원.
 
 SpEL 구성
@@ -942,11 +930,11 @@ SpEL 구성
 
 문법
 
-- #{“표현식"}
+- # {“표현식"}
 - ${“프로퍼티"}
 - 표현식은 프로퍼티를 가질 수 있지만, 반대는 안 됨.
 
-- #{${my.data} + 1}
+- # {${my.data} + 1}
 - 레퍼런스​ 참고
 
 실제로 어디서 쓰나?
@@ -1008,8 +996,7 @@ AOP 적용 방법
 - 프록시 기반의 AOP ​​ 구현체
 - 스프링 빈에만 AOP 를를 적용​​할 수 있다
 
-- 모든 AOP 기능을 제공하는 것이 목적이 아니라, 스프링 IoC와 연동하여 엔터프라이즈
-애플리케이션에서 가장 흔한 문제에 대한 해결책을 제공하는 것이 목적.
+- 모든 AOP 기능을 제공하는 것이 목적이 아니라, 스프링 IoC와 연동하여 엔터프라이즈 애플리케이션에서 가장 흔한 문제에 대한 해결책을 제공하는 것이 목적.
 
 프록시 패턴
 
@@ -1029,11 +1016,11 @@ AOP 적용 방법
 
 - 스프링 IoC 컨테이너가 제공하는 기반 시설과 Dynamic 프록시를 사용하여 여러 복잡한 문제 해결.
 - Dynamic Proxy: 런타임에 동적으로 프록시 객체 생성하는 방법
-  - 자바가 제공하는 방법은 인터페이스 기반 프록시 생성.
-  - CGlib은 클래스 기반 프록시도 지원.
+    - 자바가 제공하는 방법은 인터페이스 기반 프록시 생성.
+    - CGlib은 클래스 기반 프록시도 지원.
 - 스프링 IoC: 기존 빈을 대체하는 동적 프록시 빈을 만들어 등록 시켜준다.
-  - 클라이언트 코드 변경 없음.
-  - `AbstractAutoProxyCreator​ implements ​BeanPostProcessor`
+    - 클라이언트 코드 변경 없음.
+    - `AbstractAutoProxyCreator​ implements ​BeanPostProcessor`
 
 ### @AOP
 

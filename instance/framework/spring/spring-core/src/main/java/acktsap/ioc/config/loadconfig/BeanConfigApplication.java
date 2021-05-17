@@ -13,8 +13,8 @@ public class BeanConfigApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(BeanConfigApplication.class)
-                .web(WebApplicationType.NONE)
-                .run(args);
+            .web(WebApplicationType.NONE)
+            .run(args);
     }
 
 }

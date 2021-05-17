@@ -25,9 +25,9 @@ public class BatchConfig {
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job footballJob(Step playerLoad) {
+    public Job footballJob() {
         return this.jobBuilderFactory.get("footballJob")
-            .start(playerLoad)
+            .start(playerLoad())
             .build();
     }
 

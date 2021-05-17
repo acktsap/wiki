@@ -23,53 +23,53 @@ public class HeaderParamsMappingControllerTest {
     @Test
     public void testFromHeader() throws Exception {
         mockMvc.perform(get("/header")
-                .header(HttpHeaders.FROM, "localhost"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("fromHeader"));
+            .header(HttpHeaders.FROM, "localhost"))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("fromHeader"));
     }
 
     @Test
     public void testNotFromHeader() throws Exception {
         mockMvc.perform(get("/header"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("notFromHeader"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("notFromHeader"));
     }
 
     @Test
     public void testAuthorizationHeaderValue() throws Exception {
         mockMvc.perform(get("/header")
-                .header(HttpHeaders.AUTHORIZATION, "111"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("authorizationHeaderValue"));
+            .header(HttpHeaders.AUTHORIZATION, "111"))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("authorizationHeaderValue"));
     }
 
     @Test
     public void testParams() throws Exception {
         mockMvc.perform(get("/params")
-                .param("name", "acktsap"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("params"));
+            .param("name", "acktsap"))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("params"));
     }
 
     @Test
     public void testNotParams() throws Exception {
         mockMvc.perform(get("/params"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("notParams"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("notParams"));
     }
 
     @Test
     public void testSpecificParams() throws Exception {
         mockMvc.perform(get("/params")
-                .param("name", "111"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("specificParams"));
+            .param("name", "111"))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("specificParams"));
     }
 
 }

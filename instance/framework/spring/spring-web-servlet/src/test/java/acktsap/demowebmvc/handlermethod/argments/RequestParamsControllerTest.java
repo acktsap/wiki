@@ -22,25 +22,25 @@ public class RequestParamsControllerTest {
     @Test
     public void testPlain() throws Exception {
         mockMvc.perform(get("/requestparams/plain")
-                .param("name", "acktsap"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"));
+            .param("name", "acktsap"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"));
     }
 
     @Test
     public void testPlainMissingAnnotation() throws Exception {
         mockMvc.perform(get("/requestparams/missing")
-                .param("name", "acktsap"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"));
+            .param("name", "acktsap"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"));
     }
 
     @Test
     public void testMap() throws Exception {
         mockMvc.perform(get("/requestparams/map")
-                .param("name", "acktsap"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"));
+            .param("name", "acktsap"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"));
     }
 
 }

@@ -40,7 +40,7 @@ public class MediaMappingController {
     }
 
     @RequestMapping(value = "/textjson", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.TEXT_PLAIN_VALUE)
+        produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
     public String mediaTextJson() {
         return "mediaTextJson";

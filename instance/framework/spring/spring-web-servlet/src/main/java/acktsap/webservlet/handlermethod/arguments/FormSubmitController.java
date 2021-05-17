@@ -33,7 +33,7 @@ public class FormSubmitController {
     // get from html <form> tag
     @PostMapping
     public String createEvent(@Validated(Event.Common.class) @ModelAttribute Event event,
-                              BindingResult bindingResult) {
+        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.err.println(bindingResult);
             // model이 error 담고 있음

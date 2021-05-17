@@ -41,7 +41,7 @@ public class CommonModelAttributeController {
         spring.setName("spring");
         spring.setLimit(10);
 
-        Event newEvent = (Event) model.asMap().get("newEvent");
+        Event newEvent = (Event)model.asMap().get("newEvent");
 
         List<Event> eventList = new ArrayList<>();
         eventList.add(spring);

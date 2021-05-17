@@ -40,7 +40,7 @@ public class GreetingInterceptor implements HandlerInterceptor {
     // - 리턴값으로 계속 다음 인터셉터 또는 핸들러로 요청,응답을 전달할지(true) 응답 처리가 이곳에서 끝났는지(false) 알린다.
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+        throws Exception {
         System.out.println(getClass() + "::preHandle");
         return true;
     }
@@ -51,7 +51,7 @@ public class GreetingInterceptor implements HandlerInterceptor {
     // - 비동기적인 요청 처리 시에는 호출되지 않는다.
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-                           ModelAndView modelAndView) throws Exception {
+        ModelAndView modelAndView) throws Exception {
         System.out.println(getClass() + "::postHandle");
     }
 
@@ -61,7 +61,7 @@ public class GreetingInterceptor implements HandlerInterceptor {
     // - 비동기적인 요청 처리 시에는 호출되지 않는다.
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-                                Object handler, Exception ex) throws Exception {
+        Object handler, Exception ex) throws Exception {
         System.out.println(getClass() + "::afterCompletion");
     }
 

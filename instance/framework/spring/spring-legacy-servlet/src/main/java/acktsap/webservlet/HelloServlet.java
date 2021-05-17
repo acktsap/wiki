@@ -27,13 +27,13 @@ public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         // get 될 때 마다 실행됨
         System.out.println("doGet");
 
         // Get servlet attribute from servelt context
         // MyListener에서 등록된 이벤트를 가지고 옴
-        String name = (String) getServletContext().getAttribute("name");
+        String name = (String)getServletContext().getAttribute("name");
         System.out.println("ServeltContract attribute name: " + name);
 
         /**
@@ -43,8 +43,8 @@ public class HelloServlet extends HttpServlet {
          * {@code WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE}의 속성으로
          * {@link WebApplicationContext}를 등록해줌. 그래서 뽑을 수 있음.
          */
-        ApplicationContext context = (ApplicationContext) getServletContext()
-                .getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        ApplicationContext context = (ApplicationContext)getServletContext()
+            .getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
         System.out.println("ServeltContract spring context name: " + context);
         HelloService helloService = context.getBean(HelloService.class);
 

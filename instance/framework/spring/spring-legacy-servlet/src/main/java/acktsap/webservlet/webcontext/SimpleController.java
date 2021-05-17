@@ -18,7 +18,7 @@ public class SimpleController implements Controller {
 
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+        throws Exception {
         /**
          * return : {@link ModelAndView}.
          *

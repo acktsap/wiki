@@ -37,12 +37,12 @@ public class RequestBodyControllerTest {
         String json = objectMapper.writeValueAsString(event);
 
         mockMvc.perform(post("/requestbody")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("keesun"))
-                .andExpect(jsonPath("limit").value(-20));
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("keesun"))
+            .andExpect(jsonPath("limit").value(-20));
     }
 
     @Test
@@ -54,12 +54,12 @@ public class RequestBodyControllerTest {
         String json = objectMapper.writeValueAsString(event);
 
         mockMvc.perform(post("/requestbody/httpentity")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("keesun"))
-                .andExpect(jsonPath("limit").value(20));
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("keesun"))
+            .andExpect(jsonPath("limit").value(20));
     }
 
 }

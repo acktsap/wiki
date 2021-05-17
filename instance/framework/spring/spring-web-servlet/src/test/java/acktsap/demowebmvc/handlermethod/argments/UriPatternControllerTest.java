@@ -21,39 +21,39 @@ public class UriPatternControllerTest {
     @Test
     public void testPathvariable() throws Exception {
         mockMvc.perform(get("/uripattern/pathvariable1/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(1));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("id").value(1));
     }
 
     @Test
     public void testPathvariableWithOptionalWithValue() throws Exception {
         mockMvc.perform(get("/uripattern/pathvariable2/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(1));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("id").value(1));
     }
 
     @Test
     public void testPathvariableWithOptionalWithoutValue() throws Exception {
         mockMvc.perform(get("/uripattern/pathvariable2"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(Integer.MAX_VALUE));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("id").value(Integer.MAX_VALUE));
     }
 
     @Test
     public void testMatrixVariable() throws Exception {
         mockMvc.perform(get("/uripattern/matrixvariable1/1;name=acktsap"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(1))
-                .andExpect(jsonPath("name").value("acktsap"))
-                .andExpect(jsonPath("limit").value(Integer.MIN_VALUE));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("id").value(1))
+            .andExpect(jsonPath("name").value("acktsap"))
+            .andExpect(jsonPath("limit").value(Integer.MIN_VALUE));
     }
 
     @Test
     public void testMatrixVariableWithMap() throws Exception {
         mockMvc.perform(get("/uripattern/matrixvariable2/1;name=acktsap"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value(1))
-                .andExpect(jsonPath("name").value("acktsap"));
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("id").value(1))
+            .andExpect(jsonPath("name").value("acktsap"));
     }
 
 }

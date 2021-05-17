@@ -29,21 +29,21 @@ public class HeadOptionsControllerTest {
     @Test
     public void testHead() throws Exception {
         mockMvc.perform(head("/headoptions"))
-                .andExpect(status().isOk())
-                .andDo(print());
+            .andExpect(status().isOk())
+            .andDo(print());
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testOptions() throws Exception {
         mockMvc.perform(options("/headoptions"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(header().stringValues(HttpHeaders.ALLOW, hasItems(
-                        containsString("GET"),
-                        containsString("POST"),
-                        containsString("HEAD"),
-                        containsString("OPTIONS"))));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(header().stringValues(HttpHeaders.ALLOW, hasItems(
+                containsString("GET"),
+                containsString("POST"),
+                containsString("HEAD"),
+                containsString("OPTIONS"))));
     }
 
 }

@@ -29,11 +29,11 @@ public class CommonModelAttributeControllerTest {
         newEvent.setLimit(10000);
 
         mockMvc.perform(get("/modelattribute2/list")
-                .flashAttr("newEvent", newEvent))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("categories"))
-                .andExpect(xpath("//p").nodeCount(2));
+            .flashAttr("newEvent", newEvent))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("categories"))
+            .andExpect(xpath("//p").nodeCount(2));
     }
 
 }

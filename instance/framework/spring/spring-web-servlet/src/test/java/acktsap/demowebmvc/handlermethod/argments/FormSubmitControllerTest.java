@@ -25,29 +25,29 @@ public class FormSubmitControllerTest {
     @Test
     public void testFormPost() throws Exception {
         mockMvc.perform(post("/form")
-                .param("name", "acktsap")
-                .param("limit", "20"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"))
-                .andExpect(jsonPath("limit").value("20"));
+            .param("name", "acktsap")
+            .param("limit", "20"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"))
+            .andExpect(jsonPath("limit").value("20"));
     }
 
     @Test
     public void testFormView() throws Exception {
         mockMvc.perform(get("/form"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(view().name("/events/form"))
-                .andExpect(model().attributeExists("event"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(view().name("/events/form"))
+            .andExpect(model().attributeExists("event"));
     }
 
     @Test
     public void testFormViewError() throws Exception {
         mockMvc.perform(post("/form")
-                .param("name", "acktsap")
-                .param("limit", "-10")) // wrong, validated에서 걸림
-                .andExpect(status().isOk())
-                .andExpect(model().hasErrors()); // model has error
+            .param("name", "acktsap")
+            .param("limit", "-10")) // wrong, validated에서 걸림
+            .andExpect(status().isOk())
+            .andExpect(model().hasErrors()); // model has error
     }
 
 }

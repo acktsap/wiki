@@ -29,17 +29,17 @@ public class RedirectionControllerTest {
     @Test
     public void testRedirectAttribute() throws Exception {
         mockMvc.perform(get("/redirection/attribute"))
-                .andExpect(redirectedUrl("/redirection/list?name=aaa&limit=111")) // present to uri
-                .andExpect(model().attribute("name", "aaa"))
-                .andExpect(model().attribute("limit", "111"));
+            .andExpect(redirectedUrl("/redirection/list?name=aaa&limit=111")) // present to uri
+            .andExpect(model().attribute("name", "aaa"))
+            .andExpect(model().attribute("limit", "111"));
     }
 
     @Test
     public void testRedirectFlashAttribute() throws Exception {
         mockMvc.perform(get("/redirection/flashattribute"))
-                .andExpect(redirectedUrl("/redirection/list")) // hidden to uri
-                .andExpect(flash().attribute("name", "bbb"))
-                .andExpect(flash().attribute("limit", "222"));
+            .andExpect(redirectedUrl("/redirection/list")) // hidden to uri
+            .andExpect(flash().attribute("name", "bbb"))
+            .andExpect(flash().attribute("limit", "222"));
     }
 
     @Test
@@ -49,11 +49,11 @@ public class RedirectionControllerTest {
         flashEvent.setLimit(10000);
 
         mockMvc.perform(get("/redirection/list")
-                .sessionAttr("visitTime", LocalDateTime.now()) // binded to @SessionAttribute
-                .flashAttr("flashEvent", flashEvent)) // binded to @ModelAttribute("flashEvent")
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("3"));
+            .sessionAttr("visitTime", LocalDateTime.now()) // binded to @SessionAttribute
+            .flashAttr("flashEvent", flashEvent)) // binded to @ModelAttribute("flashEvent")
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("3"));
     }
 
 }

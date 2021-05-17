@@ -46,7 +46,7 @@ public class SessionAttributeController {
     @GetMapping("/visit2")
     @ResponseBody
     public String visitTime(Model model, HttpSession httpSession) {
-        LocalDateTime visitTime = (LocalDateTime) httpSession.getAttribute("visitTime");
+        LocalDateTime visitTime = (LocalDateTime)httpSession.getAttribute("visitTime");
         System.out.println(visitTime);
         return visitTime.toString();
     }

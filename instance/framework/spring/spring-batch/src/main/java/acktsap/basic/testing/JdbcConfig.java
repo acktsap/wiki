@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 public class JdbcConfig {
 
     /*
-        localhost:8080/h2-console
-            user : "sa"
-            pw : ""
+      localhost:8080/h2-console
+        user : "sa"
+        pw : ""
 
-        들어가서 table 값 확인해봐
+      들어가서 table 값 확인해봐
      */
     @Bean
     public DataSource dataSource() {

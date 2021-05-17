@@ -1,21 +1,21 @@
 # Spring Data JPA
 
 - [Spring Data JPA](#spring-data-jpa)
-  - [Why](#why)
-  - [How repository bean is injected](#how-repository-bean-is-injected)
-  - [Query문을 작성하는 방법](#query%eb%ac%b8%ec%9d%84-%ec%9e%91%ec%84%b1%ed%95%98%eb%8a%94-%eb%b0%a9%eb%b2%95)
-  - [Transactional](#transactional)
-  - [References](#references)
+    - [Why](#why)
+    - [How repository bean is injected](#how-repository-bean-is-injected)
+    - [Query문을 작성하는 방법](#query%eb%ac%b8%ec%9d%84-%ec%9e%91%ec%84%b1%ed%95%98%eb%8a%94-%eb%b0%a9%eb%b2%95)
+    - [Transactional](#transactional)
+    - [References](#references)
 
 ## Why
 
 - 대부분의 data access layer에서는 CRUD의 반복이 일어남. 이를 그냥 JPA만 사용해서 구현하는 것은 엄청난 반복. 이를 Generic을 사용해서 처리해보자!
 - `JpaRepository`같은 특정 인터페이스를 상속한 후 method를 규약에 맞게 작성하면 Spring이 CRUD에 대한 구현체를 주입시켜줌
 - Spring Data JPA 인터페이스들
-  - `Repostiory` : Repository에 대한 Marker Interface
-  - `CrudRepository` : 기본 CRUD제공
-  - `PagingAndSortingRepository` : CrudRepository에 Pagination, Sorting 추가로 제공
-  - `JpaRepository` : Jpa version of Repostiory
+    - `Repostiory` : Repository에 대한 Marker Interface
+    - `CrudRepository` : 기본 CRUD제공
+    - `PagingAndSortingRepository` : CrudRepository에 Pagination, Sorting 추가로 제공
+    - `JpaRepository` : Jpa version of Repostiory
 
 ## How repository bean is injected
 

@@ -21,59 +21,59 @@ public class ModelAttributeControllerTest {
     @Test
     public void testPlain() throws Exception {
         mockMvc.perform(get("/modelattribute/plain")
-                .param("name", "acktsap")
-                .param("limit", "30"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"))
-                .andExpect(jsonPath("limit").value("30"));
+            .param("name", "acktsap")
+            .param("limit", "30"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"))
+            .andExpect(jsonPath("limit").value("30"));
     }
 
     @Test
     public void testMissing() throws Exception {
         mockMvc.perform(get("/modelattribute/missing")
-                .param("name", "acktsap")
-                .param("limit", "30"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"))
-                .andExpect(jsonPath("limit").value("30"));
+            .param("name", "acktsap")
+            .param("limit", "30"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"))
+            .andExpect(jsonPath("limit").value("30"));
     }
 
     @Test
     public void testBindingError() throws Exception {
         mockMvc.perform(get("/modelattribute/plain")
-                .param("name", "acktsap")
-                .param("limit", "aaaa")) // error
-                .andExpect(status().isBadRequest());
+            .param("name", "acktsap")
+            .param("limit", "aaaa")) // error
+            .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testBindingResult() throws Exception {
         mockMvc.perform(get("/modelattribute/bindingresult")
-                .param("name", "acktsap")
-                .param("limit", "aaa")) // must be number. but bindingresult holds error
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"))
-                .andExpect(jsonPath("limit").doesNotExist()); // so, null
+            .param("name", "acktsap")
+            .param("limit", "aaa")) // must be number. but bindingresult holds error
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"))
+            .andExpect(jsonPath("limit").doesNotExist()); // so, null
     }
 
     @Test
     public void testValid() throws Exception {
         mockMvc.perform(get("/modelattribute/valid")
-                .param("name", "acktsap")
-                .param("limit", "-10")) // error on Min(0)
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("acktsap"))
-                .andExpect(jsonPath("limit").value("-10")); // inserted since binding result holds error
+            .param("name", "acktsap")
+            .param("limit", "-10")) // error on Min(0)
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").value("acktsap"))
+            .andExpect(jsonPath("limit").value("-10")); // inserted since binding result holds error
     }
 
     @Test
     public void testValidated() throws Exception {
         mockMvc.perform(get("/modelattribute/valid")
-                // .param("name", "acktsap") // missing
-                .param("limit", "-10")) // valid since group1 is used
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").doesNotExist()) // so, null
-                .andExpect(jsonPath("limit").value("-10"));
+            // .param("name", "acktsap") // missing
+            .param("limit", "-10")) // valid since group1 is used
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("name").doesNotExist()) // so, null
+            .andExpect(jsonPath("limit").value("-10"));
     }
 
 }

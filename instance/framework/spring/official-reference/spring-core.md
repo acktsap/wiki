@@ -1,12 +1,12 @@
 # Spring Core
 
 - [Spring Core](#spring-core)
-  - [5. Aspect Oriented Programming with Spring](#5-aspect-oriented-programming-with-spring)
-    - [5.1. AOP Concepts](#51-aop-concepts)
-    - [5.2. Spring AOP Capabilities and Goals](#52-spring-aop-capabilities-and-goals)
-    - [5.3. AOP Proxies](#53-aop-proxies)
-    - [5.4. @AspectJ support](#54-aspectj-support)
-      - [5.4.1. Enabling @AspectJ Support](#541-enabling-aspectj-support)
+    - [5. Aspect Oriented Programming with Spring](#5-aspect-oriented-programming-with-spring)
+        - [5.1. AOP Concepts](#51-aop-concepts)
+        - [5.2. Spring AOP Capabilities and Goals](#52-spring-aop-capabilities-and-goals)
+        - [5.3. AOP Proxies](#53-aop-proxies)
+        - [5.4. @AspectJ support](#54-aspectj-support)
+            - [5.4.1. Enabling @AspectJ Support](#541-enabling-aspectj-support)
 
 ## 5. Aspect Oriented Programming with Spring
 

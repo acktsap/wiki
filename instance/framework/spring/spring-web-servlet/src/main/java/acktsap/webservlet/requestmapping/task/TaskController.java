@@ -25,7 +25,7 @@ public class TaskController {
     }
 
     @PostMapping(value = "/tasks", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postTasks() {
         return "postTasks";
@@ -38,7 +38,7 @@ public class TaskController {
     }
 
     @PutMapping(value = "/tasks/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String putTasks(@PathVariable String id) {
         return "putTasks";

@@ -35,7 +35,7 @@ public class ResponseBodyController {
 
     @PostMapping("/entity")
     public ResponseEntity<Event> createEvent2(@RequestBody @Validated(Event.Common.class) Event event,
-                                              BindingResult bindingResult) {
+        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }

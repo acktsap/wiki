@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @SpringBootTest
 public class TransactionAnnotationTest {
 
-
     @TestConfiguration
     static class TestConfig {
 
@@ -43,7 +42,7 @@ public class TransactionAnnotationTest {
     static class TestClass {
 
         public void callsInternally() {
-            TestClass proxy = (TestClass) AopContext.currentProxy();
+            TestClass proxy = (TestClass)AopContext.currentProxy();
 
             proxy.publicTxCall();
 
@@ -62,19 +61,19 @@ public class TransactionAnnotationTest {
         void packageTxCall() {
             // package라서 Transactional 적용 안되서 NoTransactionException 던짐
             assertThatThrownBy(TransactionAspectSupport::currentTransactionStatus)
-                    .isInstanceOf(NoTransactionException.class);
+                .isInstanceOf(NoTransactionException.class);
         }
 
         @Transactional
         protected void protectedTxCall() {
             // protected라서 Transactional 적용 안되서 NoTransactionException 던짐
             assertThatThrownBy(TransactionAspectSupport::currentTransactionStatus)
-                    .isInstanceOf(NoTransactionException.class);
+                .isInstanceOf(NoTransactionException.class);
         }
 
         @Transactional
         public void callsInternallyWithAnnotated() {
-            TestClass proxy = (TestClass) AopContext.currentProxy();
+            TestClass proxy = (TestClass)AopContext.currentProxy();
 
             TransactionStatus current = TransactionAspectSupport.currentTransactionStatus();
 
@@ -118,14 +117,14 @@ public class TransactionAnnotationTest {
         protected void protectedTxCallRequired(TransactionStatus calledTxStatus) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             assertThat(status)
-                    .isEqualTo(calledTxStatus); // protected라서 Transactional이 적용이 안되서서 이전하고 객체가 같음
+                .isEqualTo(calledTxStatus); // protected라서 Transactional이 적용이 안되서서 이전하고 객체가 같음
         }
 
         @Transactional(propagation = Propagation.REQUIRES_NEW)
         protected void protectedTxCallRequireNew(TransactionStatus calledTxStatus) {
             TransactionStatus status = TransactionAspectSupport.currentTransactionStatus();
             assertThat(status)
-                    .isEqualTo(calledTxStatus); // protected라서 Transactional이 적용이 안되서서 이전하고 객체가 같음
+                .isEqualTo(calledTxStatus); // protected라서 Transactional이 적용이 안되서서 이전하고 객체가 같음
         }
 
     }

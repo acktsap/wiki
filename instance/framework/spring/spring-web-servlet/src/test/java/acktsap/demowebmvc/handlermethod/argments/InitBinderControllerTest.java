@@ -24,11 +24,11 @@ public class InitBinderControllerTest {
     @Test
     public void testGetEventWithIdPresent() throws Exception {
         mockMvc.perform(get("/initbinder/events")
-                .param("id", "333")
-                .param("name", "acktsap"))
-                .andDo(print())
-                .andExpect(jsonPath("id").doesNotExist())
-                .andExpect(jsonPath("name").value("acktsap"));
+            .param("id", "333")
+            .param("name", "acktsap"))
+            .andDo(print())
+            .andExpect(jsonPath("id").doesNotExist())
+            .andExpect(jsonPath("name").value("acktsap"));
     }
 
     @Test
@@ -38,9 +38,9 @@ public class InitBinderControllerTest {
         event.setName("bad");
 
         mockMvc.perform(get("/initbinder/events")
-                .param("id", "333")
-                .param("name", "bad"))
-                .andExpect(status().isBadRequest());
+            .param("id", "333")
+            .param("name", "bad"))
+            .andExpect(status().isBadRequest());
     }
 
 }

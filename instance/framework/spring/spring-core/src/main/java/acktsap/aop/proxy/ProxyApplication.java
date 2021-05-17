@@ -13,9 +13,9 @@ public class ProxyApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(ProxyApplication.class)
-                .web(WebApplicationType.NONE)
-                .build()
-                .run(args);
+            .web(WebApplicationType.NONE)
+            .build()
+            .run(args);
     }
 
 }

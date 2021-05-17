@@ -46,7 +46,7 @@ public class InitBinderController {
 
         @Override
         public void validate(Object target, Errors errors) {
-            Event event = (Event) target;
+            Event event = (Event)target;
             if (event.getName().equals("bad")) {
                 errors.rejectValue("name", "wrongValue", "the value is not allowed");
             }

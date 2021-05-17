@@ -25,7 +25,7 @@ public class EventEditor extends PropertyEditorSupport {
 
     @Override
     public String getAsText() {
-        Event event = (Event) getValue();
+        Event event = (Event)getValue();
         return event.getId().toString();
     }
 

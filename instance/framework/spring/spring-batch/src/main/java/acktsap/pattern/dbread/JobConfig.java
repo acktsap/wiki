@@ -35,7 +35,7 @@ public class JobConfig {
     private final int poolSize = Runtime.getRuntime().availableProcessors() * 2;
     private final int chunkSize = 3;
     private final int pageSize = 3;
-    private final Supplier<Integer> startCursorProvider = new Supplier<>() {
+    private final Supplier<Integer> startIdProvider = new Supplier<>() {
         private final Object lock = new Object();
         private int cursor = 1;
 
@@ -78,8 +78,8 @@ public class JobConfig {
             .transactionManager(transactionManager)
             .<List<Customer>, List<Customer>>chunk(chunkSize)
             .reader(() -> {
-                int cursor = startCursorProvider.get();
-                String sql = String.format("SELECT * FROM CUSTOMER WHERE %d <= ID AND ID <= %d", cursor, cursor + (pageSize - 1));
+                int startId = startIdProvider.get();
+                String sql = String.format("SELECT * FROM CUSTOMER WHERE %d <= ID AND ID <= %d", startId, startId + (pageSize - 1));
                 List<Customer> customers = jdbcOperations.query(sql, (rs, rowNum) -> {
                     long id = rs.getLong(1);
                     String name = rs.getString(2);
@@ -93,7 +93,7 @@ public class JobConfig {
                 System.out.printf("[%s] Read %s%n", Thread.currentThread().getName(), customers);
                 return customers;
             })
-            .processor((ItemProcessor<? super List<Customer>, ? extends  List<Customer>>)datas -> {
+            .processor((ItemProcessor<? super List<Customer>, ? extends List<Customer>>)datas -> {
                 System.out.printf("[%s] Process %s%n", Thread.currentThread().getName(), datas);
                 return datas;
             })

@@ -25,6 +25,7 @@ public class JobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final JobLauncher jobLauncher;
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Bean
     public Job footballJob() {
@@ -35,7 +36,6 @@ public class JobConfig {
             .build();
 
         // to simulate restart
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         executorService.scheduleAtFixedRate(new Runnable() {
             private int count = 1;
 

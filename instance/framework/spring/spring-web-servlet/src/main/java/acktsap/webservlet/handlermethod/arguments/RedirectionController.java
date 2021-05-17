@@ -61,7 +61,7 @@ public class RedirectionController {
     @GetMapping("/list")
     @ResponseBody
     public String getEvents(@ModelAttribute("flashEvent") Event flashEvent,
-                            @SessionAttribute LocalDateTime visitTime, Model model, SessionStatus status) {
+        @SessionAttribute LocalDateTime visitTime, Model model, SessionStatus status) {
         Event spring = new Event();
         spring.setName("spring");
         spring.setLimit(10);

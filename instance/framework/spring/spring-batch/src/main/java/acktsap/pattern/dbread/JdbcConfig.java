@@ -13,7 +13,7 @@ public class JdbcConfig {
     /*
         localhost:8080/h2-console
             user : "sa"
-            pw : ""
+            pw   : ""
 
         들어가서 table 값 확인해봐
      */

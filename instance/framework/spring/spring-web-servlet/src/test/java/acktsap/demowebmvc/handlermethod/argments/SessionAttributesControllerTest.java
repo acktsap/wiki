@@ -25,11 +25,11 @@ public class SessionAttributesControllerTest {
     @Test
     public void eventForm() throws Exception {
         MockHttpServletRequest mockRequest = mockMvc.perform(get("/session/events/name"))
-                .andDo(print())
-                .andExpect(view().name("/events/form-name"))
-                .andExpect(model().attributeExists("event"))
-                .andExpect(request().sessionAttribute("event", notNullValue()))
-                .andReturn().getRequest();
+            .andDo(print())
+            .andExpect(view().name("/events/form-name"))
+            .andExpect(model().attributeExists("event"))
+            .andExpect(request().sessionAttribute("event", notNullValue()))
+            .andReturn().getRequest();
         Object event = mockRequest.getSession().getAttribute("event");
         System.out.println(event);
     }

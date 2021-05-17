@@ -25,64 +25,64 @@ public class HttpMappingControllerTest {
     @Test
     public void helloGet() throws Exception {
         mockMvc.perform(get("/hello"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello"));
     }
 
     @Test
     public void helloPost() throws Exception {
         mockMvc.perform(post("/hello"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello"));
     }
 
     @Test
     public void helloPut() throws Exception {
         mockMvc.perform(put("/hello"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello"));
     }
 
     @Test
     public void helloDelete() throws Exception {
         mockMvc.perform(delete("/hello"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello"));
     }
 
     @Test
     public void hello2Get() throws Exception {
         mockMvc.perform(get("/hello2"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello2"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello2"));
     }
 
     @Test
     public void hello2Put() throws Exception {
         mockMvc.perform(put("/hello2"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello2"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hello2"));
     }
 
     @Test
     public void shouldFailOnHello2Post() throws Exception {
         mockMvc.perform(post("/hello2"))
-                .andDo(print())
-                .andExpect(status().isMethodNotAllowed());
+            .andDo(print())
+            .andExpect(status().isMethodNotAllowed());
     }
 
     @Test
     public void hiGet() throws Exception {
         mockMvc.perform(get("/hi"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("hi"));
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().string("hi"));
     }
 
 }

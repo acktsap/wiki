@@ -22,23 +22,23 @@ public class CustomExceptionHandlerControllerTest {
     @Test
     public void testCustom() throws Exception {
         mockMvc.perform(get("/exception/custom"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("custom"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("custom"));
     }
 
     @Test
     public void testEntity() throws Exception {
         mockMvc.perform(get("/exception/entity"))
-                .andExpect(status().isBadRequest());
+            .andExpect(status().isBadRequest());
     }
 
     @Test
     public void testGlobal() throws Exception {
         mockMvc.perform(get("/exception/global"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("global"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("global"));
     }
 
 }

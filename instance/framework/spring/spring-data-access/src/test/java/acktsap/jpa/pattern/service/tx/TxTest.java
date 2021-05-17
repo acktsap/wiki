@@ -32,8 +32,8 @@ public class TxTest {
     public void usingConcTxNotApplied() {
         // given
         Event event = Event.builder()
-                .id(1L)
-                .build();
+            .id(1L)
+            .build();
 
         // when
         txEventServiceConc.callsFailTxOperationNotApplied(event, "create");
@@ -47,8 +47,8 @@ public class TxTest {
     public void usingConc() {
         // given
         Event event = Event.builder()
-                .id(1L)
-                .build();
+            .id(1L)
+            .build();
 
         // when
         txEventServiceConc.callsFailTxOperation(event, "create");
@@ -62,8 +62,8 @@ public class TxTest {
     public void usingInterface() {
         // given
         Event event = Event.builder()
-                .id(1L)
-                .build();
+            .id(1L)
+            .build();
 
         // when
         txEventService.callsFailTxOperation(event, "create");

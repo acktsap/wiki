@@ -39,8 +39,8 @@ public class EnvironmentRunner implements ApplicationRunner {
         // spring boot는 자동으로 classpath:/message.properties를 읽음
         MessageSource messageSource = applicationContext;
         String defaultName = messageSource
-                .getMessage("greeting", new String[]{"lim"}, Locale.getDefault());
-        String krName = messageSource.getMessage("greeting", new String[]{"lim"}, Locale.KOREA);
+            .getMessage("greeting", new String[] {"lim"}, Locale.getDefault());
+        String krName = messageSource.getMessage("greeting", new String[] {"lim"}, Locale.KOREA);
         System.out.println("default: " + defaultName);
         System.out.println("kr: " + krName);
     }

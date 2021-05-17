@@ -22,9 +22,9 @@ public class CustomAnnotationControllerTest {
     @Test
     public void testCustom() throws Exception {
         mockMvc.perform(get("/custom"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("custom"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("custom"));
     }
 
 }

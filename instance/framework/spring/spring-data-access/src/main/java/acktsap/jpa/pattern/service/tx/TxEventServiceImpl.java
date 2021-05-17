@@ -37,9 +37,9 @@ public class TxEventServiceImpl implements TxEventService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void failTxOperation(Event event, String change) {
         EventHistory eventHistory = EventHistory.builder()
-                .eventId(event.getId())
-                .changeType(change)
-                .build();
+            .eventId(event.getId())
+            .changeType(change)
+            .build();
         EventHistory inserted = eventHistoryRepository.save(eventHistory);
         log.info("History: {}", inserted);
 

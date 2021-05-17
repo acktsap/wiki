@@ -58,7 +58,7 @@ public class UriPatternController {
     @GetMapping("/matrixvariable1/{id}")
     @ResponseBody
     public Event matrixVariable(@PathVariable Integer id, @MatrixVariable String name,
-                                @MatrixVariable Optional<Integer> limit) {
+        @MatrixVariable Optional<Integer> limit) {
         Event event = new Event();
         event.setId(id);
         event.setName(name);
@@ -69,7 +69,7 @@ public class UriPatternController {
     @GetMapping("/matrixvariable2/{id}")
     @ResponseBody
     public Event matrixVariableWithMap(@PathVariable Integer id,
-                                       @MatrixVariable MultiValueMap<String, String> map) {
+        @MatrixVariable MultiValueMap<String, String> map) {
         Event event = new Event();
         event.setId(id);
         event.setName(map.getFirst("name"));

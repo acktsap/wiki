@@ -45,7 +45,7 @@ public class SessionAttributesController {
 
     @PostMapping("/events/name")
     public String eventsFormNameSubmit(@Validated(Event.Common.class) @ModelAttribute Event event,
-                                       BindingResult bindingResult) {
+        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.err.println(bindingResult);
             return "/events/form-name";
@@ -61,7 +61,7 @@ public class SessionAttributesController {
 
     @PostMapping("/events/limit")
     public String eventsFormLimitSubmit(@Validated(Event.Common.class) @ModelAttribute Event event,
-                                        BindingResult bindingResult, SessionStatus sessionStatus) {
+        BindingResult bindingResult, SessionStatus sessionStatus) {
         if (bindingResult.hasErrors()) {
             System.err.println(bindingResult);
             return "/events/form-limit";

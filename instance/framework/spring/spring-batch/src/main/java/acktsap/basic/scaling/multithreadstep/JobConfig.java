@@ -58,7 +58,11 @@ public class JobConfig {
 
                 // 동시성 제어를 위해 synchronized
                 @Override
-                public synchronized List<Integer> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+                public synchronized List<Integer> read() throws
+                    Exception,
+                    UnexpectedInputException,
+                    ParseException,
+                    NonTransientResourceException {
                     // repeat until return null
 
                     if (cursor > 8) {
@@ -90,20 +94,20 @@ public class JobConfig {
             })
             .taskExecutor(taskExecutor) // chunk 단위로 (tx 단위) thread에 맡김
             /*
-                throttleLimit : default : 4, 이 사이즈만큼 pool이 동시에 실행됨
+              throttleLimit : default : 4, 이 사이즈만큼 pool이 동시에 실행됨
 
-                동작 (이 과정이 tx 한개임)
+              동작 (이 과정이 tx 한개임)
 
-                1. throttleLimit 만큼 pool에 task를 던짐.
-                2. task를 받은 pool은 reader에서 chunk size만큼 읽음 (또는 null이 리턴될때까지)
-                3. 각각 읽은 것들을 가지고 processor -> writer 탐
+              1. throttleLimit 만큼 pool에 task를 던짐.
+              2. task를 받은 pool은 reader에서 chunk size만큼 읽음 (또는 null이 리턴될때까지)
+              3. 각각 읽은 것들을 가지고 processor -> writer 탐
              */
             .throttleLimit(poolSize)
             /*
-                이걸로 하면 결과가 다름.
-                poolSize로 하면 여러개가 동시에 실행되지만 3으로 하면 max 3개가 실행되서
-                3개 thread가 각각 3, 3, 2개 처리하게 됨.
-                위에꺼로 하면 poolSize가 8보다 크면 각각 1개씩 처리하는 방식으로 됨
+              이걸로 하면 결과가 다름.
+              poolSize로 하면 여러개가 동시에 실행되지만 3으로 하면 max 3개가 실행되서
+              3개 thread가 각각 3, 3, 2개 처리하게 됨.
+              위에꺼로 하면 poolSize가 8보다 크면 각각 1개씩 처리하는 방식으로 됨
              */
             // .throttleLimit(3)
             .build();

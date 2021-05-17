@@ -26,67 +26,67 @@ public class TaskControllerTest {
     @Test
     public void testGetTasks() throws Exception {
         mockMvc.perform(get("/tasks"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("getTasks"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("getTasks"));
     }
 
     @Test
     public void testGetTasksOnSingleItem() throws Exception {
         mockMvc.perform(get("/tasks/1"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("getTasksWithId"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("getTasksWithId"));
         mockMvc.perform(get("/tasks/2"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("getTasksWithId"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("getTasksWithId"));
         mockMvc.perform(get("/tasks/3"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("getTasksWithId"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("getTasksWithId"));
     }
 
     @Test
     public void testPostTasks() throws Exception {
         mockMvc.perform(post("/tasks")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("postTasks"));
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("postTasks"));
     }
 
     @Test
     public void testDeleteTasksOnSingleItem() throws Exception {
         mockMvc.perform(delete("/tasks/1"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("deleteTasks"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("deleteTasks"));
         mockMvc.perform(delete("/tasks/2"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("deleteTasks"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("deleteTasks"));
         mockMvc.perform(delete("/tasks/3"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("deleteTasks"));
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("deleteTasks"));
     }
 
     @Test
     public void testPutTasksOnSingleItem() throws Exception {
         mockMvc.perform(put("/tasks/1")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("putTasks"));
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("putTasks"));
         mockMvc.perform(put("/tasks/2")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("putTasks"));
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andExpect(content().string("putTasks"));
     }
 
 }

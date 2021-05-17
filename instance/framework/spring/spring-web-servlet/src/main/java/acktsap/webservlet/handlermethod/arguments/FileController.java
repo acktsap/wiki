@@ -33,7 +33,7 @@ public class FileController {
 
     @PostMapping("/file")
     public String fileUpload(@RequestParam MultipartFile file,
-                             RedirectAttributes attributes) {
+        RedirectAttributes attributes) {
 
         // save file to repository
 

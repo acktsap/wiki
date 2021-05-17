@@ -20,8 +20,8 @@ public class BeanConfig {
 
     @Bean
     public EventService dynamicProxyEventService() {
-        return (EventService) Proxy.newProxyInstance(BeanConfig.class.getClassLoader(),
-                new Class[]{EventService.class}, proxyInvocationHandler());
+        return (EventService)Proxy.newProxyInstance(BeanConfig.class.getClassLoader(),
+            new Class[] {EventService.class}, proxyInvocationHandler());
     }
 
     @Bean
@@ -42,7 +42,7 @@ public class BeanConfig {
             long start = System.currentTimeMillis();
             Object ret = method.invoke(delegate, args);
             System.out.printf("Class: %s, time: %s%n", proxy.getClass(),
-                    System.currentTimeMillis() - start);
+                System.currentTimeMillis() - start);
             return ret;
         }
 
