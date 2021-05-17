@@ -2,7 +2,7 @@
  * @copyright defined in LICENSE.txt
  */
 
-package acktsap.spec.clazz;
+package acktsap.language.clazz;
 
 public class InnerEx5 {
 

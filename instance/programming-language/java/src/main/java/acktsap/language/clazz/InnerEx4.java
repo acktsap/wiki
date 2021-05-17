@@ -1,7 +1,7 @@
-package acktsap.spec.clazz;
+package acktsap.language.clazz;
 
-import acktsap.spec.clazz.InnerEx4.Outer.InstanceInner;
-import acktsap.spec.clazz.InnerEx4.Outer.StaticInner;
+import acktsap.language.clazz.InnerEx4.Outer.InstanceInner;
+import acktsap.language.clazz.InnerEx4.Outer.StaticInner;
 
 public class InnerEx4 {
 

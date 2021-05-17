@@ -49,6 +49,7 @@ Dev
 - Iterm2
 - Intellij
 - vscode
+- docker
 
 Utils
 

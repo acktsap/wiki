@@ -1,4 +1,4 @@
-package acktsap.spec.generics;
+package acktsap.language.generics;
 
 import java.util.ArrayList;
 import java.util.List;

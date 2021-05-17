@@ -1,4 +1,4 @@
-package acktsap.spec.basic;
+package acktsap.language.basic;
 
 import java.util.Scanner;
 

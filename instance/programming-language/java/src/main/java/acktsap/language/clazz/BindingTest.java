@@ -1,4 +1,4 @@
-package acktsap.spec.clazz;
+package acktsap.language.clazz;
 
 public class BindingTest {
 

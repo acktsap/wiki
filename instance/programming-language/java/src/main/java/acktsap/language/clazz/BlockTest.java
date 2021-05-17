@@ -1,4 +1,4 @@
-package acktsap.spec.clazz;
+package acktsap.language.clazz;
 
 // 클래스 변수 순서 : 기본값 -> 명시적 초기화 -> static block
 // 인스턴스 변수 순서 : 기본값 -> 명시적 초기화 -> init block -> 생성자
