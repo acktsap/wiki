@@ -1,4 +1,4 @@
-package acktsap.basic.testing.step;
+package acktsap.basic.testing.job;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -25,7 +25,7 @@ import acktsap.basic.testing.TestBatchConfig;
 @SpringBootTest(properties = {
     "spring.batch.job.names=footballJob"
 }, classes = TestBatchConfig.class)
-class SpringBootBasedTest {
+class SingleTaskletJobTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
@@ -40,25 +40,21 @@ class SpringBootBasedTest {
     }
 
     @Test
-    void testPlayerLoadStep() throws Exception {
-        JobParameters jobParameters = new JobParametersBuilder()
+    void testFootballJob() throws Exception {
+        JobParameters jobParametes = new JobParametersBuilder()
             .addString("action", "in")
             .toJobParameters();
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("playerLoadStep", jobParameters);
-
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParametes);
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
     @Transactional
     @Test
-    void testPlayerLoadStepTransaction() throws Exception {
+    void testFootballJobTransaction() throws Exception {
         this.jdbcOperations.update("INSERT INTO CUSTOMER VALUES (?, ?, ?)", 1, "cat", 200);
 
-        JobParameters jobParameters = new JobParametersBuilder()
-            .addString("action", "in")
-            .toJobParameters();
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("playerLoadStep", jobParameters);
-
+        JobParameters jobParameter = new JobParametersBuilder().toJobParameters();
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameter);
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 }

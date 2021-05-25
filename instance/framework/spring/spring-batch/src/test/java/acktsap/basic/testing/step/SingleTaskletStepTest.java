@@ -9,7 +9,7 @@ import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.Step;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.JobRepositoryTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
@@ -24,17 +24,14 @@ import acktsap.basic.testing.TestBatchConfig;
 
 @SpringBatchTest
 @SpringBootTest(properties = {
-    "spring.batch.job.names=chunkJob"
+    "spring.batch.job.names=footballJob"
 }, classes = TestBatchConfig.class)
-class ChunkStepTest {
+class SingleTaskletStepTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
 
     @Autowired
     private JobRepositoryTestUtils jobRepositoryTestUtils;
-
-    @Autowired
-    private Step chunkStep;
 
     private JdbcOperations jdbcOperations;
 
@@ -44,29 +41,50 @@ class ChunkStepTest {
     }
 
     @Test
-    void testPlayerLoadStep() throws Exception {
+    void testPlayerPreStep() throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
-            .addString("prefix", "tt")
+            .addString("action", "in")
             .toJobParameters();
 
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("chunkStep", jobParameters);
+        ExecutionContext jobExecutionContext = new ExecutionContext();
+        jobExecutionContext.putString("player", "lazy player");
+
+        // player: lazy player, action: in
+        // since it uses JobExecutionContext
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("playerPreStep", jobParameters, jobExecutionContext);
 
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }
 
-    // deadlock at `TaskletStep$ChunkTransactionCallback.doInTransaction - semaphore.acquire()`
-    // reason : it never commits
-    // see also https://github.com/spring-projects/spring-batch/issues/2021
+    @Test
+    void testPlayerLoadStep() throws Exception {
+        JobParameters jobParameters = new JobParametersBuilder()
+            .addString("action", "in")
+            .toJobParameters();
+
+        ExecutionContext jobExecutionContext = new ExecutionContext();
+        jobExecutionContext.putString("player", "lazy player");
+
+        // player: null, action: in
+        // since it uses StepExecutionContext
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("playerLoadStep", jobParameters, jobExecutionContext);
+
+        then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+    }
+
     @Transactional
     @Test
-    void testPlayerLoadStepTransaction() throws Exception {
+    void testPlayerPreStepTransaction() throws Exception {
         this.jdbcOperations.update("INSERT INTO CUSTOMER VALUES (?, ?, ?)", 1, "cat", 200);
 
         JobParameters jobParameters = new JobParametersBuilder()
-            .addString("prefix", "tt")
+            .addString("action", "in")
             .toJobParameters();
 
-        JobExecution jobExecution = jobLauncherTestUtils.launchStep("chunkStep", jobParameters);
+        ExecutionContext jobExecutionContext = new ExecutionContext();
+        jobExecutionContext.putString("player", "lazy player");
+
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("playerPreStep", jobParameters, jobExecutionContext);
 
         then(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
     }

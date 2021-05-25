@@ -1,6 +1,7 @@
 package acktsap.basic.testing;
 
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -25,17 +26,22 @@ public class ChunkJobConfig {
     @ConditionalOnProperty(name = "spring.batch.job.names", havingValue = "chunkJob")
     public Job chunkJob() {
         return this.jobBuilderFactory.get("chunkJob")
-            .start(this.stepBuilderFactory.get("chunkStep")
-                .<String, String>chunk(3)
-                .reader(reader(null))
-                .writer(writer())
-                .build()
-            ).build();
+            .start(chunkStep())
+            .build();
+    }
+
+    @Bean
+    public Step chunkStep() {
+        return this.stepBuilderFactory.get("chunkStep")
+            .<String, String>chunk(3)
+            .reader(chunkReader(null, null))
+            .writer(chunkWriter())
+            .build();
     }
 
     @StepScope
     @Bean
-    public ItemReader<String> reader(@Value("#{jobParameters['prefix']}") String prefix) {
+    public ItemReader<String> chunkReader(@Value("#{stepExecutionContext['meta']}") String meta, @Value("#{jobParameters['prefix']}") String prefix) {
         return new ItemReader<>() {
             private int count = 1;
 
@@ -48,13 +54,14 @@ public class ChunkJobConfig {
 
                 int next = count;
                 count++;
-                return prefix + ":" + Integer.toString(next);
+
+                return String.format("%s:%s:%s%n", meta, prefix, next);
             }
         };
     }
 
     @Bean
-    public ItemWriter<String> writer() {
+    public ItemWriter<String> chunkWriter() {
         return datas -> {
             System.out.printf("[%s] Write %s%n", getCallBackMethod(), datas);
         };

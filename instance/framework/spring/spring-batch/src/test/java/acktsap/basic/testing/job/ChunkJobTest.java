@@ -21,6 +21,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import acktsap.basic.testing.TestBatchConfig;
 
+/**
+ *
+ * {@link SpringBatchTest} enables
+ *
+ * - {@link org.springframework.batch.test.JobLauncherTestUtils} : need single job bean
+ * - {@link org.springframework.batch.test.JobRepositoryTestUtils}
+ *
+ * bad...
+ *
+ */
 @SpringBatchTest
 @SpringBootTest(properties = {
     "spring.batch.job.names=chunkJob"

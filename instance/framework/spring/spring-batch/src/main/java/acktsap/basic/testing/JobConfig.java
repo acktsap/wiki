@@ -8,6 +8,7 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -30,7 +31,8 @@ public class JobConfig {
     @ConditionalOnProperty(name = "spring.batch.job.names", havingValue = "footballJob")
     public Job footballJob() {
         return this.jobBuilderFactory.get("footballJob")
-            .start(playerLoadStep())
+            .start(playerPreStep())
+            .next(playerLoadStep())
             .build();
     }
 
@@ -43,17 +45,33 @@ public class JobConfig {
     }
 
     @Bean
+    public Step playerPreStep() {
+        return this.stepBuilderFactory.get("playerPreStep")
+            .tasklet(playerPreTasklet(null, null))
+            .build();
+    }
+
+    @Bean
     public Step playerLoadStep() {
         return this.stepBuilderFactory.get("playerLoadStep")
             .tasklet(playerLoadTasklet(null, null))
             .build();
     }
 
+    @JobScope
+    @Bean
+    public Tasklet playerPreTasklet(@Value("#{jobExecutionContext['player']}") String player, @Value("#{jobParameters['action']}") String action) {
+        return (contribution, chunkContext) -> {
+            System.out.printf("[%s] playerPreTasklet (player: %s, action: %s)%n", Thread.currentThread().getName(), player, action);
+            return RepeatStatus.FINISHED;
+        };
+    }
+
     @StepScope
     @Bean
     public Tasklet playerLoadTasklet(@Value("#{stepExecutionContext['player']}") String player, @Value("#{jobParameters['action']}") String action) {
         return (contribution, chunkContext) -> {
-            System.out.printf("[%s] load %s (action: %s)%n", Thread.currentThread().getName(), player, action);
+            System.out.printf("[%s] playerLoadTasklet (player: %s, action: %s)%n", Thread.currentThread().getName(), player, action);
             return RepeatStatus.FINISHED;
         };
     }

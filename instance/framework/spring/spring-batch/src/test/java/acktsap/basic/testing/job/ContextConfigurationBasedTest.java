@@ -20,14 +20,14 @@ import acktsap.basic.testing.TestBatchConfig;
 /**
  *
  * Spring batch에서 추천하는 방법. 개인적으로는 이게 맞지 싶으나 Job bean이 의존하고 있는 configuration을 다 넣어주는건 좀 힘들거같음.
- * 그냥 {@link org.springframework.boot.test.context.SpringBootTest} 사용하는게..
+ * 그냥 {@link org.springframework.boot.test.context.SpringBootTest} 사용.
  *
  */
 @SpringBatchTest
 @TestPropertySource(properties = {
     "spring.batch.job.names=footballJob"
 })
-@ContextConfiguration(classes = {JobConfig.class, TestBatchConfig.class})  /* 이거 bean별로 다해줘야함 */
+@ContextConfiguration(classes = {JobConfig.class, TestBatchConfig.class})  /* 이거 bean별로 다해줘야함.. 번거로움.. */
 class ContextConfigurationBasedTest {
 
     @Autowired
