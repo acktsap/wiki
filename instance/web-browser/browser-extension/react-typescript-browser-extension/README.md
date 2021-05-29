@@ -56,3 +56,4 @@
   - [https://github.com/kryptokinght/react-extension-boilerplate](https://github.com/kryptokinght/react-extension-boilerplate)
 - general setting
   - [creating-react-app-with-typescript-eslint-with-webpack5](https://www.carlrippon.com/creating-react-app-with-typescript-eslint-with-webpack5/)
+  - [web extension @types](https://github.com/kelseasy/web-ext-types)

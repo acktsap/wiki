@@ -3,19 +3,21 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 
 type ButtonProps = {
-  value: string;
+  name: string;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
-function Button({ value } : ButtonProps) {
+function Button({ name, onClick } : ButtonProps) {
   return (
-    <div className={styles.button}>
-      {value}
+    <div className={styles.button} onClick={onClick} >
+      {name}
     </div>
   );
 }
 
 Button.defaultProps = {
-  value: 'undefined'
+  name: 'undefined',
+  onClick: () => void(0),
 };
 
 export default Button;

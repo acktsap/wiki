@@ -31,6 +31,10 @@ const baseConfigs = {
               "@babel/preset-react",
               "@babel/preset-typescript",
             ],
+            plugins: [
+              // resolve 'regeneratorRuntime is not defined' when using async/await
+              "@babel/transform-runtime",
+            ]
           },
         },
       },
