@@ -117,6 +117,8 @@ public class JobConfig {
                         --count;
 
                         // stepContext에 저장해서 재시도하면 거기서 가져옴
+                        // 실패한 step_execution 은 그대로 두고 새로 생성 후 실행
+                        // step_execution_context 도 다름
                         executionContext.putInt("count", count);
 
                         return RepeatStatus.CONTINUABLE;

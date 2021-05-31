@@ -103,7 +103,7 @@ public class JobConfig {
                 2. task를 받은 pool은 reader에서 chunk size만큼 읽음 (또는 null이 리턴될때까지)
                 3. 각각 읽은 것들을 가지고 processor -> writer 탐
              */
-            .throttleLimit(poolSize)
+            // .throttleLimit(poolSize)
             /*
                 이걸로 하면 결과가 다름.
                 poolSize로 하면 여러개가 동시에 실행되지만 3으로 하면 max 3개가 실행되서
@@ -114,7 +114,7 @@ public class JobConfig {
 
                 반대로 throttleLimit == 1로 하면 사실상 single thread의 효과가 남
              */
-            // .throttleLimit(3)
+            .throttleLimit(1)
             .build();
     }
 

@@ -98,8 +98,11 @@ public class JobConfig {
     @StepScope // to use lazy binding of parameter
     public Tasklet tasklet(@Value("#{stepExecutionContext['target']}") Integer target) {
         return (contribution, chunkContext) -> {
+            String stepName = chunkContext.getStepContext().getStepName();
+
             // use 'target' in stepExecutionContext
-            System.out.printf("[%s %s] step1 - process %d%n", Thread.currentThread().getName(), getCallBackMethod(), target);
+            System.out.printf("[%s %s] %s - process %d%n", Thread.currentThread().getName(), getCallBackMethod(), stepName, target);
+
             return RepeatStatus.FINISHED;
         };
     }

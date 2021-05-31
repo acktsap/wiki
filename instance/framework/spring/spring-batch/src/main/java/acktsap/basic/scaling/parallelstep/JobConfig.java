@@ -7,6 +7,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.flow.Flow;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,9 +33,9 @@ public class JobConfig {
     }
 
     @Bean
-    public Job job() {
-        return this.jobBuilderFactory.get("job")
-            .start(splitFlow())
+    public Job parallelFlowJob() {
+        return this.jobBuilderFactory.get("parallelFlowJob")
+            .start(splitFlow()).on("FAILED").fail()
             .next(step("step4", () -> System.out.printf("[%s] step4%n", Thread.currentThread().getName())))
             .build()   // builds FlowJobBuilder instance
             .build();  // builds Job instance
@@ -59,7 +60,30 @@ public class JobConfig {
     @Bean
     public Flow flow2() {
         return new FlowBuilder<Flow>("flow2")
-            .start(step("step3", () -> System.out.printf("[%s] flow2 - step3%n", Thread.currentThread().getName())))
+            .start(this.stepBuilderFactory.get("step3")
+                .tasklet((contribution, chunkContext) -> {
+                    ExecutionContext executionContext = chunkContext.getStepContext().getStepExecution().getExecutionContext();
+
+                    int count = -999;
+                    if (executionContext.containsKey("count")) {
+                        // localhost:8080/job?name=parallelFlowJob 로 재시작 시
+                        count = executionContext.getInt("count");
+                    }
+
+                    if (count == -999) {
+                        // 값이 없을경우 값을 set
+                        // localhost:8080/job?name=parallelFlowJob
+                        // 이를 통해 재시작 시 이 block을 타지 않게 됨
+                        executionContext.putInt("count", 10);
+                        throw new IllegalStateException("count is not set in context");
+                    }
+
+                    executionContext.putInt("count", count + 10);
+
+                    System.out.printf("[%s] flow2 - step3%n", Thread.currentThread().getName());
+
+                    return RepeatStatus.FINISHED;
+                }).build())
             .build();
     }
 
