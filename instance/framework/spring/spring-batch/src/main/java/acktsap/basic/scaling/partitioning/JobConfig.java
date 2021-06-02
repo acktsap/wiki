@@ -50,8 +50,8 @@ public class JobConfig {
 
     @Bean
     public Step step1Manager() {
-        return this.stepBuilderFactory.get("step1:manager")
-            .partitioner("step1", partitioner())
+        return this.stepBuilderFactory.get("step1:manager") // manager postfix is a convention
+            .partitioner("step111", partitioner())
             // PartitionHandler 없으면 내부적으로 TaskExecutorPartitionHandler 만들어서 gridSize, step, taskExecutor 할당
             // but 명시적으로 하는게 좋음
             .partitionHandler(partitionHandler())
@@ -89,7 +89,7 @@ public class JobConfig {
 
     @Bean
     public Step step1() {
-        return this.stepBuilderFactory.get("step1")
+        return this.stepBuilderFactory.get("noname") // 아무거나 해도 됨 어차피 step1Manager에서 설정한 값이 들어감
             .tasklet(tasklet(null))
             .build();
     }

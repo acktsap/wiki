@@ -29,22 +29,21 @@ public class JobConfig {
         return this.jobBuilderFactory.get("continuableByFieldJob")
             .start(this.stepBuilderFactory.get("continuableByFieldStep")
                 .tasklet(new Tasklet() {
-                             private int count = 3;
+                    private int count = 3;
 
-                             @Override
-                             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                                 // need lock for concurrency
-                                 if (count == 0) {
-                                     return RepeatStatus.FINISHED;
-                                 }
+                    @Override
+                    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                        // need lock for concurrency
+                        if (count == 0) {
+                            return RepeatStatus.FINISHED;
+                        }
 
-                                 System.out.printf("[%s - %s] process %s%n", chunkContext.getStepContext().getJobName(), getCallBackMethod(), count);
-                                 --count;
+                        System.out.printf("[%s - %s] process %s%n", chunkContext.getStepContext().getJobName(), getCallBackMethod(), count);
+                        --count;
 
-                                 return RepeatStatus.CONTINUABLE;
-                             }
-                         }
-                )
+                        return RepeatStatus.CONTINUABLE;
+                    }
+                })
                 .build())
             .build();
     }
@@ -54,30 +53,29 @@ public class JobConfig {
         return this.jobBuilderFactory.get("chunkContextJob")
             .start(this.stepBuilderFactory.get("chunkContextStep")
                 .tasklet((contribution, chunkContext) -> {
-                        AttributeAccessor attributeAccessor = chunkContext;
+                    AttributeAccessor attributeAccessor = chunkContext;
 
-                        Integer count = 3;
-                        if (attributeAccessor.hasAttribute("count")) {
-                            count = (Integer)attributeAccessor.getAttribute("count");
-                        }
-
-                        if (count == 0) {
-                            return RepeatStatus.FINISHED;
-                        }
-
-                        if (count == 1) {
-                            throw new IllegalStateException();
-                        }
-
-                        System.out.printf("[%s - %s] process %s%n", chunkContext.getStepContext().getJobName(), getCallBackMethod(), count);
-                        --count;
-
-                        // chunkContext에 저장해서 재시도해도 처음부터 다시 시작함
-                        attributeAccessor.setAttribute("count", count);
-
-                        return RepeatStatus.CONTINUABLE;
+                    Integer count = 3;
+                    if (attributeAccessor.hasAttribute("count")) {
+                        count = (Integer)attributeAccessor.getAttribute("count");
                     }
-                )
+
+                    if (count == 0) {
+                        return RepeatStatus.FINISHED;
+                    }
+
+                    if (count == 1) {
+                        throw new IllegalStateException();
+                    }
+
+                    System.out.printf("[%s - %s] process %s%n", chunkContext.getStepContext().getJobName(), getCallBackMethod(), count);
+                    --count;
+
+                    // chunkContext에 저장해서 재시도해도 처음부터 다시 시작함
+                    attributeAccessor.setAttribute("count", count);
+
+                    return RepeatStatus.CONTINUABLE;
+                })
                 .build())
             .build();
     }
