@@ -22,6 +22,16 @@ dump state (check details like plist path)
 > launchctl dumpstate
 ```
 
+where daemon files is
+
+- ~/Library/LaunchDaemons
+- ~/Library/LaunchAgents
+- /Library/LaunchDaemons
+- /Library/LaunchAgents
+- /System/Library/LaunchDaemons
+- /System/Library/LaunchAgents
+
+
 ## System extension
 
 list
