@@ -63,7 +63,7 @@ public class JobConfig {
                         .collect(toList());
                     ++count;
 
-                    System.out.printf("[%s] Read %s%n", getCallBackMethod(), datas);
+                    System.out.printf("[Tx: %s] Read %s%n", getCallBackMethod(), datas);
 
                     return datas;
                 }
@@ -72,14 +72,14 @@ public class JobConfig {
                 List<String> processed = datas.stream()
                     .map(v -> String.format("'%d'", v))
                     .collect(toList());
-                System.out.printf("[%s] Process %s to %s%n", getCallBackMethod(), datas, processed);
+                System.out.printf("[Tx: %s] Process %s to %s%n", getCallBackMethod(), datas, processed);
                 return processed;
             })
             .writer(data -> {
                 List<String> flattened = data.stream()
                     .flatMap(Collection::stream)
                     .collect(toList());
-                System.out.printf("[%s] Write %s%n", getCallBackMethod(), flattened);
+                System.out.printf("[Tx: %s] Write %s%n", getCallBackMethod(), flattened);
             })
             .build();
     }

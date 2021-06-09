@@ -1,5 +1,6 @@
 package acktsap.basic.stepconfig.taskletstep;
 
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -11,7 +12,6 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.AttributeAccessor;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
@@ -53,26 +53,27 @@ public class JobConfig {
         return this.jobBuilderFactory.get("chunkContextJob")
             .start(this.stepBuilderFactory.get("chunkContextStep")
                 .tasklet((contribution, chunkContext) -> {
-                    AttributeAccessor attributeAccessor = chunkContext;
 
-                    Integer count = 3;
-                    if (attributeAccessor.hasAttribute("count")) {
-                        count = (Integer)attributeAccessor.getAttribute("count");
+                    int count = 3;
+                    if (chunkContext.hasAttribute("count")) {
+                        count = (int)chunkContext.getAttribute("count");
                     }
 
                     if (count == 0) {
                         return RepeatStatus.FINISHED;
                     }
 
+                    /*
+                        localhost:8080/job?name=chunkContextJob
+                        chunkContext에 저장해서 재시도해도 처음부터 다시 시작함
+                     */
                     if (count == 1) {
-                        throw new IllegalStateException();
+                        throw new IllegalStateException("count is 1");
                     }
 
                     System.out.printf("[%s - %s] process %s%n", chunkContext.getStepContext().getJobName(), getCallBackMethod(), count);
-                    --count;
 
-                    // chunkContext에 저장해서 재시도해도 처음부터 다시 시작함
-                    attributeAccessor.setAttribute("count", count);
+                    chunkContext.setAttribute("count", count - 1);
 
                     return RepeatStatus.CONTINUABLE;
                 })
@@ -107,7 +108,7 @@ public class JobConfig {
                         if (count == 1) {
                             if (isFirst) {
                                 isFirst = false;
-                                throw new IllegalStateException();
+                                throw new IllegalStateException("count is 1");
                             }
                         }
 
@@ -121,6 +122,19 @@ public class JobConfig {
 
                         return RepeatStatus.CONTINUABLE;
                     }
+                })
+                .build())
+            .build();
+    }
+
+    @Bean
+    public Job exitStatusJob() {
+        return this.jobBuilderFactory.get("exitStatusJob")
+            .start(this.stepBuilderFactory.get("exitStatusStep")
+                .tasklet((contribution, chunkContext) -> {
+                    // localhost:8080/h2-console 에서 확인해 보면 exitStatus만 FAILED임
+                    contribution.setExitStatus(ExitStatus.FAILED);
+                    return RepeatStatus.FINISHED;
                 })
                 .build())
             .build();

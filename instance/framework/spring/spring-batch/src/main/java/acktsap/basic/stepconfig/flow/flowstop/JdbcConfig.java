@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.flowconfig;
+package acktsap.basic.stepconfig.flow.flowstop;
 
 import javax.sql.DataSource;
 

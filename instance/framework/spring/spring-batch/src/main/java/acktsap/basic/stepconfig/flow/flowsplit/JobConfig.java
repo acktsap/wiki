@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.flowsplit;
+package acktsap.basic.stepconfig.flow.flowsplit;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

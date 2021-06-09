@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.flowdecision;
+package acktsap.basic.stepconfig.flow.flowsplit;
 
 import javax.sql.DataSource;
 

@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.chunkoriented;
+package acktsap.basic.stepconfig.intercept;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

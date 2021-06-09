@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.flowconfig;
+package acktsap.basic.stepconfig.flow.flowconfig;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

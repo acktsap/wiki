@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.flowconfig;
+package acktsap.basic.stepconfig.flow.flowstop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
