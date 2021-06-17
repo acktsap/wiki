@@ -12,7 +12,7 @@ import java.util.Properties;
 public class ResourcesIO {
 
     public static void main(String[] args) {
-        Block.d("Load by Class").p(() -> {
+        Block.d("Load by Class", () -> {
             Properties properties = new Properties();
             try (InputStream in = ResourcesIO.class.getResourceAsStream("/resources.properties")) {
                 properties.load(in);
@@ -24,7 +24,7 @@ public class ResourcesIO {
             System.out.println("nokey=" + properties.getProperty("nokey", "default value"));
         });
 
-        Block.d("Load by ClassLoader").p(() -> {
+        Block.d("Load by ClassLoader", () -> {
             Properties properties = new Properties();
             try (InputStream in = ResourcesIO.class.getClassLoader().getResourceAsStream("resources.properties")) {
                 properties.load(in);

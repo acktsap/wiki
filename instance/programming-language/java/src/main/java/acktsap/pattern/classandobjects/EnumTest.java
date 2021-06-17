@@ -38,7 +38,7 @@ public class EnumTest {
 
     public static void main(String[] args) {
 
-        Block.d("Enum conversion").p(() -> {
+        Block.d("Enum conversion", () -> {
             for (Source source : Source.values()) {
                 System.out.printf("from '%s' to '%s'%n", source, Target.valueOf(source.name()));
             }

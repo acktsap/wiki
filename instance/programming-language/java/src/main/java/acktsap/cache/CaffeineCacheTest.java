@@ -4,6 +4,7 @@ import acktsap.Block;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class CaffeineCacheTest {
         - guava cache보다 빠름
     */
     public static void main(String[] args) {
-        Block.d("Caffeine Loading cache without ttl").p(() -> {
+        Block.d("Caffeine Loading cache without ttl", () -> {
             LoadingCache<Object, String> cache = Caffeine.newBuilder()
                 .maximumSize(3)
                 .executor(Runnable::run) // used when running async task like eviction. By default, ForkJoinPool.commonPool() is used
@@ -44,7 +45,7 @@ public class CaffeineCacheTest {
             cache.get("3");
         });
 
-        Block.d("Caffeine Loading cache getAll without ttl").p(() -> {
+        Block.d("Caffeine Loading cache getAll without ttl", () -> {
             LoadingCache<Object, String> cache = Caffeine.newBuilder()
                 .maximumSize(3)
                 .executor(Runnable::run)
