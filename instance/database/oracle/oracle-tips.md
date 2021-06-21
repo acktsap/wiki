@@ -24,3 +24,7 @@ Oracle aggregate functions (sum, average, ... ) generally ignore NULL values.
 -- null + null -> 0
 NVL(SUM(COL1), 0)
 ```
+
+Conditional
+
+- DECODE(column, condition, expr1, expr2) : if (condition.match(column) expr1 else expr2

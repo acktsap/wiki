@@ -3,7 +3,7 @@
 
     <persistence-unit name="jpa-entity">
         <!-- gradle일 경우 이게 필요 : https://www.inflearn.com/questions/17098 -->
-        <class>acktsap.jpa.hibernate.entity.SuperMember</class>
+        <class>acktsap.snippet.jpa.hibernate.entity.SuperMember</class>
 
         <properties>
             <!-- H2 데이터베이스 드라이버 및 설정 -->
@@ -44,17 +44,17 @@
 
     <persistence-unit name="jpa-relation">
         <!-- gradle일 경우 이게 필요 : https://www.inflearn.com/questions/17098 -->
-        <class>acktsap.jpa.hibernate.relation.Address</class>
-        <class>acktsap.jpa.hibernate.relation.Album</class>
-        <class>acktsap.jpa.hibernate.relation.Book</class>
-        <class>acktsap.jpa.hibernate.relation.Category</class>
-        <class>acktsap.jpa.hibernate.relation.Delivery</class>
-        <class>acktsap.jpa.hibernate.relation.Item</class>
-        <class>acktsap.jpa.hibernate.relation.Member</class>
-        <class>acktsap.jpa.hibernate.relation.Movie</class>
-        <class>acktsap.jpa.hibernate.relation.Order</class>
-        <class>acktsap.jpa.hibernate.relation.OrderItem</class>
-        <class>acktsap.jpa.hibernate.relation.RelationMain</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Address</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Album</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Book</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Category</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Delivery</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Item</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Member</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Movie</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.Order</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.OrderItem</class>
+        <class>acktsap.snippet.jpa.hibernate.relation.RelationMain</class>
 
         <properties>
             <!-- H2 데이터베이스 드라이버 및 설정 -->

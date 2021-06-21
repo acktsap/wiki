@@ -72,6 +72,7 @@ public class JobConfig {
                 executorService.shutdownNow();
             }
         }, 3000L, TimeUnit.MILLISECONDS);
+
         return noRestartJob;
     }
 
