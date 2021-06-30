@@ -8,8 +8,9 @@ Show query plan
 EXPLAIN SELECT * FROM customer;
 ```
 
-Output format
+- [Query Plan 보는 법](https://ibks-platform.tistory.com/374)
 
+Output format
 
 ## References
 
