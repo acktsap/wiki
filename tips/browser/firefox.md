@@ -39,6 +39,16 @@ History
   - [ ] Remember search and form history
   - [X] Clear history when Firefox closes
 
+## Developer Tools
+
+- setting : "..." -> Settings
+  - Theme
+    - [X] Dark
+  - Advanced Setttings
+    - Enabling the Browser Toolbox
+      - [X] Enable browser chrome and add-on debugging toolboxes
+        - [X] Enable remote debugging
+
 ## Extensions & Themes
 
 ### Extensions

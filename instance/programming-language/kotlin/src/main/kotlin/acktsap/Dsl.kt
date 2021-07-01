@@ -1,5 +1,7 @@
 package acktsap
 
+import java.time.LocalTime
+
 @Suppress("FunctionName")
 inline fun Block(description: String, block: () -> Unit) {
     println("== $description ==")
@@ -11,4 +13,4 @@ inline fun Block(description: String, block: () -> Unit) {
     println()
 }
 
-fun printWithThread(message: String) = println("[${Thread.currentThread().name}]$message")
+fun log(message: String) = println("${LocalTime.now()} [${Thread.currentThread().name}] $message")

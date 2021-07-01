@@ -6,7 +6,7 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.20"
 }
 
 apply(plugin = "kotlin")
@@ -34,6 +34,6 @@ tasks {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.20")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
 }
