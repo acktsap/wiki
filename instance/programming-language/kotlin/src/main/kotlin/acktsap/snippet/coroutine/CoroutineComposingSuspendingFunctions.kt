@@ -5,14 +5,17 @@ import acktsap.log
 import kotlinx.coroutines.*
 import kotlin.system.measureTimeMillis
 
+@Suppress("DuplicatedCode")
 fun main() {
     suspend fun doSomethingUsefulOne(): Int {
         delay(300L)
+        log("doSomethingUsefulOne")
         return 13
     }
 
     suspend fun doSomethingUsefulTwo(): Int {
         delay(300L)
+        log("doSomethingUsefulTwo")
         return 29
     }
 
@@ -99,7 +102,6 @@ fun main() {
         suspend fun failedConcurrentSum(): Int = coroutineScope {
             val one = async<Int> {
                 try {
-                    delay(Long.MAX_VALUE) // Emulates very long computation
                     log("Never called")
                     42
                 } finally {

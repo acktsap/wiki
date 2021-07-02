@@ -2,19 +2,114 @@ package acktsap.snippet.coroutine
 
 import acktsap.Block
 import acktsap.log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
+import java.util.concurrent.Executor
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlin.system.measureTimeMillis
 
+@Suppress("BlockingMethodInNonBlockingContext", "DuplicatedCode")
 fun main() {
+    Block("Sleep with Dispatchers.IO") {
+        runBlocking {
+            val dispatcher = Dispatchers.IO
+
+            log("Start with Dispatchers.IO using sleep")
+            val time = measureTimeMillis {
+                val a = async(dispatcher) {
+                    delay(100)
+                    log("return 12")
+                    12
+                }
+                val b = async(dispatcher) {
+                    delay(100)
+                    log("return 23")
+                    23
+                }
+
+                log("Result: ${a.await() + b.await()}")
+            }
+            log("Completed in $time ms") // 100ms
+        }
+    }
+    Block("Sleep with Dispatchers.IO") {
+        runBlocking {
+            val dispatcher = Dispatchers.IO
+
+            log("Start")
+            val time = measureTimeMillis {
+                val a = async(dispatcher) {
+                    TimeUnit.MILLISECONDS.sleep(100L)
+                    log("return 12")
+                    12
+                }
+                val b = async(dispatcher) {
+                    TimeUnit.MILLISECONDS.sleep(100L)
+                    log("return 23")
+                    23
+                }
+
+                log("Result: ${a.await() + b.await()}")
+            }
+            log("Completed in $time ms") // 100ms
+        }
+    }
+
+    Block("Delay with Direct dispatcher") {
+        runBlocking {
+            val executor = Executor { it.run() }
+            val dispatcher = executor.asCoroutineDispatcher()
+
+            log("Start")
+            val time = measureTimeMillis {
+                // use CoroutineScope
+                val a = async(dispatcher) {
+                    delay(100)
+                    log("return 12")
+                    12
+                }
+                val b = async(dispatcher) {
+                    delay(100)
+                    log("return 23")
+                    23
+                }
+
+                log("Result: ${a.await() + b.await()}")
+            }
+            log("Completed in $time ms") // 100ms
+        }
+    }
+
+    Block("Sleep with Direct dispatcher") {
+        runBlocking {
+            val executor = Executor { it.run() }
+            val dispatcher = executor.asCoroutineDispatcher()
+
+            log("Start")
+            val time = measureTimeMillis {
+                // use CoroutineScope
+                val a = async(dispatcher) {
+                    TimeUnit.MILLISECONDS.sleep(100L)
+                    log("return 12")
+                    12
+                }
+                val b = async(dispatcher) {
+                    TimeUnit.MILLISECONDS.sleep(100L)
+                    log("return 23")
+                    23
+                }
+
+                log("Result: ${a.await() + b.await()}")
+            }
+            log("Completed in $time ms") // 200ms
+        }
+    }
+
     Block("IO Blocking Comparison") {
         val httpRequest = HttpRequest.newBuilder()
             .uri(URI.create("https://www.naver.com:91"))

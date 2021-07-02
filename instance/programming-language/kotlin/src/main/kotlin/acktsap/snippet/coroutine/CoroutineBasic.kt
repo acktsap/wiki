@@ -53,6 +53,7 @@ fun main() {
     Block("New CoroutineScope") {
         // Every coroutine builder, including runBlocking,
         // adds an instance of CoroutineScope to the scope of its code block
+        // Structured concurrency : New coroutines can be only launched in a specific CoroutineScope
         runBlocking {
             // launch a new coroutine in the scope of runBlocking
             launch {
@@ -65,8 +66,14 @@ fun main() {
     }
 
     Block("Scope Builder") {
-        // runBlocking : blocks the current thread for waiting
-        // coroutineScope : just suspends, releasing the underlying thread for other usages
+        /*
+            runBlocking
+            - Blocks the current thread for waiting.
+            - A bridges between non-coroutine world and code coroutine world
+
+            coroutineScope
+            - Just suspends, releasing the underlying thread for other usages
+         */
         log("Task start!")
         runBlocking {
             launch {
