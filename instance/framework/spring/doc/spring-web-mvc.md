@@ -29,7 +29,7 @@ Web Application에서 발행하는 이벤트를 감지하고 이벤트에 해당
 
 ## DispatcherServlet
 
-![dispatcher-servlet-process](./img/dispatcher-servlet-process.png)
+![dispatcher-servlet-process](../img/dispatcher-servlet-process.png)
 
 - Spring에서 제공하는 Servlet스펙에 대한 구현체
 - 하나의 컨트롤러 (Front Controller)로 요청을 받은 후 dispatch해서 처리를 함
@@ -44,14 +44,14 @@ Web Application에서 발행하는 이벤트를 감지하고 이벤트에 해당
 
 ### Dispatcher Servlet over Servlet Container
 
-![servlet-container](./img/servlet-container.png)
+![servlet-container](../img/servlet-container.png)
 
-`DispatcherServlet`을 Servlet에 등록하고 `ContextLoaderListener`를 Listener에 등록하면 `ContextLoaderListener`가 ApplicatonContext를 초기화하고 DispatcherServlet이 Front
-Controller역할을 해서 동작하는 형태.
+`DispatcherServlet`을 Servlet에 등록하고 `ContextLoaderListener`를 Listener에 등록하면 `ContextLoaderListener`가 ApplicatonContext를
+초기화하고 DispatcherServlet이 Front Controller역할을 해서 동작하는 형태.
 
 ### Embedded Tomcat
 
-![embeded-tomcat](./img/embeded-tomcat.png)
+![embeded-tomcat](../img/embeded-tomcat.png)
 
 Spring Application 위에 Embedded Tomcat이 있고 그 위에 Dispatcher Servlet이 올라가는 형태. Ioc Container는 Embedded Tomcat밖에 있음.
 

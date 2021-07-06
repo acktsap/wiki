@@ -5,11 +5,11 @@ import acktsap.Block
 fun main() {
     Block("Class References") {
         val clazz = String::class
-        println(clazz)
+        println("class: $clazz")
     }
 
-    Block("bound Class References") {
+    Block("Bound Class References") {
         val value = "test"
-        println("Test: ${value::class.qualifiedName}")
+        println("class: ${value::class.qualifiedName}")
     }
 }

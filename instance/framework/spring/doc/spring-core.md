@@ -47,7 +47,8 @@
         - Request : HTTP request마다 한개.
         - Session : Session마다 한개. Session객체의 lifecycle을 따름
         - Application : Application마다 한개. ServletContext객체의 lifecycle을 따름.
-            - SingleTon하고 다른점은 Application은 ServletContext에 따르는 반면에 SingleTon은 ApplicationContext에 따름. ApplicationContext는 여러개가 있을 수 있음!
+            - SingleTon하고 다른점은 Application은 ServletContext에 따르는 반면에 SingleTon은 ApplicationContext에 따름.
+              ApplicationContext는 여러개가 있을 수 있음!
 
 #### Singleton Beans with Prototype-bean Dependencies
 
@@ -84,7 +85,7 @@
 
 ## AOP (Aspect Oriented Programming)
 
-![spring-aop](./img/spring-aop.png)
+![spring-aop](../img/spring-aop.png)
 
 - 관점 지향 프로그램으로 Object간의 Concern에 집중해서 흩어진 관점을 모듈화 할 수 있는 프로그래밍 기법
 - AOP 용어

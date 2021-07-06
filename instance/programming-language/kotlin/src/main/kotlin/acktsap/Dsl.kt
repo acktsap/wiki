@@ -13,4 +13,4 @@ inline fun Block(description: String, block: () -> Unit) {
     println()
 }
 
-fun log(message: String) = println("${LocalTime.now()} [${Thread.currentThread().name}] $message")
+fun log(message: Any?) = println("${LocalTime.now()} [${Thread.currentThread().name}] $message")

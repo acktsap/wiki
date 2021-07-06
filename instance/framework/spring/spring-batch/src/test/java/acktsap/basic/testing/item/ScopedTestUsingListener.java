@@ -20,6 +20,9 @@ import acktsap.basic.testing.TestBatchConfig;
  * - {@link org.springframework.batch.test.JobScopeTestExecutionListener}
  * - {@link org.springframework.batch.test.StepScopeTestExecutionListener}
  *
+ * See also
+ * - {@link org.springframework.batch.test.context.BatchTestContextCustomizerFactory}
+ *
  * bad...
  *
  */

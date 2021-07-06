@@ -3,17 +3,17 @@ package acktsap.syntax.classandobjects
 import acktsap.Block
 import acktsap.syntax.classandobjects.external.externalExtension
 
-/*
-    the ability to extend a class with new functionality
-    without having to inherit from the class or use design patterns such as Decorator
+/**
+ *  The ability to extend a class with new functionality
+ *  without having to inherit from the class or use design patterns such as Decorator
  */
 
-/* Extension properties (local extension of properties is not allowed) */
+/** Extension properties (local extension of properties is not allowed) */
 
 val <T> List<T>.lastIndex: Int
     get() = size - 1
 
-/* Extension properties (setter) */
+/** Extension properties (setter) */
 
 var value: String? = null
 var String.cabinet: String
@@ -22,7 +22,7 @@ var String.cabinet: String
         value = v
     }
 
-/* Companion object extensions (companion inside local class is now allowed) */
+/** Companion object extensions (companion inside local class is now allowed) */
 
 class MyClass {
     companion object {

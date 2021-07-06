@@ -4,37 +4,38 @@
 
 It provides
 
-- Reusable functions that are essential in processing large volumes of records, including logging/tracing, transaction management, job processing
-  statistics, job restart, skip, and resource management
-- Advanced technical services and features that enable extremely high-volume and high performance batch jobs through optimization and partitioning
-  techniques
+- Reusable functions that are essential in processing large volumes of records, including logging/tracing, transaction
+  management, job processing statistics, job restart, skip, and resource management
+- Advanced technical services and features that enable extremely high-volume and high performance batch jobs through
+  optimization and partitioning techniques
 
 It's not a scheduler. It is intended to work in conjunction with a scheduler.
 
 ## Architecture
 
-![spring-batch-layers](img/spring-batch-layers.png)
+![spring-batch-layers](../img/spring-batch-layers.png)
 
 Layered Architecture
 
 - Application
     - Contains all batch jobs and custom code written by developers using Spring Batch
 - Batch Core
-    - Contains the core runtime classes necessary to launch and control a batch job. It includes implementations for JobLauncher, Job, and Step.
+    - Contains the core runtime classes necessary to launch and control a batch job. It includes implementations for
+      JobLauncher, Job, and Step.
 - Batch Infrastructure
-    - Contains common readers and writers and services (such as the RetryTemplate), which are used both by application developers (such as ItemReader
-      and ItemWriter) and the core framework itself.
+    - Contains common readers and writers and services (such as the RetryTemplate), which are used both by application
+      developers (such as ItemReader and ItemWriter) and the core framework itself.
 
 ## Core Concept
 
-![spring-batch-reference-model](img/spring-batch-reference-model.png)
+![spring-batch-reference-model](../img/spring-batch-reference-model.png)
 
 A Job has one to many steps, each of which has exactly one ItemReader, one ItemProcessor, and one ItemWriter.\
 A job needs to be launched (with JobLauncher), and metadata needs to be stored in JobRepository.
 
 ### Job
 
-![job-heirarchy](img/spring-batch-job-heirarchy.png)
+![job-heirarchy](../img/spring-batch-job-heirarchy.png)
 
 - Job : Job configuration including name, step ordering, restartable, etc..
 - JobInstance : The concept of a logical job run.
@@ -42,18 +43,19 @@ A job needs to be launched (with JobLauncher), and metadata needs to be stored i
     - JobParameters : Holds a set of parameters used to start a batch job.
         - Has identifying flag to determine whether to be used as JobInstance identification.
 - JobExecution : The technical concept of a single attempt to run a Job.
-    - The JobInstance corresponding to a given execution is not considered to be complete unless the execution completes successfully.
-        - eg. JobInstance for 01-01-2017 that failed. If it run with the same job parameters, a new JobExecution is created. But still only one
-          JobInstance.
+    - The JobInstance corresponding to a given execution is not considered to be complete unless the execution completes
+      successfully.
+        - eg. JobInstance for 01-01-2017 that failed. If it run with the same job parameters, a new JobExecution is
+          created. But still only one JobInstance.
 
 ### Step
 
-![job-heirarchy-with-steps](img/spring-batch-job-heirarchy-with-steps.png)
+![job-heirarchy-with-steps](../img/spring-batch-job-heirarchy-with-steps.png)
 
 - Step : A domain object that encapsulates an independent, sequential phase of a batch job.
 - StepExecution : A single attempt to execute a Step.
-    - If a step fails to execute because the step before it fails, no execution is persisted for it. A StepExecution is created only when its Step is
-      actually started.
+    - If a step fails to execute because the step before it fails, no execution is persisted for it. A StepExecution is
+      created only when its Step is actually started.
 
 ### ExecutionContext
 
@@ -69,7 +71,7 @@ A job needs to be launched (with JobLauncher), and metadata needs to be stored i
 ```java
 // ecJob does not equal ecStep
 ExecutionContext ecJob=jobExecution.getExecutionContext();
-		ExecutionContext ecStep=stepExecution.getExecutionContext();
+    ExecutionContext ecStep=stepExecution.getExecutionContext();
 ```
 
 ### JobRepository
@@ -88,44 +90,44 @@ ExecutionContext ecJob=jobExecution.getExecutionContext();
 
 ### Chunk-oriented Processing
 
-![chunk-oriented-processing-with-item-processor](img/spring-batch-chunk-oriented-processing-with-item-processor.png)
+![chunk-oriented-processing-with-item-processor](../img/spring-batch-chunk-oriented-processing-with-item-processor.png)
 
 - Reading the data one at a time and creating 'chunks' that are written out within a transaction boundary.
 
 ```java
 // pseudo code of chunk-oriented processing
 
-List items = new Arraylist();
-for(int i = 0; i < commitInterval; i++){
-    Object item = itemReader.read();
-    if (item != null) {
-        items.add(item);
+List items=new Arraylist();
+    for(int i=0;i<commitInterval; i++){
+    Object item=itemReader.read();
+    if(item!=null){
+    items.add(item);
     }
-}
-
-List processedItems = new Arraylist();
-for(Object item: items){
-    Object processedItem = itemProcessor.process(item);
-    if (processedItem != null) {
-        processedItems.add(processedItem);
     }
-}
 
-itemWriter.write(processedItems);
+    List processedItems=new Arraylist();
+    for(Object item:items){
+    Object processedItem=itemProcessor.process(item);
+    if(processedItem!=null){
+    processedItems.add(processedItem);
+    }
+    }
+
+    itemWriter.write(processedItems);
 ```
 
 ## Scalling
 
 ### Remote Chunking
 
-![remote-chunking](img/spring-batch-remote-chunking.png)
+![remote-chunking](../img/spring-batch-remote-chunking.png)
 
 - Step processing is split across multiple processes, communicating with each other through some middleware.
 - Works best if the manager is not a bottleneck, so the processing must be more expensive than the reading of item.
 
 ### Partitioning
 
-![partitioning-overview](img/spring-batch-partitioning-overview.png)
+![partitioning-overview](../img/spring-batch-partitioning-overview.png)
 
 ## References
 
