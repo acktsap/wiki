@@ -12,14 +12,24 @@
 
 - chrome://extensions/ (or whale://extensions) -> Developer mode -> Load unpacked
 
-## Cors Request
+## Cross-Origin Request
 
-cors request를 위해서는 mainfest에 match pattern에 맞는 permission을 넣어줘야 한다.
+Cross-Origin request를 위해서는 mainfest에 match pattern에 맞는 permission을 넣어줘야 한다.
 
 eg. `https://developer.mozilla.org/test`로 요청해야 하면 `"*://developer.mozilla.org/*"`를 넣는 식.
 
 - [content script - xhr and Fetch](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts#xhr_and_fetch)
 - [manifest post permissions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#host_permissions)
+
+### Chrome
+
+- Chrome extension manifest v3부터 cross-origin request 가 보안상 이유때문에 content script에서 안되게 바뀜. 대신 Background script에서 하면 됨.
+- webextension-polyfill 를 쓰면 `browser`를 chrome의 `chrome`으로 변환해줌.
+
+See also
+
+- [extension-context-script-fetches](https://www.chromium.org/Home/chromium-security/extension-content-script-fetches)
+- [webextension-polyfill](https://github.com/mozilla/webextension-polyfill#basic-setup)
 
 ## Cross Browsing
 
