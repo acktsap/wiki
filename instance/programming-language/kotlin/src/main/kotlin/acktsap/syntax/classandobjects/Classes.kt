@@ -4,6 +4,7 @@ import acktsap.Block
 
 private annotation class TestAnnotation
 
+@Suppress("ConvertSecondaryConstructorToPrimary")
 fun main() {
     Block("Class Declaration") {
         class Invoice { /* ... */ }
@@ -33,29 +34,46 @@ fun main() {
                 println("Second initializer block that prints ${name.length}") // 4
             }
         }
-        InitOrderDemo("tester")
+
+        val demo = InitOrderDemo("tester")
+        println("demo.firstProperty: ${demo.firstProperty}")
+        println("demo.secondProperty: ${demo.secondProperty}")
 
         // multiple property
         class Person3(
             val firstName: String,
             val lastName: String,
-            var age: Int, // trailing comma
+            var age: Int, // trailing comma can be placed
         ) { /*...*/ }
+    }
 
-        // constructor with annotations or visibility modifiers,
+    Block("Primary constructor with annotation") {
         class Customer @TestAnnotation public constructor(name: String) { /*...*/ }
+    }
+
+    Block("Declaring Private Primary Constructor") {
+        class DontCreateMe private constructor() { /*...*/ }
     }
 
     Block("Secondary Constructor") {
         // secondary constructor needs to delegate to the primary constructor
         class Person(val name: String) {
-            var children: MutableList<Person> = mutableListOf()
+            var children = mutableListOf<Person>()
 
             // this(name) : delegation to primary constructor
             constructor(name: String, parent: Person) : this(name) {
                 parent.children.add(this)
             }
+
+            override fun toString(): String {
+                return "Person(name=$name, children=$children)"
+            }
         }
+
+        val parent = Person("god")
+        val child = Person("slave", parent)
+        println("parent: $parent")
+        println("child: $child")
 
         // implicit delegation to primary constructor
         class Constructors {
@@ -70,31 +88,36 @@ fun main() {
         Constructors(3)
     }
 
-    Block("Declaring Private Constructor") {
-        class DontCreateMe private constructor() { /*...*/ }
-    }
-
     Block("Constructor with Default Value") {
-        // the compiler will generate an additional parameterless constructor with default value.
-        class Customer(val name: String = "") {
+        /**
+         * The compiler will generate an additional parameterless constructor with default value.
+         *
+         * That is, it creates
+         *
+         * ```
+         * class Customer {
+         *     private String name;
+         *
+         *     public Customer() {
+         *       this.name = "tt";
+         *     }
+         *
+         *     public Customer(String name) {
+         *       this.name = name;
+         *     }
+         * }
+         * ```
+         */
+        class Customer(val name: String = "tt") {
             override fun toString(): String {
-                return "Customer(name = $name)"
+                return "Customer(name=$name)"
             }
         }
 
-        println(Customer())
-        println(Customer("tester"))
-    }
-
-    Block("Creating Class Instance") {
-        class Invoice(val amount: Long = 0L) {
-            override fun toString(): String {
-                return "Invoice(amount = $amount)"
-            }
-        }
-
-        val invoice1 = Invoice()
-        val invoice2 = Invoice(100)
+        val customer1 = Customer()
+        val customer2 = Customer("tester")
+        println("customer with default: $customer1")
+        println("customer with args: $customer2")
     }
 
     Block("Abstract Class") {
@@ -106,5 +129,13 @@ fun main() {
         abstract class Rectangle : Polygon() {
             abstract override fun draw()
         }
+
+        class Test : Rectangle() {
+            override fun draw() {
+                println("Test.draw")
+            }
+        }
+
+        Test().draw()
     }
 }
