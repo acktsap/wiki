@@ -2,7 +2,7 @@ package acktsap.syntax
 
 import acktsap.Block
 
-@Suppress("RedundantNullableReturnType")
+@Suppress("RedundantNullableReturnType", "UnnecessaryVariable")
 fun main() {
     Block("Structural equality (equals)") {
         val a: Int? = null
@@ -18,13 +18,13 @@ fun main() {
     Block("Referential equality (two references point to the same object)") {
         data class A(val p: Int)
 
-        val a = A(1)
-        val b = a
+        val origin = A(1)
+        val referrer = origin
+        val another = A(1)
 
-        val equalityOnSameObject = (a === b)
-        println("equality (same object): $equalityOnSameObject")
-
-        val equalityOnSameValue = (a === A(1))
-        println("equality (same value): $equalityOnSameValue")
+        println("Referential equality with referrer: ${origin === referrer}")
+        println("Structural equality with referrer: ${origin == referrer}")
+        println("Referential equality with another: ${origin === another}")
+        println("Structural equality with another: ${origin == another}")
     }
 }

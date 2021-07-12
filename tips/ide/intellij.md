@@ -15,7 +15,12 @@ Editor > Code Style
 
 Eclipse
 
-Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
+- Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
+
+Custsom
+
+- Go to Implementations : Ctrl + i
+- Go to Test : Ctrl + t
 
 ### Show whitespace
 

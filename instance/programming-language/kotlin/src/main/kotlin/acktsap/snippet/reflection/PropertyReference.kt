@@ -5,6 +5,12 @@ import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty0
 import kotlin.reflect.KProperty1
 
+private const val firstClassObjectX = 1
+private var firstClassObjectY = 2
+
+private val String.lastChar: Char
+    get() = this[length - 1]
+
 fun main() {
     Block("First Class Object Property References") {
         val kProperty0: KProperty0<Int> = ::firstClassObjectX
