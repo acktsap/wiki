@@ -4,10 +4,8 @@
 
 It provides
 
-- Reusable functions that are essential in processing large volumes of records, including logging/tracing, transaction
-  management, job processing statistics, job restart, skip, and resource management
-- Advanced technical services and features that enable extremely high-volume and high performance batch jobs through
-  optimization and partitioning techniques
+- Reusable functions that are essential in processing large volumes of records, including logging/tracing, transaction management, job processing statistics, job restart, skip, and resource management
+- Advanced technical services and features that enable extremely high-volume and high performance batch jobs through optimization and partitioning techniques
 
 It's not a scheduler. It is intended to work in conjunction with a scheduler.
 
@@ -18,13 +16,11 @@ It's not a scheduler. It is intended to work in conjunction with a scheduler.
 Layered Architecture
 
 - Application
-    - Contains all batch jobs and custom code written by developers using Spring Batch
+  - Contains all batch jobs and custom code written by developers using Spring Batch
 - Batch Core
-    - Contains the core runtime classes necessary to launch and control a batch job. It includes implementations for
-      JobLauncher, Job, and Step.
+  - Contains the core runtime classes necessary to launch and control a batch job. It includes implementations for JobLauncher, Job, and Step.
 - Batch Infrastructure
-    - Contains common readers and writers and services (such as the RetryTemplate), which are used both by application
-      developers (such as ItemReader and ItemWriter) and the core framework itself.
+  - Contains common readers and writers and services (such as the RetryTemplate), which are used both by application developers (such as ItemReader and ItemWriter) and the core framework itself.
 
 ## Core Concept
 
@@ -39,14 +35,13 @@ A job needs to be launched (with JobLauncher), and metadata needs to be stored i
 
 - Job : Job configuration including name, step ordering, restartable, etc..
 - JobInstance : The concept of a logical job run.
-    - Distinguished by identifying JobParameters.
-    - JobParameters : Holds a set of parameters used to start a batch job.
-        - Has identifying flag to determine whether to be used as JobInstance identification.
+  - Distinguished by identifying JobParameters.
+  - JobParameters : Holds a set of parameters used to start a batch job.
+    - Has identifying flag to determine whether to be used as JobInstance identification.
 - JobExecution : The technical concept of a single attempt to run a Job.
-    - The JobInstance corresponding to a given execution is not considered to be complete unless the execution completes
-      successfully.
-        - eg. JobInstance for 01-01-2017 that failed. If it run with the same job parameters, a new JobExecution is
-          created. But still only one JobInstance.
+  - The JobInstance corresponding to a given execution is not considered to be complete unless the execution completes successfully.
+    - eg. JobInstance for 01-01-2017 that failed. If it run with the same job parameters, a new JobExecution is created. But still only one
+          JobInstance.
 
 ### Step
 
@@ -54,24 +49,24 @@ A job needs to be launched (with JobLauncher), and metadata needs to be stored i
 
 - Step : A domain object that encapsulates an independent, sequential phase of a batch job.
 - StepExecution : A single attempt to execute a Step.
-    - If a step fails to execute because the step before it fails, no execution is persisted for it. A StepExecution is
-      created only when its Step is actually started.
+  - If a step fails to execute because the step before it fails, no execution is persisted for it. A StepExecution is created only when its Step is
+      actually started.
 
 ### ExecutionContext
 
 - Represents a collection of key/value pairs that are persisted and controlled by the framework.
 - Allow developers a place to store persistent state that is scoped to a StepExecution object or a JobExecution object.
 - JobExecution::ExecutionContext
-    - At least one ExecutionContext per JobExecution.
-    - Saved in between every StepExecution.
+  - At least one ExecutionContext per JobExecution.
+  - Saved in between every StepExecution.
 - StepExecution::ExecutionContext
-    - ExecutionContext for every StepExecution
-    - Saved at every commit point in the Step.
+  - ExecutionContext for every StepExecution
+  - Saved at every commit point in the Step.
 
 ```java
 // ecJob does not equal ecStep
 ExecutionContext ecJob=jobExecution.getExecutionContext();
-    ExecutionContext ecStep=stepExecution.getExecutionContext();
+ExecutionContext ecStep=stepExecution.getExecutionContext();
 ```
 
 ### JobRepository
@@ -98,22 +93,22 @@ ExecutionContext ecJob=jobExecution.getExecutionContext();
 // pseudo code of chunk-oriented processing
 
 List items=new Arraylist();
-    for(int i=0;i<commitInterval; i++){
+for(int i=0;i<commitInterval; i++) {
     Object item=itemReader.read();
-    if(item!=null){
-    items.add(item);
+    if(item!=null) {
+        items.add(item);
     }
-    }
+}
 
-    List processedItems=new Arraylist();
-    for(Object item:items){
+List processedItems=new Arraylist();
+for (Object item:items) {
     Object processedItem=itemProcessor.process(item);
-    if(processedItem!=null){
-    processedItems.add(processedItem);
+    if(processedItem!=null) {
+        processedItems.add(processedItem);
     }
-    }
+}
 
-    itemWriter.write(processedItems);
+itemWriter.write(processedItems);
 ```
 
 ## Scalling
@@ -128,6 +123,95 @@ List items=new Arraylist();
 ### Partitioning
 
 ![partitioning-overview](../img/spring-batch-partitioning-overview.png)
+
+## Builder relations
+
+```text
+- JobBuilderFactory
+  - get(name: String): JobBuilder
+
+    - JobBuilder (extends JobBuilderHelper<JobBuilder>)
+      - start(step: Step): SimpleJobBuilder
+      - start(flow: Flow): JobFlowBuilder
+      - flow(step: Step): JobFlowBuilder
+
+        - SimpleJobBuilder (extends JobBuilderHelper<SimpleJobBuilder>)
+          - start(step: Step): SimpleJobBuilder
+          - next(step: Step): SimpleJobBuilder
+          - start(decider: JobExecutionDecider): JobFlowBuilder
+          - next(decider: JobExecutionDecider): JobFlowBuilder
+          - on(pattern: String): FlowBuilder.TransitionBuilder<FlowJobBuilder>
+          - split(executor: TaskExecutor): JobFlowBuilder.SplitBuilder<FlowJobBuilder>
+          - build(): Job
+
+        - JobFlowBuilder (extends FlowBuilder<FlowJobBuilder>)
+          - build(): FlowJobBuilder
+
+            - FlowJobBuilder
+              - start(flow: Flow): JobFlowBuilder
+              - start(step: Step): JobFlowBuilder
+              - build(): Job
+
+        - FlowBuilder<Q>
+          - start(step: Step): FlowBuilder<Q>
+          - next(step: Step): FlowBuilder<Q>
+          - from(step: Step): FlowBuilder<Q>
+          - start(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
+          - next(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
+          - from(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
+          - start(flow: Flow): FlowBuilder<Q>
+          - next(flow: Flow): FlowBuilder<Q>
+          - from(flow: Flow): FlowBuilder<Q>
+          - split(executor: TaskExecutor): FlowBuilder.SplitBuilder<Q>
+          - on(pattern: String): FlowBuilder.TransitionBuilder<Q>
+          - end(): Q
+          - build(): Q
+
+            - FlowBuilder.SplitBuilder<Q>
+              - add(...flows: Flow): FlowBuilder<Q>
+
+            - FlowBuilder.TransitionBuilder<Q>
+              - to(step: Step): FlowBuilder<Q>
+              - to(flow: Flow): FlowBuilder<Q>
+              - to(decider: JobExecutionDecider): FlowBuilder<Q>
+              - stopAndRestart(step: Step): FlowBuilder<Q>
+              - stopAndRestart(flow: Flow): FlowBuilder<Q>
+              - stopAndRestart(decider: JobExecutionDecider): FlowBuilder<Q>
+              - end(): FlowBuilder<Q>
+              - end(status: String): FlowBuilder<Q>
+              - stop(): FlowBuilder<Q>
+              - fail(): FlowBuilder<Q>
+
+            - FlowBuilder.UnterminatedFlowBuilder<Q>
+              - on(pattern: String): FlowBuilder.TransitionBuilder<Q>
+
+- StepBuilderFactory
+  - get(name: String): StepBuilder
+
+    - StepBuilder (extends StepBuilderHelper<StepBuilder>)
+      - tasklet(tasklet: Tasklet): TaskletStepBuilder
+      - chunk(chunkSize: Int): SimpleStepBuilder<I, O>
+      - chunk(completionPolicy: CompletionPolicy): SimpleStepBuilder<I, O>
+      - partitioner(stepName: String, partitioner: Partitioner): PartitionStepBuilder
+      - partitioner(step: Step): PartitionStepBuilder
+      - partitioner(job: Job): JobStepBuilder
+      - flow(flow: Flow): FlowStepBuilder
+
+        - TaskletStepBuilder
+          - TODO
+
+        - SimpleStepBuilder
+          - TODO
+
+        - PartitionStepBuilder
+          - TODO
+
+        - JobStepBuilder
+          - TODO
+
+        - FlowStepBuilder
+          - TODO
+```
 
 ## References
 
