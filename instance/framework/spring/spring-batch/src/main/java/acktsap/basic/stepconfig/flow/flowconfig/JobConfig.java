@@ -50,7 +50,8 @@ public class JobConfig {
             .start(stepA()).on("COMPLETED").end() // success job
             .from(stepA()).on("FAILED").fail() // fail job
             .from(stepA()).on("HELL").to(stepB()) // success job
-            .from(stepA()).on("*").to(stepC()).end() // success job
+            .from(stepA()).on("*").to(stepC()) // success job
+            .end()
             .build();
 
         // to re-trigger

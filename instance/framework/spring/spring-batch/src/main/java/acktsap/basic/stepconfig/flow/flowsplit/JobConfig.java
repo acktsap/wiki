@@ -39,8 +39,7 @@ public class JobConfig {
     public Job sampleJob1() {
         return this.jobBuilderFactory.get("sampleJob1")
             .start(flow1())
-            .split(taskExecutor())
-            .add(flow2(), flow3()) // flow1, flow2, flow3 run in async executor
+            .split(taskExecutor()).add(flow2(), flow3()) // flow1, flow2, flow3 run in async executor
             .next(makeStep(("step5"))) // step 5 run in main
             .end()
             .build();
@@ -58,16 +57,16 @@ public class JobConfig {
     @Bean
     public Flow splitFlow() {
         return new FlowBuilder<Flow>("splitFlow")
-            .split(taskExecutor())
-            .add(flow1(), flow2(), flow3()) // flow1, flow2, flow3 run in async executor
+            .split(taskExecutor()).add(flow1(), flow2(), flow3()) // flow1, flow2, flow3 run in async executor
             .build();
     }
 
     @Bean
     public Flow flow1() {
-        return new FlowBuilder<Flow>("flow1")
+        FlowBuilder<Flow> next = new FlowBuilder<Flow>("flow1")
             .start(makeStep("step1"))
-            .next(makeStep("step2"))
+            .next(makeStep("step2"));
+        return next
             .build();
     }
 

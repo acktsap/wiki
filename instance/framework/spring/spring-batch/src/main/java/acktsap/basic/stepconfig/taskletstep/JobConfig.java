@@ -26,6 +26,7 @@ public class JobConfig {
 
     @Bean
     public Job continuableByFieldJob() {
+        Object o = null;
         return this.jobBuilderFactory.get("continuableByFieldJob")
             .start(this.stepBuilderFactory.get("continuableByFieldStep")
                 .tasklet(new Tasklet() {
@@ -44,6 +45,7 @@ public class JobConfig {
                         return RepeatStatus.CONTINUABLE;
                     }
                 })
+                .listener(o)
                 .build())
             .build();
     }
