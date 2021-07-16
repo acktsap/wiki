@@ -11,12 +11,12 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
@@ -44,15 +44,15 @@ public class JobConfig {
     }
 
     @Bean
-    public Job sampleJob(JobRepository jobRepository, Step sampleStep) {
-        return this.jobBuilderFactory.get("sampleJob")
-            .start(sampleStep)
+    public Job sampleJob1() {
+        return this.jobBuilderFactory.get("sampleJob1")
+            .start(sampleStep1())
             .build();
     }
 
     @Bean
-    public Step sampleStep(TaskExecutor taskExecutor) {
-        return this.stepBuilderFactory.get("sampleStep")
+    public Step sampleStep1() {
+        return this.stepBuilderFactory.get("sampleStep1")
             .<List<Integer>, List<String>>chunk(3)
             .reader(new ItemReader<>() {
                 private int cursor = 1;
@@ -93,7 +93,7 @@ public class JobConfig {
                     .collect(toList());
                 System.out.printf("[%s %s] Write %s%n", Thread.currentThread().getName(), getCallBackMethod(), flattened);
             })
-            .taskExecutor(taskExecutor) // chunk 단위로 (tx 단위) thread에 맡김
+            .taskExecutor(taskExecutor()) // chunk 단위로 (tx 단위) thread에 맡김
             /*
                 throttleLimit : default : 4, 이 사이즈만큼 pool이 동시에 실행됨
 
@@ -115,6 +115,26 @@ public class JobConfig {
                 반대로 throttleLimit == 1로 하면 사실상 single thread의 효과가 남
              */
             .throttleLimit(1)
+            .build();
+    }
+
+    @Bean
+    public Job sampleJob2() {
+        return this.jobBuilderFactory.get("sampleJob")
+            .start(sampleStep2())
+            .build();
+    }
+
+    @Bean
+    public Step sampleStep2() {
+        return this.stepBuilderFactory.get("sampleStep")
+            .tasklet((contribution, chunkContext) -> {
+                // TODO: maybe unintended bug..
+                System.out.printf("tasklet step with task executor is called more then throttle limit (poolSize: %s)%n", poolSize);
+                return RepeatStatus.FINISHED;
+            })
+            .taskExecutor(taskExecutor())
+            // .throttleLimit(3)
             .build();
     }
 

@@ -202,8 +202,8 @@ itemWriter.write(processedItems);
 
         // JobBuilder, SimpleJobBuilder, FlowJobBuilder에 대한 부모
         // dsl 만들면 3개에 대해 공통으로 가야함
-        - JobBuilderHelper<B extends JobBuilderHelper<B>> -> 
-          - validator(jobParametersValidator: JobParametersValidator ): B
+        - JobBuilderHelper<B extends JobBuilderHelper<B>>
+          - validator(jobParametersValidator: JobParametersValidator): B
           - incrementer(jobParametersIncrementer: JobParametersIncrementer): B
           - repository(jobRepository: JobRepository): B
           - listener(listener: Object): B -> BeforeJob, AfterJob이 달려있는 object를 처리함
@@ -273,6 +273,7 @@ itemWriter.write(processedItems);
           // 공통 빌더
           - build(): TaskletStep
           // 쓰이는 것들
+          // taskExecutor, throttleLimit은 TaskletStepBuilder에는 의미가 없음.. SimpleStepBuilder 에만 의미가 있음
           - taskExecutor(taskExecutor: TaskExecutor): AbstractTaskletStepBuilder<B>
           - throttleLimit(throttleLimit: Int): AbstractTaskletStepBuilder<B>
           - exceptionHandler(exceptionHandler: ExceptionHandler): AbstractTaskletStepBuilder<B>
@@ -283,14 +284,15 @@ itemWriter.write(processedItems);
           - stream(stream: ItemStream)
           - stepOperations(repeatTemplate: RepeatOperations): AbstractTaskletStepBuilder<B>
         
-        // TasketStepBuilder, SimpleStepBuilder, PartitionStepBuilder, JobStepBuilder, FlowStepBuilder 에 대한 부모
+        // StepBuilder, TasketStepBuilder, SimpleStepBuilder, PartitionStepBuilder, JobStepBuilder, FlowStepBuilder 에 대한 부모
+        // 그렇긴 한데 StepBuilder 제외하고는 사실상 step 자체에 대한 설정이라 StepBuilder에서만 해도 될 듯
         - StepBuilderHelper<B>
           - repository(jobRepository: JobRepository): B
           - transactionManager(transactionManager: PlatformTransactionManager): B
           - startLimit(startLimit: Int): B
           - listener(listener: Object): B // BeforeStep, AfterStep 처리함
           - listener(listener: StepExecutionListener): B
-          - allowStartIfComplete(allowStartIfComplete: boolean): B
+          - allowStartIfComplete(allowStartIfComplete: Boolean): B
 
 - 번외로 flow 만드는 법
   // FlowBuilder를 Flow generic으로 해서 사용. 이건 전통적인 코틀린 dsl으로 해도 가능할듯
