@@ -220,7 +220,7 @@ itemWriter.write(processedItems);
       - chunk(completionPolicy: CompletionPolicy): SimpleStepBuilder<I, O>
       - partitioner(stepName: String, partitioner: Partitioner): PartitionStepBuilder
       - partitioner(step: Step): PartitionStepBuilder
-      - partitioner(job: Job): JobStepBuilder
+      - job(job: Job): JobStepBuilder
       - flow(flow: Flow): FlowStepBuilder
 
         - TaskletStepBuilder (extends AbstractTaskletStepBuilder<TaskletStepBuilder>)

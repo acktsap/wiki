@@ -1,10 +1,17 @@
 package acktsap.basic.jobconfig;
 
+import javax.sql.DataSource;
+
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 
+import lombok.RequiredArgsConstructor;
+
 // Just for snippets for case
-// @Component
+// @Configuration
+// @EnableBatchProcessing
+@RequiredArgsConstructor
 public class CustomBatchConfiguer extends DefaultBatchConfigurer {
+    private final DataSource dataSource;
 
     // Tx configuration for jobRepository
     /*

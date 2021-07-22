@@ -1,16 +1,16 @@
 package acktsap.basic.runningjob.web;
 
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.BatchConfigurer;
+import javax.sql.DataSource;
+
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.explore.JobExplorer;
+import org.springframework.batch.core.explore.support.JobExplorerFactoryBean;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
-import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.context.annotation.Bean;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
@@ -19,40 +19,36 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableBatchProcessing
 @RequiredArgsConstructor
-public class BatchConfig {
-    private final JobBuilderFactory jobBuilderFactory;
+public class BatchConfig extends DefaultBatchConfigurer {
+    private final DataSource dataSource;
+    @Value("${spring.batch.jdbc.table-prefix}")  // custom table prefix
+    private String tablePrefix;
 
-    private final StepBuilderFactory stepBuilderFactory;
-
-    @Bean
-    public Job footballJob() {
-        return this.jobBuilderFactory.get("footballJob")
-            .start(playerLoad())
-            .build();
+    @Override
+    protected JobLauncher createJobLauncher() throws Exception {
+        SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
+        jobLauncher.setJobRepository(getJobRepository());
+        jobLauncher.setTaskExecutor(new SimpleAsyncTaskExecutor()); // async
+        jobLauncher.afterPropertiesSet();
+        return jobLauncher;
     }
 
-    @Bean
-    public Step playerLoad() {
-        return this.stepBuilderFactory.get("playerLoad")
-            .tasklet((contribution, chunkContext) -> {
-                String jobName = chunkContext.getStepContext().getJobName();
-                System.out.printf("[%s] %s - %s%n", Thread.currentThread().getName(), jobName, "playerLoad");
-                return RepeatStatus.FINISHED;
-            })
-            .build();
+    @Override
+    protected JobExplorer createJobExplorer() throws Exception {
+        JobExplorerFactoryBean factory = new JobExplorerFactoryBean();
+        factory.setDataSource(dataSource);
+        factory.setTablePrefix(tablePrefix);
+        factory.afterPropertiesSet();
+        return factory.getObject();
     }
 
-    @Bean
-    public BatchConfigurer batchConfigurer() {
-        return new DefaultBatchConfigurer() {
-            @Override
-            protected JobLauncher createJobLauncher() throws Exception {
-                SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
-                jobLauncher.setJobRepository(getJobRepository());
-                jobLauncher.setTaskExecutor(new SimpleAsyncTaskExecutor()); // async
-                jobLauncher.afterPropertiesSet();
-                return jobLauncher;
-            }
-        };
+    @Override
+    protected JobRepository createJobRepository() throws Exception {
+        JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
+        factory.setDataSource(dataSource);
+        factory.setTransactionManager(getTransactionManager());
+        factory.setTablePrefix(tablePrefix);
+        factory.afterPropertiesSet();
+        return factory.getObject();
     }
 }

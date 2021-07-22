@@ -15,9 +15,11 @@ fun main() {
 
         val a = A(3)
 
+        // kclass to java class
         val javaClass = a.javaClass
         println("javaClass: $javaClass")
 
+        // java class to kclass
         val kClass: KClass<A> = javaClass.kotlin
         println("kClass: $kClass")
     }
