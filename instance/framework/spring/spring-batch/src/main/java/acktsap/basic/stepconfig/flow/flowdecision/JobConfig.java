@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -32,8 +33,8 @@ public class JobConfig {
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Bean
-    public Job job() {
-        Job job = this.jobBuilderFactory.get("job")
+    public Job deciderJob() {
+        Job job = this.jobBuilderFactory.get("deciderJob")
             .start(step1())
             .next(decider()).on("FAILED").to(step2())
             .from(decider()).on("COMPLETED").to(step3())
@@ -44,7 +45,6 @@ public class JobConfig {
         executorService.schedule(() -> {
             try {
                 JobParameters jobParameters = new JobParametersBuilder()
-                    .addLong("time", System.currentTimeMillis())
                     .toJobParameters();
                 jobLauncher.run(job, jobParameters);
             } catch (Exception e) {
@@ -56,12 +56,36 @@ public class JobConfig {
     }
 
     @Bean
+    public Job stopDeciderJob() {
+        JobExecutionDecider jobExecutionDecider = (j, s) -> FlowExecutionStatus.STOPPED;
+        return this.jobBuilderFactory.get("stopDeciderJob")
+            .start(step1())
+            .next(jobExecutionDecider).on("FAILED").to(step2())
+            .from(jobExecutionDecider).on("*").to(step3()) // never called. just stop the job
+            .end()
+            .build();
+    }
+
+    @Bean
+    public Job deciderAfterFailStepJob() {
+        return this.jobBuilderFactory.get("deciderAfterFailStepJob")
+            .start(failStep())
+            // decider never called
+            .next(decider()).on("FAILED").to(step2())
+            .from(decider()).on("*").to(step3())
+            .end()
+            .build();
+    }
+
+    @Bean
     public JobExecutionDecider decider() {
         return new JobExecutionDecider() {
             boolean isFirst = true;
 
             @Override
             public FlowExecutionStatus decide(JobExecution jobExecution, StepExecution stepExecution) {
+                String jobName = jobExecution.getJobInstance().getJobName();
+                System.out.printf("[%s] %s - decider%n", Thread.currentThread().getName(), jobName);
                 if (isFirst) {
                     isFirst = false;
                     return new FlowExecutionStatus("FAILED");
@@ -76,7 +100,8 @@ public class JobConfig {
     public Step step1() {
         return stepBuilderFactory.get("step1")
             .tasklet((contribution, chunkContext) -> {
-                System.out.println("Execute step1 always");
+                String jobName = chunkContext.getStepContext().getJobName();
+                System.out.printf("[%s] %s - step1%n", Thread.currentThread().getName(), jobName);
                 return RepeatStatus.FINISHED;
             })
             .build();
@@ -86,7 +111,8 @@ public class JobConfig {
     public Step step2() {
         return stepBuilderFactory.get("step2")
             .tasklet((contribution, chunkContext) -> {
-                System.out.println("Execute step2 on failure");
+                String jobName = chunkContext.getStepContext().getJobName();
+                System.out.printf("[%s] %s - step2%n", Thread.currentThread().getName(), jobName);
                 return RepeatStatus.FINISHED;
             })
             .build();
@@ -96,7 +122,20 @@ public class JobConfig {
     public Step step3() {
         return stepBuilderFactory.get("step3")
             .tasklet((contribution, chunkContext) -> {
-                System.out.println("Execute step3 on success");
+                String jobName = chunkContext.getStepContext().getJobName();
+                System.out.printf("[%s] %s - step3%n", Thread.currentThread().getName(), jobName);
+                return RepeatStatus.FINISHED;
+            })
+            .build();
+    }
+
+    @Bean
+    public Step failStep() {
+        return stepBuilderFactory.get("failStep")
+            .tasklet((contribution, chunkContext) -> {
+                String jobName = chunkContext.getStepContext().getJobName();
+                System.out.printf("[%s] %s - failStep%n", Thread.currentThread().getName(), jobName);
+                contribution.setExitStatus(ExitStatus.FAILED);
                 return RepeatStatus.FINISHED;
             })
             .build();

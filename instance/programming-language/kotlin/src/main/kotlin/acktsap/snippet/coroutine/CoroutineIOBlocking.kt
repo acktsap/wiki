@@ -31,6 +31,7 @@ fun main() {
                     log("return 23")
                     23
                 }
+                log("Requested")
 
                 log("Result: ${a.await() + b.await()}")
             }
@@ -53,6 +54,7 @@ fun main() {
                     log("return 23")
                     23
                 }
+                log("Requested")
 
                 log("Result: ${a.await() + b.await()}")
             }
@@ -78,6 +80,7 @@ fun main() {
                     log("return 23")
                     23
                 }
+                log("Requested")
 
                 log("Result: ${a.await() + b.await()}")
             }
@@ -103,6 +106,7 @@ fun main() {
                     log("return 23")
                     23
                 }
+                log("Requested")
 
                 log("Result: ${a.await() + b.await()}")
             }

@@ -13,6 +13,8 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.FlowBuilder;
+import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -78,6 +80,22 @@ public class JobConfig {
         }, 3000L, 2000L, TimeUnit.MILLISECONDS);
 
         return job;
+    }
+
+    @Bean
+    public Job flowJob() {
+        return this.jobBuilderFactory.get("flowJob")
+            .start(flow())
+            .end()
+            .build();
+    }
+
+    @Bean
+    public Flow flow() {
+        return new FlowBuilder<Flow>("testFlow")
+            .start(step1())
+            .next(step2())
+            .build();
     }
 
     @Bean

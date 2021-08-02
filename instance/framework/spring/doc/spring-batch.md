@@ -167,17 +167,28 @@ itemWriter.write(processedItems);
               - build(): FlowJobBuilder
 
               // 아래부턴 FlowBuilder<Q>에 정의. -> Q는 build시 반환되는 값
+
+              // 이 4개는 동급 두개씩 나눠서 비슷하게 취급
               - start(step: Step): FlowBuilder<Q>
               - next(step: Step): FlowBuilder<Q>
-              - from(step: Step): FlowBuilder<Q>
-              - start(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
-              - next(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
-              - from(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
               - start(flow: Flow): FlowBuilder<Q>
               - next(flow: Flow): FlowBuilder<Q>
+
+              // on 두번 이상 사용할 때
+              - from(step: Step): FlowBuilder<Q>
               - from(flow: Flow): FlowBuilder<Q>
-              - split(executor: TaskExecutor): FlowBuilder.SplitBuilder<Q>
+              - from(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
+
+              // 이건 이전의 step, flow에 대한 on
               - on(pattern: String): FlowBuilder.TransitionBuilder<Q>
+
+              // decider
+              - start(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
+              - next(decider: JobExecutionDecider): FlowBuilder.UnterminatedFlowBuilder<Q>
+
+              // split
+              - split(executor: TaskExecutor): FlowBuilder.SplitBuilder<Q>
+
               - end(): Q
               - build(): Q
 
@@ -201,7 +212,7 @@ itemWriter.write(processedItems);
                   - on(pattern: String): FlowBuilder.TransitionBuilder<Q>
 
         // JobBuilder, SimpleJobBuilder, FlowJobBuilder에 대한 부모
-        // dsl 만들면 3개에 대해 공통으로 가야함
+        // dsl 만들면 3개에 대해 공통으로 가야함 -> JobBuilderDsl에만 넣어
         - JobBuilderHelper<B extends JobBuilderHelper<B>>
           - validator(jobParametersValidator: JobParametersValidator): B
           - incrementer(jobParametersIncrementer: JobParametersIncrementer): B
@@ -216,11 +227,16 @@ itemWriter.write(processedItems);
     // sub builder 중 StepBuilder에서 호출되는 부분은 dsl 만들때 비슷하게 호출하고 넣어야 함
     - StepBuilder (extends StepBuilderHelper<StepBuilder>)
       - tasklet(tasklet: Tasklet): TaskletStepBuilder
+
       - chunk(chunkSize: Int): SimpleStepBuilder<I, O>
       - chunk(completionPolicy: CompletionPolicy): SimpleStepBuilder<I, O>
+
       - partitioner(stepName: String, partitioner: Partitioner): PartitionStepBuilder
+      // 내부적으로 'new PartitionStepBuilder(this).step(step)'을 호출. 위에꺼에 통합시켜도 될 듯
       - partitioner(step: Step): PartitionStepBuilder
+
       - job(job: Job): JobStepBuilder
+
       - flow(flow: Flow): FlowStepBuilder
 
         - TaskletStepBuilder (extends AbstractTaskletStepBuilder<TaskletStepBuilder>)
@@ -233,7 +249,7 @@ itemWriter.write(processedItems);
           - reader(reader: ItemReader<I>): SimpleStepBuilder<I, O>
           - writer(writer: ItemWriter<O>): SimpleStepBuilder
           - processor(processor: ItemProcessor<I, O>): SimpleStepBuilder<I, O>
-          - processor(function: Function<I, O>): SimpleStepBuilder<I, O> // 위에랑 동일
+          - processor(function: Function<I, O>): SimpleStepBuilder<I, O> // 위에랑 동일, 안해도 될듯
           // listener 들
           - listener(listener: Object): SimpleStepBuilder<I, O> -> Overridden one
           - listener(listener: ItemReadListener<I>): SimpleStepBuilder<I, O>
@@ -248,6 +264,7 @@ itemWriter.write(processedItems);
           - aggregator(aggregator: StepExecutionAggregator): PartitionStepBuilder
 
           - splitter(splitter: StepExecutionSplitter): PartitionStepBuilder
+          // workerStepName는 splitter가 없을 경우 SimpleStepExecutionSplitter 만들면서 사용됨
           // partitioner는 splitter가 없을 경우 SimpleStepExecutionSplitter 만들면서 사용됨
           - partitioner(workerStepName: String, partitioner: Partitioner): PartitionStepBuilder // StepBuilder에서 호출됨
 
@@ -283,11 +300,13 @@ itemWriter.write(processedItems);
           // ?? 어디쓰임?
           - stream(stream: ItemStream)
           - stepOperations(repeatTemplate: RepeatOperations): AbstractTaskletStepBuilder<B>
-        
+
         // StepBuilder, TasketStepBuilder, SimpleStepBuilder, PartitionStepBuilder, JobStepBuilder, FlowStepBuilder 에 대한 부모
         // 그렇긴 한데 StepBuilder 제외하고는 사실상 step 자체에 대한 설정이라 StepBuilder에서만 해도 될 듯
         - StepBuilderHelper<B>
           - repository(jobRepository: JobRepository): B
+          // transactionManager는 AbstractTaskletStepBuilder에 가는게 맞는거같음. 사실상 다음의 링크에서 변환되어서 쓰임;
+          // https://github.com/spring-projects/spring-batch/blob/a0316379945a813b6516aaa37d110dc425693fed/spring-batch-core/src/main/java/org/springframework/batch/core/step/builder/StepBuilderHelper.java#L160-L163
           - transactionManager(transactionManager: PlatformTransactionManager): B
           - startLimit(startLimit: Int): B
           - listener(listener: Object): B // BeforeStep, AfterStep 처리함
