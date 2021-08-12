@@ -56,3 +56,12 @@ NVL(SUM(COL1), 0)
 Conditional
 
 - DECODE(column, condition, expr1, expr2) : if (condition.match(column) expr1 else expr2
+
+- TRUNC : Truncate value.
+  ```sql
+  -- 15.7
+  SELECT TRUNC(15.79,1) "Truncate" FROM DUAL;
+
+  -- 15
+  SELECT TRUNC(15.79) "Truncate" FROM DUAL;
+  ```

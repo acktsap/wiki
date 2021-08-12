@@ -8,3 +8,5 @@
 ## Java Kotlin Extension
 
 - [Jackcon Kotlin Module](https://github.com/FasterXML/jackson-module-kotlin/tree/2.13/src/main/kotlin/com/fasterxml/jackson/module/kotlin)
+  - [generics](https://github.com/FasterXML/jackson-module-kotlin/blob/2.13/src/main/kotlin/com/fasterxml/jackson/module/kotlin/Extensions.kt)
+    - extensions `inline fun <reified T> test()`로 (`fun <T> test(type: KClass<T>)` 말고)
