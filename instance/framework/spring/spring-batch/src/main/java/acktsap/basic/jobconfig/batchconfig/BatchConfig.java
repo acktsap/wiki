@@ -1,4 +1,4 @@
-package acktsap.basic.jobconfig;
+package acktsap.basic.jobconfig.batchconfig;
 
 import javax.sql.DataSource;
 

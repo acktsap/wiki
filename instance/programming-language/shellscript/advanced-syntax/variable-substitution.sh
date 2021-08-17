@@ -28,7 +28,7 @@ function variable_substitution() {
 
     # substitute for hostname as 'localhost' when hostname is unset
     # no change to hostname
-    echo "Processed hostname: ${hostname:-"localhost"}"
+    echo "Processed hostname: ${hostname:-${hostname}}"
 
     # substitute for alias as 'forced_alias' when alias is set
     # no change to alias
@@ -36,6 +36,8 @@ function variable_substitution() {
 
     echo "Dirty hostname: $hostname"
     echo "Dirty alias: $alias"
+
+    echo
   }
 
   # print 192.168.0.1, forced_alias

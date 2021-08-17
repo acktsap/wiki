@@ -1,4 +1,4 @@
-package acktsap.basic.runningjob.web;
+package acktsap.basic.jobconfig.db_prefix;
 
 import java.util.Properties;
 
@@ -14,7 +14,8 @@ public class Application {
         SpringApplication application = new SpringApplication(Application.class);
 
         Properties properties = new Properties();
-        properties.put("spring.batch.job.enabled", false);  // without this, all job will run
+        properties.put("spring.batch.job.enabled", true);  // without this, all job will run
+        properties.put("spring.batch.jdbc.table-prefix", "TEST_BAT_");
         application.setDefaultProperties(properties);
 
         application.run(args);

@@ -1,4 +1,4 @@
-package acktsap.basic.jobconfig;
+package acktsap.basic.jobconfig.batchconfig;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

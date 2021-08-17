@@ -1,4 +1,4 @@
-package acktsap.basic.jobconfig;
+package acktsap.basic.jobconfig.batchconfig;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

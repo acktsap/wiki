@@ -5,6 +5,3 @@ spring:
     console:
       enabled: true
       path: /h2-console # enable h2 console
-  batch:
-    jdbc:
-      table-prefix: TEST_BAT_ # set metatable prefix

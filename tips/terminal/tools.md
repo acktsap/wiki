@@ -31,3 +31,19 @@ openssl aes-256-cbc -a -salt -in input.txt
 # decrypt input.txt file with aes-256-cbc
 openssl aes-256-cbc -a -d -in input.txt
 ```
+
+## Curl
+
+```sh
+```
+
+## Date
+
+
+```sh
+# get days 3 days before
+date -v -3d
+
+# print today as yyyymmdd
+date "+%Y%m%d"
+```
