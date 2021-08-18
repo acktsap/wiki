@@ -1,4 +1,4 @@
-package acktsap.basic.stepconfig.restart;
+package acktsap.basic.stepconfig.restart.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
