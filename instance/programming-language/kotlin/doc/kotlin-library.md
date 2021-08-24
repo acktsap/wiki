@@ -1,5 +1,15 @@
 # Kotlin Library
 
+## Closed
+
+- 생성자 노출 방어
+  ```kotlin
+  // internal constructor
+  class MockHttpServletRequestDsl internal constructor (private val builder: MockHttpServletRequestBuilder) {
+    ...
+  }
+  ```
+
 ## Dsl
 
 - [ktor](https://ktor.io/docs/routing-in-ktor.html)

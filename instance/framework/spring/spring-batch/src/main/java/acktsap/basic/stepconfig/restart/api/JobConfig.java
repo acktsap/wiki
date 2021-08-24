@@ -13,6 +13,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,7 +32,7 @@ public class JobConfig {
     public Job footballJob() {
         Job job = this.jobBuilderFactory.get("footballJob")
             .start(playerLoad())
-            .next(gameLoad())
+            .next(alwaysRunStep())
             .next(playerSummarization())
             .build();
 
@@ -70,11 +71,14 @@ public class JobConfig {
     }
 
     @Bean
-    public Step gameLoad() {
-        return this.stepBuilderFactory.get("gameLoad")
-            .<String, String>chunk(3)
-            .reader(reader())
-            .writer(games -> System.out.printf("Load games: %s%n", games))
+    public Step alwaysRunStep() {
+        return this.stepBuilderFactory.get("alwaysRunStep")
+            .tasklet((contribution, chunkContext) -> {
+                String jobName = chunkContext.getStepContext().getJobName();
+                String stepName = chunkContext.getStepContext().getStepName();
+                System.out.printf("[%s - %s] I always run: %n", jobName, stepName);
+                return RepeatStatus.FINISHED;
+            })
             .allowStartIfComplete(true) // always run
             .build();
     }
