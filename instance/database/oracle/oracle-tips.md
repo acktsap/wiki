@@ -64,4 +64,8 @@ Conditional
 
   -- 15
   SELECT TRUNC(15.79) "Truncate" FROM DUAL;
+
+  -- oracle trunc할 때 조심 자릿수가 생각보다 한계가 짧아서 java BigDecimal이랑 비교하면 1씩 안맞을 수 있음
+  SELECT trunc(-111823.9999999999999999999999999999999999) FROM dual; -- -111823
+  SELECT trunc(-111823.99999999999999999999999999999999999) FROM dual; -- -111824
   ```
