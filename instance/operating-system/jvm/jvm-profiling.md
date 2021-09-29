@@ -46,3 +46,8 @@ View
   - Usage : File -> Open Heap Dump -> Select dump binary
   - heap size 단위는 **byte**
 
+## Show class file compiler version
+
+```sh
+javap -v A.class | grep major
+```

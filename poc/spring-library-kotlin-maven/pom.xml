@@ -94,7 +94,7 @@
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 
 		<plugins>
-      <!-- kotlin -->
+	  <!-- kotlin -->
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
@@ -114,8 +114,9 @@
 					</execution>
 				</executions>
 
-        <!-- to make spring related class automatically open -->
+				<!-- to make spring related class automatically open -->
 				<configuration>
+					<jvmTarget>1.8</jvmTarget>
 					<compilerPlugins>
 						<plugin>spring</plugin>
 					</compilerPlugins>
@@ -129,7 +130,7 @@
 				</dependencies>
 			</plugin>
 
-      <!-- kotlin lint -->
+			<!-- kotlin lint -->
 			<plugin>
 				<groupId>com.github.gantsign.maven</groupId>
 				<artifactId>ktlint-maven-plugin</artifactId>

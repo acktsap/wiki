@@ -1,16 +1,25 @@
 # Language
 
-## Jvm
+## Jdk
 
-### Jdk
+- [common](https://blog.benelog.net/installing-jdk.html)
 
-https://blog.benelog.net/installing-jdk.html
+### osx
 
-osx
+https://github.com/AdoptOpenJDK/homebrew-openjdk
 
 ```sh
-brew tap AdoptOpenJDK/openjdk
-brew cask install adoptopenjdk14
+# brew tap
+brew tap homebrew/cask-versions
+
+# latest version
+brew install --cask temurin 
+
+# jdk 8
+brew install --cask temurin8
+
+# jdk 11
+brew install --cask temurin11 
 ```
 
 ## JavaScript Runtime
