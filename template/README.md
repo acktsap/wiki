@@ -2,22 +2,11 @@
 
 Project template (app, library) for languages.
 
-- java
-- ts
-
 ## README should has build
 
-- Prerequisites
-- Install dependencies
-- Lint
-- Test
-  - Unit Test
-  - Integration Test
-  - Coverage
-- Build Production
-- Run as dev mode
+- Requirements
 - Install
-- Run
+- Usage
 
 ## Build Configuration
 
@@ -26,9 +15,14 @@ Project template (app, library) for languages.
 - Logging
 - Lint
 - Testing
+  - Unit Test
+  - Integration Test
+  - Coverage
 - Coverage
 - Docs
 - Packaging
+  - Build Production
+  - Run as dev mode
 - CI
 
 ## Docs (Optional)

@@ -26,9 +26,13 @@ Custsom
 
 - Editor > General > Appearance > Show whitespace
 
-### Disable auto save
+### Apperance & Behavior
 
-System Settings -> Synchronization -> Uncheck all
+- Disable auto save : System Settings -> Autosave -> Uncheck all
+  - [X] Save fies if the IDE is idle for xx seconds
+  - [X] Save files when switching to a different application
+  - [ ] Backup files before saving
+  - [X] Synchronize external changes when switching to the IDE windows or opening an editor tab
 
 ### JDK Version
 

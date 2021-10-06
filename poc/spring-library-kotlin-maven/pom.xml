@@ -41,6 +41,7 @@
 
 		<!-- plugin versions -->
 		<ktlint-maven-plugin.version>1.10.2</ktlint-maven-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -94,7 +95,7 @@
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 
 		<plugins>
-	  <!-- kotlin -->
+		<!-- kotlin -->
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
@@ -134,13 +135,28 @@
 			<plugin>
 				<groupId>com.github.gantsign.maven</groupId>
 				<artifactId>ktlint-maven-plugin</artifactId>
-				<version>1.10.2</version>
+				<version>${ktlint-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>format-and-check</id>
 						<goals>
 							<goal>format</goal>
 							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- deploy sources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
