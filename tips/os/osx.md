@@ -60,6 +60,13 @@ Utils
 - [gif brewery 3 by gfycat](https://apps.apple.com/kr/app/gif-brewery-3-by-gfycat/id1081413713?mt=12) : gif generator
   - Video location : `~/Movies/GIF Brewery 3`
 - [RunCat](https://apps.apple.com/kr/app/runcat/id1429033973?mt=12) : Monotoring tool
+- [Scroll Reverser](https://pilotmoon.com/scrollreverser/) : Separate mouse and trackpad settings
+  - Scrolling Axes
+    - [X] Reverse Vertical
+    - [X] Reverse Horizontal
+  - Scroll Direction (Before this, set mouse scroll direction to natural)
+    - [ ] Reverse Trackpad
+    - [X] Reverse Mouse
 
 Docs
 
