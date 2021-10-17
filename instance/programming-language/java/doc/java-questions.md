@@ -32,6 +32,7 @@
     - [Stream (I/O) vs Channel](#stream-io-vs-channel)
   - [Reflection](#reflection)
     - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
+    - [What is Synthetic?](#what-is-synthetic)
   - [References](#references)
 
 ## Type
@@ -219,7 +220,6 @@ public static Integer valueOf(int i) {
 
 - 둘다 Since 1.8
 - Lambda
-  - 그냥 anonymous class 에 syntax suger를 붙인것 뿐임
   - `@FunctionalInterface` annotation하고 관계 없이 method가 1개인 인터페이스에 쓸 수 있음
 - `@FunctionalInterface`
   - 함수가 한개인거를 강제해서 컴파일 시 체크를 해주는 annotation
@@ -298,6 +298,13 @@ public static Integer valueOf(int i) {
 
 - Proxy : interface (또는 class)에 해당하는 메소드를 다 정의해야함
 - DynamicProxy : Reflection을 통해 실행되는 method를 가져와서 직접 다 정의하지 않고도 동적으로 proxy 처리를 할 수 있음
+
+### What is Synthetic?
+
+https://javapapers.com/core-java/java-synthetic-class-method-field/
+
+- compiler에 의해 인조적으로 만들어지는 method
+- java lambda가 invokeDynamic으로 호출하게 변환될 때 호출하는 static method가 synthetic임
 
 ## References
 
