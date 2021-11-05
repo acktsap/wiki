@@ -28,6 +28,10 @@ VALUES
   )
 ```
 
+### UNPIVOT
+
+https://wookoa.tistory.com/241
+
 ## Sequence
 
 ```sql

@@ -15,11 +15,12 @@
 - Keyboard
   - Modifier Keys
     - Caps Lock -> Control
-    - External keyboard only
+    - ~~External keyboard only~~ -> Karabiner Virtual Keyboard로 대체
       - Control -> Control
       - Option -> Command
       - Command -> Optional
-  - Shortcut -> Input Sources -> Select the previous input source : Option + Space (⌥ + Space)
+  - ~~Shortcut -> Input Sources~~ -> Karabiner Virtual Keyboard로 대체
+    - Select the previous input source : Option + Space (⌥ + Space)
   - Function Keys : ${customizing}
 - Trackpad
   - 탭하여 클릭하기
@@ -67,6 +68,28 @@ Utils
   - Scroll Direction (Before this, set mouse scroll direction to natural)
     - [ ] Reverse Trackpad
     - [X] Reverse Mouse
+- [Karabiner](https://karabiner-elements.pqrs.org/) : Virtual keyboard
+  - Karabiner Elements Preferences
+    - Simple modifications
+      - Apple Internal Keyboard
+        - right_command to **F18**
+      - External keyboard (eg. Realforce)
+        - left_command to left_option
+        - left_option to left_command
+        - right_command to right_option
+        - right_option to **F18**
+    - Function keys
+      - For all devices
+        - [X] Use all F1, F2, etc as standard function keys
+    - Devices
+      - [X] Apple Internal Keyboard
+      - [X] External keyboard (eg. Realforce)
+  - System Preference
+    - Keyboard -> Keyboard -> Modifier Keys
+      - Caps Lock to Control
+    - Shortcuts -> Input Sources
+      - Select the previous input source to **F18**
+  - [see also](https://ssossoblog.tistory.com/54)
 
 Docs
 
@@ -94,6 +117,11 @@ Make workspace dir & pin it to the finder
 ### 취소선 단축키
 
 https://www.clien.net/service/board/cm_mac/13752933
+
+### 동영상 편집
+
+- QuickTimePlayer 사용해서 Split Clip (command + Y)을 활용해서 중간 중간 자른 후 저장
+- Mp4 변환의경우 imovie 사용
 
 
 [osx system java version](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x)

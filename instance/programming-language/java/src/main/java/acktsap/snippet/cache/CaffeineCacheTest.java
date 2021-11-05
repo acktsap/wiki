@@ -1,17 +1,18 @@
 package acktsap.snippet.cache;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import acktsap.Block;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class CaffeineCacheTest {
     /*
@@ -56,7 +57,7 @@ public class CaffeineCacheTest {
                     }
 
                     @Override
-                    public @NonNull Map<Object, String> loadAll(@NonNull Iterable<?> keys) throws Exception {
+                    public Map<?, ? extends String> loadAll(@NonNull Set<?> keys) throws Exception {
                         List<Object> list = new ArrayList<>();
                         keys.forEach(list::add);
                         System.out.println("load all with " + list);

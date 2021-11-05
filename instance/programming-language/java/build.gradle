@@ -10,8 +10,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility = 1.17
-    targetCompatibility = 1.17
+    sourceCompatibility = 1.14
+    targetCompatibility = 1.14
 }
 
 repositories {

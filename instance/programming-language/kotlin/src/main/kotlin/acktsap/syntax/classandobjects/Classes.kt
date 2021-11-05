@@ -90,7 +90,7 @@ fun main() {
 
     Block("Constructor with Default Value") {
         /**
-         * The compiler will generate an additional parameterless constructor with default value.
+         * If all of the primary constructor have default values, the compiler will benerate an additional parameterless constructor.
          *
          * That is, it creates
          *

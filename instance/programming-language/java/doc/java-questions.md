@@ -20,6 +20,7 @@
     - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
     - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
     - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
+    - [Java Lambda vs Anonymous class](#java-lambda-vs-anonymous-class)
     - [Java에 Closure가 있는가](#java에-closure가-있는가)
   - [Concurrency](#concurrency)
     - [Java Thread & Kernal thread](#java-thread--kernal-thread)
@@ -232,6 +233,10 @@ public static Integer valueOf(int i) {
   - `Consumer` : void accept()
   - `Function` : R apply(T t)
   - `Predicate` : boolean test(T t)
+
+### Java Lambda vs Anonymous class
+
+https://dreamchaser3.tistory.com/5
 
 ### Java에 Closure가 있는가
 
