@@ -1,0 +1,25 @@
+# Language
+
+## Programming Laugnage
+
+A programming language is a formal language comprising a set of instructions that produce various kinds of output.
+
+https://en.wikipedia.org/wiki/Programming_language
+
+## Markup Language
+
+In computer text processing, a markup language is a system for annotating a document in a way that is syntactically distinguishable from the text meaning when the document is processed for display, the markup language is not shown, and is only used to format the text.
+
+https://en.wikipedia.org/wiki/Markup_language
+
+## Common
+
+- Syntax : The set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language. Specified by grammar.
+- Snippet : A small region of re-usable source code, machine code, or text
+- Design pattern : A general, reusable solution to a commonly occurring problem within a given context in software design
+
+https://en.wikipedia.org/wiki/Syntax_(programming_languages)
+
+https://en.wikipedia.org/wiki/Snippet_(programming)
+
+https://en.wikipedia.org/wiki/Software_design_pattern
