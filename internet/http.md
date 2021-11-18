@@ -1,17 +1,38 @@
-# Http 1.1
+# Http
 
-- [Http 1.1](#http-11)
-  - [Background](#background)
-  - [Terms](#terms)
-  - [Structure](#structure)
+- [Http](#http)
+  - [Http](#http-1)
+  - [Http 1.0](#http-10)
+  - [Http 1.1](#http-11)
+    - [Background](#background)
+    - [Terms](#terms)
+    - [Structure](#structure)
     - [Simplest case](#simplest-case)
     - [With intermediary](#with-intermediary)
     - [With a cache](#with-a-cache)
     - [Http over TCP/IP](#http-over-tcpip)
-  - [Keep-Alive](#keep-alive)
-  - [Reference](#reference)
+    - [Keep-Alive](#keep-alive)
+  - [Https](#https)
+    - [Background](#background-1)
+    - [Structure](#structure-1)
+  - [Http 2.0](#http-20)
+    - [Background](#background-2)
+    - [Structure](#structure-2)
+    - [Frame](#frame)
+    - [Stream](#stream)
+    - [Server Push](#server-push)
+  - [Http 3.0](#http-30)
+  - [References](#references)
 
-## Background
+## Http
+
+HTTP (HyperText Transfer Protocol). 웹에서 request-response를 받을 수 있는 규약
+
+## Http 1.0
+
+## Http 1.1
+
+### Background
 
 ```text
 HTTP/1.0 does not sufficiently take into consideration the effects
@@ -21,7 +42,7 @@ or virtual hosts
 
 > Http/1.0의 한계를 보완해서 만듬
 
-## Terms
+### Terms
 
 ```text
 connection
@@ -157,7 +178,7 @@ inbound/outbound
 
 > 그냥 이것저것..
 
-## Structure
+### Structure
 
 ```text
 The HTTP protocol is a request/response protocol. A client sends a
@@ -222,7 +243,7 @@ on the Internet, or on other networks.
 
 > HTTP는 보통 TCP/IP 위에서 돌아감. 계층이 달라서 그럼. But 다른 프로토콜 위에서도 돌아갈 수 있음
 
-## Keep-Alive
+### Keep-Alive
 
 In HTTP/1.0, each connection is established by the client prior to
 the request and closed by the server after sending the response.
@@ -236,10 +257,146 @@ closed for a variety of reasons (see section 8.1).
 > 보통은 response받고 그냥 끊어버리는데 port를 열어둔 상태를 일정 기간 유지하자!\
 > Http Persistent Connections임.
 
-## Reference
+## Https
 
-[Origin (1997)](https://tools.ietf.org/html/rfc2068)
+### Background
 
-[Enhancement (1999)](https://tools.ietf.org/html/rfc2616)
+```text
+HTTP [RFC2616] was originally used in the clear on the Internet.
+However, increased use of HTTP for sensitive applications has
+required security measures. SSL, and its successor TLS [RFC2246] were
+designed to provide channel-oriented security. This document
+describes how to use HTTP over TLS.
+```
 
-[(HTTP/1.1): Message Syntax and Routing](https://tools.ietf.org/html/rfc7230#page-79)
+> HTTP 그냥 쓰면 보안상 문제가 있을 수 있어서 등장
+
+### Structure
+
+```text
+Conceptually, HTTP/TLS is very simple. Simply use HTTP over TLS
+precisely as you would use HTTP over TCP
+```
+
+> TLS 위에서의 HTTP임 그냥
+
+```text
+When HTTP/TLS is being run over a TCP/IP connection, the default port
+is 443. This does not preclude HTTP/TLS from being run over another
+transport.
+```
+
+> Default port : 443
+
+## Http 2.0
+
+### Background
+
+The Hypertext Transfer Protocol (HTTP) is a wildly successful
+protocol.  However, the way HTTP/1.1 uses the underlying transport
+on connection management which has several characteristics
+that have a negative overall effect on application performance today.
+
+In particular, HTTP/1.0 allowed only one request to be outstanding at
+a time on a given TCP connection.
+
+Furthermore, HTTP header fields are often repetitive and verbose,
+causing unnecessary network traffic as well as causing the initial
+TCP [TCP] congestion window to quickly fill
+
+HTTP/2 addresses these issues by defining an optimized mapping of
+HTTP's semantics to an underlying connection.  Specifically, it
+allows interleaving of request and response messages on the same
+connection and uses an efficient coding for HTTP header fields
+
+> Http/1.0은 동시에 하나의 요청만 처리 가능, header도 많아서 트레픽이 증가됨. 이를 해결하자!
+
+### Structure
+
+HTTP/2 provides an optimized transport for HTTP semantics.  HTTP/2
+supports all of the core features of HTTP/1.1 but aims to be more
+efficient in several ways.
+
+> Http/1.1에 대한 하위호환성을 유지하면서 보다 효율적으로 함.
+
+### Frame
+
++-----------------------------------------------+
+|                 Length (24)                   |
++---------------+---------------+---------------+
+|   Type (8)    |   Flags (8)   |
++-+-------------+---------------+-------------------------------+
+|R|                 Stream Identifier (31)                      |
++=+=============================================================+
+|                   Frame Payload (0...)                      ...
++---------------------------------------------------------------+
+
+The basic protocol unit in HTTP/2 is a frame (Section 4.1).  Each
+frame type serves a different purpose.  For example, HEADERS and DATA
+frames form the basis of HTTP requests and responses (Section 8.1);
+other frame types like SETTINGS, WINDOW_UPDATE, and PUSH_PROMISE are
+used in support of other HTTP/2 features.
+
+> basic protocol unit은 frame임.
+
+### Stream
+
+A "stream" is an independent, bidirectional sequence of frames
+exchanged between the client and server within an HTTP/2 connection.
+Streams have several important characteristics:
+
+- A single HTTP/2 connection can contain multiple concurrently open
+  streams, with either endpoint interleaving frames from multiple
+  streams.
+
+- Streams can be established and used unilaterally or shared by
+  either the client or server.
+
+- Streams can be closed by either endpoint.
+
+- The order in which frames are sent on a stream is significant.
+  Recipients process frames in the order they are received.  In
+  particular, the order of HEADERS and DATA frames is semantically
+  significant.
+
+- Streams are identified by an integer.  Stream identifiers are
+  assigned to streams by the endpoint initiating the stream.
+
+> frame들의 independent한 sequence가 stream임.\
+> single connection에서 multiple stream을 사용함으로써 multiplexing을 함
+
+Flow control and prioritization ensure that it is possible to
+efficiently use multiplexed streams.  Flow control (Section 5.2)
+helps to ensure that only data that can be used by a receiver is
+transmitted.  Prioritization (Section 5.3) ensures that limited
+resources can be directed to the most important streams first.
+
+### Server Push
+
+HTTP/2 adds a new interaction mode whereby a server can push
+responses to a client (Section 8.2).  Server push allows a server to
+speculatively send data to a client that the server anticipates the
+client will need, trading off some network usage against a potential
+latency gain.  The server does this by synthesizing a request, which
+it sends as a PUSH_PROMISE frame.  The server is then able to send a
+response to the synthetic request on a separate stream.
+
+> network usage를 포기하면서 latency를 얻음. 그래서 server가 client에 push 할 수 있음\
+> (보통은 client 가 server에 request해야만 server가 response함)
+
+## Http 3.0
+
+## References
+
+- [HTTP Specifications and Drafts](https://www.w3.org/Protocols/Specs.html)
+- HTTP/1.0
+  - [HTTP/1.0 (rfc Informational, 1996)](https://www.w3.org/Protocols/rfc1945/rfc1945)
+- HTTP/1.1
+  - [HTTP/1.1 (rfc Proposed Standard, 1997)](https://tools.ietf.org/html/rfc2068)
+  - [HTTP/1.1 Enhancement (rfc Draft Standard 1999)](https://tools.ietf.org/html/rfc2616)
+  - [HTTP/1.1 Message Syntax and Routing (rfc Proposed Standard, 2014)](https://tools.ietf.org/html/rfc7230#page-79)
+- HTTPS
+  - [HTTPS (rfc Informational, 2000)](https://tools.ietf.org/html/rfc2818)
+- HTTP/2.0
+  - [HTTP/2.0 (rfc Proposed Standard, 2015)](https://tools.ietf.org/html/rfc7540)
+- HTTP/3.0
