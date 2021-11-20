@@ -61,6 +61,7 @@ characters ("//").
 
 The following are two example URIs and their component parts:
 
+```text
       foo://example.com:8042/over/there?name=ferret#nose
       \_/   \______________/\_________/ \_________/ \__/
       |           |            |            |        |
@@ -68,6 +69,7 @@ The following are two example URIs and their component parts:
       |   _____________________|__
       / \ /                        \
       urn:example:animal:ferret:nose
+```
 
 > scheme:(//authority/path/query)  
 > scheme:path:subpath
@@ -88,6 +90,4 @@ unavailable, and to any other URI with the properties of a name.
 
 ## References
 
-2005
-
-https://tools.ietf.org/html/rfc3986
+- [URL (rfc Internet Standard, 2005)](https://tools.ietf.org/html/rfc3986)
