@@ -1,6 +1,7 @@
 # Http
 
 - [Http](#http)
+  - [Term](#term)
   - [Http](#http-1)
   - [Http 1.0](#http-10)
   - [Http 1.1](#http-11)
@@ -23,6 +24,14 @@
     - [Server Push](#server-push)
   - [Http 3.0](#http-30)
   - [References](#references)
+
+## Term
+
+- HyperText
+- HTTP (HyperText Transfer Protocol)
+- Cache
+- Cookie
+- Session
 
 ## Http
 

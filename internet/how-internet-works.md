@@ -9,9 +9,9 @@
 
 ## Terms
 
-- Packet
-- Router
-- Modem
+- Packet : 통신의 단위.
+- Router : 패킷이 최상의 경로로 가게 조정해주는 기계.
+- Modem (MOdulator and DEModulator)
 - ISP (Internet Service Provider)
 - Domain Name System
 - IP Address

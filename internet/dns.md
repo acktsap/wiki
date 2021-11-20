@@ -1,12 +1,31 @@
 # Domain Name System
 
-- Resolving Name Server
-- Root Name Server
-- TLD Name Server
-- Authoritative Name Server
-- TLD (Top Level Domain)
-- Label
-- SLD (Secondary Level Domain)
+- [Domain Name System](#domain-name-system)
+  - [Term](#term)
+  - [Domain Name](#domain-name)
+  - [DNS Namespace Hierarchy](#dns-namespace-hierarchy)
+  - [How does a DNS request work?](#how-does-a-dns-request-work)
+  - [Get domain information](#get-domain-information)
+  - [Buying a domain name](#buying-a-domain-name)
+  - [References](#references)
+
+## Term
+
+- Structure
+  - TLD (Top Level Domain)
+  - SLD (Secondary Level Domain)
+  - Label
+- Server Type
+  - Resolving Name Server : Root Name Server가 어디있는지 알음. domain name 정보 받아서 처리.
+  - Root Name Server : TLD Name Server가 어디있는지 알음.
+  - TLD Name Server : Authoritative Name Server가 어디있는지 알음.
+  - Authoritative Name Server : 실제 IP Address을 알음.
+- Organizations
+  - ICANN (Internet Corporation for Assigned Names and Numbers) : DNS Root 관리 등을 하는 비영리기관.
+  - Domain Name Registry : TLD를 관리하는 기관. (eg. KISA)
+  - Domain Name Registrar : top-level domain (gTLD) registry or a country code top-level domain (ccTLD) registry에 의해 공인받은 기관이로 도메인 이름 등록을 관리하고 관련 서비스를 제공. (eg. 가비아, 카페 24)
+- DDNS (Dynamic DNS) : 도메인의 IP가 유동적인 경우 이를 계속 반영.
+- DHCP (Dynamic Host Configuration Protocol) : PC에 자동으로 네임 서버 주소, IP 주소, 게이트웨이 주소 등을 할당해줌.
 
 ## Domain Name
 
@@ -35,15 +54,6 @@
 ## How does a DNS request work?
 
 ![dns-how-request-works](./img/dns-how-request-works.png)
-
-Server 종류
-
-- Resolving Name Server : Root Name Server가 어디있는지 알음. domain name 정보 받아서 처리.
-- Root Name Server : TLD Name Server가 어디있는지 알음.
-- TLD Name Server : Authoritative Name Server가 어디있는지 알음.
-- Authoritative Name Server : 실제 IP Address을 알음.
-
-구조
 
 - Browser에 domain name (example.com.)을 입력하면 OS에 요청해서 Resolving Name Server에 IP Address를 요청.
 - Resolving Name Server는 Root name Server에 요청해서 TLD Name Server (`com` name server)에 대한 정보를 받음.
@@ -79,7 +89,9 @@ URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
 
 ## Buying a domain name
 
-TODO
+- Domain을 구매한다는 것은 없음. 해당 domain을 일정 기간동안 사용할 수 있는 권리를 구매하는 것.
+- Domain Name Registrars (도메인 등록 대행자)에 등록 요청.
+- 일정 시간이 지난 후 DNS 서버들이 갱신되고 사용 가능해짐.
 
 ## References
 
@@ -87,3 +99,5 @@ TODO
 - [DNS Explained (youtube)](https://www.youtube.com/watch?v=72snZctFFtA)
 - [What is DNS? (varonis)](https://www.varonis.com/blog/what-is-dns/)
 - [Introducing the DNS Namespace (oracle)](https://docs.oracle.com/cd/E19455-01/806-1387/6jam692f3/index.html)
+- [ICANN (archive.icann)](https://archive.icann.org/tr/english.html)
+- [Domain name registrar (wikipedia)](https://en.wikipedia.org/wiki/Domain_name_registrar)
