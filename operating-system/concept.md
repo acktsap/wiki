@@ -4,14 +4,10 @@
   - [User Mode vs Kernal Mode](#user-mode-vs-kernal-mode)
   - [Process Management](#process-management)
     - [Process vs Thread](#process-vs-thread)
-    - [Process state](#process-state)
-    - [Context Switching](#context-switching)
     - [Process Synchronization](#process-synchronization)
       - [Critical Section](#critical-section)
       - [Spinlock](#spinlock)
       - [Monitors](#monitors)
-    - [Process Scheduling](#process-scheduling)
-    - [Schedulering Algorithm (On Short Term Scheduler)](#schedulering-algorithm-on-short-term-scheduler)
     - [Deadlocks](#deadlocks)
   - [Memory Management](#memory-management)
     - [Swapping](#swapping)
@@ -36,8 +32,6 @@
 
 ### Process vs Thread
 
-![process-in-memory](./img/process-in-memory.png)
-
 ![thread in process](./img/thread-in-process.png)
 
 - Process
@@ -50,25 +44,6 @@
   - Process안의 Code, Heap, Data를 공유하고 Thread별로 별도의 Stack영역을 가짐
   - 장점 : 한 Process의 메모리 공간을 공유해서 자원 공유가 쉽고 Context switching비용이 작음
   - 단점 : 자원 공유를 할 때 동시성 문제를 제어해야 함
-
-### Process state
-
-![process-state](./img/process-state.png)
-
-- new : 처음에 만들어 지면
-- ready : ready queue에 들어가면
-- running : Short Term Scheduler에 의해 CPU의 할당을 받으면
-- waiting : I/O등 작업을 기다리는 경우
-- terminated : exit
-
-### Context Switching
-
-![process-control-block](./img/process-control-block.png)
-
-- CPU가 한 프로세스를 실행다가 다른 프로세스를 실행하려면 Process정보를 저장하고 새로 실행할 프로세스의 정보를 불러와야함
-- 이 정보가 PCB (Process Control Block)이며 PID, Program Counter, Register등이 저장
-
-[위로](#Operating-System)
 
 ---
 
@@ -92,34 +67,6 @@
 - 공유 자원과 그것에 대한 mutual exclusion을 보장하는 operation들을 포함하는 일종의 ADT(Abstract Data Type)
 - 공유 자원에 접근하기 위한 키 획득과 해제를 추상화해서 처리해줌
 - Java에서 synchronized를 거는게 monitor lock이라고 하는데 이게 이거임 (bytecode에서 monitorenter, monitorexit을 삽입함)
-
-### Process Scheduling
-
-- 다중 프로그래밍이 가능하게 하는 기법
-- Scheduler의 종류
-  - Long Term Scheduler : 메모리와 디스크 사이의 스케줄링을 담당하며 Degree of Multiprogramming을 관리
-  - Medium Term Scheduler : 여유 공간 마련을 위해 프로세스를 통째로 메모리에서 디스크로 쫓아내는 녀석
-  - Short Term Scheduler : 메모리와 CPU 사이의 스케줄링을 담당하며 Ready Queue 에 존재하는 프로세스 중 어떤 Process에 CPU를 할당할지 결정
-
-### Schedulering Algorithm (On Short Term Scheduler)
-
-- First Come, First Served (FCFS)
-  - 먼저 온 process에 CPU를 할당
-  - 문제점 : Convoy Effect, 소요시간이 긴 프로세스가 먼저 도달하여 효율성을 낮추는 현상이 발생
-- Shortest Job First (SJF)
-  - CPU burst time 이 짧은 프로세스에게 선 할당
-  - 문제점 : 사용 시간이 긴 프로세스는 거의 영원히 CPU 를 할당받을 수 없음 (Starvation)
-- Shortest Remaining Time First (SRT)
-  - 남은 burst time이 더 짧은 프로세스에 cpu를 할당.
-  - 문제점 : CPU burst time이 긴 녀석은 계속 할당 못받을 수 있음 (Starvation)
-- Priority Scheduling
-  - 우선순위가 가장 높은 프로세스에게 CPU 를 할당. 작은 숫자가 우선순위가 높다.
-  - 문제점 : 우선순위가 낮은 프로세스가 무기한 대기할 수 있음 (Starvation)
-    - 해결책 : 오래 머무르면 우선순위를 높여줌 (Aging)
-- Round Robin
-  - 각 프로세스는 동일한 크기의 할당 시간(time quantum)을 받음. 할당 끝나면 queue의 제일 뒤로 감
-  - 장점 : Response time이 증가 (아무리 오래 기다려도 (n-1) * q 이상 기다리지 않음)
-  - 문제점 : time quantum이 너무 커지면 FCFS랑 똑같아짐. 너무 작아지면 잦은 Context Switching으로 overhead가 발생
 
 ### Deadlocks
 

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="77c67421-9650-4245-ad7f-e21e9b0ee918" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="kotlin" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="Class" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1qHd02QwFtUMZRpYEdZdBSSxDGO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/coroutine/src/main/kotlin/acktsap" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/kotlin/acktsap/snippet/reflection" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.ktlint" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/kotlin/acktsap/snippet/reflection" />
+      <recent name="$PROJECT_DIR$/src/main/kotlin/acktsap/syntax" />
+      <recent name="$PROJECT_DIR$/doc" />
+      <recent name="$PROJECT_DIR$/coroutine/src/main/kotlin/acktsap/coroutine" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/coroutine/src/main/kotlin/acktsap" />
+      <recent name="$PROJECT_DIR$/coroutine/src/main/kotlin/acktsap/coroutine" />
+      <recent name="$PROJECT_DIR$/basic/src/main/kotlin/acktsap/basic" />
+      <recent name="$PROJECT_DIR$/basic/src/main/kotlin/acktsap" />
+      <recent name="$PROJECT_DIR$/basic/src/main/kotlin/acktsap/packageandimports" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.SequenceBasicKt">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.jvm.lib.Test" />
+      <module name="kotlin.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acktsap.snippet.jvm.lib.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClassReferenceKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="kotlin.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.reflection.ClassReferenceKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CoroutineIOBlockingKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="kotlin.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.coroutine.CoroutineIOBlockingKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EqualityKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="kotlin.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="acktsap.syntax.EqualityKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SequenceBasicKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="kotlin.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.collection.SequenceBasicKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SequenceBasicKt" />
+        <item itemvalue="Application.CoroutineIOBlockingKt" />
+        <item itemvalue="Application.ClassReferenceKt" />
+        <item itemvalue="Application.EqualityKt" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77c67421-9650-4245-ad7f-e21e9b0ee918" name="Default Changelist" comment="" />
+      <created>1616740222830</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616740222830</updated>
+      <workItem from="1616740246255" duration="846000" />
+      <workItem from="1616987136266" duration="9000" />
+      <workItem from="1617610910886" duration="1016000" />
+      <workItem from="1617615616297" duration="3000" />
+      <workItem from="1617712250716" duration="7668000" />
+      <workItem from="1617766946266" duration="1645000" />
+      <workItem from="1617769705219" duration="328000" />
+      <workItem from="1617770094064" duration="37000" />
+      <workItem from="1617770153090" duration="597000" />
+      <workItem from="1617774699191" duration="2987000" />
+      <workItem from="1617785032276" duration="174000" />
+      <workItem from="1617861957684" duration="10253000" />
+      <workItem from="1617940042376" duration="1202000" />
+      <workItem from="1618192342607" duration="9294000" />
+      <workItem from="1618280296139" duration="114000" />
+      <workItem from="1618383569255" duration="618000" />
+      <workItem from="1618385194608" duration="41000" />
+      <workItem from="1618385250412" duration="27000" />
+      <workItem from="1618385294423" duration="5000" />
+      <workItem from="1618386588973" duration="1712000" />
+      <workItem from="1618388787762" duration="3227000" />
+      <workItem from="1618394356386" duration="2429000" />
+      <workItem from="1618398647963" duration="6483000" />
+      <workItem from="1618453129447" duration="407000" />
+      <workItem from="1618468245269" duration="205000" />
+      <workItem from="1618468471869" duration="1555000" />
+      <workItem from="1619597010124" duration="1138000" />
+      <workItem from="1620006416493" duration="249000" />
+      <workItem from="1620950482998" duration="906000" />
+      <workItem from="1621235812223" duration="719000" />
+      <workItem from="1621307039887" duration="44000" />
+      <workItem from="1622107474081" duration="257000" />
+      <workItem from="1622167625146" duration="7000" />
+      <workItem from="1622795290751" duration="685000" />
+      <workItem from="1623221144290" duration="104000" />
+      <workItem from="1623221435926" duration="54000" />
+      <workItem from="1625195487468" duration="5832000" />
+      <workItem from="1625559594386" duration="15597000" />
+      <workItem from="1625626798716" duration="8935000" />
+      <workItem from="1625655587940" duration="637000" />
+      <workItem from="1625716226612" duration="577000" />
+      <workItem from="1625736186958" duration="3298000" />
+      <workItem from="1625832110463" duration="2316000" />
+      <workItem from="1625836226209" duration="741000" />
+      <workItem from="1626054720537" duration="1601000" />
+      <workItem from="1626072834254" duration="6014000" />
+      <workItem from="1626164816643" duration="5440000" />
+      <workItem from="1626210436016" duration="581000" />
+      <workItem from="1626236536732" duration="1344000" />
+      <workItem from="1626239338615" duration="51000" />
+      <workItem from="1626660779185" duration="1932000" />
+      <workItem from="1626692226747" duration="29000" />
+      <workItem from="1627020801910" duration="2252000" />
+      <workItem from="1627029056631" duration="4000" />
+      <workItem from="1628770143897" duration="1445000" />
+      <workItem from="1629398432947" duration="675000" />
+      <workItem from="1629726999330" duration="1130000" />
+      <workItem from="1629728219603" duration="1108000" />
+      <workItem from="1629770594736" duration="174000" />
+      <workItem from="1632723626401" duration="607000" />
+      <workItem from="1636002265585" duration="644000" />
+      <workItem from="1636083439838" duration="91000" />
+      <workItem from="1636538414934" duration="1216000" />
+      <workItem from="1636596850312" duration="461000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

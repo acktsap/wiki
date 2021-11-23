@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="151d9669-e49c-4098-beca-b943ecf0295b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/doc/reactor.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/acktsap/snippet/reactive/reactor/MonoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../concept/software-engineering/design/oop-design-pattern.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../concept/software-engineering/design/oop-design-pattern.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../database/oracle/oracle-tips.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../database/oracle/oracle-tips.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/java-questions.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/java-questions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/acktsap/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/acktsap/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/acktsap/snippet/cache/CaffeineCacheTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/acktsap/snippet/cache/CaffeineCacheTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../tips/os/osx.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../tips/os/osx.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package.json" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1r9NqkgvCj0fpVb36s6M2LhuL5o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/external" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/external" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/img" />
+      <recent name="$PROJECT_DIR$/core/src/main/resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="acktsap.pattern" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="acktsap.pattern.concurrency.highlevel" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MonoTest">
+    <configuration name="ConcurrentHashMapTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.concurrency.highlevel.ConcurrentHashMapTest" />
+      <module name="java.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acktsap.snippet.concurrency.highlevel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileIO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.io.FileIO" />
+      <module name="java.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acktsap.snippet.io.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FluxTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.reactive.reactor.FluxTest" />
+      <module name="java.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acktsap.snippet.reactive.reactor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.reactive.reactor.MonoTest" />
+      <module name="java.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acktsap.snippet.reactive.reactor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SynchronizedStatement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="acktsap.snippet.concurrency.synchronization.SynchronizedStatement" />
+      <module name="java.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="acktsap.snippet.concurrency.synchronization.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MonoTest" />
+        <item itemvalue="Application.FileIO" />
+        <item itemvalue="Application.SynchronizedStatement" />
+        <item itemvalue="Application.FluxTest" />
+        <item itemvalue="Application.ConcurrentHashMapTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="151d9669-e49c-4098-beca-b943ecf0295b" name="Default Changelist" comment="" />
+      <created>1618384539028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618384539028</updated>
+      <workItem from="1618384540177" duration="300000" />
+      <workItem from="1618385238238" duration="10000" />
+      <workItem from="1618385279867" duration="12000" />
+      <workItem from="1618385301252" duration="1276000" />
+      <workItem from="1618557894474" duration="54000" />
+      <workItem from="1620712228508" duration="50000" />
+      <workItem from="1620879996154" duration="6241000" />
+      <workItem from="1620891669232" duration="4000" />
+      <workItem from="1620891743517" duration="1013000" />
+      <workItem from="1623296309093" duration="315000" />
+      <workItem from="1623893053679" duration="4046000" />
+      <workItem from="1624267129693" duration="5269000" />
+      <workItem from="1626345980998" duration="2110000" />
+      <workItem from="1628080202677" duration="1369000" />
+      <workItem from="1628503694237" duration="1796000" />
+      <workItem from="1628848818241" duration="3066000" />
+      <workItem from="1629167225052" duration="101000" />
+      <workItem from="1629381505021" duration="48000" />
+      <workItem from="1630475586972" duration="843000" />
+      <workItem from="1631000951414" duration="67000" />
+      <workItem from="1632731717574" duration="219000" />
+      <workItem from="1634157877091" duration="2281000" />
+      <workItem from="1634201804461" duration="258000" />
+      <workItem from="1634637636853" duration="4264000" />
+      <workItem from="1634644002292" duration="2989000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
