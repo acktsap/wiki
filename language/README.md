@@ -12,7 +12,7 @@ In computer text processing, a markup language is a system for annotating a docu
 
 https://en.wikipedia.org/wiki/Markup_language
 
-## Common
+## Item
 
 - Syntax : The set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language. Specified by grammar.
 - Snippet : A small region of re-usable source code, machine code, or text
@@ -23,3 +23,10 @@ https://en.wikipedia.org/wiki/Syntax_(programming_languages)
 https://en.wikipedia.org/wiki/Snippet_(programming)
 
 https://en.wikipedia.org/wiki/Software_design_pattern
+
+## Content
+
+- Language Basic (loop, i/o, network, data structure, concurrency, ...)
+- Testing
+- Logging
+- ORM

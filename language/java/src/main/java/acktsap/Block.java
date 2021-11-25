@@ -1,5 +1,8 @@
 package acktsap;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 public final class Block {
     public static void d(String description, DangerousRunnable dangerousRunnable) {
         try {
@@ -14,17 +17,18 @@ public final class Block {
     }
 
     public static void dt(String description, DangerousRunnable dangerousRunnable) {
-        long start = System.currentTimeMillis();
+        LocalTime start = LocalTime.now();
         try {
             System.out.printf("== %s ==%n", description);
+            System.out.printf("-- start time: %s%n", start);
             dangerousRunnable.run();
         } catch (Exception e) {
             RuntimeException throughPass = new RuntimeException(e.getMessage());
             throughPass.setStackTrace(e.getStackTrace());
             throw throughPass;
         } finally {
-            long end = System.currentTimeMillis();
-            System.out.printf("-- elapsed time: %s%n", end - start);
+            LocalTime end = LocalTime.now();
+            System.out.printf("-- end time: %s (elapsed: %sms)%n", end, Duration.between(start, end).toMillis());
             System.out.println();
         }
     }
