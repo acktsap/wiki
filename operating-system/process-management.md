@@ -10,6 +10,8 @@
   - [Process Operation](#process-operation)
     - [Process Termination](#process-termination)
   - [Process Scheduling](#process-scheduling)
+    - [Degree of Multiprogramming](#degree-of-multiprogramming)
+    - [Scheduling Queue](#scheduling-queue)
     - [Long Term Scheduler (Job Scheduler)](#long-term-scheduler-job-scheduler)
     - [Medium Term Scheduler](#medium-term-scheduler)
     - [Short Term Scheduler (CPU Scheduler)](#short-term-scheduler-cpu-scheduler)
@@ -62,7 +64,7 @@
 
 ![process-state](./img/process-management-process-state.png)
 
-- New : 처음에 만들어 지면 new 상태.
+- New / Created : 처음에 만들어 지면 new 상태.
 - Ready : In ready queue.
 - Running : 실행중.
 - Waiting : I/O등 작업을 기다리는 경우.
@@ -97,24 +99,40 @@
 
 - CPU의 사용률을 최대로 높이게 process를 CPU에 할당하는 기법.
 
+### Degree of Multiprogramming
+
+- Memory위의 Process의 수.
+
+### Scheduling Queue
+
+![waiting-queue](./img/process-management-waiting-queue.png)
+
+- Job Queue : HDD에 있던 프로그램을 메모리에 로드 할 때 대기.
+- Ready Queue : 프로세스들이 실행을 위해 대기.
+- Device Queue : I/O장치를 이용하려는 작업이 대기.
+
 ### Long Term Scheduler (Job Scheduler)
 
-- Disk로부터 Memory에 어떤 Process를 올려둘건지 결정.
-- Degree of Multiprogramming (memory에 있는 process의 수)을 관리.
+- Disk로부터 Memory에 어떤 Process를 올려둘건지 결정하는 scheduler.
+- Degree of Multiprogramming 을 관리.
+- CPU bound process와 I/O bound process간의 적절한 조화를 관리.
+- Process 상태는 new -> ready.
 
 ### Medium Term Scheduler
 
 ![swapping](./img/process-management-swapping.jpeg)
 
-- Process를 실행 중에 Memory로부터 빼는 scheduler.
+- Process들이 cpu 경쟁이 심해지면 Process를 실행 중에 Memory로부터 빼는 scheduler.
+- Degree of Multiprogramming 을 줄임.
 - Memory로부터 빼는걸 swap out, 다시 Memory에 올리는걸 swap in, 이 모든 과정을 swapping이라고 함.
+- Process 상태는 ready -> suspended.
 
 ### Short Term Scheduler (CPU Scheduler)
 
 ![cpu-scheduler](./img/process-management-cpu-scheduler.jpeg)
 
-- Ready Queue의 어떤 Process에 CPU를 할당할지 결정.
-- CPU에 할당된 Process가 I/O request 같은거를 하면 ready queue에 들어가고 다른 Process에 CPU를 할당.
+- I/O, system call 같은게 생길때 Ready Queue의 어떤 Process에 CPU를 할당할지 결정하는 scheduler.
+- Process 상태는 ready -> running.
 
 ## CPU Scheduling
 
@@ -130,8 +148,12 @@
 
 ### Non-preemptive vs Preemptive
 
-- Non-preemptive (비선점형) : process가 종료하거나 wait() call 등을 통해 waiting state로 갔을때 scheduling을 하는 경우
-- Preemptive (선점형) : process가 interrupt 같은 이유로 ready state로 갔을 때 scheduling을 하는 경우.
+- Non-preemptive (비선점형)
+  - OS가 프로세서를 관리하지 않기 때문에 Process에 할당되면 끝날 때 까지 프로세스를 소유.
+  - 일괄 처리 시스템에 적합.
+- Preemptive (선점형)
+  - OS가 프로세서를 관리하기 때문에 interrupt 등의 이유일때 다른 Process에 프로세서를 할당하는 형식.
+  - 특정 요건들을 기준으로 자원을 배분. 스케줄링을 많이 함.
 
 ### First Come, First Served Scheduling (FCFS)
 
@@ -141,13 +163,13 @@
 ### Shortest Job First Scheduling (SJF)
 
 - Next CPU burst time 이 짧을 것으로 예측되는 프로세스에게 선 할당.
-- 선점형, 비선전형 둘다 가능.
+- 선점형, 비선점형 둘다 가능. 선점형의 경우 Shortest Remaining Time (SRT) 라고도 부름.
 - 문제점 : Starvation, 사용 시간이 긴 프로세스는 거의 영원히 CPU 를 할당받을 수 없음.
 
 ### Priority Scheduling
 
 - 우선순위가 가장 높은 프로세스에게 CPU 를 할당. 작은 숫자가 우선순위가 높다.
-- 선점형, 비선전형 둘다 가능.
+- 선점형, 비선점형 둘다 가능.
 - 문제점 : Starvation, 우선순위가 낮은 프로세스가 무기한 대기할 수 있음.
   - Aging으로 오래 머무르면 우선순위를 높여주는 식으로 해결 가능.
 
@@ -214,3 +236,6 @@ TODO
   - [Synchronization](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_Synchronization.html)
   - [CPU Scheduling](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/6_CPU_Scheduling.html)
   - [Deadlocks](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/7_Deadlocks.html)
+- [Process Management (코딩스낵)](https://gusdnd852.tistory.com/82)
+- [Process State (wiki)](https://en.wikipedia.org/wiki/Process_state)
+- [Scheduling (wiki)](https://en.wikipedia.org/wiki/Scheduling_(computing))
