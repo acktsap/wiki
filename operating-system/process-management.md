@@ -25,6 +25,8 @@
     - [Multilevel Queue Scheduling](#multilevel-queue-scheduling)
   - [Real-Time CPU Scheculing](#real-time-cpu-scheculing)
   - [Inter-Process Communication](#inter-process-communication)
+    - [Message Passing](#message-passing)
+    - [Shared Memory](#shared-memory)
   - [Client-Server Communication](#client-server-communication)
     - [Socket](#socket)
     - [Remote Procedure Call](#remote-procedure-call)
@@ -40,6 +42,7 @@
     - [Semaphore](#semaphore)
     - [Monitor](#monitor)
   - [Deadlock](#deadlock)
+  - [Practice](#practice)
   - [Reference](#reference)
 
 ## Program
@@ -196,6 +199,19 @@ TODO
 
 ## Inter-Process Communication
 
+- Process는 기본적으로 독립적이나 Computation speedup이나 Modularity를 위해 협력하기도 함.
+- 이때 서로 통신하기 위해 하는 과정을 IPC (Inter-Process Communication) 라고 함.
+
+### Message Passing
+
+![message-passing](./img/process-management-message-passing.png)
+
+TODO
+
+### Shared Memory
+
+![process-management-shared-memory](./img/process-management-shared-memory.png)
+
 TODO
 
 ## Client-Server Communication
@@ -227,6 +243,10 @@ TODO
 ### Monitor
 
 ## Deadlock
+
+## Practice
+
+[process-fork](./practice/process-fork.c)
 
 ## Reference
 

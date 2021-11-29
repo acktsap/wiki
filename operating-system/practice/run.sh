@@ -1,3 +1,5 @@
+# usage: ./run.sh ***.c input.txt output.txt
+
 readonly FILE=$1
 
 if [ -z ${FILE} ]; then
@@ -6,4 +8,6 @@ if [ -z ${FILE} ]; then
 fi
 
 gcc ${FILE} -o a.out > /dev/null 2>&1
-./a.out
+
+shift
+./a.out "$@"

@@ -1,7 +1,6 @@
 # Operating System
 
 - [Operating System](#operating-system)
-  - [User Mode vs Kernal Mode](#user-mode-vs-kernal-mode)
   - [Process Management](#process-management)
     - [Process vs Thread](#process-vs-thread)
     - [Process Synchronization](#process-synchronization)
@@ -20,13 +19,6 @@
   - [Etc](#etc)
     - [Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming](#blocking--non-blocking-io-synchronous--asynchronous-programming)
   - [References](#references)
-
-## User Mode vs Kernal Mode
-
-![user-mode-kernal-mode](./img/user-mode-kernal-mode.png)
-
-- 프로그램이 동작 하다가 I/O등 시스템 콜을 하면 kernal mode로 진입
-- I/O등의 작업이 끝나면 다시 user mode로 돌아감
 
 ## Process Management
 
