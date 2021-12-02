@@ -32,9 +32,13 @@
     - [Remote Procedure Call](#remote-procedure-call)
     - [Pipe](#pipe)
   - [Thread](#thread)
-    - [Multicore Programming](#multicore-programming)
+    - [Process vs Thread](#process-vs-thread)
+    - [Why Thread?](#why-thread)
+    - [Concurrency vs Parallelism](#concurrency-vs-parallelism)
+    - [Designing Multicore Programming](#designing-multicore-programming)
+    - [Data Parallelism vs Task Parallelism](#data-parallelism-vs-task-parallelism)
+    - [User Thread vs Kernel Thread](#user-thread-vs-kernel-thread)
     - [Multithreading Model](#multithreading-model)
-    - [Implicit Threading](#implicit-threading)
   - [Synchronization](#synchronization)
     - [Producer Consumer](#producer-consumer)
     - [Critical Section](#critical-section)
@@ -224,11 +228,82 @@ TODO
 
 ## Thread
 
-### Multicore Programming
+- A basic unit of CPU utilization.
+
+### Process vs Thread
+
+![multithreaded-process](./img/process-management-multithreaded-process.png)
+
+- Process
+  - OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석
+  - 메모리는 Code, Heap, Data등으로 구성
+  - 장점 : 서로 다른 프로세스가 분리되어 있어서 한 프로세스가 죽어도 다른 프로세스에 영향이 없음
+  - 단점 : 프로세스간 다른 메모리 영역을 사용해서 자원 공유가 힘들고 Context Switching 비용이 큼
+- Thread
+  - Process의 실행 단위
+  - Process안의 Code, Heap, Data를 공유하고 Thread별로 별도의 Stack, Register를 가짐
+  - 장점 : 한 Process의 메모리 공간을 공유해서 자원 공유가 쉽고 Context switching비용이 작음
+  - 단점 : 자원 공유를 할 때 동시성 문제를 제어해야 함
+
+### Why Thread?
+
+- 요청올때마다 Process를 만드는건 비용이 큼. 어차피 비슷한 일 할텐데 Process 안에서 일을 하게해보자! 하는 김에 자원 공유도 할 수 있게 하고.
+
+### Concurrency vs Parallelism
+
+![single-core](./img/process-management-single-core.jpg)
+
+![multi-core](./img/process-management-multi-core.jpg)
+
+- Concurrency
+  - 2개 이상의 task가 진행이 되게 하는 것 (동시에 실행될 필요는 없음).
+  - Single core에서도 switwching을 통해 달성 가능.
+- Parallelism
+  - 2개 이상의 task를 완전히 동시에 실행하는 것.
+  - Multi core에서만 가능
+
+### Designing Multicore Programming
+
+- Identifying tasks : 서로 독립적으로 실행될 수 있는 task를 찾는 과정.
+- Balance : 분리한 task가 서로 비슷한 처리를 할 수 있게.
+- Data splitting : 서로 독립적인 작업을 하기 때문에 data도 분리되어서 처리될 수 있게.
+- Data dependency : 데이터가 서로 의존적인 경우 서로 간섭이 일어나지 않게.
+- Testing and debugging : Single core일때보다 테스트나 디버깅이 어려우므로 이를 잘 해결할 수 있게.
+
+### Data Parallelism vs Task Parallelism
+
+- Data Parallelism : 같은 데이터에 대해 범위를 분리해서 처리하는 것 (eg. image를 구역을 나눠서 처리)
+- Task Parallelism : Data를 나누는게 아니라 Task를 나누는 것 (eg. 요청 여러개를 분리)
+
+### User Thread vs Kernel Thread
+
+- User Thread : Kernel 위에서 돌아감.
+- Kernel Thread : OS Kernel에 의해 직접적으로 관리됨.
 
 ### Multithreading Model
 
-### Implicit Threading
+![many-to-one](./img/process-management-many-to-one.jpg)
+
+![one-to-one](./img/process-management-one-to-one.jpg)
+
+![many-to-many](./img/process-management-many-to-many.jpg)
+
+- User Thread랑 Kernal Thread는 서로 mapping되어야 함.
+- Many-to-One Model
+  - n user thread - 1 kernel thread
+  - Blocking call이 있으면 전체 thread가 block.
+- One-to-One Model
+  - 1 user thread - 1 kernel thread
+  - Blocking call이 있으면 다른 thread를 수행해서 parallism을 달성.
+  - user thread마다 kernel thread가 있어야 해서 thread 수에 제약이 있음.
+- Many-to-Many Model
+  - n user thread - n kernel thread
+  - thread수에 제약도 없고 blocking call의 경우에도 괜찮음.
+
+> 이건 이론적인거고 실제로는 [이렇다고 한다](https://stackoverflow.com/questions/40707221/multithreading-model-in-linux-and-windows)
+>
+> - Many to Many가 설명상 좋아보이지만 이론적일 뿐. 실제로는 one-to-one model을 사용.
+> - process를 여러개의 thread가 있는 address space로 보고 thread 단위로 스케줄링 (one-to-one).
 
 ## Synchronization
 
@@ -244,9 +319,17 @@ TODO
 
 ## Deadlock
 
+- 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황
+- 4가지 조건이 동시에 성립해야만 발생
+  - Mutual exclusion : 자원은 한 번에 한 프로세스만이 사용할 수 있음
+  - Hold and wait : 하나의 자원을 점유하고 있으면서 다른 프로세스에 할당되어 사용하고 있는 자원을 점유하기 위해 대기하는 프로세스가 있어야 함
+  - No preemption : 자원에 대한 선점이 불가능
+  - Circular wait : 자원을 대기하는 프로세스간 Cycle이 있어야 함 (e. A -> B, B -> C, C -> A)
+
 ## Practice
 
-[process-fork](./practice/process-fork.c)
+- Process
+  - [process-fork](./practice/process-fork.c)
 
 ## Reference
 

@@ -2,12 +2,10 @@
 
 - [Operating System](#operating-system)
   - [Process Management](#process-management)
-    - [Process vs Thread](#process-vs-thread)
     - [Process Synchronization](#process-synchronization)
       - [Critical Section](#critical-section)
       - [Spinlock](#spinlock)
       - [Monitors](#monitors)
-    - [Deadlocks](#deadlocks)
   - [Memory Management](#memory-management)
     - [Swapping](#swapping)
     - [Fragmentation](#fragmentation)
@@ -21,23 +19,6 @@
   - [References](#references)
 
 ## Process Management
-
-### Process vs Thread
-
-![thread in process](./img/thread-in-process.png)
-
-- Process
-  - OS로부터 CPU, Memory 등 자원을 받아서 일하는 녀석
-  - 메모리는 Code, Heap, Data등으로 구성
-  - 장점 : 서로 다른 프로세스가 분리되어 있어서 한 프로세스가 죽어도 다른 프로세스에 영향이 없음
-  - 단점 : 프로세스간 다른 메모리 영역을 사용해서 자원 공유가 힘들고 Context Switching 비용이 큼
-- Thread
-  - Process의 실행 단위
-  - Process안의 Code, Heap, Data를 공유하고 Thread별로 별도의 Stack영역을 가짐
-  - 장점 : 한 Process의 메모리 공간을 공유해서 자원 공유가 쉽고 Context switching비용이 작음
-  - 단점 : 자원 공유를 할 때 동시성 문제를 제어해야 함
-
----
 
 ### Process Synchronization
 
@@ -59,17 +40,6 @@
 - 공유 자원과 그것에 대한 mutual exclusion을 보장하는 operation들을 포함하는 일종의 ADT(Abstract Data Type)
 - 공유 자원에 접근하기 위한 키 획득과 해제를 추상화해서 처리해줌
 - Java에서 synchronized를 거는게 monitor lock이라고 하는데 이게 이거임 (bytecode에서 monitorenter, monitorexit을 삽입함)
-
-### Deadlocks
-
-- 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황
-- 4가지 조건이 동시에 성립해야만 발생
-  - Mutual exclusion : 자원은 한 번에 한 프로세스만이 사용할 수 있음
-  - Hold and wait : 하나의 자원을 점유하고 있으면서 다른 프로세스에 할당되어 사용하고 있는 자원을 점유하기 위해 대기하는 프로세스가 있어야 함
-  - No preemption : 자원에 대한 선점이 불가능
-  - Circular wait : 자원을 대기하는 프로세스간 Cycle이 있어야 함 (e. A -> B, B -> C, C -> A)
-
-[위로](#Operating-System)
 
 ---
 

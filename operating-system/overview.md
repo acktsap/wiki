@@ -82,6 +82,9 @@
 
 ## Practice
 
+- System Call
+  - [file-copy](./practice/file-copy.c)
+
 ## Reference
 
 - Operating System Concepts (Operating System Concepts, Ninth Edition)

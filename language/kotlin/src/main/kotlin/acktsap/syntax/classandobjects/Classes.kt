@@ -1,6 +1,7 @@
 package acktsap.syntax.classandobjects
 
 import acktsap.Block
+import java.beans.ConstructorProperties
 
 private annotation class TestAnnotation
 
@@ -17,7 +18,10 @@ fun main() {
         class Person constructor(firstName: String) { /*...*/ }
 
         // constructor keyword can be omitted:
-        class Person2(firstName: String) { /*...*/ }
+        class Person2(firstName: String) { /*...*/
+            @ConstructorProperties
+            constructor(a: Int) : this("")
+        }
 
         // init block. executed in the same order as code order
         class InitOrderDemo(name: String) {
