@@ -210,21 +210,52 @@ TODO
 
 ![message-passing](./img/process-management-message-passing.png)
 
-TODO
+- communication link를 만들고 (eg. shared memory, network) 서로 send, receive message를 주고받으면서 할 수도 있음.
+- 고려해야 할 점
+  - Naming
+    - Direct communication : 두 process가 서로를 알아야 함.
+    - Indirect communication :  생산자 소비자가 서로 공유된 mailbox에 넣고 빼는 구조.
+  - Synchronization
+    - Blocking : Sender는 Receiver가 받을 때 까지 blocked. Receiver는 Sender가 보낼 때 까지 blocked.
+    - Unblocking : Sender는 보내고 끝. Receiver는 message queue가 비어 있는 경우 null을 처리.
+    - Sender와 Receiver가 서로 blocking이면 생산자-소비자에서 동시성 문제가 없어짐.
+  - Buffering
+    - Zero capacity : buffer 크기 0. sender가 receiver가 처리할 때 까지 대기해야 함.
+    - Bounded capacity : buffer 크기 제한. buffer가 가득차 있으면 sender가 대기.
+    - Unbounded capacity : buffer 크기 무제한. sender가 대기 안하고 계속 넣음.
 
 ### Shared Memory
 
 ![process-management-shared-memory](./img/process-management-shared-memory.png)
 
-TODO
+- 서로 다른 Process는 기본적으로는 같은 address space에 접근하지 못하지만 이를 예외적으로 허용.
+- 어떤 식으로 공유 memory를 구성할건지, 동시성 관리를 어떻게 할건지는 Process에 달려 있음.
+- 보통 Buffer같은거 둬서 생산자는 Buffer에 넣고 소비자는 Buffer에 있는거 빼는 식으로 동작.
+  - Unbounded Buffer : size 제한이 없는 buffer.
+  - Bounded Buffer : size 제한이 있는 buffer. buffer가 차있으면 생산자가 기다리고 buffer가 비어있으면 소비자가 기다림.
 
 ## Client-Server Communication
 
+- IPC에서 적용된 개념이 Client Server간 통신에도 적용될 수 있음.
+
 ### Socket
+
+![process-management-socket](./img/process-management-socket.png)
+
+- An endpoint for communication.
+- IP address와 port number로 구성 (eg. 192.168.0.1:1000)
+  - 1024 이전의 포트들은 공식적으로 정해져 있음. (eg. ftp: 21, http: 80, https: 443)
+  - 1024 보다 큰 포트들은 connection을 새로 만들때 사용.
+  - 127.0.0.1 (or localhost)은 자기 자신을 가리키는 loopback IP.
+- Client가 server랑 연결 맺을 때 host의 남는 port를 할당받는 식으로 동작.
 
 ### Remote Procedure Call
 
+TODO
+
 ### Pipe
+
+TODO
 
 ## Thread
 
