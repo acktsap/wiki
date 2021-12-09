@@ -2,6 +2,7 @@
 
 - [Process Management](#process-management)
   - [Program](#program)
+  - [Subroutine](#subroutine)
   - [Process](#process)
     - [Process Memory Model](#process-memory-model)
     - [Process State](#process-state)
@@ -30,7 +31,8 @@
   - [Client-Server Communication](#client-server-communication)
     - [Socket](#socket)
     - [Remote Procedure Call](#remote-procedure-call)
-    - [Pipe](#pipe)
+    - [Anonymous Pipe](#anonymous-pipe)
+    - [Named Pipe](#named-pipe)
   - [Thread](#thread)
     - [Process vs Thread](#process-vs-thread)
     - [Why Thread?](#why-thread)
@@ -39,19 +41,30 @@
     - [Data Parallelism vs Task Parallelism](#data-parallelism-vs-task-parallelism)
     - [User Thread vs Kernel Thread](#user-thread-vs-kernel-thread)
     - [Multithreading Model](#multithreading-model)
-  - [Synchronization](#synchronization)
-    - [Producer Consumer](#producer-consumer)
+  - [Process Synchronization](#process-synchronization)
+    - [Race Contition](#race-contition)
     - [Critical Section](#critical-section)
-    - [Mutex](#mutex)
+    - [Critical Section Problem](#critical-section-problem)
+    - [Peterson's Solution](#petersons-solution)
+    - [Compare and Swap](#compare-and-swap)
+    - [Mutex (MUTal EXclusion)](#mutex-mutal-exclusion)
     - [Semaphore](#semaphore)
+    - [SpinLock](#spinlock)
     - [Monitor](#monitor)
+    - [Bounded-Buffer Problem using mutex](#bounded-buffer-problem-using-mutex)
+    - [Readers-Writers Problem](#readers-writers-problem)
+    - [Dining-Philosophers Problem](#dining-philosophers-problem)
   - [Deadlock](#deadlock)
   - [Practice](#practice)
   - [Reference](#reference)
 
 ## Program
 
-- 명령어의 집합
+- 명령어의 집합.
+
+## Subroutine
+
+- 특정한 작업을 하기 위한 명령어의 집합. Program의 일부로도 활용.
 
 ## Process
 
@@ -180,7 +193,7 @@
 - 문제점 : Starvation, 우선순위가 낮은 프로세스가 무기한 대기할 수 있음.
   - Aging으로 오래 머무르면 우선순위를 높여주는 식으로 해결 가능.
 
-### Round Robin Scheduling 
+### Round Robin Scheduling
 
 - 각 프로세스는 동일한 크기의 할당 시간(time quantum)을 받고 할당이 끝나면 queue의 제일 뒤로 감.
 - 장점 : Response time이 증가 (아무리 오래 기다려도 (n-1) * q 이상 기다리지 않음)
@@ -251,11 +264,20 @@ TODO
 
 ### Remote Procedure Call
 
-TODO
+- 다른 address space (주로 다른 network의 computer) 의 subroutine을 마치 local의 subroutine을 수행하는것 마냥 할 수 있게 하는 것.
+- IPC의 일종.
+- Object-Oriented Paradigm에서는 RMI (Remote Method Call)로 불림.
 
-### Pipe
+### Anonymous Pipe
 
-TODO
+- one-way IPC의 일종.
+- 보통 parent process가 만들고 child process가 활용.
+
+### Named Pipe
+
+- IPC의 일종.
+- 보통 파일을 생성해서 pipe로 사용하며 process가 죽어도 있음.
+- 이름이 있어서 reader, writer가 이름으로 동시에 접근 가능.
 
 ## Thread
 
@@ -336,19 +358,169 @@ TODO
 > - Many to Many가 설명상 좋아보이지만 이론적일 뿐. 실제로는 one-to-one model을 사용.
 > - process를 여러개의 thread가 있는 address space로 보고 thread 단위로 스케줄링 (one-to-one).
 
-## Synchronization
+## Process Synchronization
 
-### Producer Consumer
+- 여러 개의 process나 thread가 critical section 을 동시에 수행하지 못하게 하는 기법
+
+### Race Contition
+
+- 여러개의 Process가 동시에 같은 데이터를 수정하는데 서로 돌아가는 순서에 따라 결과가 달라지는 경우를 말함.
 
 ### Critical Section
 
-### Mutex
+- 서로 다른 프로세스가 같은 데이터를 수정할 수 있는 코드 영역.
+
+### Critical Section Problem
+
+- 서로 다른 Process가 critical section에 동시에 접근할 수 있게 protocol을 짜는 것.
+- 다음의 요구사항을 만족해야 함
+  - Mutual exclusion : 서로 다른 process가 동시에 같은 critical section을 실행 못함.
+  - Progress : critical section을 수행하는 process가 없으면 요청받은 process중 하나를 선택해서 수행.
+  - Bounded Waiting : critical section에 대한 요청을 하고 무기한 기다리지 않음.
+
+### Peterson's Solution
+
+- pseudocode (i와 j가 process id라고 생각)
+  ```cpp
+  // turn = i : i가 critical section에 들어가려고 함
+  // flag[i] : i가 critical section에 들어갈 준비가 됨
+  do {
+    flag[i] = true;
+    turn = j;
+    while (flag[j] && turn == j);
+
+    /* critical section */
+
+    flag[i] = false;
+  } while (true);
+  ```
+
+### Compare and Swap
+
+- hardware에서 지원해주는 operation.
+- pseudocode (대략적인 컨셉으로 실제 하드웨어에서는 구현이 다름)
+  ```cpp
+  int compare_and_swap(int *value, int expected, int new_value) {
+    int temp = *value;
+    if (*value == expected) {
+      *value = new_value;
+    }
+    return temp;
+  }
+  ```
+
+> java의 AtomicXXX class들이 volatile (cache 안쓰고 메모리에서 읽음)과 cas instruction을 사용해서 구현.
+
+### Mutex (MUTal EXclusion)
+
+- Critical section에 들어가기 전에 lock을 얻고 다 하면 lock을 푸는 형식. lock이 이미 걸려있으면 기다림.
+- Binary Semaphore라고도 부름.
 
 ### Semaphore
 
+- Critical section에 n개의 process가 동시에 접근 가능한 것. 자원의 수가 1 이상이면 해당 자원을 가져오고 수가 0이면 기다림.
+
+### SpinLock
+
+- critical section에 진입이 가능할 때 까지 루프돌면서 계속 재시도 하는 것.
+- 장점 : context switching이 없어서 짧은 시간 사이에 lock을 얻는다는 보장이 있으면 괜찮음.
+- 단점 : 해당 core가 계속 loop 돌아서 다른거 못함.
+
 ### Monitor
 
+- process가 mutual exclusion 하고 wait 할 수 있게 해주는 ADT (Abstract Data Type).
+- Condition x에 두가지 연산을 제공
+  - x.signal() : x를 요청한 process중 하나를 깨움. 어떠한 process도 기다리고 있지 않다면 아무 일도 일어나지 않음.
+  - x.wait() : x를 요청한 process를 block.
+
+> ![process-management-java-monitor](./img/process-management-java-monitor.gif)\
+>
+> java synchronized 쓰면 내부적으로 monitor의 개념으로 동작.
+
+### Bounded-Buffer Problem using mutex
+
+- 생산자가 buffer에 데이터 넣고 소비자가 buffer에 있는 데이터를 빼는 경우.
+- 생산자, 소비자가 동시에 접근하면 꼬일 수 있음. buffer에 semaphore 사용.
+  ```cpp
+  // semaphore 정의
+  semaphore mutex = 1;  // critical section용
+  semaphore empty = n;  // n개 비어 있음
+  semaphore full = 0    // 0개 가득차 있음
+
+  // 생산자
+  do {
+    /* produce an item in next produced */
+
+    wait(empty);  // empty가 한개라도 있을 때 까지 기다림
+    wait(mutex);
+
+    /* add next produced to the buffer */
+
+    signal(mutex);
+    signal(full);
+  } while (true);
+
+  // 소비자
+  do {
+    wait(full);  // full이 한개라도 있을 때 까지 기다림
+    wait(mutex);
+
+    /* remove an item from buffer to next consumed */
+
+    signal(mutex);
+    signal(empty);
+
+    /* consume the item in next consumed */
+  } while (true);
+  ```
+
+### Readers-Writers Problem
+
+- 여러 개의 Reader와 Writer가 동시에 같은 데이터를 각각 읽고, 변경하고자 하는 경우.
+- Reader에 우선순위를 주면 Writer가 starvation. Writer에 우선순위를 주면 Reader가 starvation.
+- Reader에 우선순위가 있는 경우 Writer가 starvation을 안하게 하는 방법.
+  ```cpp
+  // semaphore 정의
+  semaphore rw_mutex = 1; // r/w mutex
+  semaphore mutex = 1;    // read_count용 mutex
+  int read_count = 0;     // 읽고 있는 독자의 수
+
+  // Writer
+  do {
+    wait(rw_mutex);
+
+    /* writing is performed */
+
+    signal(rw_mutex);
+  } while (true);
+
+  // Reader
+  do {
+    wait(mutex);
+    read_count++;
+    if (read_count == 1) { // 첫 번째 reader라면
+      wait(rw_mutex);      // writer block
+    }
+    signal(mutex);
+
+    /* reading is performed */
+
+    wait(mutex);
+    read_count--;
+    if (read_count == 0) { // 마지막 writer라면
+      signal(rw_mutex);    // writer가 access 할 수 있게 함
+    }
+    signal(mutex);
+  } while (true);
+  ```
+
+### Dining-Philosophers Problem
+
+TODO
+
 ## Deadlock
+
+TODO
 
 - 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황
 - 4가지 조건이 동시에 성립해야만 발생
@@ -359,8 +531,8 @@ TODO
 
 ## Practice
 
-- Process
-  - [process-fork](./practice/process-fork.c)
+- [process-fork](./practice/process-fork.c)
+- [make-pipe](./practice/make-pipe.sh)
 
 ## Reference
 
@@ -370,6 +542,12 @@ TODO
   - [Synchronization](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_Synchronization.html)
   - [CPU Scheduling](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/6_CPU_Scheduling.html)
   - [Deadlocks](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/7_Deadlocks.html)
+- wiki
+  - [Process State](https://en.wikipedia.org/wiki/Process_state)
+  - [Remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call)
+  - [Anonymous pipe](https://en.wikipedia.org/wiki/Anonymous_pipe)
+  - [Named pipe](https://en.wikipedia.org/wiki/Named_pipe)
+  - [Scheduling](https://en.wikipedia.org/wiki/Scheduling_(computing))
+  - [Reader Writers Problem](https://en.wikipedia.org/wiki/Readers%E2%80%93writers_problem)
 - [Process Management (코딩스낵)](https://gusdnd852.tistory.com/82)
-- [Process State (wiki)](https://en.wikipedia.org/wiki/Process_state)
-- [Scheduling (wiki)](https://en.wikipedia.org/wiki/Scheduling_(computing))
+- [Difference between lock and monitor – Java Concurrency](https://howtodoinjava.com/java/multi-threading/multithreading-difference-between-lock-and-monitor/)
