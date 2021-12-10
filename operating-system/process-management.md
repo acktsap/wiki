@@ -55,6 +55,13 @@
     - [Readers-Writers Problem](#readers-writers-problem)
     - [Dining-Philosophers Problem](#dining-philosophers-problem)
   - [Deadlock](#deadlock)
+    - [DeadLock Preconditions](#deadlock-preconditions)
+    - [Deadlock Prevention](#deadlock-prevention)
+    - [Deadlock Avoidance](#deadlock-avoidance)
+    - [Deadlock Detection on Single Category Resource](#deadlock-detection-on-single-category-resource)
+    - [Deadlock Detection on Multi Category Resource](#deadlock-detection-on-multi-category-resource)
+    - [Deadlock Recovery](#deadlock-recovery)
+  - [LiveLock](#livelock)
   - [Practice](#practice)
   - [Reference](#reference)
 
@@ -239,7 +246,7 @@ TODO
 
 ### Shared Memory
 
-![process-management-shared-memory](./img/process-management-shared-memory.png)
+![shared-memory](./img/process-management-shared-memory.png)
 
 - 서로 다른 Process는 기본적으로는 같은 address space에 접근하지 못하지만 이를 예외적으로 허용.
 - 어떤 식으로 공유 memory를 구성할건지, 동시성 관리를 어떻게 할건지는 Process에 달려 있음.
@@ -253,7 +260,7 @@ TODO
 
 ### Socket
 
-![process-management-socket](./img/process-management-socket.png)
+![socket](./img/process-management-socket.png)
 
 - An endpoint for communication.
 - IP address와 port number로 구성 (eg. 192.168.0.1:1000)
@@ -433,7 +440,7 @@ TODO
   - x.signal() : x를 요청한 process중 하나를 깨움. 어떠한 process도 기다리고 있지 않다면 아무 일도 일어나지 않음.
   - x.wait() : x를 요청한 process를 block.
 
-> ![process-management-java-monitor](./img/process-management-java-monitor.gif)\
+> ![java-monitor](./img/process-management-java-monitor.gif)\
 >
 > java synchronized 쓰면 내부적으로 monitor의 개념으로 동작.
 
@@ -520,14 +527,66 @@ TODO
 
 ## Deadlock
 
-TODO
+![deadlock](./img/process-management-deadlock.png)
 
-- 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황
+- 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황.
+
+### DeadLock Preconditions
+
 - 4가지 조건이 동시에 성립해야만 발생
-  - Mutual exclusion : 자원은 한 번에 한 프로세스만이 사용할 수 있음
-  - Hold and wait : 하나의 자원을 점유하고 있으면서 다른 프로세스에 할당되어 사용하고 있는 자원을 점유하기 위해 대기하는 프로세스가 있어야 함
-  - No preemption : 자원에 대한 선점이 불가능
-  - Circular wait : 자원을 대기하는 프로세스간 Cycle이 있어야 함 (e. A -> B, B -> C, C -> A)
+  - Mutual exclusion : 자원은 한 번에 한 process만이 사용할 수 있음.
+  - Hold and wait : 자원을 사용하는 process가 있고 그 자원에 접근하려고 대기하는 process가 있어야 함.
+  - No preemption : 자원에 대한 선점이 불가능.
+  - Circular wait : 자원을 대기하는 프로세스간 Cycle이 있어야 함 (e. A -> B, B -> C, C -> A).
+
+### Deadlock Prevention
+
+- Mutual exclusion 해결
+  - Read-only resource에는 lock을 걸 필요 없음.
+  - Read-only가 아니라면 보통은 불가능.
+- Hold and wait 해결
+  - 요청할 때 가지고 있는 resource가 하나도 없게.
+  - 방법
+    - 필요한 resource를 한번에 요청하게.
+    - 다른 resource를 요청할 때 가지고 있는 resource를 내려놓게.
+  - 단점 : 두가지 방법 모두 인기있는 resource를 요청하면 starvation이 될 수 있음.
+- No preemption 해결
+  - 선점이 가능하게.
+  - 방법
+    - 요청한 resource를 다른 process가 쓰고 있으면 요청한 process가 가지고 있는 resource를 release하고 새롭게 요청한 resource와 기존에 가지고 있던 resource를 같이 요청.
+    - 요청한 resource를 점유하고 있는 process가 waiting상태라면 그 resource를 점유.
+  - 단점 : 둘다 빠르게 save/load되는 resource가 아니라면 사용하기 힘듬.
+- Circular wait 해결
+  - resource에 순서를 부여하고 숫자가 증가하는 방향으로만 resource를 요청할 수 있게.
+  - 단점 : 어떻게 순서를 부여할것인가?
+
+### Deadlock Avoidance
+
+todo
+
+### Deadlock Detection on Single Category Resource
+
+![single-category-resource-deadlock-detection](./img/process-management-single-category-resource-deadlock-detection.jpg)
+
+- Resource가 single category일때는 resource allocation graph에서 resource를 제거 후 cycle이 있는지 확인하면 됨.
+
+### Deadlock Detection on Multi Category Resource
+
+todo
+
+### Deadlock Recovery
+
+- Process Termination : 관계되어 있는 모든 process를 죽이거나 deadlock이 풀릴 때 까지 process를 죽임.
+  - deadlock이 풀릴 때 까지 죽이는 것은 죽이는 process를 어떻게 정할건지 생각해야 함.
+- Resource Preemption : 자원이 선점 가능하게.
+  - 어떤 process로부터 자원을 빼올것인가, starvation은 일어나지 않을까 고민해야 함.
+
+## LiveLock
+
+![livelock](./img/process-management-livelock.jpg)
+
+- Deadlock과 비슷하지만 서로가 서로의 resource를 가져오기 위해 blocked된 상태가 아니라 resource를 가져오기 위해 cpu를 계속 쓰고 있는 상태.
+- Resource starvation의 특별한 case임.
 
 ## Practice
 
@@ -549,5 +608,7 @@ TODO
   - [Named pipe](https://en.wikipedia.org/wiki/Named_pipe)
   - [Scheduling](https://en.wikipedia.org/wiki/Scheduling_(computing))
   - [Reader Writers Problem](https://en.wikipedia.org/wiki/Readers%E2%80%93writers_problem)
+  - [Deadlock](https://en.wikipedia.org/wiki/Deadlock)
 - [Process Management (코딩스낵)](https://gusdnd852.tistory.com/82)
 - [Difference between lock and monitor – Java Concurrency](https://howtodoinjava.com/java/multi-threading/multithreading-difference-between-lock-and-monitor/)
+- [What's the difference between deadlock and livelock? (stackoverflow)](https://stackoverflow.com/questions/6155951/whats-the-difference-between-deadlock-and-livelock)
