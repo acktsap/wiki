@@ -28,11 +28,11 @@
   - [Inter-Process Communication](#inter-process-communication)
     - [Message Passing](#message-passing)
     - [Shared Memory](#shared-memory)
-  - [Client-Server Communication](#client-server-communication)
     - [Socket](#socket)
     - [Remote Procedure Call](#remote-procedure-call)
     - [Anonymous Pipe](#anonymous-pipe)
     - [Named Pipe](#named-pipe)
+    - [File](#file)
   - [Thread](#thread)
     - [Process vs Thread](#process-vs-thread)
     - [Why Thread?](#why-thread)
@@ -41,11 +41,14 @@
     - [Data Parallelism vs Task Parallelism](#data-parallelism-vs-task-parallelism)
     - [User Thread vs Kernel Thread](#user-thread-vs-kernel-thread)
     - [Multithreading Model](#multithreading-model)
+    - [Implicit Threading](#implicit-threading)
   - [Process Synchronization](#process-synchronization)
     - [Race Contition](#race-contition)
     - [Critical Section](#critical-section)
+    - [Critical Section Example (++operator)](#critical-section-example-operator)
     - [Critical Section Problem](#critical-section-problem)
     - [Peterson's Solution](#petersons-solution)
+    - [Peterson's Solution Problem](#petersons-solution-problem)
     - [Compare and Swap](#compare-and-swap)
     - [Mutex (MUTal EXclusion)](#mutex-mutal-exclusion)
     - [Semaphore](#semaphore)
@@ -58,8 +61,8 @@
     - [DeadLock Preconditions](#deadlock-preconditions)
     - [Deadlock Prevention](#deadlock-prevention)
     - [Deadlock Avoidance](#deadlock-avoidance)
-    - [Deadlock Detection on Single Category Resource](#deadlock-detection-on-single-category-resource)
-    - [Deadlock Detection on Multi Category Resource](#deadlock-detection-on-multi-category-resource)
+    - [Deadlock Detection on Single Instance Resource](#deadlock-detection-on-single-instance-resource)
+    - [Deadlock Detection on Multi Instance Resource](#deadlock-detection-on-multi-instance-resource)
     - [Deadlock Recovery](#deadlock-recovery)
   - [LiveLock](#livelock)
   - [Practice](#practice)
@@ -233,7 +236,7 @@ TODO
 - communication link를 만들고 (eg. shared memory, network) 서로 send, receive message를 주고받으면서 할 수도 있음.
 - 고려해야 할 점
   - Naming
-    - Direct communication : 두 process가 서로를 알아야 함.
+    - Direct communication : 두 process가 서로를 알아서 넘겨줘야 함.
     - Indirect communication :  생산자 소비자가 서로 공유된 mailbox에 넣고 빼는 구조.
   - Synchronization
     - Blocking : Sender는 Receiver가 받을 때 까지 blocked. Receiver는 Sender가 보낼 때 까지 blocked.
@@ -253,10 +256,6 @@ TODO
 - 보통 Buffer같은거 둬서 생산자는 Buffer에 넣고 소비자는 Buffer에 있는거 빼는 식으로 동작.
   - Unbounded Buffer : size 제한이 없는 buffer.
   - Bounded Buffer : size 제한이 있는 buffer. buffer가 차있으면 생산자가 기다리고 buffer가 비어있으면 소비자가 기다림.
-
-## Client-Server Communication
-
-- IPC에서 적용된 개념이 Client Server간 통신에도 적용될 수 있음.
 
 ### Socket
 
@@ -285,6 +284,10 @@ TODO
 - IPC의 일종.
 - 보통 파일을 생성해서 pipe로 사용하며 process가 죽어도 있음.
 - 이름이 있어서 reader, writer가 이름으로 동시에 접근 가능.
+
+### File
+
+- 서로 다른 process가 같은 파일에 쓰고 읽어도 통신한다고 볼 수 있음.
 
 ## Thread
 
@@ -365,6 +368,12 @@ TODO
 > - Many to Many가 설명상 좋아보이지만 이론적일 뿐. 실제로는 one-to-one model을 사용.
 > - process를 여러개의 thread가 있는 address space로 보고 thread 단위로 스케줄링 (one-to-one).
 
+### Implicit Threading
+
+- 스레드의 생성과 관리 책임을 개발자가 하기에는 번거로움.
+- 컴파일러와 런타임 라이브러리가 스레드 처리를 하고 개발자는 병렬로 실행할 수 있는 작업만 식별하여 작업을 함수로 작성.
+- Thread pool 같은거를 미리 만들어서 사용.
+
 ## Process Synchronization
 
 - 여러 개의 process나 thread가 critical section 을 동시에 수행하지 못하게 하는 기법
@@ -377,29 +386,155 @@ TODO
 
 - 서로 다른 프로세스가 같은 데이터를 수정할 수 있는 코드 영역.
 
+### Critical Section Example (++operator)
+
+- ++operator가 실제로는 더한 값을 임시 변수에 뒀다가 최종적으로 다시 할당하는 식인데 순서에 따라 값이 이상하게 나올 수 있음.
+  ```cpp
+  // T0, ++value, T1가 --value을 하는 경우
+
+  value = 3
+  T0: 0_tmp = value
+  T1: 1_tmp = value
+  T0: 0_tmp = 0_tmp + 1 // 4
+  T1: 1_tmp = 1_tmp - 1 // 2
+  T0: value = 0_tmp
+  T1: value = 1_tmp
+
+  // value == 2가 됨 (3이어야 함)
+  ```
+
 ### Critical Section Problem
 
 - 서로 다른 Process가 critical section에 동시에 접근할 수 있게 protocol을 짜는 것.
 - 다음의 요구사항을 만족해야 함
   - Mutual exclusion : 서로 다른 process가 동시에 같은 critical section을 실행 못함.
   - Progress : critical section을 수행하는 process가 없으면 요청받은 process중 하나를 선택해서 수행.
-  - Bounded Waiting : critical section에 대한 요청을 하고 무기한 기다리지 않음.
+  - Bounded Waiting : starvation 방지하기 위해 critical section에 대한 요청을 하고 무기한 기다리지 않음.
 
 ### Peterson's Solution
 
-- pseudocode (i와 j가 process id라고 생각)
+- `turn = i` : process i 턴임, `flag[i]` : process i 가 공유자원 쓰고 싶음.
+- turn만 사용한 경우.
   ```cpp
-  // turn = i : i가 critical section에 들어가려고 함
-  // flag[i] : i가 critical section에 들어갈 준비가 됨
+  // process i
+  do {
+    while (turn == j); // j턴이면 기다림
+
+    /* critical section */
+
+    turn = j;
+
+    /* remainder section */
+  } while (true);
+
+  // process j
+  do {
+    while (turn == i); // i턴이면 기다림
+
+    /* critical section */
+
+    turn = i;
+
+    /* remainder section */
+  } while (true);
+  ```
+  - j가 끝나고 remainder section에 있는 상태에서 i가 수행, i가 끝나고 다시 수행하고 싶어도 j가 다시 끝나야 수행 가능 (progress 불만족).
+- flag만 사용한 경우.
+  ```cpp
+  // process j
   do {
     flag[i] = true;
-    turn = j;
-    while (flag[j] && turn == j);
+    while (flag[j]); // j가 쓰려고 하면 기다림
 
     /* critical section */
 
     flag[i] = false;
+
+    /* remainder section */
   } while (true);
+
+  // process j
+  do {
+    flag[j] = true;
+    while (flag[i]); // i가 쓰려고 하면 기다림
+
+    /* critical section */
+
+    flag[j] = false;
+
+    /* remainder section */
+  } while (true);
+  ```
+  - flag[i], flag[j]이 동시에 true가 된다면 서로가 서로를 끝나기 위해 기다려서 progress를 보장하지 못함.
+- turn, flag 둘다 사용한 경우.
+  ```cpp
+  // process i
+  do {
+    flag[i] = true;
+    turn = j; // j 먼저 들어가도록 양보
+    while (flag[j] && turn == j); // j가 이용할 의사가 있고 j턴이면 기다림
+
+    /* critical section */
+
+    flag[i] = false;
+
+    /* remainder section */
+  } while (true);
+
+  // process j
+  do {
+    flag[j] = true;
+    turn = i; // i 먼저 들어가도록 양보
+    while (flag[i] && turn == i); // i가 이용할 의사가 있고 i턴이면 기다림
+
+    /* critical section */
+
+    flag[j] = false;
+
+    /* remainder section */
+  } while (true);
+  ```
+  - Mutual Exclusion 보장
+    ```text
+    flag[i], flag[j]가 동시에 true가 된다고 가정.
+    i쪽이 먼저 while문까지 가는 경우 while문에서 대기함 (flag[j] && turn == j). 이후 j쪽이 turn = i 로 하면서 i쪽이 수행.
+    만약 i, j 둘다 turn을 수행하는 경우 둘중 나중에 수행되는걸로 turn이 설정됨.
+    ```
+  - Progress && Bounded Waiting
+    ```text
+    We note that a process Pi can be prevented from
+    entering the critical section only if it is stuck in the while loop with the condition
+    flag[j] == true and turn == j; this loop is the only one possible. If Pj is not
+    ready to enter the critical section, then flag[j] == false, and Pi can enter its
+    critical section. If Pj has set flag[j] to true and is also executing in its while
+    statement, then either turn == i or turn == j. If turn == i, then Pi will enter
+    the critical section. If turn == j, then Pj will enter the critical section. However,
+    once Pj exits its critical section, it will reset flag[j] to false, allowing Pi to
+    enter its critical section. If Pj resets flag[j] to true, it must also set turn to i.
+    Thus, since Pi does not change the value of the variable turn while executing
+    the while statement, Pi will enter the critical section (progress).
+    ```
+  - Bounded Waiting
+    ```
+    i, j 둘다 entry section을 수행하는 경우 turn이 둘중 한개가 되고 해당 process가 critical section을 수행.
+    critical section을 수행한 process는 다음에 돌 때 turn을 다른 process에게줌. 즉, 처음 critical section을
+    수행하지 못한 process는 기껏해야 1개의 process만 기다리게 됨.
+    ```
+
+### Peterson's Solution Problem
+
+- Compiler 최적화 때문에 문제가 발생 가능
+  ```cpp
+    do {
+      // compiler가 아래의 2개 statement간 dependency가 없다고 보고 순서를 바꿀 수 있음. 그러면 문제 발생.
+      flag[i] = true;
+      turn = j;
+
+      while (flag[j] && turn == j);
+
+      ...
+
+    } while (true);
   ```
 
 ### Compare and Swap
@@ -429,7 +564,7 @@ TODO
 
 ### SpinLock
 
-- critical section에 진입이 가능할 때 까지 루프돌면서 계속 재시도 하는 것.
+- critical section에 진입이 가능할 때 까지 루프돌면서 계속 재시도 하는 것 (Busy Waiting).
 - 장점 : context switching이 없어서 짧은 시간 사이에 lock을 얻는다는 보장이 있으면 괜찮음.
 - 단점 : 해당 core가 계속 loop 돌아서 다른거 못함.
 
@@ -440,9 +575,11 @@ TODO
   - x.signal() : x를 요청한 process중 하나를 깨움. 어떠한 process도 기다리고 있지 않다면 아무 일도 일어나지 않음.
   - x.wait() : x를 요청한 process를 block.
 
-> ![java-monitor](./img/process-management-java-monitor.gif)\
+> ![java-monitor](./img/process-management-java-monitor.gif)
 >
-> java synchronized 쓰면 내부적으로 monitor의 개념으로 동작.
+> - java synchronized 쓰면 내부적으로 monitor의 개념으로 동작.
+>   - entry set : lock 얻기 위해 막 도착한 thread들.
+>   - wait set : `this.wait()`써서 기다리는 thread들.
 
 ### Bounded-Buffer Problem using mutex
 
@@ -464,7 +601,7 @@ TODO
     /* add next produced to the buffer */
 
     signal(mutex);
-    signal(full);
+    signal(full); // full을 한개 증가
   } while (true);
 
   // 소비자
@@ -475,7 +612,7 @@ TODO
     /* remove an item from buffer to next consumed */
 
     signal(mutex);
-    signal(empty);
+    signal(empty); // empty를 한개 증가
 
     /* consume the item in next consumed */
   } while (true);
@@ -484,8 +621,7 @@ TODO
 ### Readers-Writers Problem
 
 - 여러 개의 Reader와 Writer가 동시에 같은 데이터를 각각 읽고, 변경하고자 하는 경우.
-- Reader에 우선순위를 주면 Writer가 starvation. Writer에 우선순위를 주면 Reader가 starvation.
-- Reader에 우선순위가 있는 경우 Writer가 starvation을 안하게 하는 방법.
+- Reader에 우선순위를 줘서 정합성을 해결하는 경우 의 예시 (writer에 starvation이 일어날 수 있음).
   ```cpp
   // semaphore 정의
   semaphore rw_mutex = 1; // r/w mutex
@@ -523,7 +659,25 @@ TODO
 
 ### Dining-Philosophers Problem
 
-TODO
+![dining-philosophers](./img/process-management-dining-philosophers.png)
+
+- 원판의 철학자가 음식을 먹기 위해 양쪽의 젓가락을 들어야 하는 경우.
+- 각각의 철학자가 왼쪽, 오른쪽 젓가락을 순차로 기다리는 경우 (5개 동시에 왼쪽 젓가락 집으면 deadlock이 발생).
+  ```cpp
+  semaphore chopstick[5];
+
+  do {
+    wait(chopstick[i]);
+    wait(chopstick[(i+1) % 5]);
+
+    /* eat for awhile */
+
+    signal(chopstick[i]);
+    signal(chopstick[(i+1) % 5]);
+
+    /* think for awhile */
+  } while (true);
+  ```
 
 ## Deadlock
 
@@ -549,37 +703,37 @@ TODO
   - 방법
     - 필요한 resource를 한번에 요청하게.
     - 다른 resource를 요청할 때 가지고 있는 resource를 내려놓게.
-  - 단점 : 두가지 방법 모두 인기있는 resource를 요청하면 starvation이 될 수 있음.
+  - 문제점 : 두가지 방법 모두 인기있는 resource를 요청하면 starvation이 될 수 있음.
 - No preemption 해결
   - 선점이 가능하게.
   - 방법
     - 요청한 resource를 다른 process가 쓰고 있으면 요청한 process가 가지고 있는 resource를 release하고 새롭게 요청한 resource와 기존에 가지고 있던 resource를 같이 요청.
     - 요청한 resource를 점유하고 있는 process가 waiting상태라면 그 resource를 점유.
-  - 단점 : 둘다 빠르게 save/load되는 resource가 아니라면 사용하기 힘듬.
+  - 문제점 : 둘다 빠르게 save/load되는 resource가 아니라면 사용하기 힘듬.
 - Circular wait 해결
-  - resource에 순서를 부여하고 숫자가 증가하는 방향으로만 resource를 요청할 수 있게.
-  - 단점 : 어떻게 순서를 부여할것인가?
+  - resource에 순서를 부여하고 숫자가 증가하는 방향으로만 resource를 요청할 수 있게. 제일 흔한 전략.
+  - 문제점 : 어떻게 순서를 부여할것인가? 가져오고 쓰는 타이밍도 달라서 자원 점유시간이 길어질 수 있다.
 
 ### Deadlock Avoidance
 
 todo
 
-### Deadlock Detection on Single Category Resource
+### Deadlock Detection on Single Instance Resource
 
 ![single-category-resource-deadlock-detection](./img/process-management-single-category-resource-deadlock-detection.jpg)
 
-- Resource가 single category일때는 resource allocation graph에서 resource를 제거 후 cycle이 있는지 확인하면 됨.
+- Resource가 single category일때는 resource allocation graph에서 resource를 빼고 process끼리의 graph에서 cycle이 있는지 확인하면 됨.
 
-### Deadlock Detection on Multi Category Resource
+### Deadlock Detection on Multi Instance Resource
 
 todo
 
 ### Deadlock Recovery
 
 - Process Termination : 관계되어 있는 모든 process를 죽이거나 deadlock이 풀릴 때 까지 process를 죽임.
-  - deadlock이 풀릴 때 까지 죽이는 것은 죽이는 process를 어떻게 정할건지 생각해야 함.
+  - 문제점 : deadlock이 풀릴 때 까지 죽이는 것은 죽이는 process를 어떻게 정할건지 생각해야 함.
 - Resource Preemption : 자원이 선점 가능하게.
-  - 어떤 process로부터 자원을 빼올것인가, starvation은 일어나지 않을까 고민해야 함.
+  - 문제점 : 어떤 process로부터 자원을 빼올것인가, starvation은 일어나지 않을까 고민해야 함.
 
 ## LiveLock
 
@@ -591,6 +745,7 @@ todo
 ## Practice
 
 - [process-fork](./practice/process-fork.c)
+- [pthread](./practice/thread.c) : `./run.sh thread.c 1000000000`
 - [make-pipe](./practice/make-pipe.sh)
 
 ## Reference
@@ -612,3 +767,5 @@ todo
 - [Process Management (코딩스낵)](https://gusdnd852.tistory.com/82)
 - [Difference between lock and monitor – Java Concurrency](https://howtodoinjava.com/java/multi-threading/multithreading-difference-between-lock-and-monitor/)
 - [What's the difference between deadlock and livelock? (stackoverflow)](https://stackoverflow.com/questions/6155951/whats-the-difference-between-deadlock-and-livelock)
+- [Why does a simplification of Peterson's Algorithm using a single 'turn' variable not provide process synchronization? (stackoverflow)](https://stackoverflow.com/questions/48385998/why-does-a-simplification-of-petersons-algorithm-using-a-single-turn-variable)
+- [[OS] critical section problem & peterson's algorithm](https://velog.io/@chy0428/OS-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%8F%99%EA%B8%B0%ED%99%94#-erroneous-algorithm-1)

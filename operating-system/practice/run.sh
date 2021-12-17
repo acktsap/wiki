@@ -7,7 +7,7 @@ if [ -z ${FILE} ]; then
   exit 0
 fi
 
-gcc ${FILE} -o a.out > /dev/null
+gcc ${FILE} -o a.out > /dev/null 2>&1
 
 shift
 ./a.out "$@"
