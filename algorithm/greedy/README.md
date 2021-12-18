@@ -2,14 +2,13 @@
 
 ## Strategy
 
-1. Divide into sub-problems
-2. Define a greedy algorithm which staisfies
-    1. Greedy choice property : ∃ optimal solution which contains our solution on sub-problem\
-       Assume ∃ other optimal solution, prove that we can modify it to our solution
-    2. Optimal Substructure : ∑ optimal solution of subproblem -> Optimal final solution; Mostly obvious
+1. Divide into sub-problems.
+2. Define a greedy algorithm which staisfies.
+    1. Greedy choice property : ∃ optimal solution which contains our solution on sub-problem.\
+         Assume ∃ other optimal solution, prove that we can modify it to our solution.
+    2. Optimal Substructure : ∑ optimal solution of subproblem -> Optimal final solution; Mostly obvious.
 
 - Tips : Sorting is the great way to select greedily easily
-
 
 ## VS bruce force? VS dynamic programming?
 

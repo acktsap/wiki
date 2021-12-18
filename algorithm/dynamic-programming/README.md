@@ -7,7 +7,6 @@
 - Dynamic Programming : speed up with memoization; only applicable to referential transparent function
 - Time Complexity : # of subproblem * # of repetation to solve it
 
-
 ## Strategy
 
 1. Solve with exhausive Search
