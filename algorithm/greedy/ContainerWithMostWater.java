@@ -32,8 +32,8 @@
  * Approach & Proof 
  *
  * Two pointer로 해서 greedy하게 접근하면 되지 않을까?
+ * 제일 처음 양쪽 끝에서 시작. 해당 너비는 width * min(y_left, y_right) 임
  *
- * TODO: greedy 증명
  *
  *
  * Complexity

@@ -1,11 +1,10 @@
 # Operating System
 
-- [Operating System](#operating-system)
-  - [Storage Management](#storage-management)
-    - [Cache Locality](#cache-locality)
-  - [Etc](#etc)
-    - [Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming](#blocking--non-blocking-io-synchronous--asynchronous-programming)
-  - [References](#references)
+- [Storage Management](#storage-management)
+  - [Cache Locality](#cache-locality)
+- [Etc](#etc)
+  - [Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming](#blocking--non-blocking-io-synchronous--asynchronous-programming)
+- [References](#references)
 
 ## Storage Management
 

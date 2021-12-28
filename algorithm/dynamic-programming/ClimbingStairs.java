@@ -61,10 +61,11 @@ class ClimbingStairs {
     return calculate(n, cache);
   }
 
-  protected int calculate(int n, int[] cache) {
+  protected int compute(int n, int[] cache) {
     if (n == 1) {
       return 1;
     }
+
     if (n == 2) {
       return 2;
     }
@@ -73,7 +74,7 @@ class ClimbingStairs {
       return cache[n];
     }
 
-    cache[n] = calculate(n - 1, cache) + calculate(n - 2, cache);
+    cache[n] = compute(n - 1, cache) + calculate(n - 2, cache);
     return cache[n];
   }
 

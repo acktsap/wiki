@@ -1,35 +1,36 @@
 # Process Management - 2
 
-- [Process Management - 2](#process-management---2)
-  - [Process Synchronization](#process-synchronization)
-    - [Race Contition](#race-contition)
-    - [Critical Section](#critical-section)
-    - [Critical Section Example (++operator)](#critical-section-example-operator)
-    - [Critical Section Problem](#critical-section-problem)
-    - [Peterson's Solution](#petersons-solution)
-    - [Peterson's Solution Problem](#petersons-solution-problem)
-    - [Compare and Swap](#compare-and-swap)
-    - [Mutex (MUTal EXclusion)](#mutex-mutal-exclusion)
-    - [Semaphore](#semaphore)
-    - [SpinLock](#spinlock)
-    - [Monitor](#monitor)
-    - [Bounded-Buffer Problem using mutex](#bounded-buffer-problem-using-mutex)
-    - [Readers-Writers Problem](#readers-writers-problem)
-    - [Dining-Philosophers Problem](#dining-philosophers-problem)
-  - [Deadlock](#deadlock)
-    - [DeadLock Preconditions](#deadlock-preconditions)
-    - [Deadlock Prevention](#deadlock-prevention)
-    - [Deadlock Avoidance](#deadlock-avoidance)
-      - [Safe State vs Unsafe State](#safe-state-vs-unsafe-state)
-      - [On Single Instance Per Resource](#on-single-instance-per-resource)
-      - [On Multiple Instance Per Resource](#on-multiple-instance-per-resource)
-    - [Deadlock Detection](#deadlock-detection)
-      - [On Single Instance Per Resource](#on-single-instance-per-resource-1)
-      - [On Multi Instance Per Resource](#on-multi-instance-per-resource)
-    - [Deadlock Recovery](#deadlock-recovery)
-  - [LiveLock](#livelock)
-  - [Practice](#practice)
-  - [Reference](#reference)
+- [Process Synchronization](#process-synchronization)
+  - [Race Contition](#race-contition)
+  - [Critical Section](#critical-section)
+  - [Critical Section Example (++operator)](#critical-section-example-operator)
+  - [Critical Section Problem](#critical-section-problem)
+  - [Peterson's Solution](#petersons-solution)
+  - [Peterson's Solution Problem](#petersons-solution-problem)
+  - [Compare and Swap](#compare-and-swap)
+  - [Mutex (MUTal EXclusion)](#mutex-mutal-exclusion)
+  - [Semaphore](#semaphore)
+  - [SpinLock](#spinlock)
+  - [Monitor](#monitor)
+  - [Bounded-Buffer Problem using mutex](#bounded-buffer-problem-using-mutex)
+  - [Readers-Writers Problem](#readers-writers-problem)
+  - [Dining-Philosophers Problem](#dining-philosophers-problem)
+- [Deadlock](#deadlock)
+  - [Resource Allocation Graph](#resource-allocation-graph)
+  - [DeadLock Preconditions](#deadlock-preconditions)
+  - [Deadlock Prevention](#deadlock-prevention)
+  - [Deadlock Avoidance](#deadlock-avoidance)
+    - [Safe State vs Unsafe State](#safe-state-vs-unsafe-state)
+    - [On Single Instance Per Resource](#on-single-instance-per-resource)
+    - [On Multiple Instance Per Resource](#on-multiple-instance-per-resource)
+  - [Deadlock Detection](#deadlock-detection)
+    - [On Single Instance Per Resource](#on-single-instance-per-resource-1)
+    - [On Multi Instance Per Resource](#on-multi-instance-per-resource)
+  - [Deadlock Recovery](#deadlock-recovery)
+  - [Deadlock Ignore](#deadlock-ignore)
+- [LiveLock](#livelock)
+- [Practice](#practice)
+- [Reference](#reference)
 
 ## Process Synchronization
 
@@ -235,8 +236,8 @@
 > ![java-monitor](./img/process-management-java-monitor.gif)
 >
 > - java synchronized 쓰면 내부적으로 monitor의 개념으로 동작.
->   - entry set : lock 얻기 위해 막 도착한 thread들.
->   - wait set : `this.wait()`써서 기다리는 thread들.
+>   - entry set : `synchronized` 사용해서 기다리는 thread들.
+>   - wait set : `wait()`써서 기다리는 thread들.
 
 ### Bounded-Buffer Problem using mutex
 
@@ -342,6 +343,13 @@
 
 - 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황.
 
+### Resource Allocation Graph
+
+todo : 그림 정리, https://github.com/jhyuk316/study/blob/main/Backend%20Roadmap/02%20General%20Knowledge/02.5%20Deadlock.md#12-resource-allocation-graph
+
+- Request Edges(요청 에지) - 프로세스(Pi)에서 리소스(Rj)로. 리소스 요청 후 대기
+- Assignment Edges(할당 에지) - 리소스(Rj)에서 프로세스(Pi)로. 리소스가 할당됨
+
 ### DeadLock Preconditions
 
 - 4가지 조건이 동시에 성립해야만 발생
@@ -374,7 +382,7 @@
 
 ### Deadlock Avoidance
 
-- system이 unsafe state로 가지 않게 하는 방법.
+- 4개의 조건을 막지는 않고 system이 unsafe state로 가지 않게 하는 방법.
 - 새 resource 요청을 받았을 때 unsafe state로 갈 수 있다면 resource를 거부하는 식으로 deadlock을 방지.
 
 #### Safe State vs Unsafe State
@@ -420,12 +428,14 @@
     ```
   - Resource allocation pseudo code
     ```cpp
-    Reqeust[i][j] = k
+    Request[i][j] = k
     if (Request[i][j] <= Need[i][j]) {
       if (Requset[i][j] <= Available[i][j]) {
-        Available[i][j] = Available[i][j] - Request[i][j]
-        Allocation[i][j] = Allocation[i][j] + Request[i][j]
-        Need[i][j] = Need[i][j] - Request[i][j]
+        if (isSafeState(아래의 3개 라인을 할당한다고 가정)) {
+          Available[i][j] = Available[i][j] - Request[i][j]
+          Allocation[i][j] = Allocation[i][j] + Request[i][j]
+          Need[i][j] = Need[i][j] - Request[i][j]
+        }
       } else {
         /* Process i 대기 */
       }
@@ -467,10 +477,16 @@
 
 ### Deadlock Recovery
 
-- Process Termination : 관계되어 있는 모든 process를 죽이거나 deadlock이 풀릴 때 까지 process를 죽임.
+- Process Termination
+  - 관계되어 있는 모든 process를 죽이거나 deadlock이 풀릴 때 까지 process를 죽임.
   - 문제점 : deadlock이 풀릴 때 까지 죽이는 것은 죽이는 process를 어떻게 정할건지 생각해야 함.
-- Resource Preemption : 자원이 선점 가능하게.
+- Resource Preemption
+  - 자원이 선점 가능하게.
   - 문제점 : 어떤 process로부터 자원을 빼올것인가, starvation은 일어나지 않을까 고민해야 함.
+
+### Deadlock Ignore
+
+- Critical 하지 않은 경우 deadlock을 무시하기도 함.
 
 ## LiveLock
 

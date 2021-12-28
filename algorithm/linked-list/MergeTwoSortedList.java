@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /*
  * Descryption
  *
@@ -66,25 +64,26 @@ class MergeTwoSortedList {
   public static void main(String[] args) {
     Object[][] parameters = new Object[][] {
       {
-        new int[] { 1, 2 },
-        new int[] { 3, 4 },
-        new int[] { 1, 2, 3, 4 },
+        ListNode.of(1, 2),
+        ListNode.of(3, 4),
+        ListNode.of(1, 2, 3, 4),
       },
       {
-        new int[] { 1, 2, 4 },
-        new int[] { 1, 3, 4 },
-        new int[] { 1, 1, 2, 3, 4, 4 },
+        ListNode.of(1, 2, 4),
+        ListNode.of(1, 3, 4),
+        ListNode.of(1, 1, 2, 3, 4, 4),
       },
     };
+
     MergeTwoSortedList solution = new MergeTwoSortedList();
     for (Object[] parameter : parameters) {
-      int[] l1 = (int[]) parameter[0];
-      int[] l2 = (int[]) parameter[1];
-      int[] expected = (int[]) parameter[2];
-      int[] actual = solution.mergeTwoLists(ListNode.of(l1), ListNode.of(l2)).toArray();
-      if (!Arrays.equals(expected, actual)) {
-        throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
-            ", actual: " + Arrays.toString(actual));
+      ListNode l1 = (ListNode) parameter[0];
+      ListNode l2 = (ListNode) parameter[1];
+      ListNode expected = (ListNode) parameter[2];
+      ListNode actual = solution.mergeTwoLists(l1, l2);
+      if (!expected.equals(actual)) {
+        throw new IllegalStateException("Expected: " + expected +
+            ", but was: " + actual);
       }
     }
   }

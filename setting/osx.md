@@ -91,6 +91,7 @@ Utils
       - Select the previous input source to **F18**
   - see also
     - https://ssossoblog.tistory.com/54
+- [IINA](https://iina.io/) : Open source music player written in native Swift language
 
 Docs
 

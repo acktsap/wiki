@@ -1,14 +1,13 @@
 # Overview
 
-- [Overview](#overview)
-  - [Role of Operating System](#role-of-operating-system)
-  - [Computer-System Operation](#computer-system-operation)
-  - [User Mode, Kernel Mode](#user-mode-kernel-mode)
-  - [System Call](#system-call)
-  - [System Call when copying file.](#system-call-when-copying-file)
-  - [Type of System Call](#type-of-system-call)
-  - [Practice](#practice)
-  - [Reference](#reference)
+- [Role of Operating System](#role-of-operating-system)
+- [Computer-System Operation](#computer-system-operation)
+- [User Mode, Kernel Mode](#user-mode-kernel-mode)
+- [System Call](#system-call)
+- [System Call when copying file.](#system-call-when-copying-file)
+- [Type of System Call](#type-of-system-call)
+- [Practice](#practice)
+- [Reference](#reference)
 
 ## Role of Operating System
 

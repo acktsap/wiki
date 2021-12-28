@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /*
  * Descryption
  *
@@ -29,11 +31,20 @@
  * Constraints:
  * 
  * 1 <= coins.length <= 12
- * 1 <= coins[i] <= 231 - 1
+ * 1 <= coins[i] <= 2^31 - 1
  * 0 <= amount <= 104
  *
  *
  * Approach & Proof 
+ *
+ * Let m be # of coins and f(n) be best solution for amount n. Then,
+ *
+ * f(n) = 1 + min(f(n - coins[0]), f(n - coins[1]), ..., f(n - coins[m - 1]))  for there exists (n - coins[i]) != -1
+ *      = -1     for there not exists (n - coins[i]) != -1
+ *      = 0      for n == 0
+ *      = -1     for n < 0
+ *
+ * todo
  *
  *
  * Complexity
@@ -48,7 +59,38 @@
  */
 class CoinChange {
   public int coinChange(int[] coins, int amount) {
-    return 0;
+    int[] cache = new int[amount + 1];
+    Arrays.fill(cache, -1);
+    cache[0] = 0;
+    return compute(cache, coins, amount);
+  }
+  
+  protected int compute(int[] cache, int[] coins, int amount) {
+    if (amount < 0) {
+      return -1;
+    }
+    
+    // cached (dp)
+    if (cache[amount] != -1) {
+      return cache[amount];
+    }
+
+    int min = Integer.MAX_VALUE;
+    for (int coin : coins) {
+      int candidate = compute(cache, coins, amount - coin);
+      if (candidate != -1) {
+        min = Math.min(min, candidate);
+      }
+    }
+    
+    // not found
+    if (min == Integer.MAX_VALUE) {
+      return -1;
+    }
+    
+    cache[amount] = 1 + min;
+    
+    return cache[amount];
   }
 
   public static void main(String[] args) {
@@ -57,6 +99,11 @@ class CoinChange {
         new int[] { 1, 2, 5 },
         11,
         3,
+      },
+      {
+        new int[] { 2, 5 },
+        11,
+        4,
       },
       {
         new int[] { 2 },

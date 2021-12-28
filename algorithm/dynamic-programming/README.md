@@ -2,15 +2,15 @@
 
 ## Concept
 
-- Memoization : do not compute twice. save & use it
-- Referential transparent function : when input is same, return is same
-- Dynamic Programming : speed up with memoization; only applicable to referential transparent function
-- Time Complexity : # of subproblem * # of repetation to solve it
+- Memoization : Do not compute twice. Cache it.
+- Referential transparent function : When input is same, return is same.
+- Dynamic Programming : Speed up with memoization; Only possible in referential transparent function.
+- Time Complexity : # of subproblem * # of repetation to solve it.
 
 ## Strategy
 
-1. Solve with exhausive Search
-2. use memoization to resolve duplication
+1. Solve with brute force using Explicit Formula (점화식).
+2. Use memoization to resolve duplication.
 
 ## Recursive Pattern
 
@@ -20,17 +20,19 @@ int cache[2500][2500];
 
 int someObscureFunction(int a, int b) {
   // base case
-  if( ... ) return ...;
+  if (...) return ...;
 
   // if it's been already computed, return that value
   // int& ret : a trick
-  int& ret = cache[a][b];
-  if( ret != -1 ) return ret;
+  int ret = cache[a][b];
+  if (ret != -1) return ret;
 
   // compute the answer
   ...
+  cache[a][b] = ...
+  ...
 
-  return ret;
+  return cache[a][b];
 }
 
 int main() {

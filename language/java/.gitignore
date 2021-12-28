@@ -15,3 +15,6 @@ bin/
 # indellij
 .idea
 out
+
+# jqwik
+.jqwik-database

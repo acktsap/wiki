@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.Objects;
 
 /*
  * Descryption
@@ -38,9 +38,9 @@ class Template {
       char[][] grid = (char[][]) parameter[0];
       int expected = (int) parameter[1];
 
-      if (!Arrays.equals(expected, actual)) {
-        throw new IllegalStateException("Expected: " + Arrays.toString(expected) +
-            ", but was: " + Arrays.toString(actual));
+      if (!Objects.equals(expected, actual)) {
+        throw new IllegalStateException("Expected: " + Objects.toString(expected) +
+            ", but was: " + Objects.toString(actual));
       }
     }
   }
