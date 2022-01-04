@@ -6,13 +6,21 @@ import java.util.Objects;
  * https://leetcode.com/problems/xxx
  *
  *
+ *
  * Approach & Proof 
  *
+ * 1. xxx approach
  *
- * Complexity
+ * Let a = 1
+ * ...
+ * 
+ * proof
  *
- *  - Time  :
- *  - Space :
+ * completixy
+ *
+ * - Time  :
+ * - Space :
+ *
  *
  *
  * Review
@@ -38,9 +46,11 @@ class Template {
       char[][] grid = (char[][]) parameter[0];
       int expected = (int) parameter[1];
 
-      if (!Objects.equals(expected, actual)) {
-        throw new IllegalStateException("Expected: " + Objects.toString(expected) +
-            ", but was: " + Objects.toString(actual));
+      {
+        if (!Objects.equals(expected, actual)) {
+          throw new IllegalStateException("Expected: " + Objects.toString(expected) +
+              ", but was: " + Objects.toString(actual));
+        }
       }
     }
   }

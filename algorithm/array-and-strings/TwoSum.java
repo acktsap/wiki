@@ -72,16 +72,17 @@ class TwoSum {
     Object[][] parameters = new Object[][] {
       {
         new int[] { 2, 7, 11, 15 },
-        9,
-        new int[] { 0, 1 }
+            9,
+            new int[] { 0, 1 }
       },
-      {
-        new int[] { 4, 10, 5, 17, 2, 23 },
-        12,
-        new int[] { 1, 4 }
-      },
+        {
+          new int[] { 4, 10, 5, 17, 2, 23 },
+          12,
+          new int[] { 1, 4 }
+        },
     };
-    TwoSum solution = new TwoSum();
+
+    var solution = new TwoSum();
     for (Object[] parameter : parameters) {
       int[] nums = (int[]) parameter[0];
       int target = (int) parameter[1];
