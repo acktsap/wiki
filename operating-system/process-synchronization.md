@@ -1,6 +1,6 @@
-# Process Management - 2
+# Process Synchronization
 
-- [Process Synchronization](#process-synchronization)
+- [Synchronization](#synchronization)
   - [Race Contition](#race-contition)
   - [Critical Section](#critical-section)
   - [Critical Section Example (++operator)](#critical-section-example-operator)
@@ -32,7 +32,7 @@
 - [Practice](#practice)
 - [Reference](#reference)
 
-## Process Synchronization
+## Synchronization
 
 - 여러 개의 process나 thread가 critical section 을 동시에 수행하지 못하게 하는 기법
 
@@ -233,7 +233,7 @@
   - x.signal() : x를 요청한 process중 하나를 깨움. 어떠한 process도 기다리고 있지 않다면 아무 일도 일어나지 않음.
   - x.wait() : x를 요청한 process를 block.
 
-> ![java-monitor](./img/process-management-java-monitor.gif)
+> ![java-monitor](./img/process-synchronization-java-monitor.gif)
 >
 > - java synchronized 쓰면 내부적으로 monitor의 개념으로 동작.
 >   - entry set : `synchronized` 사용해서 기다리는 thread들.
@@ -317,7 +317,7 @@
 
 ### Dining-Philosophers Problem
 
-![dining-philosophers](./img/process-management-dining-philosophers.png)
+![dining-philosophers](./img/process-synchronization-dining-philosophers.png)
 
 - 원판의 철학자가 음식을 먹기 위해 양쪽의 젓가락을 들어야 하는 경우.
 - 각각의 철학자가 왼쪽, 오른쪽 젓가락을 순차로 기다리는 경우 (5개 동시에 왼쪽 젓가락 집으면 deadlock이 발생).
@@ -339,7 +339,7 @@
 
 ## Deadlock
 
-![deadlock](./img/process-management-deadlock.png)
+![deadlock](./img/process-synchronization-deadlock.png)
 
 - 두개의 프로세스 이상이 서로 상대 프로세스가 끝나길 기다리고 있어서 아무것도 완료되지 못하는 상황.
 
@@ -387,7 +387,7 @@ todo : 그림 정리, https://github.com/jhyuk316/study/blob/main/Backend%20Road
 
 #### Safe State vs Unsafe State
 
-![safe-state](./img/process-management-safe-state.png)
+![safe-state](./img/process-synchronization-safe-state.png)
 
 - Safe State
   - If there exists a safe sequence of processes { P0, P1, ..., PN } such that all of the resource requests for Pi can be granted using the resources currently allocated to Pi and all processes Pj where j < i (j가 끝내고 resource 반환하면 i가 끝낼 수 있는 상태).
@@ -397,9 +397,9 @@ todo : 그림 정리, https://github.com/jhyuk316/study/blob/main/Backend%20Road
 
 #### On Single Instance Per Resource
 
-![deadlock-avoidance-single-request-edge](./img/process-management-deadlock-avoidance-single-resource-request-edge.png)
+![deadlock-avoidance-single-request-edge](./img/process-synchronization-deadlock-avoidance-single-resource-request-edge.png)
 
-![deadlock-avoidance-single-resource-unsafe](./img/process-management-deadlock-avoidance-single-resource-unsafe.png)
+![deadlock-avoidance-single-resource-unsafe](./img/process-synchronization-deadlock-avoidance-single-resource-unsafe.png)
 
 `P2 -> R2 request edge` to `P2 -> R2 assignment edge`
 
@@ -448,7 +448,7 @@ todo : 그림 정리, https://github.com/jhyuk316/study/blob/main/Backend%20Road
 
 #### On Single Instance Per Resource
 
-![deadlock-detection-single-resource](./img/process-management-deadlock-detection-single-resource.jpg)
+![deadlock-detection-single-resource](./img/process-synchronization-deadlock-detection-single-resource.jpg)
 
 - 각 resource가 하나밖에 없으면 resource allocation graph에서 resource를 빼고 process끼리의 graph에서 cycle이 있는지 확인하면 됨.
 
@@ -490,7 +490,7 @@ todo : 그림 정리, https://github.com/jhyuk316/study/blob/main/Backend%20Road
 
 ## LiveLock
 
-![livelock](./img/process-management-livelock.jpg)
+![livelock](./img/process-synchronization-livelock.jpg)
 
 - Deadlock과 비슷하지만 서로가 서로의 resource를 가져오기 위해 blocked된 상태가 아니라 resource를 가져오기 위해 cpu를 계속 쓰고 있는 상태.
 - Resource starvation의 특별한 case임.

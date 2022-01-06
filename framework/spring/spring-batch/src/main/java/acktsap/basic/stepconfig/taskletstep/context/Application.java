@@ -1,6 +1,7 @@
 package acktsap.basic.stepconfig.taskletstep.context;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;

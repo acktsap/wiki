@@ -1,4 +1,4 @@
-# Process Management - 1
+# Process Management
 
 - [Program](#program)
 - [Subroutine](#subroutine)

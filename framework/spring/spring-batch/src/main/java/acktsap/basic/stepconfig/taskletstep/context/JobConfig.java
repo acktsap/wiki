@@ -1,5 +1,6 @@
 package acktsap.basic.stepconfig.taskletstep.context;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.StepContribution;
@@ -15,8 +16,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import lombok.RequiredArgsConstructor;
-
 @Configuration
 @EnableBatchProcessing
 @RequiredArgsConstructor
@@ -26,7 +25,6 @@ public class JobConfig {
 
     @Bean
     public Job continuableByFieldJob() {
-        Object o = null;
         return this.jobBuilderFactory.get("continuableByFieldJob")
             .start(this.stepBuilderFactory.get("continuableByFieldStep")
                 .tasklet(new Tasklet() {
@@ -45,7 +43,6 @@ public class JobConfig {
                         return RepeatStatus.CONTINUABLE;
                     }
                 })
-                .listener(o)
                 .build())
             .build();
     }
@@ -58,7 +55,7 @@ public class JobConfig {
 
                     int count = 3;
                     if (chunkContext.hasAttribute("count")) {
-                        count = (int)chunkContext.getAttribute("count");
+                        count = (int) chunkContext.getAttribute("count");
                     }
 
                     if (count == 0) {
@@ -123,6 +120,43 @@ public class JobConfig {
                         executionContext.putInt("count", count);
 
                         return RepeatStatus.CONTINUABLE;
+                    }
+                })
+                .build())
+            .build();
+    }
+
+    @Bean
+    public Job executionContextJob2() {
+        return this.jobBuilderFactory.get("executionContextJob2")
+            .start(this.stepBuilderFactory.get("executionContextStep2")
+                .tasklet(new Tasklet() {
+                    private int failCount = 3;
+
+                    @Override
+                    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                        ExecutionContext executionContext = chunkContext.getStepContext().getStepExecution().getExecutionContext();
+
+                        String first = "true";
+                        if (executionContext.containsKey("first")) {
+                            first = executionContext.getString("first");
+                        } else {
+                            executionContext.put("first", "false");
+                            System.out.printf("[%s - %s] no count%n", chunkContext.getStepContext().getJobName(), getCallBackMethod());
+                        }
+
+                        System.out.printf("[%s - %s] process (first: %s)%n", chunkContext.getStepContext().getJobName(), getCallBackMethod(), first);
+
+                        /*
+                            localhost:8080/job?name=executionContextJob
+                            처음에만 실패하고 이후에 실행하면 성공
+                         */
+                        if (failCount > 0) {
+                            --failCount;
+                            throw new IllegalStateException("failCount is " + failCount);
+                        }
+
+                        return RepeatStatus.FINISHED;
                     }
                 })
                 .build())

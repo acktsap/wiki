@@ -9,14 +9,14 @@
   - [Logical Address Space vs Physical Address Space](#logical-address-space-vs-physical-address-space)
   - [Swapping](#swapping)
   - [Fragmentation](#fragmentation)
-  - [Segmentation](#segmentation)
-  - [Paging](#paging)
+- [Segmentation](#segmentation)
+- [Paging](#paging)
   - [Hybrid Paging/Segmentation](#hybrid-pagingsegmentation)
   - [TLB (Translation Look-Aside Buffer)](#tlb-translation-look-aside-buffer)
-- [Page Table Structure](#page-table-structure)
-  - [Hierarchical Paging](#hierarchical-paging)
-  - [Hashed Page Tables](#hashed-page-tables)
-  - [Inverted Page Tables](#inverted-page-tables)
+  - [Page Table Structure](#page-table-structure)
+    - [Hierarchical Paging](#hierarchical-paging)
+    - [Hashed Page Tables](#hashed-page-tables)
+    - [Inverted Page Tables](#inverted-page-tables)
 - [Virtual Memory](#virtual-memory)
   - [Demand Paging](#demand-paging)
   - [Page Fault](#page-fault)
@@ -24,11 +24,11 @@
 - [Page Replacement](#page-replacement)
   - [Locality of Reference](#locality-of-reference)
   - [Page Replacement Algorithm](#page-replacement-algorithm)
-  - [First-In First-Out (FIFO) Page Replacement Algorithm](#first-in-first-out-fifo-page-replacement-algorithm)
-  - [Optimal Page Replacement Algorithm](#optimal-page-replacement-algorithm)
-  - [Most Frequently Used (MFU) Page Replacement Algorithm](#most-frequently-used-mfu-page-replacement-algorithm)
-  - [Least Frequently Used (LFU) Page Replacement Algorithm](#least-frequently-used-lfu-page-replacement-algorithm)
-  - [Least Recently Used (LRU) Page Replacement Algorithm](#least-recently-used-lru-page-replacement-algorithm)
+    - [First-In First-Out (FIFO) Page Replacement Algorithm](#first-in-first-out-fifo-page-replacement-algorithm)
+    - [Optimal Page Replacement Algorithm](#optimal-page-replacement-algorithm)
+    - [Most Frequently Used (MFU) Page Replacement Algorithm](#most-frequently-used-mfu-page-replacement-algorithm)
+    - [Least Frequently Used (LFU) Page Replacement Algorithm](#least-frequently-used-lfu-page-replacement-algorithm)
+    - [Least Recently Used (LRU) Page Replacement Algorithm](#least-recently-used-lru-page-replacement-algorithm)
   - [Page-Buffering Algorithms](#page-buffering-algorithms)
 - [Allocation of Frames](#allocation-of-frames)
   - [Thrashing](#thrashing)
@@ -97,7 +97,7 @@ https://github.com/jhyuk316/study/blob/main/Backend%20Roadmap/02%20General%20Kno
     - JVM의 Old Generation이 Object에 대해서 이 작업을 함.
 - Internal Fragmentation : Process에 memory를 할당할 때 특정 단위로 할당해서 실제 사용하지 않는 부분이 생겨서 발생.
 
-### Segmentation
+## Segmentation
 
 ![segmentation](./img/memory-management-segmentation.png)
 
@@ -107,7 +107,7 @@ https://github.com/jhyuk316/study/blob/main/Backend%20Roadmap/02%20General%20Kno
 - 단점
   - 외부 단편화.
 
-### Paging
+## Paging
 
 ![paging-hardware](./img/memory-management-paging-hardware.png)
 
@@ -139,15 +139,15 @@ todo: https://velog.io/@monsterkos/TIL2020.09.12 에서 사진
 
 todo: 사진 추가 정리
 
-## Page Table Structure
+### Page Table Structure
 
 todo
 
-### Hierarchical Paging
+#### Hierarchical Paging
 
-### Hashed Page Tables
+#### Hashed Page Tables
 
-### Inverted Page Tables
+#### Inverted Page Tables
 
 ## Virtual Memory
 
@@ -198,7 +198,7 @@ todo
 - Page Replacement Algorithm의 goal은 page fault를 최소한으로 줄이는 것. Page fault가 일어나면 I/O가 일어나서 비용이 많이 듬.
 - 보통 한 Process가 이용가능한 frame의 수가 많아지면 (process에 더 많은 memory를 할당) page fault가 적어짐.
 
-### First-In First-Out (FIFO) Page Replacement Algorithm
+#### First-In First-Out (FIFO) Page Replacement Algorithm
 
 - 가장 먼저 메모리에 들어온 (oldest load time) 페이지를 교체.
 - 문제점
@@ -206,24 +206,24 @@ todo
 
 > Belady's anomaly 는 자주 사용되는 page를 swap out시켜서 발생하는 듯.
 
-### Optimal Page Replacement Algorithm
+#### Optimal Page Replacement Algorithm
 
 - 앞으로 가장 오랫동안 사용되지 않을 페이지를 찾아 교체.
 - 문제점
   - 미래에 언제 어떻게 사용될지 몰라서 이상적으로는 불가능. 실전에서는 적당히 추정해서 victim을 결정.
   - 그래서 실전에서는 다른 algorithm과 비교하는 benchmark 대상으로 사용.
 
-### Most Frequently Used (MFU) Page Replacement Algorithm
+#### Most Frequently Used (MFU) Page Replacement Algorithm
 
 - 참조 횟수가 가장 많은 page를 이미 교체. 이미 많이 쓰였으니 미래에 잘 안쓰일거라 가정.
 
-### Least Frequently Used (LFU) Page Replacement Algorithm
+#### Least Frequently Used (LFU) Page Replacement Algorithm
 
 - 참조 횟수가 가장 적은 page를 교체. 자주 안쓰이니까 미래에도 잘 안쓰일거라 가정.
 - 문제점
   - 초기에 사용되고 이후에 사용이 안되는 녀석을 유지. -> aging으로 해결.
 
-### Least Recently Used (LRU) Page Replacement Algorithm
+#### Least Recently Used (LRU) Page Replacement Algorithm
 
 - 가장 오랫동안 사용되지 않은 (oldset use time) page를 선택하여 교체.
 - todo: https://github.com/jhyuk316/study/blob/main/Backend%20Roadmap/02%20General%20Knowledge/02.7%20Virtual%20Memory%20Main%20Management.md#45-lru-approximation-page-replacement 보고 구현체 보완

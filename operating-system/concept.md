@@ -1,20 +1,5 @@
 # Operating System
 
-- [Storage Management](#storage-management)
-  - [Cache Locality](#cache-locality)
-- [Etc](#etc)
-  - [Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming](#blocking--non-blocking-io-synchronous--asynchronous-programming)
-- [References](#references)
-
-## Storage Management
-
-### Cache Locality
-
-- Cache의 적중률을 극대화 시키기 위해 사용되는 원리
-  - Temporal Locality (시간 지역성) : 최근에 참조된 주소는 조만간 다시 참조되는 특성
-  - Spatical Locality (공간 지역성) : 참조된 주소와 인접한 주소의 내용이 다시 참조되는 특성
-    - eg. array
-
 ## Etc
 
 ### Blocking / Non-Blocking I/O, Synchronous / Asynchronous Programming
@@ -29,10 +14,6 @@
   - return시간과 요청 결과를 얻는 시간이 같으면 synchronous, 다르면 asynchronous
 - Non-Blocking I/O vs Asynchronous
   - 관점이 다를 뿐임. Asynchronous를 위한 재료로써 Non-blocking I/O가 활용될 수 있으나 필수조건은 아님. I/O를 다른 Thread에 위임하고 그 thread는 blocking하고 있어도 Asynchronous 한거임
-
-[위로](#Operating-System)
-
----
 
 ## References
 
