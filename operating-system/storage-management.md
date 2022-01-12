@@ -19,6 +19,28 @@
   - [Swap-Space Management](#swap-space-management)
   - [RAID Structure](#raid-structure)
 - [I/O Systems](#io-systems)
+  - [Device Driver](#device-driver)
+  - [I/O Hardware Structure](#io-hardware-structure)
+  - [Memory Mapped I/O](#memory-mapped-io)
+  - [Polling](#polling)
+  - [Interrupt](#interrupt)
+    - [Software interrupt (Trap)](#software-interrupt-trap)
+  - [Direct Memory Access (DMA)](#direct-memory-access-dma)
+  - [Application I/O Interface](#application-io-interface)
+    - [Block Devices](#block-devices)
+    - [Character Devices](#character-devices)
+    - [Network Devices](#network-devices)
+    - [Clocks and Timers](#clocks-and-timers)
+    - [Blocking and Non-blocking I/O](#blocking-and-non-blocking-io)
+    - [Vectored I/O](#vectored-io)
+  - [Kernel I/O Subsystem](#kernel-io-subsystem)
+    - [I/O Scheduling](#io-scheduling)
+    - [Buffering](#buffering)
+    - [Caching](#caching)
+    - [Spooling and Device Reservation](#spooling-and-device-reservation)
+    - [Error Handling](#error-handling)
+    - [Kernel Data Structures](#kernel-data-structures)
+  - [Transforming I/O Request to Hardware](#transforming-io-request-to-hardware)
 - [Reference](#reference)
 
 ## Mass-Storage Structure
@@ -116,6 +138,111 @@
 - reliability나 성능 향상을 위해 데이터를 여러 disk 에 중복해서 저장하는 방법.
 
 ## I/O Systems
+
+### Device Driver
+
+- Kernel이 복잡하고 다양한 I/O device를 다 담당하기에는 무리가 있음.
+- 이를 추상화 해서 I/O subsystem에 접근할 수 있는 interface를 device driver가 제공.
+
+### I/O Hardware Structure
+
+![pc-bus](./img/storage-management-pc-bus.png)
+
+- port : computer와 연결되어 있는 port가 있고 각 port에 4 bytes의 register가 있음.
+  - data-in register : device로부터 쓰여진 데이터로 host에게 읽혀짐.
+  - data-out register : host로부터 쓰여진 데이터로 device에게 읽혀짐.
+  - status register : device의 상태를 나타내기 위한 register로 host에게 읽혀짐.
+  - control register : host로부터 입력된 device의 설정을 바꾸기 위한 command로 device에게 읽혀짐.
+- bus : 여러개의 device를 연결하기 위한 wire들과 wire에서 message를 보내기 위한 protocal들의 집합.
+
+### Memory Mapped I/O
+
+- device-controll register들이 process의 address space에 mapping 되어서 I/O는 해당 memory를 통해 이루어짐.
+- graphic처럼 대용량의 데이터를 한꺼번에 처리해야 할 때 적합함.
+
+### Polling
+
+- host가 controller가 I/O를 처리할 때 까지 계속 port의 busy bit를 확인하는 방법.
+- 장점
+  - device와 controller가 빠르면 효율적임.
+- 단점
+  - host가 오래 기다려야 하면 비효율적임.
+
+### Interrupt
+
+![interrupt](./img/storage-management-interrupt.png)
+
+- cpu에는 interrupt-request line이라는 cpu가 매 instruction마다 체크하는 부분이 있음.
+- device에 i/o 요청 보내고 cpu는 자기 일 하고 있다가 interrupt-request line이 set이면 interrupt-handler routine으로 dispatch해서 interrupt를 처리함.
+
+#### Software interrupt (Trap)
+
+- System call을 구현하기 위한 특별한 instruction.
+- trap instruction을 받으면 user mode -> kernel mode로 전환 후 instruction에 명시된 kernel service로 가서 요청한 system call을 수행.
+
+### Direct Memory Access (DMA)
+
+![dma](./img/storage-management-dma.png)
+
+todo
+
+### Application I/O Interface
+
+![io-structure](./img/storage-management-io-structure.png)
+
+- I/O device를 handling하기 위한 추상회된 interface.
+- But os별로 interface가 달라서 device-hardware 제조사들은 각각 대응해야 함..
+
+> Like other complex software-engineering problems, the approach here involves abstraction, encapsulation, and software layering. <- 책에 있는 말인데 와닿는다.
+
+#### Block Devices
+
+- Disk I/O에 대한 interface.
+- operations : `read()`, `write()`, `seek()`
+- raw I/O
+  - filesystem structure를 사용하지 않고 바로 하는 방법.
+  - locking, buffering 같은거를 os단에서는 pass하고 application 단에서 함.
+- direct I/O
+  - filesystem access를 사용. But os단에서 하는 locking, buffering을 pass함.
+
+#### Character Devices
+
+- 한번에 한 byte만
+- operations : `get()`, `put()`
+
+#### Network Devices
+
+- network I/O를 추상화해서 full-duplex한 socket이라는 interface를 사용.
+- operations : `select()`
+
+#### Clocks and Timers
+
+- Not standardized across operating systems...
+- operations : `select()`
+
+#### Blocking and Non-blocking I/O
+
+#### Vectored I/O
+
+### Kernel I/O Subsystem
+
+#### I/O Scheduling
+
+#### Buffering
+
+#### Caching
+
+#### Spooling and Device Reservation
+
+#### Error Handling
+
+#### Kernel Data Structures
+
+### Transforming I/O Request to Hardware 
+
+![io-life-cycle](./img/storage-management-io-life-cycle.png)
+
+todo
 
 ## Reference
 
