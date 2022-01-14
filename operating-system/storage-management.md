@@ -32,8 +32,11 @@
     - [Character Devices](#character-devices)
     - [Network Devices](#network-devices)
     - [Clocks and Timers](#clocks-and-timers)
-    - [Blocking and Non-blocking I/O](#blocking-and-non-blocking-io)
+    - [Blocking and Non-Blocking I/O in interface](#blocking-and-non-blocking-io-in-interface)
     - [Vectored I/O](#vectored-io)
+  - [Blocking I/O vs Non-Blocking I/O](#blocking-io-vs-non-blocking-io)
+  - [Synchronous vs Asynchronous](#synchronous-vs-asynchronous)
+  - [Non-Blocking I/O vs Asynchronous](#non-blocking-io-vs-asynchronous)
   - [Kernel I/O Subsystem](#kernel-io-subsystem)
     - [I/O Scheduling](#io-scheduling)
     - [Buffering](#buffering)
@@ -239,9 +242,26 @@ todo
 - Not standardized across operating systems...
 - operations : `select()`
 
-#### Blocking and Non-blocking I/O
+#### Blocking and Non-Blocking I/O in interface
+
+- Blocking I/O : process가 I/O 요청을 하고 waiting queue로 들어감. cpu는 그동안 다른 process를 실행.
+- Non-Blocking I/O : process가  I/O 요청을 하고 바로 return하고 process가 데이터가 왔는지 주기적으로 확인.
 
 #### Vectored I/O
+
+- 여러개의 buffer를 받아서 I/O하는 경우도 있음.
+
+### Blocking I/O vs Non-Blocking I/O
+
+- Kernal에 I/O를 요청한 후 ready queue에 들어가서 기다리면 blocking, 안들어가고 바로 응답을 보내면 non-blocking
+
+### Synchronous vs Asynchronous
+
+- return시간과 요청 결과를 얻는 시간이 같으면 synchronous, 다르면 asynchronous
+
+### Non-Blocking I/O vs Asynchronous
+
+- 관점이 다를 뿐임. Asynchronous를 위한 재료로써 Non-blocking I/O가 활용될 수 있으나 필수조건은 아님. I/O를 다른 Thread에 위임하고 그 thread는 blocking하고 있어도 Asynchronous 한거임.
 
 ### Kernel I/O Subsystem
 
@@ -268,3 +288,4 @@ todo
 - Operating System Concepts (Operating System Concepts, Ninth Edition)
   - [Mass-Storage Structure](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/10_MassStorage.html)
   - [I/O Systems](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/13_IOSystems.html)
+- [blocking, non-blocking and async](http://asfirstalways.tistory.com/348)
