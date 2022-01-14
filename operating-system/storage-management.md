@@ -5,6 +5,7 @@
     - [Magnetic Disks (HHD)](#magnetic-disks-hhd)
     - [Solid-State Disks (SSD)](#solid-state-disks-ssd)
     - [Magenetic Tapes](#magenetic-tapes)
+  - [Disk Address](#disk-address)
   - [Disk Attachment](#disk-attachment)
     - [Host-Attashed Storage](#host-attashed-storage)
     - [Network-Attashed Storage (NAS)](#network-attashed-storage-nas)
@@ -50,18 +51,35 @@
 #### Magnetic Disks (HHD)
 
 ![magnetic-disk](./img/storage-management-magnetic-disk.png)
+
 - platter가 겹겹히 쌓인 구조.
 - 한 platter는 track이라는 여러개의 ring으로 구분.
 - 각 platter에 같은 위치에 존재하는 track들의 집합을 cylinder.
-- track은 sector라는 단위로 나누어짐.
+- track은 sector라는 단위로 나누어짐. 보통 512 bytes.
+- 조회
+  - Seek Time : arm이 cylinder로 이동하는 시간
+  - Rotation delay : Sector 찾는 시간
+  - Data transmission Time : Sector에서 데이터 읽어 오는 시간
 
 #### Solid-State Disks (SSD)
 
 - HDD보다 빠르지만 비쌈.
+- 장점
+  - Seek time 없음. Rotation delay 없음
+- 단점
+  - 내구성이 낮음.
 
 #### Magenetic Tapes
 
 - HDD 이전에 주로 사용. But 되게 느려서 요즘은 backup용으로만 사용.
+
+### Disk Address
+
+- Physical disk address
+  - cylinder number + Surface Number + Sector Number
+- Logical (relative)
+  - OS는 Block 번호들만 알고 있음. (모든 제조사의 것을 알 수 없으므로)
+  - (제조사에서 만든) Disk Driver가 이 블록 번호로 물리 주소를 가져옴.
 
 ### Disk Attachment
 
@@ -119,14 +137,15 @@
 
 #### LOOK Scheculing
 
-- 요청받은 데이터가 있는 가려는 방향에 먼저 있는지 확인 (LOOK)하고 SCAN하는 방식. 해당 방향에 기다리는 요청이 없으면 즉시 reverse로 순회하는 식으로 동작.
+- 요청받은 데이터가 있는 가려는 방향에 먼저 있는지 확인 (LOOK)하고 있는 데이터까지만 SCAN하는 방식.
 
 ### Disk Formatting
 
 - Physical formatting (Low-level formatting)
-  - disk를 sector 단위로 분할.
+  - disk의 sector를 다시 구분하는 과정.
+  - 예전에는 처음 디스크를 샀을 때 안되어 있었음.
 - Logical formatting
-  - file system을 만드는 과정.
+  - disk를 운영체제의 관점에서 바라볼 수 있게 file system을 올리는 과정.
 
 ### Swap-Space Management
 
@@ -135,7 +154,7 @@
 ### RAID Structure
 
 - Redundant Array of Inexpensive Disks.
-- reliability나 성능 향상을 위해 데이터를 여러 disk 에 중복해서 저장하는 방법.
+- Disk의 reliability나 performance를 위해 데이터를 여러 disk 에 중복해서 저장하는 방법.
 
 ## I/O Systems
 

@@ -6,10 +6,9 @@
     - [File Operations](#file-operations)
   - [Access Method](#access-method)
     - [Sequential Access](#sequential-access)
-    - [Direct Access](#direct-access)
+    - [Direct Access (Random Access)](#direct-access-random-access)
     - [Other Access Methods](#other-access-methods)
   - [Directory](#directory)
-  - [Directory Structure](#directory-structure)
   - [Mounting](#mounting)
   - [File Sharing](#file-sharing)
   - [File Protection](#file-protection)
@@ -27,6 +26,8 @@
   - [Free-Space Management](#free-space-management)
   - [Bit Vector](#bit-vector)
     - [Linked List](#linked-list)
+    - [Grouping](#grouping)
+    - [Counting](#counting)
   - [Efficiency](#efficiency)
   - [Performance](#performance)
   - [Recovery](#recovery)
@@ -70,7 +71,7 @@
   - rewind
   - skip n records
 
-#### Direct Access
+#### Direct Access (Random Access)
 
 - record로 jump해서 읽을 수 있는 operation을 제공.
   - read n
@@ -82,10 +83,6 @@
 - Direct access 기반으로 index 같은거를 할 수도 있음.
 
 ### Directory
-
-todo
-
-### Directory Structure
 
 ### Mounting
 
@@ -122,7 +119,7 @@ todo : 해야하나?
   - 이어서 있어서 읽기가 쉬움.
 - 단점
   - 외부 단편화가 발생 가능.
-  - 파일 크기를 예측 불가능하기 때문에 공간이 남거나 모자라는 경우가 많아짐.
+  - 파일의 나중 크기를 예측 불가능하기 때문에 공간이 남거나 모자라는 경우가 생김.
 
 #### Linked Allocation
 
@@ -139,6 +136,8 @@ todo : 해야하나?
 
 ![fat](./img/file-system-fat.png)
 
+- 각 partition의 0번 block에 link 정보가 있음.
+
 #### Indexed Allocation
   
 ![indexed-allocation](./img/file-system-indexed-allocation.png)
@@ -149,6 +148,7 @@ todo : 해야하나?
   - random access 가능.
 - 단점
   - index를 관리하기 위한 공간 낭비가 있음.
+  - index를 저장하는 block 크기보다 큰 데이터를 저장할 수 없음.
 
 ### Free-Space Management
 
@@ -168,13 +168,29 @@ todo : 해야하나?
 - 장점
   - 빈 block 할당할때 Linked List에서 그냥 빼면 됨.
 - 단점
-  - 물리적으로 붙어 있는 빈 block을 찾기 힘듬.
+  - continous allogation을 할 때 이어서 비어있음 빈 block을 찾기 힘듬.
+
+#### Grouping
+
+- A modification of the free-list approach stores the addresses of n free blocks in the first free block. The first n−1 of these blocks are actually free. The last block contains the addresses of another n free blocks, and so on
+
+#### Counting
+
+- 빈 블럭들이 연속되어 있다면, 첫 번째 블럭 주소와 연속된 블럭 수를 table로 관리
+- 장점
+  - continuous allocation에 유리
 
 ### Efficiency
 
+해야하나?
+
 ### Performance
 
+해야하나?
+
 ### Recovery
+
+- 파일 시스템의 오류로 인해 오류가 난 block을 해결하는 방법.
 
 ## Reference
 

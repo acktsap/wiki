@@ -1,10 +1,11 @@
 import java.util.List;
 
 class TreeNode {
-  static TreeNode of(Integer[] tree) {
-    if (0 == tree.length) {
+  static TreeNode of(Integer... values) {
+    if (values.length == 0) {
       return null;
     }
+
     return null;
   }
 

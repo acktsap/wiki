@@ -7,11 +7,6 @@
 - Dynamic Programming : Speed up with memoization; Only possible in referential transparent function.
 - Time Complexity : # of subproblem * # of repetation to solve it.
 
-## Strategy
-
-1. Solve with brute force using Explicit Formula (점화식).
-2. Use cache to resolve duplication.
-
 ## When to use
 
 When problem has characteristics
@@ -24,6 +19,11 @@ Rule of Thumb
 - When asking for optimum value (maximum or minimum) of something or # of ways to do something.
 - Future decision depends on earlier decision.
 - When brute force is too long (2^n).
+
+## Strategy
+
+1. Solve with brute force using Explicit Formula (점화식).
+2. Use cache to resolve duplication.
 
 ## Bottom-up (Tabulation)
 
@@ -65,7 +65,7 @@ void f(int n) {
 }
 ```
 
-## Multidimensional Example
+## Multidimensional
 
 Recursion.
 
@@ -96,3 +96,7 @@ int main() {
 }
 ```
 
+## Reference
+
+- leetcode
+- [dynamic-programming-vs-memoization](https://cs.stackexchange.com/questions/99513/dynamic-programming-vs-memoization/99517)
