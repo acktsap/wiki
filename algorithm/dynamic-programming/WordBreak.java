@@ -54,7 +54,7 @@ import java.util.Objects;
  *
  * completixy
  *
- * - Time  : O(2^n)???? 
+ * - Time  : O(2^n) - (when basic operation is checking all words, then split or not to split)
  * - Space : O(n) - recursion depth
  *
  * 2. dp
@@ -65,7 +65,7 @@ import java.util.Objects;
  *
  * dp[n] = (dp[n - word1.length] && match(word1)) || (dp[n - word.length] && match(word2)) || ...
  *
- * - Time  : O(n * n * wordDict.length) - match + dp loop + dict loop
+ * - Time  : O(n * n * wordDict.length) - (match + dp loop + dict loop)
  * - Space : O(n) - array length
  *
  *
