@@ -9,10 +9,8 @@ public final class Block {
             System.out.printf("== %s ==%n", description);
             dangerousRunnable.run();
             System.out.println();
-        } catch (Exception e) {
-            RuntimeException throughPass = new RuntimeException(e.getMessage());
-            throughPass.setStackTrace(e.getStackTrace());
-            throw throughPass;
+        } catch (Throwable e) {
+            e.printStackTrace(System.out);
         }
     }
 
@@ -22,10 +20,8 @@ public final class Block {
             System.out.printf("== %s ==%n", description);
             System.out.printf("-- start time: %s%n", start);
             dangerousRunnable.run();
-        } catch (Exception e) {
-            RuntimeException throughPass = new RuntimeException(e.getMessage());
-            throughPass.setStackTrace(e.getStackTrace());
-            throw throughPass;
+        } catch (Throwable e) {
+            e.printStackTrace(System.out);
         } finally {
             LocalTime end = LocalTime.now();
             System.out.printf("-- end time: %s (elapsed: %sms)%n", end, Duration.between(start, end).toMillis());
@@ -34,7 +30,7 @@ public final class Block {
     }
 
     public interface DangerousRunnable {
-        void run() throws Exception;
+        void run() throws Throwable;
     }
 
     private Block() {

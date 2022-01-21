@@ -47,7 +47,7 @@ import java.util.Objects;
  *
  * Approach & Proof 
  *
- * 1. dp vabulation
+ * 1. dp tabulation
  *
  * dp[n] : n에 대한 경우의 수
  * dp[n] = dp[n - m_1] + dp[n - m_2] + ...    where m_x is in nums

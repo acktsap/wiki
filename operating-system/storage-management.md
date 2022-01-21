@@ -32,7 +32,8 @@
     - [Character Devices](#character-devices)
     - [Network Devices](#network-devices)
     - [Clocks and Timers](#clocks-and-timers)
-    - [Blocking and Non-Blocking I/O in interface](#blocking-and-non-blocking-io-in-interface)
+    - [Blocking and Non-Blocking in I/O interface](#blocking-and-non-blocking-in-io-interface)
+    - [Synchronous vs Asynchronous in I/O interface](#synchronous-vs-asynchronous-in-io-interface)
     - [Vectored I/O](#vectored-io)
   - [Blocking I/O vs Non-Blocking I/O](#blocking-io-vs-non-blocking-io)
   - [Synchronous vs Asynchronous](#synchronous-vs-asynchronous)
@@ -196,17 +197,21 @@
 
 - cpu에는 interrupt-request line이라는 cpu가 매 instruction마다 체크하는 부분이 있음.
 - device에 i/o 요청 보내고 cpu는 자기 일 하고 있다가 interrupt-request line이 set이면 interrupt-handler routine으로 dispatch해서 interrupt를 처리함.
+- 장점
+  - process가 다른 일을 할 수 있음.
+- 단점
+  - polling에 비해서 interrupt handling하는 불필요한 루틴이 추가됨.
 
 #### Software interrupt (Trap)
 
-- System call을 구현하기 위한 특별한 instruction.
+- system call을 구현하기 위한 특별한 instruction.
 - trap instruction을 받으면 user mode -> kernel mode로 전환 후 instruction에 명시된 kernel service로 가서 요청한 system call을 수행.
 
 ### Direct Memory Access (DMA)
 
 ![dma](./img/storage-management-dma.png)
 
-todo
+- processor가 직접 I/O를 처리하지 않고 disk <-> memory I/O 를 DMA 하는 모듈에게 위임.
 
 ### Application I/O Interface
 
@@ -221,11 +226,6 @@ todo
 
 - Disk I/O에 대한 interface.
 - operations : `read()`, `write()`, `seek()`
-- raw I/O
-  - filesystem structure를 사용하지 않고 바로 하는 방법.
-  - locking, buffering 같은거를 os단에서는 pass하고 application 단에서 함.
-- direct I/O
-  - filesystem access를 사용. But os단에서 하는 locking, buffering을 pass함.
 
 #### Character Devices
 
@@ -240,16 +240,25 @@ todo
 #### Clocks and Timers
 
 - Not standardized across operating systems...
-- operations : `select()`
+- operations
+  - Give the current time.
+  - Give the elapsed time.
+  - Set a timer to trigger operation X at time T.
+    > timer에서 설정한 시간이 되면 interrupt를 발생. cpu에서 해당 interrupt에 대한 handler를 호출.
 
-#### Blocking and Non-Blocking I/O in interface
+#### Blocking and Non-Blocking in I/O interface
 
 - Blocking I/O : process가 I/O 요청을 하고 waiting queue로 들어감. cpu는 그동안 다른 process를 실행.
 - Non-Blocking I/O : process가  I/O 요청을 하고 바로 return하고 process가 데이터가 왔는지 주기적으로 확인.
 
+#### Synchronous vs Asynchronous in I/O interface
+
+![sync-async](./img/storage-management-sync-async.png)
+
 #### Vectored I/O
 
-- 여러개의 buffer를 받아서 I/O하는 경우도 있음.
+- 여러개의 buffer를 받아서 한번에 I/O하는 경우도 있음.
+- 선형 데이터를 한 스트림으로 입력 출력하는 방법.
 
 ### Blocking I/O vs Non-Blocking I/O
 
@@ -289,3 +298,4 @@ todo
   - [Mass-Storage Structure](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/10_MassStorage.html)
   - [I/O Systems](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/13_IOSystems.html)
 - [blocking, non-blocking and async](http://asfirstalways.tistory.com/348)
+- [동기 vs 비동기 (feat. blocking vs non-blocking)](https://velog.io/@wonhee010/%EB%8F%99%EA%B8%B0vs%EB%B9%84%EB%8F%99%EA%B8%B0-feat.-blocking-vs-non-blocking)
