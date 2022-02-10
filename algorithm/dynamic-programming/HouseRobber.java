@@ -60,7 +60,7 @@ import java.util.Objects;
  *
  */
 class HouseRobber {
-  public int rob(int[] nums) {
+  public int robPlainDp(int[] nums) {
     int[] dp = new int[nums.length + 1];
     dp[0] = 0;
     dp[1] = nums[0];
@@ -70,6 +70,10 @@ class HouseRobber {
     }
     
     return dp[nums.length];
+  }
+
+  public int robPlainOptimal(int[] nums) {
+    // TODO: space: O(3)
   }
 
   public static void main(String[] args) {
@@ -98,7 +102,7 @@ class HouseRobber {
       int expected = (int) parameter[1];
 
       {
-        int actual = solution.rob(nums);
+        int actual = solution.robPlainDp(nums);
         if (!Objects.equals(expected, actual)) {
           throw new IllegalStateException("Expected: " + Objects.toString(expected) +
               ", but was: " + Objects.toString(actual));

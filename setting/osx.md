@@ -28,7 +28,7 @@
   - 클릭 : 가볍게
 - Engery Saver
   - Battery -> Uncheck Slightly dim the display while on battery power
-  - Battery Health -> Enable battery health management 
+  - Battery Health -> Enable battery health management
 - Display
   - Scaled -> Larger Text랑 Default 사이
 
@@ -92,6 +92,38 @@ Utils
   - see also
     - https://ssossoblog.tistory.com/54
 - [IINA](https://iina.io/) : Open source music player written in native Swift language
+- [Hammerspoon](http://www.hammerspoon.org/) : Macro tool for mac.
+  - Behavior
+    - [X] Launch Hammerspoon at login
+    - [X] Check for updates
+    - [ ] Show dock icon
+    - [X] Show menu icon
+    - [ ] Keep Console window on top
+    - [ ] Send crash data (require restart)
+  - vim hangul setting
+    - Put following code into `~/.hammerspoon/init.lua`
+      ```lua
+      -- key mapping for vim
+      -- Convert input soruce as English and sends 'escape' if inputSource is not English.
+      -- Sends 'escape' if inputSource is English.
+      -- key bindding reference --> https://www.hammerspoon.org/docs/hs.hotkey.html
+      local inputEnglish = "com.apple.keylayout.ABC"
+      local esc_bind
+
+      function convert_to_eng_with_esc()
+        local inputSource = hs.keycodes.currentSourceID()
+        if not (inputSource == inputEnglish) then
+          hs.eventtap.keyStroke({}, 'right')
+          hs.keycodes.currentSourceID(inputEnglish)
+        end
+        esc_bind:disable()
+        hs.eventtap.keyStroke({}, 'escape')
+        esc_bind:enable()
+      end
+
+      esc_bind = hs.hotkey.new({}, 'escape', convert_to_eng_with_esc):enable()
+      ```
+    - [see also](https://humblego.tistory.com/10)
 
 Docs
 
@@ -125,5 +157,6 @@ https://www.clien.net/service/board/cm_mac/13752933
 - QuickTimePlayer 사용해서 Split Clip (command + Y)을 활용해서 중간 중간 자른 후 저장
 - Mp4 변환의경우 imovie 사용
 
+### Setting default java version
 
 [osx system java version](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x)
