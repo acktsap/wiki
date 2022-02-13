@@ -62,8 +62,8 @@ class DecodeWays {
     
     dp[i] : # possible ways to decode until i
     
-    dp[i] = if (dp[i - 2] != 0 && s[i-2:i-1] matches alpha) dp[i - 2]) else 0 +
-            if (dp[i - 1] != 0 && s[i-1:i-1] matches alpha) dp[i - 1]) else 0
+    dp[i] = if (s[i-2:i] matches alpha) dp[i] += dp[i - 2]
+            if (s[i-1:i] matches alpha) dp[i] += dp[i - 1]
 
     - time: O(s.length)
     - space: O(s.length)
@@ -92,8 +92,8 @@ class DecodeWays {
     
     dp[i] : # possible ways to decode until i
     
-    dp[i] = if (dp[i - 2] != 0 && s[i-2:i-1] matches alpha) dp[i - 2]) else 0 +
-            if (dp[i - 1] != 0 && s[i-1:i-1] matches alpha) dp[i - 1]) else 0
+    dp[i] = if (s[i-2:i] matches alpha) dp[i] += dp[i - 2]
+            if (s[i-1:i] matches alpha) dp[i] += dp[i - 1]
 
     - time: O(s.length)
     - space: O(1)
