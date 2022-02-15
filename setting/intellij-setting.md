@@ -2,14 +2,18 @@
 
 ## Setting
 
-### Code Style
-
-Editor > Code Style
-
 ### Project
 
 - Open File With Single Click
 - Always Select Opened File
+
+### Apperance & Behavior
+
+- Disable auto save : Apperance & Behavior > System Settings > Autosave
+  - [X] Save fies if the IDE is idle for xx seconds
+  - [X] Save files when switching to a different application
+  - [ ] Backup files before saving
+  - [X] Synchronize external changes when switching to the IDE windows or opening an editor tab
 
 ### Keymap
 
@@ -17,47 +21,53 @@ Eclipse
 
 - Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
 
-Custsom
+Custom
 
 - Go to Implementations : Ctrl + i
 - Go to Test : Ctrl + t
 
-### Show whitespace
+### Editor
 
-- Editor > General > Appearance > Show whitespace
+- Show whitespace : Editor > General > Appearance > Show whitespace
+- Code template : Editor > File and Code Templates > Class
+  ```java
+  /*
+   * @copyright defined in LICENSE.txt
+   */
 
-### Apperance & Behavior
+  ```
+- Disable Quick Documentation by Mouse : Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation on mouse move
+- Code Style : Editor > Code Style
+- Java wird card import : Editor > Code Style > Java > Imports > General
+  - Normal : Class count to use import with '*'
+  - Static : Names count to use static import with '*'
+### Build, Execution, Deployment
 
-- Disable auto save : System Settings -> Autosave -> Uncheck all
-  - [X] Save fies if the IDE is idle for xx seconds
-  - [X] Save files when switching to a different application
-  - [ ] Backup files before saving
-  - [X] Synchronize external changes when switching to the IDE windows or opening an editor tab
+- Build and run using intellij : Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
+  - Need rebuild (build -> rebuild)
+
+## Plugins
+
+- Ktlint
+- IdeaVim
+- Relative Line Numbers -> `:set rnu` via IdeaVim plugin
+- CheckStyle-IDEA
+- [Save actions](https://plugins.jetbrains.com/plugin/7642-save-actions/versions)
+  - Settings > Other settings > Save actions
+    - General
+      - [X] Activate save actions on save
+    - Formatting Actions
+      - [X] Optimize imports
+      - [X] Reformat file
+- Bundled
+  - Kotlin
+  - Lombok
+
+## Etc
 
 ### JDK Version
 
 File > Project Structure > Project > Project SDK, Project language level
-
-### Build and run using
-
-Build, Execution, Deployment > Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
-
-Need rebuild (build -> rebuild)
-
-### Code template
-
-Editor > File and Code Templates > Class
-
-```java
-/*
- * @copyright defined in LICENSE.txt
- */
-
-```
-
-### Disable Quick Documentation by Mouse
-
-Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation on mouse move
 
 ### VM options
 
@@ -69,25 +79,6 @@ Help -> Edit Custom VM Options (or shift + shift -> enter custom vm options)
 ...
 -
 ```
-
-### Wird card import config
-
-- Normal : File > Settings > Project Settings > Code Style > Java > Imports > General > Class count to use import with '*'
-- Static : File > Settings > Project Settings > Code Style > Java > Imports > General > Names count to use static import with '*'
-
-## Plugins
-
-- IdeaVim
-- Relative Line Numbers -> `:set rnu` via IdeaVim plugin
-- Lombok
-- CheckStyle-IDEA
-- [Save actions](https://plugins.jetbrains.com/plugin/7642-save-actions/versions)
-  - Settings > Other settings > Save actions
-    - General
-      - [X] Activate save actions on save
-    - Formatting Actions
-      - [X] Optimize imports
-      - [X] Reformat file
 
 ## Shortcuts
 
@@ -143,10 +134,4 @@ Use eclispe keymap.
 - Step into
 - Step over
 - Resume
-
-## Tips
-
-### Heap size
-
-Change `-Xms, -Xmx` in `/Users/$USER/Library/Application Support/JetBrains/IdeaIC2020.1/idea.vmoptions`
 

@@ -32,6 +32,8 @@ VALUES
 
 https://wookoa.tistory.com/241
 
+https://m.blog.naver.com/isaac7263/222115359986
+
 ## Sequence
 
 ```sql
