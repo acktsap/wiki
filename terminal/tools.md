@@ -1,12 +1,5 @@
 # Terminal Tools
 
-## direnv
-
-```sh
-# Assume .envrc file on current directory
-> direnv allow .
-```
-
 ## find
 
 ```sh

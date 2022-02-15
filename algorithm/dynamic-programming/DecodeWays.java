@@ -62,8 +62,8 @@ class DecodeWays {
     
     dp[i] : # possible ways to decode until i
     
-    dp[i] = if (s[i-2:i] matches alpha) dp[i] += dp[i - 2]
-            if (s[i-1:i] matches alpha) dp[i] += dp[i - 1]
+    dp[i] = if (s[i-2:i-1] matches alpha) dp[i] += dp[i - 2]
+            if (s[i-1:i-1] matches alpha) dp[i] += dp[i - 1]
 
     - time: O(s.length)
     - space: O(s.length)
@@ -87,34 +87,34 @@ class DecodeWays {
     return dp[s.length()];
   }
   
-  /*
-    dp tabulation with constant space (keep beforeTwo, beforeOne)
+    /*
+    dp tabulation
     
     dp[i] : # possible ways to decode until i
     
-    dp[i] = if (s[i-2:i] matches alpha) dp[i] += dp[i - 2]
-            if (s[i-1:i] matches alpha) dp[i] += dp[i - 1]
+    dp[i] = if (s[i-2:i-1] matches alpha) dp[i] += dp[i - 2]
+            if (s[i-1:i-1] matches alpha) dp[i] += dp[i - 1]
 
     - time: O(s.length)
-    - space: O(1)
+    - space: O(s.length)
   */
   public int numDecodingsTabulationConstantSpace(String s) {
-    int[] dp = new int[s.length() + 1];
-    dp[0] = 1; // trick
-    dp[1] = canDecode(s, 0, 0) ? 1 : 0;
+    int beforeTwo = 1;
+    int beforeOne = canDecode(s, 0, 0) ? 1 : 0;
     
     for (int i = 2; i <= s.length(); ++i) {
       int next = 0;
       if (canDecode(s, i - 2, i - 1)) {
-        next += dp[i - 2];
+        next += beforeTwo;
       }
       if (canDecode(s, i - 1, i - 1)) {
-        next += dp[i - 1];
+        next += beforeOne;
       }
-      dp[i] = next;
+      beforeTwo = beforeOne;
+      beforeOne = next;
     }
     
-    return dp[s.length()];
+    return beforeOne;
   }
 
   protected boolean canDecode(String s, int from, int to) {

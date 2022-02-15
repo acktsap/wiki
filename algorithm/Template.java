@@ -7,24 +7,7 @@ import java.util.Objects;
  *
  *
  *
- * Approach & Proof 
- *
- * 1. xxx approach
- *
- * Let a = 1
- * ...
- * 
- * proof
- *
- * completixy
- *
- * - Time  :
- * - Space :
- *
- *
- *
  * Review
- *
  *
  */
 class Template {
@@ -43,8 +26,8 @@ class Template {
 
     var solution = new Template();
     for (Object[] parameter : parameters) {
-      char[][] grid = (char[][]) parameter[0];
-      int expected = (int) parameter[1];
+      var grid = (char[][]) parameter[0];
+      var expected = (int) parameter[1];
 
       {
         if (!Objects.equals(expected, actual)) {
