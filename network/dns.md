@@ -1,13 +1,12 @@
 # Domain Name System
 
-- [Domain Name System](#domain-name-system)
-  - [Term](#term)
-  - [Domain Name](#domain-name)
-  - [DNS Namespace Hierarchy](#dns-namespace-hierarchy)
-  - [How does a DNS request work?](#how-does-a-dns-request-work)
-  - [Get domain information](#get-domain-information)
-  - [Buying a domain name](#buying-a-domain-name)
-  - [References](#references)
+- [Term](#term)
+- [Domain Name](#domain-name)
+- [DNS Namespace Hierarchy](#dns-namespace-hierarchy)
+- [How does a DNS request work?](#how-does-a-dns-request-work)
+- [Get domain information](#get-domain-information)
+- [Buying a domain name](#buying-a-domain-name)
+- [References](#references)
 
 ## Term
 
