@@ -7,7 +7,10 @@ import java.util.Objects;
  *
  * Given an integer array nums, return the length of the longest strictly increasing subsequence.
  * 
- * A subsequence is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
+ * A subsequence is a sequence that can be derived from an array
+ * by deleting some or no elements without changing the order of the remaining elements.
+ *
+ * For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
  * 
  *
  * Example 1:
@@ -33,27 +36,20 @@ import java.util.Objects;
  *
  *
  *
- * Approach & Proof 
- *
- * 1. dp using Tabulation
- *
- * dp[n] = 1 + Max(dp[i])   where i < n && nums[i] < nums[j]
- *
- * 
- * completixy
- *
- * - Time  : O(n^2)
- * - Space : O(n)
- *
- *
- *
  * Review
  *
  * 점화식으로 가볍게 풀었는데 이걸 O(n*log(n))으로 어떻게하지?
  *
- *
  */
 class LongestIncreasingSubsequence {
+  /*
+    dp[n] : size of longest increasing subsequence amoung nums[0:n]
+
+    dp[n] = 1 + Max(dp[i])   where i < n && nums[i] < nums[n]
+
+    - Time  : O(n^2)
+    - Space : O(n)
+  */
   public int lengthOfLIS(int[] nums) {
     int ret = 0;
     
@@ -70,6 +66,11 @@ class LongestIncreasingSubsequence {
     }
     
     return ret;
+  }
+
+  public int lengthOfLISTimeOptimal(int[] nums) {
+    // TODO: resolve by nlog(n)
+    return 0;
   }
 
   public static void main(String[] args) {

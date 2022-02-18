@@ -37,32 +37,25 @@ import java.util.Objects;
  *
  *
  *
- * Approach & Proof 
- *
- * 1. dp tabulation
- *
- * Let a_n be n-th nums (nums[n - 1).
- *
- * dp[n] = max(dp[n - 1], dp(n - 2) + a_n)    n >= 2
- *       = a_n    n == 1
- *       = 0      n == 0
- *
- * completixy
- *
- * - Time  : O(n)
- * - Space : O(n)
- *
- *
- *
  * Review
  *
  * 간단하다.
  *
  */
 class HouseRobber {
-  public int robPlainDp(int[] nums) {
+  /*
+    Overlapping subproblem -> dynamic programming
+ 
+    dp[n] : max until nums[0:n]
+    
+    dp[n] = max(dp[n - 1], dp(n - 2) + nums[n])
+ 
+    - time:  O(n)
+    - space: O(n)
+  */
+  public int rob(int[] nums) {
     int[] dp = new int[nums.length + 1];
-    dp[0] = 0;
+    dp[0] = 0; // trick
     dp[1] = nums[0];
     
     for (int i = 2; i <= nums.length; ++i) {
@@ -72,8 +65,31 @@ class HouseRobber {
     return dp[nums.length];
   }
 
-  public int robPlainOptimal(int[] nums) {
-    // TODO: space: O(3)
+  /*
+    Overlapping subproblem -> dynamic programming
+ 
+    dp[n] : max until nums[0:n]
+    
+    dp[n] = max(dp[n - 1], dp(n - 2) + nums[n])
+ 
+    - time:  O(n)
+    - space: O(1)
+  */
+  public int robSpaceOptimal(int[] nums) {
+    if (nums.length == 1) {
+      return nums[0];
+    }
+    
+    int beforeTwo = nums[0];
+    int beforeOne = Math.max(beforeTwo, nums[1]);
+    
+    for (int i = 2; i < nums.length; ++i) {
+      int next = Math.max(beforeOne, beforeTwo + nums[i]);
+      beforeTwo = beforeOne;
+      beforeOne = next;
+    }
+    
+    return beforeOne;
   }
 
   public static void main(String[] args) {
@@ -98,11 +114,19 @@ class HouseRobber {
 
     var solution = new HouseRobber();
     for (Object[] parameter : parameters) {
-      int[] nums = (int[]) parameter[0];
-      int expected = (int) parameter[1];
+      var nums = (int[]) parameter[0];
+      var expected = (int) parameter[1];
 
       {
-        int actual = solution.robPlainDp(nums);
+        var actual = solution.rob(nums);
+        if (!Objects.equals(expected, actual)) {
+          throw new IllegalStateException("Expected: " + Objects.toString(expected) +
+              ", but was: " + Objects.toString(actual));
+        }
+      }
+
+      {
+        var actual = solution.robSpaceOptimal(nums);
         if (!Objects.equals(expected, actual)) {
           throw new IllegalStateException("Expected: " + Objects.toString(expected) +
               ", but was: " + Objects.toString(actual));

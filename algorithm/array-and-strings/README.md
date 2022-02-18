@@ -55,6 +55,7 @@ vector<int> twoSum(vector<int>& numbers, int target) {
 - Window size : [i, j) (i: inclusive, j: exclusive)
 - When iterating elements, do not waste already processed one.
 - 매번 처리되는 중복된 요소를 버리지 않고 재사용함으로써 낭비되는 계산을 하지 않음으로써 효율적으로 처리하는 방법.
+- When to stretch window? When to shrink window?
 
 ### Example 1 : Max subarray of length 3 
 

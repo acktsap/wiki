@@ -1,36 +1,51 @@
 # Dynamic Programming
 
-## Concept
+## Terms
 
 - Memoization : Do not compute twice. Cache it.
 - Referential transparent function : When input is same, return is same.
-- Dynamic Programming : Speed up with memoization; Only possible in referential transparent function.
-- Time Complexity : # of subproblem * # of repetation to solve it.
 
-## When to use
+## Concept
 
-When problem has characteristics
+- Dynamic Programming : Speed up by using cache of sub-problem; Only possible in referential transparent function.
+- Time Complexity : the number of of subproblem * the number of of repetation to solve it.
 
-- Overlapping subproblems : smaller versions of the original problem that are reused multiple times.
-- Optimal substructure : An optimal solution can be formed from optimal solutions to the overlapping subproblems.
+### Characteristics
 
-Rule of Thumb
+- Overlapping subproblems
+  - Smaller versions of the original problem that are reused multiple times.
+- Optimal substructure
+  - An optimal solution can be formed from optimal solutions to the overlapping subproblems.
+
+#### When to use
 
 - When asking for optimum value (maximum or minimum) of something or # of ways to do something.
 - Future decision depends on earlier decision.
+  - Greedy의 경우 이 조건이 만족못함. dp인지 확인해보기 위해 greedy를 가정하고 greedy에 대한 counterexample을 들어봐라.
 - When brute force is too long (2^n).
 
-## Strategy
+### Framework
 
-1. Solve with brute force using Explicit Formula (점화식).
-2. Use cache to resolve duplication.
+- A data structure and a way of visiting each DP state.
+- The recurrence relation (Explicit Formula ,점화식).
+- The base cases.
 
 ## Bottom-up (Tabulation)
 
-Use iteration.
+- Use iteration.
+- Pros
+  - Faster then memoization (no recursion overhead).
+- Cons
+  - Should set logical ordering of sub-problem.
 
 ```java
-// Fibonacci example
+/*
+  Fibonacci example
+
+  dp[i] = dp[i - 1] + dp[i]     n >= 2
+          1                     n == 1
+          0                     n == 0
+*/
 
 int[] dp = new dp[n];
 dp[0]= 0;
@@ -40,12 +55,23 @@ for (int i = 2; i < n; ++i) {
 }
 ```
 
-## Top-down (Memoization)
+## Top-down (Memoization) : Prefer it
 
-Use recursion.
+- Use recursion.
+- Pros
+  - No need to order sub-problem.
+- Cons
+  - Recursion overhead.
 
 ```java
-// Fibonacci example
+/*
+  Fibonacci example
+
+  dp[i] = dp[i - 1] + dp[i]     n >= 2
+          1                     n == 1
+          0                     n == 0
+*/
+
 int[] dp = new dp[n];
 Arrays.fill(dp, -1);
 
@@ -67,7 +93,7 @@ void f(int n) {
 
 ## Multidimensional
 
-Recursion.
+- Multiple dimension state.
 
 ```cpp
 // initialized to -1
