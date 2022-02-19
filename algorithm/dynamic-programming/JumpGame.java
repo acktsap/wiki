@@ -54,16 +54,17 @@ class JumpGame {
     boolean[] dp = new boolean[nums.length];
     dp[0] = true;
     
-    for (int i = 0; i < nums.length; ++i) {
-      if (dp[i] == true && nums[i] > 0) {
-        for (int j = i + 1; j <= i + nums[i] && j < dp.length; ++j) {
-          dp[j] = true;
+    for (int i = 1; i < nums.length; ++i) {
+      for (int j = i - 1; j >= 0; --j) {
+        if (dp[j] && nums[j] >= (i - j)) {
+          dp[i] = true;
+          break;
         }
       }
     }
     
     return dp[nums.length - 1];
-  }
+ }
 
   /*
     overlapping subproblem -> dp
