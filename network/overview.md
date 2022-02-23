@@ -1,13 +1,19 @@
 # Overview
 
 - [What is Computer Network](#what-is-computer-network)
+- [Protocols](#protocols)
 - [OSI 7 Layer vs TCP/IP Layer](#osi-7-layer-vs-tcpip-layer)
+- [캡슐화](#캡슐화)
 - [What happens](#what-happens)
 - [References](#references)
 
 ## What is Computer Network
 
-서로 다른 노드간 서로 자원을 공유할 수 있게 해주는 디지털 망
+- 서로 다른 노드간 서로 자원을 공유할 수 있게 해주는 디지털 망
+
+## Protocols
+
+- 네트워크에 연결된 두 컴퓨터 간의 통신을 제어하는 규칙
 
 ## OSI 7 Layer vs TCP/IP Layer
 
@@ -29,6 +35,10 @@ TCP/IP : de-facto standard (사실상 표준)
 - Transport Layer : Transport Layer
 - Internet Layer : Network Layer
 - Network Interface Layer : DataLink + Physical Layer
+
+## 캡슐화
+
+https://github.com/jhyuk316/study/blob/main/Backend%20Roadmap/02%20General%20Knowledge/02.10%20Basic%20Networking%20Concepts.md#31-osiopen-systems-interconnection-model
 
 ## What happens
 

@@ -30,10 +30,14 @@ A: 가도됨? B: ㅇㅋ. A: 간다!!!!
 A: 끊을게. B: 어 잠깐만 마저 하고, B: 어 다 했어 끊어. A : ok bye~
 
 - 클라이언트가 FIN을 서버에 보냄
-- FIN으 받은 서버가 클라이언트에 ACK를 보냄
+- FIN을 받은 서버가 클라이언트에 ACK를 보냄
 - 서버가 보내던 데이터를 다 보내면 클라이언트에 FIN을 보냄
 - FIN을 받은 클라이언트는 TIME_WAIT 상태로 변경되고 서버에 ACK를 보냄
 - ACK를 받은 서버는 CLOSED 로 변경
+
+https://github.com/jhyuk316/study/blob/main/Backend%20Roadmap/02%20General%20Knowledge/02.10%20Basic%20Networking%20Concepts.md#close-the-connection---4-way-handshake
+
+에러처리 추가
 
 ### Keep Alive on TCP
 

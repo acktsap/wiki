@@ -4,3 +4,6 @@
 # golang
 go.mod
 go.sum
+
+# direnv generated
+.direnv/
