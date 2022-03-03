@@ -55,7 +55,24 @@ vector<int> twoSum(vector<int>& numbers, int target) {
 - Window size : [i, j) (i: inclusive, j: exclusive)
 - When iterating elements, do not waste already processed one.
 - 매번 처리되는 중복된 요소를 버리지 않고 재사용함으로써 낭비되는 계산을 하지 않음으로써 효율적으로 처리하는 방법.
-- When to stretch window? When to shrink window?
+
+### Rule of Thumb
+
+- State: sss
+- Stretch window until xxx, change the state
+- Shrink window until yyy, change the state
+
+```java
+i, j = 0
+while j < s.length - 1:
+  if next does not duplicate entry:
+    ++j  // stretch
+  if next duplicates entry && i < j:
+    ++i // shrink
+  if next duplicates entry && i == j:
+    ++i, ++j 
+  ...
+```
 
 ### Example 1 : Max subarray of length 3 
 
@@ -74,6 +91,20 @@ while (j < arr.length) {
   sum = Math.max(sum, next);
   ++i;
   ++j;
+}
+```
+
+## Prefix Sum
+
+- Use cumulative sum of an array.
+
+### Example
+
+```java
+int[] nums = new int[] { 1, 0, 3, 2, 5 };
+int[] prefixSum = new int[nums.length + 1]; // trick: put 0 to 0-th entry
+for (int i = 1; i < prefixSum.length - 1; ++i) {
+  prefixSum[i] = nums[i - 1] + prefixSum[i - 1];
 }
 ```
 

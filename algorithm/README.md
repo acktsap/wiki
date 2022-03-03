@@ -1,5 +1,27 @@
 # Algorithm Design
 
+- [Rule](#rule)
+- [Modeling](#modeling)
+  - [Data Structure](#data-structure)
+    - [Canonicalization](#canonicalization)
+    - [Separate data with an algorithm](#separate-data-with-an-algorithm)
+  - [Explicit Formula (점화식)](#explicit-formula-점화식)
+- [Proving](#proving)
+  - [Loop dominates Time Complexity](#loop-dominates-time-complexity)
+  - [Mathematical Induction (수학적귀납법)](#mathematical-induction-수학적귀납법)
+  - [Loop Invariant](#loop-invariant)
+  - [Test with corner case](#test-with-corner-case)
+- [Implemenation](#implemenation)
+  - [Use half-open interval in a range](#use-half-open-interval-in-a-range)
+  - [Always init on declaration](#always-init-on-declaration)
+  - [No floating point operation if possible](#no-floating-point-operation-if-possible)
+  - [Validate function precondition](#validate-function-precondition)
+- [Debugging](#debugging)
+  - [Logging middle result](#logging-middle-result)
+  - [Use assert on precondition](#use-assert-on-precondition)
+  - [Print Utils](#print-utils)
+- [Brute Force](#brute-force)
+
 ## Rule
 
 What is algorithm? What is goal of computer science?\
@@ -227,3 +249,7 @@ Objects.toString(Arrays.asList(1, 2));
 // nested array toString
 Arrays.deepToString(new int[][] { {1,2,3}, {1, 2} });
 ```
+
+## Brute Force
+
+![brute-force](./img/brute-force.jpg)
