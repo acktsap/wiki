@@ -26,8 +26,7 @@
     // no loop here if possible
   }
   ```
-
-Check out the loop invariant based on i, j
+- Check out the loop invariant based on i, j
 
 ### Example 1 : Two sum
 
@@ -52,9 +51,12 @@ vector<int> twoSum(vector<int>& numbers, int target) {
 
 ## Sliding window 
 
-- Window size : [i, j) (i: inclusive, j: exclusive)
-- When iterating elements, do not waste already processed one.
-- 매번 처리되는 중복된 요소를 버리지 않고 재사용함으로써 낭비되는 계산을 하지 않음으로써 효율적으로 처리하는 방법.
+- Window size : [i, j]
+- Greedy하게 매번 처리되는 중복된 요소를 버리지 않고 재사용함으로써 낭비되는 계산을 하지 않음으로써 효율적으로 처리하는 방법.
+
+### vs Two Pointer
+
+- Sliding window는 window 안의 모든 element를 가지고 비교하지만 (eg. sum) two pointer는 각각의 pointer가 가리키고 있는 값만 비교함.
 
 ### Rule of Thumb
 

@@ -88,7 +88,7 @@ import java.util.Objects;
  *
  * 조건이 복잡할때는 있는 정보를 가지고 어떻게 단순화 할 수 있을까 하고 생각해보자
  * j를 다음 element로 하면 다 해결되는 문제였다..
- * sliding window가 원원래 [i, j) 조건이네
+ * sliding window가 원원래 [i, j) 조건이네 <- 맞음??
  *
  */
 class LongestSubstringWithoutRepeatingCharacters {
@@ -138,9 +138,9 @@ class LongestSubstringWithoutRepeatingCharacters {
     int j = 0;
     while (j < s.length()) {
       if (set[s.charAt(j)] == 0) {
+        ret = Math.max(ret, j - i + 1);
         ++set[s.charAt(j)];
         ++j;
-        ret = Math.max(ret, j - i);
       } else {
         --set[s.charAt(i)];
         ++i;

@@ -1,30 +1,26 @@
 # Database
 
-- [Database](#database)
-  - [Why](#why)
-  - [DB Performance](#db-performance)
-  - [Logical Design](#logical-design)
-    - [Normalization](#normalization)
-    - [Entity-Relational Model](#entity-relational-model)
-  - [Physical Design](#physical-design)
-    - [Index](#index)
-  - [Join](#join)
-    - [Cross Join](#cross-join)
-    - [Natural Join](#natural-join)
-    - [Inner Join](#inner-join)
-    - [Outer Join](#outer-join)
-      - [Left Outer Join](#left-outer-join)
-      - [Right Outer Join](#right-outer-join)
-    - [Inner Join vs Outer Join](#inner-join-vs-outer-join)
-  - [Transaction](#transaction)
-    - [Transaction Status](#transaction-status)
-    - [Transaction Deadlock](#transaction-deadlock)
-    - [Lock vs Transaction](#lock-vs-transaction)
-  - [Statement vs PreparedStatement](#statement-vs-preparedstatement)
-  - [Replication vs Clustering](#replication-vs-clustering)
-  - [NoSQL](#nosql)
-    - [CAP](#cap)
-  - [References](#references)
+- [Why](#why)
+- [DB Performance](#db-performance)
+- [Physical Design](#physical-design)
+  - [Index](#index)
+- [Join](#join)
+  - [Cross Join](#cross-join)
+  - [Natural Join](#natural-join)
+  - [Inner Join](#inner-join)
+  - [Outer Join](#outer-join)
+    - [Left Outer Join](#left-outer-join)
+    - [Right Outer Join](#right-outer-join)
+  - [Inner Join vs Outer Join](#inner-join-vs-outer-join)
+- [Transaction](#transaction)
+  - [Transaction Status](#transaction-status)
+  - [Transaction Deadlock](#transaction-deadlock)
+  - [Lock vs Transaction](#lock-vs-transaction)
+- [Statement vs PreparedStatement](#statement-vs-preparedstatement)
+- [Replication vs Clustering](#replication-vs-clustering)
+- [NoSQL](#nosql)
+  - [CAP](#cap)
+- [References](#references)
 
 ---
 
@@ -37,34 +33,6 @@
 
 - 데이터를 읽으려면 결국 디스크를 뒤져야 하는데 디스크 원판을 돌리는 시간이 좀 걸림. 그래서 순차 Access가 빠름
 - 근데 현실에서는 다 Random I/O. Random I/O를 순차 I/O를 바꿀 수 없을까? 이게 쿼리 튜닝의 시작.
-
-[위로](#Database)
-
-## Logical Design
-
-데이터의 중복을 제거해서 저장하기 논리적으로 설계하는 과정.
-
-### Normalization
-
-![normalization](./img/normalization.jpeg)
-![bcnf](./img/bcnf.jpeg)
-
-- 중복을 최소화하게 데이터를 구조화하는 프로세스. 주로 함수적 종속으로 정의.
-  - 함수적 종속 : X 와 Y가 속성집합일 때, X 값이 Y 값을 유일하게 결정하는 경우
-  - 1NF : 모든 속성의 도메인이 원자 값으로만 구성
-    - 해결방안 : 그냥 속성에 ',' 같은거 안넣음
-  - 2NF : 1NF이면서 기본키의 일부에 종족적인 속성이 없는 경우 (eg. (X,Y)->Z일 때 X->Z가 없는 경우)
-    - 해결방안 : 기본키의 일부에 종속적인 속성들을 다른 테이블로 분리
-  - 3NF
-    - 2NF이면서 이행적 함수 종속이 없는 경우를 말하는데 이행적 함수 종속(Transitive Functional Dependency)이란 X가 primary key일 때 X->Y이고, Y->Z라서 X->Z가 되는 경우를 의미. 3NF는 여기서 Y가 Primary attribute인 경우는 제외
-    - 해결방안 : Y->Z를 다른 테이블로 분리
-  - BCNF : 3NF에서 Y가 primary attribute일 경우를 제외한다는 조건을 뺌
-- 장점 : 중복 제거
-- 단점 : query를 할 때 join을 해야 함. 그래서 query리 성능 저하가 심하게 발생하면 비정규화(De-normalization)를 하기도 함
-
-### Entity-Relational Model
-
-![batch-schema](./img/batch-schema.png)
 
 [위로](#Database)
 
@@ -275,12 +243,6 @@ https://en.wikipedia.org/wiki/CAP_theorem
 Index
 
 https://chartworld.tistory.com/18
-
-Normalization
-
-https://yaboong.github.io/database/2018/03/09/database-normalization-1/
-
-https://magok-leaders-coding.tistory.com/4
 
 Join
 
