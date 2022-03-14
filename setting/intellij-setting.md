@@ -25,6 +25,7 @@ Custom
 
 - Go to Implementations : Ctrl + i
 - Go to Test : Ctrl + t
+- Replace in  : Ctrl + Shift + H
 
 ### Editor
 
@@ -124,7 +125,7 @@ Use eclispe keymap.
 - Go to definition : F3
 - Referer : ?
 - Call Hierarchy : Command + Alt + H
-- Find in path : Ctrl + H
+- Find in files : Ctrl + H
 
 ### Run, Debug
 

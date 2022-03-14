@@ -30,7 +30,6 @@ public class JobConfig {
                 .tasklet(new Tasklet() {
                     private int count = 3;
 
-                    @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
                         // need lock for concurrency
                         if (count == 0) {

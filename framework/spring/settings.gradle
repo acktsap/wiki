@@ -1,6 +1,5 @@
 rootProject.name = "spring-framework"
 
-include ":spring-batch"
 include ":spring-core"
 include ":spring-data-access"
 include ":spring-web-config"
