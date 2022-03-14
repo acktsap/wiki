@@ -4,23 +4,25 @@ root = true
 [*]
 # [encoding-utf8]
 charset = utf-8
-
+# [indentation-tab]
+indent_style = space
 # [newline-lf]
 end_of_line = lf
-
 # [newline-eof]
 insert_final_newline = true
+# [no-trailing-spaces]
+trim_trailing_whitespace = true
 
 [*.bat]
 end_of_line = crlf
 
-[*.java]
-# [indentation-tab]
-indent_style = space
-
+[{*.java, *.kt}]
 # [4-spaces-tab]
 indent_size = 4
 tab_width = 4
 
-# [no-trailing-spaces]
-trim_trailing_whitespace = true
+[{*.md, *.sh}]
+# [2-spaces-tab]
+indent_size = 2
+tab_width = 2
+

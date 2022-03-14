@@ -36,7 +36,7 @@ load new shell feature for current directory
     if declare -f "$name" >/dev/null; then
       echo "#!/usr/bin/env bash" > "$target"
       declare -f "$name" >> "$target" 2>/dev/null
-      echo "$name" >> "$target"
+      echo "$name \"\$@\"" >> "$target"
       chmod +x "$target"
     fi
   }

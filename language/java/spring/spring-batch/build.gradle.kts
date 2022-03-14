@@ -1,5 +1,6 @@
 plugins {
     java
+    kotlin("jvm") version "1.6.10"
 }
 
 val developmentOnly = configurations.create("developmentOnly")

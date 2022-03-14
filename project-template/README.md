@@ -32,3 +32,8 @@ Project template (app, library) for languages.
 - Architecture, Design Philosophy
 - Latest version
 - Compatibility
+
+## Idea
+
+- version을 별도의 파일로 관리하지 말고 차라리 각각의 파일에 관리하면서 그 역할을 하는 모듈을 한개 만들자
+

@@ -90,7 +90,6 @@ class GridGame {
       sum1[i] = grid[1][i - 1] + sum1[i - 1];
     }
     
-    int turnAt = 0;
     long min = Long.MAX_VALUE;
     for (int i = 1; i < sum0.length; ++i) {
       long sum = Math.max(sum0[sum0.length - 1] - sum0[i], sum1[i - 1] + sum1[0]);
