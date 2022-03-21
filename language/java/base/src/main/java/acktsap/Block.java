@@ -4,6 +4,10 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 public final class Block {
+    public static String threadName() {
+        return Thread.currentThread().getName();
+    }
+
     public static void d(String description, DangerousRunnable dangerousRunnable) {
         try {
             System.out.printf("== %s ==%n", description);

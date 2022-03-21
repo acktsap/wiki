@@ -275,7 +275,7 @@ https://dreamchaser3.tistory.com/5
 
 ### NIO
 
-![java-io](./img/java-io.jpg)
+![java-io](imgava-io.jpg)
 
 - New I/O (Non-blocking I/O 아님)로 기존의 느린 I/O를 보완하기 위한 것
 - 기존의 I/O
@@ -293,7 +293,7 @@ https://dreamchaser3.tistory.com/5
 - Channel
   - Two-way라서 I/O 둘다를 한개로 처리 가능
   - Non-blocking도 가능
-  
+
 ## Reflection
 
 - 클래스의 구체적인 타입을 알지 못해도 클래스의 method, type, field를 접근하게 할 수 있게 해주는 api

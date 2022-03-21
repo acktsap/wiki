@@ -114,7 +114,7 @@ Use eclispe keymap.
     - Block
 - Refactor
   - Rename : Command + Shift + R
-  - Extract variable : Command + Shift + L
+  - Introduce variable : Command + Shift + L
   - Extract method : Command + Shift + M
 
 ### Search

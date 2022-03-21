@@ -3,11 +3,12 @@ plugins {
 }
 
 dependencies {
-    // jpa
+    /* jpa */
+    // h2
     implementation("org.hibernate:hibernate-core:5.6.3.Final")
     implementation("com.h2database:h2:2.0.202")
 
-    // utils
+    /* utils */
     // guava
     implementation("com.google.guava:guava:31.0.1-jre")
 
@@ -22,5 +23,6 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.2.9")
 
     /* reactive */
-    implementation("io.projectreactor:reactor-core:3.4.13")
+    // reactor
+    implementation("io.projectreactor:reactor-core:3.4.16")
 }
