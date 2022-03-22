@@ -1,53 +1,82 @@
 #!/bin/bash
 
-function variable_substitution() {
-  echo "-- variable_substitution --"
+echo -e "\n-- Command substituion --"
 
-  local val=1
+val=`expr 1 + 1`
+echo $val
 
-  # command substitution
-  val=`expr $val + 1`
-  val=$(expr $val + 1)
+val=$(expr 1 + 1)
+echo $val
 
-  # print $origin wow
-  echo '$val wow it is not replaced'
+unset val
 
-  # print some_value wow
-  echo "$val wow it's replaced"
 
-  function substitution_case() {
-    echo "--- Try with $@ ---"
+echo -e "\n-- Variable substituion --"
 
-    local hostname="$1"
+val="hey!!"
+echo '$val is not replaced'
+echo "$val is replaced"
 
-    # show warning when alias isn't set
-    local alias=${2:?"Alias must be provided"}
+unset val
 
-    echo "Origin hostname: $hostname"
-    echo "Origin alias: $alias"
 
-    # substitute for hostname as 'localhost' when hostname is unset
-    # no change to hostname
-    echo "Processed hostname: ${hostname:-${hostname}}"
+echo -e "\n-- Variable substituion (default value with not changing) --"
 
-    # substitute for alias as 'forced_alias' when alias is set
-    # no change to alias
-    echo "Processed alias: ${alias:+"forced_alias"}"
+origin=""
+val=${origin:-default}
+echo "val: $val" # default
+echo "origin: $origin" # ""
 
-    echo "Dirty hostname: $hostname"
-    echo "Dirty alias: $alias"
+origin=123
+val=${origin:-default}
+echo "val: $val" # 123
+echo "origin: $origin" # 123
 
-    echo
-  }
+unset val
+unset origin
 
-  # print 192.168.0.1, forced_alias
-  substitution_case "192.168.0.1" my_alias
 
-  # print localhost, forced_alias
-  substitution_case "" my_alias
+echo -e "\n-- Variable substituion (default value with changing) --"
 
-  # print warning
-  substitution_case "192.168.0.1"
-}
+origin=""
+val=${origin:=default}
+echo "val: $val" # default
+echo "origin: $origin" # default
 
-variable_substitution
+origin=123
+val=${origin:=default}
+echo "val: $val" # 123
+echo "origin: $origin" # 123
+
+unset val
+unset origin
+
+
+echo -e "\n-- Variable substituion (replace it to default if present, not changing) --"
+
+origin=""
+val=${origin:+default}
+echo "val: $val" # ""
+echo "origin: $origin" # ""
+
+origin=123
+val=${origin:+default}
+echo "val: $val" # default
+echo "origin: $origin" # 123
+
+unset val
+unset origin
+
+
+echo -e "\n-- Variable substituion (throw error if not present) --"
+
+origin="123"
+val=${origin:?should set origin}
+echo "val: $val" # 123
+echo "origin: $origin" # 123
+
+origin=""
+val=${origin:?should set origin} # throw error
+
+unset val
+unset origin

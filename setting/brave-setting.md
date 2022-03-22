@@ -46,6 +46,12 @@ https://brave.com
   - YouTube
     - :y, :ㅛ
     - https://www.youtube.com/results?search_query=%s
+
+## Additional Settings
+
+### Autofill
+
+- [ ] Offer to save passwords
  
 ## Bookmark
 
