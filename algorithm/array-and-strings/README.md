@@ -114,7 +114,8 @@ for (int i = 1; i < prefixSum.length - 1; ++i) {
 
 Define a greedy algorithm which staisfies.
 
-- Greedy choice property : A global optimal solution can be reached by choosing the optimal solution of each subproblem.
+- Greedy choice property : A global optimal solution can be reached by choosing the optimal solution of each subproblem.  
+  -> mostly obvious
 - Optimal Substructure : An optimal solution to the problem contains optimal solutions to the sub-problems.
 
 Two pointer is greedy??

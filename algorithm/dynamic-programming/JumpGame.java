@@ -28,17 +28,48 @@ import java.util.Objects;
  * 
  * Constraints:
  * 
- * 1 <= nums.length <= 104
- * 0 <= nums[i] <= 105
+ * 1 <= nums.length <= 10^4
+ * 0 <= nums[i] <= 10^5
  *
  *
  *
  * Review
  *
  * O(n^2)라도 같은 O(n^2)가 아니다..
+ * 그리고 dp인데 O(n^2)면 느린거다..
  *
  */
 class JumpGame {
+  /*
+    뒤에서부터 시작해서 Greedy하게 해보자.
+
+    [2,3,1,1,4]
+    4 -> 1 -> 1로 가서 j를 빠르게 갱신하더라도 결국 4 -> 3 때문에 3으로 감
+
+    [2,3,0,1,4]
+    중간에 끊어져서 j를 조금 더 앞에 두더라도 결국 큰게 해당 range를 커버
+    j가 1로 가더라도 3에서 어차피 1, 4 둘다 갈 수 있음 그래서 1로가도 ㄱㅊ
+
+    i, j가 있다 i는 줄어들고 j는 고정
+    if (j - i <= nums[i]) {
+      j = i;
+    }
+    
+    Let n be size of nums. Then,
+    - time: O(n)
+    - space: O(1)
+  */
+  public boolean canJumpGreedy(int[] nums) {
+    int j = nums.length - 1;
+    for (int i = nums.length - 2; i >= 0; --i) {
+      if (j - i <= nums[i]) {
+        j = i;
+      }
+    }
+
+    return j == 0;
+  }
+
   /*
     overlapping subproblem -> dp
     
@@ -124,6 +155,14 @@ class JumpGame {
     for (Object[] parameter : parameters) {
       var nums = (int[]) parameter[0];
       var expected = (boolean) parameter[1];
+
+      {
+        var actual = solution.canJumpGreedy(nums);
+        if (!Objects.equals(expected, actual)) {
+          throw new IllegalStateException("Expected: " + Objects.toString(expected) +
+              ", but was: " + Objects.toString(actual));
+        }
+      }
 
       {
         var actual = solution.canJumpDpFaster(nums);
