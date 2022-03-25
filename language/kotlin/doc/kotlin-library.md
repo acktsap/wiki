@@ -2,13 +2,19 @@
 
 ## Closed
 
-- 생성자 노출 방어
-  ```kotlin
-  // internal constructor
-  class MockHttpServletRequestDsl internal constructor (private val builder: MockHttpServletRequestBuilder) {
-    ...
-  }
-  ```
+### 생성자 노출 방어
+
+```kotlin
+// as private constructor
+class MockHttpServletRequestDsl private constructor (private val builder: MockHttpServletRequestBuilder) {
+  ...
+}
+
+// as internal constructor
+class MockHttpServletRequestDsl internal constructor (private val builder: MockHttpServletRequestBuilder) {
+  ...
+}
+```
 
 ## Dsl
 
@@ -41,7 +47,20 @@
 
 - [Jackcon Kotlin Module](https://github.com/FasterXML/jackson-module-kotlin/tree/2.13/src/main/kotlin/com/fasterxml/jackson/module/kotlin)
   - [generics](https://github.com/FasterXML/jackson-module-kotlin/blob/2.13/src/main/kotlin/com/fasterxml/jackson/module/kotlin/Extensions.kt)
-    - extensions `inline fun <reified T> test()`로 (`fun <T> test(type: KClass<T>)` 말고)
 - [RestOperaationsExtensions](https://github.com/spring-projects/spring-framework/blob/main/spring-web/src/main/kotlin/org/springframework/web/client/RestOperationsExtensions.kt)
   - [pr](https://github.com/spring-projects/spring-framework/commit/546687d5e44c6771a95f5334dbcbf4b37a6cea33)
     - kotlin을 optional로
+
+### KClass Extensions
+
+```kotlin
+// like this
+inline fun <reified T> A.test(val: Int): Int {
+  return this.test(val, T.java)
+}
+
+// not like this
+fun <T> A.test(val: Int, type: KClass<T>): Int {
+  return this.test(val, type.java)
+}
+```

@@ -60,6 +60,7 @@ Custom
     - Formatting Actions
       - [X] Optimize imports
       - [X] Reformat file
+- Dto generator : json to Dto java class
 - Bundled
   - Kotlin
   - Lombok

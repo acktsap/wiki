@@ -15,6 +15,7 @@ public class Application {
 
         Properties properties = new Properties();
         properties.put("spring.batch.job.enabled", false);  // without this, all job will run
+        properties.put("spring.batch.jdbc.table-prefix", "BATCH_");
         application.setDefaultProperties(properties);
 
         application.run(args);

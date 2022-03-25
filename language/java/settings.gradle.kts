@@ -3,7 +3,7 @@ rootProject.name = "java"
 // core
 include(":base")
 include(":database")
-include(":logging")
+include(":monitoring")
 include(":security")
 include(":testing")
 
