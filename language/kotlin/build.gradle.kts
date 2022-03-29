@@ -1,39 +1,29 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-}
-
 plugins {
-    kotlin("jvm") version "1.5.20"
+    kotlin("jvm") version "1.6.10"
 }
 
-apply(plugin = "kotlin")
-
-repositories {
-    mavenCentral()
-    jcenter()
-}
-
-tasks {
-    compileKotlin {
-        kotlinOptions {
-            val compileJvmTarget = "11"
-            freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = compileJvmTarget
-        }
-    }
-    compileTestKotlin {
-        kotlinOptions {
-            val testJvmTarget = "11"
-            freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = testJvmTarget
-        }
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
     }
 }
 
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.20")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+subprojects {
+    apply(plugin = "kotlin")
+
+    tasks {
+        compileKotlin {
+            kotlinOptions {
+                freeCompilerArgs = listOf("-Xjsr305=strict")
+                jvmTarget = "17"
+            }
+        }
+        compileTestKotlin {
+            kotlinOptions {
+                freeCompilerArgs = listOf("-Xjsr305=strict")
+                jvmTarget = "17"
+            }
+        }
+    }
 }
