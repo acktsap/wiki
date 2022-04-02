@@ -1,59 +1,36 @@
 # Vagrant
 
-## Setup
+## Introduction
 
-Need virtual box
+A tool for building and managing virtual machine environments in a single workflow.
 
-1. [Install virtual box](https://www.virtualbox.org/wiki/Downloads)
-2. [Install vagrant](https://www.vagrantup.com/downloads.html)
+## Install vagrant
 
-## Make virtual machine
+https://www.vagrantup.com/downloads.html)
 
-By hand
+osx
 
 ```sh
-> # make target directory
-> mkdir some_dir
->
-> # move Vagrantfile and some scripts
-> cp Vagrantfile_xxx some_dir/Vagrantfile
-> cp -R install-scripts/* some_dir/
-> 
-> # move to target directory
-> cd some_dir
->
-> # customize install scripts
-> # ...
->
-> # run vagrant file
-> vagrant up
+brew install vagrant
 ```
 
-Use setup script
+## Install Provider
+
+- [Virtual box](https://www.virtualbox.org/wiki/Downloads)
+
+## See boxes
+
+https://app.vagrantup.com/boxes/search
+
+## Basic Commands
 
 ```sh
-> ./setup.sh -p ubuntu -d test
-```
+# make a new directory
+mkdir some_dir
+cd some_dir
 
-## Access
-
-By rsa config
-
-```sh
-> ssh xxx.xxx.xxx.xx
-```
-
-By vagrant (at target directory)
-
-```sh
-> vagrant ssh
-```
-
-## Commands
-
-```sh
 # create 'Vagrantfile'
-vagrant init
+vagrant init $machine
 
 # make vm based on 'Vagrantfile'
 vagrant up
@@ -79,3 +56,11 @@ vagrant reload
 # remove vm
 vagrant destroy
 ```
+
+## Other Commands
+
+https://www.vagrantup.com/docs/cli
+
+## References
+
+- [vagrant learn](https://learn.hashicorp.com/vagrant)
