@@ -8,5 +8,5 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.6.2")
+    testImplementation("net.jqwik:jqwik:1.6.5")
 }

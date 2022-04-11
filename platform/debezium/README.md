@@ -8,4 +8,18 @@
 
 ## Starting Sample
 
-https://debezium.io/documentation/reference/1.8/tutorial.html#starting-services
+Podman
+
+```sh
+## create user-defined bridge
+docker network create dbz-net
+
+## start zookeeper container
+docker run --rm --name zookeeper -p 2181:2181 -p 2888:2888 -p 3888:3888 --net dbz-net debezium/zookeeper:1.8
+
+## start kafka container
+# docker run --rm --name kafka -p 9092:9092 --network dbz-net debezium/kafka:1.8
+docker run --rm --name kafka -p 9092:9092 --net dbz-net debezium/kafka:1.8 # not works
+```
+
+[see also](https://debezium.io/documentation/reference/1.8/tutorial.html#starting-services)

@@ -26,10 +26,16 @@ allowing you to instrument your JVM-based application code without vendor lock-i
   - Identified by `Tag`
   - Micrometer packs with
     - `Timer`
+      - Measuring short-duration latencies.
+      - Report at least the total time and count of events as separate time series.
+      - Does not record the duration until the task is complete.
+      - Recording many longer durations could cause overflow of the total time at `Long.MAX_VALUE` nanoseconds (292.3 years)
+    - `LongTaskTimer`
+      - Measure time while an event being measured is still running.
+      -
     - `Counter`
     - `Gauge`
     - `DistributionSummary`
-    - `LongTaskTimer`
     - `FunctionCounter`
     - `FunctionTimer`
     - `TimeGauge`
