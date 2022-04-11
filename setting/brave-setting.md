@@ -16,6 +16,7 @@ https://brave.com
 - Google Translate
   - Extension Options
     - My primary language: Korean
+- Octotree : GitHub code tree
 
 ## Settings
 

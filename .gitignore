@@ -7,3 +7,6 @@ go.sum
 
 # direnv generated
 .direnv/
+
+# a.out
+a.out
