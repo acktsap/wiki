@@ -1,0 +1,3 @@
+# Auto Configurations
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+acktsap.LibraryAutoConfiguration
