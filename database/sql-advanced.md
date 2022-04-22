@@ -21,3 +21,5 @@
 ### Query Plan
 
 ## Reference
+
+- [Isolation (wiki)](https://en.wikipedia.org/wiki/Isolation_(database_systems))
