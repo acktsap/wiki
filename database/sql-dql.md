@@ -1,23 +1,5 @@
-# Sql
+# Sql Query
 
-- [Sql Basic](#sql-basic)
-  - [Comments](#comments)
-- [DDL](#ddl)
-  - [Create Table](#create-table)
-  - [Alter Table](#alter-table)
-  - [Drop Table](#drop-table)
-  - [Truncate Table](#truncate-table)
-  - [Constraints](#constraints)
-    - [Primary Key](#primary-key)
-    - [Foreign Key](#foreign-key)
-    - [Unique](#unique)
-    - [Not Null](#not-null)
-    - [Check](#check)
-  - [View](#view)
-- [DML](#dml)
-  - [Insert](#insert)
-  - [Update](#update)
-  - [Delete](#delete)
 - [DQL](#dql)
   - [Select](#select)
   - [Sorting](#sorting)
@@ -64,113 +46,9 @@
     - [Any](#any)
 - [References](#references)
 
-## Sql Basic
-
-- Structured Query Language.
-- 관계형 데이터베이스에서 데이터를 관리하기 위한 언어.
-- declarative languag라서 자연어랑 유사함.
-- ISO Standard임. But 부족한 feature가 있어서 vender사마다 자기들만의 SQL Dialect가 있음.
-- [practice](https://www.sqltutorial.org/seeit/)
-
-### Comments
-
-```sql
-/* i am comment */
-
--- i am comment
-```
-
-[Go to top](#sql)
-
-## DDL
-
-- Data Definition Language.
-
-### Create Table
-
-- 한 database 안에 unique한 table을 생성.
-
-Create table with simple pk.
-
-```sql
-CREATE TABLE courses (
-    course_id INTEGER PRIMARY KEY AUTOINCREMENT, -- db automatically increment id when inserted
-    course_name VARCHAR(50) NOT NULL -- set as not null
-);
-```
-
-Create table composite pk.
-
-```sql
-CREATE TABLE trainings (
-    employee_id INTEGER,
-    course_id INTEGER,
-    taken_date DATE,
-    PRIMARY KEY (employee_id , course_id) -- set composite key
-);
-```
-
-[Go to top](#sql)
-
-### Alter Table
-
-[Go to top](#sql)
-
-### Drop Table
-
-[Go to top](#sql)
-
-### Truncate Table
-
-[Go to top](#sql)
-
-### Constraints
-
-[Go to top](#sql)
-
-#### Primary Key
-
-[Go to top](#sql)
-
-#### Foreign Key
-
-[Go to top](#sql)
-
-#### Unique
-
-[Go to top](#sql)
-
-#### Not Null
-
-[Go to top](#sql)
-
-#### Check
-
-[Go to top](#sql)
-
-### View
-
-[Go to top](#sql)
-
-## DML
-
-- Data Manupulation Language.
-
-### Insert
-
-[Go to top](#sql)
-
-### Update
-
-[Go to top](#sql)
-
-### Delete
-
-[Go to top](#sql)
-
 ## DQL
 
-- Data Query Languag.
+- Data Query Language.
 
 ### Select
 
@@ -264,7 +142,7 @@ FROM
 ...
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 ### Sorting
 
@@ -357,7 +235,7 @@ ORDER BY
 ...
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 ### Filtering
 
@@ -555,7 +433,7 @@ WHERE
     );
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### Fetch
 
@@ -600,6 +478,7 @@ FETCH NEXT 5 ROWS ONLY;
 
 - `=` :    Equal
 - `<>` : Not equal to
+    - `!=` 도 가능.
 - `>`    : Greater than
 - `>=` : Greater than or equal to
 - `<`    : Less than
@@ -725,7 +604,7 @@ WHERE
 ORDER BY salary DESC;
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### Logical Operators
 
@@ -970,7 +849,7 @@ WHERE
     );
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 ### Conditional Expression
 
@@ -1016,7 +895,7 @@ FROM
     employees;
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 ### Join
 
@@ -1084,7 +963,7 @@ FROM
     employees AS e;
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### Inner Join
 
@@ -1154,7 +1033,7 @@ WHERE
     employees.emp_no = dept_emp.emp_no;
 ```
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### Left Outer Join
 
@@ -1201,13 +1080,15 @@ WHERE
 
 ![left-outer-join-result2](./img/sql-left-outer-join-result2.png)
 
-[Go to top](#sql)
+todo: Implicit notation.
+
+[Go to top](#sql-query)
 
 #### Right Outer Join
 
 - Left outer join과 동일한데 방향만 다름.
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### Full Outer Join
 
@@ -1257,7 +1138,9 @@ FROM
  C           | (null)
 ```
 
-[Go to top](#sql)
+todo: Implicit notation.
+
+[Go to top](#sql-query)
 
 #### Cross Join
 
@@ -1304,13 +1187,15 @@ FROM
 
 ![cross-join-result](./img/sql-cross-join-result.png)
 
-[Go to top](#sql)
+todo: Implicit notation.
+
+[Go to top](#sql-query)
 
 #### Self Join
 
 - 필요에 따라 자기 자신과 Join하는 것. 주로 Inner join이나 Left outer join 사용.
 
-Joins the employees table to itself to query the information of who reports to whom.
+Joins the employees table to itself to query the information of who reports to whom (이름을 같이 보기 위해).
 
 ```sql
 SELECT 
@@ -1340,7 +1225,7 @@ ORDER BY manager;
 
 ![self-join-result2](./img/sql-self-join-result2.png)
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 ### Aggregation
 
@@ -1456,7 +1341,8 @@ SELECT
     AVG(salary)
 FROM
     employees e
-INNER JOIN departments d ON d.department_id = e.department_id
+    INNER JOIN departments d
+        ON d.department_id = e.department_id
 GROUP BY
     e.department_id
 HAVING AVG(salary) > 4000
@@ -1483,13 +1369,13 @@ FROM
 
 ![avg-subquery-result](./img/sql-avg-subquery-result.png)
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### Count
 
 - Returns the number of rows returned by a query. 
 - `DISTINCT` 쓰면 unique 하고 null이 아닌 것들만 포함.
-
+- `Count`하고 column 넣으면 해당 column이 null이 아닌 것들만 포함.
 
 To get the number of rows in the employees table, use `COUNT`.
 
@@ -1608,7 +1494,7 @@ ORDER BY
 
 ![count-having-result](./img/sql-count-having-result.png)
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### MAX
 
@@ -1715,7 +1601,7 @@ HAVING
 
 ![max-having-result](./img/sql-max-having-result.png)
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### MIN
 
@@ -1823,7 +1709,7 @@ HAVING
 
 ![min-having-result](./img/sql-min-having-result.png)
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 #### SUM
 
@@ -1923,7 +1809,7 @@ ORDER BY
 
 ![sum-having-result](./img/sql-sum-having-result.png)
 
-[Go to top](#sql)
+[Go to top](#sql-query)
 
 ### Grouping
 

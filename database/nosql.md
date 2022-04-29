@@ -1,20 +1,20 @@
 # NoSQL
 
 - [Cap Theorm](#cap-theorm)
-  - [Key-Value Model](#key-value-model)
-  - [Document Model](#document-model)
-  - [Column Model](#column-model)
-  - [Graph Model](#graph-model)
+- [Key-Value Model](#key-value-model)
+- [Document Model](#document-model)
+- [Column Model](#column-model)
+- [Graph Model](#graph-model)
 - [Reference](#reference)
 
 ## Cap Theorm
 
-### Key-Value Model
+## Key-Value Model
 
-### Document Model
+## Document Model
 
-### Column Model
+## Column Model
 
-### Graph Model
+## Graph Model
 
 ## Reference
