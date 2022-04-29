@@ -32,6 +32,8 @@ public class LongTaskTimerTest {
             System.out.printf("[while2] active tasks: %s, duration: %sms (snapshot: %s)%n",
                 scrapeTimer.activeTasks(), scrapeTimer.duration(TimeUnit.MILLISECONDS), scrapeTimer.takeSnapshot());
         });
+
+        // active: 0, duration: 0.0ms
         System.out.printf("[after] active tasks: %s, duration: %sms (snapshot: %s)%n",
             scrapeTimer.activeTasks(), scrapeTimer.duration(TimeUnit.MILLISECONDS), scrapeTimer.takeSnapshot());
     }

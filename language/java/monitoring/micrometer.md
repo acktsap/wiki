@@ -32,7 +32,6 @@ allowing you to instrument your JVM-based application code without vendor lock-i
       - Recording many longer durations could cause overflow of the total time at `Long.MAX_VALUE` nanoseconds (292.3 years)
     - `LongTaskTimer`
       - Measure time while an event being measured is still running.
-      -
     - `Counter`
     - `Gauge`
     - `DistributionSummary`
