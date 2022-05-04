@@ -8,6 +8,13 @@ public final class Block {
         return Thread.currentThread().getName();
     }
 
+    public static void print(String format, Object... args) {
+        Object[] newArgs = new Object[args.length + 1];
+        newArgs[0] = threadName();
+        System.arraycopy(args, 0, newArgs, 1, args.length);
+        System.out.printf("[%s] " + format + "%n", newArgs);
+    }
+
     public static void d(String description, DangerousRunnable dangerousRunnable) {
         try {
             System.out.printf("== %s ==%n", description);

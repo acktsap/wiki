@@ -101,7 +101,7 @@ public class JobConfig {
 
                         /*
                             localhost:8080/job?name=executionContextJob
-                            처음에만 실패하고 이후에 실행하면 성공
+                            count 1일때 처음에만 실패하고 이후에 실행하면 성공
                          */
                         if (count == 1) {
                             if (isFirst) {

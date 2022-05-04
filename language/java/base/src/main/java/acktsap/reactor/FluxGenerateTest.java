@@ -9,22 +9,22 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
+import static acktsap.Block.print;
 import static acktsap.Block.threadName;
 
 public class FluxGenerateTest {
     public static void main(String[] args) {
         Block.d("Create", () -> {
-            Flux<Integer> flux = Flux.create(emitter -> {
+            Flux<Integer> flux = Flux.<Integer>create(emitter -> {
                 IntStream.range(1, 4).forEach(i -> {
-                    System.out.printf("[%s] emit %d%n", threadName(), i); // run on main
+                    print("emit: %d", i); // run in main
                     emitter.next(i);
                 });
-                System.out.printf("[%s] emit complete%n", threadName()); // run on main
+                print("emit complete"); // run in main
                 emitter.complete();
             });
 
-            flux.subscribeOn(Schedulers.boundedElastic())
-                    .subscribe(i -> System.out.printf("[%s] subscribe %d%n", threadName(), i)); // run on pool
+            flux.subscribe(i -> print("subscribe %d", i)); // run in main
             Thread.sleep(1000L);
         });
 
@@ -34,16 +34,16 @@ public class FluxGenerateTest {
             Flux<Integer> flux = Flux.<Integer>create(emitter -> {
                 executorService.submit(() -> {
                     IntStream.range(1, 4).forEach(i -> {
-                        System.out.printf("[%s] emit %d%n", threadName(), i);
+                        print("emit %d", i);
                         emitter.next(i);
                     });
-                    System.out.printf("[%s] emit complete%n", threadName());
+                    print("emit complete");
                     emitter.complete();
                 });
 
             });
 
-            flux.subscribe(i -> System.out.printf("[%s] subscribe %d%n", threadName(), i));
+            flux.subscribe(i -> print("subscribe %d", i));
             Thread.sleep(1000L);
         });
 
@@ -62,7 +62,7 @@ public class FluxGenerateTest {
             });
 
             flux.subscribeOn(Schedulers.boundedElastic())
-                    .subscribe(i -> System.out.printf("[%s] subscribe %d%n", threadName(), i)); // run on pool
+                .subscribe(i -> System.out.printf("[%s] subscribe %d%n", threadName(), i)); // run on pool
             Thread.sleep(1000L);
         });
 
@@ -80,8 +80,8 @@ public class FluxGenerateTest {
             });
 
             flux.publishOn(Schedulers.boundedElastic())
-                    .subscribeOn(Schedulers.boundedElastic())
-                    .subscribe(i -> System.out.printf("[%s] subscribe '%s'%n", threadName(), i)); // run on pool
+                .subscribeOn(Schedulers.boundedElastic())
+                .subscribe(i -> System.out.printf("[%s] subscribe '%s'%n", threadName(), i)); // run on pool
             Thread.sleep(1000L);
         });
 
@@ -111,8 +111,8 @@ public class FluxGenerateTest {
                 });
             });
             fluxAdaptor.publishOn(Schedulers.boundedElastic())
-                    .subscribeOn(Schedulers.boundedElastic())
-                    .subscribe(i -> System.out.printf("[%s] subscribe '%s'%n", threadName(), i)); // run on pool
+                .subscribeOn(Schedulers.boundedElastic())
+                .subscribe(i -> System.out.printf("[%s] subscribe '%s'%n", threadName(), i)); // run on pool
             Thread.sleep(1000L);
         });
     }
