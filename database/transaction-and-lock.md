@@ -28,8 +28,10 @@
 - Purpose
   - To provide reliable units of work that allow correct recovery from failures and **keep a database consistency**.
   - To provide isolation between programs accessing a database concurrently.
-- 장점 : All or nothing이라서 한개가 에러가 발생하면 rollback함
-- 단점 : db connection수는 한정되어 있기 때문에 과도하게 사용하면 collection pool이 남아나질 않음
+- Pros
+  - All or nothing이라서 한개가 에러가 발생하면 rollback함
+- Cons
+- transaction 하는 동안 connection을 계속 점유하기 때문에 과도하게 사용하면 connection pool이 남아나지 않음.
 
 eg. Dobule-entry accounting.
 
@@ -82,12 +84,14 @@ Transaction이 가지는 속성
 
 ### Exclusive Lock
 
-- 보통 record writing을 위해 한번에 한개의 holder가 lock을 잡을 수 있게 하는 것.
+- 보통 record writing을 위해 한번에 한개의 lock holder만 lock을 잡을 수 있게 하는 것.
+- Write lock
 
 ### Shared Lock
 
 - 여러 개의 lock holder가 동시에 같은 데이터를 읽는 것을 보증하기 위해 record가 변경되지 않게하는 lock.
 - Exclusive locks cannot be obtained when a record is already locked (exclusively or shared).
+- Read lock.
 
 ### Deadlock
 

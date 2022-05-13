@@ -11,6 +11,8 @@
 - [Index](#index)
   - [Index Architecture](#index-architecture)
   - [Index Types](#index-types)
+  - [Multiple Index](#multiple-index)
+  - [Index를 정하는 기준](#index를-정하는-기준)
   - [Index Locking](#index-locking)
 - [Query Tuning](#query-tuning)
   - [Query Plan](#query-plan)
@@ -345,10 +347,12 @@ ORDER BY manager;
 
 - Non-clustered
   - 물리적으로 저장 할때 logical index order을 굳이 따르지 않는 것. 보통 primary key가 아닌 column들을 index할 때 사용.
-  - 장점 : primary Key를 수정하는 경우 물리적으로 수정 안해도 됨.
+  - Like a linked list.
+  - 장점 : index를 수정하는 경우 물리적으로 수정 안해도 됨.
   - 단점 : clustered index에 비해 느림.
 - Clustered
   - primary key에만 적용 가능한 것으로 물리적으로 키값이 비슷한 record끼리 묶어서 저장하는 것.
+  - Like an array.
   - 장점 : 비슷한 값들을 묶어서 저장하기 때문에 검색시 속도가 빠름.
   - 단점 : primary key를 수정하는 경우 물리적으로 실제 저장되어야 하는 위치가 변경.
 
@@ -356,6 +360,24 @@ ORDER BY manager;
 
 - Primary Index : primary key에 따라서 생성. 보통 table 생성 시 자동 생성.
 - Secondary Index : key field나 ordering field 이외의 field들로 index를 생성한 것.
+
+### Multiple Index
+
+- index가 주어진 column 순으로 만들어지기 때문에 2번째 column만 사용하면 index를 사용하지 않음.
+
+```sql
+CREATE INDEX person_first_name_last_name_idx ON person(last_name, first_name);
+
+SELECT * FROM person WHERE last_name="kim"; -- 빠름
+SELECT * FROM person WHERE last_name="kim" AND first_name="john"; -- 빠름
+SELECT * FROM person WHERE first_name="john"; -= 느림.
+```
+
+### Index를 정하는 기준
+
+- Index로 최대한 많은 효율을 뽑아내려면 Cardinality가 높은 column들을 선택해야 함.
+- Cardinality란 해당 column의 중복된 수치로 중복도가 낮으면 Cardinality가 높고 중복도가 높으면 Cardinality가 낮다.
+- Cardinality가 높은 (중복도가 낮은) column에 index를 걸면 index를 활용해서 최대한 많은 column을 걸러낼 수 있음.
 
 ### Index Locking
 
