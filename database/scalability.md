@@ -1,7 +1,0 @@
-# Scaling
-
-## Sharding
-
-## Replication
-
-## Clustering

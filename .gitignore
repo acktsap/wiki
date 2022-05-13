@@ -10,3 +10,6 @@ go.sum
 
 # a.out
 a.out
+
+# js
+node_modules/
