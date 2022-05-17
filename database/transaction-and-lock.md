@@ -196,6 +196,7 @@ ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting trans
 - Optimistic Lock
   - tx가 시작될때는 안걸고 data가 변경될 때만 lock을 거는 방법.
   - Application level에서 잡아주는 lock으로 version column을 where 조건에 사용해서 updated rows가 0건이면 다른 녀석이 수정했다고 보고 에러를 발생시키는 것.
+  - [eg. spring-batch JdbcStepExecutionDao](https://github.com/spring-projects/spring-batch/blob/main/spring-batch-core/src/main/java/org/springframework/batch/core/repository/dao/JdbcStepExecutionDao.java#L248-L291)
 - Pessimistic Lock
   - tx가 시작될 때 lock을 걸어서 동시에 수정 자체를 막아버리는 것.
 

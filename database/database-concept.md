@@ -7,8 +7,11 @@
   - [Entity-Relational Diagram](#entity-relational-diagram)
   - [Relation Model](#relation-model)
     - [Type of Keys](#type-of-keys)
+- [Functional Dependency](#functional-dependency)
+  - [Full Functional Dependency](#full-functional-dependency)
+  - [Partial Functional Dependency](#partial-functional-dependency)
+  - [Transitive Functional Dependency](#transitive-functional-dependency)
 - [Normalization](#normalization)
-  - [Functional Dependency](#functional-dependency)
   - [Anomaly (이상현상)](#anomaly-이상현상)
   - [1NF](#1nf)
   - [2NF](#2nf)
@@ -18,7 +21,11 @@
 - [Replication](#replication)
 - [Clustering](#clustering)
 - [Partitioning](#partitioning)
+  - [Horizontal partitioning](#horizontal-partitioning)
+  - [Vertical partitioning](#vertical-partitioning)
 - [Sharding](#sharding)
+  - [Horizontal sharding](#horizontal-sharding)
+  - [Vertical sharding??](#vertical-sharding)
 - [Partitioning vs Sharding](#partitioning-vs-sharding)
 - [Etc](#etc)
   - [ORM](#orm)
@@ -86,19 +93,40 @@
   - attribute가 다른 relation의 attribute에 있는 값들로만 이루어질 수 있는 경우.
   - eg. STUDENT_COURSE의 STUD_NO
 
+## Functional Dependency
+
+- For any relation R, attribute B is functionally dependent on attribute A if, for every valid instance of A, that value of A uniquely determines the value of B (Dutka and Hanson, 1989).
+- 이 때 X를 Determinant (결정자), Y를 Dependent 라고 함.
+- If the determinant X value is unique (different) then the dependent Y could have any value meaning:
+  - for same X , value of Y should be same.
+  - for different X, value of Y could be same or different.
+
+### Full Functional Dependency
+
+- 완전 함수 종속.
+- A dependency is said to be full if and only if the determinant of the dependency is either a candidate key or a super key.
+
+### Partial Functional Dependency
+
+- 부분 함수 종속.
+- A nonkey attribute is functionally dependent on part (but not all) of the primary key.
+- (X, Y) -> Z 가 있을 때 X -> Z 가 있는 경우.
+
+### Transitive Functional Dependency
+
+- 이행적 함수 종속.
+- A functional dependency between the primary key and one or more nonkey attributes that are dependent on the primary key via another nonkey attribute.
+- X가 primary key이고 Y가 primary key가 아닐 때 X -> Y이고, Y -> Z라서 X -> Z가 되는 경우를 의미. 
+
 ## Normalization
 
-![normalization](./img/normalization.jpeg)
+![normalization](./img/normalization.png)
 
 - 데이터의 중복을 최소화하게 데이터를 구조화하는 프로세스. 주로 함수적 종속으로 정의.
 - Pros
   - 데이터의 중복 저장을 제거해서 데이터를 효율적으로 저장.
 - Cons
   - query를 할 때 join을 해야 함. 그래서 query리 성능 저하가 심하게 발생하면 비정규화(De-normalization)를 해서 일부 중복을 허용하기도 함.
-
-### Functional Dependency
-
-- X 와 Y가 attribute 일 때, X 값이 Y 값을 유일하게 결정하는 경우 X -> Y로 함수적 종속이 있다고 함.
 
 ### Anomaly (이상현상)
 
@@ -112,7 +140,8 @@
 ![1nf-before-after.png](./img/normalization-1nf-before-after.png)
 
 - 모든 값이 atomic value 구성. 즉, 속성에 ',' 같은거 넣으면 안됨.
-- Repeating group을 다 분리해서 해결.
+- Solution
+  - Remove repeating groups.
 
 ### 2NF
 
@@ -121,16 +150,27 @@
 ![2nf-after.png](./img/normalization-2nf-after.png)
 
 - 1NF 이면서 **No Partial Dependency**.
-- Partial Dependency란 기본키의 일부에 종족적인 속성이 있는 경우를 의미 (eg. (X,Y)->Z일 때 X->Z가 있는 경우)
-- 기본키의 일부에 종속적인 속성들을 다른 테이블로 분리해서 해결.
+- Solution
+  1. Create a new relation for each primary key attribute (or combination of attributes)
+that is a determinant in a partial dependency. That attribute is the primary key in
+the new relation.
+  2. Move the nonkey attributes that are dependent on this primary key attribute
+(or attributes) from the old relation to the new relation.
+  - 즉, 기본키의 일부에 종속적인 속성들을 다른 테이블로 분리해서 해결.
 
 ### 3NF
 
-![3nf-before-after](./img/normalization-3nf-before-after.png)
+![3nf-before](./img/normalization-3nf-before.png)
+
+![3nf-after](./img/normalization-3nf-after.png)
 
 - 2NF 이면서 **No Transitive Functional Dependency**.
-- Transitive Functional Dependency란 X가 primary key이고 Y가 primary key가 아닐 때 X->Y이고, Y->Z라서 X->Z가 되는 경우를 의미. 
-- Y->Z를 다른 테이블로 분리해서 해결.
+- Solution
+  1. For each nonkey attribute (or set of attributes) that is a determinant in a relation, create a new relation. That attribute (or set of attributes) becomes the primary key
+  of the new relation.
+  2. Move all of the attributes that are functionally dependent on the primary key of the new relation from the old to the new relation.
+  3. Leave the attribute that serves as a primary key in the new relation in the old relation to serve as a foreign key that allows you to associate the two relations.
+  - 간단하게 Transitive Functional Dependency에서 사이에 낀 함수적 종속을 다른 테이블로 분리하고 기존 테이블에서 외래키로 지정.
 
 ### BCNF
 
@@ -139,6 +179,9 @@
 ![bcnf-after](./img/normalization-bcnf-after.png)
 
 - 3NF 이면서 모든 X -> Y 의 모든 X가 candidate key인 경우.
+- Solution
+  1. In the first step, the relation is modified so that the determinant in the relation that is not a candidate key becomes a component of the primary key of the revised relation. The attribute that is functionally dependent on that determinant becomes a nonkey attribute.
+  2. The second step in the conversion process is to decompose the relation to eliminate the partial functional dependency. This results in two relations.
 
 ## CAP
 
@@ -170,34 +213,43 @@
   - 1개의 node가 죽어도 손쉽게 failover 가능.
 - Cons
   - 데이터를 동기화하는데 시간이 필요하므로 replication에 비해 성능이 떨어짐.
-  - 장애가 일어난 경우 처리가 번거롭다.
+  - 장애가 전파된 경우 처리가 까다로움.
 
 ## Partitioning
+
+![partitioning](./img/concept-partitioning.png)
 
 - data를 관리하기 쉬운 단위로 분리해서 저장하는 것.
 - Pros
   - 데이터를 분산해서 저장해서 index 크기를 줄이는 등 성능 향상을 꾀할 수 있음.
 - Cons
   - join 등을 할 때 비용이 증가.
-  - node간 통신 비용도 증가.
-- Horizontal partitioning
-  - 비슷한 row들을 다른 테이블에 나누어서 저장하는 것 (eg. < 500까지는 여기, 500 이후부터는 저기)
-  - 같은 형식의 스키마지만 엄밀히는 서로 다른 table에 저장.
-  - 분리해서 저장함으로서 index 크기를 줄이는 등 성능 향상을 꾀할 수 있음.
-- Vertical partitioning
-  - column을 기준으로 데이터를 나누어서 다른 테이블에 저장하는 것.
-  - 자주 사용하는 column을 분리하고 해서 성능 향상을 할 수 있음.
+
+### Horizontal partitioning
+
+- 비슷한 row들을 다른 테이블에 나누어서 저장하는 것. (eg. < 500까지는 여기, 500 이후부터는 저기) 같은 형식의 스키마지만 엄밀히는 서로 다른 table에 저장.
+- 분리해서 저장함으로서 index 크기를 줄이는 등 성능 향상을 꾀할 수 있음.
+
+### Vertical partitioning
+
+- column을 기준으로 데이터를 나누어서 다른 테이블에 저장하는 것.
+- 자주 사용하는 column을 분리하고 해서 성능 향상을 할 수 있음.
 
 ## Sharding
 
-- Horizontal sharding
-  - Horizontal partitioning의 일부로 같은 스키마를 사용해서 shard key 같은거에 따라 분산해서 저장하는 것.
-  - Pros
-    - 데이터를 분산해서 저장해서 성능 향상을 꾀할 수 있음.
-  - Cons
-    - 서로 다른 shard간 join이 어려움.
-- Vertical sharding??
-  - Vertical partitioning이랑 거의 동일하다고 볼 수 있는듯.
+- Partitioning의 구체적인 타입.
+
+### Horizontal sharding
+
+- Horizontal partitioning의 일부로 같은 스키마를 사용해서 shard key 같은거에 따라 분산해서 저장하는 것.
+- Pros
+  - 데이터를 분산해서 저장해서 성능 향상을 꾀할 수 있음.
+- Cons
+  - 서로 다른 shard간 join이 어려움.
+
+### Vertical sharding??
+
+- Vertical partitioning이랑 거의 동일하다고 볼 수 있는듯.
 
 ## Partitioning vs Sharding
 
@@ -245,6 +297,7 @@
 - Normalization
   - [wiki](https://en.wikipedia.org/wiki/Database_normalization)
   - [마곡 리더스 코딩](https://magok-leaders-coding.tistory.com/4)
+  - [ashutoshtripathi](https://ashutoshtripathi.com/gate/dbms/normalization-normal-forms/types-of-functional-dependencies-in-normalization/)
 - Replication, Clustering
   - [https://mangkyu.tistory.com/97 (망나니개발자)](https://mangkyu.tistory.com/97)
 - Partitioning, Sharding

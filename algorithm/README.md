@@ -16,11 +16,30 @@
   - [Always init on declaration](#always-init-on-declaration)
   - [No floating point operation if possible](#no-floating-point-operation-if-possible)
   - [Validate function precondition](#validate-function-precondition)
+- [Brute Force](#brute-force)
 - [Debugging](#debugging)
   - [Logging middle result](#logging-middle-result)
   - [Use assert on precondition](#use-assert-on-precondition)
-  - [Print Utils](#print-utils)
-- [Brute Force](#brute-force)
+- [Java Apis](#java-apis)
+  - [Console I/O](#console-io)
+  - [Array](#array)
+  - [List](#list)
+  - [Queue](#queue)
+  - [Stack](#stack)
+  - [Map](#map)
+  - [Set](#set)
+  - [Heap](#heap)
+  - [Sorting](#sorting)
+- [C++ Apis](#c-apis)
+  - [Console I/O](#console-io-1)
+  - [Array](#array-1)
+  - [Vector](#vector)
+  - [Queue](#queue-1)
+  - [Stack](#stack-1)
+  - [Map](#map-1)
+  - [Set](#set-1)
+  - [Heap](#heap-1)
+  - [Sorting](#sorting-1)
 
 ## Rule
 
@@ -219,6 +238,10 @@ void dfs(TreeNode curr) {
 }
 ```
 
+## Brute Force
+
+![brute-force](./img/brute-force.jpg)
+
 ## Debugging
 
 ### Logging middle result
@@ -239,17 +262,74 @@ void f(int next, int sum) {
 }
 ```
 
-### Print Utils
+## Java Apis
+
+### Console I/O
 
 ```java
-// general toString
-Objects.toString(new int[] { 1, 2, 3 });
-Objects.toString(Arrays.asList(1, 2));
+// console output
+System.out.println("hello");
+
+// array to String
+System.ot.println(Objects.toString(Arrays.asList(1, 2)));
 
 // nested array toString
-Arrays.deepToString(new int[][] { {1,2,3}, {1, 2} });
+System.ot.println(Arrays.deepToString(new int[][] { {1,2,3}, {1, 2} }));
+
+// console input
+Scanner scanner = new Scanner(System.in);
+
+// check next
+scanner.hasNext();
+
+// get next int
+scanner.nextInt();
+
+// get next long
+scanner.nextLong();
+
+// get next string
+scanner.next();
 ```
 
-## Brute Force
+### Array
 
-![brute-force](./img/brute-force.jpg)
+### List
+
+### Queue
+
+### Stack
+
+### Map
+
+### Set
+
+### Heap
+
+### Sorting
+
+## C++ Apis
+
+### Console I/O
+
+```cpp
+cout << "hello" << endl;
+
+// todo
+```
+
+### Array
+
+### Vector
+
+### Queue
+
+### Stack
+
+### Map
+
+### Set
+
+### Heap
+
+### Sorting
