@@ -315,12 +315,31 @@ scanner.next();
 ```cpp
 cout << "hello" << endl;
 
-// todo
+// print vector
+copy(adjacent.begin(), adjacent.end(), ostream_iterator<int>(cout, ", "))
 ```
 
 ### Array
 
 ### Vector
+
+```cpp
+// init 
+vector<int> test;
+
+// init with size 3 and fill with 1
+vector<int> test(3, 1);
+
+// using initializer list
+vector<int> test = { 1, 2, 3 };
+vector<vector<int>> test2 = {
+  { 1, 2, 3 },
+  { 4, 5, 6 },
+};
+
+// add value to next
+test.push_back(3);
+```
 
 ### Queue
 
