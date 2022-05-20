@@ -17,7 +17,6 @@
   - [2NF](#2nf)
   - [3NF](#3nf)
   - [BCNF](#bcnf)
-- [CAP](#cap)
 - [Replication](#replication)
 - [Clustering](#clustering)
 - [Partitioning](#partitioning)
@@ -182,17 +181,6 @@ the new relation.
 - Solution
   1. In the first step, the relation is modified so that the determinant in the relation that is not a candidate key becomes a component of the primary key of the revised relation. The attribute that is functionally dependent on that determinant becomes a nonkey attribute.
   2. The second step in the conversion process is to decompose the relation to eliminate the partial functional dependency. This results in two relations.
-
-## CAP
-
-- 데이터베이스를 분산해서 관리하면 다음의 3개 중 2개 초과를 보장할 수 없음
-  - Consistency : 분산된 데이터 간 동일한 시간에 조회하면 동일한 데이터를 얻는 것
-  - Availability : 항상 이용가능한 것
-  - Partition Tolerance  : 네트워크 장애가 발생해도 시스템이 정상적으로 운영되어야 함
-- Partition Tolerance를 보장하면서
-  - Concsistency를 보장하려면 네트워크 장애가 발생하면 기다려야함 (Availability 불만족)
-  - Availability를 보장하려면 네트워크 장애가 발생해도 동작해야함. 그 서버에는 값이 다를 수 있음 (Consistency 불만족)
-- 그렇다고 Partition Tolerance를 버리면 분산 하는 의미가 없음
 
 ## Replication
 

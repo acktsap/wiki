@@ -10,9 +10,10 @@
   - [AUTO-INC Locks](#auto-inc-locks)
   - [Predicate Locks for Spatial Indexes](#predicate-locks-for-spatial-indexes)
 - [MySQL Isolation Levels](#mysql-isolation-levels)
+  - [Consistent Read](#consistent-read)
   - [READ UNCOMMITED](#read-uncommited)
-  - [READ COMMITED](#read-commited)
-  - [REPEATABLE READS](#repeatable-reads)
+  - [READ COMMITTED](#read-committed)
+  - [REPEATABLE READ](#repeatable-read)
   - [SERIALIZABLE](#serializable)
 - [Reference](#reference)
 
@@ -79,17 +80,39 @@ InnoDB는 Shared and Exclusive Locks 표준을 구현.
 
 ## MySQL Isolation Levels
 
+- A user can change the isolation level for a single session or for all subsequent connections with the `SET TRANSACTION` statement. To set the server's default isolation level for all connections, use the `--transaction-isolation` option on the command line or in an option file. 
+
+### Consistent Read
+
+- A read operation that uses snapshot information to present query results based on a point in time, regardless of changes performed by other transactions running at the same time.
+
 ### READ UNCOMMITED
 
-### READ COMMITED
+- Performed in a nonlocking fashion.
 
-### REPEATABLE READS
+### READ COMMITTED
+
+- Each consistent read, even within the same transaction, sets and reads its own fresh snapshot.
+- For locking reads (`SELECT` with `FOR UPDATE `or `FOR SHARE`), `UPDATE` statements, and `DELETE` statements, InnoDB locks only index records, not the gaps.
+- For `UPDATE` or `DELETE` statements, InnoDB holds locks only for rows that it updates or deletes. Record locks for nonmatching rows are released after MySQL has evaluated the WHERE condition. This greatly reduces the probability of deadlocks.
+
+### REPEATABLE READ
+
+- Consistent reads within the same transaction read the snapshot established by the first read.
+- Default for InnoDb.
+- For locking reads (`SELECT` with `FOR UPDATE` or `FOR SHARE`), `UPDATE`, and `DELETE` statements, locking depends on whether the statement uses a unique index with a unique search condition, or a range-type search condition.
+  - For a unique index, locks only the index record. Not gap.
+  - For others, locks the index range scanned using gap lock or next-key lock.
 
 ### SERIALIZABLE
+
+- Like REPEATABLE READ, except for InnoDB implicitly converts all plain `SELECT` statements to `SELECT ... FOR SHARE` if autocommit is disabled.
+- If autocommit is enabled, the SELECT is its own transaction. 
 
 ## Reference
 
 - [MySQL 8.0 reference, innodb-locking-transaction-model](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-transaction-model.html)
   - [MySQL reference, innodb-locking](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html)
   - [MySQL reference, innodb-transaction-isolation-levels](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)
+  - [MySQL reference ,Consistent Nonlocking Reads](https://dev.mysql.com/doc/refman/8.0/en/innodb-consistent-read.html)
 - [MySQL InnoDB lock & deadlock 이해하기](https://www.letmecompile.com/mysql-innodb-lock-deadlock/)

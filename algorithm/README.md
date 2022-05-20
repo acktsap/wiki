@@ -324,7 +324,7 @@ copy(adjacent.begin(), adjacent.end(), ostream_iterator<int>(cout, ", "))
 ### Vector
 
 ```cpp
-// init 
+// init
 vector<int> test;
 
 // init with size 3 and fill with 1
@@ -347,7 +347,58 @@ test.push_back(3);
 
 ### Map
 
+```cpp
+// init
+map<string, int> m;
+
+// insert
+m.insert({"test", 3});
+m.insert({"test2", 2});
+
+// find 값이 있으면 해당 위치의 iterator 반환, 아니면 s.end()반환
+m.find("test");
+m.find("test") == m.end(); // false
+m.find("aaa") == m.end(); // true
+
+// remove
+m.erase("test2");
+
+// clear entry
+m.clear();
+```
+
 ### Set
+
+```cpp
+// init
+set<int> s;
+
+// init with containser
+vector<int> datas = { 1, 2, 1, 3 }
+set<int> s(datas.begin(), datas.end());
+
+// add
+s.insert(2);
+s.insert(3);
+
+// find 값이 있으면 해당 위치의 iterator 반환, 아니면 s.end()반환
+s.find(3);
+s.find(3) == s.end() // false
+s.find(99) == s.end() // true
+
+// get
+s[3];
+
+// remove
+s.erase(3);
+
+// clear elements
+s.clear();
+
+// check size
+s.empty();
+s.size();
+```
 
 ### Heap
 
