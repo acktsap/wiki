@@ -208,3 +208,4 @@ ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting trans
 - [Two-phase locking (wiki)](https://en.wikipedia.org/wiki/Two-phase_locking)
 - [Isolation (wiki)](https://en.wikipedia.org/wiki/Isolation_(database_systems))
 - [Optimistic Lock과 Pessimistic Lock (코딩하는 오징어)](https://effectivesquid.tistory.com/entry/Optimistic-Lock%EA%B3%BC-Pessimistic-Lock)
+- [A Critique of ANSI SQL Isolation Levels, (Microsoft Corp Research)](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf)
