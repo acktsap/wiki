@@ -2,12 +2,12 @@ package acktsap.coroutine
 
 import acktsap.Block
 import acktsap.log
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.future.await
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -72,14 +72,14 @@ fun main() {
                 - default # of thread == # of core
              */
             runBlocking {
-                withContext(Dispatchers.Default) {
-                    (1..2 * nProcessor).map {
-                        // started가 core개수만큼씩만 한번에 찍힘
-                        // Dispatchers.Default는 core 수만큼 thread가 있는데
-                        // 다 blocking이 되어서 다른 task로 context switching이 미발생
-                        async { sendRequest("Dispatchers.Default") }
-                    }.awaitAll()
-                }
+                (1..2 * nProcessor).map {
+                    // started가 core개수만큼씩만 한번에 찍힘
+                    // Dispatchers.Default는 core 수만큼 thread가 있는데
+                    // 다 blocking이 되어서 다른 task로 context switching이 미발생
+                    CoroutineScope(Dispatchers.Default).async {
+                        sendRequest("Dispatchers.Default")
+                    }
+                }.awaitAll()
             }
         }
 
@@ -93,13 +93,13 @@ fun main() {
                 - set pool size : kotlinx.coroutines.scheduler.max.pool.size
              */
             runBlocking {
-                withContext(Dispatchers.IO) {
-                    (1..2 * nProcessor).map {
-                        // started가 한번에 찍힌 이후 finished가 한번에 찍힘
-                        // Dispatchers.IO는 I/O intensive job을 위해 pool size를 넉넉하게 잡아놓아서 (기본 : 64) suspend해도 문제 없음
-                        async { sendRequest("Dispatchers.IO") }
-                    }.awaitAll()
-                }
+                (1..2 * nProcessor).map {
+                    // started가 한번에 찍힌 이후 finished가 한번에 찍힘
+                    // Dispatchers.IO는 I/O intensive job을 위해 pool size를 넉넉하게 잡아놓아서 (기본 : 64) suspend해도 문제 없음
+                    CoroutineScope(Dispatchers.IO).async {
+                        sendRequest("Dispatchers.IO")
+                    }
+                }.awaitAll()
             }
         }
 
@@ -111,14 +111,14 @@ fun main() {
                 - default # of thread == # of core
              */
             runBlocking {
-                withContext(Dispatchers.Default) {
-                    (1..2 * nProcessor).map {
-                        // started가 전부 한번에 찍힘
-                        // Dispatchers.Default는 core 수만큼 thread가 있지만
-                        // suspend function을 async로 호출해서 병렬처리 가능
-                        async { sendRequestAsync("Dispatchers.Default with suspend") }
-                    }.awaitAll()
-                }
+                (1..2 * nProcessor).map {
+                    // started가 전부 한번에 찍힘
+                    // Dispatchers.Default는 core 수만큼 thread가 있지만
+                    // suspend function을 async로 호출해서 병렬처리 가능
+                    CoroutineScope(Dispatchers.Default).async {
+                        sendRequestAsync("Dispatchers.Default with suspend")
+                    }
+                }.awaitAll()
             }
         }
 
