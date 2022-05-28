@@ -1,24 +1,24 @@
 # JVM
 
-- [JVM](#jvm)
-  - [Architecture](#architecture)
-  - [Heap Structure](#heap-structure)
-    - [Constant Pool](#constant-pool)
-  - [Garbage Collector](#garbage-collector)
-    - [Minor GC, Major GC](#minor-gc-major-gc)
-    - [Card Table](#card-table)
-    - [Thread-Local Allocation Buffers](#thread-local-allocation-buffers)
-    - [Stop the world](#stop-the-world)
-  - [Garbage Collectors](#garbage-collectors)
-    - [Serial Collector](#serial-collector)
-    - [Parallel Collector](#parallel-collector)
-    - [Parallel Compacting Collector](#parallel-compacting-collector)
-    - [CMS (Concurrent Mark Sweep) Collector](#cms-concurrent-mark-sweep-collector)
-    - [G1 Collector](#g1-collector)
-  - [GC Tuning](#gc-tuning)
-    - [Out Of Memory (OOM) Error](#out-of-memory-oom-error)
-    - [JVM Crash](#jvm-crash)
-  - [Reference](#reference)
+- [Architecture](#architecture)
+- [todo](#todo)
+- [Heap Structure](#heap-structure)
+  - [Constant Pool](#constant-pool)
+- [Garbage Collector](#garbage-collector)
+  - [Minor GC, Major GC](#minor-gc-major-gc)
+  - [Card Table](#card-table)
+  - [Thread-Local Allocation Buffers](#thread-local-allocation-buffers)
+  - [Stop the world](#stop-the-world)
+- [Garbage Collectors](#garbage-collectors)
+  - [Serial Collector](#serial-collector)
+  - [Parallel Collector](#parallel-collector)
+  - [Parallel Compacting Collector](#parallel-compacting-collector)
+  - [CMS (Concurrent Mark Sweep) Collector](#cms-concurrent-mark-sweep-collector)
+  - [G1 Collector](#g1-collector)
+- [GC Tuning](#gc-tuning)
+  - [Out Of Memory (OOM) Error](#out-of-memory-oom-error)
+  - [JVM Crash](#jvm-crash)
+- [Reference](#reference)
 
 ## Architecture
 
@@ -32,6 +32,10 @@
   - Stack Area : method stack의 지역변수들을 저장, Thread별로 생성
   - PC Registers : Program Counter Registers, Thread별로 다음에 실행될 명령어의 주소를 저장
   - Native Method Stack : c/c++ 등의 native method에 대한 stack
+
+## todo
+
+기본 처리 단위 4 byte?
 
 ## Heap Structure
 

@@ -1,40 +1,39 @@
 # Java Questions
 
-- [Java Questions](#java-questions)
-  - [Type](#type)
-    - [Primitive types](#primitive-types)
-    - [Wrapper Class, AutoBoxing, Unboxing](#wrapper-class-autoboxing-unboxing)
-    - [Integer.valueOf vs Integer.parseInt](#integervalueof-vs-integerparseint)
-  - [Class](#class)
-    - [Overridding vs Overloading](#overridding-vs-overloading)
-    - [Interface vs Abstract class](#interface-vs-abstract-class)
-    - [Access Modifier (접근지정자)](#access-modifier-접근지정자)
-    - [static, default method in interface](#static-default-method-in-interface)
-    - [Java Class정의 필수요소](#java-class정의-필수요소)
-    - [Annotation, Generics](#annotation-generics)
-    - [Exception](#exception)
-    - [ClassLoader](#classloader)
-  - [Collection vs Stream](#collection-vs-stream)
-    - [ArrayList, LinkedList](#arraylist-linkedlist)
-    - [Vector vs ArrayList](#vector-vs-arraylist)
-    - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
-    - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
-    - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
-    - [Java Lambda vs Anonymous class](#java-lambda-vs-anonymous-class)
-    - [Java에 Closure가 있는가](#java에-closure가-있는가)
-  - [Concurrency](#concurrency)
-    - [Java Thread & Kernal thread](#java-thread--kernal-thread)
-    - [Volatile](#volatile)
-    - [ForkJoinPool](#forkjoinpool)
-    - [Atomic Operation](#atomic-operation)
-  - [I/O](#io)
-    - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
-    - [NIO](#nio)
-    - [Stream (I/O) vs Channel](#stream-io-vs-channel)
-  - [Reflection](#reflection)
-    - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
-    - [What is Synthetic?](#what-is-synthetic)
-  - [References](#references)
+- [Type](#type)
+  - [Primitive types](#primitive-types)
+  - [Wrapper Class, AutoBoxing, Unboxing](#wrapper-class-autoboxing-unboxing)
+  - [Integer.valueOf vs Integer.parseInt](#integervalueof-vs-integerparseint)
+- [Class](#class)
+  - [Overridding vs Overloading](#overridding-vs-overloading)
+  - [Interface vs Abstract class](#interface-vs-abstract-class)
+  - [Access Modifier (접근지정자)](#access-modifier-접근지정자)
+  - [static, default method in interface](#static-default-method-in-interface)
+  - [Java Class정의 필수요소](#java-class정의-필수요소)
+  - [Annotation, Generics](#annotation-generics)
+  - [Exception](#exception)
+  - [ClassLoader](#classloader)
+- [Collection vs Stream](#collection-vs-stream)
+  - [ArrayList, LinkedList](#arraylist-linkedlist)
+  - [Vector vs ArrayList](#vector-vs-arraylist)
+  - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
+  - [HashTable vs ConcurrentHashMap](#hashtable-vs-concurrenthashmap)
+  - [Lambda, @FunctionalInterface](#lambda-functionalinterface)
+  - [Java Lambda vs Anonymous class](#java-lambda-vs-anonymous-class)
+  - [Java에 Closure가 있는가](#java에-closure가-있는가)
+- [Concurrency](#concurrency)
+  - [Java Thread & Kernal thread](#java-thread--kernal-thread)
+  - [Volatile](#volatile)
+  - [ForkJoinPool](#forkjoinpool)
+  - [Atomic Operation](#atomic-operation)
+- [I/O](#io)
+  - [InputStream, OutputStream, Reader, Writer](#inputstream-outputstream-reader-writer)
+  - [NIO](#nio)
+  - [Stream (I/O) vs Channel](#stream-io-vs-channel)
+- [Reflection](#reflection)
+  - [Proxy vs DynamicProxy](#proxy-vs-dynamicproxy)
+  - [What is Synthetic?](#what-is-synthetic)
+- [References](#references)
 
 ## Type
 
@@ -253,8 +252,8 @@ https://dreamchaser3.tistory.com/5
 ### Volatile
 
 - 한 thread에서 수정한 값이 cache에만 저장되어 있어서 다른 thread에 보이지 않는 메모리의 가시성 문제를 해결하기 위한 것
-- 이 키워드를 쓴 변수에 대해서는 cache를 사용하지 않고 memory만 사용
-- jvm이 4 byte단위로 연산하기 때문에 8바이트를 사용하는 long, double에 대해서는 2개의 연산이 필요해서 동작하지 않음.
+- 이 키워드를 쓴 변수에 대해서는 cache를 사용하지 않고 memory만 사용.
+- 기본적으로 jvm이 4 byte단위로 연산하기 때문에 8바이트를 사용하는 long, double에 대해서는 2개의 연산이 필요해서 원자성을 보장하지 않는데 volatile으로 하면 원자성이 보장됨.
 
 ### ForkJoinPool
 

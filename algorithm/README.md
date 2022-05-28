@@ -9,6 +9,7 @@
 - [Proving](#proving)
   - [Loop dominates Time Complexity](#loop-dominates-time-complexity)
   - [Mathematical Induction (수학적귀납법)](#mathematical-induction-수학적귀납법)
+  - [귀류법](#귀류법)
   - [Loop Invariant](#loop-invariant)
   - [Test with corner case](#test-with-corner-case)
 - [Implemenation](#implemenation)
@@ -170,13 +171,18 @@ f(n + 1) = (f(n - 1) + n) + n + 1
          = f(n) + n + 1
 ```
 
+### 귀류법
+
+- 어떤 명제가 참이라고 가정한 후, 모순을 이끌어내 그 가정이 거짓임을, 즉 처음의 명제가 참임을 증명하는 방법이다.
+  > 그래 니 말이 맞다고 치자, 그러면 ~~ 해서 이상하잖아?
+
 ### Loop Invariant
 
-TODO
+- A property of a program loop that is true before (and after) each iteration.
 
 ### Test with corner case
 
-Just like -1, 0, 1 in `if (n <= 0) ...`
+- like -1, 0, 1 in `if (n <= 0) ...`.
 
 ## Implemenation
 
@@ -403,3 +409,16 @@ s.size();
 ### Heap
 
 ### Sorting
+
+```cpp
+vector<int> items { 2, 3, 1, 10 };
+
+// ascending order
+sort(items.begin(), items.end());
+
+// with comparator (ascending order)
+sort(items.begin(), items.end(), [](int& a, int& b) { return a < b; });
+
+// with comparator (decending order)
+sort(items.begin(), items.end(), [](int& a, int& b) { return a > b; });
+```

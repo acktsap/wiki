@@ -1,5 +1,15 @@
 # Dynamic Programming
 
+- [Terms](#terms)
+- [Concept](#concept)
+  - [Characteristics](#characteristics)
+    - [When to use](#when-to-use)
+  - [Framework](#framework)
+- [Bottom-up (Tabulation)](#bottom-up-tabulation)
+- [Top-down (Memoization) : Prefer it](#top-down-memoization--prefer-it)
+- [Multidimensional](#multidimensional)
+- [Reference](#reference)
+
 ## Terms
 
 - Memoization : Do not compute twice. Cache it.
