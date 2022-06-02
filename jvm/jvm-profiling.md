@@ -1,5 +1,10 @@
 # Jvm Profiling
 
+- [jdk tools](#jdk-tools)
+- [Thread dump](#thread-dump)
+- [Heap Profiling](#heap-profiling)
+- [Show class file compiler version](#show-class-file-compiler-version)
+
 ## jdk tools
 
 - jcmd : jdk7 or higher, integrated one (jstack, jinfo, jmap, etc..), use it

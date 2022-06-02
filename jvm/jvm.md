@@ -1,7 +1,7 @@
 # JVM
 
 - [Architecture](#architecture)
-- [todo](#todo)
+- [Memory Layout](#memory-layout)
 - [Heap Structure](#heap-structure)
   - [Constant Pool](#constant-pool)
 - [Garbage Collector](#garbage-collector)
@@ -15,6 +15,7 @@
   - [Parallel Compacting Collector](#parallel-compacting-collector)
   - [CMS (Concurrent Mark Sweep) Collector](#cms-concurrent-mark-sweep-collector)
   - [G1 Collector](#g1-collector)
+- [Memory usage](#memory-usage)
 - [GC Tuning](#gc-tuning)
   - [Out Of Memory (OOM) Error](#out-of-memory-oom-error)
   - [JVM Crash](#jvm-crash)
@@ -33,9 +34,9 @@
   - PC Registers : Program Counter Registers, Thread별로 다음에 실행될 명령어의 주소를 저장
   - Native Method Stack : c/c++ 등의 native method에 대한 stack
 
-## todo
+## Memory Layout
 
-기본 처리 단위 4 byte?
+todo: 기본 처리 단위 4 byte? 맞아?
 
 ## Heap Structure
 
@@ -155,6 +156,15 @@ GC를 하기 위해 JVM이 멈추는 것. 이 시간을 Suspend time이라고 �
 
 - Garbage First -> Heap을 Region단위로 나누어서 Garbage로 가득 차 있는 Region부터 GC를 수행
 - CMS에 비해 GC의 단위가 작기 때문에 stop-the-world시간이 짧고 stop-the-world도 그 region을 사용하는 곳에서만 일어남
+
+## Memory usage
+
+- 옛날 gc들은 os로부터 memory 할당받고 나서 uncommit을 하지 않는거같음. 최신 gc (g1, z) 같은거는 heap shrinking을 제공하고.
+- 해결방법
+  - `-Xms`가 너무 크게 잡은게 아닌지 확인 : `-Xms`로 처음에는 os로부터 memory를 할당받지 않다가 나중에 필요해서 할당받고 나면 `-Xms`보다 줄지 않음.
+  - `XX:MaxHeapFreeRatio`를 너무 크게 잡지 않았는지 확인 : 크게 잡으면 free space를 크게 들고 있는다.
+- see also
+  - https://www.baeldung.com/gc-release-memory
 
 ## GC Tuning
 

@@ -1,5 +1,6 @@
 package acktsap.webclient;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
@@ -7,6 +8,7 @@ import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriBuilderFactory;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,6 +35,7 @@ public class WebClientConfigTest {
                 .uriBuilderFactory(uriBuilderFactory) // provide custom uriBuilderFactory
                 .defaultUriVariables(Map.of("uriKey", "uriValue")) // provide default uri variable (exclusive with uriBuilderFactory)
                 .defaultHeader("testHeader", "headerValue") // provide custom header
+                .defaultHeaders(headers -> headers.setAccept(List.of(MediaType.APPLICATION_JSON))) // profide custom headers
                 .defaultCookie("defaultCookie", "cookieValue") // set default cookie
                 .defaultRequest(spec -> spec.header("someHeader", "h~~")) // set default request spec
                 .codecs(configurer -> {

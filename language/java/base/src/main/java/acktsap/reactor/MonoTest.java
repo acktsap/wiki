@@ -47,5 +47,10 @@ public class MonoTest {
             //     .collectList()
             //     .block();
         });
+
+        Block.d("Empry mono returns null", () -> {
+            Mono<Integer> mono = Mono.empty();
+            System.out.println(mono.block());
+        });
     }
 }
