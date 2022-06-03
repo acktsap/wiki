@@ -29,8 +29,6 @@
 # run task in sub-project
 # exmaple) ./gradlew library-core:test
 ./gradlew {sub_project}:{some_task} 
-
-# exmaple) ./gradlew library-core:test
 ```
 
 ## Structuring Software Products

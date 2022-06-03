@@ -15,10 +15,11 @@
   - [Parallel Compacting Collector](#parallel-compacting-collector)
   - [CMS (Concurrent Mark Sweep) Collector](#cms-concurrent-mark-sweep-collector)
   - [G1 Collector](#g1-collector)
-- [Memory usage](#memory-usage)
 - [GC Tuning](#gc-tuning)
   - [Out Of Memory (OOM) Error](#out-of-memory-oom-error)
   - [JVM Crash](#jvm-crash)
+  - [jvm process가 너무 많은 memory를 차지하고 gc 이후로도 반환을 안한다?](#jvm-process가-너무-많은-memory를-차지하고-gc-이후로도-반환을-안한다)
+  - [Heap size](#heap-size)
 - [Reference](#reference)
 
 ## Architecture
@@ -157,14 +158,6 @@ GC를 하기 위해 JVM이 멈추는 것. 이 시간을 Suspend time이라고 �
 - Garbage First -> Heap을 Region단위로 나누어서 Garbage로 가득 차 있는 Region부터 GC를 수행
 - CMS에 비해 GC의 단위가 작기 때문에 stop-the-world시간이 짧고 stop-the-world도 그 region을 사용하는 곳에서만 일어남
 
-## Memory usage
-
-- 옛날 gc들은 os로부터 memory 할당받고 나서 uncommit을 하지 않는거같음. 최신 gc (g1, z) 같은거는 heap shrinking을 제공하고.
-- 해결방법
-  - `-Xms`가 너무 크게 잡은게 아닌지 확인 : `-Xms`로 처음에는 os로부터 memory를 할당받지 않다가 나중에 필요해서 할당받고 나면 `-Xms`보다 줄지 않음.
-  - `XX:MaxHeapFreeRatio`를 너무 크게 잡지 않았는지 확인 : 크게 잡으면 free space를 크게 들고 있는다.
-- see also
-  - https://www.baeldung.com/gc-release-memory
 
 ## GC Tuning
 
@@ -177,6 +170,20 @@ heap dump떠서 뭐가 많이 차지하는지 확인
 ### JVM Crash
 
 JVM이 그냥 죽어버리는 것...
+
+### jvm process가 너무 많은 memory를 차지하고 gc 이후로도 반환을 안한다?
+
+- heap shrinking이 제대로 되지 않거나 최소 heap size가 너무 큰게 아닌지 의심. shrink 정책은 gc마다 설정이 다름.
+- 해결방법
+  - `-Xms`가 너무 크게 잡은게 아닌지 확인 : `-Xms`로 처음에는 os로부터 memory를 할당받지 않다가 나중에 필요해서 할당받고 나면 `-Xms`보다 줄지 않음.
+  - `XX:MaxHeapFreeRatio`를 너무 크게 잡지 않았는지 확인 : 크게 잡으면 free space를 크게 들고 있는다.
+- see also
+  - https://www.baeldung.com/gc-release-memory
+
+### Heap size
+
+- `-Xms`, `-Xmx`를 보통 같게 하는 이유가 gc가 일어나서 나서 일어나는 heap shrink를 하지 않기 위해서임.
+- 즉, gc 이후 stop 하는 시간을 줄이려고 인데 api 서버에서는 이 수치가 다르면 문제가 될 수 있으나 batch 같은 친구들 한테는 문제 없음.
 
 ## Reference
 
