@@ -67,3 +67,4 @@ int findBestSchedule(vector<int>& begin, vector<int>& end) {
 ## Reference
 
 - [Greedy Algorithm (wiki)](https://en.wikipedia.org/wiki/Greedy_algorithm)
+- [Activity selection problem (wiki)](https://en.wikipedia.org/wiki/Activity_selection_problem)

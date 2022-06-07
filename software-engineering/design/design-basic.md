@@ -24,3 +24,14 @@ It represents as **SOLID** in OOP
 ## Framework
 
 Making DSL.
+
+## Abstraction
+
+- 빼는 것. 도메인 상에서 필요한거만 집중하고 나머지는 빼는 것.  
+- 내가 만들고 싶은 세상에서 펼치고 싶은 의도가 있고 이걸 위해 속성을 추가.
+- 현실과 결합하는 과정에서 현실에 있는 것의 속성을 뺌.
+- 여기서 추상화 하는 도메인이 서로 겹치면 안된다
+
+## Reference
+
+- [Abstraction (computer_science), wiki](https://en.wikipedia.org/wiki/Abstraction_(computer_science))

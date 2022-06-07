@@ -8,7 +8,7 @@
   - [Example 1 : Max subarray of length 3](#example-1--max-subarray-of-length-3)
 - [Prefix Sum](#prefix-sum)
   - [Example](#example)
-- [Tips](#tips)
+- [Binary Search](#binary-search)
 - [References](#references)
 
 ## Two Pointer
@@ -121,19 +121,45 @@ for (int i = 1; i < prefixSum.length; ++i) {
 }
 ```
 
-## Tips
+## Binary Search
 
-Always check IndexOutOfBoundException before getting it.
+- 이미 **정렬 되어 있는** 데이터를 반씩 탐색해서 원하는 값이 있는지 찾아내는 기법.
+- Time: O(log(n))
 
-```java
-while (index < s.length() && s.charAt(index) == ' ') {
-  ++index;
+```cpp
+bool searchRecursively(vector<int> nums, int from, int to, int target) {
+  if (from > to) {
+    return false;
+  }
+
+  int mid = (from + to) / 2;
+  if (nums[mid] == target) {
+    return true;
+  } else if (nums[mid] < target) {
+    return search(nums, mid + 1, to, target);
+  } else { // nums[mid] > target
+    return search(nums, from, mid - 1, target);
+  }
+}
+
+bool searchIteratively(vector<int> nums, int from, int to, int target) {
+  int start = from;
+  int end = to;
+  while (start <= end) {
+    int mid = (start + end) / 2;
+    if (nums[mid] == target) {
+      return true;
+    } else if (nums[mid] < target) {
+      start = mid + 1;
+    } else { // nums[mid] > target
+      end = mid - 1;
+    }
+  }
+
+  return false;
 }
 ```
 
-Sorting is the great way to select greedily easily
-
 ## References
 
-- [[알고리즘] 슬라이딩 윈도우 알고리즘](https://blog.fakecoding.com/archives/algorithm-slidingwindow/)
-
+-

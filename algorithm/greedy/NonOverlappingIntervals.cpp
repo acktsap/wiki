@@ -51,7 +51,10 @@ using namespace std;
 class NonoverlappingIntervals {
 public:
   /*
-    Greedy: 가장 일찍 끝나는거부터 정렬하고 가장 일찍 끝나는거부터 처리. 가장 많이 선택하는거로 하면 남는것들이 최소로 제거해야 하는 개수.
+    Greedy
+
+    가장 일찍 끝나는거부터 정렬하고 가장 일찍 끝나는거부터 처리.
+    가장 많이 선택하는거로 하면 남는것들이 최소로 제거해야 하는 개수.
 
     - time: O(n*log(n))
     - space: O(1)
