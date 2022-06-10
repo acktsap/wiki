@@ -1,5 +1,9 @@
 # Productivity Tools
 
+- [direnv](#direnv)
+- [fzf](#fzf)
+- [Broot](#broot)
+
 ## direnv
 
 https://direnv.net/

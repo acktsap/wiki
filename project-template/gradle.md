@@ -5,7 +5,7 @@
 - [Authoring Sustainable Builds](#authoring-sustainable-builds)
 - [Authoring JVM Builds](#authoring-jvm-builds)
 - [Samples](#samples)
-- [Spring](#spring)
+- [Maven Bom](#maven-bom)
 - [Useful Plugins](#useful-plugins)
 
 ## Useful commands
@@ -52,17 +52,9 @@ https://docs.gradle.org/current/samples/
 - [java](https://docs.gradle.org/current/samples/#java)
 - [kotlin](https://docs.gradle.org/current/samples/#kotlin)
 
-## Spring
+## Maven Bom
 
-- [Spring Boot Plugin](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/)
-  - Allows you to package executable jar or war archives, run Spring Boot applications, and use the dependency management provided by spring-boot-dependencies.
-  - The plugin detects when certain other plugins are applied and reacts accordingly. (eg. `spring.dependency.management`, `java`, `groovy`, ...)
-- [Spring Dependency Management Plugin](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/)
-  - Control the versions of your project’s direct and transitive dependencies and will honour any exclusions declared in the poms of your project’s dependencies.
-
-see also
-
-https://github.com/mrclrchtr/gradle-kotlin-spring
+https://reflectoring.io/maven-bom/
 
 ## Useful Plugins
 

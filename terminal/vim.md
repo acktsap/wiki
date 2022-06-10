@@ -1,5 +1,29 @@
 # VIM Basic Usage
 
+- [Movement [direction]](#movement-direction)
+    - [By character](#by-character)
+  - [By word](#by-word)
+  - [By line](#by-line)
+  - [By sentence](#by-sentence)
+  - [By paragraph](#by-paragraph)
+  - [By screen](#by-screen)
+  - [By page](#by-page)
+- [Edit [starts from the cursor]](#edit-starts-from-the-cursor)
+  - [Basic form](#basic-form)
+  - [Delete](#delete)
+  - [Change](#change)
+  - [Copy [yank]](#copy-yank)
+  - [Undo, Redo](#undo-redo)
+  - [Replacement](#replacement)
+  - [Etc](#etc)
+- [Vim mode](#vim-mode)
+  - [Visual](#visual)
+  - [Shell prompt type](#shell-prompt-type)
+- [File management](#file-management)
+- [Split](#split)
+- [Etc](#etc-1)
+- [Vim Setting](#vim-setting)
+
 ![vim_cheat_sheet_for_programmers](./img/vim_cheat_sheet_for_programmers.png)
 
 ## Movement [direction]

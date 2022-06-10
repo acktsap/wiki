@@ -28,7 +28,7 @@ Spring Batch
 
 ## Spring Batch Architecture
 
-![layered-architecture](./img/spring-batch-introduction-layered-architecture.png)
+![layered-architecture](img/spring-batch-introduction-layered-architecture.png)
 
 Layered Architecture
 

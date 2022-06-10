@@ -5,6 +5,6 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":spring-boot-autoconfigure-lib"))
+    api(project(":spring-boot-autoconfigure-lib")) // mostly, api
     api(project(":spring-lib"))
 }

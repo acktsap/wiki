@@ -2,14 +2,14 @@
 
 ## Introduction
 
-![overview](./img/spring-batch-domain-language-overview.png)
+![overview](img/spring-batch-domain-language-overview.png)
 
 - A Job has one to many steps, each of which has exactly one ItemReader, one ItemProcessor, and one ItemWriter.
 - A job needs to be launched (with JobLauncher), and metadata needs to be stored in JobRepository.
 
 ## Job
 
-![job](./img/spring-batch-domain-language-job.png)
+![job](img/spring-batch-domain-language-job.png)
 
 ### Job
 
@@ -53,11 +53,11 @@
 
 ### Relation
 
-![job-instance-execution](./img/spring-batch-domain-language-job-instance-execution.png)
+![job-instance-execution](img/spring-batch-domain-language-job-instance-execution.png)
 
 ## Step
 
-![job-with-steps](./img/spring-batch-domain-language-job-with-steps.png)
+![job-with-steps](img/spring-batch-domain-language-job-with-steps.png)
 
 todo
 
@@ -99,7 +99,7 @@ ExecutionContext ecStep = stepExecution.getExecutionContext();
 
 ### Chunk-oriented Processing
 
-![chunk-oriented-processing-with-item-processor](./img/spring-batch-chunk-oriented-processing-with-item-processor.png)
+![chunk-oriented-processing-with-item-processor](img/spring-batch-chunk-oriented-processing-with-item-processor.png)
 
 - Reading the data one at a time and creating 'chunks' that are written out within a transaction boundary.
 
@@ -129,14 +129,14 @@ itemWriter.write(processedItems);
 
 ### Remote Chunking
 
-![remote-chunking](./img/spring-batch-remote-chunking.png)
+![remote-chunking](img/spring-batch-remote-chunking.png)
 
 - Step processing is split across multiple processes, communicating with each other through some middleware.
 - Works best if the manager is not a bottleneck, so the processing must be more expensive than the reading of item.
 
 ### Partitioning
 
-![partitioning-overview](./img/spring-batch-partitioning-overview.png)
+![partitioning-overview](img/spring-batch-partitioning-overview.png)
 
 ## References
 
