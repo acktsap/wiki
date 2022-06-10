@@ -1,5 +1,12 @@
 # Cryptography
 
+- [Symmetric Key Cryptography](#symmetric-key-cryptography)
+- [Public Key Cryptography](#public-key-cryptography)
+  - [ECDSA](#ecdsa)
+- [MAC](#mac)
+  - [HMAC](#hmac)
+- [References](#references)
+
 ## Symmetric Key Cryptography
 
 ![symmetric-key-cryptography](./img/symmetric-key-cryptography.png)
@@ -24,8 +31,21 @@
 - 장점 : 짧은 키로 RSA와 동일한 수준의 암호화를 가능
 - 단점 : PrivateKey가 짧아서 품질이 떨어지는 난수 생성기를 사용하면 예측가능할 수 있음
 
+## MAC
+
+![mac](./img/cryptography-mac.png)
+
+- Message Authentication Code.
+- message 자체의 인증을 위해 사용되는 작은 data.
+- 송신자는 수신자와 공유하고 있는 key와 message를 혼합해서 mac 값을 만들고 이를 message와 함께 전송.  수신자는 공유하고 있는 key와 message를 통해 mac 값을 계산해서 message위 위/변조를 확인하는 것.
+
+### HMAC
+
+- Hash-based Message Authentication Code
+- MAC의 일종으로 MAC 계산을 Hash로 하면 HMAC임.
+
 ## References
 
-대칭키, 공개키
-
-https://cryptocat.tistory.com/2
+- [대칭키, 공개키](https://cryptocat.tistory.com/2)
+- [Message authentication code (wiki)](https://en.wikipedia.org/wiki/Message_authentication_code)
+- [What is the difference between MAC and HMAC? (stackexchange)](https://crypto.stackexchange.com/questions/6523/what-is-the-difference-between-mac-and-hmac)

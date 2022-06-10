@@ -345,6 +345,9 @@ vector<vector<int>> test2 = {
 
 // add value to next
 test.push_back(3);
+
+// access value by index
+cout << test[0] << endl;
 ```
 
 ### Queue
@@ -352,6 +355,41 @@ test.push_back(3);
 ### Stack
 
 ### Map
+
+unordered_map
+
+- 진짜 map으로 practical하게 O(1)을 보장하려고 함.
+
+```cpp
+// init
+unordered_map<string, int> m;
+
+// insert
+m.insert({"test", 3});
+m.insert({"test2", 2});
+m["test3"] = 4;
+
+// find 값이 있으면 해당 위치의 iterator 반환, 아니면 s.end()반환
+m.find("test");
+m.find("test") == m.end(); // false
+m.find("aaa") == m.end(); // true
+m["test3"] == m.end(); // false
+
+// remove
+m.erase("test2");
+
+// iterating
+for(auto& entry : m) {
+  cout << entry.first << ":" << entry.second << endl;
+}
+
+// clear entry
+m.clear();
+```
+
+map
+
+- 내부적으로 r/b tree를 사용해서 insert/delete가 O(log(n))임
 
 ```cpp
 // init
