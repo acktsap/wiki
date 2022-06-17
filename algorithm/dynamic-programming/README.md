@@ -6,7 +6,7 @@
     - [When to use](#when-to-use)
   - [Framework](#framework)
 - [Bottom-up (Tabulation)](#bottom-up-tabulation)
-- [Top-down (Memoization) : Prefer it](#top-down-memoization--prefer-it)
+- [Top-down (Memoization)](#top-down-memoization)
 - [Multidimensional](#multidimensional)
 - [Reference](#reference)
 
@@ -65,7 +65,7 @@ for (int i = 2; i < n; ++i) {
 }
 ```
 
-## Top-down (Memoization) : Prefer it
+## Top-down (Memoization)
 
 - Use recursion.
 - Pros

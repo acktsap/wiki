@@ -5,6 +5,7 @@
 ### Setting
 
 - Appearance
+  - Dark
 - Dock
   - Position on screen : Right
   - Size : 33%
@@ -19,55 +20,36 @@
       - Control -> Control
       - Option -> Command
       - Command -> Optional
-  - ~~Shortcut -> Input Sources~~ -> Karabiner Virtual Keyboard로 대체
-    - Select the previous input source : Option + Space (⌥ + Space)
+  - Shortcut
+    - Input Sources
+      - ~~Select the previous input source : Option + Space (⌥ + Space)~~ -> Karabiner Virtual Keyboard로 대체
+    - Mission Control
+      - [ ] Show Desktop
   - Function Keys : ${customizing}
 - Trackpad
-  - 탭하여 클릭하기
-  - 이동속도 : 6
-  - 클릭 : 가볍게
-- Engery Saver
-  - Battery -> Uncheck Slightly dim the display while on battery power
-  - Battery Health -> Enable battery health management
+  - [] Tap to click
+  - Tracking speed : 6
+- Battery
+  - Turn display off after 5 minutes
+  - [ ] Slightly dim the display while on battery power
 - Display
   - Scaled -> Larger Text랑 Default 사이
 
 ### Downloads
 
-Browser
-
-- Firefox
-- Chrome
-
-Co-work
-
-- KakaoTalk
-- Slack
-
-Dev
-
-- Brew
-- Iterm2
-- Intellij
-- vscode
-- docker
-
 Utils
 
-- [CopyClip](https://apps.apple.com/us/app/copyclip-clipboard-history/id595191960?mt=12) : Managing Clipboard History
-- [Alfred](https://www.alfredapp.com) : 알프레드
-  - Disable stotlight on 'Keyboard Shortcuts > Spotlight -> Show Spotlight search'
-- [Spectacle](https://www.spectacleapp.com/) : A Window Manager
-- [gif brewery 3 by gfycat](https://apps.apple.com/kr/app/gif-brewery-3-by-gfycat/id1081413713?mt=12) : gif generator
-  - Video location : `~/Movies/GIF Brewery 3`
-- [RunCat](https://apps.apple.com/kr/app/runcat/id1429033973?mt=12) : Monotoring tool
 - [Scroll Reverser](https://pilotmoon.com/scrollreverser/) : Separate mouse and trackpad settings
-  - Scrolling Axes
-    - [X] Reverse Vertical
-    - [X] Reverse Horizontal
-  - Scroll Direction (Before this, set mouse scroll direction to natural)
-    - [ ] Reverse Trackpad
-    - [X] Reverse Mouse
+  - Scrolling
+    - Scrolling Axes
+      - [X] Reverse Vertical
+      - [X] Reverse Horizontal
+    - Scroll Direction (Before this, set mouse scroll direction to natural)
+      - [ ] Reverse Trackpad
+      - [X] Reverse Mouse
+    - App
+      - [X] Start at login
+      - [X] Shot in menu bar
 - [Karabiner](https://karabiner-elements.pqrs.org/) : Virtual keyboard
   - Karabiner Elements Preferences
     - Simple modifications
@@ -86,12 +68,22 @@ Utils
       - [X] External keyboard (eg. Realforce)
   - System Preference
     - Keyboard -> Keyboard -> Modifier Keys
-      - Caps Lock to Control
+      - Caps Lock -> Control
     - Shortcuts -> Input Sources
-      - Select the previous input source to **F18**
+      - Select the previous input source to **F18** (오른쪽 command key 누르기)
+    - Input Sources
+      - [ ] Use the Caps Lock key to switch to and from ABC
   - see also
     - https://ssossoblog.tistory.com/54
-- [IINA](https://iina.io/) : Open source music player written in native Swift language
+- [Alfred](https://www.alfredapp.com) : 알프레드
+  - System Preference
+    - Keyboard Shortcuts
+      - Spotlight
+        - [ ] Show Spotlight search
+  - Alfred Hotkey: `command + Space`
+- [Spectacle](https://www.spectacleapp.com/) : A Window Manager
+  - [ ] Launch Spectacle at login
+- [RunCat](https://apps.apple.com/kr/app/runcat/id1429033973?mt=12) : Monotoring tool
 - [Hammerspoon](http://www.hammerspoon.org/) : Macro tool for mac.
   - Behavior
     - [X] Launch Hammerspoon at login
@@ -101,7 +93,7 @@ Utils
     - [ ] Keep Console window on top
     - [ ] Send crash data (require restart)
   - vim hangul setting
-    - Put following code into `~/.hammerspoon/init.lua`
+    - Open Config -> Put code to Config -> Reload Config
       ```lua
       -- key mapping for vim
       -- Convert input soruce as English and sends 'escape' if inputSource is not English.
@@ -124,10 +116,40 @@ Utils
       esc_bind = hs.hotkey.new({}, 'escape', convert_to_eng_with_esc):enable()
       ```
     - [see also](https://humblego.tistory.com/10)
+- [(IINA)](https://iina.io/) : Open source music player written in native Swift language
+- ([gif brewery 3 by gfycat)](https://apps.apple.com/kr/app/gif-brewery-3-by-gfycat/id1081413713?mt=12) : gif generator
+  - Video location : `~/Movies/GIF Brewery 3`
+
+Dev
+
+- [Iterm2](https://iterm2.com)
+- [Brew](https://brew.sh/index_ko)
+- [Intellij](https://www.jetbrains.com/idea/download/#section=mac)
+  - [setting](./intellij.md)
+- [vscode](https://code.visualstudio.com/)
+  - [setting](./vscode.md)
+- [install language](./language-installation.md)
+- [Postman](https://www.postman.com/downloads/)
+
+Browser
+
+- [Chrome](https://www.google.com/chrome/)
+  - [setting](./chrome.md)
+- [Whale](https://whale.naver.com/en/download/mac/)
+  - [setting](./whale.md)
+- [(Brave)](https://brave.com/?ref=xwv588)
+  - [setting](./brave.md)
+- [(Firefox)](https://www.mozilla.org/en-US/firefox/new/)
+  - [setting](./firefox.md)
 
 Docs
 
-- Acrobat Pdf Reader
+- [Acrobat Pdf Reader](https://get.adobe.com/reader/)
+  - [setting](./pdf-reader.md)
+
+Etc
+
+- [KakaoTalk](https://www.kakaocorp.com/page/service/service/KakaoTalk?lang=ko)
 
 See also
 

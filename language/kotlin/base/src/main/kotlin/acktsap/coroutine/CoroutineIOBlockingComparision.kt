@@ -2,12 +2,8 @@ package acktsap.coroutine
 
 import acktsap.Block
 import acktsap.log
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.*
 import kotlinx.coroutines.future.await
-import kotlinx.coroutines.runBlocking
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -122,9 +118,29 @@ fun main() {
             }
         }
 
+        val coroutineBlockingDefaultMsWithSuspend = measureTimeMillis {
+            /*
+                Dispatchers.Default
+
+                - default CoroutineDispatcher used by all standard builders like (launch, async)
+                - default # of thread == # of core
+             */
+            runBlocking {
+                (1..2 * nProcessor).map {
+                    // started가 전부 한번에 찍힘
+                    // main thread 한개가 처리하지만 suspend때문에 started 한번에 찍힘
+                    // suspend function을 async로 호출해서 병렬처리 가능
+                    async {
+                        sendRequestAsync("runBlocking with suspend")
+                    }
+                }.awaitAll()
+            }
+        }
+
         log("threadPool(size: 2 * core): ${threadPoolMs}ms") // 5000ms
         log("coroutine(Dispatchers.Default): ${coroutineDefaultMs}ms") // 10000ms
         log("coroutine(Dispatchers.IO): ${coroutineIoMs}ms") // 5000ms
         log("coroutine(Dispatchers.Default with suspend): ${coroutineDefaultMsWithSuspend}ms") // 5000ms
+        log("coroutine(runBlocking with suspend): ${coroutineBlockingDefaultMsWithSuspend}ms") // 5000ms
     }
 }

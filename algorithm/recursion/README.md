@@ -1,11 +1,26 @@
 # Recursive
 
+- [Basic](#basic)
+  - [Completity Analysis](#completity-analysis)
+- [Divide & Conquer](#divide--conquer)
+  - [VS Brute Force](#vs-brute-force)
+- [Tail Recursion](#tail-recursion)
+
 ## Basic
 
 A recursive function should have the following properties so that it does not result in an infinite loop:
 
 1. A base cases : f(i,j) = 1   where j = 1 or j = i
 2. Recurrence Relation : f(i, j) = f(i − 1, j − 1) + f(i − 1, j)
+
+### Completity Analysis
+
+- Time
+  - the number of recursion invocations (R) and the time complexity of calculation (O(S)).
+  - O(T) = R * O(S)
+  - n-ary tree일 경우 최대 n level인 tree에서 O(2^n)
+- Space
+  - maximum depth of recursion.
 
 ## Divide & Conquer
 
@@ -19,7 +34,6 @@ A recursive function should have the following properties so that it does not re
 
 - bruce force : divide into one part & left big part
 - divice & conquer : divide into sub-problem of almost same size
-
 
 ```java
 

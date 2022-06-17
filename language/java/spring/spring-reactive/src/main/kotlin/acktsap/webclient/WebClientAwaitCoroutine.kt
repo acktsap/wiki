@@ -8,11 +8,13 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.netty.http.client.HttpClient
+import java.time.Duration
 import kotlin.system.measureTimeMillis
 
 fun main() {
     val httpClient = HttpClient.create()
-        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000)
+        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 500)
+        .responseTimeout(Duration.ofSeconds(1))
     val webClient = WebClient.builder()
         .baseUrl("https://www.naver.com:91")
         .clientConnector(ReactorClientHttpConnector(httpClient))
@@ -23,7 +25,6 @@ fun main() {
             (1..3).map {
                 async {
                     webClient.get()
-                        .uri("")
                         .retrieve()
                         .bodyToMono<String>()
                         .onErrorReturn("failed")
@@ -38,7 +39,6 @@ fun main() {
             (1..3).map {
                 async {
                     webClient.get()
-                        .uri("")
                         .retrieve()
                         .bodyToMono<String>()
                         .onErrorReturn("failed")

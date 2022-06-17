@@ -10,14 +10,14 @@
 ### Apperance & Behavior
 
 - Disable auto save : Apperance & Behavior > System Settings > Autosave
-  - [X] Save fies if the IDE is idle for xx seconds
+  - [X] Save fies if the IDE is idle for 15 seconds
   - [X] Save files when switching to a different application
   - [ ] Backup files before saving
   - [X] Synchronize external changes when switching to the IDE windows or opening an editor tab
 
 ### Keymap
 
-Eclipse
+Eclipse (macOS)
 
 - Project <-> Editor : Command (or Ctrl) + F7 (need to set in Tool Keymap > Windows > Project)
 
@@ -25,27 +25,40 @@ Custom
 
 - Go to Implementations : Ctrl + i
 - Go to Test : Ctrl + t
-- Replace in  : Ctrl + Shift + H
+- Rename : Command + option + r
 
 ### Editor
 
-- Show whitespace : Editor > General > Appearance > Show whitespace
-- Code template : Editor > File and Code Templates > Class
-  ```java
-  /*
-   * @copyright defined in LICENSE.txt
-   */
+- Editor
+  - General
+    - Apperance
+      - Show whitespace
+  - Code Editing
+    - Quick Documentation
+      - [ ] Show quick documentation on hover
+  - Code Style
+    - Java
+      - Imports
+        - General
+          - Class count to use import with '*' : 99
+          - Names count to use static import with '*' : 99
+    - Schema : ${project_specific_setting}
+  - File and Code Templates
+    - Class : ${your_setting}
+      - eg.
+        ```java
+        /*
+        * @copyright defined in LICENSE.txt
+        */
+        ```
 
-  ```
-- Disable Quick Documentation by Mouse : Editor > Code Editing > Quick Documentation > Uncheck Show quick documentation on mouse move
-- Code Style : Editor > Code Style
-- Java wird card import : Editor > Code Style > Java > Imports > General
-  - Normal : Class count to use import with '*'
-  - Static : Names count to use static import with '*'
 ### Build, Execution, Deployment
 
-- Build and run using intellij : Build Tools > Gradle > Set 'Build and running', 'Run test using' as Intellij
-  - Need rebuild (build -> rebuild)
+- Build Tools
+  - Gradle 
+    - Gradle projects
+      - Build and running : Intellij IDEA
+      - Run test using : Intellij IDEA 
 
 ## Plugins
 
@@ -54,13 +67,9 @@ Custom
 - Relative Line Numbers -> `:set rnu` via IdeaVim plugin
 - CheckStyle-IDEA
 - [Save actions](https://plugins.jetbrains.com/plugin/7642-save-actions/versions)
-  - Settings > Other settings > Save actions
-    - General
-      - [X] Activate save actions on save
-    - Formatting Actions
-      - [X] Optimize imports
-      - [X] Reformat file
-- Dto generator : json to Dto java class
+  - [X] Reformat code
+  - [X] Optimize imports
+- Infinitest
 - Bundled
   - Kotlin
   - Lombok
@@ -76,10 +85,8 @@ File > Project Structure > Project > Project SDK, Project language level
 Help -> Edit Custom VM Options (or shift + shift -> enter custom vm options)
 
 ```sh
--Xms2g
--Xmx2g
-...
--
+-Xms4G
+-Xmx4G
 ```
 
 ## Shortcuts
