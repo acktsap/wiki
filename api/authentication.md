@@ -1,58 +1,73 @@
 # Authentication
 
-- [What is Authentication?](#what-is-authentication)
+- [Authentication vs Authorization](#authentication-vs-authorization)
 - [Authentication factors](#authentication-factors)
+- [Security Realms](#security-realms)
 - [Basic Authentication](#basic-authentication)
-  - [What?](#what)
-  - [Protocol](#protocol)
+- [Proxy Authentication](#proxy-authentication)
+- [Digest Authentication](#digest-authentication)
 - [Token Based Authentication](#token-based-authentication)
-  - [What?](#what-1)
+  - [What?](#what)
 - [SAML](#saml)
 - [SWT](#swt)
 - [JWT](#jwt)
-  - [What?](#what-2)
-  - [Protocol](#protocol-1)
+  - [What?](#what-1)
+  - [Protocol](#protocol)
   - [Usage](#usage)
 - [OAuth](#oauth)
   - [OAuth 1.0](#oauth-10)
   - [OAuth 1.0a](#oauth-10a)
   - [OAuth 2.0](#oauth-20)
   - [OpenID](#openid)
+- [Kerberos](#kerberos)
 - [Reference](#reference)
 
-## What is Authentication?
+## Authentication vs Authorization
 
-- The act of proving an assertion, such as the identity of a computer system user.
+- Authentication : The act of proving who you are.
   > 니가 누군지 밝혀내는 과정.
+- Authorization : The function of specifying access rights/privileges to resources,
+  > 자원에 접근이 가능한지 확인하는 과정.
 
 ## Authentication factors
 
-- Something the user knows, something the user has, and something the user is.
-  > 니가 아는 것 또는 니가 가지고 있는 것, 또는 너 자신이 누구인가?
-- the knowledge factors: Something the user knows (eg. a password, partial password, passphrase, personal identification number (PIN), challenge–response (the user must answer a question or pattern), security question).
-- the ownership factors: Something the user has (eg. wrist band, ID card, security token, implanted device, cell phone with a built-in hardware token, software token, or cell phone holding a software token).
-- the inherence factors: Something the user is or does (eg. fingerprint, retinal pattern, DNA sequence (there are assorted definitions of what is sufficient), signature, face, voice, unique bio-electric signals, or other biometric identifiers).
+- the knowledge factors : Something the user knows (eg. a password, partial password, passphrase, personal identification number (PIN), challenge–response (the user must answer a question or pattern), security question).
+  > 니가 아는 것.
+- the ownership factors : Something the user has (eg. wrist band, ID card, security token, implanted device, cell phone with a built-in hardware token, software token, or cell phone holding a software token).
+  > 니가 가지고 있는 것.
+- the inherence factors : Something the user is or does (eg. fingerprint, retinal pattern, DNA sequence (there are assorted definitions of what is sufficient), signature, face, voice, unique bio-electric signals, or other biometric identifiers).
+  > 니 몸에 있는거.
 
 > 웹에서는 거의 knowledge factor를 사용한다고 볼 수 있음.
 
+## Security Realms
+
 ## Basic Authentication
 
-### What?
+Intention
 
 - http request를 할 때 인증을 하고 싶어 근데 간단하게 header에 인증 데이터를 넣고 해보자!
-- http request header에 user name과 password를 제공해서 하는 인증방식.
-- 장점
-  - session 관리, cookie 같은거 없이 간단하게 사용 가능.
+- http request header에 user name과 password를 `:`를 사이에 끼워서 concat하고 base64로 인코딩해서 보내는 방식.
+- base64 encoding은 `:`같은 특수문자를 그대로 보내면 http header parsing 할 때 이상하게 되어서 그럼.
 
-### Protocol
+Protocol
 
 - http header에 `Authentication: Basic <credentials>`의 형식으로 추가함.
   - eg. `Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==`
-- credentials은 ID와 password 사이에 `:`를 붙여서 base64로 encoding한 형식.
-- browser에서 요청 할 때 마다 사용해야 해서 보통 cache해버림.
-- server에서는 unauthenticate 요청일 경우 401 status code와 함께 다음의 header를 반환.
+- server에서는 인증이 없는요청일 경우 401 status code와 함께 다음의 header를 반환.
   - `WWW-Authenticate: Basic realm="User Visible Realm"`
+  - R
 
+Pros & Cons
+
+- Pros
+  - Protocol이 simple함.
+- Cons
+  - Http header를 보면 id와 pw를 바로 알 수 있기 때문에 보안에 취약. 그래서 https랑 사용하기도 함.
+
+## Proxy Authentication
+
+## Digest Authentication
 
 ## Token Based Authentication
 
@@ -141,10 +156,16 @@ see also
 
 - OAuth 2.0 위에 있는 protocal로.. todo
 
+## Kerberos
+
 ## Reference
 
 - [Authentication (wiki)](https://en.wikipedia.org/wiki/Authentication)
+- [Authorization (wiki)](https://en.wikipedia.org/wiki/Authorization)
 - [Basic access authentication (wiki)](https://en.wikipedia.org/wiki/Basic_access_authentication)
+- [HTTP Authentication: Basic and Digest Access Authentication (rfc2617)](https://www.ietf.org/rfc/rfc2617.txt)
+- [What is the exact uses of REALM term in security? (stackoverflow)](https://stackoverflow.com/questions/8468075/what-is-the-exact-uses-of-realm-term-in-security)
+- [Create a Session Using Basic Authentication (vmware)](https://vdc-download.vmware.com/vmwb-repository/dcr-public/94b8bd8d-74ff-4fe3-b7a4-41ae31516ed7/1b42f3b5-8b31-4279-8b3f-547f6c7c5aa8/doc/GUID-536ED934-ECE3-4B17-B7E5-F8D0765C9ECB.html)
 - [What is token-based authentication? (stackoverflow)](https://stackoverflow.com/questions/1592534/what-is-token-based-authentication)
 - [Simple Web Token (SWT) (Microsoft)](https://docs.microsoft.com/en-us/previous-versions/azure/azure-services/hh781551(v=azure.100)?redirectedfrom=MSDN)
 - [Introduction to JSON Web Tokens (jwt)](https://jwt.io/introduction)
