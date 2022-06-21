@@ -51,6 +51,7 @@ using namespace std;
  *
  * Review
  *
+ *  10^9까지 메모리 잡으면 oom남 그런거 생각해봐
  *
  */
 class MaximumProfitinJobScheduling {
@@ -97,41 +98,6 @@ public:
       
     return dp[dp.size() - 1];
   }
-
-  /*
-    memory limit하고 동일한데 stack에 쌓아서 memory limit이 나는 듯 해서 heap에 생성해봄.
-    leak은 있는 코드긴함..
-  */
-  int jobSchedulingTimeLimit(vector<int>& startTimes, vector<int>& endTimes, vector<int>& profits) {
-    unordered_map<int, set<int>> endTime2StartTimeIndexes;
-    
-    int maxEndTime = 0;
-    for (int i = 0; i < startTimes.size(); ++i) {
-      int startTime = startTimes[i];
-      int endTime = endTimes[i];
-      if (endTime2StartTimeIndexes.find(endTime) == endTime2StartTimeIndexes.end()) {
-        endTime2StartTimeIndexes[endTime] = set<int>();
-      }
-      endTime2StartTimeIndexes[endTime].insert(i);
-      maxEndTime = max(maxEndTime, endTime);
-    }
-    
-    vector<int> *dp = new vector<int>(maxEndTime + 1);
-    for (int i = 1; i < (*dp).size(); ++i) {
-      int candidate = (*dp)[i - 1];
-      if (endTime2StartTimeIndexes.find(i) != endTime2StartTimeIndexes.end()) {
-        for (int j : endTime2StartTimeIndexes[i]) {
-          int startTime = startTimes[j];
-          int profit = profits[j];
-          candidate = max(candidate, (*dp)[startTime] + profit);
-        }
-      }
-      (*dp)[i] = candidate;
-    }
-      
-    return (*dp)[(*dp).size() - 1];
-  }
-};
 
 int main() {
   vector<tuple<vector<int>, vector<int>, vector<int>, int>> parameters {

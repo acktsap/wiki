@@ -1,5 +1,8 @@
 # JVM
 
+- [JDK vs JRE vs JVM](#jdk-vs-jre-vs-jvm)
+- [Does java written in c/cpp?](#does-java-written-in-ccpp)
+- [How Jvm Works](#how-jvm-works)
 - [Architecture](#architecture)
 - [Memory Layout](#memory-layout)
 - [Heap Structure](#heap-structure)
@@ -20,7 +23,29 @@
   - [JVM Crash](#jvm-crash)
   - [jvm process가 너무 많은 memory를 차지하고 gc 이후로도 반환을 안한다?](#jvm-process가-너무-많은-memory를-차지하고-gc-이후로도-반환을-안한다)
   - [Heap size](#heap-size)
-- [Reference](#reference)
+- [See also](#see-also)
+
+## JDK vs JRE vs JVM
+
+JDK
+
+- Java Development Kit, java appliation을 만들때 필요한 것으로 JRE에 javac (compiler), jar (archiver), javadoc (doc generator) 같은거를 포함시킨 것.
+
+JRE
+
+- Java Runtime Environment, java programn이 수행하기 위한 환경으로 JVM에 기본 class들 rt.jar (runtime java 파일들) 같은거를 포함시킨 것.
+
+JVM
+
+- Java Virtual Machine, java bytecode를 읽어서 수행하는 machine.
+
+## Does java written in c/cpp?
+
+- No, javac is written in java. But jre is written in native language like c/cpp.
+
+## How Jvm Works
+
+todo
 
 ## Architecture
 
@@ -185,16 +210,17 @@ JVM이 그냥 죽어버리는 것...
 - `-Xms`, `-Xmx`를 보통 같게 하는 이유가 gc가 일어나서 나서 일어나는 heap shrink를 하지 않기 위해서임.
 - 즉, gc 이후 stop 하는 시간을 줄이려고 인데 api 서버에서는 이 수치가 다르면 문제가 될 수 있으나 batch 같은 친구들 한테는 문제 없음.
 
-## Reference
+## See also
+
+- [Differences between JDK, JRE and JVM (geeksforgeeks)](https://www.geeksforgeeks.org/differences-jdk-jre-jvm/)
+- [In which language are the Java compiler and JVM written? (stackoverflow)](https://stackoverflow.com/questions/1220914/in-which-language-are-the-java-compiler-and-jvm-written)
 
 GC들
 
-https://blog.embian.com/68
-
-https://d2.naver.com/helloworld/1329
-
-https://www.slideshare.net/ssuserb77a05/garbage-collection-20150213-44717452
+- https://blog.embian.com/68
+- https://d2.naver.com/helloworld/1329
+- https://www.slideshare.net/ssuserb77a05/garbage-collection-20150213-44717452
 
 Java Reference와 GC
 
-https://d2.naver.com/helloworld/329631
+- https://d2.naver.com/helloworld/329631

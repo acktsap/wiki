@@ -47,6 +47,10 @@ https://brave.com
   - YouTube
     - :y, :ㅛ
     - https://www.youtube.com/results?search_query=%s
+  - Dict
+    - :c, :ㅊ
+    - https://en.dict.naver.com/#/search?query=%s
+
 
 ## Additional Settings
 
