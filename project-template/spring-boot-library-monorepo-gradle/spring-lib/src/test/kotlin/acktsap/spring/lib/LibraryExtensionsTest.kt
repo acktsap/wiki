@@ -1,4 +1,5 @@
-import acktsap.Library
+package acktsap.spring.lib
+
 import acktsap.someExtension
 import org.junit.jupiter.api.Test
 

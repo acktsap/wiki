@@ -170,7 +170,7 @@ see also
 ## OAuth
 
 - Open Authorization.
-- Internet user가 다른 website의 password를 제공하지 않고 현재 website가 다른 website에 있는 자기들의 정보를 이용할 수 있게 해주고 싶다? 그래서 만든 표준.
+- Internet user가 다른 website의 password를 제공하지 않고 현재 website가 다른 website에 있는 자기들의 정보를 이용할 수 있게 해주고 싶어서 만든 표준.
 
 ### OAuth 1.0
 
@@ -201,7 +201,8 @@ see also
   - [Simple Web Token (SWT) (Microsoft)](https://docs.microsoft.com/en-us/previous-versions/azure/azure-services/hh781551(v=azure.100)?redirectedfrom=MSDN)
   - [Introduction to JSON Web Tokens (jwt)](https://jwt.io/introduction)
   - [JSON Web Token (JWT) (rfc7519)](https://datatracker.ietf.org/doc/html/rfc7519)
-- [OAuth 2.0 (ietf)](https://tools.ietf.org/html/rfc6749)
-- [OAuth (oauth.net)](https://oauth.net/2/)
-- [OpenID (wiki)](https://en.wikipedia.org/wiki/OpenID)
+- OAuth
+  - [OAuth (oauth.net)](https://oauth.net/2/)
+  - [OAuth 2.0 (ietf)](https://tools.ietf.org/html/rfc6749)
+  - [OpenID (wiki)](https://en.wikipedia.org/wiki/OpenID)
 - [Kerberos (wiki)](https://en.wikipedia.org/wiki/Kerberos_(protocol))

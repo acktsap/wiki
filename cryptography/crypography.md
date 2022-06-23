@@ -37,7 +37,7 @@
 
 - Message Authentication Code.
 - message 자체의 인증을 위해 사용되는 작은 data.
-- 송신자는 수신자와 공유하고 있는 key와 message를 혼합해서 mac 값을 만들고 이를 message와 함께 전송.  수신자는 공유하고 있는 key와 message를 통해 mac 값을 계산해서 message위 위/변조를 확인하는 것.
+- 송신자는 수신자와 공유하고 있는 key와 message를 혼합해서 mac 값을 만들고 이를 message와 함께 전송. 수신자는 공유하고 있는 key와 message를 통해 mac 값을 계산해서 message위 위/변조를 확인하는 것.
 
 ### HMAC
 
