@@ -13,11 +13,13 @@
 
 - 자동으로 등록되면 좋을 bean들을 등록함. 근데 보통 조건이 붙어서 `@ConditionalXXX` annotation을 사용.
 
-### Implementation (< v2.7)
+### Implementation (before v2.7)
 
 - `@Configuration`을 써서 자동으로 등록되면 좋을 빈들을 정의.
 - 그렇게 정의한 Configuration을 `META-INF/spring.factories`에 다음과 같이 정의해두면 Spring boot가 알아서 읽음.
 - 이 방법으로만 등록되어야 함. component scan으로 자동으로 읽게 되지 않게 주의.
+- eg.
+  - [참고](https://github.com/spring-projects/spring-boot/blob/v2.6.0/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories)
 
 ```text
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
@@ -25,12 +27,14 @@ com.mycorp.libx.autoconfigure.LibXAutoConfiguration,\
 com.mycorp.libx.autoconfigure.LibXWebAutoConfiguration
 ```
 
-### Implementation (v2.7 <)
+### Implementation (after v2.7)
 
 - `@AutoConfiguration`을 써서 자동으로 등록되면 좋을 빈들을 정의.
 - `@AutoConfiguration`은 `@Configuration`으로 meta annotated 되어있음.
 - 그렇게 정의한 Configuration을 `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`에 다음과 같이 정의해두면 Spring boot가 알아서 읽음.
 - 이 방법으로만 등록되어야 함. component scan으로 자동으로 읽게 되지 않게 주의.
+- eg.
+  - [참고](https://github.com/spring-projects/spring-boot/blob/v2.7.0/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports)
 
 ```text
 com.mycorp.libx.autoconfigure.LibXAutoConfiguration

@@ -13,6 +13,9 @@ https://docs.gradle.org/current/userguide/structuring_software_products.html
 ## Authoring Sustainable Builds
 
 - [Organizing Gradle Projects](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html)
+  - buildSrc
+    - 이 directoryr가 있으면 gradle이 읽어서 build script의 classpath에 추가함.
+    - 안에 imperative logic을 custom plugin을 넣어서 추가.
 - [Best practices for authoring maintainable builds](https://docs.gradle.org/current/userguide/authoring_maintainable_build_scripts.html)
 
 ## Authoring JVM Builds

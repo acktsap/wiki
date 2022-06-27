@@ -14,6 +14,7 @@ java {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:2.6.6")
+//    implementation(project(":spring-boot-starter-lib"))
     implementation("acktsap:spring-boot-starter-lib:0.0.1-SNAPSHOT")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.7.1")
 }

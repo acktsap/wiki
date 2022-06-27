@@ -1,11 +1,12 @@
 plugins {
-    id("custom.java-library-conventions")
-    id("custom.spring-boot-conventions")
-    id("custom.maven-publish-conventions")
+    id("acktsap.java-library-conventions")
+    id("acktsap.maven-publish-conventions")
+    id("acktsap.spring-conventions")
 }
 
 dependencies {
     api(project(":spring-lib"))
+    implementation("org.springframework.boot:spring-boot-autoconfigure")
 
-    implementation("org.springframework.boot:spring-boot-starter")
+    testImplementation("org.springframework.boot:spring-boot-test")
 }

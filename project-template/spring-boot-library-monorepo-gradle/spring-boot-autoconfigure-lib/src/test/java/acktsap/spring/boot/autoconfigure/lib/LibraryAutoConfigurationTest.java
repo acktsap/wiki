@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class LibraryAutoConfigurationTest {
 
@@ -13,6 +14,7 @@ public class LibraryAutoConfigurationTest {
     @Test
     void load() {
         contextRunner.withConfiguration(AutoConfigurations.of(LibraryAutoConfiguration.class)).run(context -> {
+            assertThat(context).hasBean("library");
         });
     }
 }

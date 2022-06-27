@@ -1,12 +1,13 @@
 plugins {
-    id("custom.java-library-conventions")
-    id("custom.kotlin-conventions")
-    id("custom.spring-boot-conventions")
-    id("custom.maven-publish-conventions")
+    id("acktsap.java-library-conventions")
+    id("acktsap.kotlin-conventions")
+    id("acktsap.maven-publish-conventions")
+    id("acktsap.spring-conventions")
 }
 
 dependencies {
     implementation(project(":spring-lib-module"))
+    implementation("org.slf4j:slf4j-api")
 
-    implementation("org.springframework.boot:spring-boot-starter")
+    runtimeOnly("org.apache.logging.log4j:log4j")
 }

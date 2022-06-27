@@ -1,10 +1,10 @@
 package acktsap.spring.boot.autoconfigure.lib;
 
 import acktsap.spring.lib.Library;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class LibraryAutoConfiguration {
     @Bean
     public Library library() {

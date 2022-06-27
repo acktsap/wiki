@@ -1,3 +1,0 @@
-# Auto Configurations
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-LibraryAutoConfiguration

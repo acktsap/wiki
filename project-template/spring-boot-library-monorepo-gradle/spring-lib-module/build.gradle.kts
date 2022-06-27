@@ -1,7 +1,7 @@
 plugins {
-    id("custom.java-library-conventions")
-    id("custom.spring-boot-conventions")
-    id("custom.maven-publish-conventions")
+    id("acktsap.java-library-conventions")
+    id("acktsap.spring-conventions")
+    id("acktsap.maven-publish-conventions")
 }
 
 dependencies {

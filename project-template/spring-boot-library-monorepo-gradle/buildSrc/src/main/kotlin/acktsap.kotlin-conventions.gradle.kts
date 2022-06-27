@@ -7,6 +7,7 @@ plugins {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict") // enable jsr305 null-safety in kotlin
         jvmTarget = "1.8"
     }
 }
