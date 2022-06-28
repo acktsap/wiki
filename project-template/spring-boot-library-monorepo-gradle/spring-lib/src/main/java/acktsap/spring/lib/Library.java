@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Library {
 
-    private Logger logger = LoggerFactory.getLogger(Library.class);
+    private final Logger logger = LoggerFactory.getLogger(Library.class);
 
     public double someLibraryModuleMethod() {
         // cannot access org.apache.commons.math3.stat.descriptive.summary.Sum
@@ -21,7 +21,7 @@ public class Library {
 
         LibraryModule libraryModule = new LibraryModule();
 
-        logger.info("test logger: {}", "someLibraryModuleMethod is called");
+        logger.info("someLibraryModuleMethod is called");
 
         return libraryModule.someLibraryModuleMethod();
     }

@@ -1,5 +1,13 @@
 # Kotlin Library
 
+- [Closed](#closed)
+  - [생성자 노출 방어](#생성자-노출-방어)
+- [Dsl](#dsl)
+- [Java Kotlin Extension](#java-kotlin-extension)
+  - [KClass Extensions](#kclass-extensions)
+- [package-info.java](#package-infojava)
+- [assertJ sam issue](#assertj-sam-issue)
+
 ## Closed
 
 ### 생성자 노출 방어
@@ -64,3 +72,14 @@ fun <T> A.test(val: Int, type: KClass<T>): Int {
   return this.test(val, type.java)
 }
 ```
+
+## package-info.java
+
+- [discussion](https://discuss.kotlinlang.org/t/equivalent-of-package-info-java/3272/5)
+
+## assertJ sam issue
+
+
+- [Kotlin SAM overload resolution ambiguity between Consumer and ThrowingConsumer](https://github.com/assertj/assertj-core/issues/2357)
+- [jetbrains ticket](https://youtrack.jetbrains.com/issue/KT-17765)
+  - 1.7에서 해결

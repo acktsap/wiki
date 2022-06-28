@@ -33,3 +33,7 @@
 - Assemble: `./gradlew build`
 - Install to local: `./gradlew install`
 - Publish: `./gradlew publish`
+
+## Contributing
+
+...

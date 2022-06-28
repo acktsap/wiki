@@ -9,5 +9,5 @@ dependencies {
     implementation(project(":spring-lib-module"))
     implementation("org.slf4j:slf4j-api")
 
-    runtimeOnly("org.apache.logging.log4j:log4j")
+    testRuntimeOnly("org.apache.logging.log4j:log4j-slf4j-impl")
 }

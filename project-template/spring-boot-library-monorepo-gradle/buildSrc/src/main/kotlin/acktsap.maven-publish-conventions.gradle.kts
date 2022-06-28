@@ -2,16 +2,16 @@ plugins {
     `maven-publish`
 }
 
-version = "0.0.1-SNAPSHOT"
 group = "acktsap"
+version = "0.1.0-SNAPSHOT"
 
 publishing {
     publications {
-        create<MavenPublication>("library") {
+        create<MavenPublication>("maven") {
             from(components["java"])
 
             pom {
-                name.set("spring-lib")
+                name.set(project.name)
                 description.set("Spring library test")
                 licenses {
                     license {
@@ -29,7 +29,7 @@ publishing {
                 scm {
                     connection.set("scm:git:git://github.com/acktsap/my-library.git")
                     developerConnection.set("scm:git:ssh://github.com/acktsap/my-library.git")
-                    url.set("http://github.com/acktsap/my-library/")
+                    url.set("https://github.com/acktsap/my-library/")
                 }
             }
         }
@@ -39,17 +39,20 @@ publishing {
         maven {
             credentials {
                 // in '.envrc'
-                // export OSS_USER=xxx
-                // export OSS_PASSWORD=xxx
-                username = System.getenv("OSS_USER")
-                password = System.getenv("OSS_PASSWORD")
+                // export MAVEN_USER=xxx
+                // export MAVEN_PASSWORD=xxx
+                username = System.getenv("MAVEN_USER")
+                password = System.getenv("MAVEN_PASSWORD")
             }
 
             url = uri(
+                // in '.envrc'
+                // export REPO_URL=https://some.url
+                // export REPO_SNAPSHOT_URL=https://some.url
                 if (!version.toString().endsWith("SNAPSHOT")) {
-                    "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                    System.getenv("REPO_URL") ?: "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
                 } else {
-                    "https://oss.sonatype.org/content/repositories/snapshots/"
+                    System.getenv("REPO_SNAPSHOT_URL") ?: "https://oss.sonatype.org/content/repositories/snapshots/"
                 }
             )
         }
@@ -58,4 +61,10 @@ publishing {
 
 tasks.create("install") {
     dependsOn("publishToMavenLocal")
+}
+
+tasks.withType<PublishToMavenRepository>() {
+    doFirst {
+        println("publishing to ${repository.url}")
+    }
 }

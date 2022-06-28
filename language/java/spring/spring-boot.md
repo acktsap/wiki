@@ -1,8 +1,8 @@
 # Spring Boot
 
 - [Creating your own auto-configuration](#creating-your-own-auto-configuration)
-  - [Implementation (< v2.7)](#implementation--v27)
-  - [Implementation (v2.7 <)](#implementation-v27-)
+  - [Implementation (before v2.7)](#implementation-before-v27)
+  - [Implementation (after v2.7)](#implementation-after-v27)
   - [Ordering](#ordering)
   - [Conditional Annotations](#conditional-annotations)
   - [Testing](#testing)

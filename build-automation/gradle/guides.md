@@ -5,6 +5,7 @@
 - [Authoring JVM Builds](#authoring-jvm-builds)
 - [Samples](#samples)
 - [Maven Bom](#maven-bom)
+- [Best Practices](#best-practices)
 
 ## Structuring Software Products
 
@@ -34,3 +35,7 @@ https://docs.gradle.org/current/samples/
 ## Maven Bom
 
 https://reflectoring.io/maven-bom/
+
+## Best Practices
+
+- [gradle-best-practices](https://tomgregory.com/gradle-best-practices)
