@@ -2,12 +2,16 @@ plugins {
     id("acktsap.java-library-conventions")
     id("acktsap.kotlin-conventions")
     id("acktsap.maven-publish-conventions")
-    id("acktsap.spring-conventions")
 }
 
 dependencies {
     implementation(project(":spring-lib-module"))
-    implementation("org.slf4j:slf4j-api")
 
-    testRuntimeOnly("org.apache.logging.log4j:log4j-slf4j-impl")
+    implementation(libs.slf4j)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.assertj)
+    testImplementation(libs.mockito)
+    testImplementation(libs.mockito.kotlin)
+    testRuntimeOnly(libs.log4j)
 }

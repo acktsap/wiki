@@ -84,6 +84,9 @@ Utils
 - [Spectacle](https://www.spectacleapp.com/) : A Window Manager
   - [ ] Launch Spectacle at login
 - [RunCat](https://apps.apple.com/kr/app/runcat/id1429033973?mt=12) : Monotoring tool
+  - General
+    - [X] Use system accent color
+    - [X] Launch Runcat at login
 - [Hammerspoon](http://www.hammerspoon.org/) : Macro tool for mac.
   - Behavior
     - [X] Launch Hammerspoon at login
