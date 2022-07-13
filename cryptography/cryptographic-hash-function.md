@@ -20,7 +20,7 @@
 
 ## What?
 
-- hash function인데 digest 로부터 역으로 가는게 거의 실행 불가능하게 만든것.
+- 데이터의 무결성 확인을 위해 hash function인데 digest 로부터 역으로 가는게 거의 실행 불가능하게 만든것.
 - digest를 가지고 key를 찾는 방법은 brute force밖에 답이 없는데 그게 너무 오래걸려서 거의 불가능한 수준으로.
 - hash된 값을 digest라고도 부름.
 

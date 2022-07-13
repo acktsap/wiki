@@ -35,6 +35,7 @@
   - [Console I/O](#console-io-1)
   - [Array](#array-1)
   - [Vector](#vector)
+  - [List](#list-1)
   - [Queue](#queue-1)
   - [Stack](#stack-1)
   - [Map](#map-1)
@@ -348,6 +349,32 @@ test.push_back(3);
 
 // access value by index
 cout << test[0] << endl;
+```
+
+### List
+
+```cpp
+// init
+list<int> test;
+
+// add new item to end of list
+test.push_back(3);
+test.push_back(4);
+
+// add new item to start of list
+test.push_back(2);
+test.push_back(1);
+
+// remove last element from list
+test.pop_back();
+
+// remove first element from list
+test.pop_front();
+
+// iteating
+for (auto& item : test) {
+  cout << item << endl;
+}
 ```
 
 ### Queue

@@ -20,6 +20,7 @@
   - [OAuth 1.0a](#oauth-10a)
   - [OAuth 2.0](#oauth-20)
   - [OpenID](#openid)
+  - [OpenID Connect](#openid-connect)
 - [Kerberos](#kerberos)
 - [Reference](#reference)
 
@@ -180,7 +181,13 @@ see also
 
 ### OpenID
 
-- OAuth 2.0 위에 있는 protocal로.. todo
+- Decentralized authentication protocol.
+
+### OpenID Connect
+
+- Authentication를 위한 protocal.
+- OpenID의 일종인데 OAuth2.0 위에서 돌아감.
+- OAuth2.0의 scope에다가 openid라는걸 정의해서 요청하면 access token을 줄 때 authentication을 위한 id token을 주는 형식으로 동작함. 보통 JWT token.
 
 ## Kerberos
 
@@ -205,4 +212,5 @@ see also
   - [OAuth (oauth.net)](https://oauth.net/2/)
   - [OAuth 2.0 (ietf)](https://tools.ietf.org/html/rfc6749)
   - [OpenID (wiki)](https://en.wikipedia.org/wiki/OpenID)
+  - [openid-connect-core](https://openid.net/specs/openid-connect-core-1_0.html)
 - [Kerberos (wiki)](https://en.wikipedia.org/wiki/Kerberos_(protocol))

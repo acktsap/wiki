@@ -47,7 +47,7 @@ using namespace std;
  * Review
  *
  * 이건 brute force로 어케 풀지?
- *
+ * 시간표 안겹치게 하는 문제랑 동일해보임
  *
  */
 class PartitionLabels {
@@ -94,7 +94,7 @@ public:
     return partitionIndexes;
   }
 
-    /*
+  /*
     greedy? 같은 알파벳은 같은 partition에 있어야 함. 
     알파벳별로 score (last index) 주고 greedy하게 partition의 score가 가장 크게 잡기?
     partition 우선 한개 잡고 그 partition 안에서 score 큰게 있으면 그걸로 partition 확장
