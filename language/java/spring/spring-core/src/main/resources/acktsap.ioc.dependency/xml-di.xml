@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="exampleBean" class="acktsap.ioc.dependency.XmlDependencyInjection.ExampleBean">
+        <!-- constructor injection -->
+        <constructor-arg ref="yetAnotherBean"/>
+        <constructor-arg value="777"/>
+
+        <!-- setter injection using the neater ref attribute -->
+        <property name="beanOne" ref="anotherExampleBean"/>
+    </bean>
+
+    <bean id="anotherExampleBean" class="acktsap.ioc.dependency.XmlDependencyInjection.AnotherBean"/>
+    <bean id="yetAnotherBean" class="acktsap.ioc.dependency.XmlDependencyInjection.YetAnotherBean"/>
+</beans>

@@ -1,9 +1,10 @@
 plugins {
     java
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.7.10"
 }
 
-val springBootVersion = "2.6.4"
+val springBootVersion = "2.7.1"
+val springVersion = "5.3.18"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
