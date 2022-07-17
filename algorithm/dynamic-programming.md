@@ -23,10 +23,9 @@
 
 ### Characteristics
 
-- Overlapping subproblems
-  - Smaller versions of the original problem that are reused multiple times.
-- Optimal substructure
-  - An optimal solution can be formed from optimal solutions to the overlapping subproblems.
+- Overlapping subproblems : Smaller versions of the original problem that are reused multiple times.
+- Optimal substructure : An optimal solution can be formed from optimal solutions to the overlapping subproblems.
+  > 즉, local optimal을 조합해서 global optimal을 만들 수 있다.
 
 #### When to use
 

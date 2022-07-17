@@ -18,6 +18,7 @@
 ## Problems
 
 - [RedundantConnection](./leetcode/RedundantConnection.cpp)
+- [NumberofOperationstoMakeNetworkConnected](./leetcode/NumberofOperationstoMakeNetworkConnected.cpp)
 
 ## Reference
 

@@ -227,7 +227,6 @@ int[] dy = { 0, 0, 1, -1 };
 
 todo
 
-
 ## Problems
 
 - [CloneGraph](./leetcode/CloneGraph.java)
@@ -238,5 +237,6 @@ todo
 - [NumberofEnclaves](./leetcode/NumberofEnclaves.cpp)
 - [NumberOfIslands](./leetcode/NumberOfIslands.java)
 - [PacificAtlanticWaterFlow](./leetcode/PacificAtlanticWaterFlow.java)
+- [NumberofOperationstoMakeNetworkConnected](./leetcode/NumberofOperationstoMakeNetworkConnected.cpp)
 
 ## Reference

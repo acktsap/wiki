@@ -52,11 +52,17 @@ using namespace std;
  * 
  *
  * Review
- *
+ * 
+ * union find를 한 결과가 무조건 아름답게 최종 조상을 가르키지 않음.
+ * 아닐 수도 있어서 findParent를 해보긴 해야함.
  *
  */
 class NumberofOperationstoMakeNetworkConnected {
 public:
+  // todo: dfs 사용
+
+  // todo: union find & set 안쓰고 해보기
+
   /*
     disjoint set만드는 과정에서 cycle 발견하는 수를 리턴?
     
@@ -69,7 +75,7 @@ public:
     - time: O(n)
     - space: O(n)
   */
-  int makeConnected(int n, vector<vector<int>>& connections) {
+  int makeConnectedPoor(int n, vector<vector<int>>& connections) {
     if (connections.size() < n - 1) {
       return -1;
     }
@@ -134,7 +140,7 @@ int main() {
     auto& expected = get<2>(parameter);
 
     {
-      auto actual = solution.makeConnected(n, connections);
+      auto actual = solution.makeConnectedPoor(n, connections);
       if (actual != expected) {
         cout << "Expected: " << expected;
         cout << " but was: " << actual;
