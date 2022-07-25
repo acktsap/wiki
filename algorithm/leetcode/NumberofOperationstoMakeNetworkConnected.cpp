@@ -59,9 +59,90 @@ using namespace std;
  */
 class NumberofOperationstoMakeNetworkConnected {
 public:
-  // todo: dfs 사용
+  /*
+    graph 만들어서 dfs. dfs 호출 수가 disjoint set size임
+    disjoint set size - 1 리턴
+    
+    - time: O(n)
+    - space: O(n)
+  */
+  int makeConnectedDfs(int n, vector<vector<int>>& connections) {
+    if (connections.size() < n - 1) {
+      return -1;
+    }
+    
+    vector<vector<int>> graph(n, vector<int>());
+    for (vector<int>& edge : connections) {
+      int from = edge[0];
+      int to = edge[1];
+      graph[from].push_back(to);
+      graph[to].push_back(from);
+    }
+    
+    vector<bool> visited(n, false);
+    int count = 0;
+    for (int i = 0; i < visited.size(); ++i) {
+      if (!visited[i]) {
+        ++count;
+        dfs(i, graph, visited);
+      }
+    }
+    
+    return count - 1;
+  }
+  
+  void dfs(int current, vector<vector<int>>& graph, vector<bool>& visited) {
+    visited[current] = true;
+    
+    for (int to : graph[current]) {
+      if (visited[to]) {
+        continue;
+      }
+      
+      dfs(to, graph, visited);
+    }
+  }
 
-  // todo: union find & set 안쓰고 해보기
+    /*
+    n - 1개 있으면 무조건 어케든 됨 n - 1보다 작으면 -1 리턴
+    
+    disjoint set을 만들때 connect를 함. m개 연결을 하고 나면 n - 1 - m개를 연결하면 됨
+    
+    - time: O(n)
+    - space: O(n)
+  */
+  int makeConnectetCountConnectionOperation(int n, vector<vector<int>>& connections) {
+    if (connections.size() < n - 1) {
+      return -1;
+    }
+    
+    vector<int> parents(n, 0);
+    for (int i = 0; i < parents.size(); ++i) {
+      parents[i] = i;
+    }
+    
+    int connectCount = 0;
+    for (vector<int>& connection : connections) {
+      int p0 = findParentPathHalving(parents, connection[0]);
+      int p1 = findParentPathHalving(parents, connection[1]);
+      
+      if (p0 != p1) {
+        ++connectCount;
+        parents[p0] = p1;
+      }
+    }
+    
+    return n - 1 - connectCount;
+  }
+  
+  int findParentPathHalving(vector<int>& parents, int vertex) {
+    int current = vertex;
+    while(parents[current] != current) {
+      parents[current] = parents[parents[current]];
+      current = parents[current];
+    }
+    return current;
+  }
 
   /*
     disjoint set만드는 과정에서 cycle 발견하는 수를 리턴?
@@ -130,6 +211,11 @@ int main() {
         6,
         vector<vector<int>> { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 1, 2 } },
         -1
+    ),
+    make_tuple(
+        5,
+        vector<vector<int>> { { 0, 1 }, { 0, 2 }, { 3, 4 }, { 2, 3 } },
+        0
     )
   };
 
@@ -138,6 +224,26 @@ int main() {
     auto& n = get<0>(parameter);
     auto& connections = get<1>(parameter);
     auto& expected = get<2>(parameter);
+
+    {
+      auto actual = solution.makeConnectedDfs(n, connections);
+      if (actual != expected) {
+        cout << "Expected: " << expected;
+        cout << " but was: " << actual;
+        cout << endl;
+        assert (false);
+      }
+    }
+
+    {
+      auto actual = solution.makeConnectetCountConnectionOperation(n, connections);
+      if (actual != expected) {
+        cout << "Expected: " << expected;
+        cout << " but was: " << actual;
+        cout << endl;
+        assert (false);
+      }
+    }
 
     {
       auto actual = solution.makeConnectedPoor(n, connections);
