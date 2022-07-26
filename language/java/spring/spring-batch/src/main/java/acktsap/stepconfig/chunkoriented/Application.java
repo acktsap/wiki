@@ -7,7 +7,11 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.item.*;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.NonTransientResourceException;
+import org.springframework.batch.item.ParseException;
+import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -88,5 +92,6 @@ public class Application {
     // db: localhost:8080/h2-console (user : "sa", pw: "")
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        System.exit(0);
     }
 }

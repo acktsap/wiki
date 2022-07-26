@@ -63,7 +63,7 @@ public class XmlDependencyInjection {
     }
 
     public static void main(String[] args) {
-        String configLocation = XmlDependencyInjection.class.getPackageName() + "/xml-di.xml";
+        String configLocation = XmlDependencyInjection.class.getPackageName().replace(".", "/") + "/xml-di.xml";
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
         ExampleBean bean = applicationContext.getBean(ExampleBean.class);
         System.out.println(bean);
