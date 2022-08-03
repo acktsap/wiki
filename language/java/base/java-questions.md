@@ -14,6 +14,7 @@
   - [Exception](#exception)
   - [ClassLoader](#classloader)
 - [Collection vs Stream](#collection-vs-stream)
+  - [Why use stream](#why-use-stream)
   - [ArrayList, LinkedList](#arraylist-linkedlist)
   - [Vector vs ArrayList](#vector-vs-arraylist)
   - [HashMap vs LinkedHashMap vs TreeMap](#hashmap-vs-linkedhashmap-vs-treemap)
@@ -162,6 +163,10 @@ public static Integer valueOf(int i) {
   - map, filter, flatMap등의 operation이 적용됨
   - Iterating을 내부적으로 해서 terminal operation (reduce, collect)이 와야만 iterating 실행
   - 내부적으로 forkJoinPool을 사용하는 parallel stream이라는 것도 있음
+
+### Why use stream
+
+- 성능 이유 보다는 readability. 선언형으로 할거냐 명령형으로 할거냐!
 
 ### ArrayList, LinkedList
 

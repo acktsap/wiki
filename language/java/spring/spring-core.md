@@ -14,6 +14,7 @@
   - [Usage](#usage)
 - [Validation, Data Binding and Type Conversion](#validation-data-binding-and-type-conversion)
 - [Spring Expression Language (SpEL)](#spring-expression-language-spel)
+  - [Usage](#usage-1)
 - [Spring AOP](#spring-aop)
 - [Null-safety](#null-safety)
 - [Data Buffer and Codecs](#data-buffer-and-codecs)
@@ -115,7 +116,6 @@ todo: overview 보고 하기
   }
   ```
 
-
 ### How to Dependency Injection
 
 - Constructor-based : 생성자의 인자를 통해 의존하는 객체 주입.
@@ -185,6 +185,18 @@ todo
 
 ## Spring Expression Language (SpEL)
 
+- Spring 진영에서 쓰는 용도로 만든 expression language로 object를 런타임에 조회 및 조회하고 조작할 수 있게 해줌.
+- Spring에서 쓰는 용도로 만들긴 했지만 spring과는 독립적으로 사용 가능.
+- [language reference](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#expressions-language-ref)
+- `@Value`에서 사용
+  - `#{}` : expresssion
+  - `${}` : property
+  - `${user.region} == #{ systemProperties['user.region'] }`
+
+### Usage
+
+- [SpEL pattern, standalone](./spring-core/src/main/java/acktsap/spel/SpELRunner.java)
+
 ## Spring AOP
 
 ## Null-safety
@@ -194,7 +206,9 @@ todo
   - `@NonNull` : a parameter, return value, or field cannot be null (not needed on parameters / return values and fields where @NonNullApi and @NonNullFields apply, respectively).
   - `@NonNullApi` : parameters and return values are to be considered as non-nullable by default for a given package.
   - `@NonNullFields` : fields are to be considered as non-nullable by default for a given package.
-- Spring annotation은 [JSR-305](https://jcp.org/en/jsr/detail?id=305)로 meta-annotated 되어 있음. 그래서 이거 사용하는 spring 기반 라이브러리에서 `@Nullable`같은거 사용하면 `com.google.code.findbugs:jsr305:3.0.2`를 compileOnly (provided in maven)으로 import 시켜줘야 compile warning이 제거됨.
+  - Leverages JSR-305 meta-annotations to indicate nullability in Java to common tools with JSR-305 support and used by Kotlin to infer nullability of Spring API.
+- Spring annotation은 [JSR-305](https://jcp.org/en/jsr/detail?id=305)로 meta-annotated 되어 있음. 그런데 이 annotation 관련 jar가 기본적으로는 없어서 `@Nullable` 같은거 사용하면 없이는 정보가 없어서 compile warning뜸. 이를 해결하기 위해서는 `com.google.code.findbugs:jsr305:3.0.2`를 compileOnly (gradle) 또는 provided (maven)으로 import 시켜줘야 함.
+  - JSR-305 는 nullable 관련 meta 정보를 주기 위한 spec. 이걸로 vender사가 (eg. Idea) null-safety support를 generic한 방법으로 하게 해줌.
   - Only projects such as Spring-based libraries that use null-safety annotations in their codebase should add `com.google.code.findbugs:jsr305:3.0.2` with compileOnly Gradle configuration or Maven provided scope to avoid compile warnings
     > 내가 적어놓은 말이 맞나???
 

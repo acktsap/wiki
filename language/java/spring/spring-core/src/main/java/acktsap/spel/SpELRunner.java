@@ -12,34 +12,19 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
 
-/**
- * SpEL : Spring Expression Language
- *
- * #{"표현식"}
- *
- * ${"프로퍼티"}
- *
- * 표현식은 프로퍼티를 가질 수 있지만, 반대는 안 됨. #{${my.data} + 1}
- *
- * eg. @PreAuthorize, @PostAuthorize, @Query, ...
- *
- * See also
- *
- * https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions-language-ref
- */
 @Component
 public class SpELRunner implements ApplicationRunner {
 
     /* expressions */
 
     @Value("#{1 + 1}")
-    int value;
+    int onePlusOne;
 
     @Value("#{'Hello ' + 'world'}")
-    String greeting;
+    String helloPlusWorld;
 
     @Value("#{1 eq 1}")
-    boolean trueOrFalse;
+    boolean oneEqOne;
 
     @Value("hello")
     String hello;
@@ -48,13 +33,16 @@ public class SpELRunner implements ApplicationRunner {
     /* property */
 
     @Value("${server.port}")
-    String myValue;
+    String port;
+
+    @Value("#{systemProperties['server.port']}")
+    String systemPort;
 
 
     /* expression + property */
 
-    @Value("#{${server.port} eq 8080}")
-    boolean isMyValue;
+    @Value("#{${server.port} eq 9000}")
+    boolean portIs9000;
 
 
     /* beans */
@@ -62,21 +50,26 @@ public class SpELRunner implements ApplicationRunner {
     @Value("#{sample}")
     Sample sample;
 
+    @Value("#{sample.data}")
+    int data;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println("#{1 + 1} : " + onePlusOne);
+        System.out.println("#{'hello' + 'World'} : " + helloPlusWorld);
+        System.out.println("#{1 eq 1} : " + oneEqOne);
+        System.out.println("\"hello\" : " + hello);
+        System.out.println("${server.port} : " + port);
+        System.out.println("#{systemProperties['server.port']} : " + systemPort); // ????
+        System.out.println("#{${server.port} eq 9000} : " + portIs9000);
+        System.out.println("#{sample} : " + sample);
+        System.out.println("#{sample.data} : " + data);
         System.out.println("================");
-        System.out.println(value);
-        System.out.println(greeting);
-        System.out.println(trueOrFalse);
-        System.out.println(hello);
-        System.out.println(myValue);
-        System.out.println(isMyValue);
-        System.out.println(sample);
 
         ExpressionParser parser = new SpelExpressionParser();
         Expression expression = parser.parseExpression("100 + 44");
         Integer value = expression.getValue(Integer.class); // uses ConversionService
-        System.out.println(value);
+        System.out.println("100 + 44: " + value);
     }
 
 }

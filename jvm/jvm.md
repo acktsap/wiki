@@ -41,7 +41,7 @@ JVM
 
 ## Does java written in c/cpp?
 
-- No, javac is written in java. But jre is written in native language like c/cpp.
+- No, javac is written in java (bootstraping). But jre is written in native language like c/cpp.
 
 ## How Jvm Works
 
