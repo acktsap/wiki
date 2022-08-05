@@ -1,0 +1,76 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<!--
+    이 정보에 기반해서 servlet container가
+    listener, filter, servlet을 war file에서 탐지
+ -->
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- spring root context params -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigutation</param-name>
+        <param-value>acktsap.webservlet.AppConfig</param-value>
+    </context-param>
+
+    <!-- filter 등록 -->
+    <filter>
+        <filter-name>myFilter</filter-name>
+        <filter-class>acktsap.webservlet.MyFilter</filter-class>
+    </filter>
+
+    <!-- filter mapping -->
+    <filter-mapping>
+        <filter-name>myFilter</filter-name>
+        <servlet-name>hello</servlet-name>
+    </filter-mapping>
+
+    <!-- custom listener 등록 -->
+    <listener>
+        <listener-class>acktsap.webservlet.MyListener</listener-class>
+    </listener>
+
+    <!-- spring context를 load하는 listener 등록 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- servlet 등록 -->
+    <servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>acktsap.webservlet</servlet-class>
+    </servlet>
+
+    <!-- spring servlet 등록 -->
+    <servlet>
+        <servlet-name>app</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+        </init-param>
+        <!-- servlet context -->
+        <init-param>
+            <param-name>contextConfigutation</param-name>
+            <param-value>acktsap.sample.webservlet.WebConfig</param-value>
+        </init-param>
+    </servlet>
+
+    <!-- servlet mapping (hello는 전통적인 Servlet 구현체가) -->
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <!-- servlet mapping (app은 DispatcherServlet이) -->
+    <servlet-mapping>
+        <servlet-name>app</servlet-name>
+        <url-pattern>/app</url-pattern>
+    </servlet-mapping>
+</web-app>

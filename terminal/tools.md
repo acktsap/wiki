@@ -7,6 +7,7 @@
 - [Sort](#sort)
 - [Sftp](#sftp)
 - [Sed](#sed)
+- [Base64](#base64)
 
 ## find
 
@@ -101,4 +102,17 @@ put *.txt
 ```sh
 # replacement
 echo "target_test" | sed -e "s/target/new/" # print new_test
+```
+
+## Base64
+
+```sh
+# decode
+echo 324324234 | base64 --decode
+
+# encode
+echo 324324234 | base64
+
+# encode without newline
+echo 324324234 | base64 -w 0
 ```
