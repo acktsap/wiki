@@ -7,6 +7,7 @@
   - [KClass Extensions](#kclass-extensions)
 - [package-info.java](#package-infojava)
 - [assertJ sam issue](#assertj-sam-issue)
+- [Compiler option](#compiler-option)
 
 ## Closed
 
@@ -79,7 +80,15 @@ fun <T> A.test(val: Int, type: KClass<T>): Int {
 
 ## assertJ sam issue
 
-
 - [Kotlin SAM overload resolution ambiguity between Consumer and ThrowingConsumer](https://github.com/assertj/assertj-core/issues/2357)
 - [jetbrains ticket](https://youtrack.jetbrains.com/issue/KT-17765)
   - 1.7에서 해결
+
+## Compiler option
+
+laugnage, api 버전은 최대한 낮게 하기. 그래야 사용자가 강제로 버전업 하지 않아도 됨.
+
+- `-language-version version` : 이 버전의 kotlin과 source 호환성을 줌.
+- `-api-version version` : 이 버전의 kotlin api만 사용 가능하게 함.
+
+- [see also](https://kotlinlang.org/docs/compiler-reference.html#common-options)
