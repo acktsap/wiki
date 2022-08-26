@@ -379,6 +379,27 @@ for (auto& item : test) {
 
 ### Queue
 
+```cpp
+// init
+queue<int> q;
+
+// inserts element at the end
+q.push(3);
+
+// access first, last element
+q.front();
+q.back();
+
+// remove first element
+q.pop();
+
+// check size
+q.size();
+
+// check if empty
+q.empty();
+```
+
 ### Stack
 
 ### Map
