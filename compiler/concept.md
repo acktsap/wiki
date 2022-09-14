@@ -1,5 +1,10 @@
 # Compiler
 
+- [Phases](#phases)
+- [Bootstrapping](#bootstrapping)
+- [Transpiler](#transpiler)
+- [References](#references)
+
 ## Phases
 
 ![compiler-phases](./img/compiler-phases.jpg)
@@ -17,6 +22,13 @@
 - 작성하는 언어에 대한 dogfooding이 가능.
 - 컴파일러 개발자가 컴파일 대상 언어만 알면 됨.
 - 컴파일러 개선을 하면 컴파일러 작성 자체에 대한 개선도 일어남.
+
+## Transpiler
+
+- source to source compiler. 주로 신규 소스 코드를 이전 버전에 호환되는 소스 코드로 만들어주는 친구.
+- eg. babel
+
+https://en.wikipedia.org/wiki/Source-to-source_compiler
 
 ## References
 

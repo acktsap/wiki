@@ -9,9 +9,9 @@ dependencies {
 
     /* cache */
     // caffeine
-    implementation("com.github.ben-manes.caffeine:caffeine:3.0.6")
-    implementation("com.github.ben-manes.caffeine:guava:3.0.6") // extension
-    implementation("com.github.ben-manes.caffeine:jcache:3.0.6") // extension
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.1")
+    implementation("com.github.ben-manes.caffeine:guava:3.1.1") // extension
+    implementation("com.github.ben-manes.caffeine:jcache:3.1.1") // extension
 
     /* logging */
     implementation("org.slf4j:slf4j-api:1.7.36")
@@ -19,5 +19,9 @@ dependencies {
 
     /* reactive */
     // reactor
-    implementation("io.projectreactor:reactor-core:3.4.16")
+    implementation("io.projectreactor:reactor-core:3.4.21")
+
+    /* markdown */
+    // commonmark
+    implementation("org.commonmark:commonmark:0.19.0")
 }

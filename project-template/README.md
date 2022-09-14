@@ -4,6 +4,8 @@ Project template (app, library) for languages.
 
 {target}-{language}-{buildtool}
 
+Based on [Build automation](https://en.wikipedia.org/wiki/Build_automation)
+
 ## README should has build
 
 - Requirements

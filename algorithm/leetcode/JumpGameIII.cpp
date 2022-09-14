@@ -103,7 +103,7 @@ public:
     }
   }
 
-    /*
+  /*
     start부터 시작해서 dfs로 index visit
     0인거 한개라도 도달하면 바로 끝
 
@@ -155,9 +155,9 @@ public:
       - O(n), visited length
   */
   bool canReachBfs(vector<int>& arr, int start) {
-    queue<int> q;
     vector<bool> visited(arr.size(), false);
 
+    queue<int> q;
     q.push(start);
     while (!q.empty()) {
       int i = q.front();
