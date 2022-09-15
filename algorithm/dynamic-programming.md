@@ -107,23 +107,23 @@ void f(int n) {
 
 ```cpp
 // initialized to -1
-int cache[2500][2500];
+int dp[2500][2500];
 
 int someObscureFunction(int a, int b) {
   // base case
   if (...) return ...;
 
   // if it's been already computed, return that value
-  // int& ret : a trick
-  int ret = cache[a][b];
-  if (ret != -1) return ret;
+  if (dp[a][b] != -1) {
+    return dp[a][b];
+  }
 
   // compute the answer
   ...
-  cache[a][b] = ...
+  dp[a][b] = ...
   ...
 
-  return cache[a][b];
+  return dp[a][b];
 }
 
 int main() {
@@ -137,12 +137,14 @@ int main() {
 - [ClimbingStairs](./leetcode/ClimbingStairs.java)
 - [CoinChange](./leetcode/CoinChange.java)
 - [CombinationSumIV](./leetcode/CombinationSumIV.java)
+- [CountVowelsPermutation](./leetcode/CountVowelsPermutation.cpp)
 - [DecodeWays](./leetcode/DecodeWays.java)
 - [DeleteAndEarn](./leetcode/DeleteAndEarn.java)
 - [HouseRobber](./leetcode/HouseRobber.java)
 - [HouseRobber2](./leetcode/HouseRobber2.java)
 - [JumpGame](./leetcode/JumpGame.java)
 - [JumpGame2](./leetcode/JumpGame2.java)
+- [JumpGameV](./leetcode/JumpGameV.cpp)
 - [LongestCommonSubsequence](./leetcode/LongestCommonSubsequence.java)
 - [LongestIncreasingSubsequence](./leetcode/LongestIncreasingSubsequence.java)
 - [MaxCourse](./leetcode/MaxCourse.java)
