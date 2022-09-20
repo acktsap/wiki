@@ -1,9 +1,14 @@
 # Compiler
 
+- [Compiler](#compiler)
 - [Phases](#phases)
 - [Bootstrapping](#bootstrapping)
 - [Transpiler](#transpiler)
 - [References](#references)
+
+## Compiler
+
+- 프로그래밍 언어 -> 기계어로 변환.
 
 ## Phases
 

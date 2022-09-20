@@ -65,7 +65,7 @@ std::ostream& operator <<(std::ostream& os, const vector<vector<T>>& grid);
  */
 class JumpGameV {
 public:
-    /*
+  /*
     a -> b, a -> c로 가면 dp[a] = 1 + max(dp[b], dp[c])임
     overlapping subproblem & optimal substructure -> dp
     

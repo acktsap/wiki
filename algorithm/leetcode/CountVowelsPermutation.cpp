@@ -57,7 +57,7 @@ std::ostream& operator <<(std::ostream& os, const vector<vector<T>>& grid);
  */
 class CountVowelsPermutation {
 public:
-    /*
+  /*
     aeiou
     ae
     ea
@@ -76,12 +76,18 @@ public:
     이거 테이블 만들 필요도 없네 그냥 변수 5개
     
     편의상 aeiou를 dp table 이름으로 치면
-    
+
+    a[n] : n번째 index를 a로 끝나는 알파벳의 경우의 수
+
+    n >= 2
     a[n] = e[n - 1] + i[n - 1] + u[n - 1]
     e[n] = a[n - 1] + i[n - 1]
     i[n] = e[n - 1] + o[n - 1]
     o[n] = i[n - 1]
     u[n] = i[n - 1] + o[n - 1]
+
+    n == 1
+    a[n], e[n], i[n], o[n], u[n] = 1
     
     - time: O(n)
     - space: O(1)
