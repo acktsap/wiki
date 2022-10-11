@@ -41,6 +41,10 @@ https://docs.gradle.org/current/userguide/base_plugin.html
     - compile classpath : depends on `XXX`
     - generated pom : none
 
+see also
+
+- [Introducing Compile-Only Dependencies](https://blog.gradle.org/introducing-compile-only-dependencies)
+
 ### vs Maven Scope
 
 [maven scope](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope)

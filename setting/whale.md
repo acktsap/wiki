@@ -19,3 +19,5 @@ Search and set
       - Grayscale : off
 - AdBlock — best ad blocker
 - Better Pull Request for Github
+- [JSON Formatter](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa/related?hl=en)
+

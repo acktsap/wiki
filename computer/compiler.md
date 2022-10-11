@@ -4,6 +4,7 @@
 - [Phases](#phases)
 - [Bootstrapping](#bootstrapping)
 - [Transpiler](#transpiler)
+- [Meta-circular evaluator](#meta-circular-evaluator)
 - [References](#references)
 
 ## Compiler
@@ -33,9 +34,16 @@
 - source to source compiler. 주로 신규 소스 코드를 이전 버전에 호환되는 소스 코드로 만들어주는 친구.
 - eg. babel
 
-https://en.wikipedia.org/wiki/Source-to-source_compiler
+## Meta-circular evaluator
+
+- interpreting 대상 언어의 구현을 해당 언어의 interpreter의 유사한 기능으로 작성한 interpreter.
+  - eg. lambda interpreting을 함수를 사용해서 하는 것.
+- self-interpreter라고도 불림.
+- 기존 언어에 기능을 쉽게 추가할 수 있음.
 
 ## References
 
 - [Phases of a Compiler](https://www.geeksforgeeks.org/phases-of-a-compiler/)
 - [Bootstrapping (compilers) (wiki)](https://en.wikipedia.org/wiki/Bootstrapping_(compilers))
+- [Source-to-source_compiler (compilers) (wiki)](https://en.wikipedia.org/wiki/Source-to-source_compiler)
+- [Meta-circular evaluator (wiki)](https://en.wikipedia.org/wiki/Meta-circular_evaluator)

@@ -13,3 +13,11 @@ a.out
 
 # js
 node_modules/
+
+# java class file
+*.class
+
+# graalvm related
+*.build_artifacts.txt
+helloworld
+prettyprintjson

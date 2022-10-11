@@ -31,6 +31,7 @@ public class Application {
         StepBuilderFactory stepBuilderFactory
     ) {
         return jobBuilderFactory.get("testJob")
+            .preventRestart()
             .start(
                 stepBuilderFactory.get("testStep1")
                     .tasklet((contribution, chunkContext) -> {
