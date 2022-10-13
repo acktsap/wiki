@@ -23,6 +23,14 @@
   - [Online playground](#online-playground)
   - [Java-to-Kotlin converter](#java-to-kotlin-converter)
 
+This chapter covers
+
+- A basic demonstration of Kotlin
+- The main traits of the Kotlin language
+- Possibilities for Android and server-side development
+- What distinguishes Kotlin from other languages
+- Writing and running code in Kotlin
+
 ## Introduction
 
 - Kotlin은 Java platform을 대상으로 함.

@@ -1,5 +1,15 @@
 # Tree
 
+- [Tree Traversal](#tree-traversal)
+- [Recursive](#recursive)
+  - [Top-down](#top-down)
+  - [Bottom-up](#bottom-up)
+- [Iterative](#iterative)
+- [Binary Search Tree](#binary-search-tree)
+- [Breadth-First Search](#breadth-first-search)
+- [Problems](#problems)
+- [See also](#see-also)
+
 ## Tree Traversal
 
 ![tree-traversal](./img/tree-traversal.png)
@@ -9,6 +19,8 @@ pre, in, post means when to visit node.
 - Pre-order: node -> left child -> right child
 - In-order: left child -> node -> right child
 - Post-order: left child -> right child -> node
+
+All traversal is DFS (depth first search).
 
 ## Recursive
 
@@ -79,6 +91,19 @@ void traverse(TreeNode node) {
  
 ## Iterative
 
+todo
+
+## Binary Search Tree
+
+- Binary tree (2 child), all nodes of left-child < root.val && root.val < all nodes of right-child.
+- In-order traversal always visits nodes in a sorted order.
+
+## Breadth-First Search
+
+![bfs](./img/tree-bfs.png)
+
+- Tree is type of graph. Bfs can be applied.
+
 ## Problems
 
 - [BinaryTreeRightSideView](./leetcode/BinaryTreeRightSideView.cpp)
@@ -88,5 +113,6 @@ void traverse(TreeNode node) {
 - [MaximumDepthOfBinaryTree](./leetcode/MaximumDepthOfBinaryTree.java)
 - [SumOfDistancesInTree](./leetcode/SumOfDistancesInTree.java)
 - [SymmetricTree](./leetcode/SymmetricTree.java)
+- [ValidateBinarySearchTree](./leetcode/ValidateBinarySearchTree.cpp)
 
 ## See also
