@@ -1,7 +1,0 @@
-spring:
-  profiles:
-    active: local
-  h2:
-    console:
-      enabled: true
-      path: /h2-console # enable h2 console

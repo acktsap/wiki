@@ -2,7 +2,7 @@
 
 - [Forward](#forward)
 - [Preface](#preface)
-- [Abount this book](#abount-this-book)
+- [About this book](#about-this-book)
 
 ## Forward
 
@@ -25,7 +25,7 @@
 - Kotlin은 대부분의 kotlin 개발자 team이 있는 Russia의 St. Petersburg 근처에 있는 섬 이름으로 지음.
 - Kotlin 언어 작성하고 나니 Kotlin을 위한 책을 Kotlin 개발자들이 쓰면 좋겠다고 생각해서 작성.
 
-## Abount this book
+## About this book
 
 - 이 책은 Kotlin을 이용해서 jvm, android 위에서 application을 만들 수 있는 지식을 줌.
 - kotlin의 기본 기능에서부터 high-level abstraction인 dsl까지 알려줌.

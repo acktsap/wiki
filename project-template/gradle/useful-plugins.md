@@ -7,8 +7,11 @@
 - [Java Checkstyle](#java-checkstyle)
 - [Java Test](#java-test)
 - [Java Publish](#java-publish)
+- [Kotlin Jvm](#kotlin-jvm)
+- [Kotlin Coverage](#kotlin-coverage)
 - [Kotlin ktlint](#kotlin-ktlint)
 - [Spring](#spring)
+- [Shadow Jar](#shadow-jar)
 - [See also](#see-also)
 
 ## Base
@@ -27,6 +30,7 @@ https://docs.gradle.org/current/userguide/base_plugin.html
 - Configuration effect
   - `api`
     - classpath : compile, runtime, test compile, test runtime
+    - transitive
     - generated pom : `compile`
   - `implementation`
     - classpath : compile, runtime, test compile, test runtime
@@ -82,6 +86,14 @@ see also
 - [maven publish plugin](https://docs.gradle.org/current/userguide/publishing_maven.html)
 - [shadow jar plugin](https://github.com/johnrengelman/shadow)
 
+## Kotlin Jvm
+
+- [Kotlin Jvm](https://kotlinlang.org/docs/gradle.html#targeting-the-jvm)
+
+## Kotlin Coverage
+
+- [Kotlinx-Kover](https://github.com/Kotlin/kotlinx-kover)
+
 ## Kotlin ktlint
 
 - [ktlint-gradle](https://github.com/JLLeitschuh/ktlint-gradle)
@@ -93,6 +105,18 @@ see also
   - The plugin detects when certain other plugins are applied and reacts accordingly. (eg. `spring.dependency.management`, `java`, `groovy`, ...)
 - [Spring Dependency Management Plugin](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/)
   - Control the versions of your project’s direct and transitive dependencies and will honour any exclusions declared in the poms of your project’s dependencies.
+- [kotlin-spring](https://kotlinlang.org/docs/all-open-plugin.html#spring-support)
+  - Mark `open` on Proxy based one.
+    - @Component
+    - @Async
+    - @Transactional
+    - @Cacheable
+    - @SpringBootTest
+
+## Shadow Jar
+
+- [Shadow Jar](https://imperceptiblethoughts.com/shadow/introduction)
+  - Make a fat Jar.
 
 ## See also
 

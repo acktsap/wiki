@@ -5,6 +5,7 @@
 - [Authoring JVM Builds](#authoring-jvm-builds)
 - [Samples](#samples)
 - [Maven Bom](#maven-bom)
+- [Working with Dependencies](#working-with-dependencies)
 - [Best Practices](#best-practices)
 
 ## Structuring Software Products
@@ -35,6 +36,11 @@ https://docs.gradle.org/current/samples/
 ## Maven Bom
 
 https://reflectoring.io/maven-bom/
+
+## Working with Dependencies
+
+- [Dependency management in Gradle](https://docs.gradle.org/current/userguide/dependency_management.html)
+- [Sharing dependency versions between projects](https://docs.gradle.org/current/userguide/platforms.html)
 
 ## Best Practices
 
