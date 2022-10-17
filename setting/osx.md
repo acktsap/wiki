@@ -168,10 +168,16 @@ Make workspace dir & pin it to the finder
 
 ### Set default system jdk version
 
+- OSX는제일 높은 버전을 기본적으로 채택.
+- 이 로직ㅇ르 disabled하는 방법. 원하는 버전 제외하고 전부 disabled 하면 됨.
+- 사실 그냥 겹치는 버전이 있는 경우에만 둘중 하나 선택해서 disable하고 싶은거만 이렇게 처리.
+
 ```sh
-> cd /Library/Java/JavaVirtualMachines/zulu-8.jdk
+> cd /Library/Java/JavaVirtualMachines/${javaVersion}/Content
 > mv Info.plist Info.plist.disabled
 ```
+
+[How to set or change the default Java (JDK) version on macOS?](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x)
 
 ### 취소선 단축키
 
@@ -181,7 +187,3 @@ https://www.clien.net/service/board/cm_mac/13752933
 
 - QuickTimePlayer 사용해서 Split Clip (command + Y)을 활용해서 중간 중간 자른 후 저장
 - Mp4 변환의경우 imovie 사용
-
-### Setting default java version
-
-[osx system java version](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x)
