@@ -91,6 +91,9 @@
 # list available tasks
 ./gradlew tasks
 
+# run in parallel
+./gradlew build --parallel
+
 # stop gradle daemon
 ./gradlew --stop
 

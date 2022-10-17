@@ -4,6 +4,7 @@ include("spring-common")
 include("spring-boot-application-cli")
 include("spring-boot-application-native-cli")
 include("spring-boot-application-web")
+include("kotlin-application-native-cli")
 
 dependencyResolutionManagement {
     repositories {
@@ -18,7 +19,7 @@ dependencyResolutionManagement {
         create("libs") {
             library(
                 "spring-boot-starter",
-                "org.springframework.starter",
+                "org.springframework.boot",
                 "spring-boot-starter"
             ).withoutVersion()
 

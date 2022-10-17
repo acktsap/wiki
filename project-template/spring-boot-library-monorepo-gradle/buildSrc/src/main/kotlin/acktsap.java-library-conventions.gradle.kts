@@ -1,12 +1,6 @@
 plugins {
     `java-library`
-    jacoco
     checkstyle
-}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
 }
 
 java {
@@ -35,9 +29,9 @@ tasks.compileJava {
 
 tasks.withType<Checkstyle>().configureEach {
     reports {
-        configFile = file("${project.rootDir}/src/checkstyle/checkstyle.xml")
+        configFile = file("${project.rootDir}/buildSrc/config/checkstyle.xml")
         configProperties = mapOf(
-            "suppressionFile" to file("${project.rootDir}/src/checkstyle/checkstyle-suppressions.xml")
+            "suppressionFile" to file("${project.rootDir}/buildSrc/config/checkstyle-suppressions.xml")
         )
         xml.required.set(false)
         html.required.set(true)
@@ -46,27 +40,5 @@ tasks.withType<Checkstyle>().configureEach {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
-    maxParallelForks = Runtime.getRuntime().availableProcessors()
-    finalizedBy(tasks.jacocoTestReport) // report is always generate
-}
-
-tasks.jacocoTestReport {
-    dependsOn(tasks.named<Test>("test")) // tests are required to run before generating the report
-
-    reports {
-        xml.required.set(false)
-        csv.required.set(false)
-        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
-    }
-}
-
-dependencies {
-    constraints {
-        implementation("org.slf4j:slf4j-api:1.7.36")
-        testRuntimeOnly("org.apache.logging.log4j:log4j-slf4j-impl:2.17.2")
-    }
-
-    testImplementation("org.junit.jupiter:junit-jupiter:5.+")
-    testImplementation("org.assertj:assertj-core:3.+")
-    testImplementation("org.mockito:mockito-core:3.+")
+    maxParallelForks = Runtime.getRuntime().availableProcessors() // run test in parallel
 }

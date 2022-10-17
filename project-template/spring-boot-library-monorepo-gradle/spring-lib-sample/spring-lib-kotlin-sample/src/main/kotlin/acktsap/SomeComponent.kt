@@ -1,6 +1,7 @@
 package acktsap
 
 import acktsap.spring.lib.Library
+import acktsap.spring.lib.someExtension
 import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
 

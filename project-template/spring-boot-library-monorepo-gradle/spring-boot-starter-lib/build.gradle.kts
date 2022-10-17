@@ -1,5 +1,6 @@
 plugins {
     id("acktsap.java-library-conventions")
+    id("acktsap.coverage-conventions")
     id("acktsap.maven-publish-conventions")
 }
 

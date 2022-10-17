@@ -5,12 +5,14 @@
 - [Java Library](#java-library)
   - [vs Maven Scope](#vs-maven-scope)
 - [Java Checkstyle](#java-checkstyle)
-- [Java Test](#java-test)
+- [Java Coverage](#java-coverage)
+- [Java MicroBmt](#java-microbmt)
 - [Java Publish](#java-publish)
 - [Kotlin Jvm](#kotlin-jvm)
-- [Kotlin Coverage](#kotlin-coverage)
 - [Kotlin ktlint](#kotlin-ktlint)
+- [Kotlin Test](#kotlin-test)
 - [Spring](#spring)
+- [Graalvm Native](#graalvm-native)
 - [Shadow Jar](#shadow-jar)
 - [See also](#see-also)
 
@@ -73,12 +75,16 @@ see also
 ## Java Checkstyle
 
 - [gradle checkstyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
-- [google checkstyle](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
-- [naver checkstyle](https://github.com/naver/hackday-conventions-java/blob/master/rule-config/naver-checkstyle-rules.xml)
+  - [google checkstyle](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
+  - [naver checkstyle](https://github.com/naver/hackday-conventions-java/blob/master/rule-config/naver-checkstyle-rules.xml)
 
-## Java Test
+## Java Coverage
 
 - [jacoco plugin](https://docs.gradle.org/current/userguide/jacoco_plugin.html)
+  - byte code 기반으로 처리해서 kotlin code도 일부 제외하고 처리 가능.
+
+## Java MicroBmt
+
 - [jmh plugin](https://github.com/melix/jmh-gradle-plugin)
 
 ## Java Publish
@@ -90,13 +96,17 @@ see also
 
 - [Kotlin Jvm](https://kotlinlang.org/docs/gradle.html#targeting-the-jvm)
 
-## Kotlin Coverage
-
-- [Kotlinx-Kover](https://github.com/Kotlin/kotlinx-kover)
-
 ## Kotlin ktlint
 
 - [ktlint-gradle](https://github.com/JLLeitschuh/ktlint-gradle)
+
+## Kotlin Test
+
+- [Kotlinx-Kover](https://github.com/Kotlin/kotlinx-kover)
+  - Kotlin coverage gradle plugin
+  - Jacoco doesn't support some feature like kotlin inline function.
+  - [Kover – The Code Coverage Plugin (youtube)](https://www.youtube.com/watch?v=jNu5LY9HIbw)
+  - [Kover : Code Coverage plugin for Kotlin](https://lengrand.fr/kover-code-coverage-plugin-for-kotlin/)
 
 ## Spring
 
@@ -112,6 +122,11 @@ see also
     - @Transactional
     - @Cacheable
     - @SpringBootTest
+    - ...
+
+## Graalvm Native
+
+- [Native Build Tools](https://graalvm.github.io/native-build-tools/latest/index.html)
 
 ## Shadow Jar
 

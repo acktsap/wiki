@@ -9,10 +9,18 @@ include("spring-lib-sample:spring-lib-java-sample")
 include("spring-lib-sample:spring-lib-kotlin-sample")
 
 dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            val springBootVersion = "2.7.1"
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url = uri("https://repo.spring.io/milestone")
+        }
+    }
 
+    versionCatalogs {
+        val springBootVersion = "2.7.1"
+
+        create("libs") {
             library(
                 "spring-boot-autoconfigure",
                 "org.springframework.boot:spring-boot-autoconfigure:$springBootVersion"
@@ -54,4 +62,3 @@ dependencyResolutionManagement {
         }
     }
 }
-

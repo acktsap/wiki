@@ -1,9 +1,9 @@
-package acktsap.spring.application
+package acktsap.spring.lib
 
-import acktsap.someExtension
 import org.junit.jupiter.api.Test
 
-class LibraryExtensionsTest {
+internal class LibraryExtensionsTest {
+
     @Test
     fun testLibraryExtension() {
         val library = Library()

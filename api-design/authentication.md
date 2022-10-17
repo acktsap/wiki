@@ -179,6 +179,8 @@ see also
 
 ### OAuth 2.0
 
+https://meetup.toast.com/posts/105
+
 ### OpenID
 
 - Decentralized authentication protocol.

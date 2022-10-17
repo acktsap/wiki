@@ -6,6 +6,13 @@ Project template (app, library) for languages.
 
 Based on [Build automation](https://en.wikipedia.org/wiki/Build_automation)
 
+## Goal
+
+- 높은 응집도
+- 낮은 결합도
+- Convention을 얼마나 따르는가
+- IDE에서 Manual 설정의 최소화
+
 ## README should has build
 
 - Requirements

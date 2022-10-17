@@ -13,5 +13,9 @@
 ### Build
 
 - Clean: `./gradlew clean`
-- Check: `./gradlew check`
-- Assemble: `./gradlew build`
+- Check: `./gradlew check --parallel`
+- Build: `./gradlew build --parallel`
+- Assemble Boot Jar: `./gradlew bootJar`
+  - Single jar is generated in `${buildDir}/libs`
+- Assemble: `./gradlew nativeCompile`
+  - Native file is generated in `${buildDir}/libs` 

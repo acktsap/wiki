@@ -1,6 +1,8 @@
 plugins {
     id("acktsap.kotlin-conventions")
-    id("acktsap.spring-boot-conventions")
+    id("acktsap.coverage-conventions")
+    id("acktsap.spring-conventions")
+    id("acktsap.spring-boot-jar-conventions")
 }
 
 dependencies {
