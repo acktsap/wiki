@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 internal class OnStartupRunnerTest {
+
     @Autowired
     lateinit var sut: OnStartupRunner
 

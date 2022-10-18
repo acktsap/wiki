@@ -36,10 +36,20 @@ brew install podman
 
 # start linux server for podman
 podman machine init
+
+# start linux server for podman with cpu, memory init init
+podman machine init --cpus 4 --memory 8092
+
+## check cpu size
+sysctl -n hw.ncpu
+
 podman machine start
 
 # show status
 podman info
+
+# remove
+podman machine rm
 ```
 
 [see also](https://podman.io/getting-started/installation)

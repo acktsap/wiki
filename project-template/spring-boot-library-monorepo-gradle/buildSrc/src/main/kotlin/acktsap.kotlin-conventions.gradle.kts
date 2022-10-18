@@ -15,3 +15,8 @@ tasks.withType<KotlinCompile> {
         apiVersion = "1.5" // allow api to use only this version
     }
 }
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+    maxParallelForks = Runtime.getRuntime().availableProcessors() // run test in parallel
+}

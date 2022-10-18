@@ -1,6 +1,7 @@
 # Useful Plugins
 
 - [Base](#base)
+- [Distribution](#distribution)
 - [Java](#java)
 - [Java Library](#java-library)
   - [vs Maven Scope](#vs-maven-scope)
@@ -21,6 +22,14 @@
 - 대부분의 build사용되는 task들을 제공.
 
 https://docs.gradle.org/current/userguide/base_plugin.html
+
+## Distribution
+
+- [Distribution plugin](https://docs.gradle.org/current/userguide/distribution_plugin.html)
+  - distTar : Tar 마는거.
+  - distZip : Zip 마는거.
+  - assembleDist : distZip + distTar.
+  - installDist : `${buildDir}/install`에 설치.
 
 ## Java
 
@@ -126,7 +135,7 @@ see also
 
 ## Graalvm Native
 
-- [Native Build Tools](https://graalvm.github.io/native-build-tools/latest/index.html)
+- [Native Build Tools](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
 
 ## Shadow Jar
 

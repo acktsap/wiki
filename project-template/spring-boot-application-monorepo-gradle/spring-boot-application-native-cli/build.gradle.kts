@@ -2,7 +2,6 @@ plugins {
     id("acktsap.kotlin-conventions")
     id("acktsap.coverage-conventions")
     id("acktsap.spring-conventions")
-    id("acktsap.spring-boot-jar-conventions")
     id("acktsap.native-conventions")
 }
 
@@ -10,7 +9,7 @@ graalvmNative {
     binaries {
         named("main") {
             // Main options
-            mainClass.set("acktsap.spring.application.CliApplicationKt") // The main class to use, defaults to the application.mainClass
+            mainClass.set("acktsap.spring.application.NativeCliApplicationKt") // The main class to use, defaults to the application.mainClass
             debug.set(true) // Determines if debug info should be generated, defaults to false (alternatively add --debug-native to the CLI)
             verbose.set(true) // Add verbose output, defaults to false
             fallback.set(true) // Sets the fallback mode of native-image, defaults to false

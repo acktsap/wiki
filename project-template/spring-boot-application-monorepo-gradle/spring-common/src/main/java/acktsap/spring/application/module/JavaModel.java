@@ -12,13 +12,16 @@ public class JavaModel {
     public int getValue() {
         return value;
     }
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o)
+    public boolean equals(Object other) {
+        if (this == other) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (other == null || getClass() != other.getClass()) {
             return false;
-        JavaModel model = (JavaModel)o;
+        }
+        JavaModel model = (JavaModel)other;
         return value == model.value;
     }
 
@@ -29,8 +32,7 @@ public class JavaModel {
 
     @Override
     public String toString() {
-        return "Model{" +
-            "value=" + value +
-            '}';
+        return "Model{" + "value=" + value
+            + '}';
     }
 }

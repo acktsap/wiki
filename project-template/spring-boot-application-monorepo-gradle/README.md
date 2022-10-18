@@ -15,7 +15,7 @@
 - Clean: `./gradlew clean`
 - Check: `./gradlew check --parallel`
 - Build: `./gradlew build --parallel`
-- Assemble Boot Jar: `./gradlew bootJar`
-  - Single jar is generated in `${buildDir}/libs`
-- Assemble: `./gradlew nativeCompile`
-  - Native file is generated in `${buildDir}/libs` 
+- Assemble Plain Jar: `./gradlew assembleDist`
+  - tar.gz file is generated in `${buildDir}/distributions`
+- Assemble Native Cli: `./gradlew nativeCompile`
+  - Native file is generated in `${buildDir}/native/nativeCompile` 

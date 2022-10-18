@@ -11,3 +11,8 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "17"
     }
 }
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+    maxParallelForks = Runtime.getRuntime().availableProcessors()
+}

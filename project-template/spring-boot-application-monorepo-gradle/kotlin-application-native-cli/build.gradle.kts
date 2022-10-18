@@ -4,9 +4,6 @@ plugins {
     id("acktsap.native-conventions")
 }
 
-dependencies {
-}
-
 graalvmNative {
     binaries {
         named("main") {
@@ -20,4 +17,11 @@ graalvmNative {
             richOutput.set(false) // Determines if native-image building should be done with rich output
         }
     }
+}
+
+dependencies {
+    implementation(project(":spring-common"))
+
+    testImplementation(libs.junit)
+    testImplementation(libs.assertj)
 }

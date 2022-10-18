@@ -1,5 +1,4 @@
 import kotlinx.kover.api.DefaultIntellijEngine
-import kotlinx.kover.api.JacocoEngine
 
 plugins {
     id("org.jetbrains.kotlinx.kover") // kover also covers java code

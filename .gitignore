@@ -20,4 +20,6 @@ node_modules/
 # graalvm related
 *.build_artifacts.txt
 helloworld
+helloworldstatic
 prettyprintjson
+examplestatic
