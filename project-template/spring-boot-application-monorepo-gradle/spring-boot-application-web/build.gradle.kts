@@ -11,7 +11,6 @@ dependencies {
     // spring
     implementation(libs.spring.boot.starter.web)
     implementation(libs.spring.boot.starter.actuator)
-//    implementation(libs.spring.boot.starter.logging)
     implementation(libs.spring.boot.starter.log4j2)
 
     // test

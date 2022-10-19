@@ -16,6 +16,6 @@
 - Check: `./gradlew check --parallel`
 - Build: `./gradlew build --parallel`
 - Assemble Plain Jar: `./gradlew assembleDist`
-  - tar.gz file is generated in `${buildDir}/distributions`
+  - `*.tar.gz` will be generated in `${buildDir}/distributions`
 - Assemble Native Cli: `./gradlew nativeCompile`
-  - Native file is generated in `${buildDir}/native/nativeCompile` 
+  - Native file will be generated in `${buildDir}/native/nativeCompile`
