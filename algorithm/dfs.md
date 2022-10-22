@@ -34,3 +34,4 @@ void dfs(int i, vector<>& arr, vector<bool>& visited) {
 ## Problems
 
 - [JumpGameIII](./leetcode/JumpGameIII.cpp)
+- [AverageofLevelsinBinaryTree](./leetcode/AverageofLevelsinBinaryTree.cpp)

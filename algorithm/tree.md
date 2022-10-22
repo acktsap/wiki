@@ -114,5 +114,6 @@ todo
 - [SumOfDistancesInTree](./leetcode/SumOfDistancesInTree.java)
 - [SymmetricTree](./leetcode/SymmetricTree.java)
 - [ValidateBinarySearchTree](./leetcode/ValidateBinarySearchTree.cpp)
+- [AverageofLevelsinBinaryTree](./leetcode/AverageofLevelsinBinaryTree.cpp)
 
 ## See also
