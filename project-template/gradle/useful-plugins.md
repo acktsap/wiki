@@ -15,6 +15,7 @@
 - [Spring](#spring)
 - [Graalvm Native](#graalvm-native)
 - [Shadow Jar](#shadow-jar)
+- [Sonarqube](#sonarqube)
 - [See also](#see-also)
 
 ## Base
@@ -141,6 +142,10 @@ see also
 
 - [Shadow Jar](https://imperceptiblethoughts.com/shadow/introduction)
   - Make a fat Jar.
+
+## Sonarqube
+
+- [sonarqube](https://plugins.gradle.org/plugin/org.sonarqube)
 
 ## See also
 

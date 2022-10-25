@@ -1,5 +1,3 @@
-import kotlinx.kover.api.DefaultIntellijEngine
-
 plugins {
     id("org.jetbrains.kotlinx.kover") // kover also covers java code
 }
@@ -7,10 +5,11 @@ plugins {
 kover {
     // https://github.com/Kotlin/kotlinx-kover#configuring-project
     isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
-    engine.set(DefaultIntellijEngine) // use IntellijEngine to cover all kotlin
+    engine.set(kotlinx.kover.api.DefaultIntellijEngine) // use IntellijEngine to cover all kotlin
 
     xmlReport {
-        onCheck.set(false)
+        onCheck.set(true)
+        reportFile.set(layout.buildDirectory.file("kover/result.xml"))
     }
 
     htmlReport {
@@ -27,7 +26,7 @@ kover {
     }
 
     verify {
-        onCheck.set(false) // enable when enough test is added
+        onCheck.set(false) // enable to verify at subproject level
         rule {
             isEnabled = true
             name = "Test Coverage Rule" // custom name for the rule

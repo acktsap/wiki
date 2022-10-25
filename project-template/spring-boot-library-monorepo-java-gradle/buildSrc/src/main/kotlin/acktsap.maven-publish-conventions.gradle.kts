@@ -2,9 +2,6 @@ plugins {
     `maven-publish`
 }
 
-group = "acktsap"
-version = "0.1.0-SNAPSHOT"
-
 publishing {
     publications {
         create<MavenPublication>("maven") {

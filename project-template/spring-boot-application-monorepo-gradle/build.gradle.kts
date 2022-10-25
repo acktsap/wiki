@@ -1,11 +1,27 @@
 plugins {
-    id("org.jetbrains.kotlinx.kover") // kover also covers java code
+    id("org.jetbrains.kotlinx.kover")
 }
 
+// disable for root project
 kover {
-    // https://github.com/Kotlin/kotlinx-kover#configuring-project
-    isDisabled.set(false) // true to disable instrumentation and all Kover tasks in this project
-    engine.set(kotlinx.kover.api.DefaultIntellijEngine) // use IntellijEngine to cover all kotlin
+    isDisabled.set(true)
+    engine.set(kotlinx.kover.api.DefaultIntellijEngine)
+}
+
+koverMerged {
+    enable()
+
+    filters {
+        classes {
+            excludes += listOf("com.example.subpackage.*")
+        }
+        annotations {
+            excludes += listOf("com.example.Annotation", "*Generated")
+        }
+        projects {
+            excludes += listOf()
+        }
+    }
 
     xmlReport {
         onCheck.set(true)
@@ -15,18 +31,10 @@ kover {
     htmlReport {
         onCheck.set(true)
         reportDir.set(layout.buildDirectory.dir("kover/html"))
-        overrideFilters {
-            classes { // override common class filter
-                excludes += listOf("com.example2.subpackage.*") // override class exclusion rules
-            }
-            annotations { // override common annotation filter for HTML report (filtering will take place only by the annotations specified here)
-                excludes += listOf("com.example2.Annotation")
-            }
-        }
     }
 
     verify {
-        onCheck.set(false) // enable to verify at subproject level
+        onCheck.set(true)
         rule {
             isEnabled = true
             name = "Test Coverage Rule" // custom name for the rule
@@ -40,7 +48,7 @@ kover {
             }
 
             bound { // add rule bound
-                minValue = 100
+                minValue = 50
                 maxValue = 100
                 counter = kotlinx.kover.api.CounterType.INSTRUCTION // (LINE, INSTRUCTION, BRANCH)
                 valueType = kotlinx.kover.api.VerificationValueType.COVERED_PERCENTAGE // (COVERED_COUNT, MISSED_COUNT, COVERED_PERCENTAGE, MISSED_PERCENTAGE)

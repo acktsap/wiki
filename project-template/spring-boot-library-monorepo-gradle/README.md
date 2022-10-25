@@ -29,9 +29,12 @@
 ### Build
 
 - Clean: `./gradlew clean`
-- Check: `./gradlew check --parallel`
+- Check: `./gradlew check`
   - Coverage report : `${buildDir}/kover/html/index.html`
-- Assemble: `./gradlew build --parallel`
+- Verify coverage: `./gradlew koverMergedVerify`
+- Merge coverage reports (after generating each report): `./gradlew koverMergedReport`
+  - Merged coverage report : `${rootDir}/${buildDir}/kover/html/index.html`
+- Build: `./gradlew build`
 - Install to local: `./gradlew install`
 - Publish: `./gradlew publish`
 
