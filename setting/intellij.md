@@ -1,5 +1,22 @@
 # Intellij Settting
 
+- [Setting](#setting)
+  - [Project](#project)
+  - [Apperance & Behavior](#apperance--behavior)
+  - [Keymap](#keymap)
+  - [Editor](#editor)
+  - [Build, Execution, Deployment](#build-execution-deployment)
+- [Plugins](#plugins)
+- [Etc](#etc)
+  - [JDK Version](#jdk-version)
+  - [VM options](#vm-options)
+- [Shortcuts](#shortcuts)
+  - [View](#view)
+  - [File](#file)
+  - [Edit](#edit)
+  - [Search](#search)
+  - [Run, Debug](#run-debug)
+
 ## Setting
 
 ### Project
@@ -38,10 +55,18 @@ Custom
       - [ ] Show quick documentation on hover
   - Code Style
     - Java
+      - Wrapping and Braces
+        - Keep when reformatting
+          - [ ] Comment at first column
       - Imports
         - General
           - Class count to use import with '*' : 99
           - Names count to use static import with '*' : 99
+      - Code Generation
+        - Comment Code
+          - [ ] Line comment at first column
+          - [X] Add a space at line comment start
+            - [ ] Enforce on reformat
     - Schema : ${project_specific_setting}
   - File and Code Templates
     - Class : ${your_setting}
@@ -55,10 +80,10 @@ Custom
 ### Build, Execution, Deployment
 
 - Build Tools
-  - Gradle 
+  - Gradle
     - Gradle projects
       - Build and running : Intellij IDEA
-      - Run test using : Intellij IDEA 
+      - Run test using : Intellij IDEA
 
 ## Plugins
 
