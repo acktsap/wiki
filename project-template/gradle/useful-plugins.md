@@ -101,6 +101,13 @@ see also
 
 - [maven publish plugin](https://docs.gradle.org/current/userguide/publishing_maven.html)
 - [shadow jar plugin](https://github.com/johnrengelman/shadow)
+- [Signing Plugin](https://docs.gradle.org/current/userguide/signing_plugin.html)
+  - Support for generating OpenPGP signatures.
+  - [Signatory crednetials](https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials)
+
+See also
+
+- [sonatype publish requirements](http://central.sonatype.org/publish/requirements/)
 
 ## Kotlin Jvm
 

@@ -183,3 +183,4 @@ Hello, World! My message is: native
 ## References
 
 - [graalvm native image official doc](https://www.graalvm.org/22.2/reference-manual/native-image/)
+- [Native Image Basics (official doc)](https://www.graalvm.org/22.3/reference-manual/native-image/basics/)

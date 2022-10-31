@@ -1,5 +1,6 @@
 plugins {
     `maven-publish`
+    signing
 }
 
 publishing {
@@ -54,6 +55,13 @@ publishing {
             )
         }
     }
+}
+
+signing {
+    // signing.keyId, signing.password, signing.secretKeyRingFile in ~/.gradle.properties
+    // ~/.gradle/gradle.properties
+    // see also: https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials
+    sign(publishing.publications["maven"])
 }
 
 tasks.create("install") {
