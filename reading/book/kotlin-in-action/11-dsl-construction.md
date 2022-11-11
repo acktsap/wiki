@@ -8,8 +8,16 @@
 - [11.2. Building structrued Apis: lambdas with receivers in DSLs](#112-building-structrued-apis-lambdas-with-receivers-in-dsls)
   - [Lambdas with receivers and extension function types](#lambdas-with-receivers-and-extension-function-types)
   - [Using lambdas with receivers in HTML builders](#using-lambdas-with-receivers-in-html-builders)
+  - [Kotlin builders: enabling abstraction and reuse](#kotlin-builders-enabling-abstraction-and-reuse)
 - [11.3. More flexible block nesting with the 'invoke' convention](#113-more-flexible-block-nesting-with-the-invoke-convention)
+  - [The "invoke" convention: objects callable as functions](#the-invoke-convention-objects-callable-as-functions)
+  - [The "invoke" convention and functional types](#the-invoke-convention-and-functional-types)
+  - [The "invoke" convention in DSLs: declaring dependencies in Gradle](#the-invoke-convention-in-dsls-declaring-dependencies-in-gradle)
 - [11.4. Kotlin DSLs in practice](#114-kotlin-dsls-in-practice)
+  - [Chaining infix calls: “should” in test frameworks](#chaining-infix-calls-should-in-test-frameworks)
+  - [Defining extensions on primitive types: handling dates](#defining-extensions-on-primitive-types-handling-dates)
+  - [Member extension functions: internal DSL for SQL](#member-extension-functions-internal-dsl-for-sql)
+  - [Anko: creating Android UIs dynamically](#anko-creating-android-uis-dynamically)
 
 This chapter covers
 
@@ -261,8 +269,394 @@ apply, with std library 구조
 
 ### Using lambdas with receivers in HTML builders
 
-todo
+- Kotlin DSL은 type-safe builder의 개념을 사용. 이 개념은 groovy에서 나왔는데 object 생성 계층을 선언형으로 할 수 있게 함.
+- Kotlin DSL은 groovy와는 다르게 type-safe함.
+
+Html Builder
+
+```kotlin
+fun createSimpleTable() = createHTML().
+    table {
+        tr {
+            td { +"cell" }
+        }
+    }
+```
+
+- 이거 그냥 함수 호출임. tr, td 전부 그냥 함수 호출
+- lambda with receiver를 인자로 받는 higher order function 함수 호출
+- 이 lambda들은 name-resolution rule을 바꿈. 예를 들면 td는 tr block 안에서만 사용할 수 있음.
+- name-resolution context는 receiver type에 의해 정해짐.
+
+실제 명시를 다 하면 이렇게 되는거임.
+
+```kotlin
+fun createSimpleTable() = createHTML().
+    table {
+        (this@table).tr {
+            (this@tr).td {
+                +"cell"
+            }
+        }
+    }
+```
+
+- lambda with receiver 안쓰고 그냥 쓰면 `it`, `this` 같은 부가적인 코드가 생겨서 읽기 힘들어짐.
+- lambda with receiver 짱임.
+
+그런데 위의 코드의 경우 tr 안에서 table의 함수도 사실 호출 가능함. 이걸 `@DslMarker`이라는 annotation을 붙여주면 제약을 걸 수 있음.
+
+실제 전체 코드임.
+
+```kotlin
+open class Tag(val name: String) {
+    private val children = mutableListOf<Tag>() // store all nested tags
+
+    protected fun <T : Tag> doInit(child: T, init: T.() -> Unit) {
+        child.init()
+        children.add(child) // store a reference to the child tag
+    }
+
+    override fun toString() =
+        "<$name>${children.joinToString("")}</$name>" // return resulting HTML as string 
+}
+
+fun table(init: TABLE.() -> Unit) = TABLE().apply(init)
+
+class TABLE : Tag("table") {
+    fun tr(init: TR.() -> Unit) = doInit(TR(), init)
+}
+
+class TR : Tag("tr") {
+    fun td(init: TD.() -> Unit) = doInit(TD(), init)
+}
+
+class TD : Tag("td")
+
+// usage
+fun createTable() =
+    table {
+        tr {
+            td {
+            }
+        }
+    }
+```
+
+Kotlin DSL을 쓰면 이렇게 동적으로도 생성 가능.
+
+```kotlin
+fun createAnotherTable() = table {
+    for (i in 1..2) {
+        tr {
+            td {
+            }
+        }
+    }
+}
+```
+
+- 결론적으로 lambda with receiver는 code block의 name-resolution context를 제한하고 API의 structure를 만들 수 있는 기능을 제공함.
+
+### Kotlin builders: enabling abstraction and reuse
+
+- 우리는 코드를 짤 때 원래 중복 제거하려고 함수 빼고 그럼.
+- Kotlin internal DSL을 쓰면 반복되는 코드를 보다 명확하게 뺄 수 있게 함.
+
+순수 html
+
+```html
+<div class="dropdown">
+    <button class="btn dropdown-toggle">
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="dropdown-header">Header</li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
+</div>
+```
+
+Kotlin DSL
+
+```kotlin
+fun buildDropdown() = createHTML().div(classes = "dropdown") {
+    button(classes = "btn dropdown-toggle") {
+        +"Dropdown"
+        span(classes = "caret")
+    }
+    ul(classes = "dropdown-menu") {
+        li { a("#") { +"Action" } }
+        li { a("#") { +"Another action" } }
+        li { role = "separator"; classes = setOf("divider") }
+        li { classes = setOf("dropdown-header"); +"Header" }
+        li { a("#") { +"Separated link" } }
+    }
+}
+```
+
+한번 더 추상화된 Kotlin DSL. 이렇게 internal DSL도 extension을 활용하여 method로 뺄 수 있음.
+
+```kotlin
+// definition
+fun UL.item(href: String, name: String) = li { a(href) { +name } }
+
+fun UL.divider() = li { role = "separator"; classes = setOf("divider") }
+
+fun UL.dropdownHeader(text: String) =
+li { classes = setOf("dropdown-header"); +text }
+
+fun DIV.dropdownMenu(block: UL.() -> Unit) = ul("dropdown-menu", block)
+
+...
+
+// usage
+fun dropdownExample() = createHTML().dropdown {
+    dropdownButton { +"Dropdown" }
+    dropdownMenu {
+        item("#", "Action")
+        item("#", "Another action")
+        divider()
+        dropdownHeader("Header")
+        item("#", "Separated link")
+    }
+}
+```
 
 ## 11.3. More flexible block nesting with the 'invoke' convention
 
+### The "invoke" convention: objects callable as functions
+
+- `get`이 `foo.get(bar)` 말고 `foo[bar]`처럼 쓸 수 있는 것처럼 `invoke`도 마찬가지임.
+- `invoke` operator의 형식에는 제약이 없음. 인자, 리턴타입을 마음대로 지정할 수 있음.
+
+```kotlin
+class Greeter(val greeting: String) {
+    // definition
+    operator fun invoke(name: String) {
+        println("$greeting, $name!")
+    }
+}
+
+// usage
+val bavarianGreeter = Greeter("Servus")
+bavarianGreeter("Dmitry") // prints "Servus, Dmitry"
+```
+
+### The "invoke" convention and functional types
+
+invoke 함수를 쓰면 긴 lambda를 깔끔하게 refactoring 할 수 있음.
+
+```
+// definition
+data class Issue(
+    val id: String, val project: String, val type: String,
+    val priority: String, val description: String
+)
+
+class ImportantIssuesPredicate(val project: String) : (Issue) -> Boolean {
+    override fun invoke(issue: Issue): Boolean {
+        return issue.project == project && issue.isImportant()
+    }
+
+    private fun Issue.isImportant(): Boolean {
+        return type == "Bug" && (priority == "Major" || priority == "Critical")
+    }
+}
+
+// usage
+val i1 = Issue("IDEA-154446", "IDEA", "Bug", "Major", "Save settings failed")
+val i2 = Issue("KT-12183", "Kotlin", "Feature", "Normal", "Intention: convert several calls on the same receiver to with/apply")
+val predicate = ImportantIssuesPredicate("IDEA")
+for (issue in listOf(i1, i2).filter(predicate)) {
+    println(issue.id)
+}
+IDEA-154446
+```
+
+### The "invoke" convention in DSLs: declaring dependencies in Gradle
+
+다음의 두 가지 케이스를 모두 지원하고 싶을 때 invoke를 활용.
+
+```kotlin
+dependencies.compile("junit:junit:4.11") // plain method call
+
+dependencies { // using invoke
+    compile("junit:junit:4.11")
+}
+```
+
+정의는 다음과 같음.
+
+```kotlin
+class DependencyHandler {
+    fun compile(coordinate: String) {
+        println("Added dependency on $coordinate")
+    }
+
+    operator fun invoke(body: DependencyHandler.() -> Unit) {
+        body()
+    }
+}
+```
+
+이 두개 code block은 동일함.
+
+```kotlin
+dependencies { // using invoke
+    compile("junit:junit:4.11")
+}
+
+dependencies.invoke({
+    this.compile("org.jetbrains.kotlin:kotlin-reflect:1.0.0")
+})
+```
+
 ## 11.4. Kotlin DSLs in practice
+
+### Chaining infix calls: “should” in test frameworks
+
+infix 예시1.
+
+```kotlin
+// definition
+interface Matcher<T> {
+    fun test(value: T)
+}
+
+infix fun <T> T.should(matcher: Matcher<T>) = matcher.test(this)
+
+class startWith(val prefix: String) : Matcher<String> { // DSL 작성할때는 class 이름이 대문자로 시작 안해도 괜찮음
+    override fun test(value: String) {
+        if (!value.startsWith(prefix)) {
+            throw AssertionError("String $value does not start with $prefix")
+        }
+    }
+}
+
+// usage
+s should startWith("kot")
+```
+
+infix 예시2.
+
+```kotlin
+object start
+
+infix fun String.should(x: start): StartWrapper = StartWrapper(this)
+
+class StartWrapper(val value: String) {
+    infix fun with(prefix: String) =
+        if (!value.startsWith(prefix))
+            throw AssertionError("String does not start with $prefix: $value")
+}
+
+// usage
+"kotlin" should start with "kot"
+
+// actual
+"kotlin".should(start).with("kot")
+```
+
+### Defining extensions on primitive types: handling dates
+
+std api에 extension 달아서 DSL 만든 예시.
+
+```kotlin
+// definition
+val Int.days: Period
+    get() = Period.ofDays(this)
+
+val Period.ago: LocalDate
+    get() = LocalDate.now() - this
+
+val Period.fromNow: LocalDate
+    get() = LocalDate.now() + this
+
+// usage
+val yesterday = 1.days.ago
+val tomorrow = 1.days.fromNow
+```
+
+### Member extension functions: internal DSL for SQL
+
+member extension(class에 extension 만드는거)를 사용한 예시1.
+
+```kotlin
+// definition
+class Table {
+    fun integer(name: String): Column<Int>
+    fun varchar(name: String, length: Int): Column<String>
+
+    fun <T> Column<T>.primaryKey(): Column<T>
+    fun Column<Int>.autoIncrement(): Column<Int>
+    ...
+}
+
+object Country : Table() {
+    val id = integer("id").autoIncrement().primaryKey()
+    val name = varchar("name", 50)
+}
+
+// usage
+SchemaUtils.create(Country)
+
+// result
+/*
+CREATE TABLE IF NOT EXISTS Country (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_Country PRIMARY KEY (id)
+)
+*/
+```
+
+- member extension은 그 class내에만 한정되기 때문에 추가적인 member extension을 정의할 수 없다는 단점이 있음.
+- 예를 들면 위 케이스의 경우 새로운 column type이 추가되어도 `integer`, `varchar` 이런 dsl을 정의할 수 없음. 왜냐하면 extension은 Table 객체 내부에 접근을 할 수 없기 때문임. 새로운 column type을 처리하려면 접근이 필요함.
+
+member extension를 사용한 예시2.
+
+```kotlin
+// definition
+fun Table.select(where: SqlExpressionBuilder.() -> Op<Boolean>) : Query
+
+object SqlExpressionBuilder {
+    infix fun<T> Column<T>.eq(t: T) : Op<Boolean>
+    // ...
+}
+
+// usage
+val result = (Country join Customer)
+    .select { Country.name eq "USA" }
+result.forEach { println(it[Customer.name]) }
+```
+
+### Anko: creating Android UIs dynamically
+
+android layout DSL 예시
+
+```kotlin
+// definition
+fun Context.alert(
+    message: String,
+    title: String,
+    init: AlertDialogBuilder.() -> Unit
+)
+
+class AlertDialogBuilder {
+    fun positiveButton(text: String, callback: DialogInterface.() -> Unit)
+    fun negativeButton(text: String, callback: DialogInterface.() -> Unit)
+    // ...
+}
+
+// usage
+fun Activity.showAreYouSureAlert(process: () -> Unit) {
+    alert(title = "Are you sure?", message = "Are you really sure?") {
+        positiveButton("Yes") { process() }
+        negativeButton("No") { cancel() }
+    }
+}
+```
