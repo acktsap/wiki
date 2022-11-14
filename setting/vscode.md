@@ -18,6 +18,7 @@
 - draw.io Integration
   - New : Create file with `.drawio, .dio, .drawio.svg or .drawio.png`. Then you can edit with draw.io.
   - Edit : aaa.png -> aaa.drawio.png -> edit -> rename to aaa.png
+- Kubernetes
 
 ## Shortcuts
 

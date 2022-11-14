@@ -28,6 +28,6 @@ https://github.com/spring-projects/spring-kafka/tree/main/samples
 
 ## Reference
 
-- [Spring Kafka Official Doc (3.0.0-M6)](https://docs.spring.io/spring-kafka/docs/3.0.0-M6/reference/html/)
+- [Spring Kafka Official Doc (3.0.0-RC2)](https://docs.spring.io/spring-kafka/docs/3.0.0-RC2/reference/html/)
 - [Kafka Streams (kafka official)](https://kafka.apache.org/33/documentation/streams/)
 - [Spring Kafka Support (spring official)](https://spring.io/projects/spring-kafka#support)

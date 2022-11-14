@@ -7,6 +7,7 @@
   - [Conditional Annotations](#conditional-annotations)
   - [Testing](#testing)
   - [Creating your own starter](#creating-your-own-starter)
+- [Profiles](#profiles)
 - [See also](#see-also)
 
 ## Creating your own auto-configuration
@@ -146,6 +147,10 @@ Configuration Keys
       annotationProcessor "org.springframework.boot:spring-boot-autoconfigure-processor"
   }
   ```
+
+## Profiles
+
+https://docs.spring.io/spring-boot/docs/3.0.0-RC1/reference/htmlsingle/#features.profiles
 
 ## See also
 

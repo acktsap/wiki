@@ -34,7 +34,7 @@ docker create ${CONTAINER_ID} -p 8080:80/tcp -p 8080:80/udp
 docker run ${IMAGE_ID}
 
 ## run in detach mode
-docker run -d ${IMAGE_ID}
+docker run -d ${IMAGE_ID} --name test_container
 
 
 # start, stop, remove

@@ -36,7 +36,7 @@
   - Merged coverage report : `${rootDir}/${buildDir}/kover/html/index.html`
 - Build: `./gradlew build`
 - Install to local: `./gradlew install`
-- Publish: `./gradlew publish`
+- Publish: `./gradlew publish --no-parallel`
 
 ## Contributing
 

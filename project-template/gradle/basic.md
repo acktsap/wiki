@@ -94,6 +94,9 @@
 # run in parallel
 ./gradlew build --parallel
 
+# run without build cache
+./gradlew build --no-build-cache
+
 # stop gradle daemon
 ./gradlew --stop
 
