@@ -3,6 +3,7 @@
 - [Components](#components)
 - [Runners](#runners)
 - [Tips](#tips)
+- [Event Payload](#event-payload)
 - [See also](#see-also)
 
 ## Components
@@ -32,6 +33,12 @@
 ## Tips
 
 - [kover coverage](https://lengrand.fr/kover-code-coverage-plugin-for-kotlin/)
+
+## Event Payload
+
+- [webhook events and payloads](https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads)
+  - issues
+  - issue_comment
 
 ## See also
 
