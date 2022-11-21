@@ -120,6 +120,13 @@ List all pids of user.
 lsof -t -u acktsap
 ```
 
+Kill process using port 8080
+
+```sh
+# print 2nd column of 2nd line and kill
+lsof -i :8080 | awk 'FNR == 2 { print $2 }' | xargs kill -9
+```
+
 ## See also
 
 - [PS Cheatsheet](https://www.sysadmin.md/ps-cheatsheet.html)

@@ -1,7 +1,7 @@
 # VIM Basic Usage
 
 - [Movement [direction]](#movement-direction)
-    - [By character](#by-character)
+  - [By character](#by-character)
   - [By word](#by-word)
   - [By line](#by-line)
   - [By sentence](#by-sentence)
@@ -28,7 +28,7 @@
 
 ## Movement [direction]
 
-#### By character
+### By character
 
 - left, down, up, right : `h, j, k, l`
 

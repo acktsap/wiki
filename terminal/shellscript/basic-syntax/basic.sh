@@ -1,9 +1,22 @@
 #!/bin/bash
 
+echo "Filename of the script: $0"
+
 function variable() {
   echo "-- variable --"
 
   # By convention, all the name is in UPPERCASE
+
+  function global_variable_outside() {
+    # declare variable
+    # globally accessable
+    VAL="global_variable_outside"
+  }
+
+  global_variable_outside
+  
+  echo "$VAL" # print "global_variable_outside"
+  unset VAL
 
   function global_variable() {
     # declare variable
@@ -35,15 +48,17 @@ function variable() {
     echo "Present working directory: $PWD"
     echo "Old PWD: $OLDPWD"
     echo "Current function name: $FUNCNAME"
+    echo "Current process id: $$"
     echo "Parent process id: $PPID"
-    echo "A script runs: $SECONDS"
+    echo "A script runs (여기까지): $SECONDS"
+    echo "Get current shell: $SHELL"
   }
 
   enviroment_variable
 
-  function special_variabke() {
+  function special_variable() {
     echo "Filename of the script: $0"
-    echo "1th args: $1, 2nd args: $2"
+    echo "1th args: $1, 2nd args: $2, 3rd args: $3"
     echo "A number of argument: $#"
     echo "All the arguments which are totally double quoted: $*"
     echo "All the arguments which are individually double quoted: $@"
@@ -55,7 +70,7 @@ function variable() {
     if [ $? != 0 ]; then exit -1; fi
   }
 
-  special_variabke "arg1" "arg2"
+  special_variable "arg1" "arg2"
 
   function global_constant() {
     # global constant

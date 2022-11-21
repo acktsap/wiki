@@ -1,18 +1,16 @@
 # Terminal
 
-- terminal tool usage pattern.
-- shell script.
-
 ## Contents
 
 Basic
 
-- [ShellScript](./shellscript/)
+- [Shell Script](./shellscript/)
 - [pipeline](./pipeline.md)
 
 Tools
 
 - [man command](./man.md)
+- [File & Directory Management](./file-directory-management.md)
 - [Process Monitoring](./process-monitoring.md)
 - [Text Manipulation Tools](./text-manipulation-tools.md)
 - [Network Tools](./network-tools.md)
@@ -29,3 +27,4 @@ Editor
 - [List of Unix Commands (wiki)](https://en.wikipedia.org/wiki/List_of_Unix_commands)
 - [40 Essential Linux Commands That Every User Should Know](https://www.hostinger.com/tutorials/linux-commands)
 - [Command Challenge](https://cmdchallenge.com/)
+- [Devops roadmap](https://roadmap.sh/devops)
