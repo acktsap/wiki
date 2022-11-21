@@ -1,0 +1,47 @@
+name: Issue comment test
+
+on:
+  issue_comment:
+    types: [ created ]
+  workflow_dispatch:
+    inputs:
+      commit_id:
+        description: 'Git commit ID to be built'
+        required: true
+
+jobs:
+  issue-comment-test:
+    name: Issue comment test
+    runs-on: [ self-hosted ]
+    if:
+      ${{ github.event.issue.pull_request != null && github.event.comment.body == 'i am god' }} ||
+      ${{ github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Setup java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          settings-path: ${{ github.workspace }}
+
+      - name: Checkout to Latest
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Checkout to Ref
+        run: |
+          if [ "${{ github.event_name }}" == "issue_comment" ]; then
+            PR_URL="${{ github.event.issue.pull_request.url }}"
+            PR_NUM=${PR_URL##*/}
+            echo "Fetch from PR #$PR_NUM based on URL: $PR_URL"
+            git fetch origin pull/${PR_NUM}/head
+            BUILD_CHECKOUT_REF=$(git rev-parse FETCH_HEAD)
+            echo "PR_NUM=${PR_NUM}" >> ${GITHUB_ENV}
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ ! -z "${{ github.event.inputs.commit_id }}" ]; then
+            BUILD_CHECKOUT_REF=${{ github.event.inputs.commit_id }}
+          fi
+
+          git checkout ${BUILD_CHECKOUT_REF}
+          echo "BUILD_CHECKOUT_REF=${BUILD_CHECKOUT_REF}" >> ${GITHUB_ENV}
