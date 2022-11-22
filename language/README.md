@@ -15,7 +15,7 @@ https://en.wikipedia.org/wiki/Markup_language
 ## Item
 
 - Syntax : The set of rules that defines the combinations of symbols that are considered to be correctly structured statements or expressions in that language. Specified by grammar.
-- Snippet : A small region of re-usable source code, machine code, or text
+- Snippet : A small region of re-usable source code, machine code, or text.
 - Design pattern : A general, reusable solution to a commonly occurring problem within a given context in software design
 
 https://en.wikipedia.org/wiki/Syntax_(programming_languages)

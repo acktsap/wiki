@@ -1,10 +1,5 @@
 # Github Action
 
-- [Components](#components)
-- [Action \& Runners Tips](#action--runners-tips)
-- [Event Payload](#event-payload)
-- [See also](#see-also)
-
 ## Components
 
 - Workflows
@@ -18,22 +13,37 @@
 - Runners
   - A runner is a server that runs your workflows when they're triggered. Each runner can run a single job at a time.
 
-## Action & Runners Tips
+## Workflow syntax
+
+- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+  - [on.<event_name>.types](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows)
+
+## Runners
 
 - [Github-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
   - ubuntu-latest
+
+## Useful Actions
+
 - [Checkout](https://github.com/actions/checkout)
 - [Cache](https://github.com/actions/cache)
   - Cache for build
-  - [Java Gradle Cache](https://github.com/actions/cache/blob/main/examples.md#java---gradle)
+  - [Java Gradle Build Cache](https://github.com/actions/cache/blob/main/examples.md#java---gradle)
+  - [Java Maven Local Repository Cache](https://github.com/actions/cache/blob/main/examples.md#java---maven)
 - [CodeCov](https://github.com/marketplace/actions/codecov)
   - 이거 처음에 오픈이라도 안되는데 https://app.codecov.io/github/naver/spring-batch-plus 이렇게 https://app.codecov.io/github/${organization}/{repo}를 직접 치고 들어가니까 됨.
-- [kover coverage](https://lengrand.fr/kover-code-coverage-plugin-for-kotlin/)
-- [Checkout issue_comment](https://github.com/actions/checkout/issues/331)
+  - [kover coverage](https://lengrand.fr/kover-code-coverage-plugin-for-kotlin/)
 - [github script action](https://github.com/actions/github-script)
   - make comment
   - apply label
   - ...
+- [Gradle Build action](https://github.com/gradle/gradle-build-action)
+  - gradle 버전 지정해서 실행 가능.
+- [setup java](https://github.com/actions/setup-java)
+
+## Tips
+
+- [Checkout issue_comment](https://github.com/actions/checkout/issues/331)
 
 ## Event Payload
 

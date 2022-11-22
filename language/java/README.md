@@ -1,23 +1,19 @@
 # Java
 
-## Import
+[Import](./import.md)
 
-### Intellij
+Java
 
-Intellij -> Project -> Open -> Gradle Project
+- todo
 
-Editor -> Code Style -> Import `./rule/***.xml`
+Testing
 
-## Run
+- todo
 
-### Intellij
+Spring
 
-- `Ctrl + Shift + R`
-
-## Gradle
-
-### Upgrade wrapper version
-
-```shell
-./gradlew wrapper --gradle-version 7.2
-```
+- [Spring Web Servlet](./spring/spring-web-servlet.md)
+- [Spring Integratino](./spring/spring-integration.md)
+- [Spring Webflux](./spring/spring-webflux.md)
+- [Spring Test](./spring/spring-test.md)
+- todo

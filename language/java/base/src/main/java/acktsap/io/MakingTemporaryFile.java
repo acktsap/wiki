@@ -21,7 +21,7 @@ package acktsap.io;
 import java.io.File;
 
 public class MakingTemporaryFile {
-    public static void main(String[] args) {
-        tempFile = File.createTempFile("tmp", ".txt");
+    public static void main(String[] args) throws Exception {
+        File tempFile = File.createTempFile("tmp", ".txt");
     }
 }

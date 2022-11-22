@@ -59,3 +59,7 @@
   ```
 
 [maven dependency scope](https://www.baeldung.com/maven-dependency-scopes)
+
+## Lifecycle
+
+- [Introduction to the Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
