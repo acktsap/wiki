@@ -1,0 +1,1 @@
+docker stop zookeeper1 kafka-server1 | xargs docker rm

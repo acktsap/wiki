@@ -5,6 +5,7 @@
   - [Chart.yaml](#chartyaml)
 - [Workload](#workload)
   - [Deployment](#deployment)
+- [Tips](#tips)
 - [See also](#see-also)
 
 ## Concept
@@ -80,6 +81,10 @@ annotations:
 ### Deployment
 
 - [deployment (official)](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+## Tips
+
+- [Wrong interpretation of Zero in templates files when having a default value](https://github.com/helm/helm/issues/3164#issuecomment-709537506)
 
 ## See also
 
