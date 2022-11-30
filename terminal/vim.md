@@ -22,7 +22,7 @@
 - [File management](#file-management)
 - [Split](#split)
 - [Etc](#etc-1)
-- [Vim Setting](#vim-setting)
+- [See also](#see-also)
 
 ![vim_cheat_sheet_for_programmers](./img/vim_cheat_sheet_for_programmers.png)
 
@@ -180,6 +180,7 @@ operator    [number]    motion
 - linux function manual : `shift + k`
 - run shell command :! ${command}
 
-## Vim Setting
+## See also
 
-http://blog.joncairns.com/2014/03/using-vim-as-a-multi-language-ide/
+- [vim setting](http://blog.joncairns.com/2014/03/using-vim-as-a-multi-language-ide/)
+- [고인물 개발자용 Vim 에디터 빠른 사용법 (youtube)](https://www.youtube.com/watch?v=LmGB0uUnkR8)

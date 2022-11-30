@@ -25,3 +25,7 @@
 - Find in path : command + shirt + f
 - Search by file name : command + p
 - Command : command + shirt + p
+
+## See also
+
+- [VSCode Vim모드 한글 제대로 세팅하기](https://www.youtube.com/watch?v=6sZJpODVMsw)

@@ -17,7 +17,7 @@
 
 ## OSI 7 Layer vs TCP/IP Layer
 
-![osi-7-layer](./img/overview-osi-7-layer.jpeg)
+![osi-7-layer](./img/network-overview-osi-7-layer.jpeg)
 
 OSI 7 Layer (공식 표준)
 
