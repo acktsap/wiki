@@ -12,6 +12,14 @@ interface Base2 {
     fun printMessage()
 }
 
+interface A {
+    fun doa()
+}
+
+interface B {
+    fun dob()
+}
+
 fun main() {
     Block("Delegation") {
         class BaseImpl(private val x: Int) : Base1 {
@@ -56,5 +64,19 @@ fun main() {
         )
         // fails to compile
         // class SomeClass<T>(t: T) : T by t
+    }
+
+    Block("Delegation with multiple interface") {
+        class AImpl : A {
+            override fun doa() = println("doa")
+        }
+
+        class BothImpl(a: A) : A by a, B {
+            override fun dob() = println("dob")
+        }
+
+        val b = BothImpl(AImpl())
+        b.doa()
+        b.dob()
     }
 }

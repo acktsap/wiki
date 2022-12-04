@@ -1,7 +1,6 @@
 # Design Basic
 
 
-
 ## Seperation of Concerns
 
 Modeling per concerns
