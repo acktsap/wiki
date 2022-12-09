@@ -24,7 +24,7 @@ public class SendMessage {
 
     private static final Logger logger = getLogger(SendMessage.class);
     static final String TOPIC_NAME = "test-topic-1";
-    static final int PARTITION_NUMBER = 5;
+    static final int PARTITION_NUMBER = 3;
 
     public static void main(String[] args) throws Exception {
         createTopic();
@@ -38,11 +38,13 @@ public class SendMessage {
         producerProperties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         Producer<String, String> kafkaProducer = new KafkaProducer<>(producerProperties);
 
-        IntStream.range(0, 100).forEach(i -> {
+        IntStream.range(0, 30).forEach(i -> {
             int partition = i % PARTITION_NUMBER;
-            String key = "";
             String value = "testMessage" + i;
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC_NAME, partition, key, value);
+
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC_NAME, partition, null, value);
+            // ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC_NAME, null, "sameKey", value);
+
             logger.info("send: {}", producerRecord);
             kafkaProducer.send(producerRecord);
         });

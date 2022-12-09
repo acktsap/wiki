@@ -2,15 +2,11 @@ package acktsap.spring.kafka.parallelconsumer;
 
 import io.confluent.parallelconsumer.ParallelConsumerOptions;
 import io.confluent.parallelconsumer.ParallelStreamProcessor;
+import io.confluent.parallelconsumer.RecordContext;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -20,9 +16,9 @@ import java.util.UUID;
 import static acktsap.spring.kafka.parallelconsumer.SendMessage.TOPIC_NAME;
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class ParallelStreamProcessorPollAndProduceTest {
+public class ParallelStreamProcessorManagedThreadFactoryTest {
 
-    private static final Logger logger = getLogger(ParallelStreamProcessorPollAndProduceTest.class);
+    private static final Logger logger = getLogger(ParallelStreamProcessorManagedThreadFactoryTest.class);
 
     public static void main(String[] args) {
         Properties consumerProperties = new Properties();
@@ -34,26 +30,23 @@ public class ParallelStreamProcessorPollAndProduceTest {
         consumerProperties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProperties);
 
-        Properties producerProperties = new Properties();
-        producerProperties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        producerProperties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        producerProperties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        Producer<String, String> kafkaProducer = new KafkaProducer<>(producerProperties);
+        // NamingManager.
+        //     InitialContext.doLookup()
 
         var options = ParallelConsumerOptions.<String, String>builder()
-            .ordering(ParallelConsumerOptions.ProcessingOrder.KEY)
-            .maxConcurrency(1000)
             .consumer(kafkaConsumer)
-            .producer(kafkaProducer)
+            .ordering(ParallelConsumerOptions.ProcessingOrder.UNORDERED)
+            .maxConcurrency(9)
+            .managedThreadFactory("WorkerPoolFactory")
             .build();
+
         ParallelStreamProcessor<String, String> parallelStreamProcessor = ParallelStreamProcessor.createEosStreamProcessor(options);
         parallelStreamProcessor.subscribe(List.of(TOPIC_NAME));
 
-        parallelStreamProcessor.pollAndProduce(pollContext -> {
-            logger.info("consumes: {}", pollContext);
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("newTopic", pollContext.value());
-            logger.info("produces: {}", producerRecord);
-            return producerRecord;
+        parallelStreamProcessor.poll(pollContext -> {
+            RecordContext<String, String> recordContext = pollContext.getSingleRecord();
+            logger.info("consumes (topic: {}, partition: {}, record: {})",
+                recordContext.topic(), recordContext.partition(), recordContext.getConsumerRecord());
         });
     }
 }

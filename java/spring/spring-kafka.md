@@ -54,7 +54,7 @@ https://github.com/confluentinc/parallel-consumer#features-list
 https://github.com/confluentinc/parallel-consumer#ordering-guarantees
 
 - Unordered level : Ordering이 필요 없을 때 사용. 제일 빠름.
-- Key level : Kafka의 key 단위로 보장.
+- Key level : 각 partition의 key 단위로 순서 보장. key는 어떤 partition을 선택할지 결정하는 친구임.
 - partition level : 전통적인 kafka client처럼 partition단위로 보장. 하지만 적은 consumer instance로 이걸 가능하게 함.
 
 key 수에 따른 성능 차이.
@@ -79,7 +79,7 @@ Basic
 ## Reference
 
 - [Spring Kafka Official Doc (3.0.0)](https://docs.spring.io/spring-kafka/docs/3.0.0/reference/html/)
-- [Kafka Streams (kafka official)](https://kafka.apache.org/33/documentation/streams/)
 - [Spring Kafka Support (spring official)](https://spring.io/projects/spring-kafka#support)
+- [Kafka Streams (kafka official)](https://kafka.apache.org/33/documentation/streams/)
 - [Parallel Consumer (github)](https://github.com/confluentinc/parallel-consumer)
 - [Introducing the Confluent Parallel Consumer (confluent)](https://www.confluent.io/blog/introducing-confluent-parallel-message-processing-client)

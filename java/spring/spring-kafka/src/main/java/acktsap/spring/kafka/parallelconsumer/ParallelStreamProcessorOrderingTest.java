@@ -2,6 +2,7 @@ package acktsap.spring.kafka.parallelconsumer;
 
 import io.confluent.parallelconsumer.ParallelConsumerOptions;
 import io.confluent.parallelconsumer.ParallelStreamProcessor;
+import io.confluent.parallelconsumer.RecordContext;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -30,18 +31,20 @@ public class ParallelStreamProcessorOrderingTest {
         Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProperties);
 
         var options = ParallelConsumerOptions.<String, String>builder()
-            .ordering(ParallelConsumerOptions.ProcessingOrder.KEY)
-            // .ordering(ParallelConsumerOptions.ProcessingOrder.UNORDERED) // 순서가 필요 없으면 이게 빠름~
-            // .ordering(ParallelConsumerOptions.ProcessingOrder.PARTITION)
-            .maxConcurrency(1000)
+            .ordering(ParallelConsumerOptions.ProcessingOrder.UNORDERED) // partition 순서 관계 없이 그냥 막 가져옴
+            // .ordering(ParallelConsumerOptions.ProcessingOrder.KEY) // partition 안의 key 순서만 보장하면서 가져옴
+            // .ordering(ParallelConsumerOptions.ProcessingOrder.PARTITION) // partition 단위의 순서만 보장
+            .maxConcurrency(9)
             .consumer(kafkaConsumer)
             .build();
 
         ParallelStreamProcessor<String, String> parallelStreamProcessor = ParallelStreamProcessor.createEosStreamProcessor(options);
-        kafkaConsumer.subscribe(List.of(TOPIC_NAME));
+        parallelStreamProcessor.subscribe(List.of(TOPIC_NAME));
 
         parallelStreamProcessor.poll(pollContext -> {
-            logger.info("consumes: {}", pollContext);
+            RecordContext<String, String> recordContext = pollContext.getSingleRecord();
+            logger.info("consumes (topic: {}, partition: {}, record: {})",
+                recordContext.topic(), recordContext.partition(), recordContext.getConsumerRecord());
         });
     }
 }
