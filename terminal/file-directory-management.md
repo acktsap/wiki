@@ -65,31 +65,31 @@ cd ./a
 Parent directory.
 
 ```sh
-cd ..
+cd .. && pwd
 ```
 
 Parent of Parent directory.
 
 ```sh
-cd ../..
+cd ../.. && pwd
 ```
 
 Go to home directory.
 
 ```sh
-cd ~
+cd ~ && pwd
 ```
 
 Go to home directory (empty).
 
 ```sh
-cd
+cd && pwd
 ```
 
 Go to previous directory.
 
 ```sh
-cd -
+cd - && pwd
 ```
 
 ## cp
@@ -104,16 +104,34 @@ cd -
 Make a symbolic link.
 
 ```sh
-ln -s <source> <target>
+ln -s sample.txt $TMPDIR/sample.txt
 ```
 
 Make a hard link.
 
 ```sh
-ln <source> <target>
+ln sample.txt $TMPDIR/sample.txt
 ```
 
 ## mv
+
+Move file.
+
+```sh
+mv <source> $TMPDIR/sample-mv.txt
+```
+
+Move file with verbose.
+
+```sh
+mv -v <source> $TMPDIR/sample-mv.txt
+```
+
+Move file. Do not overwrite an existing file.
+
+```sh
+mv -n <source> $TMPDIR/sample-mv.txt
+```
 
 ## rm
 

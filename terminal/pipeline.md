@@ -20,7 +20,7 @@ command1 | command2 | command3
 Example
 
 ```sh
-ls -l | grep key | less
+cat sample.txt | grep line-3
 ```
 
 ## xargs
@@ -28,7 +28,7 @@ ls -l | grep key | less
 - Pipeline할 때 stdin으로 받지 못하는 친구들한테 인자로 넘겨주기 위해.
 
 ```sh
-find /etc - name "*.txt" | xargs ls -l
+find . -name "*.txt" | xargs ls -lh
 ```
 
 ## See also

@@ -28,3 +28,4 @@ Editor
 - [40 Essential Linux Commands That Every User Should Know](https://www.hostinger.com/tutorials/linux-commands)
 - [Command Challenge](https://cmdchallenge.com/)
 - [Devops roadmap](https://roadmap.sh/devops)
+- [POSIX commands](https://gist.github.com/td-shi/bf599ae6bcfab074e6f01a34ac68196a)
