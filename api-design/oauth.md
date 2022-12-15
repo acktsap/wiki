@@ -1,15 +1,33 @@
-# OAuth 2.0
+# OAuth
 
+- [Concept](#concept)
+- [OAuth 1.0](#oauth-10)
+- [OAuth 1.0a](#oauth-10a)
 - [OAuth 2.0](#oauth-20)
   - [Roles](#roles)
   - [Authorization Grant](#authorization-grant)
-    - [Authorization Code](#authorization-code)
-    - [Implicit](#implicit)
-    - [Resource Owner Password Credentials](#resource-owner-password-credentials)
-    - [Client Credentials](#client-credentials)
-  - [References](#references)
+  - [Authorization Code](#authorization-code)
+  - [Implicit](#implicit)
+  - [Resource Owner Password Credentials](#resource-owner-password-credentials)
+  - [Client Credentials](#client-credentials)
+  - [OpenID](#openid)
+  - [OpenID Connect](#openid-connect)
+- [See also](#see-also)
 
-## Roles
+## Concept
+
+- Open Authorization.
+- Internet user가 다른 website의 password를 제공하지 않고 현재 website가 다른 website에 있는 자기들의 정보를 이용할 수 있게 해주고 싶어서 만든 표준.
+
+## OAuth 1.0
+
+## OAuth 1.0a
+
+## OAuth 2.0
+
+https://meetup.toast.com/posts/105
+
+### Roles
 
 ```text
 resource owner
@@ -38,7 +56,7 @@ authorization server
 > authorization server : 사용자를 인증함으로써 access token을 제공하는 서버
 ```
 
-## Authorization Grant
+### Authorization Grant
 
 ```text
 An authorization grant is a credential representing the resource
@@ -114,8 +132,21 @@ client to obtain an access token
 
 ### Client Credentials
 
-## References
+### OpenID
 
-2012
+- Decentralized authentication protocol.
 
-https://tools.ietf.org/html/rfc6749
+### OpenID Connect
+
+- Authentication를 위한 protocal.
+- OpenID의 일종인데 OAuth2.0 위에서 돌아감.
+- OAuth2.0의 scope에다가 openid라는걸 정의해서 요청하면 access token을 줄 때 authentication을 위한 id token을 주는 형식으로 동작함. 보통 JWT token.
+
+## See also
+
+- [OAuth 1.0 (ietf)](https://tools.ietf.org/html/rfc5849)
+- [OAuth 1.0a (ietf)](https://oauth.net/core/1.0a/)
+- [OAuth 2.0 (oauth.net)](https://oauth.net/2/)
+- [OAuth 2.0 (ietf)](https://tools.ietf.org/html/rfc6749)
+- [OpenID (wiki)](https://en.wikipedia.org/wiki/OpenID)
+- [openid-connect-core](https://openid.net/specs/openid-connect-core-1_0.html)
