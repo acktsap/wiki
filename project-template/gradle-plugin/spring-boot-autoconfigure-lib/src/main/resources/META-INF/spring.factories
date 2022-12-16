@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-acktsap.spring.boot.autoconfigure.lib.LibraryAutoConfiguration
