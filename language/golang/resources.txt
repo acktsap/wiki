@@ -1,2 +1,0 @@
-# a tour of go
-https://tour.golang.org
