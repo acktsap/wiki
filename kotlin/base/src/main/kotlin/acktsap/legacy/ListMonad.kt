@@ -1,4 +1,0 @@
-package legacy
-
-fun main() {
-}

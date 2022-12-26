@@ -1,6 +1,0 @@
-spring:
-  profiles:
-    active: test
-  batch:
-    job:
-      enabled: false # without this, all job would be launched on load
