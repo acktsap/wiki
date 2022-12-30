@@ -1,6 +1,0 @@
-rootProject.name = 'java-library'
-
-include ':library-tools'
-include ':library-common'
-include ':library-core'
-include ':library-assembly'
