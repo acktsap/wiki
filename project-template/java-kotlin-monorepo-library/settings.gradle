@@ -1,7 +1,0 @@
-rootProject.name = 'java-kotlin-monorepo-library'
-
-include ':library-util'
-include ':library-core'
-include ':library-instance1'
-include ':library-instance2'
-include ':library-assembly'
