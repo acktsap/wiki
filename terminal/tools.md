@@ -1,7 +1,6 @@
 # Terminal Tools
 
 - [find](#find)
-- [Curl](#curl)
 - [Date](#date)
 - [Sort](#sort)
 - [Sftp](#sftp)
@@ -13,13 +12,6 @@
 ```sh
 # find directories from current with max depth 2 except '.git' directory and execute on those.
 find . -type d -maxdepth 2 ! -name ".git" -exec direnv allow {} > /dev/null 2>&1 \; 
-```
-
-## Curl
-
-```sh
-# get
-curl -X GET www.naver.com
 ```
 
 ## Date
