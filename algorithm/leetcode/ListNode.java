@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class ListNode {
+static class ListNode {
   static ListNode of(int[] arr) {
     if (arr.length == 0) {
       return null;
