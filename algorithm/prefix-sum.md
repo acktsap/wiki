@@ -2,8 +2,7 @@
 
 - [Prefix Sum](#prefix-sum)
   - [Example](#example)
-- [Problem](#problem)
-- [References](#references)
+- [See also](#see-also)
 
 ## Prefix Sum
 
@@ -19,10 +18,4 @@ for (int i = 1; i < prefixSum.length; ++i) {
 }
 ```
 
-## Problem
-
-todo
-
-## References
-
--
+## See also
