@@ -1,8 +1,5 @@
 # Cryptographic hash function
 
-- [What?](#what)
-- [Good cryptographic hash function](#good-cryptographic-hash-function)
-- [Degree of difficulty](#degree-of-difficulty)
 - [Collision attack](#collision-attack)
   - [Classical collision attack](#classical-collision-attack)
   - [Chosen-prefix collision attack](#chosen-prefix-collision-attack)
@@ -17,25 +14,6 @@
   - [Bcrypt](#bcrypt)
   - [Argon2](#argon2)
 - [See also](#see-also)
-
-## What?
-
-- 데이터의 무결성 확인을 위해 hash function인데 digest 로부터 역으로 가는게 거의 실행 불가능하게 만든것.
-- digest를 가지고 key를 찾는 방법은 brute force밖에 답이 없는데 그게 너무 오래걸려서 거의 불가능한 수준으로.
-- hash된 값을 digest라고도 부름.
-
-## Good cryptographic hash function
-
-- fast to compute.
-- infeasible to generate a message that yields a given hash value.
-- infeasible to find two different message with the same hash value.
-- a small change to a message should change the hash value so extensively that a new hash value appears uncorrelated with the old hash value (avalanche effect).
-
-## Degree of difficulty
-
-"difficult" generally means "almost certainly beyond the reach of any adversary who must be prevented from breaking the system for as long as the security of the system is deemed important".
-
-> ???
 
 ## Collision attack
 

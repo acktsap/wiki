@@ -1,7 +1,5 @@
 # Database Concept
 
-- [Database](#database)
-- [Advantages over File system](#advantages-over-file-system)
 - [Model](#model)
   - [Entity-Relational Model](#entity-relational-model)
   - [Entity-Relational Diagram](#entity-relational-diagram)
@@ -32,19 +30,6 @@
   - [Connection Pool](#connection-pool)
   - [Statement vs PreparedStatement](#statement-vs-preparedstatement)
 - [References](#references)
-
-## Database
-
-- 데이터를 효율적으로 관리할 수 있게 테이블, 스키마 등을 사용해서 관계를 맺은 데이터들의 집함.
-- 이러한 database를 관리하는 프로그램을 DBMS (DataBase Management System)이라고 함.
-
-## Advantages over File system
-
-- Data redundancy and inconsistency.
-- Data sharing.
-- Data concurrency.
-- Data searching.
-- ...
 
 ## Model
 
