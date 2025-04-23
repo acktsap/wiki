@@ -2,6 +2,7 @@
 
 - [Comment](#comment)
 - [Talk](#talk)
+- [Writing Code](#writing-code)
 - [How to solve problem](#how-to-solve-problem)
 - [Indent Size](#indent-size)
 - [Indent Type](#indent-type)
@@ -13,6 +14,10 @@
 ## Talk
 
 ![talk-is-cheap-show-me-the-code](./img/talk-is-cheap-show-me-the-code.jpg)
+
+## Writing Code
+
+![writing-code](./img/writing-code.png)
 
 ## How to solve problem
 
