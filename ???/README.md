@@ -3,6 +3,7 @@
 - [Comment](#comment)
 - [Talk](#talk)
 - [Writing Code](#writing-code)
+- [Object Oriented Programming](#object-oriented-programming)
 - [How to solve problem](#how-to-solve-problem)
 - [Indent Size](#indent-size)
 - [Indent Type](#indent-type)
@@ -18,6 +19,10 @@
 ## Writing Code
 
 ![writing-code](./img/writing-code.png)
+
+## Object Oriented Programming
+
+![oop](./img/oop.png)
 
 ## How to solve problem
 
